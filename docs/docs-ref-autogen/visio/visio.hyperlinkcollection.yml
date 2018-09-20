@@ -1,0 +1,110 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: 12637044fa71605810bc715e16d3acdd6829aa60
+ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 09/20/2018
+ms.locfileid: "24042533"
+items:
+- uid: visio.Visio.HyperlinkCollection
+  summary: >-
+    Représente l’objet HyperlinkCollection.
+
+
+    \[[Du jeu d’API : 1.1](/javascript/office/overview/visio-javascript-reference-overview)\]
+  name: Visio.HyperlinkCollection
+  fullName: visio.Visio.HyperlinkCollection
+  langs:
+  - typeScript
+  type: class
+  extends:
+  - OfficeExtension.ClientObject
+  package: visio
+  children:
+  - visio.Visio.HyperlinkCollection.getCount
+  - visio.Visio.HyperlinkCollection.getItem
+  - visio.Visio.HyperlinkCollection.items
+  - visio.Visio.HyperlinkCollection.load
+  - visio.Visio.HyperlinkCollection.toJSON
+- uid: visio.Visio.HyperlinkCollection.getCount
+  summary: >-
+    Obtient le nombre de liens hypertexte.
+
+
+    \[[Du jeu d’API : 1.1](/javascript/office/overview/visio-javascript-reference-overview)\]
+  name: getCount()
+  fullName: visio.Visio.HyperlinkCollection.getCount
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getCount(): OfficeExtension.ClientResult<number>;'
+    return:
+      type:
+      - OfficeExtension.ClientResult<number>
+      description: ''
+- uid: visio.Visio.HyperlinkCollection.getItem
+  summary: >-
+    Obtient un objet Hyperlink à l’aide de sa clé (nom ou ID).
+
+
+    \[[Du jeu d’API : 1.1](/javascript/office/overview/visio-javascript-reference-overview)\]
+  name: getItem(Key)
+  fullName: visio.Visio.HyperlinkCollection.getItem
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getItem(Key: number | string): Visio.Hyperlink;'
+    return:
+      type:
+      - visio.Visio.Hyperlink
+      description: ''
+    parameters:
+    - id: Key
+      description: La clé est le nom ou l’index de l’objet Hyperlink à récupérer.
+      type:
+      - number | string
+- uid: visio.Visio.HyperlinkCollection.items
+  summary: Obtient l’enfant chargé éléments dans cette collection.
+  name: items
+  fullName: visio.Visio.HyperlinkCollection.items
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly items: Visio.Hyperlink[];'
+    return:
+      type:
+      - Visio.Hyperlink[]
+- uid: visio.Visio.HyperlinkCollection.load
+  summary: Files d’attente d’une commande pour charger les propriétés de l’objet spécifiées. Vous devez appeler « context.sync() » avant de lire les propriétés.
+  remarks: "Outre cette signature, cette méthode présente les signatures suivantes :\n\n`load(option?: { select?: string; expand?: string; }): Visio.HyperlinkCollection`-Où option.select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options.expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Visio.HyperlinkCollection`-Uniquement disponible sur les types de la collection. Il est similaire à la signature précédente. Option.Top Spécifie le nombre maximal d’éléments pouvant être inclus dans le résultat de la collection. Option.Skip Spécifie le nombre d’éléments qui doivent être ignoré et non inclus dans le résultat. Si option.top est spécifié, le jeu de résultats démarre après l’ignorer le nombre spécifié d’éléments.\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nVisio.run(session, function (ctx) {\n    var activePage = ctx.document.getActivePage();\n    var shapeName = \"Manager Belt\";\n    var shape = activePage.shapes.getItem(shapeName);\n    var hyperlinks = shape.hyperlinks;\n    shapeHyperlinks.load();\n        ctx.sync().then(function () {\n            for(var i=0; i<shapeHyperlinks.items.length;i++)\n            {\n                var hyperlink = shapeHyperlinks.items[i];\n                console.log(\n                    \"Description:\"+hyperlink.description +\"Address:\"+hyperlink.address +\"SubAddress:  \" + \n                    hyperlink.subAddress);\n            }\n        });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  name: load(option)
+  fullName: visio.Visio.HyperlinkCollection.load
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: string | string[]): Visio.HyperlinkCollection;'
+    return:
+      type:
+      - visio.Visio.HyperlinkCollection
+      description: ''
+    parameters:
+    - id: option
+      description: Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+      type:
+      - string | string[]
+- uid: visio.Visio.HyperlinkCollection.toJSON
+  name: toJSON()
+  fullName: visio.Visio.HyperlinkCollection.toJSON
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'toJSON(): Visio.Interfaces.HyperlinkCollectionData;'
+    return:
+      type:
+      - visio.Visio.Interfaces.HyperlinkCollectionData
+      description: ''

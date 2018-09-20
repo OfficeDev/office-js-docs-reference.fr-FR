@@ -1,0 +1,124 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: 94441d977d046eb98013d32c7754332200b649e4
+ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 09/20/2018
+ms.locfileid: "24042512"
+items:
+- uid: Outlook_1_3.Office.Time
+  summary: >-
+    L’objet Time est renvoyé comme propriété start ou end d’un rendez-vous en mode composition.
+
+
+    \[[Du jeu d’API : boîte aux lettres 1.1](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition</td></tr></table>
+  name: Office.Time
+  fullName: Outlook_1_3.Office.Time
+  langs:
+  - typeScript
+  type: interface
+  package: Outlook_1_3
+  children:
+  - Outlook_1_3.Office.Time.getAsync
+  - Outlook_1_3.Office.Time.setAsync
+- uid: Outlook_1_3.Office.Time.getAsync
+  summary: >-
+    Obtient l’heure de début ou de fin d’un rendez-vous.
+
+
+    La date et l’heure sont fournies sous la forme d’un objet Date dans la propriété asyncResult.value. La valeur est exprimée au format UTC (temps universel coordonné). Vous pouvez convertir l’heure UTC au format du client avec la méthode convertToLocalClientTime.
+
+
+    \[[Du jeu d’API : boîte aux lettres 1.1](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition</td></tr></table>
+
+
+    Outre la signature principale, cette méthode a également cette signature :
+
+
+    `getAsync(callback: (result: AsyncResult) => void): void;`
+  name: getAsync(options, callback)
+  fullName: Outlook_1_3.Office.Time.getAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getAsync(options: Office.AsyncContextOptions, callback: (result: AsyncResult) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: options
+      description: 'Littéral d’objet contenant une ou plusieurs des propriétés suivantes. asyncContext : les développeurs peuvent fournir n’importe quel objet qu’ils souhaitent accéder dans la méthode de rappel.'
+      type:
+      - office.Office.AsyncContextOptions
+    - id: callback
+      description: Une fois la méthode terminée, la fonction passée dans le paramètre de rappel est appelée avec un seul paramètre de type AsyncResult.
+      type:
+      - '(result: AsyncResult) => void'
+- uid: Outlook_1_3.Office.Time.setAsync
+  summary: >-
+    Définit l’heure de début ou de fin d’un rendez-vous.
+
+
+    Si la méthode setAsync est appelée dans la propriété start, la propriété end est modifiée pour maintenir la durée du rendez-vous telle que définie précédemment. Si la méthode setAsync est appelée dans la propriété end, la durée du rendez-vous est étendue jusqu’à la nouvelle heure de fin.
+
+
+    La durée doit être exprimée au format UTC. Vous pouvez obtenir l’heure UTC correcte à l’aide de la méthode convertToUtcClientTime.
+
+
+    \[[Du jeu d’API : boîte aux lettres 1.1](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr>
+
+
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition</td></tr>
+
+
+    <tr><td>Erreurs</td><td>InvalidEndTime - l’heure de fin est avant l’heure de début du rendez-vous.</td></tr></table>
+
+
+    Outre la signature principale, cette méthode a également ces signatures :
+
+
+    `setAsync(dateTime: Date): void;`
+
+
+    `setAsync(dateTime: Date, options: Office.AsyncContextOptions): void;`
+
+
+    `setAsync(dateTime: Date, callback: (result: AsyncResult) => void): void;`
+  name: setAsync(dateTime, options, callback)
+  fullName: Outlook_1_3.Office.Time.setAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'setAsync(dateTime: Date, options?: Office.AsyncContextOptions, callback?: (result: AsyncResult) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: dateTime
+      description: Un objet date-heure en temps universel coordonné (UTC).
+      type:
+      - Date
+    - id: options
+      description: 'Littéral d’objet contenant une ou plusieurs des propriétés suivantes. asyncContext : les développeurs peuvent fournir n’importe quel objet qu’ils souhaitent accéder dans la méthode de rappel.'
+      type:
+      - office.Office.AsyncContextOptions
+    - id: callback
+      description: Une fois la méthode terminée, la fonction passée dans le paramètre de rappel est appelée avec un seul paramètre de type AsyncResult. Si la date et l’heure échoue, l’AsyncResult.Error, propriété contient un code d’erreur.
+      type:
+      - '(result: AsyncResult) => void'
