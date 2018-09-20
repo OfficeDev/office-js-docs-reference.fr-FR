@@ -1,0 +1,368 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: b6b41c3f4824c99041428cf51a98d0e34214de1f
+ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 09/20/2018
+ms.locfileid: "24044567"
+items:
+- uid: onenote.OneNote.Section
+  summary: >-
+    Représente une section OneNote. Les sections peuvent contenir des pages.
+
+
+    \[[Du jeu d’API : OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: OneNote.Section
+  fullName: onenote.OneNote.Section
+  langs:
+  - typeScript
+  type: class
+  extends:
+  - OfficeExtension.ClientObject
+  package: onenote
+  children:
+  - onenote.OneNote.Section.addPage
+  - onenote.OneNote.Section.clientUrl
+  - onenote.OneNote.Section.copyToNotebook
+  - onenote.OneNote.Section.copyToSectionGroup
+  - onenote.OneNote.Section.getRestApiId
+  - onenote.OneNote.Section.id
+  - onenote.OneNote.Section.insertSectionAsSibling
+  - onenote.OneNote.Section.isEncrypted
+  - onenote.OneNote.Section.isLocked
+  - onenote.OneNote.Section.load
+  - onenote.OneNote.Section.name
+  - onenote.OneNote.Section.notebook
+  - onenote.OneNote.Section.pages
+  - onenote.OneNote.Section.parentSectionGroup
+  - onenote.OneNote.Section.parentSectionGroupOrNull
+  - onenote.OneNote.Section.toJSON
+  - onenote.OneNote.Section.track
+  - onenote.OneNote.Section.untrack
+  - onenote.OneNote.Section.webUrl
+- uid: onenote.OneNote.Section.addPage
+  summary: >-
+    Ajoute une nouvelle page à la fin de la section.
+
+
+    \[[Du jeu d’API : OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: addPage(title)
+  fullName: onenote.OneNote.Section.addPage
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'addPage(title: string): OneNote.Page;'
+    return:
+      type:
+      - onenote.OneNote.Page
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nOneNote.run(function (context) {\n            \n    // Queue a command to add a page to the current section.\n    var page = context.application.getActiveSection().addPage(\"Wish list\");\n            \n    // Queue a command to load the id and title of the new page. \n    // This example loads the new page so it can read its properties later.           \n    page.load('id,title');\n            \n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n             \n            // Display the properties.       \n            console.log(\"Page name: \" + page.title);\n            console.log(\"Page ID: \" + page.id);\n\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+    parameters:
+    - id: title
+      description: Titre de la nouvelle page.
+      type:
+      - string
+- uid: onenote.OneNote.Section.clientUrl
+  summary: >-
+    URL du client de la section. En lecture seule
+
+
+    \[[Du jeu d’API : OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: clientUrl
+  fullName: onenote.OneNote.Section.clientUrl
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly clientUrl: string;'
+    return:
+      type:
+      - string
+- uid: onenote.OneNote.Section.copyToNotebook
+  summary: >-
+    Copie cette section dans le bloc-notes spécifié.
+
+
+    \[[Du jeu d’API : OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: copyToNotebook(destinationNotebook)
+  fullName: onenote.OneNote.Section.copyToNotebook
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'copyToNotebook(destinationNotebook: OneNote.Notebook): OneNote.Section;'
+    return:
+      type:
+      - onenote.OneNote.Section
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nOneNote.run(function (context) {\n    var app = context.application;\n    \n    // Gets the active Notebook.\n    var notebook = app.getActiveNotebook();\n    \n    // Gets the active Section.\n    var section = app.getActiveSection();\n    \n    var newSection;\n    \n    return context.sync()\n        .then(function() {\n            newSection = section.copyToNotebook(notebook);\n            newSection.load('id');\n            return context.sync();\n        })\n        .then(function() {\n            console.log(newSection.id);\n        });\n})\n.catch(function (error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+    parameters:
+    - id: destinationNotebook
+      description: Bloc-notes dans lequel cette section doit être copiée.
+      type:
+      - onenote.OneNote.Notebook
+- uid: onenote.OneNote.Section.copyToSectionGroup
+  summary: >-
+    Copie cette section dans le groupe de sections spécifié.
+
+
+    \[[Du jeu d’API : OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: copyToSectionGroup(destinationSectionGroup)
+  fullName: onenote.OneNote.Section.copyToSectionGroup
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'copyToSectionGroup(destinationSectionGroup: OneNote.SectionGroup): OneNote.Section;'
+    return:
+      type:
+      - onenote.OneNote.Section
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nOneNote.run(function (ctx) {\n    var app = ctx.application;\n    \n    // Gets the active Notebook.\n    var notebook = app.getActiveNotebook();\n    \n    // Gets the active Section.\n    var section = app.getActiveSection();\n    \n    var newSection;\n    \n    return ctx.sync()\n        .then(function() {\n            var firstSectionGroup = notebook.sectionGroups.items[0];\n            newSection = section.copyToSectionGroup(firstSectionGroup);\n            newSection.load('id');\n            return ctx.sync();\n        })\n        .then(function() {\n            console.log(newSection.id);\n        });\n})\n.catch(function (error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+    parameters:
+    - id: destinationSectionGroup
+      description: Groupe de sections dans lequel cette section doit être copiée.
+      type:
+      - onenote.OneNote.SectionGroup
+- uid: onenote.OneNote.Section.getRestApiId
+  summary: >-
+    Obtient l’ID d’API REST.
+
+
+    \[[Du jeu d’API : OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: getRestApiId()
+  fullName: onenote.OneNote.Section.getRestApiId
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getRestApiId(): OfficeExtension.ClientResult<string>;'
+    return:
+      type:
+      - OfficeExtension.ClientResult<string>
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nOneNote.run(function(ctx){\n    // Get the current section.         \n    var section = ctx.application.getActiveSection();\n    var restApiId = section.getRestApiId();\n\n    return ctx.sync().\n        then(function(){\n            console.log(\"The REST API ID is \" + restApiId.value);\n            // Note that the REST API ID isn't all you need to interact with the OneNote REST API. \n            // This is only required for SharePoint notebooks. baseUrl will be null for OneDrive notebooks.\n            // For SharePoint notebooks, the notebook baseUrl should be used to talk to the \n            // OneNote REST API according to the OneNote Development Blog.\n            // https://blogs.msdn.microsoft.com/onenotedev/2015/06/11/and-sharepoint-makes-three/\n        });\n});\n```"
+- uid: onenote.OneNote.Section.id
+  summary: >-
+    Renvoie l’ID de la section. En lecture seule.
+
+
+    \[[Du jeu d’API : OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: id
+  fullName: onenote.OneNote.Section.id
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly id: string;'
+    return:
+      type:
+      - string
+- uid: onenote.OneNote.Section.insertSectionAsSibling
+  summary: >-
+    Insère une nouvelle section avant ou après la section active.
+
+
+    \[[Du jeu d’API : OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: insertSectionAsSibling(location, title)
+  fullName: onenote.OneNote.Section.insertSectionAsSibling
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'insertSectionAsSibling(location: OneNote.InsertLocation, title: string): OneNote.Section;'
+    return:
+      type:
+      - onenote.OneNote.Section
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nOneNote.run(function (context) {\n            \n    // Queue a command to insert a section after the current section.\n    var section = context.application.getActiveSection().insertSectionAsSibling(\"After\", \"New section\");\n            \n    // Queue a command to load the id and name of the new section. \n    // This example loads the new section so it can read its properties later.           \n    section.load('id,name');\n            \n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n             \n            // Display the properties.       \n            console.log(\"Section name: \" + section.name);\n            console.log(\"Section ID: \" + section.id);\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+    parameters:
+    - id: location
+      description: Emplacement de la nouvelle section par rapport à la section active.
+      type:
+      - onenote.OneNote.InsertLocation
+    - id: title
+      description: Nom de la nouvelle section.
+      type:
+      - string
+- uid: onenote.OneNote.Section.isEncrypted
+  summary: >-
+    True si cette section est chiffrée avec un mot de passe. En lecture seule
+
+
+    \[[Du jeu d’API : OneNoteApi 1.2](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: isEncrypted
+  fullName: onenote.OneNote.Section.isEncrypted
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly isEncrypted: boolean;'
+    return:
+      type:
+      - boolean
+- uid: onenote.OneNote.Section.isLocked
+  summary: >-
+    True si cette section est verrouillée. En lecture seule
+
+
+    \[[Du jeu d’API : OneNoteApi 1.2](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: isLocked
+  fullName: onenote.OneNote.Section.isLocked
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly isLocked: boolean;'
+    return:
+      type:
+      - boolean
+- uid: onenote.OneNote.Section.load
+  summary: Files d’attente d’une commande pour charger les propriétés de l’objet spécifiées. Vous devez appeler « context.sync() » avant de lire les propriétés.
+  remarks: "Outre cette signature, cette méthode présente les signatures suivantes :\n\n`load(option?: { select?: string; expand?: string; }): OneNote.Section`-Où option.select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options.expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.Section`-Uniquement disponible sur les types de la collection. Il est similaire à la signature précédente. Option.Top Spécifie le nombre maximal d’éléments pouvant être inclus dans le résultat de la collection. Option.Skip Spécifie le nombre d’éléments qui doivent être ignoré et non inclus dans le résultat. Si option.top est spécifié, le jeu de résultats démarre après l’ignorer le nombre spécifié d’éléments.\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nOneNote.run(function (context) {\n        \n    // Get the current section.\n    var section = context.application.getActiveSection();\n            \n    // Queue a command to load the section. \n    // For best performance, request specific properties.           \n    section.load(\"id\");\n            \n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n            console.log(\"Section ID: \" + section.id);\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\nOneNote.run(function (context) {\n        \n    // Get the current section.\n    var section = context.application.getActiveSection();\n            \n    // Queue a command to load the section with the specified properties. \n    section.load(\"name,notebook/name\");\n            \n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n            console.log(\"Section name: \" + section.name);\n            console.log(\"Parent notebook name: \" + section.notebook.name);\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\nOneNote.run(function (context) {\n    // Queue a command to add a page to the current section.\n    var section = context.application.getActiveSection();\n    section.load('clientUrl,notebook');\n    var sectionGroup = section.parentSectionGroupOrNull;\n    \n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n            if(sectionGroup.isNull === false)\n            {\n                // If a parent section group exists, queue a command to add a section in it!\n                sectionGroup.addSection(\"NewSectionInSectionGroup\");\n            }\n            return context.sync();\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  name: load(option)
+  fullName: onenote.OneNote.Section.load
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: string | string[]): OneNote.Section;'
+    return:
+      type:
+      - onenote.OneNote.Section
+      description: ''
+    parameters:
+    - id: option
+      description: Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+      type:
+      - string | string[]
+- uid: onenote.OneNote.Section.name
+  summary: >-
+    Obtient le nom de la section. En lecture seule.
+
+
+    \[[Du jeu d’API : OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: name
+  fullName: onenote.OneNote.Section.name
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly name: string;'
+    return:
+      type:
+      - string
+- uid: onenote.OneNote.Section.notebook
+  summary: >-
+    Obtient le bloc-notes qui contient la section. En lecture seule.
+
+
+    \[[Du jeu d’API : OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: notebook
+  fullName: onenote.OneNote.Section.notebook
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly notebook: OneNote.Notebook;'
+    return:
+      type:
+      - onenote.OneNote.Notebook
+- uid: onenote.OneNote.Section.pages
+  summary: >-
+    Collection de pages dans la section. En lecture seule
+
+
+    \[[Du jeu d’API : OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: pages
+  fullName: onenote.OneNote.Section.pages
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly pages: OneNote.PageCollection;'
+    return:
+      type:
+      - onenote.OneNote.PageCollection
+- uid: onenote.OneNote.Section.parentSectionGroup
+  summary: >-
+    Obtient le groupe de sections qui contient la section. Génère ItemNotFound si la section est un enfant direct du bloc-notes. En lecture seule.
+
+
+    \[[Du jeu d’API : OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: parentSectionGroup
+  fullName: onenote.OneNote.Section.parentSectionGroup
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly parentSectionGroup: OneNote.SectionGroup;'
+    return:
+      type:
+      - onenote.OneNote.SectionGroup
+- uid: onenote.OneNote.Section.parentSectionGroupOrNull
+  summary: >-
+    Obtient le groupe de sections qui contient la section. Renvoie la valeur Null si la section est un enfant direct du bloc-notes. En lecture seule.
+
+
+    \[[Du jeu d’API : OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: parentSectionGroupOrNull
+  fullName: onenote.OneNote.Section.parentSectionGroupOrNull
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly parentSectionGroupOrNull: OneNote.SectionGroup;'
+    return:
+      type:
+      - onenote.OneNote.SectionGroup
+- uid: onenote.OneNote.Section.toJSON
+  name: toJSON()
+  fullName: onenote.OneNote.Section.toJSON
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'toJSON(): OneNote.Interfaces.SectionData;'
+    return:
+      type:
+      - onenote.OneNote.Interfaces.SectionData
+      description: ''
+- uid: onenote.OneNote.Section.track
+  summary: Suivre l’objet pour l’ajustement automatique selon entourant les modifications dans le document. Cet appel est une abréviation de context.trackedObjects.add(thisObject). Si vous utilisez cet objet dans les appels de « .sync » et en dehors de l’exécution séquentielle d’un lot de « .run » et obtenir une erreur « InvalidObjectPath » lors de la définition d’une propriété ou d’appeler une méthode sur l’objet, vous devez avoir ajouté l’objet à l’objet suivi collection lorsque l’objet a été créé tout d’abord.
+  name: track()
+  fullName: onenote.OneNote.Section.track
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'track(): OneNote.Section;'
+    return:
+      type:
+      - onenote.OneNote.Section
+      description: ''
+- uid: onenote.OneNote.Section.untrack
+  summary: Version de la mémoire associée à cet objet, si elle a été précédemment suivi. Cet appel est l’abréviation de context.trackedObjects.remove(thisObject). Comportant de nombreux objets suivis ralentit l’application hôte, donc pensez à libérer les objets que vous ajoutez, une fois que vous avez terminé les utiliser. Vous devrez appeler « context.sync() » avant que la version de mémoire prenne effet.
+  name: untrack()
+  fullName: onenote.OneNote.Section.untrack
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'untrack(): OneNote.Section;'
+    return:
+      type:
+      - onenote.OneNote.Section
+      description: ''
+- uid: onenote.OneNote.Section.webUrl
+  summary: >-
+    URL web de la page. En lecture seule
+
+
+    \[[Du jeu d’API : OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: webUrl
+  fullName: onenote.OneNote.Section.webUrl
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly webUrl: string;'
+    return:
+      type:
+      - string
