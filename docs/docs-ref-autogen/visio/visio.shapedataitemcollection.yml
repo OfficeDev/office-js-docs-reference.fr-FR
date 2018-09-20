@@ -1,0 +1,143 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: 71c6bd6d34115e5cc0c776ffd6a62c23fa8ab9f0
+ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 09/20/2018
+ms.locfileid: "24043702"
+items:
+- uid: visio.Visio.ShapeDataItemCollection
+  summary: >-
+    Représente la collection d’éléments de données pour une forme donnée.
+
+
+    \[[Du jeu d’API : 1.1](/javascript/office/overview/visio-javascript-reference-overview)\]
+  name: Visio.ShapeDataItemCollection
+  fullName: visio.Visio.ShapeDataItemCollection
+  langs:
+  - typeScript
+  type: class
+  extends:
+  - OfficeExtension.ClientObject
+  package: visio
+  children:
+  - visio.Visio.ShapeDataItemCollection.getCount
+  - visio.Visio.ShapeDataItemCollection.getItem
+  - visio.Visio.ShapeDataItemCollection.items
+  - visio.Visio.ShapeDataItemCollection.load
+  - visio.Visio.ShapeDataItemCollection.toJSON
+- uid: visio.Visio.ShapeDataItemCollection.getCount
+  summary: >-
+    Obtient le nombre d’éléments de données de forme.
+
+
+    \[[Du jeu d’API : 1.1](/javascript/office/overview/visio-javascript-reference-overview)\]
+  name: getCount()
+  fullName: visio.Visio.ShapeDataItemCollection.getCount
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getCount(): OfficeExtension.ClientResult<number>;'
+    return:
+      type:
+      - OfficeExtension.ClientResult<number>
+      description: ''
+- uid: visio.Visio.ShapeDataItemCollection.getItem
+  summary: >-
+    Obtient l’élément de données de forme à l’aide de son nom.
+
+
+    \[[Du jeu d’API : 1.1](/javascript/office/overview/visio-javascript-reference-overview)\]
+  name: getItem(key)
+  fullName: visio.Visio.ShapeDataItemCollection.getItem
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getItem(key: string): Visio.ShapeDataItem;'
+    return:
+      type:
+      - visio.Visio.ShapeDataItem
+      description: ''
+    parameters:
+    - id: key
+      description: La clé est le nom de l’élément de données de forme à récupérer.
+      type:
+      - string
+- uid: visio.Visio.ShapeDataItemCollection.items
+  summary: Obtient l’enfant chargé éléments dans cette collection.
+  name: items
+  fullName: visio.Visio.ShapeDataItemCollection.items
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly items: Visio.ShapeDataItem[];'
+    return:
+      type:
+      - Visio.ShapeDataItem[]
+- uid: visio.Visio.ShapeDataItemCollection.load
+  summary: Files d’attente d’une commande pour charger les propriétés de l’objet spécifiées. Vous devez appeler « context.sync() » avant de lire les propriétés.
+  remarks: >-
+    Outre cette signature, cette méthode présente les signatures suivantes :
+
+
+    `load(option?: { select?: string; expand?: string; }): Visio.ShapeDataItemCollection`-Où option.select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options.expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
+
+
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Visio.ShapeDataItemCollection`-Uniquement disponible sur les types de la collection. Il est similaire à la signature précédente. Option.Top Spécifie le nombre maximal d’éléments pouvant être inclus dans le résultat de la collection. Option.Skip Spécifie le nombre d’éléments qui doivent être ignoré et non inclus dans le résultat. Si option.top est spécifié, le jeu de résultats démarre après l’ignorer le nombre spécifié d’éléments.
+
+    #### <a name="examples"></a>Exemples
+
+
+    ```javascript
+
+    Visio.run(session, function (ctx) {
+        var activePage = ctx.document.getActivePage();
+        var shape = activePage.shapes.getItem(0);
+        var shapeDataItems = shape.shapeDataItems;
+        shapeDataItems.load();
+        return ctx.sync().then(function() {
+            for (var i = 0; i < shapeDataItems.items.length; i++)
+            {
+                console.log(shapeDataItems.items[i].label);
+                console.log(shapeDataItems.items[i].value);
+            }
+        });
+    }).catch(function(error) {
+        console.log("Error: " + error);
+        if (error instanceof OfficeExtension.Error) {
+            console.log("Debug info: " + JSON.stringify(error.debugInfo));
+        }
+    });
+
+    ```
+  name: load(option)
+  fullName: visio.Visio.ShapeDataItemCollection.load
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: string | string[]): Visio.ShapeDataItemCollection;'
+    return:
+      type:
+      - visio.Visio.ShapeDataItemCollection
+      description: ''
+    parameters:
+    - id: option
+      description: Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+      type:
+      - string | string[]
+- uid: visio.Visio.ShapeDataItemCollection.toJSON
+  name: toJSON()
+  fullName: visio.Visio.ShapeDataItemCollection.toJSON
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'toJSON(): Visio.Interfaces.ShapeDataItemCollectionData;'
+    return:
+      type:
+      - visio.Visio.Interfaces.ShapeDataItemCollectionData
+      description: ''

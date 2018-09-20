@@ -1,0 +1,157 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: 26ce48cc61720d1f718d6ca3a76cf4dd6b640df8
+ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 09/20/2018
+ms.locfileid: "24044098"
+items:
+- uid: office.Office.UI
+  summary: >-
+    Fournit des objets et des méthodes que vous pouvez utiliser pour créer et manipuler des composants d’interface utilisateur, telles que les boîtes de dialogue dans vos compléments Office.
+
+
+    Visitez le site «[utiliser l’API de boîte de dialogue dans vos compléments Office](https://docs.microsoft.com/office/dev/add-ins/develop/dialog-api-in-office-add-ins)<!-- -->» pour plus d’informations.
+  name: Office.UI
+  fullName: office.Office.UI
+  langs:
+  - typeScript
+  type: interface
+  package: office
+  children:
+  - office.Office.UI.closeContainer
+  - office.Office.UI.displayDialogAsync
+  - office.Office.UI.messageParent
+- uid: office.Office.UI.closeContainer
+  summary: Ferme le conteneur d’IU où le code JavaScript est exécuté.
+  remarks: >-
+    <table><tr><td>Hôtes</td><td>Excel, Word, PowerPoint, Outlook (ensemble de conditions requises minimales : 1,5 de boîte aux lettres)</td></tr></table>
+
+
+    Le comportement de cette méthode est spécifié par les éléments suivants :
+
+
+    - Appelée à partir d’un bouton de commande sans l’interface utilisateur : aucun effet. Les boîtes de dialogue ouvertes par displayDialogAsync restent ouvertes.
+
+
+    - Appelée à partir d’un volet Office : ferme le volet Office. Toute boîte de dialogue Ouvrir par displayDialogAsync ferme également. Si le volet Office est épinglable et qu’il a été épinglé par l’utilisateur, il sera détaché.
+
+
+    - Appelée à partir d’une extension de module : aucun effet.
+  name: closeContainer()
+  fullName: office.Office.UI.closeContainer
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'closeContainer(): void;'
+    return:
+      type:
+      - void
+      description: ''
+- uid: office.Office.UI.displayDialogAsync
+  summary: Affiche une boîte de dialogue pour afficher ou de collecter des informations à partir de l’utilisateur ou pour faciliter la navigation Web.
+  remarks: >-
+    <table><tr><td>Hôtes</td><td>Word, Excel, Outlook, PowerPoint</td></tr>
+
+
+    <tr><td>Ensembles de conditions requises</td><td>DialogAPI, la boîte aux lettres 1.4</td></tr></table>
+
+
+    Cette méthode est disponible dans la spécification DialogApi définies pour les compléments Word, Excel et PowerPoint, et dans la boîte aux lettres exigence définie 1.4 pour Outlook. Pour plus d’informations sur la façon de spécifier une exigence définie dans votre manifeste, voir [hôtes Office spécifier et exigences de l’API](https://docs.microsoft.com/office/dev/add-ins/develop/specify-office-hosts-and-api-requirements)<!-- -->.
+
+
+    La page initiale doit se trouver sur le même domaine que la page parent (le paramètre startAddress). Après le chargement de la page initiale, vous pouvez également accéder à d’autres domaines.
+
+
+    Tout appel de la page `office.context.ui.messageParent` doit également se trouver sur le même domaine que la page parent.
+
+
+    **Considérations de conception**:
+
+
+    Les considérations relatives à la conception ci-dessous s’appliquent aux boîtes de dialogue :
+
+
+    - Un volet Office Add-in peut avoir qu’une seule boîte de dialogue Ouvrir à tout moment. Plusieurs boîtes de dialogue peuvent être ouvertes en même temps dans Ajouter des commandes (boutons du ruban personnalisé ou éléments de menu).
+
+
+    - Toutes les boîtes de dialogue peuvent être déplacées et redimensionnées par l’utilisateur.
+
+
+    - Toutes les boîtes de dialogue s’affichent au centre de l’écran à l’ouverture.
+
+
+    - Les boîtes de dialogue s’affichent au-dessus de l’application hôte et dans l’ordre dans lequel elles ont été créées.
+
+
+    Utilisez une boîte de dialogue pour :
+
+
+    - Afficher les pages d’authentification permettant de collecter les informations d’identification de l’utilisateur.
+
+
+    - Affiche un écran d’erreur/progression/entrée d’une commande ShowTaskpane ou ExecuteAction.
+
+
+    - Augmenter provisoirement la surface dont un utilisateur dispose pour effectuer une tâche.
+
+
+    N’utilisez pas de boîte de dialogue pour interagir avec un document. Il est préférable d’utiliser un volet des tâches.
+
+
+    Pour obtenir un exemple de modèle de conception à utiliser pour créer une boîte de dialogue, consultez [Boîte de dialogue client](https://github.com/OfficeDev/Office-Add-in-UX-Design-Patterns/blob/master/Patterns/Client_Dialog.md) dans le référentiel relatif aux modèles de conception de l’expérience utilisateur du complément Office sur GitHub.
+
+
+    **displayDialogAsync erreurs**:
+
+
+    <table> <tr> <th>Numéro de code</th> <th>Signification</th> </tr> <tr> <td>12004</td> <td>Le domaine de l’URL passé à displayDialogAsync n’est pas approuvé. Le domaine doit être le même domaine que la page hôte (y compris le numéro de port et le protocole), ou il doit être enregistré dans le <AppDomains> section du complément de manifeste.</td> </tr> <tr> <td>12005</td> <td>L’URL transmise à displayDialogAsync utilise le protocole HTTP. HTTPS est requis. (Dans certaines versions de Microsoft Office, le message d’erreur renvoyé avec 12005 est le même un retournées pour 12004.)</td> </tr> <tr> <td>12007</td> <td>Une boîte de dialogue est déjà ouverte à partir du volet Office. Une seule boîte de dialogue à la fois peut être ouverte dans un complément de volet Office.</td> </tr> </table>
+
+
+    Dans la fonction de rappel passée à la méthode displayDialogAsync, vous pouvez utiliser les propriétés de l’objet AsyncResult pour renvoyer les informations suivantes.
+
+
+    <table> <tr> <th>Propriété</th> <th>Utiliser pour</th> </tr> <tr> <td>AsyncResult.value</td> <td>Accéder à l’objet Dialog.</td> </tr> <tr> <td>AsyncResult.status</td> <td>Déterminer si l’opération a réussi ou échoué.</td> </tr> <tr> <td>AsyncResult.error</td> <td>Accéder à un objet Error fournissant des informations sur l’erreur en cas d’échec de l’opération.</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>Accéder à votre objet défini par l’utilisateur ou la valeur, si vous avez passé un en tant que paramètre asyncContext.</td> </tr> </table>
+  name: displayDialogAsync(startAddress, options, callback)
+  fullName: office.Office.UI.displayDialogAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'displayDialogAsync(startAddress: string, options?: DialogOptions, callback?: (result: AsyncResult<Dialog>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: startAddress
+      description: Accepte l’URL HTTPS initial qui s’ouvre dans la boîte de dialogue.
+      type:
+      - string
+    - id: options
+      description: Facultatif. Accepte un objet[Office.DialogOptions](xref:office.Office.DialogOptions) pour définir l’affichage de la boîte de dialogue.
+      type:
+      - office.Office.DialogOptions
+    - id: callback
+      description: Facultatif. Accepte une méthode de rappel pour gérer la tentative de création de boîte de dialogue. Si l’opération réussit, le AsyncResult.value est un objet Dialog.
+      type:
+      - '(result: AsyncResult<Dialog>) => void'
+- uid: office.Office.UI.messageParent
+  summary: Remet un message de la part de la boîte de dialogue à sa page parent/d’ouverture. La page appelant cette API doit figurer sur le même domaine que la page parent.
+  name: messageParent(messageObject)
+  fullName: office.Office.UI.messageParent
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'messageParent(messageObject: any): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: messageObject
+      description: Accepte un message provenant de la boîte de dialogue et destiné au complément.
+      type:
+      - any

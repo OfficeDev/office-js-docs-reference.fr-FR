@@ -1,0 +1,158 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: b0436d89db9b46e0dc1850fd3b2715496b541150
+ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 09/20/2018
+ms.locfileid: "24044014"
+items:
+- uid: excel.Excel.WorksheetFreezePanes
+  summary: '\[[Du jeu d’API : ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]'
+  name: Excel.WorksheetFreezePanes
+  fullName: excel.Excel.WorksheetFreezePanes
+  langs:
+  - typeScript
+  type: class
+  extends:
+  - OfficeExtension.ClientObject
+  package: excel
+  children:
+  - excel.Excel.WorksheetFreezePanes.freezeAt
+  - excel.Excel.WorksheetFreezePanes.freezeColumns
+  - excel.Excel.WorksheetFreezePanes.freezeRows
+  - excel.Excel.WorksheetFreezePanes.getLocation
+  - excel.Excel.WorksheetFreezePanes.getLocationOrNullObject
+  - excel.Excel.WorksheetFreezePanes.toJSON
+  - excel.Excel.WorksheetFreezePanes.unfreeze
+- uid: excel.Excel.WorksheetFreezePanes.freezeAt
+  summary: >-
+    Définit les cellules figer dans l’affichage de la feuille de calcul active. La plage fournie correspond à des cellules qui seront être figés dans le volet supérieur et gauche.
+
+
+    \[[Du jeu d’API : ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: freezeAt(frozenRange)
+  fullName: excel.Excel.WorksheetFreezePanes.freezeAt
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'freezeAt(frozenRange: Range | string): void;'
+    return:
+      type:
+      - void
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n\n    // Freeze the specified range in top-and-left-most pane of the worksheet.\n    sheet.freezePanes.freezeAt(sheet.getRange(\"H2:K5\"));\n\n    await context.sync();\n});\n```"
+    parameters:
+    - id: frozenRange
+      description: Une plage qui représente les cellules à être figé, ou valeur null pour supprimer tous les volets figés.
+      type:
+      - Range | string
+- uid: excel.Excel.WorksheetFreezePanes.freezeColumns
+  summary: >-
+    Figer la première ou de colonnes de la feuille de calcul en place.
+
+
+    \[[Du jeu d’API : ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: freezeColumns(count)
+  fullName: excel.Excel.WorksheetFreezePanes.freezeColumns
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'freezeColumns(count?: number): void;'
+    return:
+      type:
+      - void
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n\n    // Freeze the first two columns in the worksheet.\n    sheet.freezePanes.freezeColumns(2);\n\n    await context.sync();\n});\n```"
+    parameters:
+    - id: count
+      description: Nombre de colonnes à figer ou zéro pour libérer toutes les colonnes facultatif
+      type:
+      - number
+- uid: excel.Excel.WorksheetFreezePanes.freezeRows
+  summary: >-
+    Figer les lignes haut de la feuille de calcul en place.
+
+
+    \[[Du jeu d’API : ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: freezeRows(count)
+  fullName: excel.Excel.WorksheetFreezePanes.freezeRows
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'freezeRows(count?: number): void;'
+    return:
+      type:
+      - void
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n\n    // Freeze the top two rows in the worksheet.\n    sheet.freezePanes.freezeRows(2);\n\n    await context.sync();\n});\n```"
+    parameters:
+    - id: count
+      description: Facultatif nombre de lignes à figer ou zéro pour libérer toutes les lignes
+      type:
+      - number
+- uid: excel.Excel.WorksheetFreezePanes.getLocation
+  summary: >-
+    Obtient une plage qui décrit les cellules figer dans l’affichage de la feuille de calcul active. La plage figer est correspond à des cellules qui sont figées dans le volet supérieur et gauche.
+
+
+    \[[Du jeu d’API : ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: getLocation()
+  fullName: excel.Excel.WorksheetFreezePanes.getLocation
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getLocation(): Excel.Range;'
+    return:
+      type:
+      - excel.Excel.Range
+      description: ''
+- uid: excel.Excel.WorksheetFreezePanes.getLocationOrNullObject
+  summary: >-
+    Obtient une plage qui décrit les cellules figer dans l’affichage de la feuille de calcul active. La plage figer est correspond à des cellules qui sont figées dans le volet supérieur et gauche. S’il n’existe aucun volet figé, renvoie un objet null.
+
+
+    \[[Du jeu d’API : ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: getLocationOrNullObject()
+  fullName: excel.Excel.WorksheetFreezePanes.getLocationOrNullObject
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getLocationOrNullObject(): Excel.Range;'
+    return:
+      type:
+      - excel.Excel.Range
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const frozenRange = sheet.freezePanes.getLocationOrNullObject();\n    frozenRange.load(\"address\");\n\n    await context.sync();\n\n    if (frozenRange.isNullObject) {\n        OfficeHelpers.UI.notify(`The worksheet does not contain a frozen pane.`);\n    } else {\n        OfficeHelpers.UI.notify(`The address of the frozen range (cells that are frozen in the top-and-left-most pane) is \"${frozenRange.address}\"`);\n    }\n});\n```"
+- uid: excel.Excel.WorksheetFreezePanes.toJSON
+  name: toJSON()
+  fullName: excel.Excel.WorksheetFreezePanes.toJSON
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'toJSON:'
+    return:
+      type:
+      - >-
+        {
+                    [key: string]: string;
+                }
+      description: ''
+- uid: excel.Excel.WorksheetFreezePanes.unfreeze
+  summary: >-
+    Supprime tous les volets figés dans la feuille de calcul.
+
+
+    \[[Du jeu d’API : ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: unfreeze()
+  fullName: excel.Excel.WorksheetFreezePanes.unfreeze
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'unfreeze(): void;'
+    return:
+      type:
+      - void
+      description: "\n#### <a name=\"examples\"></a>範例\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    sheet.freezePanes.unfreeze();\n\n    await context.sync();\n});\n```"

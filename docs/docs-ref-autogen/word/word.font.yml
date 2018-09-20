@@ -1,0 +1,491 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: 932101dd810955b075f7b98dc22ff547af29976a
+ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 09/20/2018
+ms.locfileid: "24043737"
+items:
+- uid: word.Word.Font
+  summary: >-
+    Représente une police.
+
+
+    \[[Du jeu d’API : WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: Word.Font
+  fullName: word.Word.Font
+  langs:
+  - typeScript
+  type: class
+  extends:
+  - OfficeExtension.ClientObject
+  package: word
+  children:
+  - word.Word.Font.bold
+  - word.Word.Font.color
+  - word.Word.Font.doubleStrikeThrough
+  - word.Word.Font.highlightColor
+  - word.Word.Font.italic
+  - word.Word.Font.load
+  - word.Word.Font.name
+  - word.Word.Font.size
+  - word.Word.Font.strikeThrough
+  - word.Word.Font.subscript
+  - word.Word.Font.superscript
+  - word.Word.Font.toJSON
+  - word.Word.Font.track
+  - word.Word.Font.underline
+  - word.Word.Font.untrack
+- uid: word.Word.Font.bold
+  summary: >-
+    Obtient ou définit une valeur qui indique si la police en gras. Renvoie true si la police est mise en forme en gras, sinon, false.
+
+
+    \[[Du jeu d’API : WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: bold
+  fullName: word.Word.Font.bold
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'bold: boolean;'
+    return:
+      type:
+      - boolean
+- uid: word.Word.Font.color
+  summary: >-
+    Obtient ou définit la couleur de la police spécifiée. Vous pouvez fournir la valeur de la «\#RRGGBB' format ou le nom de couleur.
+
+
+    \[[Du jeu d’API : WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: color
+  fullName: word.Word.Font.color
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'color: string;'
+    return:
+      type:
+      - string
+- uid: word.Word.Font.doubleStrikeThrough
+  summary: >-
+    Obtient ou définit une valeur qui indique si la police a un barré double. True si la police est mise en forme barré double, sinon, false.
+
+
+    \[[Du jeu d’API : WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: doubleStrikeThrough
+  fullName: word.Word.Font.doubleStrikeThrough
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'doubleStrikeThrough: boolean;'
+    return:
+      type:
+      - boolean
+- uid: word.Word.Font.highlightColor
+  summary: >-
+    Obtient ou définit la couleur de surbrillance. Pour la définir, utilisez soit une valeur dans la «\#RRGGBB' format ou le nom de couleur. Pour supprimer la couleur de surbrillance, affectez-lui la valeur null. La couleur de surbrillance retournée peut être dans la «\#RRGGBB' mettre en forme, une chaîne vide pour les couleurs de surbrillance mixte, ou la couleur de surbrillance null pour non.
+
+
+    \[[Du jeu d’API : WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: highlightColor
+  fullName: word.Word.Font.highlightColor
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'highlightColor: string;'
+    return:
+      type:
+      - string
+- uid: word.Word.Font.italic
+  summary: >-
+    Obtient ou définit une valeur qui indique si la police est en italique. Renvoie true si la police est en italique, sinon, false.
+
+
+    \[[Du jeu d’API : WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: italic
+  fullName: word.Word.Font.italic
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'italic: boolean;'
+    return:
+      type:
+      - boolean
+- uid: word.Word.Font.load
+  summary: Files d’attente d’une commande pour charger les propriétés de l’objet spécifiées. Vous devez appeler « context.sync() » avant de lire les propriétés.
+  remarks: >-
+    Outre cette signature, cette méthode présente les signatures suivantes :
+
+
+    `load(option?: { select?: string; expand?: string; }): Word.Font`-Où option.select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options.expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
+
+
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Word.Font`-Uniquement disponible sur les types de la collection. Il est similaire à la signature précédente. Option.Top Spécifie le nombre maximal d’éléments pouvant être inclus dans le résultat de la collection. Option.Skip Spécifie le nombre d’éléments qui doivent être ignoré et non inclus dans le résultat. Si option.top est spécifié, le jeu de résultats démarre après l’ignorer le nombre spécifié d’éléments.
+
+    #### <a name="examples"></a>Exemples
+
+
+    ```javascript
+
+    // Change the font name
+
+    // Run a batch operation against the Word object model.
+
+    Word.run(function (context) {
+
+        // Create a range proxy object for the current selection.
+        var selection = context.document.getSelection();
+
+        // Queue a commmand to change the current selection's font name.
+        selection.font.name = 'Arial';
+
+        // Synchronize the document state by executing the queued commands,
+        // and return a promise to indicate task completion.
+        return context.sync().then(function () {
+            console.log('The font name has changed.');
+        });
+    })
+
+    .catch(function (error) {
+        console.log('Error: ' + JSON.stringify(error));
+        if (error instanceof OfficeExtension.Error) {
+            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+        }
+    });
+
+    ```
+
+    ```javascript
+
+    // Change the font color
+
+    // Run a batch operation against the Word object model.
+
+    Word.run(function (context) {
+
+        // Create a range proxy object for the current selection.
+        var selection = context.document.getSelection();
+
+        // Queue a commmand to change the font color of the current selection.
+        selection.font.color = 'blue';
+
+        // Synchronize the document state by executing the queued commands,
+        // and return a promise to indicate task completion.
+        return context.sync().then(function () {
+            console.log('The font color of the selection has been changed.');
+        });
+    })
+
+    .catch(function (error) {
+        console.log('Error: ' + JSON.stringify(error));
+        if (error instanceof OfficeExtension.Error) {
+            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+        }
+    });
+
+    ```
+
+    ```javascript
+
+    // Change the font size
+
+    // Run a batch operation against the Word object model.
+
+    Word.run(function (context) {
+
+        // Create a range proxy object for the current selection.
+        var selection = context.document.getSelection();
+
+        // Queue a commmand to change the current selection's font size.
+        selection.font.size = 20;
+
+        // Synchronize the document state by executing the queued commands,
+        // and return a promise to indicate task completion.
+        return context.sync().then(function () {
+            console.log('The font size has changed.');
+        });
+    })
+
+    .catch(function (error) {
+        console.log('Error: ' + JSON.stringify(error));
+        if (error instanceof OfficeExtension.Error) {
+            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+        }
+    });
+
+    ```
+
+    ```javascript
+
+    // Highlight selected text
+
+    // Run a batch operation against the Word object model.
+
+    Word.run(function (context) {
+
+        // Create a range proxy object for the current selection.
+        var selection = context.document.getSelection();
+
+        // Queue a commmand to highlight the current selection.
+        selection.font.highlightColor = '#FFFF00'; // Yellow
+
+        // Synchronize the document state by executing the queued commands,
+        // and return a promise to indicate task completion.
+        return context.sync().then(function () {
+            console.log('The selection has been highlighted.');
+        });
+    })
+
+    .catch(function (error) {
+        console.log('Error: ' + JSON.stringify(error));
+        if (error instanceof OfficeExtension.Error) {
+            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+        }
+    });
+
+    ```
+
+    ```javascript
+
+    // Bold format text
+
+    // Run a batch operation against the Word object model.
+
+    Word.run(function (context) {
+
+        // Create a range proxy object for the current selection.
+        var selection = context.document.getSelection();
+
+        // Queue a commmand to make the current selection bold.
+        selection.font.bold = true;
+
+        // Synchronize the document state by executing the queued commands,
+        // and return a promise to indicate task completion.
+        return context.sync().then(function () {
+            console.log('The selection is now bold.');
+        });
+    })
+
+    .catch(function (error) {
+        console.log('Error: ' + JSON.stringify(error));
+        if (error instanceof OfficeExtension.Error) {
+            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+        }
+    });
+
+    ```
+
+    ```javascript
+
+    // Underline format text
+
+    // Run a batch operation against the Word object model.
+
+    Word.run(function (context) {
+
+        // Create a range proxy object for the current selection.
+        var selection = context.document.getSelection();
+
+        // Queue a commmand to underline the current selection.
+        selection.font.underline = Word.UnderlineType.single;
+
+        // Synchronize the document state by executing the queued commands,
+        // and return a promise to indicate task completion.
+        return context.sync().then(function () {
+            console.log('The selection now has an underline style.');
+        });
+    })
+
+    .catch(function (error) {
+        console.log('Error: ' + JSON.stringify(error));
+        if (error instanceof OfficeExtension.Error) {
+            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+        }
+    });
+
+    ```
+
+    ```javascript
+
+    // Strike format text
+
+    // Run a batch operation against the Word object model.
+
+    Word.run(function (context) {
+
+        // Create a range proxy object for the current selection.
+        var selection = context.document.getSelection();
+
+        // Queue a commmand to strikethrough the font of the current selection.
+        selection.font.strikeThrough = true;
+
+        // Synchronize the document state by executing the queued commands,
+        // and return a promise to indicate task completion.
+        return context.sync().then(function () {
+            console.log('The selection now has a strikethrough.');
+        });
+    })
+
+    .catch(function (error) {
+        console.log('Error: ' + JSON.stringify(error));
+        if (error instanceof OfficeExtension.Error) {
+            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+        }
+    });
+
+    ```
+  name: load(option)
+  fullName: word.Word.Font.load
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: string | string[]): Word.Font;'
+    return:
+      type:
+      - word.Word.Font
+      description: ''
+    parameters:
+    - id: option
+      description: Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+      type:
+      - string | string[]
+- uid: word.Word.Font.name
+  summary: >-
+    Obtient ou définit une valeur qui représente le nom de la police.
+
+
+    \[[Du jeu d’API : WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: name
+  fullName: word.Word.Font.name
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'name: string;'
+    return:
+      type:
+      - string
+- uid: word.Word.Font.size
+  summary: >-
+    Obtient ou définit une valeur qui représente la taille de police en points.
+
+
+    \[[Du jeu d’API : WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: size
+  fullName: word.Word.Font.size
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'size: number;'
+    return:
+      type:
+      - number
+- uid: word.Word.Font.strikeThrough
+  summary: >-
+    Obtient ou définit une valeur qui indique si la police a un barré. True si la police est barrée, sinon, false.
+
+
+    \[[Du jeu d’API : WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: strikeThrough
+  fullName: word.Word.Font.strikeThrough
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'strikeThrough: boolean;'
+    return:
+      type:
+      - boolean
+- uid: word.Word.Font.subscript
+  summary: >-
+    Obtient ou définit une valeur qui indique si la police correspond à du texte mis en indice. Renvoie true si la police correspond à du texte mis en indice, sinon, false.
+
+
+    \[[Du jeu d’API : WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: subscript
+  fullName: word.Word.Font.subscript
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'subscript: boolean;'
+    return:
+      type:
+      - boolean
+- uid: word.Word.Font.superscript
+  summary: >-
+    Obtient ou définit une valeur qui indique si la police correspond à du texte en exposant. Renvoie true si la police correspond à du texte mis en exposant, sinon, false.
+
+
+    \[[Du jeu d’API : WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: superscript
+  fullName: word.Word.Font.superscript
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'superscript: boolean;'
+    return:
+      type:
+      - boolean
+- uid: word.Word.Font.toJSON
+  name: toJSON()
+  fullName: word.Word.Font.toJSON
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'toJSON(): Word.Interfaces.FontData;'
+    return:
+      type:
+      - word.Word.Interfaces.FontData
+      description: ''
+- uid: word.Word.Font.track
+  summary: Suivre l’objet pour l’ajustement automatique selon entourant les modifications dans le document. Cet appel est une abréviation de context.trackedObjects.add(thisObject). Si vous utilisez cet objet dans les appels de « .sync » et en dehors de l’exécution séquentielle d’un lot de « .run » et obtenir une erreur « InvalidObjectPath » lors de la définition d’une propriété ou d’appeler une méthode sur l’objet, vous devez avoir ajouté l’objet à l’objet suivi collection lorsque l’objet a été créé tout d’abord.
+  name: track()
+  fullName: word.Word.Font.track
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'track(): Word.Font;'
+    return:
+      type:
+      - word.Word.Font
+      description: ''
+- uid: word.Word.Font.underline
+  summary: >-
+    Obtient ou définit une valeur qui indique le type de soulignement de la police. « None » si la police n’est pas soulignée.
+
+
+    \[[Du jeu d’API : WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: underline
+  fullName: word.Word.Font.underline
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'underline: Word.UnderlineType | "Mixed" | "None" | "Hidden" | "DotLine" | "Single" | "Word" | "Double" | "Thick" | "Dotted" | "DottedHeavy" | "DashLine" | "DashLineHeavy" | "DashLineLong" | "DashLineLongHeavy" | "DotDashLine" | "DotDashLineHeavy" | "TwoDotDashLine" | "TwoDotDashLineHeavy" | "Wave" | "WaveHeavy" | "WaveDouble";'
+    return:
+      type:
+      - Word.UnderlineType | "Mixed" | "None" | "Hidden" | "DotLine" | "Single" | "Word" | "Double" | "Thick" | "Dotted" | "DottedHeavy" | "DashLine" | "DashLineHeavy" | "DashLineLong" | "DashLineLongHeavy" | "DotDashLine" | "DotDashLineHeavy" | "TwoDotDashLine" | "TwoDotDashLineHeavy" | "Wave" | "WaveHeavy" | "WaveDouble"
+- uid: word.Word.Font.untrack
+  summary: Version de la mémoire associée à cet objet, si elle a été précédemment suivi. Cet appel est l’abréviation de context.trackedObjects.remove(thisObject). Comportant de nombreux objets suivis ralentit l’application hôte, donc pensez à libérer les objets que vous ajoutez, une fois que vous avez terminé les utiliser. Vous devrez appeler « context.sync() » avant que la version de mémoire prenne effet.
+  name: untrack()
+  fullName: word.Word.Font.untrack
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'untrack(): Word.Font;'
+    return:
+      type:
+      - word.Word.Font
+      description: ''

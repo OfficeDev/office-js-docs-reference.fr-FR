@@ -1,0 +1,112 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: 62419a668fbf12531043f27ee38c6dc1859980ac
+ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 09/20/2018
+ms.locfileid: "24044147"
+items:
+- uid: office.Office.CustomXmlParts
+  summary: Représente une collection d’objets CustomXmlPart.
+  remarks: >-
+    <table><tr><td>Ensembles de ressources</td><td>CustomXmlParts</td></tr></table>
+
+
+    **Informations de prise en charge**
+
+
+    MAJUSCULE Y dans le tableau suivant indique que cette interface est prise en charge dans l’application hôte Office correspondante. Une cellule vide indique que l’application hôte Office ne prennent en charge cette interface.
+
+
+    Pour plus d’informations sur les exigences des applications et le serveur hôte Office, voir [Configuration requise pour exécuter des compléments Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.
+
+
+    *Hôtes pris en charge par la plateforme* <table> <tr><th> </th><th> Office pour Bureau Windows </th><th> Office Online (dans un navigateur) </th><th> Office pour iPad </th></tr> <tr><td><strong>Word</strong></td><td> Y </td><td> </td><td> Y </td></tr> </table>
+  name: Office.CustomXmlParts
+  fullName: office.Office.CustomXmlParts
+  langs:
+  - typeScript
+  type: interface
+  package: office
+  children:
+  - office.Office.CustomXmlParts.addAsync
+  - office.Office.CustomXmlParts.getByIdAsync
+  - office.Office.CustomXmlParts.getByNamespaceAsync
+- uid: office.Office.CustomXmlParts.addAsync
+  summary: Ajoute de manière asynchrone une nouvelle partie XML personnalisée à un fichier.
+  name: addAsync(xml, options, callback)
+  fullName: office.Office.CustomXmlParts.addAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'addAsync(xml: string, options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<CustomXmlPart>) => void): void;'
+    return:
+      type:
+      - void
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nfunction addXMLPart() {\n    Office.context.document.customXmlParts.addAsync(\n        '<root categoryId=\"1\" xmlns=\"http://tempuri.org\"><item name=\"Cheap Item\" price=\"$193.95\"/><item name=\"Expensive Item\" price=\"$931.88\"/></root>',\n        function (result) {});\n}\n\nfunction addXMLPartandHandler() {\n    Office.context.document.customXmlParts.addAsync(\n        \"<testns:book xmlns:testns='http://testns.com'><testns:page number='1'>Hello</testns:page><testns:page number='2'>world!</testns:page></testns:book>\",\n        function(r) { r.value.addHandlerAsync(Office.EventType.DataNodeDeleted,\n            function(a) {write(a.type)\n            },\n                function(s) {write(s.status)\n                });\n        });\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message;\n}\n```"
+    parameters:
+    - id: xml
+      description: Le code XML à ajouter à la partie XML personnalisée nouvellement créée.
+      type:
+      - string
+    - id: options
+      description: Fournit une option de conservation des données de contexte d’un type quelconque, inchangé, pour une utilisation dans un rappel.
+      type:
+      - office.Office.AsyncContextOptions
+    - id: callback
+      description: Facultatif. Une fonction qui est appelée quand le rappel retourné, dont le seul paramètre est de type[Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->. Le `value` propriété du résultat est l’objet CustomXmlPart nouvellement créé.
+      type:
+      - '(result: AsyncResult<CustomXmlPart>) => void'
+- uid: office.Office.CustomXmlParts.getByIdAsync
+  summary: Obtient la partie XML personnalisée spécifiée par son id de manière asynchrone.
+  name: getByIdAsync(id, options, callback)
+  fullName: office.Office.CustomXmlParts.getByIdAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getByIdAsync(id: string, options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<CustomXmlPart>) => void): void;'
+    return:
+      type:
+      - void
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nfunction showXMLPartInnerXML() {\n    Office.context.document.customXmlParts.getByIdAsync(\n        \"{3BC85265-09D6-4205-B665-8EB239A8B9A1}\", function (result) {\n        var xmlPart = result.value;\n        xmlPart.getXmlAsync({}, function (eventArgs) {\n            write(eventArgs.value);\n        });\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+    parameters:
+    - id: id
+      description: Le GUID de la partie XML personnalisée, y compris ouvrante et fermante accolades.
+      type:
+      - string
+    - id: options
+      description: Fournit une option de conservation des données de contexte d’un type quelconque, inchangé, pour une utilisation dans un rappel.
+      type:
+      - office.Office.AsyncContextOptions
+    - id: callback
+      description: Facultatif. Une fonction qui est appelée quand le rappel retourné, dont le seul paramètre est de type[Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->. Le `value` propriété du résultat est un objet CustomXmlPart qui représente la partie XML personnalisée spécifiée. S’il n’existe aucune partie XML personnalisée avec l’id spécifié, la méthode retourne null.
+      type:
+      - '(result: AsyncResult<CustomXmlPart>) => void'
+- uid: office.Office.CustomXmlParts.getByNamespaceAsync
+  summary: Obtient de manière asynchrone les ou les parties XML personnalisées spécifiés par son espace de noms.
+  name: getByNamespaceAsync(ns, options, callback)
+  fullName: office.Office.CustomXmlParts.getByNamespaceAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getByNamespaceAsync(ns: string, options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<CustomXmlPart[]>) => void): void;'
+    return:
+      type:
+      - void
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nfunction showXMLPartsInNamespace() {\n    Office.context.document.customXmlParts.getByNamespaceAsync(\n        \"http://tempuri.org\", \n        function (eventArgs) {\n            write(\"Found \" + eventArgs.value.length + \" parts with this namespace\");\n    }); \n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+    parameters:
+    - id: ns
+      description: L’espace de noms URI.
+      type:
+      - string
+    - id: options
+      description: Fournit une option de conservation des données de contexte d’un type quelconque, inchangé, pour une utilisation dans un rappel.
+      type:
+      - office.Office.AsyncContextOptions
+    - id: callback
+      description: Facultatif. Une fonction qui est appelée quand le rappel retourné, dont le seul paramètre est de type[Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->. Le `value` propriété du résultat est un tableau d’objets CustomXmlPart qui correspondent à l’espace de noms spécifié.
+      type:
+      - '(result: AsyncResult<CustomXmlPart[]>) => void'

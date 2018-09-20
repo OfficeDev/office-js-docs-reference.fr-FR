@@ -1,0 +1,998 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: 031a2be8316449e7222f7b34ece4c3facfffb0e0
+ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 09/20/2018
+ms.locfileid: "24043873"
+items:
+- uid: word.Word.ContentControl
+  summary: >-
+    Représente un contrôle de contenu. Les contrôles de contenu sont des zones d’un document délimitées par des bordures et pouvant porter une étiquette qui servent à contenir certains types de contenu. Les contrôles de contenu individuels peuvent contenir des images, des tableaux ou des paragraphes de texte mis en forme. Actuellement, seuls les contrôles de contenu à texte enrichi sont pris en charge.
+
+
+    \[[Du jeu d’API : WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: Word.ContentControl
+  fullName: word.Word.ContentControl
+  langs:
+  - typeScript
+  type: class
+  extends:
+  - OfficeExtension.ClientObject
+  package: word
+  children:
+  - word.Word.ContentControl.appearance
+  - word.Word.ContentControl.cannotDelete
+  - word.Word.ContentControl.cannotEdit
+  - word.Word.ContentControl.clear
+  - word.Word.ContentControl.color
+  - word.Word.ContentControl.contentControls
+  - word.Word.ContentControl.delete
+  - word.Word.ContentControl.font
+  - word.Word.ContentControl.getHtml
+  - word.Word.ContentControl.getOoxml
+  - word.Word.ContentControl.getRange
+  - word.Word.ContentControl.getTextRanges
+  - word.Word.ContentControl.id
+  - word.Word.ContentControl.inlinePictures
+  - word.Word.ContentControl.insertBreak
+  - word.Word.ContentControl.insertFileFromBase64
+  - word.Word.ContentControl.insertHtml
+  - word.Word.ContentControl.insertInlinePictureFromBase64
+  - word.Word.ContentControl.insertOoxml
+  - word.Word.ContentControl.insertParagraph
+  - word.Word.ContentControl.insertTable
+  - word.Word.ContentControl.insertText
+  - word.Word.ContentControl.lists
+  - word.Word.ContentControl.load
+  - word.Word.ContentControl.paragraphs
+  - word.Word.ContentControl.parentBody
+  - word.Word.ContentControl.parentContentControl
+  - word.Word.ContentControl.parentContentControlOrNullObject
+  - word.Word.ContentControl.parentTable
+  - word.Word.ContentControl.parentTableCell
+  - word.Word.ContentControl.parentTableCellOrNullObject
+  - word.Word.ContentControl.parentTableOrNullObject
+  - word.Word.ContentControl.placeholderText
+  - word.Word.ContentControl.removeWhenEdited
+  - word.Word.ContentControl.search
+  - word.Word.ContentControl.select
+  - word.Word.ContentControl.split
+  - word.Word.ContentControl.style
+  - word.Word.ContentControl.styleBuiltIn
+  - word.Word.ContentControl.subtype
+  - word.Word.ContentControl.tables
+  - word.Word.ContentControl.tag
+  - word.Word.ContentControl.text
+  - word.Word.ContentControl.title
+  - word.Word.ContentControl.toJSON
+  - word.Word.ContentControl.track
+  - word.Word.ContentControl.type
+  - word.Word.ContentControl.untrack
+- uid: word.Word.ContentControl.appearance
+  summary: >-
+    Obtient ou définit l’apparence du contrôle de contenu. La valeur peut être « BoundingBox », « Balises » ou « Masqué ».
+
+
+    \[[Du jeu d’API : WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: appearance
+  fullName: word.Word.ContentControl.appearance
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'appearance: Word.ContentControlAppearance | "BoundingBox" | "Tags" | "Hidden";'
+    return:
+      type:
+      - Word.ContentControlAppearance | "BoundingBox" | "Tags" | "Hidden"
+- uid: word.Word.ContentControl.cannotDelete
+  summary: >-
+    Obtient ou définit une valeur qui indique si l’utilisateur peut supprimer le contrôle de contenu. Non compatible avec removeWhenEdited.
+
+
+    \[[Du jeu d’API : WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: cannotDelete
+  fullName: word.Word.ContentControl.cannotDelete
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'cannotDelete: boolean;'
+    return:
+      type:
+      - boolean
+- uid: word.Word.ContentControl.cannotEdit
+  summary: >-
+    Obtient ou définit une valeur qui indique si l’utilisateur peut modifier le contenu du contrôle.
+
+
+    \[[Du jeu d’API : WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: cannotEdit
+  fullName: word.Word.ContentControl.cannotEdit
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'cannotEdit: boolean;'
+    return:
+      type:
+      - boolean
+- uid: word.Word.ContentControl.clear
+  summary: >-
+    Efface le contenu du contrôle de contenu. L’utilisateur peut effectuer l’opération d’annulation sur le contenu effacé.
+
+
+    \[[Du jeu d’API : WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: clear()
+  fullName: word.Word.ContentControl.clear
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'clear(): void;'
+    return:
+      type:
+      - void
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n    \n    // Create a proxy object for the content controls collection.\n    var contentControls = context.document.contentControls;\n    \n    // Queue a command to load the content controls collection.\n    contentControls.load('text');\n     \n    // Synchronize the document state by executing the queued commands, \n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n        \n        if (contentControls.items.length === 0) {\n            console.log(\"There isn't a content control in this document.\");\n        } else {\n            \n            // Queue a command to clear the contents of the first content control.\n            contentControls.items[0].clear();\n            // Synchronize the document state by executing the queued commands, \n            // and return a promise to indicate task completion.\n            return context.sync().then(function () {\n                console.log('Content control cleared of contents.');\n            });      \n        }\n            \n    });  \n})\n.catch(function (error) {\n    console.log('Error: ' + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Debug info: ' + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- uid: word.Word.ContentControl.color
+  summary: >-
+    Obtient ou définit la couleur du contrôle de contenu. Couleur est spécifiée dans «\#RRGGBB' format ou en utilisant le nom de couleur.
+
+
+    \[[Du jeu d’API : WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: color
+  fullName: word.Word.ContentControl.color
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'color: string;'
+    return:
+      type:
+      - string
+- uid: word.Word.ContentControl.contentControls
+  summary: >-
+    Obtient la collection d’objets de contrôle de contenu compris dans le contrôle de contenu. En lecture seule.
+
+
+    \[[Du jeu d’API : WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: contentControls
+  fullName: word.Word.ContentControl.contentControls
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly contentControls: Word.ContentControlCollection;'
+    return:
+      type:
+      - word.Word.ContentControlCollection
+- uid: word.Word.ContentControl.delete
+  summary: >-
+    Supprime le contrôle de contenu et son contenu. Si keepContent est défini sur true, le contenu n’est pas supprimé.
+
+
+    \[[Du jeu d’API : WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: delete(keepContent)
+  fullName: word.Word.ContentControl.delete
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'delete(keepContent: boolean): void;'
+    return:
+      type:
+      - void
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n    \n    // Create a proxy object for the content controls collection.\n    var contentControls = context.document.contentControls;\n    \n    // Queue a command to load the content controls collection.\n    contentControls.load('text');\n     \n    // Synchronize the document state by executing the queued commands, \n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n        \n        if (contentControls.items.length === 0) {\n            console.log(\"There isn't a content control in this document.\");\n        } else {\n            \n            // Queue a command to delete the first content control. The\n            // contents will remain in the document.\n            contentControls.items[0].delete(true);\n            // Synchronize the document state by executing the queued commands, \n            // and return a promise to indicate task completion.\n            return context.sync().then(function () {\n                console.log('Content control cleared of contents.');\n            });      \n        }\n            \n    });  \n})\n.catch(function (error) {\n    console.log('Error: ' + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Debug info: ' + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+    parameters:
+    - id: keepContent
+      description: Obligatoire. Indique si le contenu doit être supprimé avec le contrôle de contenu. Si keepContent est défini sur true, le contenu n’est pas supprimé.
+      type:
+      - boolean
+- uid: word.Word.ContentControl.font
+  summary: >-
+    Obtient le format de texte du contrôle de contenu. Utilisez cette propriété pour obtenir et définir le nom de la police, la taille, la couleur et d’autres propriétés. En lecture seule.
+
+
+    \[[Du jeu d’API : WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: font
+  fullName: word.Word.ContentControl.font
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly font: Word.Font;'
+    return:
+      type:
+      - word.Word.Font
+- uid: word.Word.ContentControl.getHtml
+  summary: >-
+    Obtient la représentation HTML de l’objet de contrôle de contenu.
+
+
+    \[[Du jeu d’API : WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: getHtml()
+  fullName: word.Word.ContentControl.getHtml
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getHtml(): OfficeExtension.ClientResult<string>;'
+    return:
+      type:
+      - OfficeExtension.ClientResult<string>
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n    \n    // Create a proxy object for the content controls collection that contains a specific tag.\n    var contentControlsWithTag = context.document.contentControls.getByTag('Customer-Address');\n    \n    // Queue a command to load the tag property for all of content controls. \n    context.load(contentControlsWithTag, 'tag');\n     \n    // Synchronize the document state by executing the queued commands, \n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n        if (contentControlsWithTag.items.length === 0) {\n            console.log('No content control found.');\n        }\n        else {\n            // Queue a command to get the HTML contents of the first content control.\n            var html = contentControlsWithTag.items[0].getHtml();\n        \n            // Synchronize the document state by executing the queued commands, \n            // and return a promise to indicate task completion.\n            return context.sync()\n                .then(function () {\n                    console.log('Content control HTML: ' + html.value);\n            });\n        }\n    });  \n})\n.catch(function (error) {\n    console.log('Error: ' + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Debug info: ' + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- uid: word.Word.ContentControl.getOoxml
+  summary: >-
+    Obtient la représentation Office Open XML (OOXML) de l’objet de contrôle de contenu.
+
+
+    \[[Du jeu d’API : WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: getOoxml()
+  fullName: word.Word.ContentControl.getOoxml
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getOoxml(): OfficeExtension.ClientResult<string>;'
+    return:
+      type:
+      - OfficeExtension.ClientResult<string>
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n    \n    // Create a proxy object for the content controls collection.\n    var contentControls = context.document.contentControls;\n    \n    // Queue a command to load the id property for all of the content controls. \n    context.load(contentControls, 'id');\n     \n    // Synchronize the document state by executing the queued commands, \n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n        if (contentControls.items.length === 0) {\n            console.log('No content control found.');\n        }\n        else {\n            // Queue a command to get the OOXML contents of the first content control.\n            var ooxml = contentControls.items[0].getOoxml();\n        \n            // Synchronize the document state by executing the queued commands, \n            // and return a promise to indicate task completion.\n            return context.sync()\n                .then(function () {\n                    console.log('Content control OOXML: ' + ooxml.value);\n            });\n        }\n    });  \n})\n.catch(function (error) {\n    console.log('Error: ' + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Debug info: ' + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- uid: word.Word.ContentControl.getRange
+  summary: >-
+    Obtient le contrôle de contenu entier, ou le point  de début ou de fin du contrôle de contenu, sous la forme d’une plage.
+
+
+    \[[Du jeu d’API : WordApi 1.3](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: getRange(rangeLocation)
+  fullName: word.Word.ContentControl.getRange
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getRange(rangeLocation?: Word.RangeLocation): Word.Range;'
+    return:
+      type:
+      - Word.Range
+      description: ''
+    parameters:
+    - id: rangeLocation
+      description: Facultatif. L’emplacement de la plage peut être 'Entier', 'Before', 'Start', 'End', 'After' ou 'Contenu'.
+      type:
+      - word.Word.RangeLocation
+- uid: word.Word.ContentControl.getTextRanges
+  summary: >-
+    Obtient les plages de texte dans le contrôle de contenu à l’aide des marques de ponctuation et/ou les autres marques de fin.
+
+
+    \[[Du jeu d’API : WordApi 1.3](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: getTextRanges(endingMarks, trimSpacing)
+  fullName: word.Word.ContentControl.getTextRanges
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getTextRanges(endingMarks: string[], trimSpacing?: boolean): Word.RangeCollection;'
+    return:
+      type:
+      - word.Word.RangeCollection
+      description: ''
+    parameters:
+    - id: endingMarks
+      description: Obligatoire. Signes de ponctuation et/ou autres marques de fin sous la forme d’un tableau de chaînes.
+      type:
+      - string[]
+    - id: trimSpacing
+      description: Facultatif. Indique s’il faut diminuer les caractères d’espacement (espaces, les tabulations, sauts de colonne et les marques de fin de paragraphe) de début et de fin des plages retourné dans la collection de la plage. Valeur par défaut est false, qui indique que les caractères d’espacement au début et de fin des plages sont inclus dans la collection range.
+      type:
+      - boolean
+- uid: word.Word.ContentControl.id
+  summary: >-
+    Obtient un entier qui représente l’identificateur du contrôle de contenu. En lecture seule.
+
+
+    \[[Du jeu d’API : WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: id
+  fullName: word.Word.ContentControl.id
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly id: number;'
+    return:
+      type:
+      - number
+- uid: word.Word.ContentControl.inlinePictures
+  summary: >-
+    Obtient la collection d’objets inlinePicture du contrôle de contenu. La collection n’inclut pas d’images flottantes. En lecture seule.
+
+
+    \[[Du jeu d’API : WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: inlinePictures
+  fullName: word.Word.ContentControl.inlinePictures
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly inlinePictures: Word.InlinePictureCollection;'
+    return:
+      type:
+      - word.Word.InlinePictureCollection
+- uid: word.Word.ContentControl.insertBreak
+  summary: >-
+    Insère un saut à l’emplacement spécifié dans le document principal. La valeur d’insertLocation peut être « Démarrer », « Fin », « Avant » ou « After ». Cette méthode ne peut pas être utilisée avec des contrôles de contenu 'RichTextTable', 'RichTextTableRow' et 'RichTextTableCell'.
+
+
+    \[[Du jeu d’API : WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: insertBreak(breakType, insertLocation)
+  fullName: word.Word.ContentControl.insertBreak
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'insertBreak(breakType: Word.BreakType, insertLocation: Word.InsertLocation): void;'
+    return:
+      type:
+      - void
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n    \n    // Create a proxy object for the content controls collection.\n    var contentControls = context.document.contentControls;\n    \n    // Queue a commmand to load the id property for all of content controls. \n    context.load(contentControls, 'id');\n    \n    // Synchronize the document state by executing the queued commands, \n    // and return a promise to indicate task completion. We now will have \n    // access to the content control collection.\n    return context.sync().then(function () {\n        if (contentControls.items.length === 0) {\n            console.log('No content control found.');\n        }\n        else {\n            // Queue a command to insert a page break after the first content control. \n            contentControls.items[0].insertBreak('page', \"After\");\n            \n            // Synchronize the document state by executing the queued commands, \n            // and return a promise to indicate task completion. \n            return context.sync()\n                .then(function () {\n                    console.log('Inserted a page break after the first content control.');    \n            });\n        }\n    });  \n})\n.catch(function (error) {\n    console.log('Error: ' + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Debug info: ' + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+    parameters:
+    - id: breakType
+      description: Obligatoire. Type de saut.
+      type:
+      - word.Word.BreakType
+    - id: insertLocation
+      description: Obligatoire. La valeur peut être « Démarrer », « Fin », « Avant » ou « After ».
+      type:
+      - Word.InsertLocation
+- uid: word.Word.ContentControl.insertFileFromBase64
+  summary: >-
+    Insère un document dans le contrôle de contenu à l’emplacement spécifié. La valeur insertLocation peut être « Remplacer », « Start » ou « Fin ».
+
+
+    \[[Du jeu d’API : WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: insertFileFromBase64(base64File, insertLocation)
+  fullName: word.Word.ContentControl.insertFileFromBase64
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'insertFileFromBase64(base64File: string, insertLocation: Word.InsertLocation): Word.Range;'
+    return:
+      type:
+      - Word.Range
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n    \n    // Create a proxy object for the content controls collection.\n    var contentControls = context.document.contentControls;\n    \n    // Queue a command to load the id property for all of the content controls. \n    context.load(contentControls, 'id');\n     \n    // Synchronize the document state by executing the queued commands, \n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n        if (contentControls.items.length === 0) {\n            console.log('No content control found.');\n        }\n        else {\n            // Queue a command to put HTML into the contents of the first content control.\n            contentControls.items[0].insertHtml(\n                '<strong>HTML content inserted into the content control.</strong>',\n                'Start');\n        \n            // Synchronize the document state by executing the queued commands, \n            // and return a promise to indicate task completion.\n            return context.sync()\n                .then(function () {\n                    console.log('Inserted HTML in the first content control.');\n            });\n        }\n    });  \n})\n.catch(function (error) {\n    console.log('Error: ' + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Debug info: ' + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+    parameters:
+    - id: base64File
+      description: Obligatoire. Contenu d’un fichier .docx encodé au format Base64.
+      type:
+      - string
+    - id: insertLocation
+      description: Obligatoire. La valeur peut être « Remplacer », « Start » ou « Fin ». 'Replace' ne peut être utilisé avec des contrôles de contenu 'RichTextTable' et 'RichTextTableRow'.
+      type:
+      - Word.InsertLocation
+- uid: word.Word.ContentControl.insertHtml
+  summary: >-
+    Insère le code HTML dans le contrôle de contenu à l’emplacement spécifié. La valeur insertLocation peut être « Remplacer », « Start » ou « Fin ».
+
+
+    \[[Du jeu d’API : WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: insertHtml(html, insertLocation)
+  fullName: word.Word.ContentControl.insertHtml
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'insertHtml(html: string, insertLocation: Word.InsertLocation): Word.Range;'
+    return:
+      type:
+      - Word.Range
+      description: ''
+    parameters:
+    - id: html
+      description: Obligatoire. Code HTML à insérer dans le contrôle de contenu.
+      type:
+      - string
+    - id: insertLocation
+      description: Obligatoire. La valeur peut être « Remplacer », « Start » ou « Fin ». 'Replace' ne peut être utilisé avec des contrôles de contenu 'RichTextTable' et 'RichTextTableRow'.
+      type:
+      - Word.InsertLocation
+- uid: word.Word.ContentControl.insertInlinePictureFromBase64
+  summary: >-
+    Insère une image en ligne dans le contrôle de contenu à l’emplacement spécifié. La valeur insertLocation peut être « Remplacer », « Start » ou « Fin ».
+
+
+    \[[Du jeu d’API : WordApi 1.2](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: insertInlinePictureFromBase64(base64EncodedImage, insertLocation)
+  fullName: word.Word.ContentControl.insertInlinePictureFromBase64
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'insertInlinePictureFromBase64(base64EncodedImage: string, insertLocation: Word.InsertLocation): Word.InlinePicture;'
+    return:
+      type:
+      - word.Word.InlinePicture
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n    \n    // Create a proxy object for the content controls collection.\n    var contentControls = context.document.contentControls;\n    \n    // Queue a command to load the id property for all of the content controls. \n    context.load(contentControls, 'id');\n     \n    // Synchronize the document state by executing the queued commands, \n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n        if (contentControls.items.length === 0) {\n            console.log('No content control found.');\n        }\n        else {\n            // Queue a command to put OOXML into the contents of the first content control.\n            contentControls.items[0].insertOoxml(\"<pkg:package xmlns:pkg='http://schemas.microsoft.com/office/2006/xmlPackage'><pkg:part pkg:name='/_rels/.rels' pkg:contentType='application/vnd.openxmlformats-package.relationships+xml' pkg:padding='512'><pkg:xmlData><Relationships xmlns='http://schemas.openxmlformats.org/package/2006/relationships'><Relationship Id='rId1' Type='http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument' Target='word/document.xml'/></Relationships></pkg:xmlData></pkg:part><pkg:part pkg:name='/word/document.xml' pkg:contentType='application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml'><pkg:xmlData><w:document xmlns:w='http://schemas.openxmlformats.org/wordprocessingml/2006/main' ><w:body><w:p><w:pPr><w:spacing w:before='360' w:after='0' w:line='480' w:lineRule='auto'/><w:rPr><w:color w:val='70AD47' w:themeColor='accent6'/><w:sz w:val='28'/></w:rPr></w:pPr><w:r><w:rPr><w:color w:val='70AD47' w:themeColor='accent6'/><w:sz w:val='28'/></w:rPr><w:t>This text has formatting directly applied to achieve its font size, color, line spacing, and paragraph spacing.</w:t></w:r></w:p></w:body></w:document></pkg:xmlData></pkg:part></pkg:package>\", \"End\");\n        \n            // Synchronize the document state by executing the queued commands, \n            // and return a promise to indicate task completion.\n            return context.sync()\n                .then(function () {\n                    console.log('Inserted OOXML in the first content control.');\n            });\n        }\n    });  \n})\n.catch(function (error) {\n    console.log('Error: ' + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Debug info: ' + JSON.stringify(error.debugInfo));\n    }\n});\n\n// Read \"Create better add-ins for Word with Office Open XML\" for guidance on working with OOXML.\n// https://docs.microsoft.com/office/dev/add-ins/word/create-better-add-ins-for-word-with-office-open-xml\n```"
+    parameters:
+    - id: base64EncodedImage
+      description: Obligatoire. Image encodée au format Base64 à insérer dans le contrôle de contenu.
+      type:
+      - string
+    - id: insertLocation
+      description: Obligatoire. La valeur peut être « Remplacer », « Start » ou « Fin ». 'Replace' ne peut être utilisé avec des contrôles de contenu 'RichTextTable' et 'RichTextTableRow'.
+      type:
+      - Word.InsertLocation
+- uid: word.Word.ContentControl.insertOoxml
+  summary: >-
+    Insère OOXML dans le contrôle de contenu à l’emplacement spécifié. La valeur insertLocation peut être « Remplacer », « Start » ou « Fin ».
+
+
+    \[[Du jeu d’API : WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: insertOoxml(ooxml, insertLocation)
+  fullName: word.Word.ContentControl.insertOoxml
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'insertOoxml(ooxml: string, insertLocation: Word.InsertLocation): Word.Range;'
+    return:
+      type:
+      - Word.Range
+      description: ''
+    parameters:
+    - id: ooxml
+      description: Obligatoire. Code OOXML à insérer dans le contrôle de contenu.
+      type:
+      - string
+    - id: insertLocation
+      description: Obligatoire. La valeur peut être « Remplacer », « Start » ou « Fin ». 'Replace' ne peut être utilisé avec des contrôles de contenu 'RichTextTable' et 'RichTextTableRow'.
+      type:
+      - Word.InsertLocation
+- uid: word.Word.ContentControl.insertParagraph
+  summary: >-
+    Insère un paragraphe à l’emplacement spécifié. La valeur d’insertLocation peut être « Démarrer », « Fin », « Avant » ou « After ».
+
+
+    \[[Du jeu d’API : WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: insertParagraph(paragraphText, insertLocation)
+  fullName: word.Word.ContentControl.insertParagraph
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'insertParagraph(paragraphText: string, insertLocation: Word.InsertLocation): Word.Paragraph;'
+    return:
+      type:
+      - Word.Paragraph
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n    \n    // Create a proxy object for the content controls collection.\n    var contentControls = context.document.contentControls;\n    \n    // Queue a command to load the id property for all of the content controls. \n    context.load(contentControls, 'id');\n     \n    // Synchronize the document state by executing the queued commands, \n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n        if (contentControls.items.length === 0) {\n            console.log('No content control found.');\n        }\n        else {\n            // Queue a command to insert a paragraph after the first content control. \n            contentControls.items[0].insertParagraph('Text of the inserted paragraph.', 'After');\n        \n            // Synchronize the document state by executing the queued commands, \n            // and return a promise to indicate task completion.\n            return context.sync()\n                .then(function () {\n                    console.log('Inserted a paragraph after the first content control.');\n            });\n        }\n    });  \n})\n.catch(function (error) {\n    console.log('Error: ' + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Debug info: ' + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+    parameters:
+    - id: paragraphText
+      description: Obligatoire. Texte de paragraphe à insérer.
+      type:
+      - string
+    - id: insertLocation
+      description: Obligatoire. La valeur peut être « Démarrer », « Fin », « Avant » ou « After ». 'Avant' et '' ne peut pas être utilisé avec 'RichTextTable', 'RichTextTableRow' et 'RichTextTableCell' contenu contrôle.
+      type:
+      - Word.InsertLocation
+- uid: word.Word.ContentControl.insertTable
+  summary: >-
+    Insère un tableau avec le nombre spécifié de lignes et de colonnes dans ou en regard d’un contrôle de contenu. La valeur d’insertLocation peut être « Démarrer », « Fin », « Avant » ou « After ».
+
+
+    \[[Du jeu d’API : WordApi 1.3](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: insertTable(rowCount, columnCount, insertLocation, values)
+  fullName: word.Word.ContentControl.insertTable
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'insertTable(rowCount: number, columnCount: number, insertLocation: Word.InsertLocation, values?: string[][]): Word.Table;'
+    return:
+      type:
+      - Word.Table
+      description: ''
+    parameters:
+    - id: rowCount
+      description: Obligatoire. Nombre de lignes dans le tableau.
+      type:
+      - number
+    - id: columnCount
+      description: Obligatoire. Nombre de colonnes dans le tableau.
+      type:
+      - number
+    - id: insertLocation
+      description: Obligatoire. La valeur peut être « Démarrer », « Fin », « Avant » ou « After ». 'Avant' et '' ne peut pas être utilisé avec 'RichTextTable', 'RichTextTableRow' et 'RichTextTableCell' contenu contrôle.
+      type:
+      - Word.InsertLocation
+    - id: values
+      description: Tableau 2D facultatif. Les cellules sont remplies si les chaînes correspondantes sont spécifiées dans le tableau.
+      type:
+      - string[][]
+- uid: word.Word.ContentControl.insertText
+  summary: >-
+    Insère du texte dans le contrôle de contenu à l’emplacement spécifié. La valeur insertLocation peut être « Remplacer », « Start » ou « Fin ».
+
+
+    \[[Du jeu d’API : WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: insertText(text, insertLocation)
+  fullName: word.Word.ContentControl.insertText
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'insertText(text: string, insertLocation: Word.InsertLocation): Word.Range;'
+    return:
+      type:
+      - Word.Range
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n    \n    // Create a proxy object for the content controls collection.\n    var contentControls = context.document.contentControls;\n    \n    // Queue a command to load the id property for all of the content controls. \n    context.load(contentControls, 'id');\n     \n    // Synchronize the document state by executing the queued commands, \n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n        if (contentControls.items.length === 0) {\n            console.log('No content control found.');\n        }\n        else {\n            // Queue a command to replace text in the first content control. \n            contentControls.items[0].insertText('Replaced text in the first content control.', 'Replace');\n        \n            // Synchronize the document state by executing the queued commands, \n            // and return a promise to indicate task completion.\n            return context.sync()\n                .then(function () {\n                    console.log('Replaced text in the first content control.');\n            });\n        }\n    });  \n})\n.catch(function (error) {\n    console.log('Error: ' + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Debug info: ' + JSON.stringify(error.debugInfo));\n    }\n});\n\n// The Silly stories add-in sample shows how to use the insertText method.\n// https://aka.ms/sillystorywordaddin\n```"
+    parameters:
+    - id: text
+      description: Obligatoire. Texte à insérer dans le contrôle de contenu.
+      type:
+      - string
+    - id: insertLocation
+      description: Obligatoire. La valeur peut être « Remplacer », « Start » ou « Fin ». 'Replace' ne peut être utilisé avec des contrôles de contenu 'RichTextTable' et 'RichTextTableRow'.
+      type:
+      - Word.InsertLocation
+- uid: word.Word.ContentControl.lists
+  summary: >-
+    Obtient la collection d’objets list du contrôle de contenu. En lecture seule.
+
+
+    \[[Du jeu d’API : WordApi 1.3](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: lists
+  fullName: word.Word.ContentControl.lists
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly lists: Word.ListCollection;'
+    return:
+      type:
+      - word.Word.ListCollection
+- uid: word.Word.ContentControl.load
+  summary: Files d’attente d’une commande pour charger les propriétés de l’objet spécifiées. Vous devez appeler « context.sync() » avant de lire les propriétés.
+  remarks: "Outre cette signature, cette méthode présente les signatures suivantes :\n\n`load(option?: { select?: string; expand?: string; }): Word.ContentControl`-Où option.select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options.expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Word.ContentControl`-Uniquement disponible sur les types de la collection. Il est similaire à la signature précédente. Option.Top Spécifie le nombre maximal d’éléments pouvant être inclus dans le résultat de la collection. Option.Skip Spécifie le nombre d’éléments qui doivent être ignoré et non inclus dans le résultat. Si option.top est spécifié, le jeu de résultats démarre après l’ignorer le nombre spécifié d’éléments.\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n    \n    // Create a proxy range object for the current selection.\n    var range = context.document.getSelection();\n    \n    // Queue a commmand to create the content control.\n    var myContentControl = range.insertContentControl();\n    myContentControl.tag = 'Customer-Address';\n    myContentControl.title = ' has t';\n    myContentControl.style = 'Heading 2';\n    myContentControl.insertText('One Microsoft Way, Redmond, WA 98052', 'replace');\n    myContentControl.cannotEdit = true;\n    \n    // Queue a command to load the id property for the content control you created.\n    context.load(myContentControl, 'id');\n    \n    // Synchronize the document state by executing the queued commands, \n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n        console.log('Created content control with id: ' + myContentControl.id);\n    });  \n})\n.catch(function (error) {\n    console.log('Error: ' + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Debug info: ' + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\n// Load all of the content control properties\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n    \n    // Create a proxy object for the content controls collection.\n    var contentControls = context.document.contentControls;\n    \n    // Queue a command to load the id property for all of the content controls. \n    context.load(contentControls, 'id');\n     \n    // Synchronize the document state by executing the queued commands, \n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n        if (contentControls.items.length === 0) {\n            console.log('No content control found.');\n        }\n        else {\n            // Queue a command to load the properties on the first content control. \n            contentControls.items[0].load(  'appearance,' +\n                                            'cannotDelete,' +\n                                            'cannotEdit,' +\n                                            'id,' +\n                                            'placeHolderText,' +\n                                            'removeWhenEdited,' +\n                                            'title,' +\n                                            'text,' +\n                                            'type,' +\n                                            'style,' +\n                                            'tag,' +\n                                            'font/size,' +\n                                            'font/name,' +\n                                            'font/color');             \n        \n            // Synchronize the document state by executing the queued commands, \n            // and return a promise to indicate task completion.\n            return context.sync()\n                .then(function () {\n                    console.log('Property values of the first content control:' + \n                        '   ----- appearance: ' + contentControls.items[0].appearance + \n                        '   ----- cannotDelete: ' + contentControls.items[0].cannotDelete +\n                        '   ----- cannotEdit: ' + contentControls.items[0].cannotEdit +\n                        '   ----- color: ' + contentControls.items[0].color +\n                        '   ----- id: ' + contentControls.items[0].id +\n                        '   ----- placeHolderText: ' + contentControls.items[0].placeholderText +\n                        '   ----- removeWhenEdited: ' + contentControls.items[0].removeWhenEdited +\n                        '   ----- title: ' + contentControls.items[0].title +\n                        '   ----- text: ' + contentControls.items[0].text +\n                        '   ----- type: ' + contentControls.items[0].type +\n                        '   ----- style: ' + contentControls.items[0].style +\n                        '   ----- tag: ' + contentControls.items[0].tag +\n                        '   ----- font size: ' + contentControls.items[0].font.size +\n                        '   ----- font name: ' + contentControls.items[0].font.name +\n                        '   ----- font color: ' + contentControls.items[0].font.color);\n            });\n        }\n    });  \n})\n.catch(function (error) {\n    console.log('Error: ' + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Debug info: ' + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  name: load(option)
+  fullName: word.Word.ContentControl.load
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: string | string[]): Word.ContentControl;'
+    return:
+      type:
+      - word.Word.ContentControl
+      description: ''
+    parameters:
+    - id: option
+      description: Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+      type:
+      - string | string[]
+- uid: word.Word.ContentControl.paragraphs
+  summary: >-
+    Obtient la collection d’objets de paragraphe du contrôle de contenu. En lecture seule.
+
+
+    \[[Du jeu d’API : WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: paragraphs
+  fullName: word.Word.ContentControl.paragraphs
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly paragraphs: Word.ParagraphCollection;'
+    return:
+      type:
+      - Word.ParagraphCollection
+- uid: word.Word.ContentControl.parentBody
+  summary: >-
+    Obtient le corps parent du contrôle de contenu. En lecture seule.
+
+
+    \[[Du jeu d’API : WordApi 1.3](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: parentBody
+  fullName: word.Word.ContentControl.parentBody
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly parentBody: Word.Body;'
+    return:
+      type:
+      - Word.Body
+- uid: word.Word.ContentControl.parentContentControl
+  summary: >-
+    Obtient le contrôle de contenu qui contient le contrôle de contenu spécifié. Renvoie s’il n’existe pas de contrôle de contenu parent. En lecture seule.
+
+
+    \[[Du jeu d’API : WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: parentContentControl
+  fullName: word.Word.ContentControl.parentContentControl
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly parentContentControl: Word.ContentControl;'
+    return:
+      type:
+      - word.Word.ContentControl
+- uid: word.Word.ContentControl.parentContentControlOrNullObject
+  summary: >-
+    Obtient le contrôle de contenu qui contient le contrôle de contenu spécifié. Renvoie un objet null s’il n’existe pas de contrôle de contenu parent. En lecture seule.
+
+
+    \[[Du jeu d’API : WordApi 1.3](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: parentContentControlOrNullObject
+  fullName: word.Word.ContentControl.parentContentControlOrNullObject
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly parentContentControlOrNullObject: Word.ContentControl;'
+    return:
+      type:
+      - word.Word.ContentControl
+- uid: word.Word.ContentControl.parentTable
+  summary: >-
+    Obtient le tableau qui contient le contrôle de contenu. Renvoie s’il n’est pas contenu dans un tableau. En lecture seule.
+
+
+    \[[Du jeu d’API : WordApi 1.3](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: parentTable
+  fullName: word.Word.ContentControl.parentTable
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly parentTable: Word.Table;'
+    return:
+      type:
+      - Word.Table
+- uid: word.Word.ContentControl.parentTableCell
+  summary: >-
+    Obtient la cellule de tableau qui contient le contrôle de contenu. Renvoie s’il n’est pas contenu dans une cellule de tableau. En lecture seule.
+
+
+    \[[Du jeu d’API : WordApi 1.3](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: parentTableCell
+  fullName: word.Word.ContentControl.parentTableCell
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly parentTableCell: Word.TableCell;'
+    return:
+      type:
+      - Word.TableCell
+- uid: word.Word.ContentControl.parentTableCellOrNullObject
+  summary: >-
+    Obtient la cellule de tableau qui contient le contrôle de contenu. Renvoie un objet null s’il n’est pas contenu dans une cellule de tableau. En lecture seule.
+
+
+    \[[Du jeu d’API : WordApi 1.3](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: parentTableCellOrNullObject
+  fullName: word.Word.ContentControl.parentTableCellOrNullObject
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly parentTableCellOrNullObject: Word.TableCell;'
+    return:
+      type:
+      - Word.TableCell
+- uid: word.Word.ContentControl.parentTableOrNullObject
+  summary: >-
+    Obtient le tableau qui contient le contrôle de contenu. Renvoie un objet null s’il n’est pas contenu dans un tableau. En lecture seule.
+
+
+    \[[Du jeu d’API : WordApi 1.3](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: parentTableOrNullObject
+  fullName: word.Word.ContentControl.parentTableOrNullObject
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly parentTableOrNullObject: Word.Table;'
+    return:
+      type:
+      - Word.Table
+- uid: word.Word.ContentControl.placeholderText
+  summary: >-
+    Obtient ou définit le texte de l’espace réservé du contrôle de contenu. Ce texte apparaît de façon estompée lorsque le contrôle de contenu est vide.
+
+
+    \[[Du jeu d’API : WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: placeholderText
+  fullName: word.Word.ContentControl.placeholderText
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'placeholderText: string;'
+    return:
+      type:
+      - string
+- uid: word.Word.ContentControl.removeWhenEdited
+  summary: >-
+    Obtient ou définit une valeur qui indique si le contrôle de contenu doit être supprimé après modification. Non compatible avec cannotDelete.
+
+
+    \[[Du jeu d’API : WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: removeWhenEdited
+  fullName: word.Word.ContentControl.removeWhenEdited
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'removeWhenEdited: boolean;'
+    return:
+      type:
+      - boolean
+- uid: word.Word.ContentControl.search
+  summary: >-
+    Effectue une recherche avec les SearchOptions spécifiées sur l’étendue de l’objet de contrôle de contenu. Les résultats de recherche sont une collection d’objets range.
+
+
+    \[[Du jeu d’API : WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: search(searchText, searchOptions)
+  fullName: word.Word.ContentControl.search
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: >-
+      search(searchText: string, searchOptions?: Word.SearchOptions | {
+                  ignorePunct?: boolean;
+                  ignoreSpace?: boolean;
+                  matchCase?: boolean;
+                  matchPrefix?: boolean;
+                  matchSuffix?: boolean;
+                  matchWholeWord?: boolean;
+                  matchWildcards?: boolean;
+              }): Word.RangeCollection;
+    return:
+      type:
+      - word.Word.RangeCollection
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n    \n    // Create a proxy object for the content controls collection.\n    var contentControls = context.document.contentControls;\n    \n    // Queue a command to load the id property for all of the content controls. \n    context.load(contentControls, 'id');\n     \n    // Synchronize the document state by executing the queued commands, \n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n        if (contentControls.items.length === 0) {\n            console.log('No content control found.');\n        }\n        else {\n            // Queue a command to select the first content control.\n            contentControls.items[0].select();\n        \n            // Synchronize the document state by executing the queued commands, \n            // and return a promise to indicate task completion.\n            return context.sync()\n                .then(function () {\n                    console.log('Selected the first content control.');\n            });\n        }\n    });  \n})\n.catch(function (error) {\n    console.log('Error: ' + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Debug info: ' + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+    parameters:
+    - id: searchText
+      description: Obligatoire. Texte de recherche.
+      type:
+      - string
+    - id: searchOptions
+      description: Facultatif. Options de la recherche.
+      type:
+      - >-
+        Word.SearchOptions | {
+                    ignorePunct?: boolean;
+                    ignoreSpace?: boolean;
+                    matchCase?: boolean;
+                    matchPrefix?: boolean;
+                    matchSuffix?: boolean;
+                    matchWholeWord?: boolean;
+                    matchWildcards?: boolean;
+                }
+- uid: word.Word.ContentControl.select
+  summary: >-
+    Sélectionne le contrôle de contenu. Word fait défiler le document jusqu’à accéder à la sélection.
+
+
+    \[[Du jeu d’API : WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: select(selectionMode)
+  fullName: word.Word.ContentControl.select
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'select(selectionMode?: Word.SelectionMode): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: selectionMode
+      description: Facultatif. Le mode de sélection peut être « Select » (sélectionner), « Start » (début) ou « End » (fin). « Select » (sélectionner) est la valeur par défaut.
+      type:
+      - Word.SelectionMode
+- uid: word.Word.ContentControl.split
+  summary: >-
+    Fractionne le contrôle de contenu en plages enfants à l’aide de délimiteurs.
+
+
+    \[[Du jeu d’API : WordApi 1.3](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: split(delimiters, multiParagraphs, trimDelimiters, trimSpacing)
+  fullName: word.Word.ContentControl.split
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'split(delimiters: string[], multiParagraphs?: boolean, trimDelimiters?: boolean, trimSpacing?: boolean): Word.RangeCollection;'
+    return:
+      type:
+      - word.Word.RangeCollection
+      description: ''
+    parameters:
+    - id: delimiters
+      description: Obligatoire. Délimiteurs sous la forme d’un tableau de chaînes.
+      type:
+      - string[]
+    - id: multiParagraphs
+      description: Facultatif. Indique si une plage d’enfants retournée peut couvrir plusieurs paragraphes. Valeur par défaut est false, qui indique que les limites de paragraphe sont également utilisés comme séparateurs.
+      type:
+      - boolean
+    - id: trimDelimiters
+      description: Facultatif. Indique s’il faut diminuer les délimiteurs dans les plages de la collection range. Valeur par défaut est false, qui indique que les délimiteurs sont inclus dans les plages retournés dans la collection de la plage.
+      type:
+      - boolean
+    - id: trimSpacing
+      description: Facultatif. Indique s’il faut diminuer les caractères d’espacement (espaces, les tabulations, sauts de colonne et les marques de fin de paragraphe) de début et de fin des plages retourné dans la collection de la plage. Valeur par défaut est false, qui indique que les caractères d’espacement au début et de fin des plages sont inclus dans la collection range.
+      type:
+      - boolean
+- uid: word.Word.ContentControl.style
+  summary: >-
+    Obtient ou définit le nom du style utilisé pour le contrôle de contenu. Utilisez cette propriété pour les noms des styles personnalisés et localisés. Pour utiliser les styles prédéfinis qui sont portables entre différents paramètres régionaux, voir la propriété « styleBuiltIn ».
+
+
+    \[[Du jeu d’API : WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: style
+  fullName: word.Word.ContentControl.style
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'style: string;'
+    return:
+      type:
+      - string
+- uid: word.Word.ContentControl.styleBuiltIn
+  summary: >-
+    Obtient ou définit le nom de style intégré pour le contrôle de contenu. Utilisez cette propriété pour les styles intégrés qui sont portables entre les paramètres régionaux. Pour utiliser des styles personnalisés ou des noms de style localisés, consultez la propriété « style ».
+
+
+    \[[Du jeu d’API : WordApi 1.3](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: styleBuiltIn
+  fullName: word.Word.ContentControl.styleBuiltIn
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'styleBuiltIn: Word.Style | "Other" | "Normal" | "Heading1" | "Heading2" | "Heading3" | "Heading4" | "Heading5" | "Heading6" | "Heading7" | "Heading8" | "Heading9" | "Toc1" | "Toc2" | "Toc3" | "Toc4" | "Toc5" | "Toc6" | "Toc7" | "Toc8" | "Toc9" | "FootnoteText" | "Header" | "Footer" | "Caption" | "FootnoteReference" | "EndnoteReference" | "EndnoteText" | "Title" | "Subtitle" | "Hyperlink" | "Strong" | "Emphasis" | "NoSpacing" | "ListParagraph" | "Quote" | "IntenseQuote" | "SubtleEmphasis" | "IntenseEmphasis" | "SubtleReference" | "IntenseReference" | "BookTitle" | "Bibliography" | "TocHeading" | "TableGrid" | "PlainTable1" | "PlainTable2" | "PlainTable3" | "PlainTable4" | "PlainTable5" | "TableGridLight" | "GridTable1Light" | "GridTable1Light_Accent1" | "GridTable1Light_Accent2" | "GridTable1Light_Accent3" | "GridTable1Light_Accent4" | "GridTable1Light_Accent5" | "GridTable1Light_Accent6" | "GridTable2" | "GridTable2_Accent1" | "GridTable2_Accent2" | "GridTable2_Accent3" | "GridTable2_Accent4" | "GridTable2_Accent5" | "GridTable2_Accent6" | "GridTable3" | "GridTable3_Accent1" | "GridTable3_Accent2" | "GridTable3_Accent3" | "GridTable3_Accent4" | "GridTable3_Accent5" | "GridTable3_Accent6" | "GridTable4" | "GridTable4_Accent1" | "GridTable4_Accent2" | "GridTable4_Accent3" | "GridTable4_Accent4" | "GridTable4_Accent5" | "GridTable4_Accent6" | "GridTable5Dark" | "GridTable5Dark_Accent1" | "GridTable5Dark_Accent2" | "GridTable5Dark_Accent3" | "GridTable5Dark_Accent4" | "GridTable5Dark_Accent5" | "GridTable5Dark_Accent6" | "GridTable6Colorful" | "GridTable6Colorful_Accent1" | "GridTable6Colorful_Accent2" | "GridTable6Colorful_Accent3" | "GridTable6Colorful_Accent4" | "GridTable6Colorful_Accent5" | "GridTable6Colorful_Accent6" | "GridTable7Colorful" | "GridTable7Colorful_Accent1" | "GridTable7Colorful_Accent2" | "GridTable7Colorful_Accent3" | "GridTable7Colorful_Accent4" | "GridTable7Colorful_Accent5" | "GridTable7Colorful_Accent6" | "ListTable1Light" | "ListTable1Light_Accent1" | "ListTable1Light_Accent2" | "ListTable1Light_Accent3" | "ListTable1Light_Accent4" | "ListTable1Light_Accent5" | "ListTable1Light_Accent6" | "ListTable2" | "ListTable2_Accent1" | "ListTable2_Accent2" | "ListTable2_Accent3" | "ListTable2_Accent4" | "ListTable2_Accent5" | "ListTable2_Accent6" | "ListTable3" | "ListTable3_Accent1" | "ListTable3_Accent2" | "ListTable3_Accent3" | "ListTable3_Accent4" | "ListTable3_Accent5" | "ListTable3_Accent6" | "ListTable4" | "ListTable4_Accent1" | "ListTable4_Accent2" | "ListTable4_Accent3" | "ListTable4_Accent4" | "ListTable4_Accent5" | "ListTable4_Accent6" | "ListTable5Dark" | "ListTable5Dark_Accent1" | "ListTable5Dark_Accent2" | "ListTable5Dark_Accent3" | "ListTable5Dark_Accent4" | "ListTable5Dark_Accent5" | "ListTable5Dark_Accent6" | "ListTable6Colorful" | "ListTable6Colorful_Accent1" | "ListTable6Colorful_Accent2" | "ListTable6Colorful_Accent3" | "ListTable6Colorful_Accent4" | "ListTable6Colorful_Accent5" | "ListTable6Colorful_Accent6" | "ListTable7Colorful" | "ListTable7Colorful_Accent1" | "ListTable7Colorful_Accent2" | "ListTable7Colorful_Accent3" | "ListTable7Colorful_Accent4" | "ListTable7Colorful_Accent5" | "ListTable7Colorful_Accent6";'
+    return:
+      type:
+      - Word.Style | "Other" | "Normal" | "Heading1" | "Heading2" | "Heading3" | "Heading4" | "Heading5" | "Heading6" | "Heading7" | "Heading8" | "Heading9" | "Toc1" | "Toc2" | "Toc3" | "Toc4" | "Toc5" | "Toc6" | "Toc7" | "Toc8" | "Toc9" | "FootnoteText" | "Header" | "Footer" | "Caption" | "FootnoteReference" | "EndnoteReference" | "EndnoteText" | "Title" | "Subtitle" | "Hyperlink" | "Strong" | "Emphasis" | "NoSpacing" | "ListParagraph" | "Quote" | "IntenseQuote" | "SubtleEmphasis" | "IntenseEmphasis" | "SubtleReference" | "IntenseReference" | "BookTitle" | "Bibliography" | "TocHeading" | "TableGrid" | "PlainTable1" | "PlainTable2" | "PlainTable3" | "PlainTable4" | "PlainTable5" | "TableGridLight" | "GridTable1Light" | "GridTable1Light_Accent1" | "GridTable1Light_Accent2" | "GridTable1Light_Accent3" | "GridTable1Light_Accent4" | "GridTable1Light_Accent5" | "GridTable1Light_Accent6" | "GridTable2" | "GridTable2_Accent1" | "GridTable2_Accent2" | "GridTable2_Accent3" | "GridTable2_Accent4" | "GridTable2_Accent5" | "GridTable2_Accent6" | "GridTable3" | "GridTable3_Accent1" | "GridTable3_Accent2" | "GridTable3_Accent3" | "GridTable3_Accent4" | "GridTable3_Accent5" | "GridTable3_Accent6" | "GridTable4" | "GridTable4_Accent1" | "GridTable4_Accent2" | "GridTable4_Accent3" | "GridTable4_Accent4" | "GridTable4_Accent5" | "GridTable4_Accent6" | "GridTable5Dark" | "GridTable5Dark_Accent1" | "GridTable5Dark_Accent2" | "GridTable5Dark_Accent3" | "GridTable5Dark_Accent4" | "GridTable5Dark_Accent5" | "GridTable5Dark_Accent6" | "GridTable6Colorful" | "GridTable6Colorful_Accent1" | "GridTable6Colorful_Accent2" | "GridTable6Colorful_Accent3" | "GridTable6Colorful_Accent4" | "GridTable6Colorful_Accent5" | "GridTable6Colorful_Accent6" | "GridTable7Colorful" | "GridTable7Colorful_Accent1" | "GridTable7Colorful_Accent2" | "GridTable7Colorful_Accent3" | "GridTable7Colorful_Accent4" | "GridTable7Colorful_Accent5" | "GridTable7Colorful_Accent6" | "ListTable1Light" | "ListTable1Light_Accent1" | "ListTable1Light_Accent2" | "ListTable1Light_Accent3" | "ListTable1Light_Accent4" | "ListTable1Light_Accent5" | "ListTable1Light_Accent6" | "ListTable2" | "ListTable2_Accent1" | "ListTable2_Accent2" | "ListTable2_Accent3" | "ListTable2_Accent4" | "ListTable2_Accent5" | "ListTable2_Accent6" | "ListTable3" | "ListTable3_Accent1" | "ListTable3_Accent2" | "ListTable3_Accent3" | "ListTable3_Accent4" | "ListTable3_Accent5" | "ListTable3_Accent6" | "ListTable4" | "ListTable4_Accent1" | "ListTable4_Accent2" | "ListTable4_Accent3" | "ListTable4_Accent4" | "ListTable4_Accent5" | "ListTable4_Accent6" | "ListTable5Dark" | "ListTable5Dark_Accent1" | "ListTable5Dark_Accent2" | "ListTable5Dark_Accent3" | "ListTable5Dark_Accent4" | "ListTable5Dark_Accent5" | "ListTable5Dark_Accent6" | "ListTable6Colorful" | "ListTable6Colorful_Accent1" | "ListTable6Colorful_Accent2" | "ListTable6Colorful_Accent3" | "ListTable6Colorful_Accent4" | "ListTable6Colorful_Accent5" | "ListTable6Colorful_Accent6" | "ListTable7Colorful" | "ListTable7Colorful_Accent1" | "ListTable7Colorful_Accent2" | "ListTable7Colorful_Accent3" | "ListTable7Colorful_Accent4" | "ListTable7Colorful_Accent5" | "ListTable7Colorful_Accent6"
+- uid: word.Word.ContentControl.subtype
+  summary: >-
+    Obtient le sous-type du contrôle de contenu. Le sous-type peut être « RichTextInline », « RichTextParagraphs », « RichTextTableCell », « RichTextTableRow » et « RichTextTable » pour les contrôles de contenu en texte enrichi. En lecture seule.
+
+
+    \[[Du jeu d’API : WordApi 1.3](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: subtype
+  fullName: word.Word.ContentControl.subtype
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly subtype: Word.ContentControlType | "Unknown" | "RichTextInline" | "RichTextParagraphs" | "RichTextTableCell" | "RichTextTableRow" | "RichTextTable" | "PlainTextInline" | "PlainTextParagraph" | "Picture" | "BuildingBlockGallery" | "CheckBox" | "ComboBox" | "DropDownList" | "DatePicker" | "RepeatingSection" | "RichText" | "PlainText";'
+    return:
+      type:
+      - Word.ContentControlType | "Unknown" | "RichTextInline" | "RichTextParagraphs" | "RichTextTableCell" | "RichTextTableRow" | "RichTextTable" | "PlainTextInline" | "PlainTextParagraph" | "Picture" | "BuildingBlockGallery" | "CheckBox" | "ComboBox" | "DropDownList" | "DatePicker" | "RepeatingSection" | "RichText" | "PlainText"
+- uid: word.Word.ContentControl.tables
+  summary: >-
+    Obtient la collection d’objets table du contrôle de contenu. En lecture seule.
+
+
+    \[[Du jeu d’API : WordApi 1.3](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: tables
+  fullName: word.Word.ContentControl.tables
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly tables: Word.TableCollection;'
+    return:
+      type:
+      - Word.TableCollection
+- uid: word.Word.ContentControl.tag
+  summary: >-
+    Obtient ou définit un indicateur pour identifier un contrôle de contenu.
+
+
+    \[[Du jeu d’API : WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: tag
+  fullName: word.Word.ContentControl.tag
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'tag: string;'
+    return:
+      type:
+      - string
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\n// Traverses each paragraph of the document and wraps a content control on each with either a even or odd tags\nawait Word.run(async (context) => {\n    let paragraphs = context.document.body.paragraphs;\n    paragraphs.load(\"$none\"); //Don't need any properties, we'll just wrap each paragraph with a content control\n\n    await context.sync();\n\n    for (let i = 0; i < paragraphs.items.length; i++) {\n        let contentControl = paragraphs.items[i].insertContentControl();\n        // For even we tag \"even\"\n        if (i % 2 === 0) {\n            contentControl.tag = \"even\";\n        }\n\n        else {\n            contentControl.tag = \"odd\";\n        }\n    }\n    console.log(\"Content controls inserted: \" + paragraphs.items.length)\n\n    await context.sync();\n});\n\n```"
+- uid: word.Word.ContentControl.text
+  summary: >-
+    Obtient le texte du contrôle de contenu. En lecture seule.
+
+
+    \[[Du jeu d’API : WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: text
+  fullName: word.Word.ContentControl.text
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly text: string;'
+    return:
+      type:
+      - string
+- uid: word.Word.ContentControl.title
+  summary: >-
+    Obtient ou définit le titre d’un contrôle de contenu.
+
+
+    \[[Du jeu d’API : WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: title
+  fullName: word.Word.ContentControl.title
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'title: string;'
+    return:
+      type:
+      - string
+- uid: word.Word.ContentControl.toJSON
+  name: toJSON()
+  fullName: word.Word.ContentControl.toJSON
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'toJSON(): Word.Interfaces.ContentControlData;'
+    return:
+      type:
+      - word.Word.Interfaces.ContentControlData
+      description: ''
+- uid: word.Word.ContentControl.track
+  summary: Suivre l’objet pour l’ajustement automatique selon entourant les modifications dans le document. Cet appel est une abréviation de context.trackedObjects.add(thisObject). Si vous utilisez cet objet dans les appels de « .sync » et en dehors de l’exécution séquentielle d’un lot de « .run » et obtenir une erreur « InvalidObjectPath » lors de la définition d’une propriété ou d’appeler une méthode sur l’objet, vous devez avoir ajouté l’objet à l’objet suivi collection lorsque l’objet a été créé tout d’abord.
+  name: track()
+  fullName: word.Word.ContentControl.track
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'track(): Word.ContentControl;'
+    return:
+      type:
+      - word.Word.ContentControl
+      description: ''
+- uid: word.Word.ContentControl.type
+  summary: >-
+    Obtient le type du contrôle de contenu. Actuellement, seuls les contrôles de contenu à texte enrichi sont pris en charge. En lecture seule.
+
+
+    \[[Du jeu d’API : WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: type
+  fullName: word.Word.ContentControl.type
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly type: Word.ContentControlType | "Unknown" | "RichTextInline" | "RichTextParagraphs" | "RichTextTableCell" | "RichTextTableRow" | "RichTextTable" | "PlainTextInline" | "PlainTextParagraph" | "Picture" | "BuildingBlockGallery" | "CheckBox" | "ComboBox" | "DropDownList" | "DatePicker" | "RepeatingSection" | "RichText" | "PlainText";'
+    return:
+      type:
+      - Word.ContentControlType | "Unknown" | "RichTextInline" | "RichTextParagraphs" | "RichTextTableCell" | "RichTextTableRow" | "RichTextTable" | "PlainTextInline" | "PlainTextParagraph" | "Picture" | "BuildingBlockGallery" | "CheckBox" | "ComboBox" | "DropDownList" | "DatePicker" | "RepeatingSection" | "RichText" | "PlainText"
+- uid: word.Word.ContentControl.untrack
+  summary: Version de la mémoire associée à cet objet, si elle a été précédemment suivi. Cet appel est l’abréviation de context.trackedObjects.remove(thisObject). Comportant de nombreux objets suivis ralentit l’application hôte, donc pensez à libérer les objets que vous ajoutez, une fois que vous avez terminé les utiliser. Vous devrez appeler « context.sync() » avant que la version de mémoire prenne effet.
+  name: untrack()
+  fullName: word.Word.ContentControl.untrack
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'untrack(): Word.ContentControl;'
+    return:
+      type:
+      - word.Word.ContentControl
+      description: ''
