@@ -1,0 +1,439 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: 8c4565f3b5279046978ebf8c6ff31c6b8c1c8884
+ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 09/20/2018
+ms.locfileid: "24043666"
+items:
+- uid: office.Office.TableBinding
+  summary: <span data-ttu-id="7651f-101">Représente une liaison à deux dimensions de lignes et de colonnes, avec éventuellement des en-têtes.</span><span class="sxs-lookup"><span data-stu-id="7651f-101">Represents a binding in two dimensions of rows and columns, optionally with headers.</span></span>
+  remarks: >-
+    <table><tr><td><span data-ttu-id="7651f-102">Ensembles de ressources</span><span class="sxs-lookup"><span data-stu-id="7651f-102">Requirement Sets</span></span></td><td><span data-ttu-id="7651f-103">TableBindings</span><span class="sxs-lookup"><span data-stu-id="7651f-103">TableBindings</span></span></td></tr></table>
+
+
+    <span data-ttu-id="7651f-104">L’objet TableBinding hérite de la `id` propriété, `type` propriété, `getDataAsync` méthode, et `setDataAsync` méthode à partir de l’objet [Office.Binding](xref:office.Office.Binding) .</span><span class="sxs-lookup"><span data-stu-id="7651f-104">The TableBinding object inherits the `id` property, `type` property, `getDataAsync` method, and `setDataAsync` method from the [Office.Binding](xref:office.Office.Binding) object.</span></span>
+
+
+    <span data-ttu-id="7651f-105">Pour Excel, notez qu’après avoir établi une liaison de tableau, chaque nouvelle ligne à qu'un utilisateur ajoute à la table est automatiquement incluse dans la liaison et rowCount augmente.</span><span class="sxs-lookup"><span data-stu-id="7651f-105">For Excel, note that after you establish a table binding, each new row a user adds to the table is automatically included in the binding and rowCount increases.</span></span>
+  name: Office.TableBinding
+  fullName: office.Office.TableBinding
+  langs:
+  - typeScript
+  type: interface
+  extends:
+  - Binding
+  package: office
+  children:
+  - office.Office.TableBinding.addColumnsAsync
+  - office.Office.TableBinding.addRowsAsync
+  - office.Office.TableBinding.clearFormatsAsync
+  - office.Office.TableBinding.columnCount
+  - office.Office.TableBinding.deleteAllDataValuesAsync
+  - office.Office.TableBinding.getFormatsAsync
+  - office.Office.TableBinding.hasHeaders
+  - office.Office.TableBinding.rowCount
+  - office.Office.TableBinding.setFormatsAsync
+  - office.Office.TableBinding.setTableOptionsAsync
+- uid: office.Office.TableBinding.addColumnsAsync
+  summary: <span data-ttu-id="7651f-106">Ajoute les données spécifiées dans la table en tant que colonnes supplémentaires.</span><span class="sxs-lookup"><span data-stu-id="7651f-106">Adds the specified data to the table as additional columns.</span></span>
+  remarks: >-
+    <span data-ttu-id="7651f-107">Pour ajouter une ou plusieurs colonnes en spécifiant les valeurs des données et des en-têtes, passez un objet TableData en tant que le paramètre data.</span><span class="sxs-lookup"><span data-stu-id="7651f-107">To add one or more columns specifying the values of the data and headers, pass a TableData object as the data parameter.</span></span> <span data-ttu-id="7651f-108">Pour ajouter une ou plusieurs colonnes en spécifiant uniquement les données, passez un tableau de tableaux (« matrice ») en tant que le paramètre data.</span><span class="sxs-lookup"><span data-stu-id="7651f-108">To add one or more columns specifying only the data, pass an array of arrays ("matrix") as the data parameter.</span></span>
+
+
+    <span data-ttu-id="7651f-109">La réussite ou l’échec d’une opération addColumnsAsync est atomique.</span><span class="sxs-lookup"><span data-stu-id="7651f-109">The success or failure of an addColumnsAsync operation is atomic.</span></span> <span data-ttu-id="7651f-110">Autrement dit, ajouter des colonnes dans l’ensemble de l’opération doit réussir, ou il sera entièrement restaurée (et la propriété AsyncResult.status renvoyée au rappel signalera la défaillance) :</span><span class="sxs-lookup"><span data-stu-id="7651f-110">That is, the entire add columns operation must succeed, or it will be completely rolled back (and the AsyncResult.status property returned to the callback will report failure):</span></span>
+
+
+    - <span data-ttu-id="7651f-111">Chaque ligne du tableau que vous transmettez comme argument données doit avoir le même nombre de lignes que le tableau mis à jour.</span><span class="sxs-lookup"><span data-stu-id="7651f-111">Each row in the array you pass as the data argument must have the same number of rows as the table being updated.</span></span> <span data-ttu-id="7651f-112">Si ce n’est pas le cas, toute l’opération échoue.</span><span class="sxs-lookup"><span data-stu-id="7651f-112">If not, the entire operation will fail.</span></span>
+
+
+    - <span data-ttu-id="7651f-p104">Chaque ligne et chaque cellule du tableau doit ajouter correctement cette ligne ou cette cellule au tableau dans la ou les nouvelles colonnes ajoutées. S’il est impossible de définir une ligne ou une cellule pour une raison quelconque, toute l’opération échoue.</span><span class="sxs-lookup"><span data-stu-id="7651f-p104">Each row and cell in the array must successfully add that row or cell to the table in the newly added column(s). If any row or cell fails to be set for any reason, the entire operation will fail.</span></span>
+
+
+    - <span data-ttu-id="7651f-115">Si vous passez un objet TableData en tant qu’argument de données, le nombre de lignes d’en-tête doit correspondre à celui de la table en cours de mise à jour.</span><span class="sxs-lookup"><span data-stu-id="7651f-115">If you pass a TableData object as the data argument, the number of header rows must match that of the table being updated.</span></span>
+
+
+    <span data-ttu-id="7651f-116">Remarque supplémentaire pour Excel Online : le nombre total de cellules dans l’objet TableData passé au paramètre de données ne peut pas dépasser 20 000 en un seul appel à cette méthode.</span><span class="sxs-lookup"><span data-stu-id="7651f-116">Additional remark for Excel Online: The total number of cells in the TableData object passed to the data parameter can't exceed 20,000 in a single call to this method.</span></span>
+
+
+    <span data-ttu-id="7651f-117">**Informations de prise en charge**</span><span class="sxs-lookup"><span data-stu-id="7651f-117">**Support details**</span></span>
+
+
+    <span data-ttu-id="7651f-p105">Un Y majuscule dans la matrice suivante indique que cette méthode est prise en charge dans l'application hôte Office correspondante. Une cellule vide indique que l'application hôte Office ne prend pas en charge cette méthode.</span><span class="sxs-lookup"><span data-stu-id="7651f-p105">A capital Y in the following matrix indicates that this method is supported in the corresponding Office host application. An empty cell indicates that the Office host application doesn't support this method.</span></span>
+
+
+    <span data-ttu-id="7651f-120">Pour plus d’informations sur les exigences des applications et le serveur hôte Office, voir [Configuration requise pour exécuter des compléments Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span><span class="sxs-lookup"><span data-stu-id="7651f-120">For more information about Office host application and server requirements, see [Requirements for running Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span></span>
+
+
+    <span data-ttu-id="7651f-121">*Hôtes pris en charge par la plateforme*</span><span class="sxs-lookup"><span data-stu-id="7651f-121">*Supported hosts, by platform*</span></span> <table> <tr><th> </th><th> <span data-ttu-id="7651f-122">Office pour Bureau Windows</span><span class="sxs-lookup"><span data-stu-id="7651f-122">Office for Windows desktop</span></span> </th><th> <span data-ttu-id="7651f-123">Office Online (dans un navigateur)</span><span class="sxs-lookup"><span data-stu-id="7651f-123">Office Online (in browser)</span></span> </th><th> <span data-ttu-id="7651f-124">Office pour iPad</span><span class="sxs-lookup"><span data-stu-id="7651f-124">Office for iPad</span></span> </th></tr> <tr><td><span data-ttu-id="7651f-125"><strong>Excel</strong></span><span class="sxs-lookup"><span data-stu-id="7651f-125"><strong> Excel </strong></span></span></td><td> <span data-ttu-id="7651f-126">Y</span><span class="sxs-lookup"><span data-stu-id="7651f-126">Y</span></span> </td><td> <span data-ttu-id="7651f-127">Y</span><span class="sxs-lookup"><span data-stu-id="7651f-127">Y</span></span> </td><td> <span data-ttu-id="7651f-128">Y</span><span class="sxs-lookup"><span data-stu-id="7651f-128">Y</span></span> </td></tr> <tr><td><span data-ttu-id="7651f-129"><strong>Word</strong></span><span class="sxs-lookup"><span data-stu-id="7651f-129"><strong> Word </strong></span></span></td><td> <span data-ttu-id="7651f-130">Y</span><span class="sxs-lookup"><span data-stu-id="7651f-130">Y</span></span> </td><td> <span data-ttu-id="7651f-131">Y</span><span class="sxs-lookup"><span data-stu-id="7651f-131">Y</span></span> </td><td> <span data-ttu-id="7651f-132">Y</span><span class="sxs-lookup"><span data-stu-id="7651f-132">Y</span></span> </td></tr> </table>
+
+    #### <a name="examples"></a><span data-ttu-id="7651f-133">Exemples</span><span class="sxs-lookup"><span data-stu-id="7651f-133">Examples</span></span>
+
+
+    ```javascript
+
+    // The following example adds a single column with three rows to a bound table with the id "myTable"
+
+    // by passing a TableData object as the data argument of the addColumnsAsync method. To succeed,
+
+    // the table being updated must have three rows.
+
+
+    // Add a column to a binding of type table by passing a TableData object.
+
+    function addColumns() {
+        var myTable = new Office.TableData();
+        myTable.headers = [["Cities"]];
+        myTable.rows = [["Berlin"], ["Roma"], ["Tokyo"]];
+
+        Office.context.document.bindings.getByIdAsync("myTable", function (result) {
+            result.value.addColumnsAsync(myTable);
+        });
+    }
+
+
+    // The following example adds a single column with three rows to a bound table with the id myTable
+
+    // by passing an array of arrays ("matrix") as the data argument of the addColumnsAsync method.
+
+    // To succeed, the table being updated must have three rows.
+
+
+    // Add a column to a binding of type table by passing an array of arrays.
+
+    function addColumns() {
+        var myTable = [["Berlin"], ["Roma"], ["Tokyo"]];
+
+        Office.context.document.bindings.getByIdAsync("myTable", function (result) {
+            result.value.addColumnsAsync(myTable);
+        });
+    }
+
+    ```
+  name: addColumnsAsync(tableData, options, callback)
+  fullName: office.Office.TableBinding.addColumnsAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'addColumnsAsync(tableData: TableData | any[][], options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<void>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: tableData
+      description: <span data-ttu-id="7651f-134">Un tableau de tableaux (« matrice ») ou un objet de données de table qui contient une ou plusieurs colonnes de données à ajouter à la table.</span><span class="sxs-lookup"><span data-stu-id="7651f-134">An array of arrays ("matrix") or a TableData object that contains one or more columns of data to add to the table.</span></span> <span data-ttu-id="7651f-135">Obligatoire.</span><span class="sxs-lookup"><span data-stu-id="7651f-135">Required.</span></span>
+      type:
+      - TableData | any[][]
+    - id: options
+      description: <span data-ttu-id="7651f-136">Fournit une option de conservation des données de contexte d’un type quelconque, inchangé, pour une utilisation dans un rappel.</span><span class="sxs-lookup"><span data-stu-id="7651f-136">Provides an option for preserving context data of any type, unchanged, for use in a callback.</span></span>
+      type:
+      - office.Office.AsyncContextOptions
+    - id: callback
+      description: <span data-ttu-id="7651f-137">Facultatif.</span><span class="sxs-lookup"><span data-stu-id="7651f-137">Optional.</span></span> <span data-ttu-id="7651f-138">Une fonction qui est appelée quand le rappel retourné, dont le seul paramètre est de type[Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.</span><span class="sxs-lookup"><span data-stu-id="7651f-138">A function that is invoked when the callback returns, whose only parameter is of type[Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.</span></span>
+      type:
+      - '(result: AsyncResult<void>) => void'
+- uid: office.Office.TableBinding.addRowsAsync
+  summary: <span data-ttu-id="7651f-139">Ajoute les données spécifiées dans la table sous forme de lignes supplémentaires.</span><span class="sxs-lookup"><span data-stu-id="7651f-139">Adds the specified data to the table as additional rows.</span></span>
+  remarks: >-
+    <span data-ttu-id="7651f-140">La réussite ou l’échec d’une opération addRowsAsync est atomique.</span><span class="sxs-lookup"><span data-stu-id="7651f-140">The success or failure of an addRowsAsync operation is atomic.</span></span> <span data-ttu-id="7651f-141">Autrement dit, ajouter des colonnes dans l’ensemble de l’opération doit réussir, ou il sera entièrement restaurée (et la propriété AsyncResult.status renvoyée au rappel signalera la défaillance) :</span><span class="sxs-lookup"><span data-stu-id="7651f-141">That is, the entire add columns operation must succeed, or it will be completely rolled back (and the AsyncResult.status property returned to the callback will report failure):</span></span>
+
+
+    - <span data-ttu-id="7651f-142">Chaque ligne du tableau que vous transmettez comme argument données doit avoir le même nombre de colonnes que la table mis à jour.</span><span class="sxs-lookup"><span data-stu-id="7651f-142">Each row in the array you pass as the data argument must have the same number of columns as the table being updated.</span></span> <span data-ttu-id="7651f-143">Si ce n’est pas le cas, toute l’opération échoue.</span><span class="sxs-lookup"><span data-stu-id="7651f-143">If not, the entire operation will fail.</span></span>
+
+
+    - <span data-ttu-id="7651f-144">Chaque colonne et cellule dans le tableau doivent ajouter correctement cette colonne ou la cellule à la table dans les lignes ajoutées (s).</span><span class="sxs-lookup"><span data-stu-id="7651f-144">Each column and cell in the array must successfully add that column or cell to the table in the newly added rows(s).</span></span> <span data-ttu-id="7651f-145">Si une colonne ou une cellule échoue pour une raison quelconque, toute l’opération échoue.</span><span class="sxs-lookup"><span data-stu-id="7651f-145">If any column or cell fails to be set for any reason, the entire operation will fail.</span></span>
+
+
+    - <span data-ttu-id="7651f-146">Si vous passez un objet TableData en tant qu’argument de données, le nombre de lignes d’en-tête doit correspondre à celui de la table en cours de mise à jour.</span><span class="sxs-lookup"><span data-stu-id="7651f-146">If you pass a TableData object as the data argument, the number of header rows must match that of the table being updated.</span></span>
+
+
+    <span data-ttu-id="7651f-147">Remarque supplémentaire pour Excel Online : le nombre total de cellules dans l’objet TableData passé au paramètre de données ne peut pas dépasser 20 000 en un seul appel à cette méthode.</span><span class="sxs-lookup"><span data-stu-id="7651f-147">Additional remark for Excel Online: The total number of cells in the TableData object passed to the data parameter can't exceed 20,000 in a single call to this method.</span></span>
+
+
+    <span data-ttu-id="7651f-148">**Informations de prise en charge**</span><span class="sxs-lookup"><span data-stu-id="7651f-148">**Support details**</span></span>
+
+
+    <span data-ttu-id="7651f-p111">Un Y majuscule dans la matrice suivante indique que cette méthode est prise en charge dans l'application hôte Office correspondante. Une cellule vide indique que l'application hôte Office ne prend pas en charge cette méthode.</span><span class="sxs-lookup"><span data-stu-id="7651f-p111">A capital Y in the following matrix indicates that this method is supported in the corresponding Office host application. An empty cell indicates that the Office host application doesn't support this method.</span></span>
+
+
+    <span data-ttu-id="7651f-151">Pour plus d’informations sur les exigences des applications et le serveur hôte Office, voir [Configuration requise pour exécuter des compléments Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span><span class="sxs-lookup"><span data-stu-id="7651f-151">For more information about Office host application and server requirements, see [Requirements for running Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span></span>
+
+
+    <span data-ttu-id="7651f-152">*Hôtes pris en charge par la plateforme*</span><span class="sxs-lookup"><span data-stu-id="7651f-152">*Supported hosts, by platform*</span></span> <table> <tr><th> </th><th> <span data-ttu-id="7651f-153">Office pour Bureau Windows</span><span class="sxs-lookup"><span data-stu-id="7651f-153">Office for Windows desktop</span></span> </th><th> <span data-ttu-id="7651f-154">Office Online (dans un navigateur)</span><span class="sxs-lookup"><span data-stu-id="7651f-154">Office Online (in browser)</span></span> </th><th> <span data-ttu-id="7651f-155">Office pour iPad</span><span class="sxs-lookup"><span data-stu-id="7651f-155">Office for iPad</span></span> </th></tr> <tr><td><span data-ttu-id="7651f-156"><strong>Access</strong></span><span class="sxs-lookup"><span data-stu-id="7651f-156"><strong> Access </strong></span></span></td><td> </td><td> <span data-ttu-id="7651f-157">Y</span><span class="sxs-lookup"><span data-stu-id="7651f-157">Y</span></span> </td><td> </td></tr> <tr><td><span data-ttu-id="7651f-158"><strong>Excel</strong></span><span class="sxs-lookup"><span data-stu-id="7651f-158"><strong> Excel </strong></span></span></td><td> <span data-ttu-id="7651f-159">Y</span><span class="sxs-lookup"><span data-stu-id="7651f-159">Y</span></span> </td><td> <span data-ttu-id="7651f-160">Y</span><span class="sxs-lookup"><span data-stu-id="7651f-160">Y</span></span> </td><td> <span data-ttu-id="7651f-161">Y</span><span class="sxs-lookup"><span data-stu-id="7651f-161">Y</span></span> </td></tr> <tr><td><span data-ttu-id="7651f-162"><strong>Word</strong></span><span class="sxs-lookup"><span data-stu-id="7651f-162"><strong> Word </strong></span></span></td><td> <span data-ttu-id="7651f-163">Y</span><span class="sxs-lookup"><span data-stu-id="7651f-163">Y</span></span> </td><td> <span data-ttu-id="7651f-164">Y</span><span class="sxs-lookup"><span data-stu-id="7651f-164">Y</span></span> </td><td> <span data-ttu-id="7651f-165">Y</span><span class="sxs-lookup"><span data-stu-id="7651f-165">Y</span></span> </td></tr> </table>
+
+    #### <a name="examples"></a><span data-ttu-id="7651f-166">Exemples</span><span class="sxs-lookup"><span data-stu-id="7651f-166">Examples</span></span>
+
+
+    ```javascript
+
+    function addRowsToTable() {
+        Office.context.document.bindings.getByIdAsync("myBinding", function (asyncResult) {
+            var binding = asyncResult.value;
+            binding.addRowsAsync([["6", "k"], ["7", "j"]]);
+        });
+    }
+
+    ```
+  name: addRowsAsync(rows, options, callback)
+  fullName: office.Office.TableBinding.addRowsAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'addRowsAsync(rows: TableData | any[][], options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<void>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: rows
+      description: <span data-ttu-id="7651f-167">Un tableau de tableaux (« matrice ») ou un objet de données de table qui contient une ou plusieurs lignes de données à ajouter à la table.</span><span class="sxs-lookup"><span data-stu-id="7651f-167">An array of arrays ("matrix") or a TableData object that contains one or more rows of data to add to the table.</span></span> <span data-ttu-id="7651f-168">Obligatoire.</span><span class="sxs-lookup"><span data-stu-id="7651f-168">Required.</span></span>
+      type:
+      - TableData | any[][]
+    - id: options
+      description: <span data-ttu-id="7651f-169">Fournit une option de conservation des données de contexte d’un type quelconque, inchangé, pour une utilisation dans un rappel.</span><span class="sxs-lookup"><span data-stu-id="7651f-169">Provides an option for preserving context data of any type, unchanged, for use in a callback.</span></span>
+      type:
+      - office.Office.AsyncContextOptions
+    - id: callback
+      description: <span data-ttu-id="7651f-170">Facultatif.</span><span class="sxs-lookup"><span data-stu-id="7651f-170">Optional.</span></span> <span data-ttu-id="7651f-171">Une fonction qui est appelée quand le rappel retourné, dont le seul paramètre est de type[Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.</span><span class="sxs-lookup"><span data-stu-id="7651f-171">A function that is invoked when the callback returns, whose only parameter is of type[Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.</span></span>
+      type:
+      - '(result: AsyncResult<void>) => void'
+- uid: office.Office.TableBinding.clearFormatsAsync
+  summary: <span data-ttu-id="7651f-172">Efface la mise en forme du tableau lié.</span><span class="sxs-lookup"><span data-stu-id="7651f-172">Clears formatting on the bound table.</span></span>
+  remarks: >-
+    <span data-ttu-id="7651f-173">Pour plus d’informations, voir [les tables de Format de compléments pour Excel](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-tables#format-a-table) .</span><span class="sxs-lookup"><span data-stu-id="7651f-173">See [Format tables in add-ins for Excel](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-tables#format-a-table) for more information.</span></span>
+
+
+    <span data-ttu-id="7651f-174">**Informations de prise en charge**</span><span class="sxs-lookup"><span data-stu-id="7651f-174">**Support details**</span></span>
+
+
+    <span data-ttu-id="7651f-p114">Un Y majuscule dans la matrice suivante indique que cette méthode est prise en charge dans l'application hôte Office correspondante. Une cellule vide indique que l'application hôte Office ne prend pas en charge cette méthode.</span><span class="sxs-lookup"><span data-stu-id="7651f-p114">A capital Y in the following matrix indicates that this method is supported in the corresponding Office host application. An empty cell indicates that the Office host application doesn't support this method.</span></span>
+
+
+    <span data-ttu-id="7651f-177">Pour plus d’informations sur les exigences des applications et le serveur hôte Office, voir [Configuration requise pour exécuter des compléments Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span><span class="sxs-lookup"><span data-stu-id="7651f-177">For more information about Office host application and server requirements, see [Requirements for running Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span></span>
+
+
+    <span data-ttu-id="7651f-178">*Hôtes pris en charge par la plateforme*</span><span class="sxs-lookup"><span data-stu-id="7651f-178">*Supported hosts, by platform*</span></span> <table> <tr><th> </th><th> <span data-ttu-id="7651f-179">Office pour Bureau Windows</span><span class="sxs-lookup"><span data-stu-id="7651f-179">Office for Windows desktop</span></span> </th><th> <span data-ttu-id="7651f-180">Office Online (dans un navigateur)</span><span class="sxs-lookup"><span data-stu-id="7651f-180">Office Online (in browser)</span></span> </th><th> <span data-ttu-id="7651f-181">Office pour iPad</span><span class="sxs-lookup"><span data-stu-id="7651f-181">Office for iPad</span></span> </th></tr> <tr><td><span data-ttu-id="7651f-182"><strong>Excel</strong></span><span class="sxs-lookup"><span data-stu-id="7651f-182"><strong> Excel </strong></span></span></td><td> <span data-ttu-id="7651f-183">Y</span><span class="sxs-lookup"><span data-stu-id="7651f-183">Y</span></span> </td><td> <span data-ttu-id="7651f-184">Y</span><span class="sxs-lookup"><span data-stu-id="7651f-184">Y</span></span> </td><td> <span data-ttu-id="7651f-185">Y</span><span class="sxs-lookup"><span data-stu-id="7651f-185">Y</span></span> </td></tr> </table>
+
+    #### <a name="examples"></a><span data-ttu-id="7651f-186">Exemples</span><span class="sxs-lookup"><span data-stu-id="7651f-186">Examples</span></span>
+
+
+    ```javascript
+
+    // The following example shows how to clear the formatting of the bound table with an ID of "myBinding":
+
+    Office.select("bindings#myBinding").clearFormatsAsync();
+
+    ```
+  name: clearFormatsAsync(options, callback)
+  fullName: office.Office.TableBinding.clearFormatsAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'clearFormatsAsync(options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<void>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: options
+      description: <span data-ttu-id="7651f-187">Fournit une option de conservation des données de contexte d’un type quelconque, inchangé, pour une utilisation dans un rappel.</span><span class="sxs-lookup"><span data-stu-id="7651f-187">Provides an option for preserving context data of any type, unchanged, for use in a callback.</span></span>
+      type:
+      - office.Office.AsyncContextOptions
+    - id: callback
+      description: <span data-ttu-id="7651f-188">Facultatif.</span><span class="sxs-lookup"><span data-stu-id="7651f-188">Optional.</span></span> <span data-ttu-id="7651f-189">Une fonction qui est appelée quand le rappel retourné, dont le seul paramètre est de type[Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.</span><span class="sxs-lookup"><span data-stu-id="7651f-189">A function that is invoked when the callback returns, whose only parameter is of type[Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.</span></span>
+      type:
+      - '(result: AsyncResult<void>) => void'
+- uid: office.Office.TableBinding.columnCount
+  summary: <span data-ttu-id="7651f-190">Obtient le nombre de colonnes dans l’objet TableBinding, en tant que valeur entière.</span><span class="sxs-lookup"><span data-stu-id="7651f-190">Gets the number of columns in the TableBinding, as an integer value.</span></span>
+  remarks: "<span data-ttu-id=\"7651f-191\">**Informations de prise en charge**</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-191\">**Support details**</span></span>\n\n<span data-ttu-id=\"7651f-p116\">Un Y majuscule dans la matrice suivante indique que cette propriété est prise en charge dans l'application hôte Office correspondante. Une cellule vide indique que l'application hôte Office ne prend pas en charge cette propriété.</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-p116\">A capital Y in the following matrix indicates that this property is supported in the corresponding Office host application. An empty cell indicates that the Office host application doesn't support this property.</span></span>\n\n<span data-ttu-id=\"7651f-194\">Pour plus d’informations sur les exigences des applications et le serveur hôte Office, voir [Configuration requise pour exécuter des compléments Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-194\">For more information about Office host application and server requirements, see [Requirements for running Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span></span>\n\n<span data-ttu-id=\"7651f-195\">*Hôtes pris en charge par la plateforme*</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-195\">*Supported hosts, by platform*</span></span> <table> <tr><th> </th><th> <span data-ttu-id=\"7651f-196\">Office pour Bureau Windows</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-196\">Office for Windows desktop</span></span> </th><th> <span data-ttu-id=\"7651f-197\">Office Online (dans un navigateur)</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-197\">Office Online (in browser)</span></span> </th><th> <span data-ttu-id=\"7651f-198\">Office pour iPad</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-198\">Office for iPad</span></span> </th></tr> <tr><td><span data-ttu-id=\"7651f-199\"><strong>Access</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-199\"><strong> Access </strong></span></span></td><td> </td><td> <span data-ttu-id=\"7651f-200\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-200\">Y</span></span> </td><td> </td></tr> <tr><td><span data-ttu-id=\"7651f-201\"><strong>Excel</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-201\"><strong> Excel </strong></span></span></td><td> <span data-ttu-id=\"7651f-202\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-202\">Y</span></span> </td><td> <span data-ttu-id=\"7651f-203\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-203\">Y</span></span> </td><td> <span data-ttu-id=\"7651f-204\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-204\">Y</span></span> </td></tr> <tr><td><span data-ttu-id=\"7651f-205\"><strong>Word</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-205\"><strong> Word </strong></span></span></td><td> <span data-ttu-id=\"7651f-206\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-206\">Y</span></span> </td><td> <span data-ttu-id=\"7651f-207\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-207\">Y</span></span> </td><td> <span data-ttu-id=\"7651f-208\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-208\">Y</span></span> </td></tr> </table>\n#### <a name=\"examples\"></a><span data-ttu-id=\"7651f-209\">Exemples</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-209\">Examples</span></span>\n\n```javascript\nfunction showBindingColumnCount() {\n    Office.context.document.bindings.getByIdAsync(\"myBinding\", function (asyncResult) {\n        write(\"Column: \" + asyncResult.value.columnCount);\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+  name: columnCount
+  fullName: office.Office.TableBinding.columnCount
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'columnCount: number;'
+    return:
+      type:
+      - number
+- uid: office.Office.TableBinding.deleteAllDataValuesAsync
+  summary: <span data-ttu-id="7651f-210">Supprime toutes les lignes et leurs valeurs (à l’exception des lignes d’en-tête) du tableau, en progressant de manière appropriée pour l’application hôte.</span><span class="sxs-lookup"><span data-stu-id="7651f-210">Deletes all non-header rows and their values in the table, shifting appropriately for the host application.</span></span>
+  remarks: >-
+    <span data-ttu-id="7651f-211">Dans Excel, si le tableau n’a pas de ligne d’en-tête, cette méthode supprime le tableau proprement dit.</span><span class="sxs-lookup"><span data-stu-id="7651f-211">In Excel, if the table has no header row, this method will delete the table itself.</span></span>
+
+
+    <span data-ttu-id="7651f-212">**Informations de prise en charge**</span><span class="sxs-lookup"><span data-stu-id="7651f-212">**Support details**</span></span>
+
+
+    <span data-ttu-id="7651f-p117">Un Y majuscule dans la matrice suivante indique que cette méthode est prise en charge dans l'application hôte Office correspondante. Une cellule vide indique que l'application hôte Office ne prend pas en charge cette méthode.</span><span class="sxs-lookup"><span data-stu-id="7651f-p117">A capital Y in the following matrix indicates that this method is supported in the corresponding Office host application. An empty cell indicates that the Office host application doesn't support this method.</span></span>
+
+
+    <span data-ttu-id="7651f-215">Pour plus d’informations sur les exigences des applications et le serveur hôte Office, voir [Configuration requise pour exécuter des compléments Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span><span class="sxs-lookup"><span data-stu-id="7651f-215">For more information about Office host application and server requirements, see [Requirements for running Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span></span>
+
+
+    <span data-ttu-id="7651f-216">*Hôtes pris en charge par la plateforme*</span><span class="sxs-lookup"><span data-stu-id="7651f-216">*Supported hosts, by platform*</span></span> <table> <tr><th> </th><th> <span data-ttu-id="7651f-217">Office pour Bureau Windows</span><span class="sxs-lookup"><span data-stu-id="7651f-217">Office for Windows desktop</span></span> </th><th> <span data-ttu-id="7651f-218">Office Online (dans un navigateur)</span><span class="sxs-lookup"><span data-stu-id="7651f-218">Office Online (in browser)</span></span> </th><th> <span data-ttu-id="7651f-219">Office pour iPad</span><span class="sxs-lookup"><span data-stu-id="7651f-219">Office for iPad</span></span> </th></tr> <tr><td><span data-ttu-id="7651f-220"><strong>Access</strong></span><span class="sxs-lookup"><span data-stu-id="7651f-220"><strong> Access </strong></span></span></td><td> </td><td> <span data-ttu-id="7651f-221">Y</span><span class="sxs-lookup"><span data-stu-id="7651f-221">Y</span></span> </td><td> </td></tr> <tr><td><span data-ttu-id="7651f-222"><strong>Excel</strong></span><span class="sxs-lookup"><span data-stu-id="7651f-222"><strong> Excel </strong></span></span></td><td> <span data-ttu-id="7651f-223">Y</span><span class="sxs-lookup"><span data-stu-id="7651f-223">Y</span></span> </td><td> <span data-ttu-id="7651f-224">Y</span><span class="sxs-lookup"><span data-stu-id="7651f-224">Y</span></span> </td><td> <span data-ttu-id="7651f-225">Y</span><span class="sxs-lookup"><span data-stu-id="7651f-225">Y</span></span> </td></tr> <tr><td><span data-ttu-id="7651f-226"><strong>Word</strong></span><span class="sxs-lookup"><span data-stu-id="7651f-226"><strong> Word </strong></span></span></td><td> <span data-ttu-id="7651f-227">Y</span><span class="sxs-lookup"><span data-stu-id="7651f-227">Y</span></span> </td><td> <span data-ttu-id="7651f-228">Y</span><span class="sxs-lookup"><span data-stu-id="7651f-228">Y</span></span> </td><td> <span data-ttu-id="7651f-229">Y</span><span class="sxs-lookup"><span data-stu-id="7651f-229">Y</span></span> </td></tr> </table>
+
+    #### <a name="examples"></a><span data-ttu-id="7651f-230">Exemples</span><span class="sxs-lookup"><span data-stu-id="7651f-230">Examples</span></span>
+
+
+    ```javascript
+
+    function deleteAllRowsFromTable() {
+        Office.context.document.bindings.getByIdAsync("myBinding", function (asyncResult) {
+            var binding = asyncResult.value;
+            binding.deleteAllDataValuesAsync();
+        });
+    }
+
+    ```
+  name: deleteAllDataValuesAsync(options, callback)
+  fullName: office.Office.TableBinding.deleteAllDataValuesAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'deleteAllDataValuesAsync(options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<void>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: options
+      description: <span data-ttu-id="7651f-231">Fournit une option de conservation des données de contexte d’un type quelconque, inchangé, pour une utilisation dans un rappel.</span><span class="sxs-lookup"><span data-stu-id="7651f-231">Provides an option for preserving context data of any type, unchanged, for use in a callback.</span></span>
+      type:
+      - office.Office.AsyncContextOptions
+    - id: callback
+      description: <span data-ttu-id="7651f-232">Facultatif.</span><span class="sxs-lookup"><span data-stu-id="7651f-232">Optional.</span></span> <span data-ttu-id="7651f-233">Une fonction qui est appelée quand le rappel retourné, dont le seul paramètre est de type[Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.</span><span class="sxs-lookup"><span data-stu-id="7651f-233">A function that is invoked when the callback returns, whose only parameter is of type[Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.</span></span>
+      type:
+      - '(result: AsyncResult<void>) => void'
+- uid: office.Office.TableBinding.getFormatsAsync
+  summary: <span data-ttu-id="7651f-234">Obtient la mise en forme des éléments spécifiés dans le tableau.</span><span class="sxs-lookup"><span data-stu-id="7651f-234">Gets the formatting on specified items in the table.</span></span>
+  remarks: >-
+    <span data-ttu-id="7651f-235">**Structure du format de renvoyé**</span><span class="sxs-lookup"><span data-stu-id="7651f-235">**Returned format structure**</span></span>
+
+
+    <span data-ttu-id="7651f-236">Chaque objet JavaScript dans le tableau de valeurs de retour a ce formulaire :`{cells:{ cell_range }, format:{ format_definition }}`</span><span class="sxs-lookup"><span data-stu-id="7651f-236">Each JavaScript object in the return value array has this form: `{cells:{ cell_range }, format:{ format_definition }}`</span></span>
+
+
+    <span data-ttu-id="7651f-237">Le `cells:` propriété spécifie la plage de format à l’aide d’une des valeurs suivantes :</span><span class="sxs-lookup"><span data-stu-id="7651f-237">The `cells:` property specifies the range you want format using one of the following values:</span></span>
+
+
+    <span data-ttu-id="7651f-238">**Plages prises en charge dans la propriété cells**</span><span class="sxs-lookup"><span data-stu-id="7651f-238">**Supported ranges in cells property**</span></span>
+
+
+    <table> <tr> <th><span data-ttu-id="7651f-239">Paramètres de la plage de cellules</span><span class="sxs-lookup"><span data-stu-id="7651f-239">cells range settings</span></span></th> <th><span data-ttu-id="7651f-240">Description</span><span class="sxs-lookup"><span data-stu-id="7651f-240">Description</span></span></th> </tr> <tr> <td><span data-ttu-id="7651f-241">{ligne : n}</span><span class="sxs-lookup"><span data-stu-id="7651f-241">{row: n}</span></span></td> <td><span data-ttu-id="7651f-242">Spécifie la plage qui est la nième ligne de données dans le tableau de base zéro.</span><span class="sxs-lookup"><span data-stu-id="7651f-242">Specifies the range that is the zero-based nth row of data in the table.</span></span></td> </tr> <tr> <td><span data-ttu-id="7651f-243">{colonne : n}</span><span class="sxs-lookup"><span data-stu-id="7651f-243">{column: n}</span></span></td> <td><span data-ttu-id="7651f-244">Spécifie la plage qui est la nième colonne de données dans le tableau en partant de zéro.</span><span class="sxs-lookup"><span data-stu-id="7651f-244">Specifies the range that is the zero-based nth column of data in the table.</span></span></td> </tr> <tr> <td><span data-ttu-id="7651f-245">{ligne : i, colonne : j}</span><span class="sxs-lookup"><span data-stu-id="7651f-245">{row: i, column: j}</span></span></td> <td><span data-ttu-id="7651f-246">Spécifie la cellule qui est la ligne d’énième j colonne du tableau.</span><span class="sxs-lookup"><span data-stu-id="7651f-246">Specifies the single cell that is the ith row and jth column of the table.</span></span></td> </tr> <tr> <td><span data-ttu-id="7651f-247">Office.Table.All</span><span class="sxs-lookup"><span data-stu-id="7651f-247">Office.Table.All</span></span></td> <td><span data-ttu-id="7651f-248">Spécifie le tableau entier, y compris les totaux, les données et les en-têtes de colonne (le cas échéant).</span><span class="sxs-lookup"><span data-stu-id="7651f-248">Specifies the entire table, including column headers, data, and totals (if any).</span></span></td> </tr> <tr> <td><span data-ttu-id="7651f-249">Office.Table.Data</span><span class="sxs-lookup"><span data-stu-id="7651f-249">Office.Table.Data</span></span></td> <td><span data-ttu-id="7651f-250">Spécifie uniquement les données du tableau (sans les en-têtes ni les totaux).</span><span class="sxs-lookup"><span data-stu-id="7651f-250">Specifies only the data in the table (no headers and totals).</span></span></td> </tr> <tr> <td><span data-ttu-id="7651f-251">Office.Table.Headers</span><span class="sxs-lookup"><span data-stu-id="7651f-251">Office.Table.Headers</span></span></td> <td><span data-ttu-id="7651f-252">Spécifie uniquement la ligne d’en-tête.</span><span class="sxs-lookup"><span data-stu-id="7651f-252">Specifies only the header row.</span></span></td> </tr> </table>
+
+
+    <span data-ttu-id="7651f-253">Le `format:` propriété spécifie la zone de valeurs qui correspondent à un sous-ensemble des paramètres disponibles dans la boîte de dialogue Format de cellule dans Excel (avec le bouton droit &gt; Format de cellule ou à la maison &gt; Format &gt; Format de cellule).</span><span class="sxs-lookup"><span data-stu-id="7651f-253">The `format:` property specifies values that correspond to a subset of the settings available in the Format Cells dialog box in Excel (Right-click &gt; Format Cells or Home &gt; Format &gt; Format Cells).</span></span>
+  name: getFormatsAsync(cellReference, formats, options, callback)
+  fullName: office.Office.TableBinding.getFormatsAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getFormatsAsync(cellReference?: any, formats?: any[], options?: Office.AsyncContextOptions, callback?: (result: AsyncResult< ({ cells: any, format: any})[]>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: cellReference
+      description: <span data-ttu-id="7651f-254">Un objet littéral contenant les paires nom-valeur qui spécifient la plage de cellules pour obtenir la mise en forme.</span><span class="sxs-lookup"><span data-stu-id="7651f-254">An object literal containing name-value pairs that specify the range of cells to get formatting from.</span></span>
+      type:
+      - any
+    - id: formats
+      description: <span data-ttu-id="7651f-255">Un tableau indiquant les propriétés de format à obtenir.</span><span class="sxs-lookup"><span data-stu-id="7651f-255">An array specifying the format properties to get.</span></span>
+      type:
+      - any[]
+    - id: options
+      description: <span data-ttu-id="7651f-256">Fournit une option de conservation des données de contexte d’un type quelconque, inchangé, pour une utilisation dans un rappel.</span><span class="sxs-lookup"><span data-stu-id="7651f-256">Provides an option for preserving context data of any type, unchanged, for use in a callback.</span></span>
+      type:
+      - office.Office.AsyncContextOptions
+    - id: callback
+      description: <span data-ttu-id="7651f-257">Facultatif.</span><span class="sxs-lookup"><span data-stu-id="7651f-257">Optional.</span></span> <span data-ttu-id="7651f-258">Une fonction qui est appelée quand le rappel retourné, dont le seul paramètre est de type[Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.</span><span class="sxs-lookup"><span data-stu-id="7651f-258">A function that is invoked when the callback returns, whose only parameter is of type[Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.</span></span> <span data-ttu-id="7651f-259">Le `value` propriété du résultat est un tableau contenant un ou plusieurs objets JavaScript spécifiant la mise en forme de leurs cellules correspondants.</span><span class="sxs-lookup"><span data-stu-id="7651f-259">The `value` property of the result is an array containing one or more JavaScript objects specifying the formatting of their corresponding cells.</span></span>
+      type:
+      - '(result: AsyncResult< ({ cells: any, format: any})[]>) => void'
+- uid: office.Office.TableBinding.hasHeaders
+  summary: <span data-ttu-id="7651f-260">True si le tableau comporte des en-têtes ; Sinon, false.</span><span class="sxs-lookup"><span data-stu-id="7651f-260">True, if the table has headers; otherwise false.</span></span>
+  remarks: "<span data-ttu-id=\"7651f-261\">**Informations de prise en charge**</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-261\">**Support details**</span></span>\n\n<span data-ttu-id=\"7651f-p120\">Un Y majuscule dans la matrice suivante indique que cette propriété est prise en charge dans l'application hôte Office correspondante. Une cellule vide indique que l'application hôte Office ne prend pas en charge cette propriété.</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-p120\">A capital Y in the following matrix indicates that this property is supported in the corresponding Office host application. An empty cell indicates that the Office host application doesn't support this property.</span></span>\n\n<span data-ttu-id=\"7651f-264\">Pour plus d’informations sur les exigences des applications et le serveur hôte Office, voir [Configuration requise pour exécuter des compléments Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-264\">For more information about Office host application and server requirements, see [Requirements for running Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span></span>\n\n<span data-ttu-id=\"7651f-265\">*Hôtes pris en charge par la plateforme*</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-265\">*Supported hosts, by platform*</span></span> <table> <tr><th> </th><th> <span data-ttu-id=\"7651f-266\">Office pour Bureau Windows</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-266\">Office for Windows desktop</span></span> </th><th> <span data-ttu-id=\"7651f-267\">Office Online (dans un navigateur)</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-267\">Office Online (in browser)</span></span> </th><th> <span data-ttu-id=\"7651f-268\">Office pour iPad</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-268\">Office for iPad</span></span> </th></tr> <tr><td><span data-ttu-id=\"7651f-269\"><strong>Access</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-269\"><strong> Access </strong></span></span></td><td> </td><td> <span data-ttu-id=\"7651f-270\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-270\">Y</span></span> </td><td> </td></tr> <tr><td><span data-ttu-id=\"7651f-271\"><strong>Excel</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-271\"><strong> Excel </strong></span></span></td><td> <span data-ttu-id=\"7651f-272\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-272\">Y</span></span> </td><td> <span data-ttu-id=\"7651f-273\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-273\">Y</span></span> </td><td> <span data-ttu-id=\"7651f-274\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-274\">Y</span></span> </td></tr> <tr><td><span data-ttu-id=\"7651f-275\"><strong>Word</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-275\"><strong> Word </strong></span></span></td><td> <span data-ttu-id=\"7651f-276\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-276\">Y</span></span> </td><td> <span data-ttu-id=\"7651f-277\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-277\">Y</span></span> </td><td> <span data-ttu-id=\"7651f-278\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-278\">Y</span></span> </td></tr> </table>\n#### <a name=\"examples\"></a><span data-ttu-id=\"7651f-279\">Exemples</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-279\">Examples</span></span>\n\n```javascript\nfunction showBindingHasHeaders() {\n    Office.context.document.bindings.getByIdAsync(\"myBinding\", function (asyncResult) {\n        write(\"Binding has headers: \" + asyncResult.value.hasHeaders);\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+  name: hasHeaders
+  fullName: office.Office.TableBinding.hasHeaders
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'hasHeaders: boolean;'
+    return:
+      type:
+      - boolean
+- uid: office.Office.TableBinding.rowCount
+  summary: <span data-ttu-id="7651f-280">Obtient le nombre de lignes dans l’objet TableBinding, en tant que valeur entière.</span><span class="sxs-lookup"><span data-stu-id="7651f-280">Gets the number of rows in the TableBinding, as an integer value.</span></span>
+  remarks: "<span data-ttu-id=\"7651f-281\">Lorsque vous insérez un tableau vide en sélectionnant une seule ligne dans Excel 2013 et Excel Online (à l’aide de tableau sous l’onglet Insertion), les deux applications hôtes Office qui créent une seule ligne d’en-têtes suivis d’une seule ligne vide.</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-281\">When you insert an empty table by selecting a single row in Excel 2013 and Excel Online (using Table on the Insert tab), both Office host applications create a single row of headers followed by a single blank row.</span></span> <span data-ttu-id=\"7651f-282\">Toutefois, si script votre complément crée une liaison pour ce récemment ajoutés table (par exemple, à l’aide de [Office.Bindings](xref:office.Office.Bindings)<!-- -->.addFromSelectionAsync méthode), puis vérifier la valeur diffère de la propriété rowCount, la valeur renvoyée selon si la feuille de calcul est ouvert dans Excel 2013 ou Excel en ligne.</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-282\">However, if your add-in's script creates a binding for this newly inserted table (for example, by using the [Office.Bindings](xref:office.Office.Bindings)<!-- -->.addFromSelectionAsync method), and then checks the value of the rowCount property, the value returned will differ depending whether the spreadsheet is open in Excel 2013 or Excel Online.</span></span>\n\n- <span data-ttu-id=\"7651f-283\">Dans Excel sur le bureau, rowCount retourne 0 (la ligne vide qui suit les en-têtes n’est pas comptabilisée).</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-283\">In Excel on the desktop, rowCount will return 0 (the blank row following the headers is not counted).</span></span>\n\n- <span data-ttu-id=\"7651f-284\">Dans Excel Online, rowCount retourne 1 (la ligne vide qui suit les en-têtes est comptabilisée).</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-284\">In Excel Online, rowCount will return 1 (the blank row following the headers is counted).</span></span>\n\n<span data-ttu-id=\"7651f-285\">Vous pouvez contourner cette différence dans votre script en vérifiant si rowCount == 1 et, si tel est le cas, en vérifiant si la ligne contient toutes les chaînes vides.</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-285\">You can work around this difference in your script by checking if rowCount == 1, and if so, then checking if the row contains all empty strings.</span></span>\n\n<span data-ttu-id=\"7651f-286\">Dans le contenu des compléments pour l’accès, pour des raisons de performances la propriété rowCount renvoie toujours -1.</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-286\">In content add-ins for Access, for performance reasons the rowCount property always returns -1.</span></span>\n\n<span data-ttu-id=\"7651f-287\">**Informations de prise en charge**</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-287\">**Support details**</span></span>\n\n<span data-ttu-id=\"7651f-p122\">Un Y majuscule dans la matrice suivante indique que cette propriété est prise en charge dans l'application hôte Office correspondante. Une cellule vide indique que l'application hôte Office ne prend pas en charge cette propriété.</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-p122\">A capital Y in the following matrix indicates that this property is supported in the corresponding Office host application. An empty cell indicates that the Office host application doesn't support this property.</span></span>\n\n<span data-ttu-id=\"7651f-290\">Pour plus d’informations sur les exigences des applications et le serveur hôte Office, voir [Configuration requise pour exécuter des compléments Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-290\">For more information about Office host application and server requirements, see [Requirements for running Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span></span>\n\n<span data-ttu-id=\"7651f-291\">*Hôtes pris en charge par la plateforme*</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-291\">*Supported hosts, by platform*</span></span> <table> <tr><th> </th><th> <span data-ttu-id=\"7651f-292\">Office pour Bureau Windows</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-292\">Office for Windows desktop</span></span> </th><th> <span data-ttu-id=\"7651f-293\">Office Online (dans un navigateur)</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-293\">Office Online (in browser)</span></span> </th><th> <span data-ttu-id=\"7651f-294\">Office pour iPad</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-294\">Office for iPad</span></span> </th></tr> <tr><td><span data-ttu-id=\"7651f-295\"><strong>Access</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-295\"><strong> Access </strong></span></span></td><td> </td><td> <span data-ttu-id=\"7651f-296\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-296\">Y</span></span> </td><td> </td></tr> <tr><td><span data-ttu-id=\"7651f-297\"><strong>Excel</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-297\"><strong> Excel </strong></span></span></td><td> <span data-ttu-id=\"7651f-298\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-298\">Y</span></span> </td><td> <span data-ttu-id=\"7651f-299\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-299\">Y</span></span> </td><td> <span data-ttu-id=\"7651f-300\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-300\">Y</span></span> </td></tr> <tr><td><span data-ttu-id=\"7651f-301\"><strong>Word</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-301\"><strong> Word </strong></span></span></td><td> <span data-ttu-id=\"7651f-302\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-302\">Y</span></span> </td><td> <span data-ttu-id=\"7651f-303\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-303\">Y</span></span> </td><td> <span data-ttu-id=\"7651f-304\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-304\">Y</span></span> </td></tr> </table>\n#### <a name=\"examples\"></a><span data-ttu-id=\"7651f-305\">Exemples</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-305\">Examples</span></span>\n\n```javascript\nfunction showBindingRowCount() {\n    Office.context.document.bindings.getByIdAsync(\"myBinding\", function (asyncResult) {\n        write(\"Rows: \" + asyncResult.value.rowCount);\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+  name: rowCount
+  fullName: office.Office.TableBinding.rowCount
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'rowCount: number;'
+    return:
+      type:
+      - number
+- uid: office.Office.TableBinding.setFormatsAsync
+  summary: <span data-ttu-id="7651f-306">Définit la mise en forme spécifié d’éléments et des données dans le tableau.</span><span class="sxs-lookup"><span data-stu-id="7651f-306">Sets formatting on specified items and data in the table.</span></span>
+  remarks: "<span data-ttu-id=\"7651f-307\">**Spécification du paramètre cellFormat**</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-307\">**Specifying the cellFormat parameter**</span></span>\n\n<span data-ttu-id=\"7651f-308\">Utilisez le paramètre cellFormat pour définir ou modifier la mise en forme de valeurs, telles que la largeur, hauteur, police, arrière-plan, l’alignement et ainsi de suite.</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-308\">Use the cellFormat parameter to set or change cell formatting values, such as width, height, font, background, alignment, and so on.</span></span> <span data-ttu-id=\"7651f-309\">La valeur que vous passez comme le paramètre cellFormat est un tableau qui contient une liste d’un ou plus JavaScript qui spécifient quelles cellules à cibler les objets (`cells:`) et les formats (`format:`) pour leur appliquer.</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-309\">The value you pass as the cellFormat parameter is an array that contains a list of one or more JavaScript objects that specify which cells to target (`cells:`) and the formats (`format:`) to apply to them.</span></span>\n\n<span data-ttu-id=\"7651f-310\">Chaque objet JavaScript dans le tableau cellFormat comprend ce formulaire :`{cells:{ cell_range }, format:{ format_definition }}`</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-310\">Each JavaScript object in the cellFormat array has this form: `{cells:{ cell_range }, format:{ format_definition }}`</span></span>\n\n<span data-ttu-id=\"7651f-311\">Le `cells:` propriété spécifie la plage de format à l’aide d’une des valeurs suivantes :</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-311\">The `cells:` property specifies the range you want format using one of the following values:</span></span>\n\n<span data-ttu-id=\"7651f-312\">**Plages prises en charge dans la propriété cells**</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-312\">**Supported ranges in cells property**</span></span>\n\n<table> <tr> <th><span data-ttu-id=\"7651f-313\">Paramètres de la plage de cellules</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-313\">cells range settings</span></span></th> <th><span data-ttu-id=\"7651f-314\">Description</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-314\">Description</span></span></th> </tr> <tr> <td><span data-ttu-id=\"7651f-315\">{ligne : n}</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-315\">{row: n}</span></span></td> <td><span data-ttu-id=\"7651f-316\">Spécifie la plage qui est la nième ligne de données dans le tableau de base zéro.</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-316\">Specifies the range that is the zero-based nth row of data in the table.</span></span></td> </tr> <tr> <td><span data-ttu-id=\"7651f-317\">{colonne : n}</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-317\">{column: n}</span></span></td> <td><span data-ttu-id=\"7651f-318\">Spécifie la plage qui est la nième colonne de données dans le tableau en partant de zéro.</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-318\">Specifies the range that is the zero-based nth column of data in the table.</span></span></td> </tr> <tr> <td><span data-ttu-id=\"7651f-319\">{ligne : i, colonne : j}</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-319\">{row: i, column: j}</span></span></td> <td><span data-ttu-id=\"7651f-320\">Spécifie la cellule qui est la ligne d’énième j colonne du tableau.</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-320\">Specifies the single cell that is the ith row and jth column of the table.</span></span></td> </tr> <tr> <td><span data-ttu-id=\"7651f-321\">Office.Table.All</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-321\">Office.Table.All</span></span></td> <td><span data-ttu-id=\"7651f-322\">Spécifie le tableau entier, y compris les totaux, les données et les en-têtes de colonne (le cas échéant).</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-322\">Specifies the entire table, including column headers, data, and totals (if any).</span></span></td> </tr> <tr> <td><span data-ttu-id=\"7651f-323\">Office.Table.Data</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-323\">Office.Table.Data</span></span></td> <td><span data-ttu-id=\"7651f-324\">Spécifie uniquement les données du tableau (sans les en-têtes ni les totaux).</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-324\">Specifies only the data in the table (no headers and totals).</span></span></td> </tr> <tr> <td><span data-ttu-id=\"7651f-325\">Office.Table.Headers</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-325\">Office.Table.Headers</span></span></td> <td><span data-ttu-id=\"7651f-326\">Spécifie uniquement la ligne d’en-tête.</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-326\">Specifies only the header row.</span></span></td> </tr> </table>\n\n<span data-ttu-id=\"7651f-327\">Le `format:` propriété spécifie la zone de valeurs qui correspondent à un sous-ensemble des paramètres disponibles dans la boîte de dialogue Format de cellule dans Excel (avec le bouton droit &gt; Format de cellule ou à la maison &gt; Format &gt; Format de cellule).</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-327\">The `format:` property specifies values that correspond to a subset of the settings available in the Format Cells dialog box in Excel (Right-click &gt; Format Cells or Home &gt; Format &gt; Format Cells).</span></span>\n\n<span data-ttu-id=\"7651f-328\">Vous spécifiez la valeur de la `format:` propriété comme une liste d’un ou plusieurs nom de la propriété - paires de valeur dans un littéral d’objet JavaScript.</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-328\">You specify the value of the `format:` property as a list of one or more property name - value pairs in a JavaScript object literal.</span></span> <span data-ttu-id=\"7651f-329\">Le nom de propriété spécifie le nom de la propriété à définir la mise en forme et la valeur spécifie la valeur de la propriété.</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-329\">The property name specifies the name of the formatting property to set, and value specifies the property value.</span></span> <span data-ttu-id=\"7651f-330\">Vous pouvez spécifier plusieurs valeurs pour un format donné, par exemple à la fois d’une police couleur et la taille.</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-330\">You can specify multiple values for a given format, such as both a font's color and size.</span></span>\n\n<span data-ttu-id=\"7651f-331\">Voici trois `format:` exemples de valeurs de propriété :</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-331\">Here's three `format:` property value examples:</span></span>\n\n`//Set cells: font color to green and size to 15 points.`\n\n`format: {fontColor : \"green\", fontSize : 15}`\n\n`//Set cells: border to dotted blue.`\n\n`format: {borderStyle: \"dotted\", borderColor: \"blue\"}`\n\n`//Set cells: background to red and alignment to centered.`\n\n`format: {backgroundColor: \"red\", alignHorizontal: \"center\"}`\n\n<span data-ttu-id=\"7651f-332\">Vous pouvez spécifier des formats de numérotation en spécifiant le numéro de la mise en forme de chaîne de « code » dans la `numberFormat:` propriété.</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-332\">You can specify number formats by specifying the number formatting \"code\" string in the `numberFormat:` property.</span></span> <span data-ttu-id=\"7651f-333\">Les numéro que vous pouvez spécifier des chaînes de format correspondent à ceux que vous pouvez spécifier dans Excel à l’aide de la catégorie personnalisé sous l’onglet numéro de la boîte de dialogue Format de cellule.</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-333\">The number format strings you can specify correspond to those you can set in Excel using the Custom category on the Number tab of the Format Cells dialog box.</span></span> <span data-ttu-id=\"7651f-334\">Cet exemple montre comment mettre en forme un nombre sous forme de pourcentage à deux décimales :</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-334\">This example shows how to format a number as a percentage with two decimal places:</span></span>\n\n`format: {numberFormat:\"0.00%\"}`\n\n<span data-ttu-id=\"7651f-335\">Pour plus d’informations, voir comment [créer un format numérique personnalisé](https://support.office.com/article/create-or-delete-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4)<!-- -->.</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-335\">For more detail, see how to [Create a custom number format](https://support.office.com/article/create-or-delete-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4)<!-- -->.</span></span>\n\n<span data-ttu-id=\"7651f-336\">Pour définir la mise en forme tables lors de l’écriture de données, utilisez les paramètres facultatifs tableOptions et cellFormat de le `Document.setSelectedDataAsync` ou `TableBinding.setDataAsync` méthodes.</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-336\">To set formatting on tables when writing data, use the tableOptions and cellFormat optional parameters of the `Document.setSelectedDataAsync` or `TableBinding.setDataAsync` methods.</span></span>\n\n<span data-ttu-id=\"7651f-337\">Définition de la mise en forme avec les paramètres facultatifs de la `Document.setSelectedDataAsync` et `TableBinding.setDataAsync` méthodes fonctionne uniquement pour définir la mise en forme lors de l’écriture de temps de données de la première.</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-337\">Setting formatting with the optional parameters of the `Document.setSelectedDataAsync` and `TableBinding.setDataAsync` methods only works to set formatting when writing data the first time.</span></span> <span data-ttu-id=\"7651f-338\">Pour apporter des modifications de mise en forme après l’écriture de données, utilisez les méthodes suivantes :</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-338\">To make formatting changes after writing data, use the following methods:</span></span>\n\n- <span data-ttu-id=\"7651f-339\">Pour mettre à jour la mise en forme de cellule, telles que la couleur de police et le style, utilisez la `TableBinding.setFormatsAsync` méthode (cette méthode).</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-339\">To update cell formatting, such as font color and style, use the `TableBinding.setFormatsAsync` method (this method).</span></span>\n\n- <span data-ttu-id=\"7651f-340\">Pour mettre à jour les options de table, comme les lignes et les boutons de filtre, utilisez la `TableBinding.setTableOptions` méthode.</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-340\">To update table options, such as banded rows and filter buttons, use the `TableBinding.setTableOptions` method.</span></span>\n\n- <span data-ttu-id=\"7651f-341\">Pour effacer la mise en forme, utilisez la `TableBinding.clearFormats` méthode.</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-341\">To clear formatting, use the `TableBinding.clearFormats` method.</span></span>\n\n<span data-ttu-id=\"7651f-342\">Pour plus d’informations et d’exemples, voir [la mise en forme des tableaux dans des compléments pour Excel](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-tables#format-a-table)<!-- -->.</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-342\">For more details and examples, see [How to format tables in add-ins for Excel](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-tables#format-a-table)<!-- -->.</span></span>\n\n<span data-ttu-id=\"7651f-343\">**Informations de prise en charge**</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-343\">**Support details**</span></span>\n\n<span data-ttu-id=\"7651f-p127\">Un Y majuscule dans la matrice suivante indique que cette méthode est prise en charge dans l'application hôte Office correspondante. Une cellule vide indique que l'application hôte Office ne prend pas en charge cette méthode.</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-p127\">A capital Y in the following matrix indicates that this method is supported in the corresponding Office host application. An empty cell indicates that the Office host application doesn't support this method.</span></span>\n\n<span data-ttu-id=\"7651f-346\">Pour plus d’informations sur les exigences des applications et le serveur hôte Office, voir [Configuration requise pour exécuter des compléments Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-346\">For more information about Office host application and server requirements, see [Requirements for running Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span></span>\n\n<span data-ttu-id=\"7651f-347\">*Hôtes pris en charge par la plateforme*</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-347\">*Supported hosts, by platform*</span></span> <table> <tr><th> </th><th> <span data-ttu-id=\"7651f-348\">Office pour Bureau Windows</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-348\">Office for Windows desktop</span></span> </th><th> <span data-ttu-id=\"7651f-349\">Office Online (dans un navigateur)</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-349\">Office Online (in browser)</span></span> </th><th> <span data-ttu-id=\"7651f-350\">Office pour iPad</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-350\">Office for iPad</span></span> </th></tr> <tr><td><span data-ttu-id=\"7651f-351\"><strong>Excel</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-351\"><strong> Excel </strong></span></span></td><td> <span data-ttu-id=\"7651f-352\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-352\">Y</span></span> </td><td> <span data-ttu-id=\"7651f-353\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-353\">Y</span></span> </td><td> <span data-ttu-id=\"7651f-354\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-354\">Y</span></span> </td></tr> </table>\n#### <a name=\"examples\"></a><span data-ttu-id=\"7651f-355\">Exemples</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-355\">Examples</span></span>\n\n```javascript\n// Specifying a single target\n// The following example shows a cellFormat value that sets the font color of the header row to red.\nOffice.select(\"bindings#myBinding\").setFormatsAsync(\n    [{cells: Office.Table.Headers, format: {fontColor: \"red\"}}], \n    function (asyncResult){});\n\n// Specifying multiple targets\n// The setFormatsAsync method can support formatting multiple targets within the bound table in a \n// single function call. To do that, you pass a list of objects in the cellFormat array \n// for each target that you want to format.\n// For example, the following line of code will set the font color of the first row yellow, \n// and the fourth cell in the third row to have a white border and bold text.\nOffice.select(\"bindings#myBinding\").setFormatsAsync(\n    [{cells: {row: 1}, format: {fontColor: \"yellow\"}}, \n        {cells: {row: 3, column: 4}, format: {borderColor: \"white\", fontStyle: \"bold\"}}], \n    function (asyncResult){});\n\n// Additional remarks for Excel Online\n// The number of formatting groups passed to the cellFormat parameter can't exceed 100. \n// A single formatting group consists of a set of formatting applied to a specified range of cells. \n// For example, the following call passes two formatting groups to cellFormat.\nOffice.select(\"bindings#myBinding\").setFormatsAsync(\n    [{cells: {row: 1}, format: {fontColor: \"yellow\"}}, \n        {cells: {row: 3, column: 4}, format: {borderColor: \"white\", fontStyle: \"bold\"}}], \n    function (asyncResult){});\n```"
+  name: setFormatsAsync(cellFormat, options, callback)
+  fullName: office.Office.TableBinding.setFormatsAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'setFormatsAsync(cellFormat: any[], options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<void>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: cellFormat
+      description: <span data-ttu-id="7651f-356">Tableau qui contient un ou plusieurs objets JavaScript qui spécifient les cellules cible et la mise en forme à appliquer à leur.</span><span class="sxs-lookup"><span data-stu-id="7651f-356">An array that contains one or more JavaScript objects that specify which cells to target and the formatting to apply to them.</span></span>
+      type:
+      - any[]
+    - id: options
+      description: <span data-ttu-id="7651f-357">Fournit une option de conservation des données de contexte d’un type quelconque, inchangé, pour une utilisation dans un rappel.</span><span class="sxs-lookup"><span data-stu-id="7651f-357">Provides an option for preserving context data of any type, unchanged, for use in a callback.</span></span>
+      type:
+      - office.Office.AsyncContextOptions
+    - id: callback
+      description: <span data-ttu-id="7651f-358">Facultatif.</span><span class="sxs-lookup"><span data-stu-id="7651f-358">Optional.</span></span> <span data-ttu-id="7651f-359">Une fonction qui est appelée quand le rappel retourné, dont le seul paramètre est de type[Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.</span><span class="sxs-lookup"><span data-stu-id="7651f-359">A function that is invoked when the callback returns, whose only parameter is of type[Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.</span></span>
+      type:
+      - '(result: AsyncResult<void>) => void'
+- uid: office.Office.TableBinding.setTableOptionsAsync
+  summary: <span data-ttu-id="7651f-360">Met à jour les options de mise en forme de tableau sur le tableau lié.</span><span class="sxs-lookup"><span data-stu-id="7651f-360">Updates table formatting options on the bound table.</span></span>
+  remarks: "<table><tr><td><span data-ttu-id=\"7651f-361\">Hôtes</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-361\">Hosts</span></span></td><td><span data-ttu-id=\"7651f-362\">Excel</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-362\">Excel</span></span></td></tr>\n\n<tr><td><span data-ttu-id=\"7651f-363\">Ensembles de ressources</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-363\">Requirement Sets</span></span></td><td><span data-ttu-id=\"7651f-364\">Pas dans un ensemble</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-364\">Not in a set</span></span></td></tr></table>\n\n<span data-ttu-id=\"7651f-365\">Dans la fonction de rappel passée à la méthode goToByIdAsync, vous pouvez utiliser les propriétés de l’objet AsyncResult pour renvoyer les informations suivantes.</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-365\">In the callback function passed to the goToByIdAsync method, you can use the properties of the AsyncResult object to return the following information.</span></span>\n\n<table> <tr> <th><span data-ttu-id=\"7651f-366\">Propriété</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-366\">Property</span></span></th> <th><span data-ttu-id=\"7651f-367\">Utiliser pour...</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-367\">Use to...</span></span></th> </tr> <tr> <td><span data-ttu-id=\"7651f-368\">AsyncResult.value</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-368\">AsyncResult.value</span></span></td> <td><span data-ttu-id=\"7651f-369\">Renvoie toujours undefined car il n’existe aucun objet à récupérer lors de la définition des formats ou aucune donnée.</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-369\">Always returns undefined because there is no data or object to retrieve when setting formats.</span></span></td> </tr> <tr> <td><span data-ttu-id=\"7651f-370\">AsyncResult.status</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-370\">AsyncResult.status</span></span></td> <td><span data-ttu-id=\"7651f-371\">Déterminer si l’opération a réussi ou échoué.</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-371\">Determine the success or failure of the operation.</span></span></td> </tr> <tr> <td><span data-ttu-id=\"7651f-372\">AsyncResult.error</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-372\">AsyncResult.error</span></span></td> <td><span data-ttu-id=\"7651f-373\">Accéder à un objet Error fournissant des informations sur l’erreur en cas d’échec de l’opération.</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-373\">Access an Error object that provides error information if the operation failed.</span></span></td> </tr> <tr> <td><span data-ttu-id=\"7651f-374\">AsyncResult.asyncContext</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-374\">AsyncResult.asyncContext</span></span></td> <td><span data-ttu-id=\"7651f-375\">Élément de tout type défini par l’utilisateur qui est renvoyé dans l’objet AsyncResult sans être modifié.</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-375\">A user-defined item of any type that is returned in the AsyncResult object without being altered.</span></span></td> </tr> </table>\n\n<span data-ttu-id=\"7651f-376\">**Informations de prise en charge**</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-376\">**Support details**</span></span>\n\n<span data-ttu-id=\"7651f-p129\">Un Y majuscule dans la matrice suivante indique que cette méthode est prise en charge dans l'application hôte Office correspondante. Une cellule vide indique que l'application hôte Office ne prend pas en charge cette méthode.</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-p129\">A capital Y in the following matrix indicates that this method is supported in the corresponding Office host application. An empty cell indicates that the Office host application doesn't support this method.</span></span>\n\n<span data-ttu-id=\"7651f-379\">Pour plus d’informations sur les exigences des applications et le serveur hôte Office, voir [Configuration requise pour exécuter des compléments Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-379\">For more information about Office host application and server requirements, see [Requirements for running Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span></span>\n\n<span data-ttu-id=\"7651f-380\">*Hôtes pris en charge par la plateforme*</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-380\">*Supported hosts, by platform*</span></span> <table> <tr><th> </th><th> <span data-ttu-id=\"7651f-381\">Office pour Bureau Windows</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-381\">Office for Windows desktop</span></span> </th><th> <span data-ttu-id=\"7651f-382\">Office Online (dans un navigateur)</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-382\">Office Online (in browser)</span></span> </th><th> <span data-ttu-id=\"7651f-383\">Office pour iPad</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-383\">Office for iPad</span></span> </th></tr> <tr><td><span data-ttu-id=\"7651f-384\"><strong>Excel</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-384\"><strong> Excel </strong></span></span></td><td> <span data-ttu-id=\"7651f-385\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-385\">Y</span></span> </td><td> <span data-ttu-id=\"7651f-386\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-386\">Y</span></span> </td><td> <span data-ttu-id=\"7651f-387\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-387\">Y</span></span> </td></tr> </table>\n#### <a name=\"examples\"></a><span data-ttu-id=\"7651f-388\">Exemples</span><span class=\"sxs-lookup\"><span data-stu-id=\"7651f-388\">Examples</span></span>\n\n```javascript\n// The following example shows how to:\n// 1. Create an object literal that specifies the table formatting options to update on the bound table.\n// 2. Call setTableOptions on a previously bound table (with an id of myBinding) passing the object\n//    with formatting setting as the tableOptions parameter.\nfunction updateTableFormatting(){\n    var tableOptions = {bandedRows: true, filterButton: false, style: \"TableStyleMedium3\"}; \n\n    Office.select(\"bindings#myBinding\").setTableOptionsAsync(tableOptions, function(asyncResult){});\n}\n```"
+  name: setTableOptionsAsync(tableOptions, options, callback)
+  fullName: office.Office.TableBinding.setTableOptionsAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'setTableOptionsAsync(tableOptions: any, options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<void>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: tableOptions
+      description: <span data-ttu-id="7651f-389">Un littéral d’objet contenant une liste de paires nom-valeur de propriété qui définissent les options de table à appliquer.</span><span class="sxs-lookup"><span data-stu-id="7651f-389">An object literal containing a list of property name-value pairs that define the table options to apply.</span></span>
+      type:
+      - any
+    - id: options
+      description: <span data-ttu-id="7651f-390">Fournit une option de conservation des données de contexte d’un type quelconque, inchangé, pour une utilisation dans un rappel.</span><span class="sxs-lookup"><span data-stu-id="7651f-390">Provides an option for preserving context data of any type, unchanged, for use in a callback.</span></span>
+      type:
+      - office.Office.AsyncContextOptions
+    - id: callback
+      description: <span data-ttu-id="7651f-391">Facultatif.</span><span class="sxs-lookup"><span data-stu-id="7651f-391">Optional.</span></span> <span data-ttu-id="7651f-392">Une fonction qui est appelée quand le rappel retourné, dont le seul paramètre est de type[Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.</span><span class="sxs-lookup"><span data-stu-id="7651f-392">A function that is invoked when the callback returns, whose only parameter is of type[Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.</span></span>
+      type:
+      - '(result: AsyncResult<void>) => void'

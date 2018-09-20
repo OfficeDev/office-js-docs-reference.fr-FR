@@ -1,0 +1,22 @@
+# <a name="outlook-add-in-api-requirement-set-14"></a><span data-ttu-id="56061-101">Ensemble de conditions requises de l’API du complément Outlook 1.4</span><span class="sxs-lookup"><span data-stu-id="56061-101">Outlook add-in API requirement set 1.4</span></span>
+
+<span data-ttu-id="56061-102">Le sous-ensemble de l’API pour le complément Outlook de l’interface API JavaScript pour Office comprend des objets, des méthodes, des propriétés et des événements à utiliser dans un complément Outlook.</span><span class="sxs-lookup"><span data-stu-id="56061-102">The Outlook add-in API subset of the JavaScript API for Office includes objects, methods, properties and events that you can use in an Outlook add-in.</span></span>
+
+> [!NOTE]
+> <span data-ttu-id="56061-103">Cette documentation est une [exigence](/javascript/office/requirement-sets/outlook-api-requirement-sets) autre que le dernier jeu d’exigence.</span><span class="sxs-lookup"><span data-stu-id="56061-103">This documentation is for a [requirement set](/javascript/office/requirement-sets/outlook-api-requirement-sets) other than the latest requirement set.</span></span>
+
+## <a name="whats-new-in-14"></a><span data-ttu-id="56061-104">Nouveautés de la version 1.4</span><span class="sxs-lookup"><span data-stu-id="56061-104">What's new in 1.4?</span></span>
+
+<span data-ttu-id="56061-p101">L’ensemble de conditions requises de la version 1.4 comprend toutes les fonctionnalités de l’[ensemble de conditions requises de la version 1.3](../requirement-set-1.3/outlook-requirement-set-1.3.md). Il comprend en plus l’accès à l’espace de noms `Office.ui`.</span><span class="sxs-lookup"><span data-stu-id="56061-p101">Requirement set 1.4 includes all of the features of [Requirement set 1.3](../requirement-set-1.3/outlook-requirement-set-1.3.md). It added access to the `Office.ui` namespace.</span></span>
+
+### <a name="change-log"></a><span data-ttu-id="56061-107">Journal des modifications</span><span class="sxs-lookup"><span data-stu-id="56061-107">Change log</span></span>
+
+- <span data-ttu-id="56061-108">Ajout de la méthode [Office.context.ui.displayDialogAsync](/javascript/api/office/office.ui#displaydialogasync-startaddress--options--callback-) : Affiche une boîte de dialogue dans un hôte Office.</span><span class="sxs-lookup"><span data-stu-id="56061-108">Added [Office.context.ui.displayDialogAsync](/javascript/api/office/office.ui#displaydialogasync-startaddress--options--callback-): Displays a dialog box in an Office host.</span></span>
+- <span data-ttu-id="56061-109">Ajout de la méthode [Office.context.ui.messageParent](/javascript/api/office/office.ui#messageparent-messageobject-) : Remet un message de la part de la boîte de dialogue à sa page parent/d’ouverture.</span><span class="sxs-lookup"><span data-stu-id="56061-109">Added [Office.context.ui.messageParent](/javascript/api/office/office.ui#messageparent-messageobject-): Delivers a message from the dialog box to its parent/opener page.</span></span>
+- <span data-ttu-id="56061-110">Objet [dialogue](/javascript/api/office/office.dialog) ajouté : l’objet qui est renvoyée lorsque le [`displayDialogAsync`](/javascript/api/office/office.ui#displaydialogasync-startaddress--options--callback-) méthode est appelée.</span><span class="sxs-lookup"><span data-stu-id="56061-110">Added [Dialog](/javascript/api/office/office.dialog) object: The object that is returned when the [`displayDialogAsync`](/javascript/api/office/office.ui#displaydialogasync-startaddress--options--callback-) method is called.</span></span>
+
+## <a name="see-also"></a><span data-ttu-id="56061-111">Voir aussi</span><span class="sxs-lookup"><span data-stu-id="56061-111">See also</span></span>
+
+- [<span data-ttu-id="56061-112">Compléments Outlook</span><span class="sxs-lookup"><span data-stu-id="56061-112">Outlook add-ins</span></span>](https://docs.microsoft.com/outlook/add-ins/)
+- [<span data-ttu-id="56061-113">Exemples de code pour les compléments Outlook</span><span class="sxs-lookup"><span data-stu-id="56061-113">Outlook add-in code samples</span></span>](https://developer.microsoft.com/outlook/gallery/?filterBy=Outlook,Samples,Add-ins)
+- [<span data-ttu-id="56061-114">Prise en main</span><span class="sxs-lookup"><span data-stu-id="56061-114">Get started</span></span>](https://docs.microsoft.com/outlook/add-ins/quick-start)
