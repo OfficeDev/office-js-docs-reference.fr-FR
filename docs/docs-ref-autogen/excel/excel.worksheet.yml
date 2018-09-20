@@ -1,0 +1,653 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: 41bea1d7d038468f8f23a3b11b411b235c26bf53
+ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 09/20/2018
+ms.locfileid: "24042885"
+items:
+- uid: excel.Excel.Worksheet
+  summary: >-
+    Une feuille de calcul Excel est une grille de cellules. Elle peut contenir des données, des tableaux, des graphiques, etc.
+
+
+    \[[Du jeu d’API : ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  remarks: Notre [guide de procédure sur l’utilisation des feuilles de calcul](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-worksheets) a détaillé des exemples de code et des procédures pas à pas.
+  name: Excel.Worksheet
+  fullName: excel.Excel.Worksheet
+  langs:
+  - typeScript
+  type: class
+  extends:
+  - OfficeExtension.ClientObject
+  package: excel
+  children:
+  - excel.Excel.Worksheet.activate
+  - excel.Excel.Worksheet.calculate
+  - excel.Excel.Worksheet.charts
+  - excel.Excel.Worksheet.copy
+  - excel.Excel.Worksheet.delete
+  - excel.Excel.Worksheet.freezePanes
+  - excel.Excel.Worksheet.getCell
+  - excel.Excel.Worksheet.getNext
+  - excel.Excel.Worksheet.getNextOrNullObject
+  - excel.Excel.Worksheet.getPrevious
+  - excel.Excel.Worksheet.getPreviousOrNullObject
+  - excel.Excel.Worksheet.getRange
+  - excel.Excel.Worksheet.getRangeByIndexes
+  - excel.Excel.Worksheet.getUsedRange
+  - excel.Excel.Worksheet.getUsedRangeOrNullObject
+  - excel.Excel.Worksheet.id
+  - excel.Excel.Worksheet.load
+  - excel.Excel.Worksheet.name
+  - excel.Excel.Worksheet.names
+  - excel.Excel.Worksheet.onActivated
+  - excel.Excel.Worksheet.onChanged
+  - excel.Excel.Worksheet.onDeactivated
+  - excel.Excel.Worksheet.onSelectionChanged
+  - excel.Excel.Worksheet.pivotTables
+  - excel.Excel.Worksheet.position
+  - excel.Excel.Worksheet.protection
+  - excel.Excel.Worksheet.standardHeight
+  - excel.Excel.Worksheet.standardWidth
+  - excel.Excel.Worksheet.tabColor
+  - excel.Excel.Worksheet.tables
+  - excel.Excel.Worksheet.toJSON
+  - excel.Excel.Worksheet.visibility
+- uid: excel.Excel.Worksheet.activate
+  summary: >-
+    Active la feuille de calcul dans l’interface utilisateur Excel.
+
+
+    \[[Du jeu d’API : ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: activate()
+  fullName: excel.Excel.Worksheet.activate
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'activate(): void;'
+    return:
+      type:
+      - void
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nExcel.run(function (ctx) { \n    var wSheetName = 'Sheet1';\n    var worksheet = ctx.workbook.worksheets.getItem(wSheetName);\n    worksheet.activate();\n    return ctx.sync(); \n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- uid: excel.Excel.Worksheet.calculate
+  summary: >-
+    Calcule toutes les cellules d’une feuille de calcul.
+
+
+    \[[Du jeu d’API : ExcelApi 1.6](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: calculate(markAllDirty)
+  fullName: excel.Excel.Worksheet.calculate
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'calculate(markAllDirty: boolean): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: markAllDirty
+      description: True pour marquer tout comme ayant été modifié.
+      type:
+      - boolean
+- uid: excel.Excel.Worksheet.charts
+  summary: >-
+    Renvoie une collection de graphiques qui font partie de la feuille de calcul. En lecture seule.
+
+
+    \[[Du jeu d’API : ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: charts
+  fullName: excel.Excel.Worksheet.charts
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly charts: Excel.ChartCollection;'
+    return:
+      type:
+      - excel.Excel.ChartCollection
+- uid: excel.Excel.Worksheet.copy
+  summary: >-
+    Copier une feuille de calcul et les placer à la position spécifiée. Renvoie la feuille copiée.
+
+
+    \[[Du jeu d’API : ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: copy(positionType, relativeTo)
+  fullName: excel.Excel.Worksheet.copy
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'copy(positionType?: Excel.WorksheetPositionType, relativeTo?: Excel.Worksheet): Excel.Worksheet;'
+    return:
+      type:
+      - excel.Excel.Worksheet
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\nawait Excel.run(async (context) => {\n\n    let myWorkbook = context.workbook;\n    let sampleSheet = myWorkbook.worksheets.getActiveWorksheet();\n    let copiedSheet = sampleSheet.copy(\"End\")\n\n    sampleSheet.load(\"name\");\n    copiedSheet.load(\"name\");\n\n    await context.sync();\n\n    console.log(\"'\" + sampleSheet.name + \"' was copied to '\" + copiedSheet.name + \"'\")\n});\n```"
+    parameters:
+    - id: positionType
+      description: Facultatif.
+      type:
+      - excel.Excel.WorksheetPositionType
+    - id: relativeTo
+      description: Facultatif.
+      type:
+      - excel.Excel.Worksheet
+- uid: excel.Excel.Worksheet.delete
+  summary: >-
+    Supprime la feuille de calcul du classeur.
+
+
+    \[[Du jeu d’API : ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: delete()
+  fullName: excel.Excel.Worksheet.delete
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'delete(): void;'
+    return:
+      type:
+      - void
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nExcel.run(function (ctx) { \n    var wSheetName = 'Sheet1';\n    var worksheet = ctx.workbook.worksheets.getItem(wSheetName);\n    worksheet.delete();\n    return ctx.sync(); \n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- uid: excel.Excel.Worksheet.freezePanes
+  summary: >-
+    Obtient un objet qui peut être utilisé pour manipuler les volets figés sur la feuille de calcul. En lecture seule.
+
+
+    \[[Du jeu d’API : ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: freezePanes
+  fullName: excel.Excel.Worksheet.freezePanes
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly freezePanes: Excel.WorksheetFreezePanes;'
+    return:
+      type:
+      - excel.Excel.WorksheetFreezePanes
+- uid: excel.Excel.Worksheet.getCell
+  summary: >-
+    Renvoie l’objet de plage qui contient une cellule donnée sur la base des numéros de ligne et de colonne. La cellule peut se trouver en dehors des limites de ses plages parent, pour peu qu’elle reste dans la grille de la feuille de calcul.
+
+
+    \[[Du jeu d’API : ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: getCell(row, column)
+  fullName: excel.Excel.Worksheet.getCell
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getCell(row: number, column: number): Excel.Range;'
+    return:
+      type:
+      - excel.Excel.Range
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nExcel.run(function (ctx) { \n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"A1:F8\";\n    var worksheet = ctx.workbook.worksheets.getItem(sheetName);\n    var cell = worksheet.getCell(0,0);\n    cell.load('address');\n    return ctx.sync().then(function() {\n        console.log(cell.address);\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+    parameters:
+    - id: row
+      description: Numéro de ligne de la cellule à récupérer. Avec indice zéro.
+      type:
+      - number
+    - id: column
+      description: Numéro de colonne de la cellule à récupérer. Avec indice zéro.
+      type:
+      - number
+- uid: excel.Excel.Worksheet.getNext
+  summary: >-
+    Obtient la feuille de calcul qui suit celle-ci. Si aucune feuille de calcul ne suit celle-ci, cette méthode génère une erreur.
+
+
+    \[[Du jeu d’API : ExcelApi 1,5](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: getNext(visibleOnly)
+  fullName: excel.Excel.Worksheet.getNext
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getNext(visibleOnly?: boolean): Excel.Worksheet;'
+    return:
+      type:
+      - excel.Excel.Worksheet
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheets = context.workbook.worksheets;\n\n    // We don't want to include the default worksheet that was created\n    // when the workbook was created, so our \"firstSheet\" will be the one\n    // after the literal first. Note chaining of navigation methods.\n    const firstSheet = sheets.getFirst().getNext();\n    const lastSheet = sheets.getLast();\n    const firstTaxRateRange = firstSheet.getRange(\"B2\");\n    const lastTaxRateRange = lastSheet.getRange(\"B2\");\n\n    firstSheet.load(\"name\");\n    lastSheet.load(\"name\");\n    firstTaxRateRange.load(\"text\");\n    lastTaxRateRange.load(\"text\");\n\n    await context.sync();\n\n    let firstYear = firstSheet.name.substr(5, 4);\n    let lastYear = lastSheet.name.substr(5, 4);\n    OfficeHelpers.UI.notify(`Tax Rate change from ${firstYear} to ${lastYear}`, `Tax rate for ${firstYear}: ${firstTaxRateRange.text[0][0]}\\nTax rate for ${lastYear}: ${lastTaxRateRange.text[0][0]}`)\n\n    await context.sync();\n});\n```"
+    parameters:
+    - id: visibleOnly
+      description: Facultatif. Si la valeur est True, prend en compte uniquement les feuilles de calcul visibles et ignore les feuilles de calcul masquées.
+      type:
+      - boolean
+- uid: excel.Excel.Worksheet.getNextOrNullObject
+  summary: >-
+    Obtient la feuille de calcul qui suit celle-ci. Si aucune feuille de calcul ne suit celle-ci, cette méthode renvoie un objet null.
+
+
+    \[[Du jeu d’API : ExcelApi 1,5](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: getNextOrNullObject(visibleOnly)
+  fullName: excel.Excel.Worksheet.getNextOrNullObject
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getNextOrNullObject(visibleOnly?: boolean): Excel.Worksheet;'
+    return:
+      type:
+      - excel.Excel.Worksheet
+      description: ''
+    parameters:
+    - id: visibleOnly
+      description: Facultatif. Si la valeur est True, prend en compte uniquement les feuilles de calcul visibles et ignore les feuilles de calcul masquées.
+      type:
+      - boolean
+- uid: excel.Excel.Worksheet.getPrevious
+  summary: >-
+    Obtient la feuille de calcul qui précède celle-ci. Si aucune feuille de calcul ne précède celle-ci, cette méthode génère une erreur.
+
+
+    \[[Du jeu d’API : ExcelApi 1,5](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: getPrevious(visibleOnly)
+  fullName: excel.Excel.Worksheet.getPrevious
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getPrevious(visibleOnly?: boolean): Excel.Worksheet;'
+    return:
+      type:
+      - excel.Excel.Worksheet
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheets = context.workbook.worksheets;\n    const currentSheet = sheets.getActiveWorksheet();\n    const previousYearSheet = currentSheet.getPrevious();\n    const currentTaxDueRange = currentSheet.getRange(\"C2\");\n    const previousTaxDueRange = previousYearSheet.getRange(\"C2\");\n\n    currentSheet.load(\"name\");\n    previousYearSheet.load(\"name\");\n    currentTaxDueRange.load(\"text\");\n    previousTaxDueRange.load(\"text\");\n\n    await context.sync();\n\n    let currentYear = currentSheet.name.substr(5, 4);\n    let previousYear = previousYearSheet.name.substr(5, 4);\n    OfficeHelpers.UI.notify(\"Two Year Tax Due Comparison\", `Tax due for ${currentYear} was ${currentTaxDueRange.text[0][0]}\\nTax due for ${previousYear} was ${previousTaxDueRange.text[0][0]}`)\n\n    await context.sync();\n});\n```"
+    parameters:
+    - id: visibleOnly
+      description: Facultatif. Si la valeur est True, prend en compte uniquement les feuilles de calcul visibles et ignore les feuilles de calcul masquées.
+      type:
+      - boolean
+- uid: excel.Excel.Worksheet.getPreviousOrNullObject
+  summary: >-
+    Obtient la feuille de calcul qui précède celle-ci. Si aucune feuille de calcul ne précède celle-ci, cette méthode renvoie un objet null.
+
+
+    \[[Du jeu d’API : ExcelApi 1,5](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: getPreviousOrNullObject(visibleOnly)
+  fullName: excel.Excel.Worksheet.getPreviousOrNullObject
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getPreviousOrNullObject(visibleOnly?: boolean): Excel.Worksheet;'
+    return:
+      type:
+      - excel.Excel.Worksheet
+      description: ''
+    parameters:
+    - id: visibleOnly
+      description: Facultatif. Si la valeur est True, prend en compte uniquement les feuilles de calcul visibles et ignore les feuilles de calcul masquées.
+      type:
+      - boolean
+- uid: excel.Excel.Worksheet.getRange
+  summary: >-
+    Obtient l’objet range, qui représente un bloc de cellules, spécifiée par le nom ou l’adresse rectangulaire unique.
+
+
+    \[[Du jeu d’API : ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: getRange(address)
+  fullName: excel.Excel.Worksheet.getRange
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getRange(address?: string): Excel.Range;'
+    return:
+      type:
+      - excel.Excel.Range
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\n// Below example uses range address to get the range object.\nExcel.run(function (ctx) { \n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"A1:F8\";\n    var worksheet = ctx.workbook.worksheets.getItem(sheetName);\n    var range = worksheet.getRange(rangeAddress);\n    range.load('cellCount');\n    return ctx.sync().then(function() {\n        console.log(range.cellCount);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\n// Below example uses a named-range to get the range object.\nExcel.run(function (ctx) { \n    var sheetName = \"Sheet1\";\n    var rangeName = 'MyRange';\n    var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeName);\n    range.load('address');\n    return ctx.sync().then(function() {\n        console.log(range.address);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+    parameters:
+    - id: address
+      description: 'Facultatif. La chaîne représentant l’adresse ou le nom de la plage. Par exemple, « A1 : B2 ». Le cas contraire, la plage de feuille de calcul entière est renvoyée.'
+      type:
+      - string
+- uid: excel.Excel.Worksheet.getRangeByIndexes
+  summary: " Renvoie l’objet range commençant à un index de ligne et de colonne particulier et couvrant un certain nombre de lignes et de colonnes.\n\n\\[[Du jeu d’API : ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\\]"
+  name: getRangeByIndexes(startRow, startColumn, rowCount, columnCount)
+  fullName: excel.Excel.Worksheet.getRangeByIndexes
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getRangeByIndexes(startRow: number, startColumn: number, rowCount: number, columnCount: number): Excel.Range;'
+    return:
+      type:
+      - excel.Excel.Range
+      description: ''
+    parameters:
+    - id: startRow
+      description: Début de ligne (indexé zéro).
+      type:
+      - number
+    - id: startColumn
+      description: Démarrez la colonne (indexé zéro).
+      type:
+      - number
+    - id: rowCount
+      description: Nombre de lignes à inclure dans la plage.
+      type:
+      - number
+    - id: columnCount
+      description: Nombre de colonnes à inclure dans la plage.
+      type:
+      - number
+- uid: excel.Excel.Worksheet.getUsedRange
+  summary: >-
+    La plage utilisée est la plus petite plage qui englobe des cellules dont la valeur ou la mise en forme attribuée. Si la feuille de calcul entière est vide, cette fonction renvoie la cellule supérieure gauche (autrement dit, il sera *ne pas* lever une erreur).
+
+
+    \[[Du jeu d’API : ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: getUsedRange(valuesOnly)
+  fullName: excel.Excel.Worksheet.getUsedRange
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getUsedRange(valuesOnly?: boolean): Excel.Range;'
+    return:
+      type:
+      - excel.Excel.Range
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nExcel.run(function (ctx) { \n    var wSheetName = 'Sheet1';\n    var worksheet = ctx.workbook.worksheets.getItem(wSheetName);\n    var usedRange = worksheet.getUsedRange();\n    usedRange.load('address');\n    return ctx.sync().then(function() {\n            console.log(usedRange.address);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+    parameters:
+    - id: valuesOnly
+      description: 'Facultatif. Si true, considère uniquement les cellules avec des valeurs en tant que cellules utilisées (en ignorant la mise en forme). \[Jeu d’API : ExcelApi 1.2\]'
+      type:
+      - boolean
+- uid: excel.Excel.Worksheet.getUsedRangeOrNullObject
+  summary: >-
+    La plage utilisée est la plus petite plage qui englobe toutes les cellules auxquelles une valeur ou un format est affecté. Si la feuille de calcul entière est vide, cette fonction renvoie un objet null.
+
+
+    \[[Du jeu d’API : ExcelApi 1.4](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: getUsedRangeOrNullObject(valuesOnly)
+  fullName: excel.Excel.Worksheet.getUsedRangeOrNullObject
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getUsedRangeOrNullObject(valuesOnly?: boolean): Excel.Range;'
+    return:
+      type:
+      - excel.Excel.Range
+      description: ''
+    parameters:
+    - id: valuesOnly
+      description: Facultatif. Prend uniquement en compte les cellules avec des valeurs sous forme de cellules utilisées.
+      type:
+      - boolean
+- uid: excel.Excel.Worksheet.id
+  summary: >-
+    Renvoie une valeur qui permet d’identifier la feuille de calcul de façon unique dans un classeur donné. La valeur de l’identificateur reste identique, même lorsque la feuille de calcul est renommée ou déplacée. En lecture seule.
+
+
+    \[[Du jeu d’API : ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: id
+  fullName: excel.Excel.Worksheet.id
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly id: string;'
+    return:
+      type:
+      - string
+- uid: excel.Excel.Worksheet.load
+  summary: Files d’attente d’une commande pour charger les propriétés de l’objet spécifiées. Vous devez appeler « context.sync() » avant de lire les propriétés.
+  remarks: "Outre cette signature, cette méthode présente les signatures suivantes :\n\n`load(option?: { select?: string; expand?: string; }): Excel.Worksheet`-Où option.select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options.expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Worksheet`-Uniquement disponible sur les types de la collection. Il est similaire à la signature précédente. Option.Top Spécifie le nombre maximal d’éléments pouvant être inclus dans le résultat de la collection. Option.Skip Spécifie le nombre d’éléments qui doivent être ignoré et non inclus dans le résultat. Si option.top est spécifié, le jeu de résultats démarre après l’ignorer le nombre spécifié d’éléments.\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\n// Get worksheet properties based on sheet name.\nExcel.run(function (ctx) { \n    var wSheetName = 'Sheet1';\n    var worksheet = ctx.workbook.worksheets.getItem(wSheetName);\n    worksheet.load('position')\n    return ctx.sync().then(function() {\n            console.log(worksheet.position);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\n// Set worksheet position. \nExcel.run(function (ctx) { \n    var wSheetName = 'Sheet1';\n    var worksheet = ctx.workbook.worksheets.getItem(wSheetName);\n    worksheet.position = 2;\n    return ctx.sync(); \n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  name: load(option)
+  fullName: excel.Excel.Worksheet.load
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: string | string[]): Excel.Worksheet;'
+    return:
+      type:
+      - excel.Excel.Worksheet
+      description: ''
+    parameters:
+    - id: option
+      description: Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+      type:
+      - string | string[]
+- uid: excel.Excel.Worksheet.name
+  summary: >-
+    Nom complet de la feuille de calcul.
+
+
+    \[[Du jeu d’API : ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: name
+  fullName: excel.Excel.Worksheet.name
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'name: string;'
+    return:
+      type:
+      - string
+- uid: excel.Excel.Worksheet.names
+  summary: >-
+    Collection de noms inclus dans l’étendue de la feuille de calcul active. En lecture seule.
+
+
+    \[[Du jeu d’API : ExcelApi 1.4](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: names
+  fullName: excel.Excel.Worksheet.names
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly names: Excel.NamedItemCollection;'
+    return:
+      type:
+      - excel.Excel.NamedItemCollection
+- uid: excel.Excel.Worksheet.onActivated
+  summary: >-
+    Se produit lorsque la feuille de calcul est activée.
+
+
+    \[[Du jeu d’API : ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: onActivated
+  fullName: excel.Excel.Worksheet.onActivated
+  langs:
+  - typeScript
+  type: event
+  syntax:
+    content: 'readonly onActivated: OfficeExtension.EventHandlers<Excel.WorksheetActivatedEventArgs>;'
+    return:
+      type:
+      - OfficeExtension.EventHandlers<Excel.WorksheetActivatedEventArgs>
+- uid: excel.Excel.Worksheet.onChanged
+  summary: >-
+    Se produit lorsque les données modifiées dans une feuille de calcul spécifique.
+
+
+    \[[Du jeu d’API : ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: onChanged
+  fullName: excel.Excel.Worksheet.onChanged
+  langs:
+  - typeScript
+  type: event
+  syntax:
+    content: 'readonly onChanged: OfficeExtension.EventHandlers<Excel.WorksheetChangedEventArgs>;'
+    return:
+      type:
+      - OfficeExtension.EventHandlers<Excel.WorksheetChangedEventArgs>
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\nawait Excel.run(async (context) => {\n    let sheet = context.workbook.worksheets.getItem(\"Sample\");\n    sheet.onChanged.add(onChange);\n\n    await context.sync();\n\n    OfficeHelpers.UI.notify(\"A handler has been registered for the onChanged event.\");\n});\n```"
+- uid: excel.Excel.Worksheet.onDeactivated
+  summary: >-
+    Se produit lorsque la feuille de calcul est désactivée.
+
+
+    \[[Du jeu d’API : ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: onDeactivated
+  fullName: excel.Excel.Worksheet.onDeactivated
+  langs:
+  - typeScript
+  type: event
+  syntax:
+    content: 'readonly onDeactivated: OfficeExtension.EventHandlers<Excel.WorksheetDeactivatedEventArgs>;'
+    return:
+      type:
+      - OfficeExtension.EventHandlers<Excel.WorksheetDeactivatedEventArgs>
+- uid: excel.Excel.Worksheet.onSelectionChanged
+  summary: >-
+    Se produit lorsque la sélection change sur une feuille de calcul particulière.
+
+
+    \[[Du jeu d’API : ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: onSelectionChanged
+  fullName: excel.Excel.Worksheet.onSelectionChanged
+  langs:
+  - typeScript
+  type: event
+  syntax:
+    content: 'readonly onSelectionChanged: OfficeExtension.EventHandlers<Excel.WorksheetSelectionChangedEventArgs>;'
+    return:
+      type:
+      - OfficeExtension.EventHandlers<Excel.WorksheetSelectionChangedEventArgs>
+- uid: excel.Excel.Worksheet.pivotTables
+  summary: >-
+    Collection de tableaux croisés dynamiques qui font partie de la feuille de calcul. En lecture seule.
+
+
+    \[[Du jeu d’API : ExcelApi 1.3](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: pivotTables
+  fullName: excel.Excel.Worksheet.pivotTables
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly pivotTables: Excel.PivotTableCollection;'
+    return:
+      type:
+      - excel.Excel.PivotTableCollection
+- uid: excel.Excel.Worksheet.position
+  summary: >-
+    Position de la feuille de calcul au sein du classeur (sur une base zéro).
+
+
+    \[[Du jeu d’API : ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: position
+  fullName: excel.Excel.Worksheet.position
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'position: number;'
+    return:
+      type:
+      - number
+- uid: excel.Excel.Worksheet.protection
+  summary: >-
+    Renvoie un objet de protection de feuille pour une feuille de calcul. En lecture seule.
+
+
+    \[[Du jeu d’API : ExcelApi 1.2](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: protection
+  fullName: excel.Excel.Worksheet.protection
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly protection: Excel.WorksheetProtection;'
+    return:
+      type:
+      - excel.Excel.WorksheetProtection
+- uid: excel.Excel.Worksheet.standardHeight
+  summary: >-
+    Renvoie la hauteur standard (valeur par défaut) de toutes les lignes dans la feuille de calcul, en points. En lecture seule.
+
+
+    \[[Du jeu d’API : ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: standardHeight
+  fullName: excel.Excel.Worksheet.standardHeight
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly standardHeight: number;'
+    return:
+      type:
+      - number
+- uid: excel.Excel.Worksheet.standardWidth
+  summary: >-
+    Cette propriété renvoie ou définit la largeur standard (valeur par défaut) de toutes les colonnes dans la feuille de calcul. Une seule unité de largeur de colonne est égale à la largeur d’un caractère unique du style Normal. Pour les polices proportionnelles, la largeur du caractère 0 (zéro) est utilisée.
+
+
+    \[[Du jeu d’API : ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: standardWidth
+  fullName: excel.Excel.Worksheet.standardWidth
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'standardWidth: number;'
+    return:
+      type:
+      - number
+- uid: excel.Excel.Worksheet.tabColor
+  summary: >-
+    Obtient ou définit la couleur d’onglet de feuille de calcul. Lors de l’extraction de la couleur d’onglet, si la feuille de calcul est invisible, la valeur sera nulle. Si la feuille de calcul est visible, mais la couleur d’onglet est définie sur auto, une chaîne vide est renvoyée. Dans le cas contraire, la propriété est fixée à une couleur, sous la forme «\#123456" lors de la définition de la couleur, utilisez une chaîne vide pour définir une couleur « automatique », ou une couleur réelle dans le cas contraire.
+
+
+    \[[Du jeu d’API : ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: tabColor
+  fullName: excel.Excel.Worksheet.tabColor
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'tabColor: string;'
+    return:
+      type:
+      - string
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\nawait Excel.run(async (context) => {\n    const activeSheet = context.workbook.worksheets.getActiveWorksheet();\n    activeSheet.tabColor = \"#FF0000\";\n\n    await context.sync();\n});\n```"
+- uid: excel.Excel.Worksheet.tables
+  summary: >-
+    Collection de tableaux qui font partie de la feuille de calcul. En lecture seule.
+
+
+    \[[Du jeu d’API : ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: tables
+  fullName: excel.Excel.Worksheet.tables
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly tables: Excel.TableCollection;'
+    return:
+      type:
+      - excel.Excel.TableCollection
+- uid: excel.Excel.Worksheet.toJSON
+  name: toJSON()
+  fullName: excel.Excel.Worksheet.toJSON
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'toJSON(): Excel.Interfaces.WorksheetData;'
+    return:
+      type:
+      - excel.Excel.Interfaces.WorksheetData
+      description: ''
+- uid: excel.Excel.Worksheet.visibility
+  summary: >-
+    La visibilité de la feuille de calcul.
+
+
+    \[[Du jeu d’API : ExcelApi 1.1 pour la lecture de visibilité ; 1.2 pour le paramètre it.](/javascript/office/requirement-sets/excel-api-requirement-sets) \]
+  name: visibility
+  fullName: excel.Excel.Worksheet.visibility
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'visibility: Excel.SheetVisibility | "Visible" | "Hidden" | "VeryHidden";'
+    return:
+      type:
+      - Excel.SheetVisibility | "Visible" | "Hidden" | "VeryHidden"

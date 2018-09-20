@@ -1,0 +1,443 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: e64e7692cefa01b57735666bf4700516a7dbae01
+ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 09/20/2018
+ms.locfileid: "24043063"
+items:
+- uid: Outlook_1_2.Office.Mailbox
+  summary: >-
+    Permet d’accéder au modèle objet de complément Outlook pour Microsoft Outlook et Microsoft Outlook sur le web.
+
+
+    Espaces de noms :
+
+
+    - diagnostics : Fournit des informations de diagnostic à un complément Outlook.
+
+
+    - item : Fournit des méthodes et des propriétés pour accéder à un message ou un rendez-vous dans un complément Outlook.
+
+
+    - userProfile : Fournit des informations sur l’utilisateur dans un complément Outlook.
+
+
+    \[[Du jeu d’API : boîte aux lettres 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>Restricted</td></tr>
+
+
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition ou lecture</td></tr></table>
+  name: Office.Mailbox
+  fullName: Outlook_1_2.Office.Mailbox
+  langs:
+  - typeScript
+  type: interface
+  package: Outlook_1_2
+  children:
+  - Outlook_1_2.Office.Mailbox.convertToLocalClientTime
+  - Outlook_1_2.Office.Mailbox.convertToUtcClientTime
+  - Outlook_1_2.Office.Mailbox.diagnostics
+  - Outlook_1_2.Office.Mailbox.displayAppointmentForm
+  - Outlook_1_2.Office.Mailbox.displayMessageForm
+  - Outlook_1_2.Office.Mailbox.displayNewAppointmentForm
+  - Outlook_1_2.Office.Mailbox.ewsUrl
+  - Outlook_1_2.Office.Mailbox.getUserIdentityTokenAsync
+  - Outlook_1_2.Office.Mailbox.item
+  - Outlook_1_2.Office.Mailbox.makeEwsRequestAsync
+  - Outlook_1_2.Office.Mailbox.userProfile
+- uid: Outlook_1_2.Office.Mailbox.convertToLocalClientTime
+  summary: >-
+    Obtient un dictionnaire contenant les informations d’heure dans l’heure locale du client.
+
+
+    Les dates et heures utilisées par une application de messagerie pour Outlook ou Outlook Web App peuvent utiliser des fuseaux horaires différents. Outlook utilise le fuseau horaire de l’ordinateur ; Outlook Web App utilise le fuseau horaire défini dans le Centre d’administration Exchange (CAE). Vous devez gérer les valeurs de date et d’heure afin que les valeurs que vous affichez sur l’interface utilisateur soient toujours cohérentes avec le fuseau horaire attendu par l’utilisateur.
+
+
+    Si l’application de messagerie s’exécute dans Outlook, la méthode convertToLocalClientTime renvoie un objet Dictionary avec les valeurs définies pour le fuseau horaire de l’ordinateur client. Si elle s’exécute dans Outlook Web App, la méthode convertToLocalClientTime renvoie un objet Dictionary avec les valeurs spécifiées dans le CAE.
+
+
+    \[[Du jeu d’API : boîte aux lettres 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition ou lecture</td></tr></table>
+  name: convertToLocalClientTime(timeValue)
+  fullName: Outlook_1_2.Office.Mailbox.convertToLocalClientTime
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'convertToLocalClientTime(timeValue: Date): LocalClientTime;'
+    return:
+      type:
+      - LocalClientTime
+      description: ''
+    parameters:
+    - id: timeValue
+      description: Objet Date.
+      type:
+      - Date
+- uid: Outlook_1_2.Office.Mailbox.convertToUtcClientTime
+  summary: >-
+    Obtient un objet Date à partir d’un dictionnaire contenant des informations d’heure.
+
+
+    La méthode convertToUtcClientTime convertit un dictionnaire contenant une date et une heure locales en objet Date avec les valeurs appropriées pour la date et l’heure locales.
+
+
+    \[[Du jeu d’API : boîte aux lettres 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition ou lecture</td></tr></table>
+  name: convertToUtcClientTime(input)
+  fullName: Outlook_1_2.Office.Mailbox.convertToUtcClientTime
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'convertToUtcClientTime(input: LocalClientTime): Date;'
+    return:
+      type:
+      - Date
+      description: Objet Date avec l’heure exprimée au format UTC.
+    parameters:
+    - id: input
+      description: Valeur de l’heure locale à convertir.
+      type:
+      - LocalClientTime
+- uid: Outlook_1_2.Office.Mailbox.diagnostics
+  summary: >-
+    Fournit des informations de diagnostic à un complément Outlook.
+
+
+    Contient les membres suivants :
+
+
+    - nom d’hôte (string) : une chaîne qui représente le nom de l’application hôte. Il est une des valeurs suivantes : Outlook, Outlook Mac, OutlookIOS ou OutlookWebApp.
+
+
+    - hostVersion (chaîne) : une chaîne qui représente la version de l’application hôte ou le serveur Exchange. Si le complément de messagerie s’exécute sur le client de bureau Outlook ou Outlook pour iOS, hostversion, de la propriété renvoie la version de l’application hôte, Outlook. Dans Outlook Web App, la propriété renvoie la version du serveur Exchange. La chaîne 15.0.468.0 est un exemple.
+
+
+    - OWAView (chaîne) : une chaîne qui représente l’affichage actuel d’Outlook Web App. Si l’application hôte n’est pas Outlook Web App, l’accès à cette propriété génère la valeur undefined. Outlook Web App propose trois vues (OneColumn - affiché lorsque l’écran est étroite, TwoColumns - affiché lorsque l’écran est plus large et ThreeColumns - affiché lorsque l’écran est wide.) qui correspondent à la largeur de l’écran et le nombre de colonnes de la fenêtre qui peut être affiché.
+
+
+    Plus d’informations est sous [Office.Diagnostics](xref:Outlook_1_2.Office.Diagnostics)<!-- -->.
+
+
+    \[[Du jeu d’API : boîte aux lettres 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition ou lecture</td></tr></table>
+  name: diagnostics
+  fullName: Outlook_1_2.Office.Mailbox.diagnostics
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'diagnostics: Office.Diagnostics;'
+    return:
+      type:
+      - outlook.Office.Diagnostics
+- uid: Outlook_1_2.Office.Mailbox.displayAppointmentForm
+  summary: >-
+    Affiche un rendez-vous de calendrier existant.
+
+
+    La méthode displayAppointmentForm ouvre un rendez-vous du calendrier existant dans une nouvelle fenêtre du Bureau ou dans une boîte de dialogue sur les appareils mobiles.
+
+
+    Dans Outlook pour Mac, vous pouvez utiliser cette méthode pour afficher un seul rendez-vous qui ne fait pas partie d’une série périodique, ou le rendez-vous principal d’une série périodique, mais vous ne pouvez pas afficher une instance de la série. En effet, dans Outlook pour Mac, vous ne pouvez pas accéder aux propriétés (notamment l’ID d’élément) des instances d’une série périodique.
+
+
+    Dans Outlook Web App, cette méthode ouvre le formulaire spécifié uniquement si le corps du formulaire comprend 32 Ko de caractères maximum.
+
+
+    Si l’identificateur de l’élément spécifié n’identifie aucun rendez-vous existant, un volet vierge s’ouvre sur l’ordinateur ou l’appareil client. Par ailleurs, aucun message d’erreur n’est retourné.
+
+
+    Remarque : Cette méthode n’est pas prise en charge dans Outlook pour iOS ou Outlook pour Android.
+
+
+    \[[Du jeu d’API : boîte aux lettres 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition ou lecture</td></tr></table>
+  name: displayAppointmentForm(itemId)
+  fullName: Outlook_1_2.Office.Mailbox.displayAppointmentForm
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'displayAppointmentForm(itemId: string): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: itemId
+      description: Identificateur des services web Exchange pour un rendez-vous du calendrier existant.
+      type:
+      - string
+- uid: Outlook_1_2.Office.Mailbox.displayMessageForm
+  summary: >-
+    Affiche un message existant.
+
+
+    La méthode displayMessageForm ouvre un message existant dans une nouvelle fenêtre du Bureau ou dans une boîte de dialogue sur les appareils mobiles.
+
+
+    Dans Outlook Web App, cette méthode ouvre le formulaire indiqué uniquement si le corps du formulaire comprend 32 Ko de caractères maximum.
+
+
+    Si l’identificateur de l’élément spécifié n’identifie aucun message existant, aucun message ne s’affiche sur l’ordinateur client. Par ailleurs, aucun message d’erreur n’est retourné.
+
+
+    N’utilisez pas la méthode displayMessageForm ayant une valeur itemId qui représente un rendez-vous. Utilisez la méthode displayAppointmentForm pour afficher un rendez-vous existant, et displayNewAppointmentForm pour afficher un formulaire pour créer un rendez-vous.
+
+
+    Remarque : Cette méthode n’est pas prise en charge dans Outlook pour iOS ou Outlook pour Android.
+
+
+    \[[Du jeu d’API : boîte aux lettres 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition ou lecture</td></tr></table>
+  name: displayMessageForm(itemId)
+  fullName: Outlook_1_2.Office.Mailbox.displayMessageForm
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'displayMessageForm(itemId: string): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: itemId
+      description: Identificateur des services web Exchange pour un message existant.
+      type:
+      - string
+- uid: Outlook_1_2.Office.Mailbox.displayNewAppointmentForm
+  summary: >-
+    Affiche un formulaire permettant de créer un rendez-vous du calendrier.
+
+
+    La méthode displayNewAppointmentForm ouvre un formulaire qui permet à l’utilisateur de créer un rendez-vous ou une réunion. Si des paramètres sont spécifiés, les champs du formulaire de rendez-vous sont remplis automatiquement avec le contenu des paramètres.
+
+
+    Dans Outlook Web App et OWA pour les périphériques, cette méthode affiche toujours un formulaire contenant un champ Participants. Si vous ne spécifiez pas de participants comme arguments d’entrée, la méthode affiche un formulaire contenant le bouton Enregistrer. Si vous avez spécifié des participants, le formulaire inclut ces derniers, en plus du bouton Envoyer.
+
+
+    Dans le client riche Outlook et Outlook RT, si vous spécifiez les participants ou les ressources dans le paramètre de ressources, optionalAttendees ou requiredAttendees cette méthode affiche un formulaire de réunion avec un bouton d’envoi. Si vous ne spécifiez aucun destinataire, cette méthode affiche un formulaire de rendez-vous avec un enregistrement &amp; bouton Fermer.
+
+
+    Si l’un des paramètres dépasse les limites définies en matière de taille ou si un nom de paramètre inconnu est spécifié, une exception est levée.
+
+
+    Remarque : Cette méthode n’est pas prise en charge dans Outlook pour iOS ou Outlook pour Android.
+
+
+    \[[Du jeu d’API : boîte aux lettres 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Read</td></tr></table>
+  name: displayNewAppointmentForm(parameters)
+  fullName: Outlook_1_2.Office.Mailbox.displayNewAppointmentForm
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'displayNewAppointmentForm(parameters: AppointmentForm): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: parameters
+      description: Un AppointmentForm décrivant le nouveau rendez-vous. Toutes les propriétés sont facultatives.
+      type:
+      - AppointmentForm
+- uid: Outlook_1_2.Office.Mailbox.ewsUrl
+  summary: >-
+    Obtient l’URL du point de terminaison des services Web Exchange (EWS) pour ce compte de messagerie. Mode lecture uniquement.
+
+
+    Votre application doit avoir l’autorisation ReadItem spécifiée dans son manifeste pour appeler le membre ewsUrl en mode lecture.
+
+
+    Dans composition mode, vous devez appeler la méthode saveAsync avant de pouvoir utiliser le membre ewsUrl. Votre application doit avoir des autorisations ReadWriteItem pour appeler la méthode saveAsync.
+
+
+    \[[Du jeu d’API : boîte aux lettres 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition ou lecture</td></tr></table>
+
+
+    La valeur d’ewsUrl peut être utilisée par un service à distance pour effectuer des appels EWS à boîte aux lettres de l’utilisateur. Par exemple, vous pouvez créer un service à distance pour [obtenir des pièces jointes à partir de l’élément sélectionné](https://docs.microsoft.com/outlook/add-ins/get-attachments-of-an-outlook-item)<!-- -->.
+
+
+    Remarque : Ce membre n’est pas pris en charge dans Outlook pour iOS ou Outlook pour Android.
+  name: ewsUrl
+  fullName: Outlook_1_2.Office.Mailbox.ewsUrl
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'ewsUrl: string;'
+    return:
+      type:
+      - string
+- uid: Outlook_1_2.Office.Mailbox.getUserIdentityTokenAsync
+  summary: >-
+    Obtient un jeton qui identifie l’utilisateur et le complément Office.
+
+
+    Le jeton est fourni sous forme de chaîne dans la propriété asyncResult.value.
+
+
+    \[[Du jeu d’API : boîte aux lettres 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition et lecture</td></tr></table>
+
+
+    La méthode getUserIdentityTokenAsync retourne un jeton que vous pouvez utiliser pour identifier et [authentifier les utilisateurs avec un système tiers et les ajouter](https://docs.microsoft.com/outlook/add-ins/authentication)<!-- -->.
+  name: getUserIdentityTokenAsync(callback, userContext)
+  fullName: Outlook_1_2.Office.Mailbox.getUserIdentityTokenAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getUserIdentityTokenAsync(callback: (result: AsyncResult) => void, userContext?: any): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: callback
+      description: Une fois la méthode terminée, la fonction passée dans le paramètre de rappel est appelée avec un seul paramètre de type AsyncResult.
+      type:
+      - '(result: AsyncResult) => void'
+    - id: userContext
+      description: Facultatif. Données d’état transmises à la méthode asynchrone.\|
+      type:
+      - any
+- uid: Outlook_1_2.Office.Mailbox.item
+  summary: 'L’élément de boîte aux lettres. Selon le contexte dans lequel le complément ouvert, l’élément peut être n’importe quel nombre de types. Si vous souhaitez voir IntelliSense pour qu’un type spécifique, vous devez effectuer un cast de cet élément à une des opérations suivantes : `ItemCompose`, `ItemRead`, `MessageCompose`, `MessageRead`, `AppointmentCompose`,`AppointmentRead`'
+  name: item
+  fullName: Outlook_1_2.Office.Mailbox.item
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'item: Item & ItemCompose & ItemRead & MessageRead & MessageCompose & AppointmentRead & AppointmentCompose;'
+    return:
+      type:
+      - Item & ItemCompose & ItemRead & MessageRead & MessageCompose & AppointmentRead & AppointmentCompose
+- uid: Outlook_1_2.Office.Mailbox.makeEwsRequestAsync
+  summary: >-
+    Envoie une demande asynchrone à un service Exchange Web Services (EWS) sur le serveur Exchange qui héberge la boîte aux lettres de l’utilisateur.
+
+
+    Dans ces cas-là, des compléments doivent utiliser l’API REST pour accéder aux boîtes aux lettres de l’utilisateur au lieu de cela.
+
+
+    La méthode makeEwsRequestAsync envoie une demande EWS à Exchange de la part du complément.
+
+
+    Vous ne pouvez pas demander des éléments associés à un dossier avec la méthode makeEwsRequestAsync.
+
+
+    La demande XML doit spécifier l’encodage UTF-8. &lt;version ?xml = « 1.0 » encoding = « utf-8 » ?&gt;
+
+
+    Votre complément doit disposer de l’autorisation ReadWriteMailbox pour utiliser la méthode makeEwsRequestAsync. Pour plus d’informations sur l’utilisation de l’autorisation ReadWriteMailbox et des opérations EWS que vous pouvez appeler avec la méthode makeEwsRequestAsync, consultez la page relative aux autorisations du complément de messagerie pour accéder à la boîte aux lettres de l’utilisateur.
+
+
+    Le résultat XML de l’appel EWS est fourni sous forme de chaîne dans la propriété asyncResult.value. Si la taille du résultat est supérieure à 1 Mo, un message d’erreur est renvoyé.
+
+
+    Remarque : Cette méthode n’est pas pris en charge dans les scénarios suivants. -Dans Outlook pour iOS ou Outlook pour Android - lorsque le complément est chargé dans une boîte aux lettres Gmail
+
+
+    Remarque : L’administrateur du serveur doit définir OAuthAuthentication sur true sur le répertoire EWS du serveur Client Access pour permettre à la méthode makeEwsRequestAsync d’effectuer des demandes EWS.
+
+
+    *Différences entre les versions*
+
+
+    Lorsque vous utilisez la méthode makeEwsRequestAsync dans les applications de messagerie exécutées dans des versions d’Outlook inférieures à 15.0.4535.1004, vous devez définir la valeur d’encodage sur ISO-8859-1.
+
+
+    `&lt;?xml version="1.0" encoding="iso-8859-1"?&gt;`
+
+
+    Lorsque votre application de messagerie s’exécute dans Outlook sur le web, vous n’avez pas à définir la valeur d’encodage. Pour déterminer si votre application de messagerie s’exécute dans Outlook ou Outlook sur le web, utilisez la propriété mailbox.diagnostics.hostName. Pour déterminer la version d’Outlook qui est exécutée, utilisez la propriété mailbox.diagnostics.hostVersion.
+
+
+    \[[Du jeu d’API : boîte aux lettres 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteMailbox</td></tr>
+
+
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition et lecture</td></tr></table>
+  name: makeEwsRequestAsync(data, callback, userContext)
+  fullName: Outlook_1_2.Office.Mailbox.makeEwsRequestAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'makeEwsRequestAsync(data: any, callback: (result: AsyncResult) => void, userContext?: any): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: data
+      description: Demande EWS.
+      type:
+      - any
+    - id: callback
+      description: Une fois la méthode terminée, la fonction passée dans le paramètre de rappel est appelée avec un seul paramètre de type AsyncResult.
+      type:
+      - '(result: AsyncResult) => void'
+    - id: userContext
+      description: Facultatif. Données d’état transmises à la méthode asynchrone.
+      type:
+      - any
+- uid: Outlook_1_2.Office.Mailbox.userProfile
+  summary: >-
+    Plus d’informations sur l’utilisateur associé à la boîte aux lettres. Cela inclut leur type de compte, nom complet, adresse de messagerie d’et fuseau horaire.
+
+
+    Plus d’informations est sous [Office.UserProfile](xref:Outlook_1_2.Office.UserProfile)
+  name: userProfile
+  fullName: Outlook_1_2.Office.Mailbox.userProfile
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'userProfile: Office.UserProfile;'
+    return:
+      type:
+      - outlook.Office.UserProfile

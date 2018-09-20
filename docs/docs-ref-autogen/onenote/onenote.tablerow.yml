@@ -1,0 +1,237 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: c56fc93130c395c57ae14edb9a397f29c006839f
+ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 09/20/2018
+ms.locfileid: "24043053"
+items:
+- uid: onenote.OneNote.TableRow
+  summary: >-
+    Représente une ligne dans une table.
+
+
+    \[[Du jeu d’API : OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: OneNote.TableRow
+  fullName: onenote.OneNote.TableRow
+  langs:
+  - typeScript
+  type: class
+  extends:
+  - OfficeExtension.ClientObject
+  package: onenote
+  children:
+  - onenote.OneNote.TableRow.cellCount
+  - onenote.OneNote.TableRow.cells
+  - onenote.OneNote.TableRow.clear
+  - onenote.OneNote.TableRow.id
+  - onenote.OneNote.TableRow.insertRowAsSibling
+  - onenote.OneNote.TableRow.load
+  - onenote.OneNote.TableRow.parentTable
+  - onenote.OneNote.TableRow.rowIndex
+  - onenote.OneNote.TableRow.setShadingColor
+  - onenote.OneNote.TableRow.toJSON
+  - onenote.OneNote.TableRow.track
+  - onenote.OneNote.TableRow.untrack
+- uid: onenote.OneNote.TableRow.cellCount
+  summary: >-
+    Obtient le nombre de cellules dans la ligne. En lecture seule.
+
+
+    \[[Du jeu d’API : OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: cellCount
+  fullName: onenote.OneNote.TableRow.cellCount
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly cellCount: number;'
+    return:
+      type:
+      - number
+- uid: onenote.OneNote.TableRow.cells
+  summary: >-
+    Obtient les cellules de la ligne. En lecture seule.
+
+
+    \[[Du jeu d’API : OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: cells
+  fullName: onenote.OneNote.TableRow.cells
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly cells: OneNote.TableCellCollection;'
+    return:
+      type:
+      - onenote.OneNote.TableCellCollection
+- uid: onenote.OneNote.TableRow.clear
+  summary: >-
+    Efface le contenu de la ligne.
+
+
+    \[[Du jeu d’API : OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: clear()
+  fullName: onenote.OneNote.TableRow.clear
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'clear(): void;'
+    return:
+      type:
+      - void
+      description: ''
+- uid: onenote.OneNote.TableRow.id
+  summary: >-
+    Obtient l’ID de la ligne. En lecture seule.
+
+
+    \[[Du jeu d’API : OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: id
+  fullName: onenote.OneNote.TableRow.id
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly id: string;'
+    return:
+      type:
+      - string
+- uid: onenote.OneNote.TableRow.insertRowAsSibling
+  summary: >-
+    Insère une ligne avant ou après la ligne active.
+
+
+    \[[Du jeu d’API : OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: insertRowAsSibling(insertLocation, values)
+  fullName: onenote.OneNote.TableRow.insertRowAsSibling
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'insertRowAsSibling(insertLocation: OneNote.InsertLocation, values?: string[]): OneNote.TableRow;'
+    return:
+      type:
+      - OneNote.TableRow
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nOneNote.run(function(ctx) {\n    var app = ctx.application;\n    var outline = app.getActiveOutline();\n    \n    // Queue a command to load outline.paragraphs and their types.\n    ctx.load(outline, \"paragraphs, paragraphs/type\");\n    \n    // Run the queued commands, and return a promise to indicate task completion.\n    return ctx.sync().then(function () {\n        var paragraphs = outline.paragraphs;\n        \n        // for each table, get table rows.\n        for (var i = 0; i < paragraphs.items.length; i++) {\n            var paragraph = paragraphs.items[i];\n            if (paragraph.type == \"Table\") {\n                var table = paragraph.table;\n                \n                // Queue a command to load table.rows.\n                ctx.load(table, \"rows\");\n                \n                // Run the queued commands\n                return ctx.sync().then(function() {\n                    var rows = table.rows;\n                    rows.items[1].insertRowAsSibling(\"Before\", [\"cell0\", \"cell1\"]);\n                    return ctx.sync();\n                });\n            }\n        }\n    })\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+    parameters:
+    - id: insertLocation
+      description: Où les nouvelles lignes doivent être insérées par rapport à la ligne active.
+      type:
+      - onenote.OneNote.InsertLocation
+    - id: values
+      description: Chaînes à insérer dans la nouvelle ligne, spécifiées sous forme de tableau. Elles ne doivent pas comporter plus de cellules que dans la ligne active. Facultatif.
+      type:
+      - string[]
+- uid: onenote.OneNote.TableRow.load
+  summary: Files d’attente d’une commande pour charger les propriétés de l’objet spécifiées. Vous devez appeler « context.sync() » avant de lire les propriétés.
+  remarks: "Outre cette signature, cette méthode présente les signatures suivantes :\n\n`load(option?: { select?: string; expand?: string; }): OneNote.TableRow`-Où option.select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options.expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.TableRow`-Uniquement disponible sur les types de la collection. Il est similaire à la signature précédente. Option.Top Spécifie le nombre maximal d’éléments pouvant être inclus dans le résultat de la collection. Option.Skip Spécifie le nombre d’éléments qui doivent être ignoré et non inclus dans le résultat. Si option.top est spécifié, le jeu de résultats démarre après l’ignorer le nombre spécifié d’éléments.\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nOneNote.run(function(ctx) {\n    var app = ctx.application;\n    var outline = app.getActiveOutline();\n    \n    // Queue a command to load outline.paragraphs and their types.\n    ctx.load(outline, \"paragraphs, paragraphs/type\");\n    \n    // Run the queued commands, and return a promise to indicate task completion.\n    return ctx.sync().then(function () {\n        var paragraphs = outline.paragraphs;\n        \n        // for each table, get table rows.\n        for (var i = 0; i < paragraphs.items.length; i++) {\n            var paragraph = paragraphs.items[i];\n            if (paragraph.type == \"Table\") {\n                var table = paragraph.table;\n                \n                // Queue a command to load table.rows.\n                ctx.load(table, \"rows\");\n                return ctx.sync().then(function() {\n                    var rows = table.rows;\n                    \n                    // for each table row, log cell count and row index.\n                    for (var i = 0; i < rows.items.length; i++) {\n                        console.log(\"Row \" + i + \" Id: \" + rows.items[i].id);\n                        console.log(\"Row \" + i + \" Cell Count: \" + rows.items[i].cellCount);\n                        console.log(\"Row \" + i + \" Row Index: \" + rows.items[i].rowIndex);\n                    }\n                    return ctx.sync();\n                });\n            }\n        }\n    })\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\nOneNote.run(function(ctx) {\n    var app = ctx.application;\n    var outline = app.getActiveOutline();\n    \n    // Queue a command to load outline.paragraphs and their types.\n    ctx.load(outline, \"paragraphs, paragraphs/type\");\n    \n    // Run the queued commands, and return a promise to indicate task completion.\n    return ctx.sync().then(function () {\n        var paragraphs = outline.paragraphs;\n        \n        // for each table, get table rows.\n        for (var i = 0; i < paragraphs.items.length; i++) {\n            var paragraph = paragraphs.items[i];\n            if (paragraph.type == \"Table\") {\n                var table = paragraph.table;\n                \n                // Queue a command to load parentTable and cells of each row in the table.\n                ctx.load(table, \"rows/parentTable, rows/cells\");\n                return ctx.sync().then(function() {\n                    var rows = table.rows;\n                    \n                    // for each row, log parentTable and cells\n                    for (var i = 0; i < rows.items.length; i++) {\n                        console.log(\"Row \" + i + \" Parent Table Id: \" + rows.items[i].parentTable.id);\n                        var cells = rows.items[i].cells;\n                        for (var j = 0 ; j < cells.items.length; j++) {\n                            console.log(\"Row \" + i + \" Cell \" + j + \" Id: \" + cells.items[j].id);\n                        }\n                    }\n                    return ctx.sync();\n                });\n            }\n        }\n    })\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  name: load(option)
+  fullName: onenote.OneNote.TableRow.load
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: string | string[]): OneNote.TableRow;'
+    return:
+      type:
+      - OneNote.TableRow
+      description: ''
+    parameters:
+    - id: option
+      description: Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+      type:
+      - string | string[]
+- uid: onenote.OneNote.TableRow.parentTable
+  summary: >-
+    Obtient le tableau parent. En lecture seule.
+
+
+    \[[Du jeu d’API : OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: parentTable
+  fullName: onenote.OneNote.TableRow.parentTable
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly parentTable: OneNote.Table;'
+    return:
+      type:
+      - OneNote.Table
+- uid: onenote.OneNote.TableRow.rowIndex
+  summary: >-
+    Obtient l’index de la ligne dans le tableau parent correspondant. En lecture seule.
+
+
+    \[[Du jeu d’API : OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: rowIndex
+  fullName: onenote.OneNote.TableRow.rowIndex
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly rowIndex: number;'
+    return:
+      type:
+      - number
+- uid: onenote.OneNote.TableRow.setShadingColor
+  summary: >-
+    Définit la couleur d’ombrage de toutes les cellules dans la ligne. Code couleur appliqué aux cellules.
+
+
+    \[[Du jeu d’API : OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: setShadingColor(colorCode)
+  fullName: onenote.OneNote.TableRow.setShadingColor
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'setShadingColor(colorCode: string): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: colorCode
+      description: ''
+      type:
+      - string
+- uid: onenote.OneNote.TableRow.toJSON
+  name: toJSON()
+  fullName: onenote.OneNote.TableRow.toJSON
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'toJSON(): OneNote.Interfaces.TableRowData;'
+    return:
+      type:
+      - OneNote.Interfaces.TableRowData
+      description: ''
+- uid: onenote.OneNote.TableRow.track
+  summary: Suivre l’objet pour l’ajustement automatique selon entourant les modifications dans le document. Cet appel est une abréviation de context.trackedObjects.add(thisObject). Si vous utilisez cet objet dans les appels de « .sync » et en dehors de l’exécution séquentielle d’un lot de « .run » et obtenir une erreur « InvalidObjectPath » lors de la définition d’une propriété ou d’appeler une méthode sur l’objet, vous devez avoir ajouté l’objet à l’objet suivi collection lorsque l’objet a été créé tout d’abord.
+  name: track()
+  fullName: onenote.OneNote.TableRow.track
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'track(): OneNote.TableRow;'
+    return:
+      type:
+      - OneNote.TableRow
+      description: ''
+- uid: onenote.OneNote.TableRow.untrack
+  summary: Version de la mémoire associée à cet objet, si elle a été précédemment suivi. Cet appel est l’abréviation de context.trackedObjects.remove(thisObject). Comportant de nombreux objets suivis ralentit l’application hôte, donc pensez à libérer les objets que vous ajoutez, une fois que vous avez terminé les utiliser. Vous devrez appeler « context.sync() » avant que la version de mémoire prenne effet.
+  name: untrack()
+  fullName: onenote.OneNote.TableRow.untrack
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'untrack(): OneNote.TableRow;'
+    return:
+      type:
+      - OneNote.TableRow
+      description: ''
