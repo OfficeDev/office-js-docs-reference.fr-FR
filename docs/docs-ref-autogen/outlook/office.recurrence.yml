@@ -1,0 +1,193 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: dd15143e190d6547d619792a71bee3ea4ab71509
+ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 09/20/2018
+ms.locfileid: "24042593"
+items:
+- uid: outlook.Office.Recurrence
+  summary: >-
+    L’objet de périodicité fournit des méthodes pour obtenir et définir la périodicité d’un rendez-vous, mais uniquement obtenir la périodicité des demandes de réunion. Elle aura un dictionnaire avec les clés suivantes : seriesTime, recurrenceType, recurrenceProperties et recurrenceTimeZone (facultatif).
+
+
+    \[[Du jeu d’API : aperçu de la boîte aux lettres](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition ou lecture</td></tr></table>
+
+
+    **États**
+
+
+    <table> <tr> <th>State</th> <th>Modifiable ?</th> <th>Visible ?</th> </tr> <tr> <td>Organisateur du rendez-vous - série de composition</td> <td>Oui (setAsync)</td> <td>Oui (getAsync)</td> </tr> <tr> <td>Organisateur du rendez-vous - Instance de composition</td> <td>Aucun (setAsync renvoie une erreur)</td> <td>Oui (getAsync)</td> </tr> <tr> <td>Rendez-vous Attendee - série de lecture</td> <td>Aucun (setAsync n’est pas disponible)</td> <td>Oui (item.recurrence)</td> </tr> <tr> <td>Rendez-vous Attendee - l’Instance de lecture</td> <td>Aucun (setAsync n’est pas disponible)</td> <td>Oui (item.recurrence)</td> </tr> <tr> <td>Demande de réunion - série de lecture</td> <td>Aucun (setAsync n’est pas disponible)</td> <td>Oui (item.recurrence)</td> </tr> <tr> <td>Demande - l’Instance de lecture de réunion</td> <td>Aucun (setAsync n’est pas disponible)</td> <td>Oui (item.recurrence)</td> </tr> </table>
+  isPreview: true
+  name: Office.Recurrence
+  fullName: outlook.Office.Recurrence
+  langs:
+  - typeScript
+  type: interface
+  package: outlook
+  children:
+  - outlook.Office.Recurrence.getAsync
+  - outlook.Office.Recurrence.recurrenceProperties
+  - outlook.Office.Recurrence.recurrenceTimeZone
+  - outlook.Office.Recurrence.recurrenceType
+  - outlook.Office.Recurrence.seriesTime
+  - outlook.Office.Recurrence.setAsync
+- uid: outlook.Office.Recurrence.getAsync
+  summary: >-
+    Renvoie l’objet en cours de la périodicité d’une série de rendez-vous.
+
+
+    Cette méthode renvoie l’objet de périodicité d’intégralité de la série de rendez-vous.
+
+
+    \[[Du jeu d’API : aperçu de la boîte aux lettres](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: "<table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>\n\n<tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition ou lecture</td></tr></table>\n\nOutre la signature principale, cette méthode a également cette signature :\n\n`getAsync(callback?: (result: AsyncResult&lt;Office.Recurrence&gt;) => void): void;`\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\n// This example gets the recurrence object of an appointment or meeting request item.\nOffice.context.mailbox.item.recurrence.getAsync(callback);\nfunction callback(asyncResult){\n    var context = asyncResult.context;\n    var recurrence = asyncResult.value;\n    var endDate = recurrence.seriesTime.getEndDate();\n}\n\n// The following is an example of the results of the getAsync call.\nRecurrence = {\n    \"recurrenceType\": \"weekly\",\n    \"recurrenceProperties\": {\"interval\": 2, \"days\": [\"mon\",\"thu\",\"fri\"], \"firstDayOfWeek\": \"sun\"},\n    \"seriesTime\": {seriesTimeObject}, \n    \"recurrenceTimeZone\": {\"name\": \"Pacific Standard Time\", \"offset\": -480}}\n```"
+  isPreview: true
+  name: getAsync(options, callback)
+  fullName: outlook.Office.Recurrence.getAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getAsync(options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<Office.Recurrence>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: options
+      description: 'Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. asyncContext : les développeurs peuvent fournir n’importe quel objet qu’ils souhaitent accéder dans la méthode de rappel.'
+      type:
+      - office.Office.AsyncContextOptions
+    - id: callback
+      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre de rappel est appelée avec un seul paramètre, asyncResult, qui est un objet Office.AsyncResult. Le `value` propriété du résultat est un objet de périodicité.
+      type:
+      - '(result: AsyncResult<Office.Recurrence>) => void'
+- uid: outlook.Office.Recurrence.recurrenceProperties
+  summary: >-
+    Obtient ou définit les propriétés de la série de rendez-vous périodiques.
+
+
+    \[[Du jeu d’API : aperçu de la boîte aux lettres](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition ou lecture</td></tr></table>
+  isPreview: true
+  name: recurrenceProperties
+  fullName: outlook.Office.Recurrence.recurrenceProperties
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'recurrenceProperties: RecurrenceProperties;'
+    return:
+      type:
+      - outlook.Office.RecurrenceProperties
+- uid: outlook.Office.Recurrence.recurrenceTimeZone
+  summary: >-
+    Obtient ou définit les propriétés de la série de rendez-vous périodiques.
+
+
+    \[[Du jeu d’API : aperçu de la boîte aux lettres](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition ou lecture</td></tr></table>
+  isPreview: true
+  name: recurrenceTimeZone
+  fullName: outlook.Office.Recurrence.recurrenceTimeZone
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'recurrenceTimeZone: Office.MailboxEnums.RecurrenceTimeZone;'
+    return:
+      type:
+      - outlook.Office.MailboxEnums.RecurrenceTimeZone
+- uid: outlook.Office.Recurrence.recurrenceType
+  summary: >-
+    Obtient ou définit le type de la série de rendez-vous périodiques.
+
+
+    \[[Du jeu d’API : aperçu de la boîte aux lettres](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition ou lecture</td></tr></table>
+  isPreview: true
+  name: recurrenceType
+  fullName: outlook.Office.Recurrence.recurrenceType
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'recurrenceType: Office.MailboxEnums.RecurrenceType;'
+    return:
+      type:
+      - outlook.Office.MailboxEnums.RecurrenceType
+- uid: outlook.Office.Recurrence.seriesTime
+  summary: >-
+    L’objet [Office.SeriesTime](xref:outlook.Office.SeriesTime) vous permet de gérer les dates de début et de fin de la série de rendez-vous périodiques et l’habituel début et fin des heures d’instances. **Cet objet n’est pas en temps UTC.** Au lieu de cela, elle est définie dans le fuseau horaire spécifié par la valeur recurrenceTimeZone ou le fuseau horaire de l’élément par défaut.
+
+
+    \[[Du jeu d’API : aperçu de la boîte aux lettres](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition ou lecture</td></tr></table>
+  isPreview: true
+  name: seriesTime
+  fullName: outlook.Office.Recurrence.seriesTime
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'seriesTime: Office.SeriesTime;'
+    return:
+      type:
+      - outlook.Office.SeriesTime
+- uid: outlook.Office.Recurrence.setAsync
+  summary: >-
+    Définit la périodicité d’une série de rendez-vous.
+
+
+    Remarque : setAsync doit uniquement être disponible pour les éléments en série et pas les éléments d’instance.
+
+
+    \[[Du jeu d’API : aperçu de la boîte aux lettres](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: "<table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr>\n\n<tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition</td></tr>\n\n<tr><td>Erreurs</td><td>InvalidEndTime - l’heure de fin est antérieure à l’heure de début.</td></tr></table>\n\nOutre la signature principale, cette méthode a également cette signature :\n\n`setAsync(recurrencePattern: Recurrence, callback?: (result: AsyncResult<void>) => void): void;`\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\n// The following example sets the recurrence pattern of an appointment series.\nvar seriesTimeObject = new SeriesTime(); \nseriesTimeObject.setStartDate(2017,11,2);  \nseriesTimeObject.setEndDate(2017,12,2); \nseriesTimeObject.setStartTime(10,30); \nseriesTimeObject.setDuration(30);\n\nvar pattern = {\n    \"seriesTime\": seriesTimeObject,\n    \"type\": \"weekly\",\n    \"properties\": {\"interval\": 1, \"days\": [\"tue\", \"thu\"], \"firstDayOfWeek\": \"sun\"},\n    \"recurrenceTimeZone\": {\"name\": \"Pacific Standard Time\"}}; \n\nOffice.context.mailbox.item.recurrence.setAsync(pattern, options, callback);\n\n//Result: This created a recurring event from November 2, 2017 to December 2, 2017\n//        at 10:30 A.M. to 11 A.M. PST every Tuesday and Thursday.\n```"
+  isPreview: true
+  name: setAsync(recurrencePattern, options, callback)
+  fullName: outlook.Office.Recurrence.setAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'setAsync(recurrencePattern: Recurrence, options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<void>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: recurrencePattern
+      description: Un objet de la périodicité.
+      type:
+      - outlook.Office.Recurrence
+    - id: options
+      description: 'Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. asyncContext : les développeurs peuvent fournir n’importe quel objet qu’ils souhaitent accéder dans la méthode de rappel.'
+      type:
+      - office.Office.AsyncContextOptions
+    - id: callback
+      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre de rappel est appelée avec un seul paramètre, asyncResult, qui est un objet Office.AsyncResult.
+      type:
+      - '(result: AsyncResult<void>) => void'

@@ -1,0 +1,183 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: 68a69b2e5da5c0ad154fb5626395bd8faf942fab
+ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 09/20/2018
+ms.locfileid: "24043252"
+items:
+- uid: onenote.OneNote.SectionCollection
+  summary: >-
+    Représente une collection de sections.
+
+
+    \[[Du jeu d’API : OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: OneNote.SectionCollection
+  fullName: onenote.OneNote.SectionCollection
+  langs:
+  - typeScript
+  type: class
+  extends:
+  - OfficeExtension.ClientObject
+  package: onenote
+  children:
+  - onenote.OneNote.SectionCollection.count
+  - onenote.OneNote.SectionCollection.getByName
+  - onenote.OneNote.SectionCollection.getItem
+  - onenote.OneNote.SectionCollection.getItemAt
+  - onenote.OneNote.SectionCollection.items
+  - onenote.OneNote.SectionCollection.load
+  - onenote.OneNote.SectionCollection.toJSON
+  - onenote.OneNote.SectionCollection.track
+  - onenote.OneNote.SectionCollection.untrack
+- uid: onenote.OneNote.SectionCollection.count
+  summary: >-
+    Renvoie le nombre de sections de la collection. En lecture seule.
+
+
+    \[[Du jeu d’API : OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: count
+  fullName: onenote.OneNote.SectionCollection.count
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly count: number;'
+    return:
+      type:
+      - number
+- uid: onenote.OneNote.SectionCollection.getByName
+  summary: >-
+    Obtient la collection de sections portant le nom spécifié.
+
+
+    \[[Du jeu d’API : OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: getByName(name)
+  fullName: onenote.OneNote.SectionCollection.getByName
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getByName(name: string): OneNote.SectionCollection;'
+    return:
+      type:
+      - onenote.OneNote.SectionCollection
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nOneNote.run(function (context) {\n\n    // Get the sections in the current notebook.\n    var sections = context.application.getActiveNotebook().sections;\n\n    // Queue a command to load the sections. \n    // For best performance, request specific properties.\n    sections.load(\"id\"); \n    \n    // Get the sections with the specified name.\n    var groceriesSections = sections.getByName(\"Groceries\");\n    \n    // Queue a command to load the sections with the specified name.\n    groceriesSections.load(\"id,name\");\n\n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n\n            // Iterate through the collection or access items individually by index.\n            if (groceriesSections.items.length > 0) {\n                console.log(\"Section name: \" + groceriesSections.items[0].name);\n                console.log(\"Section ID: \" + groceriesSections.items[0].id);\n            }\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+    parameters:
+    - id: name
+      description: Nom de la section.
+      type:
+      - string
+- uid: onenote.OneNote.SectionCollection.getItem
+  summary: >-
+    Obtient une section en fonction de son ID ou de son index dans la collection. En lecture seule.
+
+
+    \[[Du jeu d’API : OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: getItem(index)
+  fullName: onenote.OneNote.SectionCollection.getItem
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getItem(index: number | string): OneNote.Section;'
+    return:
+      type:
+      - onenote.OneNote.Section
+      description: ''
+    parameters:
+    - id: index
+      description: ID ou emplacement d’index de la section de la collection.
+      type:
+      - number | string
+- uid: onenote.OneNote.SectionCollection.getItemAt
+  summary: >-
+    Obtient une section en fonction de sa position dans la collection.
+
+
+    \[[Du jeu d’API : OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: getItemAt(index)
+  fullName: onenote.OneNote.SectionCollection.getItemAt
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getItemAt(index: number): OneNote.Section;'
+    return:
+      type:
+      - onenote.OneNote.Section
+      description: ''
+    parameters:
+    - id: index
+      description: Valeur d’indice de l’objet à récupérer. Avec indice zéro.
+      type:
+      - number
+- uid: onenote.OneNote.SectionCollection.items
+  summary: Obtient l’enfant chargé éléments dans cette collection.
+  name: items
+  fullName: onenote.OneNote.SectionCollection.items
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly items: OneNote.Section[];'
+    return:
+      type:
+      - OneNote.Section[]
+- uid: onenote.OneNote.SectionCollection.load
+  summary: Files d’attente d’une commande pour charger les propriétés de l’objet spécifiées. Vous devez appeler « context.sync() » avant de lire les propriétés.
+  remarks: "Outre cette signature, cette méthode présente les signatures suivantes :\n\n`load(option?: { select?: string; expand?: string; }): OneNote.SectionCollection`-Où option.select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options.expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.SectionCollection`-Uniquement disponible sur les types de la collection. Il est similaire à la signature précédente. Option.Top Spécifie le nombre maximal d’éléments pouvant être inclus dans le résultat de la collection. Option.Skip Spécifie le nombre d’éléments qui doivent être ignoré et non inclus dans le résultat. Si option.top est spécifié, le jeu de résultats démarre après l’ignorer le nombre spécifié d’éléments.\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nOneNote.run(function (context) {\n\n    // Get the sections in the current notebook.\n    var sections = context.application.getActiveNotebook().sections;\n\n    // Queue a command to load the sections. \n    // For best performance, request specific properties.\n    sections.load(\"name\"); \n\n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n            \n            // Iterate through the collection or access items individually by index, for example: sections.items[0]\n            $.each(sections.items, function(index, section) {\n                if (section.name === \"Homework\") {\n                    section.addPage(\"Biology\");\n                    section.addPage(\"Spanish\");\n                    section.addPage(\"Computer Science\");\n                }\n            });\n            return context.sync();\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  name: load(option)
+  fullName: onenote.OneNote.SectionCollection.load
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: string | string[]): OneNote.SectionCollection;'
+    return:
+      type:
+      - onenote.OneNote.SectionCollection
+      description: ''
+    parameters:
+    - id: option
+      description: Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+      type:
+      - string | string[]
+- uid: onenote.OneNote.SectionCollection.toJSON
+  name: toJSON()
+  fullName: onenote.OneNote.SectionCollection.toJSON
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'toJSON(): OneNote.Interfaces.SectionCollectionData;'
+    return:
+      type:
+      - onenote.OneNote.Interfaces.SectionCollectionData
+      description: ''
+- uid: onenote.OneNote.SectionCollection.track
+  summary: Suivre l’objet pour l’ajustement automatique selon entourant les modifications dans le document. Cet appel est une abréviation de context.trackedObjects.add(thisObject). Si vous utilisez cet objet dans les appels de « .sync » et en dehors de l’exécution séquentielle d’un lot de « .run » et obtenir une erreur « InvalidObjectPath » lors de la définition d’une propriété ou d’appeler une méthode sur l’objet, vous devez avoir ajouté l’objet à l’objet suivi collection lorsque l’objet a été créé tout d’abord.
+  name: track()
+  fullName: onenote.OneNote.SectionCollection.track
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'track(): OneNote.SectionCollection;'
+    return:
+      type:
+      - onenote.OneNote.SectionCollection
+      description: ''
+- uid: onenote.OneNote.SectionCollection.untrack
+  summary: Version de la mémoire associée à cet objet, si elle a été précédemment suivi. Cet appel est l’abréviation de context.trackedObjects.remove(thisObject). Comportant de nombreux objets suivis ralentit l’application hôte, donc pensez à libérer les objets que vous ajoutez, une fois que vous avez terminé les utiliser. Vous devrez appeler « context.sync() » avant que la version de mémoire prenne effet.
+  name: untrack()
+  fullName: onenote.OneNote.SectionCollection.untrack
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'untrack(): OneNote.SectionCollection;'
+    return:
+      type:
+      - onenote.OneNote.SectionCollection
+      description: ''

@@ -1,0 +1,154 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: 1e6c65b0232661ef332c79441e1b808b899c3d83
+ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 09/20/2018
+ms.locfileid: "24042619"
+items:
+- uid: excel.Excel.ChartSeriesCollection
+  summary: >-
+    Représente une collection de séries de graphique.
+
+
+    \[[Du jeu d’API : ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: Excel.ChartSeriesCollection
+  fullName: excel.Excel.ChartSeriesCollection
+  langs:
+  - typeScript
+  type: class
+  extends:
+  - OfficeExtension.ClientObject
+  package: excel
+  children:
+  - excel.Excel.ChartSeriesCollection.add
+  - excel.Excel.ChartSeriesCollection.count
+  - excel.Excel.ChartSeriesCollection.getCount
+  - excel.Excel.ChartSeriesCollection.getItemAt
+  - excel.Excel.ChartSeriesCollection.items
+  - excel.Excel.ChartSeriesCollection.load
+  - excel.Excel.ChartSeriesCollection.toJSON
+- uid: excel.Excel.ChartSeriesCollection.add
+  summary: >-
+    Ajouter une nouvelle série à la collection. La nouvelle série ajoutée n’est pas visible jusqu'à ce que les valeurs de jeu / x de l’axe des valeurs/bulle tailles il (selon le type de graphique).
+
+
+    \[[Du jeu d’API : ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: add(name, index)
+  fullName: excel.Excel.ChartSeriesCollection.add
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'add(name?: string, index?: number): Excel.ChartSeries;'
+    return:
+      type:
+      - excel.Excel.ChartSeries
+      description: ''
+    parameters:
+    - id: name
+      description: Facultatif. Nom de la série.
+      type:
+      - string
+    - id: index
+      description: Facultatif. Valeur d’index de la série à ajouter. Index zéro.
+      type:
+      - number
+- uid: excel.Excel.ChartSeriesCollection.count
+  summary: >-
+    Renvoie le nombre de séries de la collection. En lecture seule.
+
+
+    \[[Du jeu d’API : ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: count
+  fullName: excel.Excel.ChartSeriesCollection.count
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly count: number;'
+    return:
+      type:
+      - number
+- uid: excel.Excel.ChartSeriesCollection.getCount
+  summary: >-
+    Renvoie le nombre de séries de la collection.
+
+
+    \[[Du jeu d’API : ExcelApi 1.4](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: getCount()
+  fullName: excel.Excel.ChartSeriesCollection.getCount
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getCount(): OfficeExtension.ClientResult<number>;'
+    return:
+      type:
+      - OfficeExtension.ClientResult<number>
+      description: ''
+- uid: excel.Excel.ChartSeriesCollection.getItemAt
+  summary: >-
+    Extrait une série en fonction de sa position dans la collection.
+
+
+    \[[Du jeu d’API : ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: getItemAt(index)
+  fullName: excel.Excel.ChartSeriesCollection.getItemAt
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getItemAt(index: number): Excel.ChartSeries;'
+    return:
+      type:
+      - excel.Excel.ChartSeries
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\n// Get the name of the first series in the series collection.\nExcel.run(function (ctx) { \n    var seriesCollection = ctx.workbook.worksheets.getItem(\"Sheet1\").charts.getItem(\"Chart1\").series;\n    seriesCollection.load('items');\n    return ctx.sync().then(function() {\n        console.log(seriesCollection.items[0].name);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+    parameters:
+    - id: index
+      description: Valeur d’indice de l’objet à récupérer. Avec indice zéro.
+      type:
+      - number
+- uid: excel.Excel.ChartSeriesCollection.items
+  summary: Obtient l’enfant chargé éléments dans cette collection.
+  name: items
+  fullName: excel.Excel.ChartSeriesCollection.items
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly items: Excel.ChartSeries[];'
+    return:
+      type:
+      - Excel.ChartSeries[]
+- uid: excel.Excel.ChartSeriesCollection.load
+  summary: Files d’attente d’une commande pour charger les propriétés de l’objet spécifiées. Vous devez appeler « context.sync() » avant de lire les propriétés.
+  remarks: "Outre cette signature, cette méthode présente les signatures suivantes :\n\n`load(option?: { select?: string; expand?: string; }): Excel.ChartSeriesCollection`-Où option.select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options.expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.ChartSeriesCollection`-Uniquement disponible sur les types de la collection. Il est similaire à la signature précédente. Option.Top Spécifie le nombre maximal d’éléments pouvant être inclus dans le résultat de la collection. Option.Skip Spécifie le nombre d’éléments qui doivent être ignoré et non inclus dans le résultat. Si option.top est spécifié, le jeu de résultats démarre après l’ignorer le nombre spécifié d’éléments.\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\n// Getting the names of series in the series collection.\nExcel.run(function (ctx) { \n    var seriesCollection = ctx.workbook.worksheets.getItem(\"Sheet1\").charts.getItem(\"Chart1\").series;\n    seriesCollection.load('items');\n    return ctx.sync().then(function() {\n        for (var i = 0; i < seriesCollection.items.length; i++)\n        {\n            console.log(seriesCollection.items[i].name);\n        }\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\n// Get the number of chart series in collection.\nExcel.run(function (ctx) { \n    var seriesCollection = ctx.workbook.worksheets.getItem(\"Sheet1\").charts.getItem(\"Chart1\").series;\n    seriesCollection.load('count');\n    return ctx.sync().then(function() {\n        console.log(\"series: Count= \" + seriesCollection.count);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  name: load(option)
+  fullName: excel.Excel.ChartSeriesCollection.load
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: string | string[]): Excel.ChartSeriesCollection;'
+    return:
+      type:
+      - excel.Excel.ChartSeriesCollection
+      description: ''
+    parameters:
+    - id: option
+      description: Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+      type:
+      - string | string[]
+- uid: excel.Excel.ChartSeriesCollection.toJSON
+  name: toJSON()
+  fullName: excel.Excel.ChartSeriesCollection.toJSON
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'toJSON(): Excel.Interfaces.ChartSeriesCollectionData;'
+    return:
+      type:
+      - excel.Excel.Interfaces.ChartSeriesCollectionData
+      description: ''
