@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: f8952632c109ec2390031257a6629053baa92243
-ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.openlocfilehash: 48b76901845a44f011b3cfd561493727f89daf27
+ms.sourcegitcommit: e9cb2f2717e1cf062a2f6ffe6a382d7b9b934ba0
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/20/2018
-ms.locfileid: "24044268"
+ms.lasthandoff: 09/21/2018
+ms.locfileid: "24063149"
 items:
 - uid: visio
   name: visio
@@ -76,7 +76,7 @@ items:
   - visio.Visio.ShapeView
   - visio.Visio.ToolBarType
 - uid: visio.Visio.run
-  summary: Exécute un script de commandes qui effectue des actions sur le modèle objet Visio, en utilisant le contexte de demande d’objets de l’API créé précédemment.
+  summary: Exécute un script de commandes qui effectue des actions sur le modèle objet Visio, à l’aide de RequestContext d’un objet créé précédemment. Lorsque la vente est résolue, tous les objets marques alloués automatiquement lors de l’exécution seront publiés.
   remarks: >-
     Outre cette signature, la méthode présente également les signatures suivantes :
 
@@ -88,24 +88,24 @@ items:
 
 
     `run<T>(objects: OfficeExtension.ClientObject[], batch: (context: Visio.RequestContext) => Promise<T>): Promise<T>;`
-  name: run(objects, batch)
+  name: run(contextObject, batch)
   fullName: visio.Visio.run
   langs:
   - typeScript
   type: function
   syntax:
-    content: 'export function run<T>(objects: OfficeExtension.ClientObject[], batch: (context: Visio.RequestContext) => Promise<T>): Promise<T>;'
+    content: 'export function run<T>(contextObject: OfficeExtension.ClientRequestContext, batch: (context: Visio.RequestContext) => Promise<T>): Promise<T>;'
     return:
       type:
       - Promise<T>
       description: ''
     parameters:
-    - id: objects
-      description: Tableau d’objets de l’API créé précédemment. Le tableau sera validé pour vous assurer que tous les objets partagent le même contexte. Le traitement par lots utilise ce contexte de demande partagé, ce qui signifie que toute modification apportée à ces objets est récupérées par « context.sync() ».
+    - id: contextObject
+      description: Un Visio.RequestContext créé précédemment. Ce contexte sera obtenir réutilisé par la fonction de traitement par lots (au lieu d’avoir un nouveau contexte créé). Cela signifie que le lot sera en mesure de récupérer les modifications apportées aux objets d’API existants, si ces objets sont dérivés de ce même contexte.
       type:
-      - OfficeExtension.ClientObject[]
+      - office.OfficeExtension.ClientRequestContext
     - id: batch
-      description: Une fonction qui prend un Visio.RequestContext et renvoie une promesse (juste en règle générale, le résultat de « context.sync()"). Lorsque la vente est résolue, tous les objets marques alloués automatiquement lors de l’exécution seront publiés.
+      description: Une fonction qui prend un RequestContext et renvoie une promesse (juste en règle générale, le résultat de « context.sync()"). Le paramètre de contexte facilite les demandes à l’application Visio. Depuis le complément Office et l’application Visio s’exécutent dans deux processus différents, RequestContext est requis pour accéder au modèle objet Visio à partir de la macro complémentaire.
       type:
       - '(context: Visio.RequestContext) => Promise<T>'
 references:
