@@ -88,11 +88,11 @@ spécifie l’événement associé à un gestionnaire d’événements.
 
 | Nom | Type | Description | Ensemble de la configuration minimale requise |
 |---|---|---|---|
-|`AppointmentTimeChanged`| String | Le rendez-vous date ou l’heure de la série sélectionnée a changé. | Preview |
+|`AppointmentTimeChanged`| String | La date ou l’heure du rendez-vous sélectionné ou de série a changé. | 1.7 |
 |`ItemChanged`| String | L’élément sélectionné a changé. | 1,5 |
 |`OfficeThemeChanged`| String | L’élément sélectionné a changé. | Preview |
-|`RecipientsChanged`| String | La liste des destinataires de l’élément sélectionné a changé. | Preview |
-|`RecurrencePatternChanged`| String | La périodicité de la série sélectionnée a changé. | Preview |
+|`RecipientsChanged`| String | La liste des destinataires de l’emplacement d’élément ou d’un rendez-vous sélectionné a changé. | 1.7 |
+|`RecurrenceChanged`| String | La périodicité de la série sélectionnée a changé. | 1.7 |
 
 ##### <a name="requirements"></a>Configuration requise
 

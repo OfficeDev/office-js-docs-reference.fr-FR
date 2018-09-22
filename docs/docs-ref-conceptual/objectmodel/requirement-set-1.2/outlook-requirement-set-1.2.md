@@ -1,6 +1,6 @@
 # <a name="outlook-add-in-api-requirement-set-12"></a>Ensemble de conditions requises de l’API du complément Outlook 1.2
 
-Le sous-ensemble de l’API pour le complément Outlook de l’interface API JavaScript pour Office comprend des objets, des méthodes, des propriétés et des événements à utiliser dans un complément Outlook.
+Le sous-ensemble Outlook-dans l’API de l’API JavaScript pour Office inclut des objets, méthodes, propriétés et événements que vous pouvez utiliser dans Outlook complément.
 
 > [!NOTE]
 > Cette documentation est une [exigence](/javascript/office/requirement-sets/outlook-api-requirement-sets) autre que le dernier jeu d’exigence. 

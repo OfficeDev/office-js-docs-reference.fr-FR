@@ -1,6 +1,6 @@
 # <a name="outlook-add-in-api-requirement-set-16"></a>Outlook complément nécessite API définie 1.6
 
-Le sous-ensemble de l’API pour le complément Outlook de l’interface API JavaScript pour Office comprend des objets, des méthodes, des propriétés et des événements à utiliser dans un complément Outlook.
+Le sous-ensemble Outlook-dans l’API de l’API JavaScript pour Office inclut des objets, méthodes, propriétés et événements que vous pouvez utiliser dans Outlook complément.
 
 ## <a name="whats-new-in-16"></a>Quelles sont les nouveautés dans 1.6 ?
 

@@ -1,0 +1,861 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: ab25b3486a70b5c565d689e2e33bcc86415c2d58
+ms.sourcegitcommit: 9b0526d43475e18288823139e53c2a70f1a7e7b2
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 09/22/2018
+ms.locfileid: "24969003"
+items:
+- uid: Outlook_1_7.Office.MessageCompose
+  summary: >-
+    Mode de [Office.context.mailbox.item](xref:Outlook_1_7.Office.Item)de composition de message<!-- -->.
+
+
+    Important : C’est un objet Outlook interne, pas directement exposé par le biais des interfaces existants. Vous devez traiter cette comme mode de `Office.context.mailbox.item`. Reportez-vous aux pages du modèle objet pour plus d’informations.
+  name: Office.MessageCompose
+  fullName: Outlook_1_7.Office.MessageCompose
+  langs:
+  - typeScript
+  type: interface
+  extends:
+  - Message
+  package: Outlook_1_7
+  children:
+  - Outlook_1_7.Office.MessageCompose.addFileAttachmentAsync
+  - Outlook_1_7.Office.MessageCompose.addHandlerAsync
+  - Outlook_1_7.Office.MessageCompose.addItemAttachmentAsync
+  - Outlook_1_7.Office.MessageCompose.bcc
+  - Outlook_1_7.Office.MessageCompose.body
+  - Outlook_1_7.Office.MessageCompose.cc
+  - Outlook_1_7.Office.MessageCompose.close
+  - Outlook_1_7.Office.MessageCompose.conversationId
+  - Outlook_1_7.Office.MessageCompose.dateTimeCreated
+  - Outlook_1_7.Office.MessageCompose.dateTimeModifed
+  - Outlook_1_7.Office.MessageCompose.from
+  - Outlook_1_7.Office.MessageCompose.getSelectedDataAsync
+  - Outlook_1_7.Office.MessageCompose.itemType
+  - Outlook_1_7.Office.MessageCompose.loadCustomPropertiesAsync
+  - Outlook_1_7.Office.MessageCompose.notificationMessages
+  - Outlook_1_7.Office.MessageCompose.recurrence
+  - Outlook_1_7.Office.MessageCompose.removeAttachmentAsync
+  - Outlook_1_7.Office.MessageCompose.removeHandlerAsync
+  - Outlook_1_7.Office.MessageCompose.saveAsync
+  - Outlook_1_7.Office.MessageCompose.seriesId
+  - Outlook_1_7.Office.MessageCompose.setSelectedDataAsync
+  - Outlook_1_7.Office.MessageCompose.subject
+  - Outlook_1_7.Office.MessageCompose.to
+- uid: Outlook_1_7.Office.MessageCompose.addFileAttachmentAsync
+  summary: >-
+    Ajoute un fichier à un message ou un rendez-vous en pièce jointe.
+
+
+    La méthode addFileAttachmentAsync charge le fichier depuis l’URI spécifié et le joint à l’élément dans le formulaire de composition.
+
+
+    L’identificateur peut être utilisé avec la méthode removeAttachmentAsync pour supprimer la pièce jointe dans la même session.
+
+
+    \[[Du jeu d’API : boîte aux lettres 1.1](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr>
+
+
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition de message</td></tr>
+
+
+    <tr><td>Erreurs</td><td>AttachmentSizeExceeded - la pièce jointe est lourde.</td></tr><tr><td></td><td>FileTypeNotSupported - la pièce jointe a une extension qui n’est pas autorisée.</td></tr><tr><td></td><td>NumberOfAttachmentsExceeded - le message ou le rendez-vous possède trop de pièces jointes.</td></tr></table>
+
+
+    Outre cette signature, la méthode présente également les signatures suivantes :
+
+
+    `addFileAttachmentAsync(uri: string, attachmentName: string): void;`
+
+
+    `addFileAttachmentAsync(uri: string, attachmentName: string, options: AsyncContextOptions): void;`
+
+
+    `addFileAttachmentAsync(uri: string, attachmentName: string, callback: (result: AsyncResult<string>) => void): void;`
+  name: addFileAttachmentAsync(uri, attachmentName, options, callback)
+  fullName: Outlook_1_7.Office.MessageCompose.addFileAttachmentAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'addFileAttachmentAsync(uri: string, attachmentName: string, options?: AsyncContextOptions, callback?: (result: AsyncResult<string>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: uri
+      description: URI indiquant l’emplacement du fichier à joindre au message ou au rendez-vous. La longueur maximale est de 2 048 caractères.
+      type:
+      - string
+    - id: attachmentName
+      description: Nom de la pièce jointe affiché lors de son chargement. La taille maximale est de 255 caractères.
+      type:
+      - string
+    - id: options
+      description: 'Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. asyncContext : les développeurs peuvent fournir n’importe quel objet qu’ils souhaitent accéder dans la méthode de rappel. isInline : Si true, indique que la pièce jointe s’affichera insérée dans le corps du message et ne doit pas être affichée dans la liste des pièces jointes.'
+      type:
+      - office.Office.AsyncContextOptions
+    - id: callback
+      description: Une fois la méthode terminée, la fonction passée dans le paramètre de rappel est appelée avec un seul paramètre de type Office.AsyncResult. En cas de réussite, l’identificateur de pièce jointe est fournie dans la propriété asyncResult.value. En cas d’échec de téléchargement de la pièce jointe, l’objet asyncResult contient un objet Error qui fournit une description de l’erreur.
+      type:
+      - '(result: AsyncResult<string>) => void'
+- uid: Outlook_1_7.Office.MessageCompose.addHandlerAsync
+  summary: >-
+    ajoute un gestionnaire d’événements pour un événement pris en charge.
+
+
+    Actuellement les types d’événements pris en charge sont `Office.EventType.AppointmentTimeChanged`, `Office.EventType.RecipientsChanged`, et `Office.EventType.RecurrenceChanged`.
+
+
+    \[[Du jeu d’API : boîte aux lettres 1.7](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition de message</td></tr></table>
+
+
+    Outre cette signature, la méthode a également la signature suivante :
+
+
+    `addHandlerAsync(eventType:EventType, handler: any, callback?: (result: AsyncResult<void>) => void): void;`
+  name: addHandlerAsync(eventType, handler, options, callback)
+  fullName: Outlook_1_7.Office.MessageCompose.addHandlerAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'addHandlerAsync(eventType:EventType, handler: any, options?: any, callback?: (result: AsyncResult<void>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: eventType
+      description: Événement qui doit appeler le gestionnaire.
+      type:
+      - EventType
+    - id: handler
+      description: La fonction à gérer l’événement. La fonction doit accepter un seul paramètre, qui est un littéral d’objet. La propriété type dans le paramètre correspondra le paramètre eventType transmis à addHandlerAsync.
+      type:
+      - any
+    - id: options
+      description: 'Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. asyncContext : les développeurs peuvent fournir n’importe quel objet qu’ils souhaitent accéder dans la méthode de rappel.'
+      type:
+      - any
+    - id: callback
+      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre de rappel est appelée avec un seul paramètre, asyncResult, qui est un objet Office.AsyncResult.
+      type:
+      - '(result: AsyncResult<void>) => void'
+- uid: Outlook_1_7.Office.MessageCompose.addItemAttachmentAsync
+  summary: >-
+    Ajoute un élément Exchange, comme un message, en pièce jointe au message ou au rendez-vous.
+
+
+    La méthode addItemAttachmentAsync joint l’élément avec l’identificateur Exchange spécifié à l’élément du formulaire de composition. Si vous spécifiez une méthode de rappel, la méthode est appelée avec un paramètre, asyncResult, qui contient l’identificateur de pièce jointe ou un code indiquant toute erreur survenue lors de l’ajout de l’élément en tant que pièce jointe. Si nécessaire, vous pouvez utiliser le paramètre options pour transmettre des informations d’état à la méthode de rappel.
+
+
+    L’identificateur peut être utilisé avec la méthode removeAttachmentAsync pour supprimer la pièce jointe dans la même session.
+
+
+    Si votre complément Office est exécuté dans Outlook Web App, la méthode addItemAttachmentAsync peut joindre des éléments à des éléments autres que ceux que vous modifiez ; mais cette action n’est pas prise en charge et est déconseillée.
+
+
+    \[[Du jeu d’API : boîte aux lettres 1.1](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr>
+
+
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition de message</td></tr>
+
+
+    <tr><td>Erreurs</td><td>NumberOfAttachmentsExceeded - le message ou le rendez-vous possède trop de pièces jointes.</td></tr></table>
+
+
+    Outre cette signature, cette méthode a également les signatures suivantes :
+
+
+    `addItemAttachmentAsync(itemId: any, attachmentName: string): void;`
+
+
+    `addItemAttachmentAsync(itemId: any, attachmentName: string, options: Office.AsyncContextOptions): void;`
+
+
+    `addItemAttachmentAsync(itemId: any, attachmentName: string, callback: (result: AsyncResult<string>) => void): void;`
+  name: addItemAttachmentAsync(itemId, attachmentName, options, callback)
+  fullName: Outlook_1_7.Office.MessageCompose.addItemAttachmentAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'addItemAttachmentAsync(itemId: any, attachmentName: string, options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<string>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: itemId
+      description: Identificateur Exchange de l’élément à joindre. La taille maximale est de 100 caractères.
+      type:
+      - any
+    - id: attachmentName
+      description: Nom de la pièce jointe affiché lors de son chargement. La taille maximale est de 255 caractères.
+      type:
+      - string
+    - id: options
+      description: 'Littéral d’objet contenant une ou plusieurs des propriétés suivantes. asyncContext : les développeurs peuvent fournir n’importe quel objet qu’ils souhaitent accéder dans la méthode de rappel.'
+      type:
+      - office.Office.AsyncContextOptions
+    - id: callback
+      description: Une fois la méthode terminée, la fonction passée dans le paramètre de rappel est appelée avec un seul paramètre de type AsyncResult. En cas de réussite, l’identificateur de pièce jointe est fournie dans la propriété asyncResult.value. En cas d’échec de l’ajout de la pièce jointe, l’objet asyncResult contiendra un objet Error qui fournit une description de l’erreur.
+      type:
+      - '(result: AsyncResult<string>) => void'
+- uid: Outlook_1_7.Office.MessageCompose.bcc
+  summary: >-
+    Obtient un objet qui fournit les méthodes permettant d’obtenir ou de mettre à jour les destinataires des Cci (copie carbone invisible) d’un message.
+
+
+    \[[Du jeu d’API : boîte aux lettres 1.1](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition de message</td></tr></table>
+  name: bcc
+  fullName: Outlook_1_7.Office.MessageCompose.bcc
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'bcc: Recipients;'
+    return:
+      type:
+      - Recipients
+- uid: Outlook_1_7.Office.MessageCompose.body
+  summary: >-
+    Obtient un objet qui fournit des méthodes permettant de manipuler le corps d’un élément.
+
+
+    \[[Du jeu d’API : boîte aux lettres 1.1](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition de message</td></tr></table>
+  name: body
+  fullName: Outlook_1_7.Office.MessageCompose.body
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'body: Office.Body;'
+    return:
+      type:
+      - outlook.Office.Body
+- uid: Outlook_1_7.Office.MessageCompose.cc
+  summary: >-
+    Permet d’accéder aux destinataires Cc (copie carbone) d’un message. Le type d’objet et le niveau d’accès dépendent du mode de l’élément actuel.
+
+
+    Cette propriété renvoie un objet de [Office.Recipients](xref:Outlook_1_7.Office.Recipients) qui fournit les méthodes permettant d’obtenir ou de mettre à jour les destinataires sur la ligne Cc du message.
+
+
+    \[[Du jeu d’API : boîte aux lettres 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition de message</td></tr></table>
+  name: cc
+  fullName: Outlook_1_7.Office.MessageCompose.cc
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'cc: Recipients;'
+    return:
+      type:
+      - Recipients
+- uid: Outlook_1_7.Office.MessageCompose.close
+  summary: >-
+    Ferme l’élément actuel sont composée
+
+
+    Les comportements de la méthode close dépend de l’état actuel de l’élément composé en cours. Si l’élément a des modifications non enregistrées, le client invite l’utilisateur à enregistrer, annuler ou fermer l’action.
+
+
+    Dans le client de bureau Outlook, si le message est une réponse instantanée, la méthode close n’a aucun effet.
+
+
+    Remarque : Dans Outlook sur le web, si l’élément est un rendez-vous et il a été précédemment enregistré à l’aide de saveAsync, l’utilisateur est invité à enregistrer, supprimer ou annuler même si aucun modifications n’ont été apportées depuis la dernière sauvegarde de l’élément.
+
+
+    \[[Du jeu d’API : boîte aux lettres 1.3](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>Restricted</td></tr>
+
+
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition de message</td></tr></table>
+  name: close()
+  fullName: Outlook_1_7.Office.MessageCompose.close
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'close(): void;'
+    return:
+      type:
+      - void
+      description: ''
+- uid: Outlook_1_7.Office.MessageCompose.conversationId
+  summary: >-
+    Obtient l’identificateur de la conversation qui contient un message particulier.
+
+
+    Vous pouvez obtenir un nombre entier de cette propriété si votre application de messagerie est activée dans les formulaires de lecture ou les réponses des formulaires de composition. Si, par la suite, l’utilisateur modifie l’objet du message de réponse, lors de l’envoi de la réponse, l’ID de conversation de ce message va changer et la valeur que vous avez obtenue plus tôt ne sera plus applicable.
+
+
+    Cette propriété obtient une valeur null lorsqu’un élément est ajouté à un formulaire de composition. Si l’utilisateur définit la ligne Objet et enregistre l’élément, la propriété conversationId renvoie une valeur.
+
+
+    \[[Du jeu d’API : boîte aux lettres 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition de message</td></tr></table>
+  name: conversationId
+  fullName: Outlook_1_7.Office.MessageCompose.conversationId
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'conversationId: string;'
+    return:
+      type:
+      - string
+- uid: Outlook_1_7.Office.MessageCompose.dateTimeCreated
+  summary: >-
+    Obtient la date et l’heure de création d’un élément. Mode lecture uniquement.
+
+
+    \[[Du jeu d’API : boîte aux lettres 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition de message</td></tr></table>
+  name: dateTimeCreated
+  fullName: Outlook_1_7.Office.MessageCompose.dateTimeCreated
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'dateTimeCreated: Date;'
+    return:
+      type:
+      - Date
+- uid: Outlook_1_7.Office.MessageCompose.dateTimeModifed
+  summary: >-
+    Obtient la date et l’heure de la dernière modification d’un élément. Mode lecture uniquement.
+
+
+    \[[Du jeu d’API : boîte aux lettres 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition de message</td></tr></table>
+
+
+    Remarque : Ce membre n’est pas pris en charge dans Outlook pour iOS ou Outlook pour Android.
+  name: dateTimeModifed
+  fullName: Outlook_1_7.Office.MessageCompose.dateTimeModifed
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'dateTimeModifed: Date;'
+    return:
+      type:
+      - Date
+- uid: Outlook_1_7.Office.MessageCompose.from
+  summary: >-
+    Obtient l’adresse de messagerie de l’expéditeur d’un message.
+
+
+    L’à partir d’et propriétés de l’expéditeur représentent la même personne, sauf si le message est envoyé par un délégué. Dans ce cas, l’à partir de la propriété représente le propriétaire et la propriété sender représente le délégué.
+
+
+    La propriété renvoie un objet de From qui fournit une méthode pour obtenir l’à partir de la valeur.
+
+
+    \[[Du jeu d’API : boîte aux lettres 1.7](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition de message</td></tr></table>
+  name: from
+  fullName: Outlook_1_7.Office.MessageCompose.from
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'from: Office.From;'
+    return:
+      type:
+      - outlook.Office.From
+- uid: Outlook_1_7.Office.MessageCompose.getSelectedDataAsync
+  summary: >-
+    Renvoie de manière asynchrone les données sélectionnées à partir de l’objet ou du corps d’un message.
+
+
+    Si aucune sélection n’est effectuée, mais que le curseur est placé dans le corps ou l’objet, la méthode renvoie null pour les données sélectionnées. Si un champ autre que le corps ou l’objet est sélectionné, la méthode renvoie l’erreur InvalidSelection.
+
+
+    Pour accéder aux données sélectionnées via la méthode de rappel, appelez la méthode asyncResult.value.data. Pour accéder à la propriété source dont la sélection est issue, appelez la méthode asyncResult.value.sourceProperty, qui correspond à body ou subject.
+
+
+    \[[Du jeu d’API : boîte aux lettres 1.2](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr>
+
+
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition de message</td></tr></table>
+  name: getSelectedDataAsync(coerciontype, callback)
+  fullName: Outlook_1_7.Office.MessageCompose.getSelectedDataAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getSelectedDataAsync(coerciontype: Office.CoercionType, callback: (result: AsyncResult<any>) => void): void;'
+    return:
+      type:
+      - void
+      description: Les données sélectionnées en tant que chaîne dont le format est déterminé par coercionType.
+    parameters:
+    - id: coerciontype
+      description: ''
+      type:
+      - office.Office.CoercionType
+    - id: callback
+      description: Une fois la méthode terminée, la fonction passée dans le paramètre de rappel est appelée avec un seul paramètre de type Office.AsyncResult.
+      type:
+      - '(result: AsyncResult<any>) => void'
+- uid: Outlook_1_7.Office.MessageCompose.itemType
+  summary: >-
+    Obtient le type d’élément représenté par une instance.
+
+
+    La propriété itemType renvoie une des valeurs d’énumération ItemType indiquant si l’instance d’objet item est un message ou un rendez-vous.
+
+
+    \[[Du jeu d’API : boîte aux lettres 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition de message</td></tr></table>
+  name: itemType
+  fullName: Outlook_1_7.Office.MessageCompose.itemType
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'itemType: Office.MailboxEnums.ItemType;'
+    return:
+      type:
+      - outlook.Office.MailboxEnums.ItemType
+- uid: Outlook_1_7.Office.MessageCompose.loadCustomPropertiesAsync
+  summary: >-
+    Charge de manière asynchrone les propriétés personnalisées de ce complément vers l’élément sélectionné.
+
+
+    Les propriétés personnalisées sont stockées sous la forme de paires clé/valeur qui s’appliquent à une application ou un élément. Cette méthode renvoie un objet CustomProperties dans le rappel, qui fournit des méthodes pour accéder aux propriétés personnalisées propres à l’élément et au complément actifs. Les propriétés personnalisées ne sont pas chiffrées dans l’élément, par conséquent elles ne doivent pas servir d’espace de stockage sécurisé.
+
+
+    Les propriétés personnalisées sont fournies sous la forme d’un objet CustomProperties dans la propriété asyncResult.value. Cet objet peut être utilisé pour obtenir, définir et supprimer des propriétés personnalisées à partir de l’élément et réenregistrer les modifications apportées au jeu de propriétés personnalisées sur le serveur.
+
+
+    \[[Du jeu d’API : boîte aux lettres 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition de message</td></tr></table>
+  name: loadCustomPropertiesAsync(callback, userContext)
+  fullName: Outlook_1_7.Office.MessageCompose.loadCustomPropertiesAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'loadCustomPropertiesAsync(callback: (result: AsyncResult<Office.CustomProperties>) => void, userContext?: any): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: callback
+      description: Une fois la méthode terminée, la fonction passée dans le paramètre de rappel est appelée avec un seul paramètre de type Office.AsyncResult.
+      type:
+      - '(result: AsyncResult<Office.CustomProperties>) => void'
+    - id: userContext
+      description: Facultatif. Les développeurs peuvent fournir n’importe quel objet qu’ils souhaitent accéder dans la fonction de rappel. Cet objet est accessible par l’AsyncResult.asynccontext, propriété dans la fonction de rappel.
+      type:
+      - any
+- uid: Outlook_1_7.Office.MessageCompose.notificationMessages
+  summary: >-
+    Obtient les messages de notification pour un élément.
+
+
+    \[[Du jeu d’API : boîte aux lettres 1.3](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition de message</td></tr></table>
+  name: notificationMessages
+  fullName: Outlook_1_7.Office.MessageCompose.notificationMessages
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'notificationMessages: Office.NotificationMessages;'
+    return:
+      type:
+      - outlook.Office.NotificationMessages
+- uid: Outlook_1_7.Office.MessageCompose.recurrence
+  summary: >-
+    Obtient ou définit la périodicité d’un rendez-vous. Obtient la périodicité d’une demande de réunion. Lecture et de composition modes pour les éléments de rendez-vous. Mode de lecture pour les éléments de la demande de réunion.
+
+
+    La propriété de périodicité renvoie un objet de périodicité pour les demandes de réunions ou de rendez-vous périodiques si un élément est une série ou à une instance d’une série. `null`sont retournées pour les rendez-vous uniques et des demandes de réunion de rendez-vous uniques. `undefined`sont retournées pour les messages qui ne sont pas des demandes de réunion.
+
+
+    Remarque : Les demandes de réunion ont une valeur itemClass IPM. Schedule.Meeting.Request.
+
+
+    Remarque : Si l’objet de périodicité est null, cela indique que l’objet est un rendez-vous ou une demande de réunion d’un rendez-vous et ne fait pas partie d’une série.
+
+
+    \[[Du jeu d’API : boîte aux lettres 1.7](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition de message</td></tr></table>
+  name: recurrence
+  fullName: Outlook_1_7.Office.MessageCompose.recurrence
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'recurrence: Recurrence;'
+    return:
+      type:
+      - Recurrence
+- uid: Outlook_1_7.Office.MessageCompose.removeAttachmentAsync
+  summary: >-
+    Supprime une pièce jointe d’un message ou d’un rendez-vous.
+
+
+    La méthode removeAttachmentAsync supprime la pièce jointe avec l’identificateur spécifié de l’élément. Nous vous recommandons vivement de supprimer une pièce jointe à l’aide de son identificateur uniquement si la même application de messagerie a ajouté cette pièce jointe au cours de la même session. Dans Outlook Web App et OWA pour les périphériques, l’identificateur de pièce jointe n’est valable que dans la même session. Une session est terminée lorsque l’utilisateur ferme l’application, ou si celui-ci commence à composer dans un formulaire en ligne qu’il fait ensuite apparaître dans une fenêtre séparée.
+
+
+    \[[Du jeu d’API : boîte aux lettres 1.1](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr>
+
+
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition de message</td></tr>
+
+
+    <tr><td>Erreurs</td><td>InvalidAttachmentId - identificateur de pièce jointe n’existe pas.</td></tr></table>
+
+
+    Outre cette signature, la méthode présente également les signatures suivantes :
+
+
+    `removeAttachmentAsync(attachmentIndex: string): void;`
+
+
+    `removeAttachmentAsync(attachmentIndex: string, options: Office.AsyncContextOptions): void;`
+
+
+    `removeAttachmentAsync(attachmentIndex: string, callback: (result: AsyncResult<void>) => void): void;`
+  name: removeAttachmentAsync(attachmentIndex, options, callback)
+  fullName: Outlook_1_7.Office.MessageCompose.removeAttachmentAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'removeAttachmentAsync(attachmentIndex: string, options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<void>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: attachmentIndex
+      description: Identificateur de la pièce jointe à supprimer. La longueur maximale de la chaîne est de 100 caractères.
+      type:
+      - string
+    - id: options
+      description: 'Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. asyncContext : les développeurs peuvent fournir n’importe quel objet qu’ils souhaitent accéder dans la méthode de rappel.'
+      type:
+      - office.Office.AsyncContextOptions
+    - id: callback
+      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre de rappel est appelée avec un seul paramètre de type Office.AsyncResult. En cas d’échec de la suppression de la pièce jointe, l’AsyncResult.Error, propriété contient un code d’erreur avec la raison de l’échec.
+      type:
+      - '(result: AsyncResult<void>) => void'
+- uid: Outlook_1_7.Office.MessageCompose.removeHandlerAsync
+  summary: >-
+    Supprime un gestionnaire d’événements pour un événement pris en charge.
+
+
+    Actuellement les types d’événements pris en charge sont `Office.EventType.AppointmentTimeChanged`, `Office.EventType.RecipientsChanged`, et `Office.EventType.RecurrenceChanged`.
+
+
+    \[[Du jeu d’API : boîte aux lettres 1.7](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition de message</td></tr></table>
+
+
+    Outre cette signature, la méthode a également la signature suivante :
+
+
+    `removeHandlerAsync(eventType:EventType, handler: any, callback?: (result: AsyncResult<void>) => void): void;`
+  name: removeHandlerAsync(eventType, handler, options, callback)
+  fullName: Outlook_1_7.Office.MessageCompose.removeHandlerAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'removeHandlerAsync(eventType:EventType, handler: any, options?: any, callback?: (result: AsyncResult<void>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: eventType
+      description: Événement qui doit appeler le gestionnaire.
+      type:
+      - EventType
+    - id: handler
+      description: La fonction à gérer l’événement. La fonction doit accepter un seul paramètre, qui est un littéral d’objet. La propriété type dans le paramètre correspondra le paramètre eventType transmis à removeHandlerAsync.
+      type:
+      - any
+    - id: options
+      description: 'Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. asyncContext : les développeurs peuvent fournir n’importe quel objet qu’ils souhaitent accéder dans la méthode de rappel.'
+      type:
+      - any
+    - id: callback
+      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre de rappel est appelée avec un seul paramètre, asyncResult, qui est un objet Office.AsyncResult.
+      type:
+      - '(result: AsyncResult<void>) => void'
+- uid: Outlook_1_7.Office.MessageCompose.saveAsync
+  summary: >-
+    Enregistre un élément de manière asynchrone.
+
+
+    Lorsqu’elle est appelée, cette méthode enregistre le message en cours en tant que brouillon et renvoie l’ID de l’élément via la méthode de rappel. Dans Outlook Web App ou Outlook en mode en ligne, l’élément est enregistré sur le serveur. Dans Outlook en mode mis en cache, l’élément est enregistré dans le cache local.
+
+
+    Étant donné que les rendez-vous n’ont aucun état de brouillon, si saveAsync est appelée sur un rendez-vous dans en mode composition, l’élément sera enregistré comme un rendez-vous dans le calendrier de l’utilisateur normal. Pour les nouveaux rendez-vous qui n’ont pas encore été enregistrés, aucune invitation ne sera envoyée. L’enregistrement d’un rendez-vous existant envoie une mise à jour aux participants ajoutés ou supprimés.
+
+
+    Remarque : Si votre saveAsync complément appels sur un élément dans le mode composition afin d’obtenir un ID d’élément à utiliser avec EWS ou l’API REST, sachez que quand Outlook est en mode mis en cache, il peut prendre un certain temps avant que l’élément est réellement synchronisé avec le serveur. Jusqu'à ce que l’élément est synchronisé, à l’aide de l’ID d’élément renverra une erreur.
+
+
+    Remarque : Les clients suivants ont un comportement différent pour saveAsync dans les rendez-vous en mode composition :
+
+
+    - Mac Outlook ne prend pas en charge saveAsync d’une réunion en mode composition. L’appel de saveAsync sur une réunion dans Outlook Mac renverra une erreur.
+
+
+    - Outlook sur le web envoie toujours une invitation ou mise à jour lorsque saveAsync est appelée sur un rendez-vous dans le mode composition.
+
+
+    \[[Du jeu d’API : boîte aux lettres 1.3](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr>
+
+
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition de message</td></tr>
+
+
+    <tr><td>Erreurs</td><td>InvalidAttachmentId - identificateur de pièce jointe n’existe pas.</td></tr></table>
+
+
+    Outre cette signature, la méthode présente également les signatures suivantes :
+
+
+    `saveAsync(): void;`
+
+
+    `saveAsync(options: Office.AsyncContextOptions): void;`
+
+
+    `saveAsync(callback: (result: AsyncResult<void>) => void): void;`
+  name: saveAsync(options, callback)
+  fullName: Outlook_1_7.Office.MessageCompose.saveAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'saveAsync(options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<void>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: options
+      description: 'Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. asyncContext : les développeurs peuvent fournir n’importe quel objet qu’ils souhaitent accéder dans la méthode de rappel.'
+      type:
+      - office.Office.AsyncContextOptions
+    - id: callback
+      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre de rappel est appelée avec un seul paramètre de type Office.AsyncResult.
+      type:
+      - '(result: AsyncResult<void>) => void'
+- uid: Outlook_1_7.Office.MessageCompose.seriesId
+  summary: >-
+    Obtient l’id de la série appartenant à une instance.
+
+
+    Dans OWA et Outlook, le seriesId renvoie l’ID Exchange Web Services (EWS) de l’élément parent (série) auquel cet élément appartient. Toutefois, dans iOS et Android, le seriesId renvoie l’ID du reste de l’élément parent.
+
+
+    Remarque : L’identificateur retourné par la propriété seriesId est identique à l’identificateur d’élément de Services Web Exchange. La propriété seriesId n’est pas identique à l’ID Outlook utilisées par l’API REST de Outlook. Avant d’effectuer des appels d’API REST à l’aide de cette valeur, elle doit être convertie à l’aide de Office.context.mailbox.convertToRestId. Pour plus d’informations, voir [utilisation de l’API REST d’Outlook à partir d’un complément Outlook](https://docs.microsoft.com/outlook/add-ins/use-rest-api)<!-- -->.
+
+
+    La propriété seriesId renvoie la valeur nulle pour les éléments qui n’ont pas d’éléments parents tels que les rendez-vous uniques, des éléments de série, ou les demandes de réunion et retourne la valeur undefined pour tous les éléments qui ne sont pas des demandes de réunion.
+
+
+    \[[Du jeu d’API : boîte aux lettres 1.7](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition de message</td></tr></table>
+  name: seriesId
+  fullName: Outlook_1_7.Office.MessageCompose.seriesId
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'seriesId: string;'
+    return:
+      type:
+      - string
+- uid: Outlook_1_7.Office.MessageCompose.setSelectedDataAsync
+  summary: >-
+    Insère les données dans le corps ou l’objet d’un message de manière asynchrone.
+
+
+    La méthode setSelectedDataAsync insère la chaîne spécifiée à l’emplacement du curseur dans l’objet ou le corps de l’élément, ou, si le texte est sélectionné dans l’éditeur, il remplace le texte sélectionné. Si le curseur n’est pas dans le champ corps ou l’objet, une erreur est renvoyée. Après insertion, le curseur est placé à la fin du contenu inséré.
+
+
+    \[[Du jeu d’API : boîte aux lettres 1.2](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr>
+
+
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition de message</td></tr>
+
+
+    <tr><td>Erreurs</td><td>InvalidAttachmentId - identificateur de pièce jointe n’existe pas.</td></tr></table>
+
+
+    Outre cette signature, la méthode présente également les signatures suivantes :
+
+
+    `setSelectedDataAsync(data: string): void;`
+
+
+    `setSelectedDataAsync(data: string, options: Office.AsyncContextOptions &amp; CoercionTypeOptions): void;`
+
+
+    `setSelectedDataAsync(data: string, callback: (result: AsyncResult<void>) => void): void;`
+  name: setSelectedDataAsync(data, options, callback)
+  fullName: Outlook_1_7.Office.MessageCompose.setSelectedDataAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'setSelectedDataAsync(data: string, options?: Office.AsyncContextOptions & CoercionTypeOptions, callback?: (result: AsyncResult<void>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: data
+      description: Données à insérer. Les données ne doivent pas dépasser 1 000 000 caractères. Si elles contiennent plus de 1 000 000 caractères, une exception ArgumentOutOfRange est générée.
+      type:
+      - string
+    - id: options
+      description: 'Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. asyncContext : les développeurs peuvent fournir n’importe quel objet qu’ils souhaitent accéder dans la méthode de rappel. coercionType : si le texte, le style actuel est appliqué dans Outlook Web App et Outlook. Si le champ est un éditeur HTML, seules les données de texte sont insérées, même si les données sont au format HTML. Si le code html et le champ prend en charge HTML (ne l’objet), le style actuel est appliqué dans Outlook Web App et du style par défaut est appliqué dans Outlook. Si le champ est un champ de texte, une erreur InvalidDataFormat est retournée. Si coercionType n’est pas défini, le résultat dépend du champ : si le champ est HTML, du langage HTML est utilisé ; si le champ est un champ de texte, du texte brut est utilisé.'
+      type:
+      - Office.AsyncContextOptions & CoercionTypeOptions
+    - id: callback
+      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre de rappel est appelée avec un seul paramètre de type Office.AsyncResult.
+      type:
+      - '(result: AsyncResult<void>) => void'
+- uid: Outlook_1_7.Office.MessageCompose.subject
+  summary: >-
+    Obtient ou définit la description qui apparaît dans le champ d’objet d’un élément.
+
+
+    La propriété subject obtient ou définit l’intégralité de l’objet de l’élément, tel qu’il est envoyé par le serveur de messagerie.
+
+
+    La propriété subject renvoie un objet Subject qui fournit des méthodes pour obtenir et définir l’objet.
+
+
+    \[[Du jeu d’API : boîte aux lettres 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition de message</td></tr></table>
+  name: subject
+  fullName: Outlook_1_7.Office.MessageCompose.subject
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'subject: Subject;'
+    return:
+      type:
+      - Subject
+- uid: Outlook_1_7.Office.MessageCompose.to
+  summary: >-
+    Permet d’accéder aux destinataires sur la ligne à du message. Le type d’objet et le niveau d’accès dépendent du mode de l’élément actuel.
+
+
+    La propriété renvoie un objet Recipients qui fournit les méthodes permettant d’obtenir ou de mettre à jour les destinataires sur la ligne à du message.
+
+
+    \[[Du jeu d’API : boîte aux lettres 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition de message</td></tr></table>
+  name: to
+  fullName: Outlook_1_7.Office.MessageCompose.to
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'to: Recipients;'
+    return:
+      type:
+      - Recipients
