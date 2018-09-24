@@ -40,6 +40,8 @@ Les clients suivants prennent en charge des compléments Outlook.
 
 | Client | Ensembles de conditions requises des API prises en charge |
 | --- | --- |
+| 2019 Outlook pour Windows | 1.1, 1.2, 1.3, 1.4, 1.5, 1.6 |
+| 2019 Outlook pour Mac | 1.1, 1.2, 1.3, 1.4, 1.5, 1.6 |
 | Outlook 2016 (Démarrer en un clic) pour Windows | 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7 |
 | Outlook 2016 (MSI) pour Windows | 1.1, 1.2, 1.3, 1.4 |
 | Outlook 2016 pour Mac | 1.1, 1.2, 1.3, 1.4, 1.5, 1.6 |
