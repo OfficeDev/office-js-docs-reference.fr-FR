@@ -25,7 +25,7 @@
 ####  <a name="accounttype-string"></a>accountType : chaîne
 
 > [!NOTE]
-> Ce membre est uniquement pris en charge dans 2016 Outlook pour Mac, créer 16.9.1212 et versions ultérieures.
+> Ce membre est actuellement uniquement pris en charge dans Outlook 2016 ou version ultérieure pour Mac (build 16.9.1212 ou version ultérieure).
 
 Obtient le type de compte de l’utilisateur associé à la boîte aux lettres. Les valeurs possibles sont répertoriés dans le tableau suivant.
 

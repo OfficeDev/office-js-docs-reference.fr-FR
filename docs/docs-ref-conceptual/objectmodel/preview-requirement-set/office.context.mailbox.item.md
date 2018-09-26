@@ -1453,7 +1453,7 @@ Type : Array.<(String|[Contact](/javascript/api/outlook/office.contact)|[Meetin
 Récupère les données d’initialisation transmises quand le complément est [activé par un message actionnable](https://docs.microsoft.com/outlook/actionable-messages/invoke-add-in-from-actionable-message).
 
 > [!NOTE]
-> Cette méthode est uniquement pris en charge par Outlook 2016 pour Windows (Click-to-Run versions supérieures à 16.0.8413.1000) et Outlook sur le web pour Office 365.
+> Cette méthode est uniquement pris en charge par Outlook 2016 ou version ultérieure pour Windows (versions Click-to-Run 16.0.8413.1000 au plus tard) et Outlook sur le site web d’Office 365.
 
 ##### <a name="parameters"></a>Paramètres :
 |Nom|Type|Attributs|Description|

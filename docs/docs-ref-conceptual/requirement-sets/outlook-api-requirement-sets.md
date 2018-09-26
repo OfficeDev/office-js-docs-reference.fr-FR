@@ -49,8 +49,8 @@ Les clients suivants prennent en charge des compléments Outlook.
 | Outlook pour iPhone | 1.1, 1.2, 1.3, 1.4, 1.5 |
 | Outlook pour Android | 1.1, 1.2, 1.3, 1.4, 1.5 |
 | Outlook sur le web (Office 365 et Outlook.com) | 1.1, 1.2, 1.3, 1.4, 1.5, 1.6 |
-| Outlook Web App (Exchange 2013 sur site) | 1.1 |
-| Outlook Web App (Exchange 2016 sur site) | 1.1, 1.2. 1.3 |
+| Outlook Web App (Exchange 2013 sur site) | 1.1 |
+| Outlook Web App (2016 Exchange sur site) | 1.1, 1.2. 1.3 |
 
 > [!NOTE]
 > Prise en charge pour 1.3 dans Outlook 2013 a été ajoutée dans le cadre de la [le 8 décembre 2015, mettre à jour pour Outlook 2013 (KB3114349)](https://support.microsoft.com/kb/3114349). Prise en charge de 1,4 dans Outlook 2013 a été ajouté dans le cadre de la [le 13 septembre 2016, mettre à jour pour Outlook 2013 (KB3118280)](https://support.microsoft.com/help/3118280).

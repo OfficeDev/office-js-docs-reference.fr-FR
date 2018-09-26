@@ -8,9 +8,9 @@ Définit l’onglet du ruban sur lequel votre commande de complément s’affich
 |:-----|:-----|:-----|
 |  Group      | Oui |  Définit un groupe de commandes. Vous ne pouvez ajouter qu’un seul groupe par complément à l’onglet par défaut.  |
 
-Les valeurs suivantes sont des valeurs `id` d’onglet valides par hôte. Les valeurs en **gras** sont prises en charge à la fois sur le bureau et en ligne (par exemple, Word 2016 pour Windows et Word Online). 
+Les valeurs suivantes sont des valeurs `id` d’onglet valides par hôte. Valeurs en **gras** sont pris en charge dans les postes de travail et en ligne (par exemple, Word 2016 ou version ultérieure pour Windows et Word en ligne).
 
-### <a name="outlook"></a>Outlook 
+### <a name="outlook"></a>Outlook
 
 - **TabDefault**
 

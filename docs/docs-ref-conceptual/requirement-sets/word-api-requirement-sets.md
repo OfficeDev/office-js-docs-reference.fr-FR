@@ -2,7 +2,7 @@
 
 Les ensembles de conditions requises sont des groupes nommés de membres d’API. Compléments Office utilisent ensembles spécifiés dans le manifeste ou une vérification de l’exécution pour déterminer si un hôte Office prend en charge les API nécessitant un complément. Pour plus d’informations, voir [définit les versions d’Office et de la spécification](https://docs.microsoft.com/office/dev/add-ins/develop/office-versions-and-requirement-sets).
 
-Compléments Word s’exécuter sur plusieurs versions d’Office, notamment Office 2016 pour Windows, Office pour iPad, Office pour Mac et Office Online. Le tableau suivant répertorie les ensembles Word, les applications hôtes Office qui prennent en charge que les numéros set et la version ou la version requise pour les applications.
+Compléments Word s’exécuter sur plusieurs versions d’Office, notamment Office 2016 ou version ultérieure pour Windows, Office pour iPad, Office pour Mac et Office Online. Le tableau suivant répertorie les ensembles Word, les applications hôtes Office qui prennent en charge que les numéros set et la version ou la version requise pour les applications.
 
 > [!NOTE]
 > Pour ensembles sont marqués comme étant bêta, utilisez la version spécifiée (ou version ultérieure) du logiciel Office et la bibliothèque de la version bêta du CDN : https://appsforoffice.microsoft.com/lib/beta/hosted/office.js.
