@@ -24,7 +24,7 @@ Pour plus d’informations sur les ensembles de conditions requises des API comm
 
 ## <a name="identityapi-11"></a>IdentityAPI 1.1 
 
-IdentityAPI 1.1 à connexion unique est la première version de l’API. Pour plus d’informations sur l’API, voir la `getAccessTokenAsync` méthode dans la rubrique de référence [Office.Auth](/javascript/api/office/office.auth) .
+IdentityAPI 1.1 à connexion unique est la première version de l’API. Pour plus d’informations sur cette API, consultez la section [référence de l’API de l’authentification unique](https://docs.microsoft.com/office/dev/add-ins/develop/sso-in-office-add-ins#sso-api-reference) [d’Activer une authentification unique dans un complément](https://docs.microsoft.com/office/dev/add-ins/develop/sso-in-office-add-ins).
 
 ## <a name="see-also"></a>Voir aussi
 
