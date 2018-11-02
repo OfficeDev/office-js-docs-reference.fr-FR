@@ -1,0 +1,170 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: 8f991d5de45173caa82eae89577981b2293ddf0d
+ms.sourcegitcommit: 4bbd18c863a4140ad456b859f9c0309e153e10b2
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 11/02/2018
+ms.locfileid: "25915883"
+items:
+- uid: outlook.Office.InternetHeaders
+  summary: >-
+    L’objet InternetHeaders représente les propriétés qui sont conservées une fois que l’élément quitte Exchange et converties en un message MIME. Ces propriétés sont stockées sous les en-têtes x dans le message MIME.
+
+
+    InternetHeaders sont stockés sous forme de paires clé/valeur sur une base par élément.
+
+
+    \[[Du jeu d’API : aperçu de la boîte aux lettres](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition ou lecture</td></tr></table>
+  isPreview: true
+  name: Office.InternetHeaders
+  fullName: outlook.Office.InternetHeaders
+  langs:
+  - typeScript
+  type: interface
+  package: outlook
+  children:
+  - outlook.Office.InternetHeaders.getAsync
+  - outlook.Office.InternetHeaders.removeAsync
+  - outlook.Office.InternetHeaders.setAsync
+- uid: outlook.Office.InternetHeaders.getAsync
+  summary: >-
+    Étant donné un tableau de noms d’en-tête internet, cette méthode renvoie un dictionnaire contenant les en-têtes internet et leurs valeurs. Si le complément demande un en-tête x n’est pas disponible, cet en-tête x n’est pas retourné dans les résultats.
+
+
+    \[[Du jeu d’API : aperçu de la boîte aux lettres](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: "<table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>\n\n<tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition ou lecture</td></tr></table>\n\nOutre cette signature, cette méthode a également la signature suivante :\n\n`getAsync(names: string[], callback: (result: AsyncResult<Office.InternetHeaders>) => void): void;`\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nOffice.context.mailbox.item.internetHeaders.getAsync([\"header1\", \"header2\"], callback); \n\nfunction callback(asyncResult) { \n    var dictionary = asyncResult.value; \n    var header1_value = dictionary[\"header1\"]; \n}\n```"
+  isPreview: true
+  name: getAsync(names, options, callback)
+  fullName: outlook.Office.InternetHeaders.getAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getAsync(names: string[], options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<Office.InternetHeaders>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: names
+      description: Les noms des en-têtes internet à renvoyer.
+      type:
+      - string[]
+    - id: options
+      description: 'Facultatif. Un littéral d’objet qui contient une ou plusieurs des propriétés suivantes : asyncContext : les développeurs peuvent fournir n’importe quel objet qu’ils souhaitent accéder dans la méthode de rappel.'
+      type:
+      - office.Office.AsyncContextOptions
+    - id: callback
+      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre de rappel est appelée avec un seul paramètre, asyncResult, qui est un objet Office.AsyncResult.
+      type:
+      - '(result: AsyncResult<Office.InternetHeaders>) => void'
+- uid: outlook.Office.InternetHeaders.removeAsync
+  summary: >-
+    Étant donné un tableau de noms d’en-tête internet, cette méthode supprime les en-têtes spécifiés à partir de la collection d’en-têtes internet.
+
+
+    \[[Du jeu d’API : aperçu de la boîte aux lettres](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr>
+
+
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition</td></tr></table>
+
+
+    Outre cette signature, cette méthode a également la signature suivante :
+
+
+    `removeAsync(names: string[], callback: (result: AsyncResult<Office.Body>) => void): void;`
+
+    #### <a name="examples"></a>Exemples
+
+
+    ```javascript
+
+    Office.context.mailbox.item.internetHeaders.removeAsync(["header1", "header2"]);
+
+    ```
+  isPreview: true
+  name: removeAsync(names, options, callback)
+  fullName: outlook.Office.InternetHeaders.removeAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'removeAsync(names: string[], options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<Office.InternetHeaders>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: names
+      description: Les noms des en-têtes internet à supprimer.
+      type:
+      - string[]
+    - id: options
+      description: 'Facultatif. Un littéral d’objet qui contient une ou plusieurs des propriétés suivantes : asyncContext : les développeurs peuvent fournir n’importe quel objet qu’ils souhaitent accéder dans la méthode de rappel.'
+      type:
+      - office.Office.AsyncContextOptions
+    - id: callback
+      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre de rappel est appelée avec un seul paramètre, asyncResult, qui est un objet Office.AsyncResult.
+      type:
+      - '(result: AsyncResult<Office.InternetHeaders>) => void'
+- uid: outlook.Office.InternetHeaders.setAsync
+  summary: >-
+    Définit les en-têtes internet spécifié les valeurs spécifiées.
+
+
+    La méthode setAsync crée un nouvel en-tête si l’en-tête spécifié n’existe pas déjà ; dans le cas contraire, la valeur existante est remplacée par la nouvelle valeur.
+
+
+    \[[Du jeu d’API : aperçu de la boîte aux lettres](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr>
+
+
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition</td></tr>
+
+
+    Outre cette signature, cette méthode a également les signatures suivantes :
+
+
+    `setAsync(headers: string, callback: (result: AsyncResult<void>) => void): void;`
+
+    #### <a name="examples"></a>Exemples
+
+
+    ```javascript
+
+    Office.context.mailbox.item.internetHeaders.setAsync({"header1": "value1", "header2": "value2"});
+
+    ```
+  isPreview: true
+  name: setAsync(headers, options, callback)
+  fullName: outlook.Office.InternetHeaders.setAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'setAsync(headers: Object, options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<void>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: headers
+      description: Les noms et les valeurs correspondantes des en-têtes à définir. Doit être un objet dictionary avec des clés en cours les noms des en-têtes internet et des valeurs en cours les valeurs des en-têtes internet.
+      type:
+      - Object
+    - id: options
+      description: 'Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. asyncContext : les développeurs peuvent fournir n’importe quel objet qu’ils souhaitent accéder dans la méthode de rappel.'
+      type:
+      - office.Office.AsyncContextOptions
+    - id: callback
+      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre de rappel est appelée avec un seul paramètre de type Office.AsyncResult. Vous trouverez les erreurs rencontrées dans l’AsyncResult.Error, propriété.
+      type:
+      - '(result: AsyncResult<void>) => void'

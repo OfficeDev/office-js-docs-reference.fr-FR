@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 97c669e9f4fab0a2875518d5bde7bba9ea2126aa
-ms.sourcegitcommit: c1149d24b38f20daf9ce690cd0761ec1ceb7333d
+ms.openlocfilehash: 7da2872b7646eb50e46b53a63dae749b1087ef8a
+ms.sourcegitcommit: 4bbd18c863a4140ad456b859f9c0309e153e10b2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/17/2018
-ms.locfileid: "25590853"
+ms.lasthandoff: 11/02/2018
+ms.locfileid: "25912570"
 items:
 - uid: outlook.Office.MessageRead
   summary: >-
@@ -39,6 +39,7 @@ items:
   - outlook.Office.MessageRead.getRegExMatchesByName
   - outlook.Office.MessageRead.getSelectedEntities
   - outlook.Office.MessageRead.getSelectedRegExMatches
+  - outlook.Office.MessageRead.internetHeaders
   - outlook.Office.MessageRead.internetMessageId
   - outlook.Office.MessageRead.itemClass
   - outlook.Office.MessageRead.itemId
@@ -57,7 +58,7 @@ items:
     ajoute un gestionnaire d’événements pour un événement pris en charge.
 
 
-    Actuellement les types d’événements pris en charge sont `Office.EventType.AppointmentTimeChanged` <!-- -->, `Office.EventType.RecipientsChanged` <!-- -->, et `Office.EventType.RecurrenceChanged` <!-- -->.
+    Actuellement les types d’événements pris en charge sont `Office.EventType.AppointmentTimeChanged` <!-- -->, `Office.EventType.RecipientsChanged` <!-- -->, et `Office.EventType.RecurrenceChanged` <!-- -->. Dans l’aperçu, `Office.EventType.AttachmentsChanged` est également pris en charge.
 
 
     \[[Du jeu d’API : boîte aux lettres 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -102,7 +103,7 @@ items:
       - '(result: AsyncResult<void>) => void'
 - uid: outlook.Office.MessageRead.attachments
   summary: >-
-    Obtient un tableau des pièces jointes de l’élément.
+    Obtient les pièces jointes de l’élément sous la forme d’un tableau.
 
 
     \[[Du jeu d’API : boîte aux lettres 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -918,6 +919,31 @@ items:
       type:
       - any
       description: Un objet qui contient les tableaux des chaînes correspondant aux expressions régulières définies dans le fichier manifeste XML. Le nom de chaque tableau est égal à la valeur correspondante de l’attribut RegExName de la règle ItemHasRegularExpressionMatch correspondante ou de l’attribut FilterName de la règle ItemHasKnownEntity correspondante.
+- uid: outlook.Office.MessageRead.internetHeaders
+  summary: >-
+    Obtient les en-têtes internet d’un message.
+
+
+    La propriété internetHeaders renvoie un objet InternetHeaders qui fournit des méthodes pour gérer les en-têtes internet du message.
+
+
+    \[[Du jeu d’API : aperçu de la boîte aux lettres](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Lecture de message</td></tr></table>
+  isPreview: true
+  name: internetHeaders
+  fullName: outlook.Office.MessageRead.internetHeaders
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'internetHeaders: Office.InternetHeaders;'
+    return:
+      type:
+      - outlook.Office.InternetHeaders
 - uid: outlook.Office.MessageRead.internetMessageId
   summary: >-
     Obtient l’identificateur de message Internet correspondant à un e-mail.
@@ -1160,7 +1186,7 @@ items:
     Supprime un gestionnaire d’événements pour un événement pris en charge.
 
 
-    Actuellement les types d’événements pris en charge sont `Office.EventType.AppointmentTimeChanged` <!-- -->, `Office.EventType.RecipientsChanged` <!-- -->, et `Office.EventType.RecurrenceChanged` <!-- -->.
+    Actuellement les types d’événements pris en charge sont `Office.EventType.AppointmentTimeChanged` <!-- -->, `Office.EventType.RecipientsChanged` <!-- -->, et `Office.EventType.RecurrenceChanged` <!-- -->. Dans l’aperçu, `Office.EventType.AttachmentsChanged` est également pris en charge.
 
 
     \[[Du jeu d’API : boîte aux lettres 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -1188,7 +1214,7 @@ items:
       description: ''
     parameters:
     - id: eventType
-      description: Événement qui doit appeler le gestionnaire.
+      description: L’événement qui doit révoquer le gestionnaire.
       type:
       - EventType
     - id: handler

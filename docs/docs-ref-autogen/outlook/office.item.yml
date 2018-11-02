@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 7d538aaaf2b31d96af424f92d5628877c0d8f7da
-ms.sourcegitcommit: c1149d24b38f20daf9ce690cd0761ec1ceb7333d
+ms.openlocfilehash: 9c4796da102c44d50159545a2a297c4a785e3add
+ms.sourcegitcommit: 4bbd18c863a4140ad456b859f9c0309e153e10b2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/17/2018
-ms.locfileid: "25585953"
+ms.lasthandoff: 11/02/2018
+ms.locfileid: "25914292"
 items:
 - uid: outlook.Office.Item
   summary: >-
@@ -28,6 +28,7 @@ items:
   - outlook.Office.Item.body
   - outlook.Office.Item.dateTimeCreated
   - outlook.Office.Item.dateTimeModifed
+  - outlook.Office.Item.getAttachmentContentAsync
   - outlook.Office.Item.getInitializationContextAsync
   - outlook.Office.Item.getSharedPropertiesAsync
   - outlook.Office.Item.itemType
@@ -41,21 +42,11 @@ items:
     ajoute un gestionnaire d’événements pour un événement pris en charge.
 
 
-    Actuellement les types d’événements pris en charge sont `Office.EventType.AppointmentTimeChanged` <!-- -->, `Office.EventType.RecipientsChanged` <!-- -->, et `Office.EventType.RecurrenceChanged` <!-- -->.
+    Actuellement les types d’événements pris en charge sont `Office.EventType.AppointmentTimeChanged` <!-- -->, `Office.EventType.RecipientsChanged` <!-- -->, et `Office.EventType.RecurrenceChanged` <!-- -->. Dans l’aperçu, `Office.EventType.AttachmentsChanged` est également pris en charge.
 
 
     \[[Du jeu d’API : boîte aux lettres 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: >-
-    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
-
-
-    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition ou lecture</td></tr></table>
-
-
-    Outre cette signature, la méthode a également la signature suivante :
-
-
-    `addHandlerAsync(eventType: Office.EventType, handler: any, callback?: (result: AsyncResult<void>) => void): void;`
+  remarks: "<table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>\n\n<tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition ou lecture</td></tr></table>\n\nOutre cette signature, la méthode a également la signature suivante :\n\n`addHandlerAsync(eventType: Office.EventType, handler: any, callback?: (result: AsyncResult<void>) => void): void;`\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nfunction myHandlerFunction(eventarg) { \n    if (eventarg.attachmentStatus == Office.MailboxEnums.AttachmentStatus.Added) { \n        var _att = eventarg.attachmentDetails; \n        showMessage(\"Event Fired and Attachment Added!\"); \n        getAttachmentContentAsync(_att.id, options, callback); \n    } \n} \nOffice.context.mailbox.item.addHandlerAsync(Office.EventType.AttachmentsChanged, myHandlerFunction, myCallback);\n```"
   name: addHandlerAsync(eventType, handler, options, callback)
   fullName: outlook.Office.Item.addHandlerAsync
   langs:
@@ -150,6 +141,41 @@ items:
     return:
       type:
       - Date
+- uid: outlook.Office.Item.getAttachmentContentAsync
+  summary: >-
+    Obtient une pièce jointe d’un message ou un rendez-vous et la retourne comme un `Office.AttachmentContent` objet.
+
+
+    Le `getAttachmentContentAsync` méthode obtient les pièces jointes portant l’identificateur spécifié à partir de l’élément. Meilleure pratique, vous devez utiliser l’identificateur pour récupérer une pièce jointe dans la même session les attachmentIds ont été récupérés par le `getAttachmentsAsync` ou `item.attachments` appel. Dans Outlook Web App et OWA pour les périphériques, l’identificateur de pièce jointe n’est valable que dans la même session. Une session est sur la fermeture de l’application, ou si l’utilisateur démarre la saisie d’un formulaire en ligne, puis ressorte par la suite de l’écran pour continuer dans une fenêtre séparée.
+
+
+    \[[Du jeu d’API : aperçu de la boîte aux lettres](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: "<table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>\n\n<tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition ou lecture</td></tr>\n\n<tr><td>Erreurs</td><td>InvalidAttachmentId - identificateur de pièce jointe n’existe pas.</td></tr></table>\n####Exemples\n\n```javascript\nvar item = Office.context.mailbox.item;\nvar listOfAttachments = [];\nitem.getAttachmentsAsync(callback);\nfunction callback(result) {\n    if (result.value.length > 0) {\n        for (i = 0 ; i < result.value.length ; i++) {\n            var options = {asyncContext: {type: result.value[i].attachmentType}};\n            getAttachmentContentAsync(result.value[i].id, options, handleAttachmentsCallback);  \n        }\n    }\n}\n\nfunction handleAttachmentsCallback(result) {\n    //parse string to be a url, an .eml file, or a base64 encoded string\n    if (result.format == Office.MailboxEnums.AttachmentContentFormat.Base64) {\n        //handle file attachment\n    }\n    else if (result.format == Office.MailboxEnums.AttachmentContentFormat.Eml) {\n        //handle item attachment\n    }\n    else {\n        //handle cloud attachment  \n    }\n}\n```"
+  isPreview: true
+  name: getAttachmentContentAsync(attachmentId, options, callback)
+  fullName: outlook.Office.Item.getAttachmentContentAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getAttachmentContentAsync(attachmentId: string, options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<Office.AttachmentContent>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: attachmentId
+      description: L’identificateur de la pièce jointe que vous souhaitez obtenir. La longueur maximale de la chaîne est 100 caractères.
+      type:
+      - string
+    - id: options
+      description: 'Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. asyncContext : les développeurs peuvent fournir n’importe quel objet qu’ils souhaitent accéder dans la méthode de rappel.'
+      type:
+      - office.Office.AsyncContextOptions
+    - id: callback
+      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre de rappel est appelée avec un seul paramètre, asyncResult, qui est un objet Office.AsyncResult. En cas d’échec de l’appel, l’AsyncResult.Error, propriété contiendra et code d’erreur avec la raison de l’échec.
+      type:
+      - '(result: AsyncResult<Office.AttachmentContent>) => void'
 - uid: outlook.Office.Item.getInitializationContextAsync
   summary: >-
     Obtient les données d’initialisation transmises lorsque le complément est [activé par un message exploitable](https://docs.microsoft.com/outlook/actionable-messages/invoke-add-in-from-actionable-message)<!-- -->.
@@ -444,7 +470,7 @@ items:
     Supprime un gestionnaire d’événements pour un événement pris en charge.
 
 
-    Actuellement les types d’événements pris en charge sont `Office.EventType.AppointmentTimeChanged` <!-- -->, `Office.EventType.RecipientsChanged` <!-- -->, et `Office.EventType.RecurrenceChanged` <!-- -->.
+    Actuellement les types d’événements pris en charge sont `Office.EventType.AppointmentTimeChanged` <!-- -->, `Office.EventType.RecipientsChanged` <!-- -->, et `Office.EventType.RecurrenceChanged` <!-- -->. Dans l’aperçu, `Office.EventType.AttachmentsChanged` est également pris en charge.
 
 
     \[[Du jeu d’API : boîte aux lettres 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -472,7 +498,7 @@ items:
       description: ''
     parameters:
     - id: eventType
-      description: Événement qui doit appeler le gestionnaire.
+      description: L’événement qui doit révoquer le gestionnaire.
       type:
       - Office.EventType
     - id: handler

@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: aed02c23f9c6af0d61b1124d36fde84cc7b711c1
-ms.sourcegitcommit: c1149d24b38f20daf9ce690cd0761ec1ceb7333d
+ms.openlocfilehash: 464cf60863dbfdc585f3597bb5abebe5fcf4136a
+ms.sourcegitcommit: 4bbd18c863a4140ad456b859f9c0309e153e10b2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/17/2018
-ms.locfileid: "25585533"
+ms.lasthandoff: 11/02/2018
+ms.locfileid: "25914348"
 items:
 - uid: outlook.Office.Mailbox
   summary: >-
@@ -51,6 +51,7 @@ items:
   - outlook.Office.Mailbox.getUserIdentityTokenAsync
   - outlook.Office.Mailbox.item
   - outlook.Office.Mailbox.makeEwsRequestAsync
+  - outlook.Office.Mailbox.removeHandlerAsync
   - outlook.Office.Mailbox.restUrl
   - outlook.Office.Mailbox.userProfile
 - uid: outlook.Office.Mailbox.addHandlerAsync
@@ -58,7 +59,7 @@ items:
     ajoute un gestionnaire d’événements pour un événement pris en charge.
 
 
-    Actuellement, les types d’événements pris en charge sont `Office.EventType.ItemChanged` et `Office.EventType.OfficeThemeChanged` <!-- -->.
+    Actuellement, le type d’événement pris en charge uniquement est `Office.EventType.ItemChanged` <!-- -->. Dans l’aperçu, `Office.EventType.OfficeThemeChanged` est également pris en charge.
 
 
     \[[Du jeu d’API : boîte aux lettres 1,5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -889,6 +890,48 @@ items:
       description: Facultatif. Données d’état transmises à la méthode asynchrone.
       type:
       - any
+- uid: outlook.Office.Mailbox.removeHandlerAsync
+  summary: >-
+    Supprime un gestionnaire d’événements pour un événement pris en charge.
+
+
+    Actuellement, le type d’événement pris en charge uniquement est `Office.EventType.ItemChanged` <!-- -->. Dans l’aperçu, `Office.EventType.OfficeThemeChanged` est également pris en charge.
+
+
+    \[[Du jeu d’API : boîte aux lettres 1,5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition ou lecture</td></tr></table>
+  name: removeHandlerAsync(eventType, handler, options, callback)
+  fullName: outlook.Office.Mailbox.removeHandlerAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'removeHandlerAsync(eventType: Office.EventType, handler: (type: EventType) => void, options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<void>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: eventType
+      description: L’événement qui doit révoquer le gestionnaire.
+      type:
+      - Office.EventType
+    - id: handler
+      description: La fonction à gérer l’événement. La fonction doit accepter un seul paramètre, qui est un littéral d’objet. La propriété type dans le paramètre correspondra le paramètre eventType transmis à addHandlerAsync.
+      type:
+      - '(type: EventType) => void'
+    - id: options
+      description: Facultatif. Fournit une option de conservation des données de contexte d’un type quelconque, inchangé, pour une utilisation dans un rappel.
+      type:
+      - office.Office.AsyncContextOptions
+    - id: callback
+      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre de rappel est appelée avec un seul paramètre de type Office.AsyncResult.
+      type:
+      - '(result: AsyncResult<void>) => void'
 - uid: outlook.Office.Mailbox.restUrl
   summary: >-
     obtient l’URL du point de terminaison REST de ce compte de messagerie.
