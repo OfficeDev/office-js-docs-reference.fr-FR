@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 0d2bed993d9cd9b2cd21c3ced70b329241ac30a6
-ms.sourcegitcommit: c1149d24b38f20daf9ce690cd0761ec1ceb7333d
+ms.openlocfilehash: ac41d2662a4e111522b600646a6d28f0b58abe68
+ms.sourcegitcommit: 016e17422cf62dc9f1de1809666e9244e41cc1a9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/17/2018
-ms.locfileid: "25584119"
+ms.lasthandoff: 11/09/2018
+ms.locfileid: "26225328"
 items:
 - uid: onenote.OneNote.RichText
   summary: >-
@@ -13,7 +13,7 @@ items:
 
     \[[Du jeu d’API : OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
   name: OneNote.RichText
-  fullName: onenote.OneNote.RichText
+  fullName: OneNote.RichText
   langs:
   - typeScript
   type: class
@@ -37,7 +37,7 @@ items:
 
     \[[Du jeu d’API : OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
   name: getHtml()
-  fullName: onenote.OneNote.RichText.getHtml
+  fullName: getHtml
   langs:
   - typeScript
   type: method
@@ -54,7 +54,7 @@ items:
 
     \[[Du jeu d’API : OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
   name: id
-  fullName: onenote.OneNote.RichText.id
+  fullName: id
   langs:
   - typeScript
   type: property
@@ -70,7 +70,7 @@ items:
 
     \[[Du jeu d’API : OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
   name: languageId
-  fullName: onenote.OneNote.RichText.languageId
+  fullName: languageId
   langs:
   - typeScript
   type: property
@@ -83,7 +83,7 @@ items:
   summary: Files d’attente d’une commande pour charger les propriétés de l’objet spécifiées. Vous devez appeler « context.sync() » avant de lire les propriétés.
   remarks: "Outre cette signature, cette méthode présente les signatures suivantes :\n\n`load(option?: { select?: string; expand?: string; }): OneNote.RichText`-Où option.select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options.expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.RichText`-Uniquement disponible sur les types de la collection. Il est similaire à la signature précédente. Option.Top Spécifie le nombre maximal d’éléments pouvant être inclus dans le résultat de la collection. Option.Skip Spécifie le nombre d’éléments qui doivent être ignoré et non inclus dans le résultat. Si option.top est spécifié, le jeu de résultats démarre après l’ignorer le nombre spécifié d’éléments.\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nOneNote.run(function (context) {\n\n    // Get the collection of pageContent items from the page.\n    var pageContents = context.application.getActivePage().contents;\n\n    // Get the first PageContent on the page, and then get its outline's paragraphs.\n    var outlinePageContents = ;\n    var paragraphs = ;\n    var richTextParagraphs = ;\n    // Queue a command to load the id and type of each page content in the outline.\n    pageContents.load(\"id,type\");\n\n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n            // Load all page contents of type Outline\n            $.each(pageContents.items, function(index, pageContent) {\n                if(pageContent.type == 'Outline')\n                {\n                    pageContent.load('outline,outline/paragraphs,outline/paragraphs/type');\n                    outlinePageContents.push(pageContent);\n                }\n            });\n            return context.sync();\n        })\n        .then(function () {\n            // Load all rich text paragraphs across outlines\n            $.each(outlinePageContents, function(index, outlinePageContent) {\n                var outline = outlinePageContent.outline;\n                paragraphs = paragraphs.concat(outline.paragraphs.items);\n            });\n            $.each(paragraphs, function(index, paragraph) {\n                if(paragraph.type == 'RichText')\n                {\n                    richTextParagraphs.push(paragraph);\n                    paragraph.load(\"id,richText/text\");\n                }\n            });\n            return context.sync();\n        })\n        .then(function () {\n            // Display all rich text paragraphs to the console\n            $.each(richTextParagraphs, function(index, richTextParagraph) {\n                var richText = richTextParagraph.richText;\n                console.log(\n                    \"Paragraph found with richtext content : \" + \n                    richText.text + \" and richtext id : \" + richText.id);\n            });\n            return context.sync();\n        });\n});\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n}); \n```"
   name: load(option)
-  fullName: onenote.OneNote.RichText.load
+  fullName: load
   langs:
   - typeScript
   type: method
@@ -105,7 +105,7 @@ items:
 
     \[[Du jeu d’API : OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
   name: paragraph
-  fullName: onenote.OneNote.RichText.paragraph
+  fullName: paragraph
   langs:
   - typeScript
   type: property
@@ -121,7 +121,7 @@ items:
 
     \[[Du jeu d’API : OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
   name: text
-  fullName: onenote.OneNote.RichText.text
+  fullName: text
   langs:
   - typeScript
   type: property
@@ -132,7 +132,7 @@ items:
       - string
 - uid: onenote.OneNote.RichText.toJSON
   name: toJSON()
-  fullName: onenote.OneNote.RichText.toJSON
+  fullName: toJSON
   langs:
   - typeScript
   type: method
@@ -145,7 +145,7 @@ items:
 - uid: onenote.OneNote.RichText.track
   summary: Suivre l’objet pour l’ajustement automatique selon entourant les modifications dans le document. Cet appel est une abréviation de context.trackedObjects.add(thisObject). Si vous utilisez cet objet dans les appels de « .sync » et en dehors de l’exécution séquentielle d’un lot de « .run » et obtenir une erreur « InvalidObjectPath » lors de la définition d’une propriété ou d’appeler une méthode sur l’objet, vous devez avoir ajouté l’objet à l’objet suivi collection lorsque l’objet a été créé tout d’abord.
   name: track()
-  fullName: onenote.OneNote.RichText.track
+  fullName: track
   langs:
   - typeScript
   type: method
@@ -158,7 +158,7 @@ items:
 - uid: onenote.OneNote.RichText.untrack
   summary: Version de la mémoire associée à cet objet, si elle a été précédemment suivi. Cet appel est l’abréviation de context.trackedObjects.remove(thisObject). Comportant de nombreux objets suivis ralentit l’application hôte, donc pensez à libérer les objets que vous ajoutez, une fois que vous avez terminé les utiliser. Vous devrez appeler « context.sync() » avant que la version de mémoire prenne effet.
   name: untrack()
-  fullName: onenote.OneNote.RichText.untrack
+  fullName: untrack
   langs:
   - typeScript
   type: method
