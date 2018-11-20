@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: d6991e18a2ada0e048c160aafcaf943a709a7374
-ms.sourcegitcommit: c1149d24b38f20daf9ce690cd0761ec1ceb7333d
+ms.openlocfilehash: 1fc0011788820a3d630e3319293da53b145f5517
+ms.sourcegitcommit: 016e17422cf62dc9f1de1809666e9244e41cc1a9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/17/2018
-ms.locfileid: "25584539"
+ms.lasthandoff: 11/09/2018
+ms.locfileid: "26230837"
 items:
 - uid: word.Word.Document
   summary: >-
@@ -13,7 +13,7 @@ items:
 
     \[[Du jeu d’API : WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
   name: Word.Document
-  fullName: word.Word.Document
+  fullName: Word.Document
   langs:
   - typeScript
   type: class
@@ -39,7 +39,7 @@ items:
 
     \[[Du jeu d’API : WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
   name: body
-  fullName: word.Word.Document.body
+  fullName: body
   langs:
   - typeScript
   type: property
@@ -55,7 +55,7 @@ items:
 
     \[[Du jeu d’API : WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
   name: contentControls
-  fullName: word.Word.Document.contentControls
+  fullName: contentControls
   langs:
   - typeScript
   type: property
@@ -71,7 +71,7 @@ items:
 
     \[[Du jeu d’API : WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
   name: getSelection()
-  fullName: word.Word.Document.getSelection
+  fullName: getSelection
   langs:
   - typeScript
   type: method
@@ -85,7 +85,7 @@ items:
   summary: Files d’attente d’une commande pour charger les propriétés de l’objet spécifiées. Vous devez appeler « context.sync() » avant de lire les propriétés.
   remarks: "Outre cette signature, cette méthode présente les signatures suivantes :\n\n`load(option?: { select?: string; expand?: string; }): Word.Document`-Où option.select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options.expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Word.Document`-Uniquement disponible sur les types de la collection. Il est similaire à la signature précédente. Option.Top Spécifie le nombre maximal d’éléments pouvant être inclus dans le résultat de la collection. Option.Skip Spécifie le nombre d’éléments qui doivent être ignoré et non inclus dans le résultat. Si option.top est spécifié, le jeu de résultats démarre après l’ignorer le nombre spécifié d’éléments.\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n    \n    // Create a proxy object for the document.\n    var thisDocument = context.document;\n    \n    // Queue a command to load content control properties.\n    context.load(thisDocument, 'contentControls/id, contentControls/text, contentControls/tag');\n    \n    // Synchronize the document state by executing the queued commands, \n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n        if (thisDocument.contentControls.items.length !== 0) {\n            for (var i = 0; i < thisDocument.contentControls.items.length; i++) {\n                console.log(thisDocument.contentControls.items[i].id);\n                console.log(thisDocument.contentControls.items[i].text);\n                console.log(thisDocument.contentControls.items[i].tag);\n            }\n        } else {\n            console.log('No content controls in this document.');\n        }\n    });  \n})\n.catch(function (error) {\n    console.log('Error: ' + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Debug info: ' + JSON.stringify(error.debugInfo));\n    }\n});\n```"
   name: load(option)
-  fullName: word.Word.Document.load
+  fullName: load
   langs:
   - typeScript
   type: method
@@ -107,7 +107,7 @@ items:
 
     \[[Du jeu d’API : WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
   name: properties
-  fullName: word.Word.Document.properties
+  fullName: properties
   langs:
   - typeScript
   type: property
@@ -124,7 +124,7 @@ items:
 
     \[[Du jeu d’API : WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
   name: save()
-  fullName: word.Word.Document.save
+  fullName: save
   langs:
   - typeScript
   type: method
@@ -141,7 +141,7 @@ items:
 
     \[[Du jeu d’API : WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
   name: saved
-  fullName: word.Word.Document.saved
+  fullName: saved
   langs:
   - typeScript
   type: property
@@ -157,7 +157,7 @@ items:
 
     \[[Du jeu d’API : WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
   name: sections
-  fullName: word.Word.Document.sections
+  fullName: sections
   langs:
   - typeScript
   type: property
@@ -168,7 +168,7 @@ items:
       - Word.SectionCollection
 - uid: word.Word.Document.toJSON
   name: toJSON()
-  fullName: word.Word.Document.toJSON
+  fullName: toJSON
   langs:
   - typeScript
   type: method
@@ -181,7 +181,7 @@ items:
 - uid: word.Word.Document.track
   summary: Suivre l’objet pour l’ajustement automatique selon entourant les modifications dans le document. Cet appel est une abréviation de context.trackedObjects.add(thisObject). Si vous utilisez cet objet dans les appels de « .sync » et en dehors de l’exécution séquentielle d’un lot de « .run » et obtenir une erreur « InvalidObjectPath » lors de la définition d’une propriété ou d’appeler une méthode sur l’objet, vous devez avoir ajouté l’objet à l’objet suivi collection lorsque l’objet a été créé tout d’abord.
   name: track()
-  fullName: word.Word.Document.track
+  fullName: track
   langs:
   - typeScript
   type: method
@@ -194,7 +194,7 @@ items:
 - uid: word.Word.Document.untrack
   summary: Version de la mémoire associée à cet objet, si elle a été précédemment suivi. Cet appel est l’abréviation de context.trackedObjects.remove(thisObject). Comportant de nombreux objets suivis ralentit l’application hôte, donc pensez à libérer les objets que vous ajoutez, une fois que vous avez terminé les utiliser. Vous devrez appeler « context.sync() » avant que la version de mémoire prenne effet.
   name: untrack()
-  fullName: word.Word.Document.untrack
+  fullName: untrack
   langs:
   - typeScript
   type: method
