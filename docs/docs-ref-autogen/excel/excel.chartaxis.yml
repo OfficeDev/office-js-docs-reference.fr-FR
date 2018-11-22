@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: c4fdc68aa26bd64a9e15de95f1a887e6ef6b908f
-ms.sourcegitcommit: 016e17422cf62dc9f1de1809666e9244e41cc1a9
+ms.openlocfilehash: 4058f0935327daac222aba29584a9a0e16367310
+ms.sourcegitcommit: b05ee546d9dfbc914c8d1c594d9b206b04780bbc
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/09/2018
-ms.locfileid: "26223879"
+ms.lasthandoff: 11/22/2018
+ms.locfileid: "26646292"
 items:
 - uid: excel.Excel.ChartAxis
   summary: >-
@@ -160,7 +160,7 @@ items:
     return:
       type:
       - Excel.ChartAxisDisplayUnit | "None" | "Hundreds" | "Thousands" | "TenThousands" | "HundredThousands" | "Millions" | "TenMillions" | "HundredMillions" | "Billions" | "Trillions" | "Custom"
-      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n\n    let chart = sheet.charts.getItemAt(0);\n    let categoryAxis = chart.axes.categoryAxis;\n    let valueAxis = chart.axes.valueAxis;\n\n    // Load to get display unit.\n    valueAxis.load(\"displayUnit\");\n   \n    await context.sync();\n\n    OfficeHelpers.UI.notify(\"The vertical axis display unit is: \" +  valueAxis.displayUnit);\n});\n```"
+      description: "\n#### <a name=\"examples\"></a>範例\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n\n    let chart = sheet.charts.getItemAt(0);\n    let categoryAxis = chart.axes.categoryAxis;\n    let valueAxis = chart.axes.valueAxis;\n\n    // Load to get display unit.\n    valueAxis.load(\"displayUnit\");\n\n    await context.sync();\n\n    console.log(\"The vertical axis display unit is: \" + valueAxis.displayUnit);\n});\n```"
 - uid: excel.Excel.ChartAxis.format
   summary: >-
     Représente la mise en forme d’un objet de graphique, à savoir le format des lignes et de la police. En lecture seule.
@@ -227,7 +227,7 @@ items:
       - number
 - uid: excel.Excel.ChartAxis.load
   summary: Files d’attente d’une commande pour charger les propriétés de l’objet spécifiées. Vous devez appeler « context.sync() » avant de lire les propriétés.
-  remarks: "Outre cette signature, cette méthode présente les signatures suivantes :\n\n`load(option?: { select?: string; expand?: string; }): Excel.ChartAxis`-Où option.select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options.expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.ChartAxis`-Uniquement disponible sur les types de la collection. Il est similaire à la signature précédente. Option.Top Spécifie le nombre maximal d’éléments pouvant être inclus dans le résultat de la collection. Option.Skip Spécifie le nombre d’éléments qui doivent être ignoré et non inclus dans le résultat. Si option.top est spécifié, le jeu de résultats démarre après l’ignorer le nombre spécifié d’éléments.\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\n// Get the maximum of Chart Axis from Chart1\nExcel.run(function (ctx) { \n    var chart = ctx.workbook.worksheets.getItem(\"Sheet1\").charts.getItem(\"Chart1\");    \n    var axis = chart.axes.valueAxis;\n    axis.load('maximum');\n    return ctx.sync().then(function() {\n            console.log(axis.maximum);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\n// Set the maximum, minimum, majorunit, minorunit of valueaxis. \nExcel.run(function (ctx) { \n    var chart = ctx.workbook.worksheets.getItem(\"Sheet1\").charts.getItem(\"Chart1\");    \n    chart.axes.valueAxis.maximum = 5;\n    chart.axes.valueAxis.minimum = 0;\n    chart.axes.valueAxis.majorUnit = 1;\n    chart.axes.valueAxis.minorUnit = 0.2;\n    return ctx.sync().then(function() {\n            console.log(\"Axis Settings Changed\");\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: "Outre cette signature, cette méthode présente les signatures suivantes :\n\n`load(option?: { select?: string; expand?: string; }): Excel.ChartAxis`-Où option.select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options.expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.ChartAxis`-Uniquement disponible sur les types de la collection. Il est similaire à la signature précédente. Option.Top Spécifie le nombre maximal d’éléments pouvant être inclus dans le résultat de la collection. Option.Skip Spécifie le nombre d’éléments qui doivent être ignoré et non inclus dans le résultat. Si option.top est spécifié, le jeu de résultats démarre après l’ignorer le nombre spécifié d’éléments.\n#### <a name=\"examples\"></a>範例\n\n```javascript\n// Get the maximum of Chart Axis from Chart1\nExcel.run(function (ctx) { \n    var chart = ctx.workbook.worksheets.getItem(\"Sheet1\").charts.getItem(\"Chart1\");    \n    var axis = chart.axes.valueAxis;\n    axis.load('maximum');\n    return ctx.sync().then(function() {\n            console.log(axis.maximum);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\n// Set the maximum, minimum, majorunit, minorunit of valueaxis. \nExcel.run(function (ctx) { \n    var chart = ctx.workbook.worksheets.getItem(\"Sheet1\").charts.getItem(\"Chart1\");    \n    chart.axes.valueAxis.maximum = 5;\n    chart.axes.valueAxis.minimum = 0;\n    chart.axes.valueAxis.majorUnit = 1;\n    chart.axes.valueAxis.minorUnit = 0.2;\n    return ctx.sync().then(function() {\n            console.log(\"Axis Settings Changed\");\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
   name: load(option)
   fullName: load
   langs:
@@ -614,7 +614,7 @@ items:
     return:
       type:
       - boolean
-      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n\n    let chart = sheet.charts.getItemAt(0);\n    let axis = chart.axes.valueAxis;\n\n    // Remove display unit.\n    axis.showDisplayUnitLabel = false;\n\n    await context.sync();\n});\n```"
+      description: "\n#### <a name=\"examples\"></a>範例\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    let chart = sheet.charts.getItemAt(0);\n    let axis = chart.axes.valueAxis;\n\n    // Remove display unit.\n    axis.showDisplayUnitLabel = false;\n\n    await context.sync();\n});\n```"
 - uid: excel.Excel.ChartAxis.textOrientation
   summary: >-
     Représente l’orientation du texte de l’étiquette de graduation de l’axe. La valeur doit être un entier compris entre-90 et 90 ou 180 orienté verticalement le texte à partir de.

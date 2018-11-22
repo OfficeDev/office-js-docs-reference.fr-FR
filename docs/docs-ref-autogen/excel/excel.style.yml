@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 0e46732c6bed365481c3dd86ba342a50c9d4054a
-ms.sourcegitcommit: 016e17422cf62dc9f1de1809666e9244e41cc1a9
+ms.openlocfilehash: b3a2cef67010a9ffa58aaaf394c8e43b530f0ef8
+ms.sourcegitcommit: b05ee546d9dfbc914c8d1c594d9b206b04780bbc
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/09/2018
-ms.locfileid: "26229766"
+ms.lasthandoff: 11/22/2018
+ms.locfileid: "26645844"
 items:
 - uid: excel.Excel.Style
   summary: >-
@@ -111,7 +111,7 @@ items:
     return:
       type:
       - void
-      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\nawait Excel.run(async (context) => {\n    let style = context.workbook.styles.getItem(\"Diagonal Orientation Style\");\n\n    // Delete the diagonal orientation style from the style collection.\n    // Styles are in the Home tab ribbon.\n    style.delete();\n\n    await context.sync();\n\n    OfficeHelpers.UI.notify(\"Successfully deleted the diagonal orientation style from the Home tab ribbon.\");\n});\n```"
+      description: "\n#### <a name=\"examples\"></a>範例\n\n```typescript\nawait Excel.run(async (context) => {\n    let style = context.workbook.styles.getItem(\"Diagonal Orientation Style\");\n\n    // Delete the diagonal orientation style from the style collection.\n    // Styles are in the Home tab ribbon.\n    style.delete();\n\n    await context.sync();\n\n    console.log(\"Successfully deleted the diagonal orientation style from the Home tab ribbon.\");\n});\n```"
 - uid: excel.Excel.Style.fill
   summary: >-
     Le remplissage du style.
@@ -144,7 +144,7 @@ items:
     return:
       type:
       - excel.Excel.RangeFont
-      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\nawait Excel.run(async (context) => {\n    let style = context.workbook.styles.getItem(\"Normal\");\n    style.font.load(\"bold, color, italic, name, size\");\n    style.fill.load(\"color\");\n\n    await context.sync();\n\n    console.log(\"Bold: \" + style.font.bold);\n    console.log(\"Font color: \" + style.font.color);\n    console.log(\"Italic: \" + style.font.italic);\n    console.log(\"Name: \" + style.font.name);\n    console.log(\"Size: \" + style.font.size);\n    console.log(\"Fill color: \" + style.fill.color);\n});\n```"
+      description: "\n#### <a name=\"examples\"></a>範例\n\n```typescript\nawait Excel.run(async (context) => {\n    let style = context.workbook.styles.getItem(\"Normal\");\n    style.font.load(\"bold, color, italic, name, size\");\n    style.fill.load(\"color\");\n\n    await context.sync();\n\n    console.log(\"Bold: \" + style.font.bold);\n    console.log(\"Font color: \" + style.font.color);\n    console.log(\"Italic: \" + style.font.italic);\n    console.log(\"Name: \" + style.font.name);\n    console.log(\"Size: \" + style.font.size);\n    console.log(\"Fill color: \" + style.fill.color);\n});\n```"
 - uid: excel.Excel.Style.formulaHidden
   summary: >-
     Indique si la formule sera masquée lorsque la feuille de calcul est protégée.
@@ -177,7 +177,7 @@ items:
     return:
       type:
       - Excel.HorizontalAlignment | "General" | "Left" | "Center" | "Right" | "Fill" | "Justify" | "CenterAcrossSelection" | "Distributed"
-      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\nawait Excel.run(async (context) => {\n    let worksheet = context.workbook.worksheets.getItem(\"Sample\");\n    let range = worksheet.getRange(\"A1:E1\");\n\n    // Apply built-in style. \n    // Styles are in the Home tab ribbon.\n    range.style = Excel.BuiltInStyle.neutral;\n    range.format.horizontalAlignment = \"Right\";\n\n    await context.sync();\n});\n```"
+      description: "\n#### <a name=\"examples\"></a>範例\n\n```typescript\nawait Excel.run(async (context) => {\n    let worksheet = context.workbook.worksheets.getItem(\"Sample\");\n    let range = worksheet.getRange(\"A1:E1\");\n\n    // Apply built-in style. \n    // Styles are in the Home tab ribbon.\n    range.style = Excel.BuiltInStyle.neutral;\n    range.format.horizontalAlignment = \"Right\";\n\n    await context.sync();\n});\n```"
 - uid: excel.Excel.Style.includeAlignment
   summary: >-
     Indique si le style comprend les propriétés de retrait automatique, HorizontalAlignment, VerticalAlignment, WrapText, IndentLevel et TextOrientation.
@@ -292,7 +292,7 @@ items:
       - number
 - uid: excel.Excel.Style.load
   summary: Files d’attente d’une commande pour charger les propriétés de l’objet spécifiées. Vous devez appeler « context.sync() » avant de lire les propriétés.
-  remarks: "Outre cette signature, cette méthode présente les signatures suivantes :\n\n`load(option?: { select?: string; expand?: string; }): Excel.Style`-Où option.select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options.expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Style`-Uniquement disponible sur les types de la collection. Il est similaire à la signature précédente. Option.Top Spécifie le nombre maximal d’éléments pouvant être inclus dans le résultat de la collection. Option.Skip Spécifie le nombre d’éléments qui doivent être ignoré et non inclus dans le résultat. Si option.top est spécifié, le jeu de résultats démarre après l’ignorer le nombre spécifié d’éléments.\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\nawait Excel.run(async (context) => {\n    let style = context.workbook.styles.getItem(\"Diagonal Orientation Style\");            \n    style.load(\"textOrientation, horizontalAlignment, autoIndent, readingOrder, wrapText, includeProtection, shrinkToFit, locked\");\n\n    await context.sync();\n\n    console.log(\"Orientation: \" + style.textOrientation);\n    console.log(\"Horizontal alignment: \" + style.horizontalAlignment);\n    console.log(\"Add indent: \" + style.autoIndent);\n    console.log(\"Reading order: \" + style.readingOrder);\n    console.log(\"Wrap text: \" + style.wrapText);\n    console.log(\"Include protection: \" + style.includeProtection);\n    console.log(\"Shrink to fit: \" + style.shrinkToFit);\n    console.log(\"Style locked: \" + style.locked);\n});\n```"
+  remarks: "Outre cette signature, cette méthode présente les signatures suivantes :\n\n`load(option?: { select?: string; expand?: string; }): Excel.Style`-Où option.select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options.expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Style`-Uniquement disponible sur les types de la collection. Il est similaire à la signature précédente. Option.Top Spécifie le nombre maximal d’éléments pouvant être inclus dans le résultat de la collection. Option.Skip Spécifie le nombre d’éléments qui doivent être ignoré et non inclus dans le résultat. Si option.top est spécifié, le jeu de résultats démarre après l’ignorer le nombre spécifié d’éléments.\n#### <a name=\"examples\"></a>範例\n\n```typescript\nawait Excel.run(async (context) => {\n    let style = context.workbook.styles.getItem(\"Diagonal Orientation Style\");            \n    style.load(\"textOrientation, horizontalAlignment, autoIndent, readingOrder, wrapText, includeProtection, shrinkToFit, locked\");\n\n    await context.sync();\n\n    console.log(\"Orientation: \" + style.textOrientation);\n    console.log(\"Horizontal alignment: \" + style.horizontalAlignment);\n    console.log(\"Add indent: \" + style.autoIndent);\n    console.log(\"Reading order: \" + style.readingOrder);\n    console.log(\"Wrap text: \" + style.wrapText);\n    console.log(\"Include protection: \" + style.includeProtection);\n    console.log(\"Shrink to fit: \" + style.shrinkToFit);\n    console.log(\"Style locked: \" + style.locked);\n});\n```"
   name: load(option)
   fullName: load
   langs:
