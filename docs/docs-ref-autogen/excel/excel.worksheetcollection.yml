@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 394b3a0aa74bf2cbf15cdf8c34be42f1dac39d7a
-ms.sourcegitcommit: b05ee546d9dfbc914c8d1c594d9b206b04780bbc
+ms.openlocfilehash: 4a328748b71027d329cd322e22d7fada9861dfb5
+ms.sourcegitcommit: 3771b97cffd6e0510fd4e9c6288db696cd0c0ca9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/22/2018
-ms.locfileid: "26646012"
+ms.lasthandoff: 11/30/2018
+ms.locfileid: "26995660"
 items:
 - uid: excel.Excel.WorksheetCollection
   summary: >-
@@ -18,7 +18,7 @@ items:
   - typeScript
   type: class
   extends:
-  - OfficeExtension.ClientObject
+  - office.OfficeExtension.ClientObject
   package: excel
   children:
   - excel.Excel.WorksheetCollection.add
@@ -52,7 +52,7 @@ items:
     return:
       type:
       - excel.Excel.Worksheet
-      description: "\n#### <a name=\"examples\"></a>範例\n\n```javascript\nExcel.run(function (ctx) { \n    var wSheetName = 'Sample Name';\n    var worksheet = ctx.workbook.worksheets.add(wSheetName);\n    worksheet.load('name');\n    return ctx.sync().then(function() {\n        console.log(worksheet.name);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nExcel.run(function (ctx) { \n    var wSheetName = 'Sample Name';\n    var worksheet = ctx.workbook.worksheets.add(wSheetName);\n    worksheet.load('name');\n    return ctx.sync().then(function() {\n        console.log(worksheet.name);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
     parameters:
     - id: name
       description: Facultatif. Nom de la feuille de calcul à ajouter. Si cette propriété est définie, le nom doit être unique. Si cette propriété n’est pas définie, Excel détermine le nom de la nouvelle feuille de calcul.
@@ -74,7 +74,7 @@ items:
     return:
       type:
       - excel.Excel.Worksheet
-      description: "\n#### <a name=\"examples\"></a>範例\n\n```javascript\nExcel.run(function (ctx) {  \n    var activeWorksheet = ctx.workbook.worksheets.getActiveWorksheet();\n    activeWorksheet.load('name');\n    return ctx.sync().then(function() {\n            console.log(activeWorksheet.name);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nExcel.run(function (ctx) {  \n    var activeWorksheet = ctx.workbook.worksheets.getActiveWorksheet();\n    activeWorksheet.load('name');\n    return ctx.sync().then(function() {\n            console.log(activeWorksheet.name);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
 - uid: excel.Excel.WorksheetCollection.getCount
   summary: >-
     Obtient le nombre de feuilles de calcul dans la collection.
@@ -113,7 +113,7 @@ items:
     return:
       type:
       - excel.Excel.Worksheet
-      description: "\n#### <a name=\"examples\"></a>範例\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheets = context.workbook.worksheets;\n\n    // We don't want to include the default worksheet that was created\n    // when the workbook was created, so our \"firstSheet\" will be the one\n    // after the literal first. Note chaining of navigation methods.\n    const firstSheet = sheets.getFirst().getNext();\n    const lastSheet = sheets.getLast();\n    const firstTaxRateRange = firstSheet.getRange(\"B2\");\n    const lastTaxRateRange = lastSheet.getRange(\"B2\");\n\n    firstSheet.load(\"name\");\n    lastSheet.load(\"name\");\n    firstTaxRateRange.load(\"text\");\n    lastTaxRateRange.load(\"text\");\n\n    await context.sync();\n\n    let firstYear = firstSheet.name.substr(5, 4);\n    let lastYear = lastSheet.name.substr(5, 4);\n    console.log(`Tax Rate change from ${firstYear} to ${lastYear}`, `Tax rate for ${firstYear}: ${firstTaxRateRange.text[0][0]}\\nTax rate for ${lastYear}: ${lastTaxRateRange.text[0][0]}`)\n\n    await context.sync();\n});\n```"
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheets = context.workbook.worksheets;\n\n    // We don't want to include the default worksheet that was created\n    // when the workbook was created, so our \"firstSheet\" will be the one\n    // after the literal first. Note chaining of navigation methods.\n    const firstSheet = sheets.getFirst().getNext();\n    const lastSheet = sheets.getLast();\n    const firstTaxRateRange = firstSheet.getRange(\"B2\");\n    const lastTaxRateRange = lastSheet.getRange(\"B2\");\n\n    firstSheet.load(\"name\");\n    lastSheet.load(\"name\");\n    firstTaxRateRange.load(\"text\");\n    lastTaxRateRange.load(\"text\");\n\n    await context.sync();\n\n    let firstYear = firstSheet.name.substr(5, 4);\n    let lastYear = lastSheet.name.substr(5, 4);\n    console.log(`Tax Rate change from ${firstYear} to ${lastYear}`, `Tax rate for ${firstYear}: ${firstTaxRateRange.text[0][0]}\\nTax rate for ${lastYear}: ${lastTaxRateRange.text[0][0]}`)\n\n    await context.sync();\n});\n```"
     parameters:
     - id: visibleOnly
       description: Facultatif. Si la valeur est True, prend en compte uniquement les feuilles de calcul visibles et ignore les feuilles de calcul masquées.
@@ -179,7 +179,7 @@ items:
     return:
       type:
       - excel.Excel.Worksheet
-      description: "\n#### <a name=\"examples\"></a>範例\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheets = context.workbook.worksheets;\n\n    // We don't want to include the default worksheet that was created\n    // when the workbook was created, so our \"firstSheet\" will be the one\n    // after the literal first. Note chaining of navigation methods.\n    const firstSheet = sheets.getFirst().getNext();\n    const lastSheet = sheets.getLast();\n    const firstTaxRateRange = firstSheet.getRange(\"B2\");\n    const lastTaxRateRange = lastSheet.getRange(\"B2\");\n\n    firstSheet.load(\"name\");\n    lastSheet.load(\"name\");\n    firstTaxRateRange.load(\"text\");\n    lastTaxRateRange.load(\"text\");\n\n    await context.sync();\n\n    let firstYear = firstSheet.name.substr(5, 4);\n    let lastYear = lastSheet.name.substr(5, 4);\n    console.log(`Tax Rate change from ${firstYear} to ${lastYear}`, `Tax rate for ${firstYear}: ${firstTaxRateRange.text[0][0]}\\nTax rate for ${lastYear}: ${lastTaxRateRange.text[0][0]}`)\n\n    await context.sync();\n});\n```"
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheets = context.workbook.worksheets;\n\n    // We don't want to include the default worksheet that was created\n    // when the workbook was created, so our \"firstSheet\" will be the one\n    // after the literal first. Note chaining of navigation methods.\n    const firstSheet = sheets.getFirst().getNext();\n    const lastSheet = sheets.getLast();\n    const firstTaxRateRange = firstSheet.getRange(\"B2\");\n    const lastTaxRateRange = lastSheet.getRange(\"B2\");\n\n    firstSheet.load(\"name\");\n    lastSheet.load(\"name\");\n    firstTaxRateRange.load(\"text\");\n    lastTaxRateRange.load(\"text\");\n\n    await context.sync();\n\n    let firstYear = firstSheet.name.substr(5, 4);\n    let lastYear = lastSheet.name.substr(5, 4);\n    console.log(`Tax Rate change from ${firstYear} to ${lastYear}`, `Tax rate for ${firstYear}: ${firstTaxRateRange.text[0][0]}\\nTax rate for ${lastYear}: ${lastTaxRateRange.text[0][0]}`)\n\n    await context.sync();\n});\n```"
     parameters:
     - id: visibleOnly
       description: Facultatif. Si la valeur est True, prend en compte uniquement les feuilles de calcul visibles et ignore les feuilles de calcul masquées.
@@ -199,7 +199,7 @@ items:
       - Excel.Worksheet[]
 - uid: excel.Excel.WorksheetCollection.load
   summary: Files d’attente d’une commande pour charger les propriétés de l’objet spécifiées. Vous devez appeler « context.sync() » avant de lire les propriétés.
-  remarks: "Outre cette signature, cette méthode présente les signatures suivantes :\n\n`load(option?: { select?: string; expand?: string; }): Excel.WorksheetCollection`-Où option.select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options.expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.WorksheetCollection`-Uniquement disponible sur les types de la collection. Il est similaire à la signature précédente. Option.Top Spécifie le nombre maximal d’éléments pouvant être inclus dans le résultat de la collection. Option.Skip Spécifie le nombre d’éléments qui doivent être ignoré et non inclus dans le résultat. Si option.top est spécifié, le jeu de résultats démarre après l’ignorer le nombre spécifié d’éléments.\n#### <a name=\"examples\"></a>範例\n\n```javascript\nExcel.run(function (ctx) { \n    var worksheets = ctx.workbook.worksheets;\n    worksheets.load('items');\n    return ctx.sync().then(function() {\n        for (var i = 0; i < worksheets.items.length; i++)\n        {\n            console.log(worksheets.items[i].name);\n            console.log(worksheets.items[i].index);\n        }\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: "Outre cette signature, cette méthode présente les signatures suivantes :\n\n`load(option?: { select?: string; expand?: string; }): Excel.WorksheetCollection`-Où option.select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options.expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.WorksheetCollection`-Uniquement disponible sur les types de la collection. Il est similaire à la signature précédente. Option.Top Spécifie le nombre maximal d’éléments pouvant être inclus dans le résultat de la collection. Option.Skip Spécifie le nombre d’éléments qui doivent être ignoré et non inclus dans le résultat. Si option.top est spécifié, le jeu de résultats démarre après l’ignorer le nombre spécifié d’éléments.\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nExcel.run(function (ctx) { \n    var worksheets = ctx.workbook.worksheets;\n    worksheets.load('items');\n    return ctx.sync().then(function() {\n        for (var i = 0; i < worksheets.items.length; i++)\n        {\n            console.log(worksheets.items[i].name);\n            console.log(worksheets.items[i].index);\n        }\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
   name: load(option)
   fullName: load
   langs:
@@ -232,7 +232,7 @@ items:
     return:
       type:
       - OfficeExtension.EventHandlers<Excel.WorksheetActivatedEventArgs>
-      description: "\n#### <a name=\"examples\"></a>範例\n\n```typescript\nawait Excel.run(async (context) => {\n    let sheets = context.workbook.worksheets;\n    sheets.onActivated.add(onActivate);\n\n    await context.sync();\n    console.log(\"A handler has been registered for the OnActivate event.\");\n});\n```"
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\nawait Excel.run(async (context) => {\n    let sheets = context.workbook.worksheets;\n    sheets.onActivated.add(onActivate);\n\n    await context.sync();\n    console.log(\"A handler has been registered for the OnActivate event.\");\n});\n```"
 - uid: excel.Excel.WorksheetCollection.onAdded
   summary: >-
     Se produit lorsqu’une nouvelle feuille de calcul est ajouté au classeur.
@@ -249,7 +249,7 @@ items:
     return:
       type:
       - OfficeExtension.EventHandlers<Excel.WorksheetAddedEventArgs>
-      description: "\n#### <a name=\"examples\"></a>範例\n\n```typescript\nawait Excel.run(async (context) => {\n    let sheet = context.workbook.worksheets;\n    sheet.onAdded.add(onWorksheetAdd);\n\n    await context.sync();\n    console.log(\"A handler has been registered for the OnAdded event.\");\n});\n```"
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\nawait Excel.run(async (context) => {\n    let sheet = context.workbook.worksheets;\n    sheet.onAdded.add(onWorksheetAdd);\n\n    await context.sync();\n    console.log(\"A handler has been registered for the OnAdded event.\");\n});\n```"
 - uid: excel.Excel.WorksheetCollection.onCalculated
   summary: >-
     Se produit lorsqu’une feuille de calcul dans le classeur est calculé.
@@ -282,7 +282,7 @@ items:
     return:
       type:
       - OfficeExtension.EventHandlers<Excel.WorksheetDeactivatedEventArgs>
-      description: "\n#### <a name=\"examples\"></a>範例\n\n```typescript\nawait Excel.run(async (context) => {\n    let sheets = context.workbook.worksheets;\n    sheets.onDeactivated.add(onDeactivate);\n\n    await context.sync();\n    console.log(\"A handler has been registered for the OnDeactivate event.\");\n});\n```"
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\nawait Excel.run(async (context) => {\n    let sheets = context.workbook.worksheets;\n    sheets.onDeactivated.add(onDeactivate);\n\n    await context.sync();\n    console.log(\"A handler has been registered for the OnDeactivate event.\");\n});\n```"
 - uid: excel.Excel.WorksheetCollection.onDeleted
   summary: >-
     Se produit lorsqu’une feuille de calcul est supprimé du classeur.

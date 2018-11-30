@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: f724ee4d39fa9825ebeba3d0e52976c4ecf246f4
-ms.sourcegitcommit: b05ee546d9dfbc914c8d1c594d9b206b04780bbc
+ms.openlocfilehash: 9ab0bdc1c89055d686c563df42d99b7a5bf33549
+ms.sourcegitcommit: 3771b97cffd6e0510fd4e9c6288db696cd0c0ca9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/22/2018
-ms.locfileid: "26646488"
+ms.lasthandoff: 11/30/2018
+ms.locfileid: "26994813"
 items:
 - uid: excel.Excel.CustomXmlPartScopedCollection
   summary: >-
@@ -18,7 +18,7 @@ items:
   - typeScript
   type: class
   extends:
-  - OfficeExtension.ClientObject
+  - office.OfficeExtension.ClientObject
   package: excel
   children:
   - excel.Excel.CustomXmlPartScopedCollection.getCount
@@ -45,7 +45,7 @@ items:
     return:
       type:
       - OfficeExtension.ClientResult<number>
-      description: "\n#### <a name=\"examples\"></a>範例\n\n```typescript\nawait Excel.run(async (context) => {\n    $(\"#display-xml\").text(\"\");\n    const contosoNamespace = \"http://schemas.contoso.com/review/1.0\";\n    const customXmlParts = context.workbook.customXmlParts;\n    const filteredXmlParts = customXmlParts.getByNamespace(contosoNamespace);\n    const numberOfPartsInNamespace = filteredXmlParts.getCount();\n\n    await context.sync();\n\n    if (numberOfPartsInNamespace.value == 1) {\n        const onlyXmlPartInNamespace = filteredXmlParts.getOnlyItem();\n        const xmlBlob = onlyXmlPartInNamespace.getXml();\n\n        await context.sync();\n\n        // Make it a bit more readable.\n        const readableXml = xmlBlob.value.replace(/></g, \">\\n<\");\n\n        $(\"#display-xml\").text(`The only XML part in the namespace ${contosoNamespace} is:\n            ${readableXml}`);\n\n    } else {\n        OfficeHelpers.UI.notify(`There are ${numberOfPartsInNamespace.value} XML parts with namespace ${contosoNamespace}.\n            There should be exactly 1.`);\n    }        \n\n    await context.sync();\n});\n```"
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\nawait Excel.run(async (context) => {\n    $(\"#display-xml\").text(\"\");\n    const contosoNamespace = \"http://schemas.contoso.com/review/1.0\";\n    const customXmlParts = context.workbook.customXmlParts;\n    const filteredXmlParts = customXmlParts.getByNamespace(contosoNamespace);\n    const numberOfPartsInNamespace = filteredXmlParts.getCount();\n\n    await context.sync();\n\n    if (numberOfPartsInNamespace.value == 1) {\n        const onlyXmlPartInNamespace = filteredXmlParts.getOnlyItem();\n        const xmlBlob = onlyXmlPartInNamespace.getXml();\n\n        await context.sync();\n\n        // Make it a bit more readable.\n        const readableXml = xmlBlob.value.replace(/></g, \">\\n<\");\n\n        $(\"#display-xml\").text(`The only XML part in the namespace ${contosoNamespace} is:\n            ${readableXml}`);\n\n    } else {\n        OfficeHelpers.UI.notify(`There are ${numberOfPartsInNamespace.value} XML parts with namespace ${contosoNamespace}.\n            There should be exactly 1.`);\n    }        \n\n    await context.sync();\n});\n```"
 - uid: excel.Excel.CustomXmlPartScopedCollection.getItem
   summary: >-
     Obtient une partie XML personnalisée en fonction de son ID.
@@ -84,7 +84,7 @@ items:
     return:
       type:
       - excel.Excel.CustomXmlPart
-      description: "\n#### <a name=\"examples\"></a>範例\n\n```typescript\nawait Excel.run(async (context) => {\n    const settings = context.workbook.settings;\n    const xmlPartIDSetting = settings.getItemOrNullObject(\"ContosoReviewXmlPartId\").load(\"value\");\n    await context.sync();\n\n    if (xmlPartIDSetting.value) {   \n        let customXmlPart = context.workbook.customXmlParts.getItem(xmlPartIDSetting.value);\n        const xmlBlob = customXmlPart.getXml();\n        customXmlPart.delete();\n        customXmlPart = context.workbook.customXmlParts.getItemOrNullObject(xmlPartIDSetting.value);\n\n        await context.sync();\n\n        if (customXmlPart.isNullObject) {\n            $(\"#display-xml\").text(`The XML part with the id ${xmlPartIDSetting.value} has been deleted.`);\n\n            // Delete the unneeded setting too.\n            xmlPartIDSetting.delete();            \n        } else {\n            const readableXml = addLineBreaksToXML(xmlBlob.value);\n            const strangeMessage = `This is strange. The XML part with the id ${xmlPartIDSetting.value} has not been deleted:\\n${readableXml}`\n            $(\"#display-xml\").text(strangeMessage);\n        }\n\n        await context.sync();\n    }\n});\n```"
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\nawait Excel.run(async (context) => {\n    const settings = context.workbook.settings;\n    const xmlPartIDSetting = settings.getItemOrNullObject(\"ContosoReviewXmlPartId\").load(\"value\");\n    await context.sync();\n\n    if (xmlPartIDSetting.value) {   \n        let customXmlPart = context.workbook.customXmlParts.getItem(xmlPartIDSetting.value);\n        const xmlBlob = customXmlPart.getXml();\n        customXmlPart.delete();\n        customXmlPart = context.workbook.customXmlParts.getItemOrNullObject(xmlPartIDSetting.value);\n\n        await context.sync();\n\n        if (customXmlPart.isNullObject) {\n            $(\"#display-xml\").text(`The XML part with the id ${xmlPartIDSetting.value} has been deleted.`);\n\n            // Delete the unneeded setting too.\n            xmlPartIDSetting.delete();            \n        } else {\n            const readableXml = addLineBreaksToXML(xmlBlob.value);\n            const strangeMessage = `This is strange. The XML part with the id ${xmlPartIDSetting.value} has not been deleted:\\n${readableXml}`\n            $(\"#display-xml\").text(strangeMessage);\n        }\n\n        await context.sync();\n    }\n});\n```"
     parameters:
     - id: id
       description: ID de l’objet à récupérer.
@@ -106,7 +106,7 @@ items:
     return:
       type:
       - excel.Excel.CustomXmlPart
-      description: "\n#### <a name=\"examples\"></a>範例\n\n```typescript\nawait Excel.run(async (context) => {\n    $(\"#display-xml\").text(\"\");\n    const contosoNamespace = \"http://schemas.contoso.com/review/1.0\";\n    const customXmlParts = context.workbook.customXmlParts;\n    const filteredXmlParts = customXmlParts.getByNamespace(contosoNamespace);\n    const numberOfPartsInNamespace = filteredXmlParts.getCount();\n\n    await context.sync();\n\n    if (numberOfPartsInNamespace.value == 1) {\n        const onlyXmlPartInNamespace = filteredXmlParts.getOnlyItem();\n        const xmlBlob = onlyXmlPartInNamespace.getXml();\n\n        await context.sync();\n\n        // Make it a bit more readable.\n        const readableXml = xmlBlob.value.replace(/></g, \">\\n<\");\n\n        $(\"#display-xml\").text(`The only XML part in the namespace ${contosoNamespace} is:\n            ${readableXml}`);\n\n    } else {\n        OfficeHelpers.UI.notify(`There are ${numberOfPartsInNamespace.value} XML parts with namespace ${contosoNamespace}.\n            There should be exactly 1.`);\n    }        \n\n    await context.sync();\n});\n```"
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\nawait Excel.run(async (context) => {\n    $(\"#display-xml\").text(\"\");\n    const contosoNamespace = \"http://schemas.contoso.com/review/1.0\";\n    const customXmlParts = context.workbook.customXmlParts;\n    const filteredXmlParts = customXmlParts.getByNamespace(contosoNamespace);\n    const numberOfPartsInNamespace = filteredXmlParts.getCount();\n\n    await context.sync();\n\n    if (numberOfPartsInNamespace.value == 1) {\n        const onlyXmlPartInNamespace = filteredXmlParts.getOnlyItem();\n        const xmlBlob = onlyXmlPartInNamespace.getXml();\n\n        await context.sync();\n\n        // Make it a bit more readable.\n        const readableXml = xmlBlob.value.replace(/></g, \">\\n<\");\n\n        $(\"#display-xml\").text(`The only XML part in the namespace ${contosoNamespace} is:\n            ${readableXml}`);\n\n    } else {\n        OfficeHelpers.UI.notify(`There are ${numberOfPartsInNamespace.value} XML parts with namespace ${contosoNamespace}.\n            There should be exactly 1.`);\n    }        \n\n    await context.sync();\n});\n```"
 - uid: excel.Excel.CustomXmlPartScopedCollection.getOnlyItemOrNullObject
   summary: >-
     Si la collection contient exactement un élément, cette méthode le renvoie. Dans le cas contraire, cette méthode renvoie la valeur Null.
