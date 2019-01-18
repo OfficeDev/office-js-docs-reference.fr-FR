@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 63ade8d57975212d17ca67f235aab81206856a71
-ms.sourcegitcommit: 3771b97cffd6e0510fd4e9c6288db696cd0c0ca9
+ms.openlocfilehash: e9d7dac89d11878fa613877f7f5816787dfdd5d2
+ms.sourcegitcommit: 06eebee5e68d349f78e6bc3bb0ef099fe063cf04
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/30/2018
-ms.locfileid: "26995639"
+ms.lasthandoff: 01/17/2019
+ms.locfileid: "28725423"
 items:
 - uid: excel.Excel.PivotLayout
   summary: >-
@@ -21,6 +21,7 @@ items:
   - office.OfficeExtension.ClientObject
   package: excel
   children:
+  - excel.Excel.PivotLayout.context
   - excel.Excel.PivotLayout.getColumnLabelRange
   - excel.Excel.PivotLayout.getDataBodyRange
   - excel.Excel.PivotLayout.getFilterAxisRange
@@ -32,9 +33,21 @@ items:
   - excel.Excel.PivotLayout.showRowGrandTotals
   - excel.Excel.PivotLayout.subtotalLocation
   - excel.Excel.PivotLayout.toJSON
+- uid: excel.Excel.PivotLayout.context
+  summary: Contexte de la requête associé à l’objet. Il connecte processus du complément au processus de l’application hôte Office.
+  name: context
+  fullName: context
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type:
+      - RequestContext
 - uid: excel.Excel.PivotLayout.getColumnLabelRange
   summary: >-
-    Renvoie la plage où résident les étiquettes de colonnes du tableau croisé dynamique.
+    Renvoie la plage où les étiquettes de colonnes de tableau croisé dynamique se trouvent.
 
 
     \[[Du jeu d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -51,7 +64,7 @@ items:
       description: ''
 - uid: excel.Excel.PivotLayout.getDataBodyRange
   summary: >-
-    Renvoie la plage où résident les valeurs de données du tableau croisé dynamique.
+    Renvoie la plage où les valeurs de données de tableau croisé dynamique se trouvent.
 
 
     \[[Du jeu d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -68,7 +81,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\nawait Excel.run(async (context) => {\n    const pivotTable = context.workbook.worksheets.getActiveWorksheet().pivotTables.getItem(\"Farm Sales\");\n\n    // the layout controls the ranges used by the PivotTable\n    const range = pivotTable.layout.getDataBodyRange();\n\n    // get all the data hierarchy totals\n    const grandTotalRange = range.getLastRow();\n    grandTotalRange.load(\"address\");\n    await context.sync();\n    \n    // use the wholesale and farm sale totals to make a final sum\n    const masterTotalRange = context.workbook.worksheets.getActiveWorksheet().getRange(\"B27:C27\");\n    masterTotalRange.formulas = [[\"All Crates\", \"=SUM(\" + grandTotalRange.address + \")\"]];\n    await context.sync();\n});\n```"
 - uid: excel.Excel.PivotLayout.getFilterAxisRange
   summary: >-
-    Renvoie la plage de la zone de filtre du tableau croisé dynamique.
+    Renvoie la plage de la zone de filtre de tableau croisé dynamique.
 
 
     \[[Du jeu d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -85,7 +98,7 @@ items:
       description: ''
 - uid: excel.Excel.PivotLayout.getRange
   summary: >-
-    Renvoie la plage que du tableau croisé dynamique existe, à l’exclusion de la zone de filtre.
+    Renvoie la plage sur laquelle le tableau croisé dynamique existe, à l’exception de la zone de filtre.
 
 
     \[[Du jeu d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -102,7 +115,7 @@ items:
       description: ''
 - uid: excel.Excel.PivotLayout.getRowLabelRange
   summary: >-
-    Renvoie la plage où résident les étiquettes de lignes du tableau croisé dynamique.
+    Renvoie la plage où les étiquettes de lignes de tableau croisé dynamique se trouvent.
 
 
     \[[Du jeu d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -119,7 +132,7 @@ items:
       description: ''
 - uid: excel.Excel.PivotLayout.layoutType
   summary: >-
-    Cette propriété indique le PivotLayoutType de tous les champs du tableau croisé dynamique. Si des champs possèdent des états différents, il est null.
+    Cette propriété indique le PivotLayoutType de tous les champs sur le tableau croisé dynamique. Si les champs ont des états différents, la valeur sera null.
 
 
     \[[Du jeu d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -161,7 +174,7 @@ items:
       - string | string[]
 - uid: excel.Excel.PivotLayout.showColumnGrandTotals
   summary: >-
-    True si le tableau croisé dynamique état affiche des totaux pour les colonnes.
+    True si le rapport de tableau croisé dynamique affiche les grands totaux des colonnes.
 
 
     \[[Du jeu d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -177,7 +190,7 @@ items:
       - boolean
 - uid: excel.Excel.PivotLayout.showRowGrandTotals
   summary: >-
-    True si le tableau croisé dynamique état affiche des totaux généraux des lignes.
+    True si le rapport de tableau croisé dynamique affiche les grands totaux des lignes.
 
 
     \[[Du jeu d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -193,7 +206,7 @@ items:
       - boolean
 - uid: excel.Excel.PivotLayout.subtotalLocation
   summary: >-
-    Cette propriété indique le SubtotalLocationType de tous les champs du tableau croisé dynamique. Si des champs possèdent des états différents, il est null.
+    Cette propriété indique le SubtotalLocationType de tous les champs sur le tableau croisé dynamique. Si les champs ont des états différents, la valeur sera null.
 
 
     \[[Du jeu d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -208,6 +221,7 @@ items:
       type:
       - Excel.SubtotalLocationType | "AtTop" | "AtBottom" | "Off"
 - uid: excel.Excel.PivotLayout.toJSON
+  summary: Remplace le code JavaScript `toJSON()` méthode afin de fournir une sortie plus utile lorsqu’un objet API est passé à `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle le `toJSON` méthode de l’objet qui lui est passé.) Tandis que l’objet Excel.PivotLayout d’origine est un objet d’API, la `toJSON` méthode renvoie un objet JavaScript brut (typée en tant que `Excel.Interfaces.PivotLayoutData` <!-- -->) qui contient des copies superficielles de toutes les propriétés enfant chargé à partir de l’objet d’origine.
   name: toJSON()
   fullName: toJSON
   langs:

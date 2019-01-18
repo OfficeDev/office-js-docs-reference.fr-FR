@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 38f301ce9182fbc761b3e867b6d3988a48db3210
-ms.sourcegitcommit: 3771b97cffd6e0510fd4e9c6288db696cd0c0ca9
+ms.openlocfilehash: c1e79f8060a2a13892185357fe51cd29e3a2a692
+ms.sourcegitcommit: 06eebee5e68d349f78e6bc3bb0ef099fe063cf04
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/30/2018
-ms.locfileid: "26994890"
+ms.lasthandoff: 01/17/2019
+ms.locfileid: "28724744"
 items:
 - uid: excel.Excel.DataValidation
   summary: >-
@@ -22,6 +22,7 @@ items:
   package: excel
   children:
   - excel.Excel.DataValidation.clear
+  - excel.Excel.DataValidation.context
   - excel.Excel.DataValidation.errorAlert
   - excel.Excel.DataValidation.ignoreBlanks
   - excel.Excel.DataValidation.load
@@ -32,7 +33,7 @@ items:
   - excel.Excel.DataValidation.valid
 - uid: excel.Excel.DataValidation.clear
   summary: >-
-    Efface la validation des données à partir de la plage actuelle.
+    Efface la validation des données de la plage active.
 
 
     \[[Du jeu d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -47,9 +48,21 @@ items:
       type:
       - void
       description: ''
+- uid: excel.Excel.DataValidation.context
+  summary: Contexte de la requête associé à l’objet. Il connecte processus du complément au processus de l’application hôte Office.
+  name: context
+  fullName: context
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type:
+      - RequestContext
 - uid: excel.Excel.DataValidation.errorAlert
   summary: >-
-    Message d’erreur lorsque l’utilisateur entre des données non valides.
+    Alerte d’erreur lorsque l’utilisateur entre des données non valides.
 
 
     \[[Du jeu d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -66,7 +79,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Decision\");\n    const commentsRange = \n        sheet.tables.getItem(\"NameOptionsTable\").columns.getItem(\"Comments\").getDataBodyRange();\n\n    // When you are developing, it is a good practice to\n    // clear the dataValidation object with each run of your code.\n    commentsRange.dataValidation.clear();   \n\n    // If the value of A2 is contained in the value of C2, then \n    // SEARCH(A2,C2) returns the number where it begins. Otherwise,\n    // it does not return a number.\n    let redundantStringRule = {\n        custom: {\n            formula: \"=NOT(ISNUMBER(SEARCH(A2,C2)))\"\n        }\n    };\n    commentsRange.dataValidation.rule = redundantStringRule;\n    commentsRange.dataValidation.errorAlert = {\n        message: \"It is redundant to include the baby name in the comment.\",\n        showAlert: true,\n        style: \"Information\",\n        title: \"Baby Name in Comment\"\n    };\n\n    await context.sync();\n});\n```"
 - uid: excel.Excel.DataValidation.ignoreBlanks
   summary: >-
-    Ignorer les espaces : validation des données n’est effectuée sur les cellules vides, la valeur par défaut est true.
+    Ignorer les espaces vides : aucune validation des données ne sera exécutée sur les cellules vides, la valeur par défaut est vrai.
 
 
     \[[Du jeu d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -139,6 +152,7 @@ items:
       type:
       - excel.Excel.DataValidationRule
 - uid: excel.Excel.DataValidation.toJSON
+  summary: Remplace le code JavaScript `toJSON()` méthode afin de fournir une sortie plus utile lorsqu’un objet API est passé à `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle le `toJSON` méthode de l’objet qui lui est passé.) Tandis que l’objet Excel.DataValidation d’origine est un objet d’API, la `toJSON` méthode renvoie un objet JavaScript brut (typée en tant que `Excel.Interfaces.DataValidationData` <!-- -->) qui contient des copies superficielles de toutes les propriétés enfant chargé à partir de l’objet d’origine.
   name: toJSON()
   fullName: toJSON
   langs:
@@ -152,7 +166,7 @@ items:
       description: ''
 - uid: excel.Excel.DataValidation.type
   summary: >-
-    Le type de la validation des données, voir Excel.DataValidationType pour plus d’informations.
+    Type de validation des données, voir Excel.DataValidationType pour plus d’informations.
 
 
     \[[Du jeu d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -168,7 +182,7 @@ items:
       - Excel.DataValidationType | "None" | "WholeNumber" | "Decimal" | "List" | "Date" | "Time" | "TextLength" | "Custom" | "Inconsistent" | "MixedCriteria"
 - uid: excel.Excel.DataValidation.valid
   summary: >-
-    Représente si toutes les valeurs de cellule sont valides conformément aux règles de validation de données. Renvoie la valeur true si toutes les valeurs de cellule sont valides, ou false si toutes les valeurs de cellule ne sont pas valides. Renvoie la valeur null s’il y a deux valeurs de cellule valides et non valides dans la plage.
+    Représente si toutes les valeurs de cellule sont valides selon les règles de validation des données. Renvoie la valeur true si toutes les valeurs de cellule sont valides, ou false si toutes les valeurs de cellule ne sont pas valides. Renvoie la valeur null s’il y a deux valeurs de cellule valides et non valides dans la plage.
 
 
     \[[Du jeu d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]

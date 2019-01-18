@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: bf2a8218e2d1bc0b69a9914611d7195d0f54e663
-ms.sourcegitcommit: 3771b97cffd6e0510fd4e9c6288db696cd0c0ca9
+ms.openlocfilehash: 779baf962704aeafd44299d52bb44a2ad936bcd0
+ms.sourcegitcommit: 06eebee5e68d349f78e6bc3bb0ef099fe063cf04
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/30/2018
-ms.locfileid: "26995110"
+ms.lasthandoff: 01/17/2019
+ms.locfileid: "28725402"
 items:
 - uid: excel.Excel.SettingCollection
   summary: >-
@@ -22,6 +22,7 @@ items:
   package: excel
   children:
   - excel.Excel.SettingCollection.add
+  - excel.Excel.SettingCollection.context
   - excel.Excel.SettingCollection.getCount
   - excel.Excel.SettingCollection.getItem
   - excel.Excel.SettingCollection.getItemOrNullObject
@@ -41,7 +42,7 @@ items:
   - typeScript
   type: method
   syntax:
-    content: 'add(key: string, value: string | number | boolean | Date | any[] | any): Excel.Setting;'
+    content: 'add(key: string, value: string | number | boolean | Date | Array<any> | any): Excel.Setting;'
     return:
       type:
       - excel.Excel.Setting
@@ -54,7 +55,19 @@ items:
     - id: value
       description: Valeur du nouveau paramètre.
       type:
-      - string | number | boolean | Date | any[] | any
+      - string | number | boolean | Date | Array<any> | any
+- uid: excel.Excel.SettingCollection.context
+  summary: Contexte de la requête associé à l’objet. Il connecte processus du complément au processus de l’application hôte Office.
+  name: context
+  fullName: context
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type:
+      - RequestContext
 - uid: excel.Excel.SettingCollection.getCount
   summary: >-
     Obtient le nombre de paramètres dans la collection.
@@ -74,7 +87,7 @@ items:
       description: ''
 - uid: excel.Excel.SettingCollection.getItem
   summary: >-
-    Obtient une entrée Setting via la clé.
+    Obtient une Entrée de paramètre via la clé.
 
 
     \[[Du jeu d’API : ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -96,7 +109,7 @@ items:
       - string
 - uid: excel.Excel.SettingCollection.getItemOrNullObject
   summary: >-
-    Obtient une entrée de paramètre via la clé. Si le paramètre n’existe pas, renvoie un objet null.
+    Obtient une Entrée de paramètre via la clé. Si le paramètre n’existe pas, renvoie un objet null.
 
 
     \[[Du jeu d’API : ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -170,8 +183,9 @@ items:
     return:
       type:
       - OfficeExtension.EventHandlers<Excel.SettingsChangedEventArgs>
-      description: "\n#### <a name=\"examples\"></a>範例\n\n```typescript\nawait Excel.run(async (context) => {\n    const settings = context.workbook.settings; \n    settings.onSettingsChanged.add(onChangedSetting);\n\n    await context.sync();\n    console.log(\"Settings changed handler registered.\");\n});\n```"
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\nawait Excel.run(async (context) => {\n    const settings = context.workbook.settings; \n    settings.onSettingsChanged.add(onChangedSetting);\n\n    await context.sync();\n    console.log(\"Settings changed handler registered.\");\n});\n```"
 - uid: excel.Excel.SettingCollection.toJSON
+  summary: Remplace le code JavaScript `toJSON()` méthode afin de fournir une sortie plus utile lorsqu’un objet API est passé à `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle le `toJSON` méthode de l’objet qui lui est passé.) Tandis que l’original `Excel.SettingCollection` objet est un objet d’API, la `toJSON` méthode renvoie un objet JavaScript brut (typée en tant que `Excel.Interfaces.SettingCollectionData` <!-- -->) qui contient un tableau « éléments » avec copies superficielles de toutes les propriétés chargées à partir des éléments de la collection.
   name: toJSON()
   fullName: toJSON
   langs:

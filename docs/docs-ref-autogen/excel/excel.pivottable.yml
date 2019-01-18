@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 86a143d5d3ce8e4486010f43d8a54de4b09f7980
-ms.sourcegitcommit: 3771b97cffd6e0510fd4e9c6288db696cd0c0ca9
+ms.openlocfilehash: f774b8bb9a5ccdddae6de035b5eff44a8c9314bd
+ms.sourcegitcommit: 06eebee5e68d349f78e6bc3bb0ef099fe063cf04
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/30/2018
-ms.locfileid: "26996073"
+ms.lasthandoff: 01/17/2019
+ms.locfileid: "28725409"
 items:
 - uid: excel.Excel.PivotTable
   summary: >-
@@ -23,6 +23,7 @@ items:
   package: excel
   children:
   - excel.Excel.PivotTable.columnHierarchies
+  - excel.Excel.PivotTable.context
   - excel.Excel.PivotTable.dataHierarchies
   - excel.Excel.PivotTable.delete
   - excel.Excel.PivotTable.filterHierarchies
@@ -37,7 +38,7 @@ items:
   - excel.Excel.PivotTable.worksheet
 - uid: excel.Excel.PivotTable.columnHierarchies
   summary: >-
-    Les hiérarchies de tableau croisé dynamique de colonne de tableau croisé dynamique.
+    Les hiérarchies de colonne de tableau croisé dynamique.
 
 
     \[[Du jeu d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -52,9 +53,21 @@ items:
       type:
       - excel.Excel.RowColumnPivotHierarchyCollection
       description: "\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\nawait Excel.run(async (context) => {\n    const pivotTable = context.workbook.worksheets.getActiveWorksheet().pivotTables.getItem(\"Farm Sales\");       \n\n    // check if the PivotTable already has a column\n    const column = pivotTable.columnHierarchies.getItemOrNullObject(\"Farm\");\n    column.load(\"id\");\n    await context.sync();\n\n    if (column.isNullObject) {\n        // ading the farm column to the column hierarchy automatically removes it from the row hierarchy\n        pivotTable.columnHierarchies.add(pivotTable.hierarchies.getItem(\"Farm\"));\n    } else {\n        pivotTable.columnHierarchies.remove(column);\n    }\n\n    await context.sync();\n});\n```"
+- uid: excel.Excel.PivotTable.context
+  summary: Contexte de la requête associé à l’objet. Il connecte processus du complément au processus de l’application hôte Office.
+  name: context
+  fullName: context
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type:
+      - RequestContext
 - uid: excel.Excel.PivotTable.dataHierarchies
   summary: >-
-    Les hiérarchies de tableau croisé dynamique de données de tableau croisé dynamique.
+    Les hiérarchies de données de tableau croisé dynamique.
 
 
     \[[Du jeu d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -88,7 +101,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\nawait Excel.run(async (context) => {\n    context.workbook.worksheets.getItem(\"Pivot\").pivotTables.getItem(\"Farm Sales\").delete();\n\n    await context.sync();\n});\n```"
 - uid: excel.Excel.PivotTable.filterHierarchies
   summary: >-
-    Les hiérarchies de tableau croisé dynamique de filtre de tableau croisé dynamique.
+    Les hiérarchies de filtre de tableau croisé dynamique.
 
 
     \[[Du jeu d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -105,7 +118,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\nasync function filter(functionType: Excel.AggregationFunction) {\n    await Excel.run(async (context) => {\n        const pivotTable = context.workbook.worksheets.getActiveWorksheet().pivotTables.getItem(\"Farm Sales\");\n        const filters = pivotTable.filterHierarchies;\n        const filter = filters.getItemOrNullObject(\"Classification\");\n        filter.load();\n        await context.sync();\n\n        // add the Classification hierarchy to the filter, if it's not already there\n        if (filter.isNullObject) {\n            filters.add(pivotTable.hierarchies.getItem(\"Classification\"));\n            await context.sync();\n        }\n    });\n}\n```"
 - uid: excel.Excel.PivotTable.hierarchies
   summary: >-
-    Les hiérarchies de tableau croisé dynamique du tableau croisé dynamique.
+    Les hiérarchies Pivot de tableau croisé dynamique.
 
 
     \[[Du jeu d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -137,7 +150,7 @@ items:
       - string
 - uid: excel.Excel.PivotTable.layout
   summary: >-
-    Le PivotLayout décrivant la disposition et la structure visuelle de l’objet PivotTable.
+    Le PivotLayout décrivant la disposition et la structure visuelle de tableau croisé dynamique.
 
 
     \[[Du jeu d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -213,7 +226,7 @@ items:
       description: ''
 - uid: excel.Excel.PivotTable.rowHierarchies
   summary: >-
-    Les hiérarchies de tableau croisé dynamique de ligne de tableau croisé dynamique.
+    Les hiérarchies de lignes de tableau croisé dynamique.
 
 
     \[[Du jeu d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -228,6 +241,7 @@ items:
       type:
       - excel.Excel.RowColumnPivotHierarchyCollection
 - uid: excel.Excel.PivotTable.toJSON
+  summary: Remplace le code JavaScript `toJSON()` méthode afin de fournir une sortie plus utile lorsqu’un objet API est passé à `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle le `toJSON` méthode de l’objet qui lui est passé.) Tandis que l’objet Excel.PivotTable d’origine est un objet d’API, la `toJSON` méthode renvoie un objet JavaScript brut (typée en tant que `Excel.Interfaces.PivotTableData` <!-- -->) qui contient des copies superficielles de toutes les propriétés enfant chargé à partir de l’objet d’origine.
   name: toJSON()
   fullName: toJSON
   langs:

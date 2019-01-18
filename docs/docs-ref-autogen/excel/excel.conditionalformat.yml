@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: a468cebcbb9e864b96f8515761752a66419f5a0e
-ms.sourcegitcommit: 3771b97cffd6e0510fd4e9c6288db696cd0c0ca9
+ms.openlocfilehash: 092df8ef4f5f2017f08981a30c942882c8189bd8
+ms.sourcegitcommit: 06eebee5e68d349f78e6bc3bb0ef099fe063cf04
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/30/2018
-ms.locfileid: "26996871"
+ms.lasthandoff: 01/17/2019
+ms.locfileid: "28724982"
 items:
 - uid: excel.Excel.ConditionalFormat
   summary: >-
@@ -25,6 +25,7 @@ items:
   - excel.Excel.ConditionalFormat.cellValueOrNullObject
   - excel.Excel.ConditionalFormat.colorScale
   - excel.Excel.ConditionalFormat.colorScaleOrNullObject
+  - excel.Excel.ConditionalFormat.context
   - excel.Excel.ConditionalFormat.custom
   - excel.Excel.ConditionalFormat.customOrNullObject
   - excel.Excel.ConditionalFormat.dataBar
@@ -81,7 +82,7 @@ items:
       - excel.Excel.CellValueConditionalFormat
 - uid: excel.Excel.ConditionalFormat.colorScale
   summary: >-
-    Renvoie les propriétés du format conditionnel ColorScale si le format conditionnel actuel est un type ColorScale. En lecture seule.
+    Renvoie les propriétés de mise en forme condittionnelle ColorScale si la mise en forme conditionnelle actuelle est un type ColorScale. Lecture seule.
 
 
     \[[Du jeu d’API : ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -98,7 +99,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const range = sheet.getRange(\"B2:M5\");\n    const conditionalFormat = range.conditionalFormats\n        .add(Excel.ConditionalFormatType.colorScale);\n    const criteria = {\n        minimum: { formula: null, type: Excel.ConditionalFormatColorCriterionType.lowestValue, color: \"blue\" },\n        midpoint: { formula: \"50\", type: Excel.ConditionalFormatColorCriterionType.percent, color: \"yellow\" },\n        maximum: { formula: null, type: Excel.ConditionalFormatColorCriterionType.highestValue, color: \"red\" }\n    };\n    conditionalFormat.colorScale.criteria = criteria;\n\n    await context.sync();\n});\n```"
 - uid: excel.Excel.ConditionalFormat.colorScaleOrNullObject
   summary: >-
-    Renvoie les propriétés du format conditionnel ColorScale si le format conditionnel actuel est un type ColorScale. En lecture seule.
+    Renvoie les propriétés de mise en forme condittionnelle ColorScale si la mise en forme conditionnelle actuelle est un type ColorScale. Lecture seule.
 
 
     \[[Du jeu d’API : ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -112,9 +113,21 @@ items:
     return:
       type:
       - excel.Excel.ColorScaleConditionalFormat
+- uid: excel.Excel.ConditionalFormat.context
+  summary: Contexte de la requête associé à l’objet. Il connecte processus du complément au processus de l’application hôte Office.
+  name: context
+  fullName: context
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type:
+      - RequestContext
 - uid: excel.Excel.ConditionalFormat.custom
   summary: >-
-    Renvoie les propriétés du format conditionnel personnalisé si le format conditionnel actuel est un type personnalisé. En lecture seule.
+    Renvoie les propriétés de mise en forme conditionnelle personnalisée si la mise en forme conditionnelle actuelle est un type personnalisé. Lecture seule.
 
 
     \[[Du jeu d’API : ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -131,7 +144,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const range = sheet.getRange(\"B8:E13\");\n    const conditionalFormat = range.conditionalFormats.add(Excel.ConditionalFormatType.custom);\n    conditionalFormat.custom.rule.formula = '=IF(B8>INDIRECT(\"RC[-1]\",0),TRUE)';\n    conditionalFormat.custom.format.font.color = \"green\";\n\n    await context.sync();\n});\n```"
 - uid: excel.Excel.ConditionalFormat.customOrNullObject
   summary: >-
-    Renvoie les propriétés du format conditionnel personnalisé si le format conditionnel actuel est un type personnalisé. En lecture seule.
+    Renvoie les propriétés de mise en forme conditionnelle personnalisée si la mise en forme conditionnelle actuelle est un type personnalisé. Lecture seule.
 
 
     \[[Du jeu d’API : ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -147,7 +160,7 @@ items:
       - excel.Excel.CustomConditionalFormat
 - uid: excel.Excel.ConditionalFormat.dataBar
   summary: >-
-    Renvoie les propriétés de la barre de données si le format conditionnel actuel est une barre de données. En lecture seule.
+    Renvoie les propriétés de la barre de données si la mise en forme conditionnelle actuelle est une barre de données.
 
 
     \[[Du jeu d’API : ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -164,7 +177,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const range = sheet.getRange(\"B8:E13\");\n    const conditionalFormat = range.conditionalFormats\n        .add(Excel.ConditionalFormatType.dataBar);\n    conditionalFormat.dataBar.barDirection = Excel.ConditionalDataBarDirection.leftToRight;\n\n    await context.sync();\n});\n```"
 - uid: excel.Excel.ConditionalFormat.dataBarOrNullObject
   summary: >-
-    Renvoie les propriétés de la barre de données si le format conditionnel actuel est une barre de données. En lecture seule.
+    Renvoie les propriétés de la barre de données si la mise en forme conditionnelle actuelle est une barre de données.
 
 
     \[[Du jeu d’API : ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -180,7 +193,7 @@ items:
       - excel.Excel.DataBarConditionalFormat
 - uid: excel.Excel.ConditionalFormat.delete
   summary: >-
-    Supprime ce format conditionnel.
+    Supprime cette mise en forme conditionnelle.
 
 
     \[[Du jeu d’API : ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -231,7 +244,7 @@ items:
       description: ''
 - uid: excel.Excel.ConditionalFormat.iconSet
   summary: >-
-    Renvoie les propriétés du format conditionnel IconSet si le format conditionnel actuel est un type IconSet. En lecture seule.
+    Renvoie les propriétés de mise en forme conditionnelle IconSet si la mise en forme conditionnelle actuelle est un type IconSet. Lecture seule.
 
 
     \[[Du jeu d’API : ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -248,7 +261,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const range = sheet.getRange(\"B8:E13\");\n    const conditionalFormat = range.conditionalFormats\n        .add(Excel.ConditionalFormatType.iconSet);\n    const iconSetCF = conditionalFormat.iconSet;\n    iconSetCF.style = Excel.IconSet.threeTriangles;\n\n    /*\n        The iconSetCF.criteria array is automatically prepopulated with\n        criterion elements whose properties have been given default settings.\n        You can't write to each property of a criterion directly. Instead,\n        replace the whole criteria object.\n\n        With a \"three*\" icon set style, such as \"threeTriangles\", the third\n        element in the criteria array (criteria[2]) defines the \"top\" icon;\n        e.g., a green triangle. The second (criteria[1]) defines the \"middle\"\n        icon, The first (criteria[0]) defines the \"low\" icon, but it\n        can often be left empty as this method does below, because every\n        cell that does not match the other two criteria always gets the low\n        icon.            \n    */\n    iconSetCF.criteria = [\n        {} as any,\n        {\n            type: Excel.ConditionalFormatIconRuleType.number,\n            operator: Excel.ConditionalIconCriterionOperator.greaterThanOrEqual,\n            formula: \"=700\"\n        },\n        {\n            type: Excel.ConditionalFormatIconRuleType.number,\n            operator: Excel.ConditionalIconCriterionOperator.greaterThanOrEqual,\n            formula: \"=1000\",\n        }\n    ];\n\n    await context.sync();\n});\n```"
 - uid: excel.Excel.ConditionalFormat.iconSetOrNullObject
   summary: >-
-    Renvoie les propriétés du format conditionnel IconSet si le format conditionnel actuel est un type IconSet. En lecture seule.
+    Renvoie les propriétés de mise en forme conditionnelle IconSet si la mise en forme conditionnelle actuelle est un type IconSet. Lecture seule.
 
 
     \[[Du jeu d’API : ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -264,7 +277,7 @@ items:
       - excel.Excel.IconSetConditionalFormat
 - uid: excel.Excel.ConditionalFormat.id
   summary: >-
-    Priorité de la mise en forme conditionnelle dans la ConditionalFormatCollection en cours. En lecture seule.
+    La priorité de la mise en forme conditionnelle dans la ConditionalFormatCollection actuelle. En lecture seule.
 
 
     \[[Du jeu d’API : ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -355,7 +368,7 @@ items:
       - number
 - uid: excel.Excel.ConditionalFormat.stopIfTrue
   summary: >-
-    Si les conditions de ce format conditionnel sont remplies, aucun format de priorité inférieure ne doit prendre effet sur cette cellule. NULL sur databars, colorscales et les jeux d’icônes qu’il n’existe pas de concept de StopIfTrue pour ces
+    Si les conditions de cette mise en forme conditionnelle sont remplies, aucun format de priorité inférieure ne doit prendre effet sur cette cellule. NULL sur databars, colorscales et les jeux d’icônes qu’il n’existe pas de concept de StopIfTrue pour ces
 
 
     \[[Du jeu d’API : ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -403,6 +416,7 @@ items:
       type:
       - excel.Excel.TextConditionalFormat
 - uid: excel.Excel.ConditionalFormat.toJSON
+  summary: Remplace le code JavaScript `toJSON()` méthode afin de fournir une sortie plus utile lorsqu’un objet API est passé à `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle le `toJSON` méthode de l’objet qui lui est passé.) Tandis que l’objet Excel.ConditionalFormat d’origine est un objet d’API, la `toJSON` méthode renvoie un objet JavaScript brut (typée en tant que `Excel.Interfaces.ConditionalFormatData` <!-- -->) qui contient des copies superficielles de toutes les propriétés enfant chargé à partir de l’objet d’origine.
   name: toJSON()
   fullName: toJSON
   langs:

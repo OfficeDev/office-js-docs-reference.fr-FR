@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 88b480928cb80e07541362126634363124f819fe
-ms.sourcegitcommit: 3771b97cffd6e0510fd4e9c6288db696cd0c0ca9
+ms.openlocfilehash: 92d8c7c86435564093bdf0c639aeead2e374089e
+ms.sourcegitcommit: 06eebee5e68d349f78e6bc3bb0ef099fe063cf04
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/30/2018
-ms.locfileid: "26994576"
+ms.lasthandoff: 01/17/2019
+ms.locfileid: "28725360"
 items:
 - uid: excel.Excel.RangeFormat
   summary: >-
@@ -25,6 +25,7 @@ items:
   - excel.Excel.RangeFormat.autofitRows
   - excel.Excel.RangeFormat.borders
   - excel.Excel.RangeFormat.columnWidth
+  - excel.Excel.RangeFormat.context
   - excel.Excel.RangeFormat.fill
   - excel.Excel.RangeFormat.font
   - excel.Excel.RangeFormat.horizontalAlignment
@@ -103,6 +104,18 @@ items:
     return:
       type:
       - number
+- uid: excel.Excel.RangeFormat.context
+  summary: Contexte de la requête associé à l’objet. Il connecte processus du complément au processus de l’application hôte Office.
+  name: context
+  fullName: context
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type:
+      - RequestContext
 - uid: excel.Excel.RangeFormat.fill
   summary: >-
     Renvoie l’objet de remplissage défini sur la plage globale. En lecture seule.
@@ -204,7 +217,7 @@ items:
       - number
 - uid: excel.Excel.RangeFormat.textOrientation
   summary: >-
-    Obtient ou définit l’orientation du texte de toutes les cellules de la plage. L’orientation du texte doit être un entier compris entre-90 et 90 ou 180 orienté verticalement le texte à partir de. Si l’orientation d’une plage n’est pas uniforme, null sera retourné.
+    Obtient ou définit l’orientation du texte de toutes les cellules dans la plage. L’orientation du texte doit être un entier compris entre-90 et 90 ou 180 orienté verticalement le texte à partir de. Si l’orientation d’une plage n’est pas uniforme, null sera retourné.
 
 
     \[[Du jeu d’API : ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -220,6 +233,7 @@ items:
       - number
       description: "\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const range = sheet.getRange(\"B2:E2\");\n\n    // Set textOrientation to either an integer between -90 and 90\n    // or to 180 for vertically-oriented text.\n    range.format.textOrientation = 90;\n\n    await context.sync();\n});\n```"
 - uid: excel.Excel.RangeFormat.toJSON
+  summary: Remplace le code JavaScript `toJSON()` méthode afin de fournir une sortie plus utile lorsqu’un objet API est passé à `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle le `toJSON` méthode de l’objet qui lui est passé.) Tandis que l’objet Excel.RangeFormat d’origine est un objet d’API, la `toJSON` méthode renvoie un objet JavaScript brut (typée en tant que `Excel.Interfaces.RangeFormatData` <!-- -->) qui contient des copies superficielles de toutes les propriétés enfant chargé à partir de l’objet d’origine.
   name: toJSON()
   fullName: toJSON
   langs:
@@ -233,7 +247,7 @@ items:
       description: ''
 - uid: excel.Excel.RangeFormat.useStandardHeight
   summary: >-
-    Détermine si la hauteur de ligne de l’objet Range est égale à la hauteur standard de la feuille. Renvoie la valeur True si la hauteur de ligne de l’objet Range est égale à la hauteur standard de la feuille. Renvoie la valeur Null si la plage contient plusieurs lignes et les lignes ne sont pas tous de la même hauteur. Renvoie la valeur False dans le cas contraire.
+    Détermine si la hauteur de ligne de l’objet de plage est égale à la hauteur standard de la feuille. Renvoie la valeur True si la hauteur de ligne de l’objet Range est égale à la hauteur standard de la feuille. Renvoie la valeur Null si la plage contient plusieurs lignes et les lignes ne sont pas tous de la même hauteur. Renvoie la valeur False dans le cas contraire.
 
 
     \[[Du jeu d’API : ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]

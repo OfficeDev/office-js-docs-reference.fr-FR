@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: b343e503a3fa62d30beef4789b3ad81a209df463
-ms.sourcegitcommit: 3771b97cffd6e0510fd4e9c6288db696cd0c0ca9
+ms.openlocfilehash: 6ba3e82f178c68789eb1283a7a0b28a8ae4c3704
+ms.sourcegitcommit: 06eebee5e68d349f78e6bc3bb0ef099fe063cf04
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/30/2018
-ms.locfileid: "26996164"
+ms.lasthandoff: 01/17/2019
+ms.locfileid: "28725437"
 items:
 - uid: excel.Excel.Style
   summary: >-
@@ -24,6 +24,7 @@ items:
   - excel.Excel.Style.autoIndent
   - excel.Excel.Style.borders
   - excel.Excel.Style.builtIn
+  - excel.Excel.Style.context
   - excel.Excel.Style.delete
   - excel.Excel.Style.fill
   - excel.Excel.Style.font
@@ -49,7 +50,7 @@ items:
   - excel.Excel.Style.wrapText
 - uid: excel.Excel.Style.autoIndent
   summary: >-
-    Indique si le texte est automatiquement mis en retrait lorsque l’alignement du texte dans une cellule est défini sur une distribution égale.
+    Indique si le texte est automatiquement mis en retrait lorsque l’alignement du texte dans une cellule est défini sur distribution égale.
 
 
     \[[Du jeu d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -65,7 +66,7 @@ items:
       - boolean
 - uid: excel.Excel.Style.borders
   summary: >-
-    Collection de quatre objets Border qui représentent les quatre bordures le style de bordure.
+    Collection de bordures de quatre objets qui représente le style des quatre bordures.
 
 
     \[[Du jeu d’API : ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -81,7 +82,7 @@ items:
       - excel.Excel.RangeBorderCollection
 - uid: excel.Excel.Style.builtIn
   summary: >-
-    Indique si le style est un style prédéfini.
+    Indique si le style est un style intégré.
 
 
     \[[Du jeu d’API : ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -95,6 +96,18 @@ items:
     return:
       type:
       - boolean
+- uid: excel.Excel.Style.context
+  summary: Contexte de la requête associé à l’objet. Il connecte processus du complément au processus de l’application hôte Office.
+  name: context
+  fullName: context
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type:
+      - RequestContext
 - uid: excel.Excel.Style.delete
   summary: >-
     Supprime ce style.
@@ -114,7 +127,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\nawait Excel.run(async (context) => {\n    let style = context.workbook.styles.getItem(\"Diagonal Orientation Style\");\n\n    // Delete the diagonal orientation style from the style collection.\n    // Styles are in the Home tab ribbon.\n    style.delete();\n\n    await context.sync();\n\n    console.log(\"Successfully deleted the diagonal orientation style from the Home tab ribbon.\");\n});\n```"
 - uid: excel.Excel.Style.fill
   summary: >-
-    Le remplissage du style.
+    Remplissage du style.
 
 
     \[[Du jeu d’API : ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -130,7 +143,7 @@ items:
       - excel.Excel.RangeFill
 - uid: excel.Excel.Style.font
   summary: >-
-    Un objet Font qui représente la police du style.
+    Renvoie un objet Police qui représente la police du style.
 
 
     \[[Du jeu d’API : ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -147,7 +160,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\nawait Excel.run(async (context) => {\n    let style = context.workbook.styles.getItem(\"Normal\");\n    style.font.load(\"bold, color, italic, name, size\");\n    style.fill.load(\"color\");\n\n    await context.sync();\n\n    console.log(\"Bold: \" + style.font.bold);\n    console.log(\"Font color: \" + style.font.color);\n    console.log(\"Italic: \" + style.font.italic);\n    console.log(\"Name: \" + style.font.name);\n    console.log(\"Size: \" + style.font.size);\n    console.log(\"Fill color: \" + style.fill.color);\n});\n```"
 - uid: excel.Excel.Style.formulaHidden
   summary: >-
-    Indique si la formule sera masquée lorsque la feuille de calcul est protégée.
+    Indique si la formule est masquée lorsque la feuille de calcul est protégée.
 
 
     \[[Du jeu d’API : ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -180,7 +193,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\nawait Excel.run(async (context) => {\n    let worksheet = context.workbook.worksheets.getItem(\"Sample\");\n    let range = worksheet.getRange(\"A1:E1\");\n\n    // Apply built-in style. \n    // Styles are in the Home tab ribbon.\n    range.style = Excel.BuiltInStyle.neutral;\n    range.format.horizontalAlignment = \"Right\";\n\n    await context.sync();\n});\n```"
 - uid: excel.Excel.Style.includeAlignment
   summary: >-
-    Indique si le style comprend les propriétés de retrait automatique, HorizontalAlignment, VerticalAlignment, WrapText, IndentLevel et TextOrientation.
+    Indique si le style inclut les propriétés AutoIndent, HorizontalAlignment, VerticalAlignment, WrapText, IndentLevel, et TextOrientation.
 
 
     \[[Du jeu d’API : ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -196,7 +209,7 @@ items:
       - boolean
 - uid: excel.Excel.Style.includeBorder
   summary: >-
-    Indique si le style comprend les propriétés de bordure Color, ColorIndex, LineStyle et Weight.
+    Indique si le style inclut les propriétés dColor, ColorIndex, LineStyle, et Weight border.
 
 
     \[[Du jeu d’API : ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -212,7 +225,7 @@ items:
       - boolean
 - uid: excel.Excel.Style.includeFont
   summary: >-
-    Indique si le style comprend les propriétés de police d’arrière-plan, gras, couleur, ColorIndex, FontStyle, Italic, le nom, taille, barré, indice, exposant et souligné.
+    Indique si le style inclut les propriétés dBackground, Bold, Color, ColorIndex, FontStyle, Italic, Name, Size, Strikethrough, Subscript, Superscript, et Underline font.
 
 
     \[[Du jeu d’API : ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -228,7 +241,7 @@ items:
       - boolean
 - uid: excel.Excel.Style.includeNumber
   summary: >-
-    Indique si le style comprend la propriété NumberFormat.
+    Indique si le style inclut la propriété NumberFormat.
 
 
     \[[Du jeu d’API : ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -244,7 +257,7 @@ items:
       - boolean
 - uid: excel.Excel.Style.includePatterns
   summary: >-
-    Indique si le style comprend les propriétés de couleur, ColorIndex, InvertIfNegative, motif, PatternColor et PatternColorIndex.
+    Indique si le style inclut les propriétés Color, ColorIndex, InvertIfNegative, Pattern, PatternColor, et PatternColorIndex interior.
 
 
     \[[Du jeu d’API : ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -260,7 +273,7 @@ items:
       - boolean
 - uid: excel.Excel.Style.includeProtection
   summary: >-
-    Indique si le style comprend les propriétés de protection FormulaHidden et Locked.
+    Indique si le style inclut les propriétés FormulaHidden et Locked protection.
 
 
     \[[Du jeu d’API : ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -276,7 +289,7 @@ items:
       - boolean
 - uid: excel.Excel.Style.indentLevel
   summary: >-
-    Entier de 0 à 250 qui indique le niveau de retrait pour le style.
+    Entier compris entre 0 à 250 qui indique le niveau de retrait du style.
 
 
     \[[Du jeu d’API : ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -327,7 +340,7 @@ items:
       - boolean
 - uid: excel.Excel.Style.name
   summary: >-
-    Le nom du style.
+    Nom du style.
 
 
     \[[Du jeu d’API : ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -343,7 +356,7 @@ items:
       - string
 - uid: excel.Excel.Style.numberFormat
   summary: >-
-    Le code de format du format de nombre pour le style.
+    Le code de format du nombre format pour le style.
 
 
     \[[Du jeu d’API : ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -359,7 +372,7 @@ items:
       - string
 - uid: excel.Excel.Style.numberFormatLocal
   summary: >-
-    Le code du format localisées du format de nombre pour le style.
+    Le code de format localisé du nombre format pour le style.
 
 
     \[[Du jeu d’API : ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -375,7 +388,7 @@ items:
       - string
 - uid: excel.Excel.Style.readingOrder
   summary: >-
-    L’ordre de lecture pour le style.
+    L’ordre de lecture du style.
 
 
     \[[Du jeu d’API : ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -391,7 +404,7 @@ items:
       - Excel.ReadingOrder | "Context" | "LeftToRight" | "RightToLeft"
 - uid: excel.Excel.Style.shrinkToFit
   summary: >-
-    Indique si le texte s’ajuste automatiquement à la largeur de colonne disponible.
+    Indique si le texte s’ajuste automatiquement pour tenir dans la largeur de colonne disponible.
 
 
     \[[Du jeu d’API : ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -407,7 +420,7 @@ items:
       - boolean
 - uid: excel.Excel.Style.textOrientation
   summary: >-
-    Orientation du texte pour le style.
+    L’orientation du texte pour le style.
 
 
     \[[Du jeu d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -422,6 +435,7 @@ items:
       type:
       - number
 - uid: excel.Excel.Style.toJSON
+  summary: Remplace le code JavaScript `toJSON()` méthode afin de fournir une sortie plus utile lorsqu’un objet API est passé à `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle le `toJSON` méthode de l’objet qui lui est passé.) Tandis que l’objet Excel.Style d’origine est un objet d’API, la `toJSON` méthode renvoie un objet JavaScript brut (typée en tant que `Excel.Interfaces.StyleData` <!-- -->) qui contient des copies superficielles de toutes les propriétés enfant chargé à partir de l’objet d’origine.
   name: toJSON()
   fullName: toJSON
   langs:
@@ -435,7 +449,7 @@ items:
       description: ''
 - uid: excel.Excel.Style.verticalAlignment
   summary: >-
-    Représente l’alignement vertical pour le style. Pour plus d’informations, voir Excel.VerticalAlignment.
+    Représente l’alignement vertical du style. Pour plus d’informations, voir Excel.VerticalAlignment.
 
 
     \[[Du jeu d’API : ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]

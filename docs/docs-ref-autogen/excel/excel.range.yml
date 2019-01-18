@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 0113e19fe75f6a676740174afd9f8d42681f847a
-ms.sourcegitcommit: c12dfe8b909dec25d284f5254d97bd6478823b8f
+ms.openlocfilehash: 8538878d7c5ae5deb7dd090b3760f6eaf146efed
+ms.sourcegitcommit: 06eebee5e68d349f78e6bc3bb0ef099fe063cf04
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/12/2018
-ms.locfileid: "27243463"
+ms.lasthandoff: 01/17/2019
+ms.locfileid: "28724961"
 items:
 - uid: excel.Excel.Range
   summary: >-
@@ -31,6 +31,7 @@ items:
   - excel.Excel.Range.columnHidden
   - excel.Excel.Range.columnIndex
   - excel.Excel.Range.conditionalFormats
+  - excel.Excel.Range.context
   - excel.Excel.Range.dataValidation
   - excel.Excel.Range.delete
   - excel.Excel.Range.format
@@ -221,7 +222,7 @@ items:
       - number
 - uid: excel.Excel.Range.conditionalFormats
   summary: >-
-    Collection de formats conditionnels qui ont une intersection avec la plage. En lecture seule.
+    Collection de mises en formes conditionnelles qui ont une intersection avec la plage. En lecture seule.
 
 
     \[[Du jeu d’API : ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -235,9 +236,21 @@ items:
     return:
       type:
       - excel.Excel.ConditionalFormatCollection
+- uid: excel.Excel.Range.context
+  summary: Contexte de la requête associé à l’objet. Il connecte processus du complément au processus de l’application hôte Office.
+  name: context
+  fullName: context
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type:
+      - RequestContext
 - uid: excel.Excel.Range.dataValidation
   summary: >-
-    Renvoie un objet de validation de données.
+    Renvoie un objet de validation des données.
 
 
     \[[Du jeu d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -339,7 +352,7 @@ items:
       - any[][]
 - uid: excel.Excel.Range.getAbsoluteResizedRange
   summary: >-
-    Obtient un objet Range avec la même cellule en haut à gauche en tant que l’objet Range en cours, mais avec les numéros de lignes et de colonnes spécifiés.
+    Obtient un objet Plage avec la même cellule supérieure gauche que l’objet de Plage en cours, mais avec un nombre spécifié de lignes et colonnes.
 
 
     \[[Du jeu d’API : ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -743,7 +756,7 @@ items:
       - number
 - uid: excel.Excel.Range.getSurroundingRegion
   summary: >-
-    Renvoie un objet Range qui représente la région de la cellule en haut à gauche dans cette plage. Une région est une plage délimitée par n’importe quelle combinaison de lignes et colonnes vides par rapport à cette plage.
+    Renvoie un objet PLage qui représente la région environnante pour la cellule en haut à gauche de cette plage. Une région environnante est une plage délimitée par une combinaison de lignes et de colonnes vides par rapport à cette plage.
 
 
     \[[Du jeu d’API : ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -876,7 +889,7 @@ items:
       - excel.Excel.InsertShiftDirection
 - uid: excel.Excel.Range.isEntireColumn
   summary: >-
-    Représente si la plage actuelle est une colonne entière. En lecture seule.
+    Représente si la plage active est une colonne entière. En lecture seule.
 
 
     \[[Du jeu d’API : ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -892,7 +905,7 @@ items:
       - boolean
 - uid: excel.Excel.Range.isEntireRow
   summary: >-
-    Représente si la plage actuelle est une ligne entière. En lecture seule.
+    Représente si la plage active est une ligne entière. En lecture seule.
 
 
     \[[Du jeu d’API : ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -965,7 +978,7 @@ items:
       - any[][]
 - uid: excel.Excel.Range.numberFormatLocal
   summary: >-
-    Représente le code de format numérique de Microsoft Excel pour la plage indiquée sous forme de chaîne dans la langue de l’utilisateur. Lors de la définition de format de numéro local à une plage, l’argument value peut être une valeur unique (string) ou un tableau à deux dimensions. Si l’argument est une valeur unique, il sera appliquée à toutes les cellules de la plage.
+    Représente le code de format numérique d’Excel pour la plage donnée en tant que chaîne dans la langue de l’utilisateur. Lors de la définition de format de numéro local à une plage, l’argument value peut être une valeur unique (string) ou un tableau à deux dimensions. Si l’argument est une valeur unique, il sera appliquée à toutes les cellules de la plage.
 
 
     \[[Du jeu d’API : ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1046,7 +1059,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nExcel.run(function (ctx) {\n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"F5:F10\"; \n    var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeAddress);\n    range.select();\n    return ctx.sync(); \n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
 - uid: excel.Excel.Range.showCard
   summary: >-
-    Affiche la carte d’une cellule active si elle comporte un contenu riche valeur.
+    Affiche la carte pour une cellule active si son contenu est riche en valeur.
 
 
     \[[Du jeu d’API : ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1111,6 +1124,7 @@ items:
       type:
       - string[][]
 - uid: excel.Excel.Range.toJSON
+  summary: Remplace le code JavaScript `toJSON()` méthode afin de fournir une sortie plus utile lorsqu’un objet API est passé à `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle le `toJSON` méthode de l’objet qui lui est passé.) Tandis que l’objet Excel.Range d’origine est un objet d’API, la `toJSON` méthode renvoie un objet JavaScript brut (typée en tant que `Excel.Interfaces.RangeData` <!-- -->) qui contient des copies superficielles de toutes les propriétés enfant chargé à partir de l’objet d’origine.
   name: toJSON()
   fullName: toJSON
   langs:
@@ -1137,7 +1151,7 @@ items:
       description: ''
 - uid: excel.Excel.Range.unmerge
   summary: >-
-    Annule la fusion de la plage de cellules.
+    Annule la fusion de la plage de cellules et les sépare dans des cellules distinctes.
 
 
     \[[Du jeu d’API : ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
