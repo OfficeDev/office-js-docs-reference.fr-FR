@@ -1,17 +1,17 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 3452ee3481ba1ddf16e504e2f639a59ee31ce2f2
-ms.sourcegitcommit: 3771b97cffd6e0510fd4e9c6288db696cd0c0ca9
+ms.openlocfilehash: 76b1a31c920babfd2c2fd2bf8b69a5de07144824
+ms.sourcegitcommit: 06eebee5e68d349f78e6bc3bb0ef099fe063cf04
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/30/2018
-ms.locfileid: "26996690"
+ms.lasthandoff: 01/17/2019
+ms.locfileid: "28724989"
 items:
 - uid: excel.Excel.CustomXmlPart
   summary: >-
-    <span data-ttu-id="a8207-101">Représente un objet de partie XML personnalisée dans un classeur.</span><span class="sxs-lookup"><span data-stu-id="a8207-101">Represents a custom XML part object in a workbook.</span></span>
+    <span data-ttu-id="88697-101">Représente un objet de partie XML personnalisée dans un classeur.</span><span class="sxs-lookup"><span data-stu-id="88697-101">Represents a custom XML part object in a workbook.</span></span>
 
 
-    <span data-ttu-id="a8207-102">\[[Du jeu d’API : ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="a8207-102">\[ [API set: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="88697-102">\[[Du jeu d’API : ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="88697-102">\[ [API set: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: Excel.CustomXmlPart
   fullName: Excel.CustomXmlPart
   langs:
@@ -21,6 +21,7 @@ items:
   - office.OfficeExtension.ClientObject
   package: excel
   children:
+  - excel.Excel.CustomXmlPart.context
   - excel.Excel.CustomXmlPart.delete
   - excel.Excel.CustomXmlPart.getXml
   - excel.Excel.CustomXmlPart.id
@@ -28,12 +29,24 @@ items:
   - excel.Excel.CustomXmlPart.namespaceUri
   - excel.Excel.CustomXmlPart.setXml
   - excel.Excel.CustomXmlPart.toJSON
+- uid: excel.Excel.CustomXmlPart.context
+  summary: <span data-ttu-id="88697-103">Contexte de la requête associé à l’objet.</span><span class="sxs-lookup"><span data-stu-id="88697-103">The request context associated with the object.</span></span> <span data-ttu-id="88697-104">Il connecte processus du complément au processus de l’application hôte Office.</span><span class="sxs-lookup"><span data-stu-id="88697-104">This connects the add-in's process to the Office host application's process.</span></span>
+  name: context
+  fullName: context
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type:
+      - RequestContext
 - uid: excel.Excel.CustomXmlPart.delete
   summary: >-
-    <span data-ttu-id="a8207-103">Supprime la partie XML personnalisée.</span><span class="sxs-lookup"><span data-stu-id="a8207-103">Deletes the custom XML part.</span></span>
+    <span data-ttu-id="88697-105">Supprime la partie XML personnalisée.</span><span class="sxs-lookup"><span data-stu-id="88697-105">Deletes the custom XML part.</span></span>
 
 
-    <span data-ttu-id="a8207-104">\[[Du jeu d’API : ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="a8207-104">\[ [API set: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="88697-106">\[[Du jeu d’API : ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="88697-106">\[ [API set: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: delete()
   fullName: delete
   langs:
@@ -44,13 +57,13 @@ items:
     return:
       type:
       - void
-      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"a8207-105\">Exemples</span><span class=\"sxs-lookup\"><span data-stu-id=\"a8207-105\">Examples</span></span>\n\n```typescript\nawait Excel.run(async (context) => {\n    const settings = context.workbook.settings;\n    const xmlPartIDSetting = settings.getItemOrNullObject(\"ContosoReviewXmlPartId\").load(\"value\");\n    await context.sync();\n\n    if (xmlPartIDSetting.value) {   \n        let customXmlPart = context.workbook.customXmlParts.getItem(xmlPartIDSetting.value);\n        const xmlBlob = customXmlPart.getXml();\n        customXmlPart.delete();\n        customXmlPart = context.workbook.customXmlParts.getItemOrNullObject(xmlPartIDSetting.value);\n\n        await context.sync();\n\n        if (customXmlPart.isNullObject) {\n            $(\"#display-xml\").text(`The XML part with the id ${xmlPartIDSetting.value} has been deleted.`);\n\n            // Delete the unneeded setting too.\n            xmlPartIDSetting.delete();            \n        } else {\n            const readableXml = addLineBreaksToXML(xmlBlob.value);\n            const strangeMessage = `This is strange. The XML part with the id ${xmlPartIDSetting.value} has not been deleted:\\n${readableXml}`\n            $(\"#display-xml\").text(strangeMessage);\n        }\n\n        await context.sync();\n    }\n});\n```"
+      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"88697-107\">Exemples</span><span class=\"sxs-lookup\"><span data-stu-id=\"88697-107\">Examples</span></span>\n\n```typescript\nawait Excel.run(async (context) => {\n    const settings = context.workbook.settings;\n    const xmlPartIDSetting = settings.getItemOrNullObject(\"ContosoReviewXmlPartId\").load(\"value\");\n    await context.sync();\n\n    if (xmlPartIDSetting.value) {   \n        let customXmlPart = context.workbook.customXmlParts.getItem(xmlPartIDSetting.value);\n        const xmlBlob = customXmlPart.getXml();\n        customXmlPart.delete();\n        customXmlPart = context.workbook.customXmlParts.getItemOrNullObject(xmlPartIDSetting.value);\n\n        await context.sync();\n\n        if (customXmlPart.isNullObject) {\n            $(\"#display-xml\").text(`The XML part with the id ${xmlPartIDSetting.value} has been deleted.`);\n\n            // Delete the unneeded setting too.\n            xmlPartIDSetting.delete();            \n        } else {\n            const readableXml = addLineBreaksToXML(xmlBlob.value);\n            const strangeMessage = `This is strange. The XML part with the id ${xmlPartIDSetting.value} has not been deleted:\\n${readableXml}`\n            $(\"#display-xml\").text(strangeMessage);\n        }\n\n        await context.sync();\n    }\n});\n```"
 - uid: excel.Excel.CustomXmlPart.getXml
   summary: >-
-    <span data-ttu-id="a8207-106">Obtient l’intégralité du contenu XML de la partie XML personnalisée.</span><span class="sxs-lookup"><span data-stu-id="a8207-106">Gets the custom XML part's full XML content.</span></span>
+    <span data-ttu-id="88697-108">Obtient l’intégralité du contenu XML de la partie XML personnalisée.</span><span class="sxs-lookup"><span data-stu-id="88697-108">Gets the custom XML part's full XML content.</span></span>
 
 
-    <span data-ttu-id="a8207-107">\[[Du jeu d’API : ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="a8207-107">\[ [API set: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="88697-109">\[[Du jeu d’API : ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="88697-109">\[ [API set: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: getXml()
   fullName: getXml
   langs:
@@ -61,13 +74,13 @@ items:
     return:
       type:
       - OfficeExtension.ClientResult<string>
-      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"a8207-108\">Exemples</span><span class=\"sxs-lookup\"><span data-stu-id=\"a8207-108\">Examples</span></span>\n\n```typescript\nawait Excel.run(async (context) => {\n    // You must have the xmlns attribute to populate the \n    // CustomXml.namespaceUri property.\n    const originalXml = \"<Reviewers xmlns='http://schemas.contoso.com/review/1.0'><Reviewer>Juan</Reviewer><Reviewer>Hong</Reviewer><Reviewer>Sally</Reviewer></Reviewers>\";\n    const customXmlPart = context.workbook.customXmlParts.add(originalXml);\n    customXmlPart.load(\"id\");\n    const xmlBlob = customXmlPart.getXml();\n\n    await context.sync();\n\n    const readableXml = addLineBreaksToXML(xmlBlob.value);\n    $(\"#display-xml\").text(readableXml);\n\n    // Store the XML part's ID in a setting.\n    const settings = context.workbook.settings;\n    settings.add(\"ContosoReviewXmlPartId\", customXmlPart.id);\n\n    await context.sync();\n});\n```"
+      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"88697-110\">Exemples</span><span class=\"sxs-lookup\"><span data-stu-id=\"88697-110\">Examples</span></span>\n\n```typescript\nawait Excel.run(async (context) => {\n    // You must have the xmlns attribute to populate the \n    // CustomXml.namespaceUri property.\n    const originalXml = \"<Reviewers xmlns='http://schemas.contoso.com/review/1.0'><Reviewer>Juan</Reviewer><Reviewer>Hong</Reviewer><Reviewer>Sally</Reviewer></Reviewers>\";\n    const customXmlPart = context.workbook.customXmlParts.add(originalXml);\n    customXmlPart.load(\"id\");\n    const xmlBlob = customXmlPart.getXml();\n\n    await context.sync();\n\n    const readableXml = addLineBreaksToXML(xmlBlob.value);\n    $(\"#display-xml\").text(readableXml);\n\n    // Store the XML part's ID in a setting.\n    const settings = context.workbook.settings;\n    settings.add(\"ContosoReviewXmlPartId\", customXmlPart.id);\n\n    await context.sync();\n});\n```"
 - uid: excel.Excel.CustomXmlPart.id
   summary: >-
-    <span data-ttu-id="a8207-p101">ID de la partie XML personnalisée. En lecture seule.</span><span class="sxs-lookup"><span data-stu-id="a8207-p101">The custom XML part's ID. Read-only.</span></span>
+    <span data-ttu-id="88697-p102">ID de la partie XML personnalisée. En lecture seule.</span><span class="sxs-lookup"><span data-stu-id="88697-p102">The custom XML part's ID. Read-only.</span></span>
 
 
-    <span data-ttu-id="a8207-111">\[[Du jeu d’API : ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="a8207-111">\[ [API set: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="88697-113">\[[Du jeu d’API : ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="88697-113">\[ [API set: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: id
   fullName: id
   langs:
@@ -78,17 +91,17 @@ items:
     return:
       type:
       - string
-      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"a8207-112\">Exemples</span><span class=\"sxs-lookup\"><span data-stu-id=\"a8207-112\">Examples</span></span>\n\n```typescript\nawait Excel.run(async (context) => {\n    // You must have the xmlns attribute to populate the \n    // CustomXml.namespaceUri property.\n    const originalXml = \"<Reviewers xmlns='http://schemas.contoso.com/review/1.0'><Reviewer>Juan</Reviewer><Reviewer>Hong</Reviewer><Reviewer>Sally</Reviewer></Reviewers>\";\n    const customXmlPart = context.workbook.customXmlParts.add(originalXml);\n    customXmlPart.load(\"id\");\n    const xmlBlob = customXmlPart.getXml();\n\n    await context.sync();\n\n    const readableXml = addLineBreaksToXML(xmlBlob.value);\n    $(\"#display-xml\").text(readableXml);\n\n    // Store the XML part's ID in a setting.\n    const settings = context.workbook.settings;\n    settings.add(\"ContosoReviewXmlPartId\", customXmlPart.id);\n\n    await context.sync();\n});\n```"
+      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"88697-114\">Exemples</span><span class=\"sxs-lookup\"><span data-stu-id=\"88697-114\">Examples</span></span>\n\n```typescript\nawait Excel.run(async (context) => {\n    // You must have the xmlns attribute to populate the \n    // CustomXml.namespaceUri property.\n    const originalXml = \"<Reviewers xmlns='http://schemas.contoso.com/review/1.0'><Reviewer>Juan</Reviewer><Reviewer>Hong</Reviewer><Reviewer>Sally</Reviewer></Reviewers>\";\n    const customXmlPart = context.workbook.customXmlParts.add(originalXml);\n    customXmlPart.load(\"id\");\n    const xmlBlob = customXmlPart.getXml();\n\n    await context.sync();\n\n    const readableXml = addLineBreaksToXML(xmlBlob.value);\n    $(\"#display-xml\").text(readableXml);\n\n    // Store the XML part's ID in a setting.\n    const settings = context.workbook.settings;\n    settings.add(\"ContosoReviewXmlPartId\", customXmlPart.id);\n\n    await context.sync();\n});\n```"
 - uid: excel.Excel.CustomXmlPart.load
-  summary: <span data-ttu-id="a8207-113">Files d’attente d’une commande pour charger les propriétés de l’objet spécifiées.</span><span class="sxs-lookup"><span data-stu-id="a8207-113">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="a8207-114">Vous devez appeler « context.sync() » avant de lire les propriétés.</span><span class="sxs-lookup"><span data-stu-id="a8207-114">You must call "context.sync()" before reading the properties.</span></span>
+  summary: <span data-ttu-id="88697-115">Files d’attente d’une commande pour charger les propriétés de l’objet spécifiées.</span><span class="sxs-lookup"><span data-stu-id="88697-115">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="88697-116">Vous devez appeler « context.sync() » avant de lire les propriétés.</span><span class="sxs-lookup"><span data-stu-id="88697-116">You must call "context.sync()" before reading the properties.</span></span>
   remarks: >-
-    <span data-ttu-id="a8207-115">Outre cette signature, cette méthode présente les signatures suivantes :</span><span class="sxs-lookup"><span data-stu-id="a8207-115">In addition to this signature, this method has the following signatures:</span></span>
+    <span data-ttu-id="88697-117">Outre cette signature, cette méthode présente les signatures suivantes :</span><span class="sxs-lookup"><span data-stu-id="88697-117">In addition to this signature, this method has the following signatures:</span></span>
 
 
-    <span data-ttu-id="a8207-116">`load(option?: { select?: string; expand?: string; }): Excel.CustomXmlPart`-Où option.select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options.expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.</span><span class="sxs-lookup"><span data-stu-id="a8207-116">`load(option?: { select?: string; expand?: string; }): Excel.CustomXmlPart` - Where option.select is a comma-delimited string that specifies the properties to load, and options.expand is a comma-delimited string that specifies the navigation properties to load.</span></span>
+    <span data-ttu-id="88697-118">`load(option?: { select?: string; expand?: string; }): Excel.CustomXmlPart`-Où option.select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options.expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.</span><span class="sxs-lookup"><span data-stu-id="88697-118">`load(option?: { select?: string; expand?: string; }): Excel.CustomXmlPart` - Where option.select is a comma-delimited string that specifies the properties to load, and options.expand is a comma-delimited string that specifies the navigation properties to load.</span></span>
 
 
-    <span data-ttu-id="a8207-117">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.CustomXmlPart`-Uniquement disponible sur les types de la collection.</span><span class="sxs-lookup"><span data-stu-id="a8207-117">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.CustomXmlPart` - Only available on collection types.</span></span> <span data-ttu-id="a8207-118">Il est similaire à la signature précédente.</span><span class="sxs-lookup"><span data-stu-id="a8207-118">It is similar to the preceding signature.</span></span> <span data-ttu-id="a8207-119">Option.Top Spécifie le nombre maximal d’éléments pouvant être inclus dans le résultat de la collection.</span><span class="sxs-lookup"><span data-stu-id="a8207-119">Option.top specifies the maximum number of collection items that can be included in the result.</span></span> <span data-ttu-id="a8207-120">Option.Skip Spécifie le nombre d’éléments qui doivent être ignoré et non inclus dans le résultat.</span><span class="sxs-lookup"><span data-stu-id="a8207-120">Option.skip specifies the number of items that are to be skipped and not included in the result.</span></span> <span data-ttu-id="a8207-121">Si option.top est spécifié, le jeu de résultats démarre après l’ignorer le nombre spécifié d’éléments.</span><span class="sxs-lookup"><span data-stu-id="a8207-121">If option.top is specified, the result set will start after skipping the specified number of items.</span></span>
+    <span data-ttu-id="88697-119">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.CustomXmlPart`-Uniquement disponible sur les types de la collection.</span><span class="sxs-lookup"><span data-stu-id="88697-119">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.CustomXmlPart` - Only available on collection types.</span></span> <span data-ttu-id="88697-120">Il est similaire à la signature précédente.</span><span class="sxs-lookup"><span data-stu-id="88697-120">It is similar to the preceding signature.</span></span> <span data-ttu-id="88697-121">Option.Top Spécifie le nombre maximal d’éléments pouvant être inclus dans le résultat de la collection.</span><span class="sxs-lookup"><span data-stu-id="88697-121">Option.top specifies the maximum number of collection items that can be included in the result.</span></span> <span data-ttu-id="88697-122">Option.Skip Spécifie le nombre d’éléments qui doivent être ignoré et non inclus dans le résultat.</span><span class="sxs-lookup"><span data-stu-id="88697-122">Option.skip specifies the number of items that are to be skipped and not included in the result.</span></span> <span data-ttu-id="88697-123">Si option.top est spécifié, le jeu de résultats démarre après l’ignorer le nombre spécifié d’éléments.</span><span class="sxs-lookup"><span data-stu-id="88697-123">If option.top is specified, the result set will start after skipping the specified number of items.</span></span>
   name: load(option)
   fullName: load
   langs:
@@ -102,15 +115,15 @@ items:
       description: ''
     parameters:
     - id: option
-      description: <span data-ttu-id="a8207-122">Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.</span><span class="sxs-lookup"><span data-stu-id="a8207-122">A comma-delimited string or an array of strings that specify the properties to load.</span></span>
+      description: <span data-ttu-id="88697-124">Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.</span><span class="sxs-lookup"><span data-stu-id="88697-124">A comma-delimited string or an array of strings that specify the properties to load.</span></span>
       type:
       - string | string[]
 - uid: excel.Excel.CustomXmlPart.namespaceUri
   summary: >-
-    <span data-ttu-id="a8207-p104">URI de l’espace de noms de la partie XML personnalisée. En lecture seule.</span><span class="sxs-lookup"><span data-stu-id="a8207-p104">The custom XML part's namespace URI. Read-only.</span></span>
+    <span data-ttu-id="88697-p105">URI de l’espace de noms de la partie XML personnalisée. En lecture seule.</span><span class="sxs-lookup"><span data-stu-id="88697-p105">The custom XML part's namespace URI. Read-only.</span></span>
 
 
-    <span data-ttu-id="a8207-125">\[[Du jeu d’API : ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="a8207-125">\[ [API set: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="88697-127">\[[Du jeu d’API : ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="88697-127">\[ [API set: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: namespaceUri
   fullName: namespaceUri
   langs:
@@ -123,10 +136,10 @@ items:
       - string
 - uid: excel.Excel.CustomXmlPart.setXml
   summary: >-
-    <span data-ttu-id="a8207-126">Définit l’intégralité du contenu XML de la partie XML personnalisée.</span><span class="sxs-lookup"><span data-stu-id="a8207-126">Sets the custom XML part's full XML content.</span></span>
+    <span data-ttu-id="88697-128">Définit l’intégralité du contenu XML de la partie XML personnalisée.</span><span class="sxs-lookup"><span data-stu-id="88697-128">Sets the custom XML part's full XML content.</span></span>
 
 
-    <span data-ttu-id="a8207-127">\[[Du jeu d’API : ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="a8207-127">\[ [API set: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="88697-129">\[[Du jeu d’API : ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="88697-129">\[ [API set: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: setXml(xml)
   fullName: setXml
   langs:
@@ -137,13 +150,14 @@ items:
     return:
       type:
       - void
-      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"a8207-128\">Exemples</span><span class=\"sxs-lookup\"><span data-stu-id=\"a8207-128\">Examples</span></span>\n\n```typescript\nawait Excel.run(async (context) => {\n    const settings = context.workbook.settings;\n    const xmlPartIDSetting = settings.getItemOrNullObject(\"ContosoReviewXmlPartId\").load(\"value\");\n    await context.sync();\n\n    if (xmlPartIDSetting.value) {   \n        const customXmlPart = context.workbook.customXmlParts.getItem(xmlPartIDSetting.value);\n\n        // The setXml method does a whole-for-whole replacement \n        // of the entire XML.\n        customXmlPart.setXml(\"<Reviewers xmlns='http://schemas.contoso.com/review/1.0'><Reviewer>John</Reviewer><Reviewer>Hitomi</Reviewer></Reviewers>\");\n        const xmlBlob = customXmlPart.getXml();\n        await context.sync();\n\n        const readableXml = addLineBreaksToXML(xmlBlob.value);\n        $(\"#display-xml\").text(readableXml);\n        await context.sync();\n    }\n});\n```"
+      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"88697-130\">Exemples</span><span class=\"sxs-lookup\"><span data-stu-id=\"88697-130\">Examples</span></span>\n\n```typescript\nawait Excel.run(async (context) => {\n    const settings = context.workbook.settings;\n    const xmlPartIDSetting = settings.getItemOrNullObject(\"ContosoReviewXmlPartId\").load(\"value\");\n    await context.sync();\n\n    if (xmlPartIDSetting.value) {   \n        const customXmlPart = context.workbook.customXmlParts.getItem(xmlPartIDSetting.value);\n\n        // The setXml method does a whole-for-whole replacement \n        // of the entire XML.\n        customXmlPart.setXml(\"<Reviewers xmlns='http://schemas.contoso.com/review/1.0'><Reviewer>John</Reviewer><Reviewer>Hitomi</Reviewer></Reviewers>\");\n        const xmlBlob = customXmlPart.getXml();\n        await context.sync();\n\n        const readableXml = addLineBreaksToXML(xmlBlob.value);\n        $(\"#display-xml\").text(readableXml);\n        await context.sync();\n    }\n});\n```"
     parameters:
     - id: xml
-      description: <span data-ttu-id="a8207-129">Contenu XML de la partie.</span><span class="sxs-lookup"><span data-stu-id="a8207-129">XML content for the part.</span></span>
+      description: <span data-ttu-id="88697-131">Contenu XML de la partie.</span><span class="sxs-lookup"><span data-stu-id="88697-131">XML content for the part.</span></span>
       type:
       - string
 - uid: excel.Excel.CustomXmlPart.toJSON
+  summary: <span data-ttu-id="88697-132">Remplace le code JavaScript `toJSON()` méthode afin de fournir une sortie plus utile lorsqu’un objet API est passé à `JSON.stringify()` <!-- -->.</span><span class="sxs-lookup"><span data-stu-id="88697-132">Overrides the JavaScript `toJSON()` method in order to provide more useful output when an API object is passed to `JSON.stringify()`<!-- -->.</span></span> <span data-ttu-id="88697-133">(`JSON.stringify`<!-- -->, à son tour, appelle le `toJSON` méthode de l’objet qui lui est passé.) Tandis que l’objet Excel.CustomXmlPart d’origine est un objet d’API, la `toJSON` méthode renvoie un objet JavaScript brut (typée en tant que `Excel.Interfaces.CustomXmlPartData` <!-- -->) qui contient des copies superficielles de toutes les propriétés enfant chargé à partir de l’objet d’origine.</span><span class="sxs-lookup"><span data-stu-id="88697-133">(`JSON.stringify`<!-- -->, in turn, calls the `toJSON` method of the object that is passed to it.) Whereas the original Excel.CustomXmlPart object is an API object, the `toJSON` method returns a plain JavaScript object (typed as `Excel.Interfaces.CustomXmlPartData`<!-- -->) that contains shallow copies of any loaded child properties from the original object.</span></span>
   name: toJSON()
   fullName: toJSON
   langs:

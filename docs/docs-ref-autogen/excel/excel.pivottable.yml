@@ -1,18 +1,18 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 86a143d5d3ce8e4486010f43d8a54de4b09f7980
-ms.sourcegitcommit: 3771b97cffd6e0510fd4e9c6288db696cd0c0ca9
+ms.openlocfilehash: f774b8bb9a5ccdddae6de035b5eff44a8c9314bd
+ms.sourcegitcommit: 06eebee5e68d349f78e6bc3bb0ef099fe063cf04
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/30/2018
-ms.locfileid: "26996073"
+ms.lasthandoff: 01/17/2019
+ms.locfileid: "28725409"
 items:
 - uid: excel.Excel.PivotTable
   summary: >-
-    <span data-ttu-id="02e9f-101">Représente un tableau croisé dynamique Excel.</span><span class="sxs-lookup"><span data-stu-id="02e9f-101">Represents an Excel PivotTable.</span></span>
+    <span data-ttu-id="2b84b-101">Représente un tableau croisé dynamique Excel.</span><span class="sxs-lookup"><span data-stu-id="2b84b-101">Represents an Excel PivotTable.</span></span>
 
 
-    <span data-ttu-id="02e9f-102">\[[Du jeu d’API : ExcelApi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="02e9f-102">\[ [API set: ExcelApi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
-  remarks: <span data-ttu-id="02e9f-103">Notre [guide de procédure sur l’utilisation des tableaux croisés dynamiques](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-pivottables) a détaillé des procédures pas à pas, des images et des exemples de code.</span><span class="sxs-lookup"><span data-stu-id="02e9f-103">Our [how-to guide on working with PivotTables](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-pivottables) has detailed walkthroughs, images, and code samples.</span></span>
+    <span data-ttu-id="2b84b-102">\[[Du jeu d’API : ExcelApi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="2b84b-102">\[ [API set: ExcelApi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+  remarks: <span data-ttu-id="2b84b-103">Notre [guide de procédure sur l’utilisation des tableaux croisés dynamiques](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-pivottables) a détaillé des procédures pas à pas, des images et des exemples de code.</span><span class="sxs-lookup"><span data-stu-id="2b84b-103">Our [how-to guide on working with PivotTables](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-pivottables) has detailed walkthroughs, images, and code samples.</span></span>
   name: Excel.PivotTable
   fullName: Excel.PivotTable
   langs:
@@ -23,6 +23,7 @@ items:
   package: excel
   children:
   - excel.Excel.PivotTable.columnHierarchies
+  - excel.Excel.PivotTable.context
   - excel.Excel.PivotTable.dataHierarchies
   - excel.Excel.PivotTable.delete
   - excel.Excel.PivotTable.filterHierarchies
@@ -37,10 +38,10 @@ items:
   - excel.Excel.PivotTable.worksheet
 - uid: excel.Excel.PivotTable.columnHierarchies
   summary: >-
-    <span data-ttu-id="02e9f-104">Les hiérarchies de tableau croisé dynamique de colonne de tableau croisé dynamique.</span><span class="sxs-lookup"><span data-stu-id="02e9f-104">The Column Pivot Hierarchies of the PivotTable.</span></span>
+    <span data-ttu-id="2b84b-104">Les hiérarchies de colonne de tableau croisé dynamique.</span><span class="sxs-lookup"><span data-stu-id="2b84b-104">The Column Pivot Hierarchies of the PivotTable.</span></span>
 
 
-    <span data-ttu-id="02e9f-105">\[[Du jeu d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="02e9f-105">\[ [API set: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="2b84b-105">\[[Du jeu d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="2b84b-105">\[ [API set: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: columnHierarchies
   fullName: columnHierarchies
   langs:
@@ -51,13 +52,25 @@ items:
     return:
       type:
       - excel.Excel.RowColumnPivotHierarchyCollection
-      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"02e9f-106\">Exemples</span><span class=\"sxs-lookup\"><span data-stu-id=\"02e9f-106\">Examples</span></span>\n\n```typescript\nawait Excel.run(async (context) => {\n    const pivotTable = context.workbook.worksheets.getActiveWorksheet().pivotTables.getItem(\"Farm Sales\");       \n\n    // check if the PivotTable already has a column\n    const column = pivotTable.columnHierarchies.getItemOrNullObject(\"Farm\");\n    column.load(\"id\");\n    await context.sync();\n\n    if (column.isNullObject) {\n        // ading the farm column to the column hierarchy automatically removes it from the row hierarchy\n        pivotTable.columnHierarchies.add(pivotTable.hierarchies.getItem(\"Farm\"));\n    } else {\n        pivotTable.columnHierarchies.remove(column);\n    }\n\n    await context.sync();\n});\n```"
+      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"2b84b-106\">Exemples</span><span class=\"sxs-lookup\"><span data-stu-id=\"2b84b-106\">Examples</span></span>\n\n```typescript\nawait Excel.run(async (context) => {\n    const pivotTable = context.workbook.worksheets.getActiveWorksheet().pivotTables.getItem(\"Farm Sales\");       \n\n    // check if the PivotTable already has a column\n    const column = pivotTable.columnHierarchies.getItemOrNullObject(\"Farm\");\n    column.load(\"id\");\n    await context.sync();\n\n    if (column.isNullObject) {\n        // ading the farm column to the column hierarchy automatically removes it from the row hierarchy\n        pivotTable.columnHierarchies.add(pivotTable.hierarchies.getItem(\"Farm\"));\n    } else {\n        pivotTable.columnHierarchies.remove(column);\n    }\n\n    await context.sync();\n});\n```"
+- uid: excel.Excel.PivotTable.context
+  summary: <span data-ttu-id="2b84b-107">Contexte de la requête associé à l’objet.</span><span class="sxs-lookup"><span data-stu-id="2b84b-107">The request context associated with the object.</span></span> <span data-ttu-id="2b84b-108">Il connecte processus du complément au processus de l’application hôte Office.</span><span class="sxs-lookup"><span data-stu-id="2b84b-108">This connects the add-in's process to the Office host application's process.</span></span>
+  name: context
+  fullName: context
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type:
+      - RequestContext
 - uid: excel.Excel.PivotTable.dataHierarchies
   summary: >-
-    <span data-ttu-id="02e9f-107">Les hiérarchies de tableau croisé dynamique de données de tableau croisé dynamique.</span><span class="sxs-lookup"><span data-stu-id="02e9f-107">The Data Pivot Hierarchies of the PivotTable.</span></span>
+    <span data-ttu-id="2b84b-109">Les hiérarchies de données de tableau croisé dynamique.</span><span class="sxs-lookup"><span data-stu-id="2b84b-109">The Data Pivot Hierarchies of the PivotTable.</span></span>
 
 
-    <span data-ttu-id="02e9f-108">\[[Du jeu d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="02e9f-108">\[ [API set: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="2b84b-110">\[[Du jeu d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="2b84b-110">\[ [API set: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: dataHierarchies
   fullName: dataHierarchies
   langs:
@@ -68,13 +81,13 @@ items:
     return:
       type:
       - excel.Excel.DataPivotHierarchyCollection
-      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"02e9f-109\">Exemples</span><span class=\"sxs-lookup\"><span data-stu-id=\"02e9f-109\">Examples</span></span>\n\n```typescript\nawait Excel.run(async (context) => {\n    const pivotTable = context.workbook.worksheets.getActiveWorksheet().pivotTables.getItem(\"Farm Sales\");\n    pivotTable.dataHierarchies.add(pivotTable.hierarchies.getItem(\"Crates Sold at Farm\"));\n    pivotTable.dataHierarchies.add(pivotTable.hierarchies.getItem(\"Crates Sold Wholesale\"));\n\n    await context.sync();\n});\n```"
+      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"2b84b-111\">Exemples</span><span class=\"sxs-lookup\"><span data-stu-id=\"2b84b-111\">Examples</span></span>\n\n```typescript\nawait Excel.run(async (context) => {\n    const pivotTable = context.workbook.worksheets.getActiveWorksheet().pivotTables.getItem(\"Farm Sales\");\n    pivotTable.dataHierarchies.add(pivotTable.hierarchies.getItem(\"Crates Sold at Farm\"));\n    pivotTable.dataHierarchies.add(pivotTable.hierarchies.getItem(\"Crates Sold Wholesale\"));\n\n    await context.sync();\n});\n```"
 - uid: excel.Excel.PivotTable.delete
   summary: >-
-    <span data-ttu-id="02e9f-110">Supprime le tableau croisé dynamique.</span><span class="sxs-lookup"><span data-stu-id="02e9f-110">Deletes the PivotTable.</span></span>
+    <span data-ttu-id="2b84b-112">Supprime le tableau croisé dynamique.</span><span class="sxs-lookup"><span data-stu-id="2b84b-112">Deletes the PivotTable.</span></span>
 
 
-    <span data-ttu-id="02e9f-111">\[[Du jeu d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="02e9f-111">\[ [API set: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="2b84b-113">\[[Du jeu d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="2b84b-113">\[ [API set: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: delete()
   fullName: delete
   langs:
@@ -85,13 +98,13 @@ items:
     return:
       type:
       - void
-      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"02e9f-112\">Exemples</span><span class=\"sxs-lookup\"><span data-stu-id=\"02e9f-112\">Examples</span></span>\n\n```typescript\nawait Excel.run(async (context) => {\n    context.workbook.worksheets.getItem(\"Pivot\").pivotTables.getItem(\"Farm Sales\").delete();\n\n    await context.sync();\n});\n```"
+      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"2b84b-114\">Exemples</span><span class=\"sxs-lookup\"><span data-stu-id=\"2b84b-114\">Examples</span></span>\n\n```typescript\nawait Excel.run(async (context) => {\n    context.workbook.worksheets.getItem(\"Pivot\").pivotTables.getItem(\"Farm Sales\").delete();\n\n    await context.sync();\n});\n```"
 - uid: excel.Excel.PivotTable.filterHierarchies
   summary: >-
-    <span data-ttu-id="02e9f-113">Les hiérarchies de tableau croisé dynamique de filtre de tableau croisé dynamique.</span><span class="sxs-lookup"><span data-stu-id="02e9f-113">The Filter Pivot Hierarchies of the PivotTable.</span></span>
+    <span data-ttu-id="2b84b-115">Les hiérarchies de filtre de tableau croisé dynamique.</span><span class="sxs-lookup"><span data-stu-id="2b84b-115">The Filter Pivot Hierarchies of the PivotTable.</span></span>
 
 
-    <span data-ttu-id="02e9f-114">\[[Du jeu d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="02e9f-114">\[ [API set: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="2b84b-116">\[[Du jeu d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="2b84b-116">\[ [API set: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: filterHierarchies
   fullName: filterHierarchies
   langs:
@@ -102,13 +115,13 @@ items:
     return:
       type:
       - excel.Excel.FilterPivotHierarchyCollection
-      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"02e9f-115\">Exemples</span><span class=\"sxs-lookup\"><span data-stu-id=\"02e9f-115\">Examples</span></span>\n\n```typescript\nasync function filter(functionType: Excel.AggregationFunction) {\n    await Excel.run(async (context) => {\n        const pivotTable = context.workbook.worksheets.getActiveWorksheet().pivotTables.getItem(\"Farm Sales\");\n        const filters = pivotTable.filterHierarchies;\n        const filter = filters.getItemOrNullObject(\"Classification\");\n        filter.load();\n        await context.sync();\n\n        // add the Classification hierarchy to the filter, if it's not already there\n        if (filter.isNullObject) {\n            filters.add(pivotTable.hierarchies.getItem(\"Classification\"));\n            await context.sync();\n        }\n    });\n}\n```"
+      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"2b84b-117\">Exemples</span><span class=\"sxs-lookup\"><span data-stu-id=\"2b84b-117\">Examples</span></span>\n\n```typescript\nasync function filter(functionType: Excel.AggregationFunction) {\n    await Excel.run(async (context) => {\n        const pivotTable = context.workbook.worksheets.getActiveWorksheet().pivotTables.getItem(\"Farm Sales\");\n        const filters = pivotTable.filterHierarchies;\n        const filter = filters.getItemOrNullObject(\"Classification\");\n        filter.load();\n        await context.sync();\n\n        // add the Classification hierarchy to the filter, if it's not already there\n        if (filter.isNullObject) {\n            filters.add(pivotTable.hierarchies.getItem(\"Classification\"));\n            await context.sync();\n        }\n    });\n}\n```"
 - uid: excel.Excel.PivotTable.hierarchies
   summary: >-
-    <span data-ttu-id="02e9f-116">Les hiérarchies de tableau croisé dynamique du tableau croisé dynamique.</span><span class="sxs-lookup"><span data-stu-id="02e9f-116">The Pivot Hierarchies of the PivotTable.</span></span>
+    <span data-ttu-id="2b84b-118">Les hiérarchies Pivot de tableau croisé dynamique.</span><span class="sxs-lookup"><span data-stu-id="2b84b-118">The Pivot Hierarchies of the PivotTable.</span></span>
 
 
-    <span data-ttu-id="02e9f-117">\[[Du jeu d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="02e9f-117">\[ [API set: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="2b84b-119">\[[Du jeu d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="2b84b-119">\[ [API set: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: hierarchies
   fullName: hierarchies
   langs:
@@ -121,10 +134,10 @@ items:
       - excel.Excel.PivotHierarchyCollection
 - uid: excel.Excel.PivotTable.id
   summary: >-
-    <span data-ttu-id="02e9f-p101">ID du tableau croisé dynamique. En lecture seule.</span><span class="sxs-lookup"><span data-stu-id="02e9f-p101">Id of the PivotTable. Read-only.</span></span>
+    <span data-ttu-id="2b84b-p102">ID du tableau croisé dynamique. En lecture seule.</span><span class="sxs-lookup"><span data-stu-id="2b84b-p102">Id of the PivotTable. Read-only.</span></span>
 
 
-    <span data-ttu-id="02e9f-120">\[[Du jeu d’API : ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="02e9f-120">\[ [API set: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="2b84b-122">\[[Du jeu d’API : ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="2b84b-122">\[ [API set: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: id
   fullName: id
   langs:
@@ -137,10 +150,10 @@ items:
       - string
 - uid: excel.Excel.PivotTable.layout
   summary: >-
-    <span data-ttu-id="02e9f-121">Le PivotLayout décrivant la disposition et la structure visuelle de l’objet PivotTable.</span><span class="sxs-lookup"><span data-stu-id="02e9f-121">The PivotLayout describing the layout and visual structure of the PivotTable.</span></span>
+    <span data-ttu-id="2b84b-123">Le PivotLayout décrivant la disposition et la structure visuelle de tableau croisé dynamique.</span><span class="sxs-lookup"><span data-stu-id="2b84b-123">The PivotLayout describing the layout and visual structure of the PivotTable.</span></span>
 
 
-    <span data-ttu-id="02e9f-122">\[[Du jeu d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="02e9f-122">\[ [API set: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="2b84b-124">\[[Du jeu d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="2b84b-124">\[ [API set: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: layout
   fullName: layout
   langs:
@@ -151,17 +164,17 @@ items:
     return:
       type:
       - excel.Excel.PivotLayout
-      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"02e9f-123\">Exemples</span><span class=\"sxs-lookup\"><span data-stu-id=\"02e9f-123\">Examples</span></span>\n\n```typescript\nawait Excel.run(async (context) => {\n    const pivotTable = context.workbook.worksheets.getActiveWorksheet().pivotTables.getItem(\"Farm Sales\");\n    pivotTable.layout.load(\"layoutType\");\n    await context.sync();\n\n    // cycle between the three layout types\n    if (pivotTable.layout.layoutType === \"Compact\") {\n        pivotTable.layout.layoutType = \"Outline\";\n    } else if (pivotTable.layout.layoutType === \"Outline\") {\n        pivotTable.layout.layoutType = \"Tabular\";\n    } else {\n        pivotTable.layout.layoutType = \"Compact\";\n    }\n    await context.sync();\n    console.log(\"Pivot layout is now \" + pivotTable.layout.layoutType);\n});\n```"
+      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"2b84b-125\">Exemples</span><span class=\"sxs-lookup\"><span data-stu-id=\"2b84b-125\">Examples</span></span>\n\n```typescript\nawait Excel.run(async (context) => {\n    const pivotTable = context.workbook.worksheets.getActiveWorksheet().pivotTables.getItem(\"Farm Sales\");\n    pivotTable.layout.load(\"layoutType\");\n    await context.sync();\n\n    // cycle between the three layout types\n    if (pivotTable.layout.layoutType === \"Compact\") {\n        pivotTable.layout.layoutType = \"Outline\";\n    } else if (pivotTable.layout.layoutType === \"Outline\") {\n        pivotTable.layout.layoutType = \"Tabular\";\n    } else {\n        pivotTable.layout.layoutType = \"Compact\";\n    }\n    await context.sync();\n    console.log(\"Pivot layout is now \" + pivotTable.layout.layoutType);\n});\n```"
 - uid: excel.Excel.PivotTable.load
-  summary: <span data-ttu-id="02e9f-124">Files d’attente d’une commande pour charger les propriétés de l’objet spécifiées.</span><span class="sxs-lookup"><span data-stu-id="02e9f-124">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="02e9f-125">Vous devez appeler « context.sync() » avant de lire les propriétés.</span><span class="sxs-lookup"><span data-stu-id="02e9f-125">You must call "context.sync()" before reading the properties.</span></span>
+  summary: <span data-ttu-id="2b84b-126">Files d’attente d’une commande pour charger les propriétés de l’objet spécifiées.</span><span class="sxs-lookup"><span data-stu-id="2b84b-126">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="2b84b-127">Vous devez appeler « context.sync() » avant de lire les propriétés.</span><span class="sxs-lookup"><span data-stu-id="2b84b-127">You must call "context.sync()" before reading the properties.</span></span>
   remarks: >-
-    <span data-ttu-id="02e9f-126">Outre cette signature, cette méthode présente les signatures suivantes :</span><span class="sxs-lookup"><span data-stu-id="02e9f-126">In addition to this signature, this method has the following signatures:</span></span>
+    <span data-ttu-id="2b84b-128">Outre cette signature, cette méthode présente les signatures suivantes :</span><span class="sxs-lookup"><span data-stu-id="2b84b-128">In addition to this signature, this method has the following signatures:</span></span>
 
 
-    <span data-ttu-id="02e9f-127">`load(option?: { select?: string; expand?: string; }): Excel.PivotTable`-Où option.select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options.expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.</span><span class="sxs-lookup"><span data-stu-id="02e9f-127">`load(option?: { select?: string; expand?: string; }): Excel.PivotTable` - Where option.select is a comma-delimited string that specifies the properties to load, and options.expand is a comma-delimited string that specifies the navigation properties to load.</span></span>
+    <span data-ttu-id="2b84b-129">`load(option?: { select?: string; expand?: string; }): Excel.PivotTable`-Où option.select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options.expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.</span><span class="sxs-lookup"><span data-stu-id="2b84b-129">`load(option?: { select?: string; expand?: string; }): Excel.PivotTable` - Where option.select is a comma-delimited string that specifies the properties to load, and options.expand is a comma-delimited string that specifies the navigation properties to load.</span></span>
 
 
-    <span data-ttu-id="02e9f-128">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.PivotTable`-Uniquement disponible sur les types de la collection.</span><span class="sxs-lookup"><span data-stu-id="02e9f-128">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.PivotTable` - Only available on collection types.</span></span> <span data-ttu-id="02e9f-129">Il est similaire à la signature précédente.</span><span class="sxs-lookup"><span data-stu-id="02e9f-129">It is similar to the preceding signature.</span></span> <span data-ttu-id="02e9f-130">Option.Top Spécifie le nombre maximal d’éléments pouvant être inclus dans le résultat de la collection.</span><span class="sxs-lookup"><span data-stu-id="02e9f-130">Option.top specifies the maximum number of collection items that can be included in the result.</span></span> <span data-ttu-id="02e9f-131">Option.Skip Spécifie le nombre d’éléments qui doivent être ignoré et non inclus dans le résultat.</span><span class="sxs-lookup"><span data-stu-id="02e9f-131">Option.skip specifies the number of items that are to be skipped and not included in the result.</span></span> <span data-ttu-id="02e9f-132">Si option.top est spécifié, le jeu de résultats démarre après l’ignorer le nombre spécifié d’éléments.</span><span class="sxs-lookup"><span data-stu-id="02e9f-132">If option.top is specified, the result set will start after skipping the specified number of items.</span></span>
+    <span data-ttu-id="2b84b-130">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.PivotTable`-Uniquement disponible sur les types de la collection.</span><span class="sxs-lookup"><span data-stu-id="2b84b-130">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.PivotTable` - Only available on collection types.</span></span> <span data-ttu-id="2b84b-131">Il est similaire à la signature précédente.</span><span class="sxs-lookup"><span data-stu-id="2b84b-131">It is similar to the preceding signature.</span></span> <span data-ttu-id="2b84b-132">Option.Top Spécifie le nombre maximal d’éléments pouvant être inclus dans le résultat de la collection.</span><span class="sxs-lookup"><span data-stu-id="2b84b-132">Option.top specifies the maximum number of collection items that can be included in the result.</span></span> <span data-ttu-id="2b84b-133">Option.Skip Spécifie le nombre d’éléments qui doivent être ignoré et non inclus dans le résultat.</span><span class="sxs-lookup"><span data-stu-id="2b84b-133">Option.skip specifies the number of items that are to be skipped and not included in the result.</span></span> <span data-ttu-id="2b84b-134">Si option.top est spécifié, le jeu de résultats démarre après l’ignorer le nombre spécifié d’éléments.</span><span class="sxs-lookup"><span data-stu-id="2b84b-134">If option.top is specified, the result set will start after skipping the specified number of items.</span></span>
   name: load(option)
   fullName: load
   langs:
@@ -175,15 +188,15 @@ items:
       description: ''
     parameters:
     - id: option
-      description: <span data-ttu-id="02e9f-133">Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.</span><span class="sxs-lookup"><span data-stu-id="02e9f-133">A comma-delimited string or an array of strings that specify the properties to load.</span></span>
+      description: <span data-ttu-id="2b84b-135">Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.</span><span class="sxs-lookup"><span data-stu-id="2b84b-135">A comma-delimited string or an array of strings that specify the properties to load.</span></span>
       type:
       - string | string[]
 - uid: excel.Excel.PivotTable.name
   summary: >-
-    <span data-ttu-id="02e9f-134">Nom du tableau croisé dynamique.</span><span class="sxs-lookup"><span data-stu-id="02e9f-134">Name of the PivotTable.</span></span>
+    <span data-ttu-id="2b84b-136">Nom du tableau croisé dynamique.</span><span class="sxs-lookup"><span data-stu-id="2b84b-136">Name of the PivotTable.</span></span>
 
 
-    <span data-ttu-id="02e9f-135">\[[Du jeu d’API : ExcelApi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="02e9f-135">\[ [API set: ExcelApi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="2b84b-137">\[[Du jeu d’API : ExcelApi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="2b84b-137">\[ [API set: ExcelApi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: name
   fullName: name
   langs:
@@ -196,10 +209,10 @@ items:
       - string
 - uid: excel.Excel.PivotTable.refresh
   summary: >-
-    <span data-ttu-id="02e9f-136">Actualise le tableau croisé dynamique.</span><span class="sxs-lookup"><span data-stu-id="02e9f-136">Refreshes the PivotTable.</span></span>
+    <span data-ttu-id="2b84b-138">Actualise le tableau croisé dynamique.</span><span class="sxs-lookup"><span data-stu-id="2b84b-138">Refreshes the PivotTable.</span></span>
 
 
-    <span data-ttu-id="02e9f-137">\[[Du jeu d’API : ExcelApi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="02e9f-137">\[ [API set: ExcelApi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="2b84b-139">\[[Du jeu d’API : ExcelApi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="2b84b-139">\[ [API set: ExcelApi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: refresh()
   fullName: refresh
   langs:
@@ -213,10 +226,10 @@ items:
       description: ''
 - uid: excel.Excel.PivotTable.rowHierarchies
   summary: >-
-    <span data-ttu-id="02e9f-138">Les hiérarchies de tableau croisé dynamique de ligne de tableau croisé dynamique.</span><span class="sxs-lookup"><span data-stu-id="02e9f-138">The Row Pivot Hierarchies of the PivotTable.</span></span>
+    <span data-ttu-id="2b84b-140">Les hiérarchies de lignes de tableau croisé dynamique.</span><span class="sxs-lookup"><span data-stu-id="2b84b-140">The Row Pivot Hierarchies of the PivotTable.</span></span>
 
 
-    <span data-ttu-id="02e9f-139">\[[Du jeu d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="02e9f-139">\[ [API set: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="2b84b-141">\[[Du jeu d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="2b84b-141">\[ [API set: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: rowHierarchies
   fullName: rowHierarchies
   langs:
@@ -228,6 +241,7 @@ items:
       type:
       - excel.Excel.RowColumnPivotHierarchyCollection
 - uid: excel.Excel.PivotTable.toJSON
+  summary: <span data-ttu-id="2b84b-142">Remplace le code JavaScript `toJSON()` méthode afin de fournir une sortie plus utile lorsqu’un objet API est passé à `JSON.stringify()` <!-- -->.</span><span class="sxs-lookup"><span data-stu-id="2b84b-142">Overrides the JavaScript `toJSON()` method in order to provide more useful output when an API object is passed to `JSON.stringify()`<!-- -->.</span></span> <span data-ttu-id="2b84b-143">(`JSON.stringify`<!-- -->, à son tour, appelle le `toJSON` méthode de l’objet qui lui est passé.) Tandis que l’objet Excel.PivotTable d’origine est un objet d’API, la `toJSON` méthode renvoie un objet JavaScript brut (typée en tant que `Excel.Interfaces.PivotTableData` <!-- -->) qui contient des copies superficielles de toutes les propriétés enfant chargé à partir de l’objet d’origine.</span><span class="sxs-lookup"><span data-stu-id="2b84b-143">(`JSON.stringify`<!-- -->, in turn, calls the `toJSON` method of the object that is passed to it.) Whereas the original Excel.PivotTable object is an API object, the `toJSON` method returns a plain JavaScript object (typed as `Excel.Interfaces.PivotTableData`<!-- -->) that contains shallow copies of any loaded child properties from the original object.</span></span>
   name: toJSON()
   fullName: toJSON
   langs:
@@ -241,10 +255,10 @@ items:
       description: ''
 - uid: excel.Excel.PivotTable.worksheet
   summary: >-
-    <span data-ttu-id="02e9f-140">Feuille de calcul contenant le tableau croisé dynamique en cours.</span><span class="sxs-lookup"><span data-stu-id="02e9f-140">The worksheet containing the current PivotTable.</span></span>
+    <span data-ttu-id="2b84b-144">Feuille de calcul contenant le tableau croisé dynamique en cours.</span><span class="sxs-lookup"><span data-stu-id="2b84b-144">The worksheet containing the current PivotTable.</span></span>
 
 
-    <span data-ttu-id="02e9f-141">\[[Du jeu d’API : ExcelApi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="02e9f-141">\[ [API set: ExcelApi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="2b84b-145">\[[Du jeu d’API : ExcelApi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="2b84b-145">\[ [API set: ExcelApi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: worksheet
   fullName: worksheet
   langs:
