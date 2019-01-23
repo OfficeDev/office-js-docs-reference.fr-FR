@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 533959bd84b874bdcb9ec273179250f75bfd91ca
-ms.sourcegitcommit: 016e17422cf62dc9f1de1809666e9244e41cc1a9
+ms.openlocfilehash: 009ce2031f68d04dfc98399f52828ee8944e2f3f
+ms.sourcegitcommit: 2dcedf6deec4167dca476a42dad411e28cc92a97
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/09/2018
-ms.locfileid: "26221261"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "29384558"
 items:
 - uid: word
   name: word
@@ -32,6 +32,7 @@ items:
   - word.Word.DocumentProperties
   - word.Word.DocumentPropertyType
   - word.Word.ErrorCodes
+  - word.Word.EventType
   - word.Word.FileContentFormat
   - word.Word.Font
   - word.Word.HeaderFooterType
@@ -124,23 +125,27 @@ items:
   - word.Word.UnderlineType
   - word.Word.VerticalAlignment
 - uid: word.Word.run
-  summary: Exécute un script de commandes qui effectue des actions sur le modèle objet Word, à l’aide de RequestContext d’objets de l’API créé précédemment.
-  name: run(objects, batch)
+  summary: Exécute un script de commandes qui effectue des actions sur le modèle objet Word, à l’aide d’un nouveau RequestContext. Lorsque la vente est résolue, tous les objets marques alloués automatiquement lors de l’exécution seront publiés.
+  remarks: >-
+    Outre cette signature, la méthode présente également les signatures suivantes, qui vous permet de reprendre le contexte de la demande d’objets précédemment créées à l’aide de :
+
+
+    Exécutez<T>(objet : OfficeExtension.ClientObject, le traitement par lots : (contexte : Word.RequestContext) =&gt; promesse<T>) : promesse<T>;
+
+
+    Exécutez<T>(objets : OfficeExtension.ClientObject\[\], lot : (contexte : Word.RequestContext) =&gt; promesse<T>) : promesse<T>;
+  name: run(batch)
   fullName: Word.run
   langs:
   - typeScript
   type: function
   syntax:
-    content: 'export function run<T>(objects: OfficeExtension.ClientObject[], batch: (context: Word.RequestContext) => Promise<T>): Promise<T>;'
+    content: 'export function run<T>(batch: (context: Word.RequestContext) => Promise<T>): Promise<T>;'
     return:
       type:
       - Promise<T>
       description: ''
     parameters:
-    - id: objects
-      description: Tableau d’objets de l’API créé précédemment. Le tableau sera validé pour vous assurer que tous les objets partagent le même contexte. Le traitement par lots utilise ce RequestContext partagé, ce qui signifie que toute modification apportée à ces objets est récupérées par « context.sync() ».
-      type:
-      - OfficeExtension.ClientObject[]
     - id: batch
       description: Une fonction qui prend un RequestContext et renvoie une promesse (juste en règle générale, le résultat de « context.sync()"). Le paramètre de contexte facilite les demandes à l’application Word. Depuis le complément Office et l’application Word s’exécutent dans deux processus différents, RequestContext est requis pour accéder au modèle objet Word à partir de la macro complémentaire.
       type:
@@ -184,6 +189,8 @@ references:
   name: Word.DocumentPropertyType
 - uid: word.Word.ErrorCodes
   name: Word.ErrorCodes
+- uid: word.Word.EventType
+  name: Word.EventType
 - uid: word.Word.FileContentFormat
   name: Word.FileContentFormat
 - uid: word.Word.Font
