@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: a2eaf5838507a26f2a4c0576bda649ac4abb01f5
-ms.sourcegitcommit: 1d3a730f48caaabe5af4f1abb74802bc91b75f4e
+ms.openlocfilehash: 32203d0ac30ab2b0ed4265693b4c39aac5331213
+ms.sourcegitcommit: a68606173477c7fb4069880eea941766c7d8c50d
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/25/2019
-ms.locfileid: "29539526"
+ms.lasthandoff: 02/01/2019
+ms.locfileid: "29704372"
 items:
 - uid: outlook.Office.AppointmentRead
   summary: >-
@@ -29,6 +29,7 @@ items:
   - outlook.Office.AppointmentRead.displayReplyAllForm
   - outlook.Office.AppointmentRead.displayReplyForm
   - outlook.Office.AppointmentRead.end
+  - outlook.Office.AppointmentRead.enhancedLocation
   - outlook.Office.AppointmentRead.getEntities
   - outlook.Office.AppointmentRead.getEntitiesByType
   - outlook.Office.AppointmentRead.getFilteredEntitiesByName
@@ -71,14 +72,14 @@ items:
     Outre cette signature, la méthode a également la signature suivante :
 
 
-    `addHandlerAsync(eventType: Office.EventType, handler: any, callback?: (result: AsyncResult<void>) => void): void;`
+    `addHandlerAsync(eventType: Office.EventType, handler: any, callback?: (result: Office.AsyncResult<void>) => void): void;`
   name: addHandlerAsync(eventType, handler, options, callback)
   fullName: addHandlerAsync
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'addHandlerAsync(eventType: Office.EventType, handler: any, options?: any, callback?: (result: AsyncResult<void>) => void): void;'
+    content: 'addHandlerAsync(eventType: Office.EventType, handler: any, options?: any, callback?: (result: Office.AsyncResult<void>) => void): void;'
     return:
       type:
       - void
@@ -99,7 +100,7 @@ items:
     - id: callback
       description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre de rappel est appelée avec un seul paramètre, asyncResult, qui est un objet Office.AsyncResult.
       type:
-      - '(result: AsyncResult<void>) => void'
+      - '(result: Office.AsyncResult<void>) => void'
 - uid: outlook.Office.AppointmentRead.attachments
   summary: >-
     Permet d’obtenir les pièces jointes de l’élément sous forme de tableau.
@@ -113,7 +114,7 @@ items:
     <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Participant de rendez-vous</td></tr></table>
 
 
-    Remarque : Certains types de fichiers bloqués par Outlook en raison de problèmes de sécurité potentiels et sont par conséquent pas retournés. Pour en savoir plus, consultez l’article [Pièces jointes bloquées dans Outlook](https://support.office.com/article/Blocked-attachments-in-Outlook-434752E1-02D3-4E90-9124-8B81E49A8519).
+    Remarque : Certains types de fichiers bloqués par Outlook en raison de problèmes de sécurité potentiels et sont par conséquent pas retournés. Pour plus d’informations, voir les [pièces jointes bloquées dans Outlook](https://support.office.com/article/Blocked-attachments-in-Outlook-434752E1-02D3-4E90-9124-8B81E49A8519)<!-- -->.
 
     #### <a name="examples"></a>Exemples
 
@@ -150,10 +151,10 @@ items:
   - typeScript
   type: property
   syntax:
-    content: 'attachments: Office.AttachmentDetails[];'
+    content: 'attachments: AttachmentDetails[];'
     return:
       type:
-      - Office.AttachmentDetails[]
+      - AttachmentDetails[]
 - uid: outlook.Office.AppointmentRead.body
   summary: >-
     Obtient un objet qui fournit des méthodes permettant de manipuler le corps d’un élément.
@@ -171,10 +172,10 @@ items:
   - typeScript
   type: property
   syntax:
-    content: 'body: Office.Body;'
+    content: 'body: Body;'
     return:
       type:
-      - outlook.Office.Body
+      - Body
 - uid: outlook.Office.AppointmentRead.dateTimeCreated
   summary: >-
     Obtient la date et l’heure de création d’un élément. Mode lecture uniquement.
@@ -242,7 +243,9 @@ items:
     <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
 
 
-    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Participant de rendez-vous</td></tr></table>Exemples
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Participant de rendez-vous</td></tr></table>
+
+    ####Exemples
 
 
     ```javascript
@@ -368,7 +371,9 @@ items:
     <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
 
 
-    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Participant de rendez-vous</td></tr></table>Exemples
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Participant de rendez-vous</td></tr></table>
+
+    ####Exemples
 
 
     ```javascript
@@ -497,6 +502,48 @@ items:
     return:
       type:
       - Date
+- uid: outlook.Office.AppointmentRead.enhancedLocation
+  summary: >-
+    Obtient les emplacements d’un rendez-vous.
+
+
+    La propriété enhancedLocation renvoie un objet [Office.EnhancedLocation](xref:outlook.Office.EnhancedLocation) qui vous permet d’obtenir l’ensemble des emplacements (chacune représentée par un objet [Office.LocationDetails](xref:outlook.Office.LocationDetails) ) associée au rendez-vous.
+
+
+    \[[Du jeu d’API : aperçu de la boîte aux lettres](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table> <tr> <td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td> <td>ReadItem</td> </tr> <tr> <td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td> <td>Participant de rendez-vous</td> </tr> </table>
+
+    ####Exemples
+
+
+    ```javascript
+
+    Office.context.mailbox.item.enhancedLocation.getAsync(callbackFunction);
+
+
+    function callbackFunction(asyncResult) {
+        asyncResult.value.forEach(function (place) {
+            console.log("Display name: " + place.displayName);
+            console.log("Type: " + place.locationIdentifier.type);
+            if (place.locationIdentifier.type == Office.MailboxEnums.LocationType.Room) {
+                console.log("Email address: " + place.emailAddress);
+            }
+        });
+    }
+
+    ```
+  isPreview: true
+  name: enhancedLocation
+  fullName: enhancedLocation
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'enhancedLocation: EnhancedLocation;'
+    return:
+      type:
+      - outlook.Office.EnhancedLocation
 - uid: outlook.Office.AppointmentRead.getEntities
   summary: >-
     Permet d’obtenir les entités figurant dans le corps de l’élément sélectionné.
@@ -541,7 +588,7 @@ items:
     Alors que le niveau d’autorisation minimal Restricted suffit pour utiliser cette méthode, certains types d’entité nécessitent le niveau ReadItem pour pouvoir y accéder, comme indiqué dans le tableau suivant.
 
 
-    <table> <tr> <th>Valeur de entityType</th> <th>Type des objets du tableau renvoyé</th> <th>Offre des autorisations requises</th> </tr> <tr> <td>Address</td> <td>String</td> <td>Restreint</td> </tr> <tr> <td>Contact</td> <td>Contact</td> <td>ReadItem</td> </tr> <tr> <td>EmailAddress</td> <td>String</td> <td>ReadItem</td> </tr> <tr> <td>MeetingSuggestion</td> <td>MeetingSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>PhoneNumber</td> <td>PhoneNumber</td> <td>Restricted</td> </tr> <tr> <td>TaskSuggestion</td> <td>TaskSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>URL</td> <td>String</td> <td>Restreint</td> </tr> </table>
+    <table> <tr> <th>Valeur de entityType</th> <th>Type des objets du tableau renvoyé</th> <th>Offre des autorisations requises</th> </tr> <tr> <td>Address</td> <td>String</td> <td>Restreinte</td> </tr> <tr> <td>Contact</td> <td>Contact</td> <td>ReadItem</td> </tr> <tr> <td>EmailAddress</td> <td>String</td> <td>ReadItem</td> </tr> <tr> <td>MeetingSuggestion</td> <td>MeetingSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>PhoneNumber</td> <td>PhoneNumber</td> <td>Restricted</td> </tr> <tr> <td>TaskSuggestion</td> <td>TaskSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>URL</td> <td>String</td> <td>Restreinte</td> </tr> </table>
 
     #### Exemples
 
@@ -573,7 +620,7 @@ items:
   - typeScript
   type: method
   syntax:
-    content: 'getEntitiesByType(entityType: Office.MailboxEnums.EntityType): (string | Contact | MeetingSuggestion | PhoneNumber | TaskSuggestion)[];'
+    content: 'getEntitiesByType(entityType: MailboxEnums.EntityType): (string | Contact | MeetingSuggestion | PhoneNumber | TaskSuggestion)[];'
     return:
       type:
       - (string | Contact | MeetingSuggestion | PhoneNumber | TaskSuggestion)[]
@@ -582,7 +629,7 @@ items:
     - id: entityType
       description: Une des valeurs d’énumération EntityType.
       type:
-      - outlook.Office.MailboxEnums.EntityType
+      - MailboxEnums.EntityType
 - uid: outlook.Office.AppointmentRead.getFilteredEntitiesByName
   summary: >-
     Renvoie des entités reconnues dans l’élément sélectionné, qui transmettent le filtre nommé défini au fichier manifeste XML.
@@ -618,7 +665,7 @@ items:
       - string
 - uid: outlook.Office.AppointmentRead.getInitializationContextAsync
   summary: >-
-    Récupère les données d’initialisation transmises quand le complément est [activé par un message actionnable](https://docs.microsoft.com/outlook/actionable-messages/invoke-add-in-from-actionable-message).
+    Obtient les données d’initialisation transmises lorsque le complément est [activé par un message exploitable](https://docs.microsoft.com/outlook/actionable-messages/invoke-add-in-from-actionable-message)<!-- -->.
 
 
     Remarque : Cette méthode est uniquement prise en charge par Outlook 2016 pour Windows (versions en un clic supérieures à 16.0.8413.1000) et Outlook sur le web pour Office 365.
@@ -635,7 +682,7 @@ items:
     Outre cette signature, la méthode a également la signature suivante :
 
 
-    `getInitializationContextAsync(callback?: (result: AsyncResult<string>) => void): void;`
+    `getInitializationContextAsync(callback?: (result: Office.AsyncResult<string>) => void): void;`
   isPreview: true
   name: getInitializationContextAsync(options, callback)
   fullName: getInitializationContextAsync
@@ -643,7 +690,7 @@ items:
   - typeScript
   type: method
   syntax:
-    content: 'getInitializationContextAsync(options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<string>) => void): void;'
+    content: 'getInitializationContextAsync(options?: Office.AsyncContextOptions, callback?: (result: Office.AsyncResult<string>) => void): void;'
     return:
       type:
       - void
@@ -656,7 +703,7 @@ items:
     - id: callback
       description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre de rappel est appelée avec un seul paramètre, asyncResult, qui est un objet Office.AsyncResult. En cas de réussite, les données d’initialisation sont fournies dans la propriété asyncResult.value sous forme de chaîne. S’il n’existe aucun contexte de l’initialisation, l’objet asyncResult contiendra un objet Error avec sa propriété code 9020 et sa propriété name la valeur GenericResponseError.
       type:
-      - '(result: AsyncResult<string>) => void'
+      - '(result: Office.AsyncResult<string>) => void'
 - uid: outlook.Office.AppointmentRead.getRegExMatches
   summary: >-
     Renvoie des valeurs de chaîne dans l’élément sélectionné, qui correspondent aux expressions régulières définies dans le fichier manifeste XML.
@@ -676,7 +723,9 @@ items:
     <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
 
 
-    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Participant de rendez-vous</td></tr></table>Exemples
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Participant de rendez-vous</td></tr></table>
+
+    ####Exemples
 
 
     ```javascript
@@ -724,7 +773,9 @@ items:
     <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
 
 
-    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Participant de rendez-vous</td></tr></table>Exemples
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Participant de rendez-vous</td></tr></table>
+
+    ####Exemples
 
 
     ```javascript
@@ -763,7 +814,9 @@ items:
     <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
 
 
-    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Participant de rendez-vous</td></tr></table>Exemples
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Participant de rendez-vous</td></tr></table>
+
+    ####Exemples
 
 
     ```javascript
@@ -805,7 +858,9 @@ items:
     <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
 
 
-    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Participant de rendez-vous</td></tr></table>Exemples
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Participant de rendez-vous</td></tr></table>
+
+    ####Exemples
 
 
     ```javascript
@@ -853,7 +908,7 @@ items:
     La propriété itemClass spécifie la classe de message de l’élément sélectionné. Les classes de message par défaut de l’élément de message ou de rendez-vous sont les suivantes.
 
 
-    <table> <tr> <th>Type</th> <th>Description</th> <th>Classe de l’élément</th> </tr> <tr> <td>Éléments de rendez-vous</td> <td>Il s’agit des éléments de calendrier de la classe d’élément IPM.Appointment ou IPM.Appointment.Occurence.</td> <td>IPM. Rendez-vous, IPM. Appointment.Occurence</td> </tr> <tr> <td>Éléments de message</td> <td>Ces éléments incluent les messages électroniques dont la classe de message par défaut est IPM.Note, ainsi que les demandes de réunion, les réponses et les annulations qui utilisent IPM.Schedule.Meeting comme classe de message de base.</td> <td>IPM. Remarque, IPM. Schedule.Meeting.Request,IPM. Schedule.Meeting.Neg,IPM. Schedule.Meeting.Pos,IPM. Schedule.Meeting.Tent,IPM. Schedule.Meeting.Canceled</td> </tr> </table>
+    <table> <tr> <th>Type</th> <th>Description</th> <th>Classe de l’élément</th> </tr> <tr> <td>Éléments de rendez-vous</td> <td>Il s’agit des éléments de calendrier de la classe d’élément IPM. Rendez-vous ou IPM. Appointment.Occurrence.</td> <td>IPM. Rendez-vous, IPM. Appointment.Occurrence</td> </tr> <tr> <td>Éléments de message</td> <td>Ces éléments incluent les messages électroniques dont la classe de message par défaut est IPM.Note, ainsi que les demandes de réunion, les réponses et les annulations qui utilisent IPM.Schedule.Meeting comme classe de message de base.</td> <td>IPM. Remarque, IPM. Schedule.Meeting.Request,IPM. Schedule.Meeting.Neg,IPM. Schedule.Meeting.Pos,IPM. Schedule.Meeting.Tent,IPM. Schedule.Meeting.Canceled</td> </tr> </table>
   name: itemClass
   fullName: itemClass
   langs:
@@ -869,10 +924,10 @@ items:
     Obtient l’identificateur de l’élément des services web Exchange pour l’élément actif.
 
 
-    La propriété itemId n’est pas disponible en mode composition. Si un identificateur d’élément est requis, la méthode saveAsync peut être utilisée pour enregistrer l’élément dans la banque, qui retourne l’identificateur d’élément dans le paramètre AsyncResult.value dans la fonction de rappel.
+    La propriété itemId n’est pas disponible en mode composition. Si un identificateur d’élément est requis, la méthode saveAsync peut être utilisée pour enregistrer l’élément dans la banque, qui retourne l’identificateur d’élément dans le paramètre asyncResult.value dans la fonction de rappel.
 
 
-    Remarque : L’identificateur retourné par la propriété itemId est identique à l’identificateur d’élément de Services Web Exchange. La propriété itemId n’est pas identique à l’identificateur d’entrée Outlook ou l’ID utilisé par l’API REST de Outlook. Avant que vous ne puissiez effectuer des appels d’API REST avec cette valeur, elle doit être convertie à l’aide de la commande Office.context.mailbox.convertToRestId. Pour plus d’informations, consultez la rubrique [Utilisation des API REST Outlook à partir d’un complément Outlook](https://docs.microsoft.com/outlook/add-ins/use-rest-api#get-the-item-id).
+    Remarque : L’identificateur retourné par la propriété itemId est identique à l’identificateur d’élément de Services Web Exchange. La propriété itemId n’est pas identique à l’identificateur d’entrée Outlook ou l’ID utilisé par l’API REST de Outlook. Avant que vous ne puissiez effectuer des appels d’API REST avec cette valeur, elle doit être convertie à l’aide de la commande Office.context.mailbox.convertToRestId. Pour plus d’informations, voir [utilisation de l’API REST d’Outlook à partir d’un complément Outlook](https://docs.microsoft.com/outlook/add-ins/use-rest-api#get-the-item-id)<!-- -->.
 
 
     \[[Du jeu d’API : boîte aux lettres 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -880,7 +935,9 @@ items:
     <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
 
 
-    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Participant de rendez-vous</td></tr></table>Exemples
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Participant de rendez-vous</td></tr></table>
+
+    ####Exemples
 
 
     ```javascript
@@ -932,10 +989,10 @@ items:
   - typeScript
   type: property
   syntax:
-    content: 'itemType: Office.MailboxEnums.ItemType;'
+    content: 'itemType: MailboxEnums.ItemType;'
     return:
       type:
-      - outlook.Office.MailboxEnums.ItemType
+      - MailboxEnums.ItemType
 - uid: outlook.Office.AppointmentRead.loadCustomPropertiesAsync
   summary: >-
     Charge de manière asynchrone les propriétés personnalisées de ce complément vers l’élément sélectionné.
@@ -959,7 +1016,7 @@ items:
   - typeScript
   type: method
   syntax:
-    content: 'loadCustomPropertiesAsync(callback: (result: AsyncResult<Office.CustomProperties>) => void, userContext?: any): void;'
+    content: 'loadCustomPropertiesAsync(callback: (result: Office.AsyncResult<CustomProperties>) => void, userContext?: any): void;'
     return:
       type:
       - void
@@ -968,7 +1025,7 @@ items:
     - id: callback
       description: Une fois la méthode terminée, la fonction passée dans le paramètre de rappel est appelée avec un seul paramètre de type Office.AsyncResult.
       type:
-      - '(result: AsyncResult<Office.CustomProperties>) => void'
+      - '(result: Office.AsyncResult<CustomProperties>) => void'
     - id: userContext
       description: Facultatif. Les développeurs peuvent fournir un objet auquel ils souhaitent accéder dans la fonction de rappel. Cet objet est accessible par l’AsyncResult.asynccontext, propriété dans la fonction de rappel.
       type:
@@ -986,7 +1043,9 @@ items:
     <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
 
 
-    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Participant de rendez-vous</td></tr></table>Exemples
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Participant de rendez-vous</td></tr></table>
+
+    ####Exemples
 
 
     ```javascript
@@ -1053,10 +1112,10 @@ items:
   - typeScript
   type: property
   syntax:
-    content: 'notificationMessages: Office.NotificationMessages;'
+    content: 'notificationMessages: NotificationMessages;'
     return:
       type:
-      - outlook.Office.NotificationMessages
+      - NotificationMessages
 - uid: outlook.Office.AppointmentRead.optionalAttendees
   summary: >-
     Permet d’accéder aux participants facultatifs d’un événement. Le type d’objet et le niveau d’accès varient selon le mode de l’élément actif.
@@ -1070,7 +1129,9 @@ items:
     <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
 
 
-    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Participant de rendez-vous</td></tr></table>Exemples
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Participant de rendez-vous</td></tr></table>
+
+    ####Exemples
 
 
     ```javascript
@@ -1107,7 +1168,9 @@ items:
     <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
 
 
-    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Participant de rendez-vous</td></tr></table>Exemples
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Participant de rendez-vous</td></tr></table>
+
+    ####Exemples
 
 
     ```javascript
@@ -1176,14 +1239,14 @@ items:
     Outre cette signature, la méthode a également la signature suivante :
 
 
-    `removeHandlerAsync(eventType:EventType, callback?: (result: AsyncResult<void>) => void): void;`
+    `removeHandlerAsync(eventType: Office.EventType, callback?: (result: Office.AsyncResult<void>) => void): void;`
   name: removeHandlerAsync(eventType, options, callback)
   fullName: removeHandlerAsync
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'removeHandlerAsync(eventType:EventType, options?: any, callback?: (result: AsyncResult<void>) => void): void;'
+    content: 'removeHandlerAsync(eventType: Office.EventType, options?: any, callback?: (result: Office.AsyncResult<void>) => void): void;'
     return:
       type:
       - void
@@ -1192,7 +1255,7 @@ items:
     - id: eventType
       description: Événement qui doit révoquer le gestionnaire.
       type:
-      - EventType
+      - Office.EventType
     - id: options
       description: 'Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. asyncContext : les développeurs peuvent fournir n’importe quel objet qu’ils souhaitent accéder dans la méthode de rappel.'
       type:
@@ -1200,7 +1263,7 @@ items:
     - id: callback
       description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre de rappel est appelée avec un seul paramètre, asyncResult, qui est un objet Office.AsyncResult.
       type:
-      - '(result: AsyncResult<void>) => void'
+      - '(result: Office.AsyncResult<void>) => void'
 - uid: outlook.Office.AppointmentRead.requiredAttendees
   summary: >-
     Permet d’accéder aux participants requis à un événement. Le type d’objet et le niveau d’accès varient selon le mode de l’élément actif.
@@ -1214,7 +1277,9 @@ items:
     <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
 
 
-    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Participant de rendez-vous</td></tr></table>Exemples
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Participant de rendez-vous</td></tr></table>
+
+    ####Exemples
 
 
     ```javascript
@@ -1249,7 +1314,7 @@ items:
     Dans OWA et Outlook, le seriesId renvoie l’ID Exchange Web Services (EWS) de l’élément parent (série) auquel cet élément appartient. Toutefois, dans iOS et Android, le seriesId renvoie l’ID du reste de l’élément parent.
 
 
-    Remarque : L’identificateur retourné par la propriété seriesId est identique à l’identificateur d’élément de Services Web Exchange. La propriété seriesId n’est pas identique à l’ID Outlook utilisées par l’API REST de Outlook. Avant que vous ne puissiez effectuer des appels d’API REST avec cette valeur, elle doit être convertie à l’aide de la commande Office.context.mailbox.convertToRestId. Pour plus d’informations, consultez la rubrique [Utilisation des API REST Outlook à partir d’un complément Outlook](https://docs.microsoft.com/outlook/add-ins/use-rest-api).
+    Remarque : L’identificateur retourné par la propriété seriesId est identique à l’identificateur d’élément de Services Web Exchange. La propriété seriesId n’est pas identique à l’ID Outlook utilisées par l’API REST de Outlook. Avant que vous ne puissiez effectuer des appels d’API REST avec cette valeur, elle doit être convertie à l’aide de la commande Office.context.mailbox.convertToRestId. Pour plus d’informations, voir [utilisation de l’API REST d’Outlook à partir d’un complément Outlook](https://docs.microsoft.com/outlook/add-ins/use-rest-api)<!-- -->.
 
 
     La propriété seriesId renvoie la valeur nulle pour les éléments qui n’ont pas d’éléments parents tels que les rendez-vous uniques, des éléments de série, ou les demandes de réunion et retourne la valeur undefined pour tous les éléments qui ne sont pas des demandes de réunion.
@@ -1284,7 +1349,9 @@ items:
     <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
 
 
-    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Participant de rendez-vous</td></tr></table>Exemples
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Participant de rendez-vous</td></tr></table>
+
+    ####Exemples
 
 
     ```javascript
@@ -1337,7 +1404,9 @@ items:
     <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
 
 
-    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Participant de rendez-vous</td></tr></table>範例
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Participant de rendez-vous</td></tr></table>
+
+    ####Exemples
 
 
     ```javascript
