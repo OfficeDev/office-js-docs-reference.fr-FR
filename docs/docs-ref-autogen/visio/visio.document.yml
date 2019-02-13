@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 8f4bc60ae424ee68581aea187ec124cc434a80e7
-ms.sourcegitcommit: 3f4a320fa860d05d348c8bdec2295e046a45a34f
+ms.openlocfilehash: b8cef1a9fb6b0a28a9c36743a8cc320cb0f260a6
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/07/2019
-ms.locfileid: "29770001"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29973666"
 items:
 - uid: visio.Visio.Document
   summary: >-
@@ -24,6 +24,8 @@ items:
   - visio.Visio.Document.application
   - visio.Visio.Document.getActivePage
   - visio.Visio.Document.load
+  - visio.Visio.Document.load_1
+  - visio.Visio.Document.load_2
   - visio.Visio.Document.onDataRefreshComplete
   - visio.Visio.Document.onDocumentLoadComplete
   - visio.Visio.Document.onPageLoadComplete
@@ -32,6 +34,7 @@ items:
   - visio.Visio.Document.onShapeMouseLeave
   - visio.Visio.Document.pages
   - visio.Visio.Document.set
+  - visio.Visio.Document.set_1
   - visio.Visio.Document.setActivePage
   - visio.Visio.Document.startDataRefresh
   - visio.Visio.Document.toJSON
@@ -59,7 +62,7 @@ items:
 
     \[[Du jeu d’API : 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
   name: getActivePage()
-  fullName: getActivePage
+  fullName: getActivePage()
   langs:
   - typeScript
   type: method
@@ -75,76 +78,65 @@ items:
     Outre cette signature, cette méthode présente les signatures suivantes :
 
 
+    `load(option?: string | string[]): Visio.Document`-Où option est une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+
+
     `load(option?: { select?: string; expand?: string; }): Visio.Document`-Où option.select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options.expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
 
 
     `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Visio.Document`-Uniquement disponible sur les types de la collection. Il est similaire à la signature précédente. Option.Top Spécifie le nombre maximal d’éléments pouvant être inclus dans le résultat de la collection. Option.Skip Spécifie le nombre d’éléments qui doivent être ignoré et non inclus dans le résultat. Si option.top est spécifié, le jeu de résultats démarre après l’ignorer le nombre spécifié d’éléments.
-
-    #### <a name="examples"></a>Exemples
-
-
-    ```javascript
-
-    Visio.run(session, function (ctx) {
-        var pages = ctx.document.pages;
-        var pageCount = pages.getCount();
-        return ctx.sync().then(function () {
-            console.log("Pages Count: " +pageCount.value);
-        });
-    }).catch(function(error) {
-        console.log("Error: " + error);
-        if (error instanceof OfficeExtension.Error) {
-            console.log("Debug info: " + JSON.stringify(error.debugInfo));
-        }
-    });
-
-    ```
-
-    ```javascript
-
-    Visio.run(session, function (ctx) {
-        var documentView = ctx.document.view;
-        documentView.disableHyperlinks();
-        return ctx.sync();
-    }).catch(function(error) {
-        console.log("Error: " + error);
-        if (error instanceof OfficeExtension.Error) {
-            console.log("Debug info: " + JSON.stringify(error.debugInfo));
-        }
-    });
-
-    ```
-
-    ```javascript
-
-    Visio.run(session, function (ctx) {
-        var application = ctx.document.application;
-        application.showToolbars = false;
-        return ctx.sync();
-    }).catch(function(error) {
-        console.log("Error: " + error);
-        if (error instanceof OfficeExtension.Error) {
-            console.log("Debug info: " + JSON.stringify(error.debugInfo));
-        }
-    });
-
-    ```
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): Visio.Document;'
+    content: 'load(option?: Visio.Interfaces.DocumentLoadOptions): Visio.Document;'
     return:
       type:
       - Visio.Document
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - visio.Visio.Interfaces.DocumentLoadOptions
+- uid: visio.Visio.Document.load_1
+  summary: Files d’attente d’une commande pour charger les propriétés de l’objet spécifiées. Vous devez appeler `context.sync()` avant de lire les propriétés.
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Visio.Document;'
+    return:
+      type:
+      - Visio.Document
+      description: ''
+    parameters:
+    - id: propertyNames
       description: Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
       type:
       - string | string[]
+- uid: visio.Visio.Document.load_2
+  summary: Files d’attente d’une commande pour charger les propriétés de l’objet spécifiées. Vous devez appeler `context.sync()` avant de lire les propriétés.
+  name: load(propertyNamesAndPaths)
+  fullName: load(propertyNamesAndPaths)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Visio.Document;'
+    return:
+      type:
+      - Visio.Document
+      description: ''
+    parameters:
+    - id: propertyNamesAndPaths
+      description: Où propertyNamesAndPaths.select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et propertyNamesAndPaths.expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
+      type:
+      - '{ select?: string; expand?: string; }'
 - uid: visio.Visio.Document.onDataRefreshComplete
   summary: >-
     Se produit lorsque les données sont actualisées dans le diagramme.
@@ -257,6 +249,7 @@ items:
     return:
       type:
       - Visio.PageCollection
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nVisio.run(session, function (ctx) {\n    var pages = ctx.document.pages;\n    var pageCount = pages.getCount();\n    return ctx.sync().then(function () {\n        console.log(\"Pages Count: \" +pageCount.value);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
 - uid: visio.Visio.Document.set
   summary: Définir plusieurs propriétés d’un objet en même temps. Vous pouvez passer un objet brut avec les propriétés appropriées, ou un autre objet API du même type.
   remarks: >-
@@ -265,7 +258,7 @@ items:
 
     `set(properties: Visio.Document): void`
   name: set(properties, options)
-  fullName: set
+  fullName: set(properties, options)
   langs:
   - typeScript
   type: method
@@ -284,6 +277,24 @@ items:
       description: Fournit une option permettant de supprimer des erreurs si l’objet propriétés tente de définir des propriétés en lecture seule.
       type:
       - office.OfficeExtension.UpdateOptions
+- uid: visio.Visio.Document.set_1
+  summary: Définit plusieurs propriétés de l’objet en même temps, basé sur un objet chargé existant.
+  name: set(properties)
+  fullName: set(properties)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'set(properties: Visio.Document): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: properties
+      description: ''
+      type:
+      - Visio.Document
 - uid: visio.Visio.Document.setActivePage
   summary: >-
     Configure la page active du document.
@@ -291,7 +302,7 @@ items:
 
     \[[Du jeu d’API : 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
   name: setActivePage(PageName)
-  fullName: setActivePage
+  fullName: setActivePage(PageName)
   langs:
   - typeScript
   type: method
@@ -313,7 +324,7 @@ items:
 
     \[[Du jeu d’API : 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
   name: startDataRefresh()
-  fullName: startDataRefresh
+  fullName: startDataRefresh()
   langs:
   - typeScript
   type: method
@@ -325,7 +336,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nVisio.run(session, function (ctx) {\n    var document = ctx.document;\n    document.startDataRefresh();\n    return ctx.sync();\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
 - uid: visio.Visio.Document.toJSON
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method

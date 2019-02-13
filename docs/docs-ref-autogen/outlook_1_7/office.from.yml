@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: df7f436e878f20213f5017210a23cf421172c8f7
-ms.sourcegitcommit: a68606173477c7fb4069880eea941766c7d8c50d
+ms.openlocfilehash: fd28d2f87afa87c519ea0aab2c3394849149cdcd
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/01/2019
-ms.locfileid: "29704127"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29979411"
 items:
 - uid: Outlook_1_7.Office.From
   summary: >-
@@ -25,6 +25,7 @@ items:
   package: Outlook_1_7
   children:
   - Outlook_1_7.Office.From.getAsync
+  - Outlook_1_7.Office.From.getAsync_1
 - uid: Outlook_1_7.Office.From.getAsync
   summary: >-
     Obtient la valeur d’un message à partir de.
@@ -49,7 +50,7 @@ items:
 
     `getAsync(callback?: (result: Office.AsyncResult<EmailAddressDetails>) => void): void;`
   name: getAsync(options, callback)
-  fullName: getAsync
+  fullName: getAsync(options, callback)
   langs:
   - typeScript
   type: method
@@ -63,7 +64,55 @@ items:
     - id: options
       description: 'Littéral d’objet contenant une ou plusieurs des propriétés suivantes. asyncContext : les développeurs peuvent fournir n’importe quel objet qu’ils souhaitent accéder dans la méthode de rappel.'
       type:
-      - office.Office.AsyncContextOptions
+      - Office.AsyncContextOptions
+    - id: callback
+      description: Une fois la méthode terminée, la fonction passée dans le paramètre de rappel est appelée avec un seul paramètre, asyncResult, qui est un objet Office.AsyncResult. Le `value` propriété du résultat est le message à partir de la valeur, comme un objet EmailAddressDetails.
+      type:
+      - '(result: Office.AsyncResult<EmailAddressDetails>) => void'
+- uid: Outlook_1_7.Office.From.getAsync_1
+  summary: >-
+    Obtient la valeur d’un message à partir de.
+
+
+    La méthode getAsync démarre un appel asynchrone au serveur Exchange pour obtenir la valeur d’un message à partir de.
+
+
+    La valeur de l’élément à partir de fournies sous la forme un [Office.EmailAddressDetails](xref:Outlook_1_7.Office.EmailAddressDetails) dans la propriété asyncResult.value.
+
+
+    \[[Du jeu d’API : boîte aux lettres 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition</td></tr></table>
+
+    ####Exemples
+
+
+    ```javascript
+
+    Office.context.mailbox.item.from.getAsync(callback);
+
+
+    function callback(asyncResult) {
+        var from = asyncResult.value;
+        console.log("From " + from);
+    }
+
+    ```
+  name: getAsync(callback)
+  fullName: getAsync(callback)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getAsync(callback?: (result: Office.AsyncResult<EmailAddressDetails>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
     - id: callback
       description: Une fois la méthode terminée, la fonction passée dans le paramètre de rappel est appelée avec un seul paramètre, asyncResult, qui est un objet Office.AsyncResult. Le `value` propriété du résultat est le message à partir de la valeur, comme un objet EmailAddressDetails.
       type:
