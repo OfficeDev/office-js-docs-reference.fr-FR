@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: d69eb600e79d5280c34a8016f3f2b11054b3de56
-ms.sourcegitcommit: 3f4a320fa860d05d348c8bdec2295e046a45a34f
+ms.openlocfilehash: 6d58afae65d71086a93ebfca56f5cabce967fcff
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/07/2019
-ms.locfileid: "29768888"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29980547"
 items:
 - uid: onenote.OneNote.InkAnalysisWord
   summary: >-
@@ -26,7 +26,10 @@ items:
   - onenote.OneNote.InkAnalysisWord.languageId
   - onenote.OneNote.InkAnalysisWord.line
   - onenote.OneNote.InkAnalysisWord.load
+  - onenote.OneNote.InkAnalysisWord.load_1
+  - onenote.OneNote.InkAnalysisWord.load_2
   - onenote.OneNote.InkAnalysisWord.set
+  - onenote.OneNote.InkAnalysisWord.set_1
   - onenote.OneNote.InkAnalysisWord.strokePointers
   - onenote.OneNote.InkAnalysisWord.toJSON
   - onenote.OneNote.InkAnalysisWord.track
@@ -94,23 +97,69 @@ items:
       - onenote.OneNote.InkAnalysisLine
 - uid: onenote.OneNote.InkAnalysisWord.load
   summary: Files d’attente d’une commande pour charger les propriétés de l’objet spécifiées. Vous devez appeler « context.sync() » avant de lire les propriétés.
-  remarks: "Outre cette signature, cette méthode présente les signatures suivantes :\n\n`load(option?: { select?: string; expand?: string; }): OneNote.InkAnalysisWord`-Où option.select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options.expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.InkAnalysisWord`-Uniquement disponible sur les types de la collection. Il est similaire à la signature précédente. Option.Top Spécifie le nombre maximal d’éléments pouvant être inclus dans le résultat de la collection. Option.Skip Spécifie le nombre d’éléments qui doivent être ignoré et non inclus dans le résultat. Si option.top est spécifié, le jeu de résultats démarre après l’ignorer le nombre spécifié d’éléments.\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nOneNote.run(function (ctx) {        \n    var app = ctx.application;\n    \n    // Gets the active page.\n    var page = app.getActivePage();\n    \n    page.load('inkAnalysisOrNull/paragraphs/lines/words');\n    return ctx.sync()\n        .then(function() {\n            var inkParagraphs = page.inkAnalysisOrNull.paragraphs;\n            $.each(inkParagraphs.items, function(i, inkParagraph) {\n                var inkLines = inkParagraph.lines;\n                $.each(inkLines.items, function(j, inkLine) {\n                    var inkWords = inkLine.words;\n                    $.each(inkWords.items, function(k, inkWord) {\n                    \n                        // Log language Id of the word\n                        console.log(inkWord.languageId);\n                        \n                        // Log every ink analyzed words.\n                        $.each(inkWord.wordAlternates, function(l, word) {\n                            console.log(word);                                    \n                        })\n                    })\n                })\n            })\n        })\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n}); \n```"
+  remarks: >-
+    Outre cette signature, cette méthode présente les signatures suivantes :
+
+
+    `load(option?: string | string[]): OneNote.InkAnalysisWord`-Où option est une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+
+
+    `load(option?: { select?: string; expand?: string; }): OneNote.InkAnalysisWord`-Où option.select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options.expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
+
+
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.InkAnalysisWord`-Uniquement disponible sur les types de la collection. Il est similaire à la signature précédente. Option.Top Spécifie le nombre maximal d’éléments pouvant être inclus dans le résultat de la collection. Option.Skip Spécifie le nombre d’éléments qui doivent être ignoré et non inclus dans le résultat. Si option.top est spécifié, le jeu de résultats démarre après l’ignorer le nombre spécifié d’éléments.
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): OneNote.InkAnalysisWord;'
+    content: 'load(option?: OneNote.Interfaces.InkAnalysisWordLoadOptions): OneNote.InkAnalysisWord;'
     return:
       type:
       - onenote.OneNote.InkAnalysisWord
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - onenote.OneNote.Interfaces.InkAnalysisWordLoadOptions
+- uid: onenote.OneNote.InkAnalysisWord.load_1
+  summary: Files d’attente d’une commande pour charger les propriétés de l’objet spécifiées. Vous devez appeler `context.sync()` avant de lire les propriétés.
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): OneNote.InkAnalysisWord;'
+    return:
+      type:
+      - onenote.OneNote.InkAnalysisWord
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nOneNote.run(function (ctx) {        \n    var app = ctx.application;\n    \n    // Gets the active page.\n    var page = app.getActivePage();\n    \n    page.load('inkAnalysisOrNull/paragraphs/lines/words');\n    return ctx.sync()\n        .then(function() {\n            var inkParagraphs = page.inkAnalysisOrNull.paragraphs;\n            $.each(inkParagraphs.items, function(i, inkParagraph) {\n                var inkLines = inkParagraph.lines;\n                $.each(inkLines.items, function(j, inkLine) {\n                    var inkWords = inkLine.words;\n                    $.each(inkWords.items, function(k, inkWord) {\n                    \n                        // Log language Id of the word\n                        console.log(inkWord.languageId);\n                        \n                        // Log every ink analyzed words.\n                        $.each(inkWord.wordAlternates, function(l, word) {\n                            console.log(word);                                    \n                        })\n                    })\n                })\n            })\n        })\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n}); \n```"
+    parameters:
+    - id: propertyNames
       description: Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
       type:
       - string | string[]
+- uid: onenote.OneNote.InkAnalysisWord.load_2
+  summary: Files d’attente d’une commande pour charger les propriétés de l’objet spécifiées. Vous devez appeler `context.sync()` avant de lire les propriétés.
+  name: load(propertyNamesAndPaths)
+  fullName: load(propertyNamesAndPaths)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): OneNote.InkAnalysisWord;'
+    return:
+      type:
+      - onenote.OneNote.InkAnalysisWord
+      description: ''
+    parameters:
+    - id: propertyNamesAndPaths
+      description: Où propertyNamesAndPaths.select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et propertyNamesAndPaths.expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
+      type:
+      - '{ select?: string; expand?: string; }'
 - uid: onenote.OneNote.InkAnalysisWord.set
   summary: Définir plusieurs propriétés d’un objet en même temps. Vous pouvez passer un objet brut avec les propriétés appropriées, ou un autre objet API du même type.
   remarks: >-
@@ -119,7 +168,7 @@ items:
 
     `set(properties: OneNote.InkAnalysisWord): void`
   name: set(properties, options)
-  fullName: set
+  fullName: set(properties, options)
   langs:
   - typeScript
   type: method
@@ -138,6 +187,24 @@ items:
       description: Fournit une option permettant de supprimer des erreurs si l’objet propriétés tente de définir des propriétés en lecture seule.
       type:
       - office.OfficeExtension.UpdateOptions
+- uid: onenote.OneNote.InkAnalysisWord.set_1
+  summary: Définit plusieurs propriétés de l’objet en même temps, basé sur un objet chargé existant.
+  name: set(properties)
+  fullName: set(properties)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'set(properties: OneNote.InkAnalysisWord): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: properties
+      description: ''
+      type:
+      - onenote.OneNote.InkAnalysisWord
 - uid: onenote.OneNote.InkAnalysisWord.strokePointers
   summary: >-
     Références faibles aux traits d’encre qui ont été reconnus dans le cadre de ce mot d’analyse des entrées manuscrites. En lecture seule.
@@ -157,7 +224,7 @@ items:
 - uid: onenote.OneNote.InkAnalysisWord.toJSON
   summary: Remplace le code JavaScript `toJSON()` méthode afin de fournir une sortie plus utile lorsqu’un objet API est passé à `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle le `toJSON` méthode de l’objet qui lui est passé.) Tandis que l’objet OneNote.InkAnalysisWord d’origine est un objet d’API, la `toJSON` méthode renvoie un objet JavaScript brut (typée en tant que `OneNote.Interfaces.InkAnalysisWordData` <!-- -->) qui contient des copies superficielles de toutes les propriétés enfant chargé à partir de l’objet d’origine.
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method
@@ -170,7 +237,7 @@ items:
 - uid: onenote.OneNote.InkAnalysisWord.track
   summary: Suivre l’objet pour l’ajustement automatique selon entourant les modifications dans le document. Cet appel est une abréviation de context.trackedObjects.add(thisObject). Si vous utilisez cet objet dans les appels de « .sync » et en dehors de l’exécution séquentielle d’un lot de « .run » et obtenir une erreur « InvalidObjectPath » lors de la définition d’une propriété ou d’appeler une méthode sur l’objet, vous devez avoir ajouté l’objet à l’objet suivi collection lorsque l’objet a été créé tout d’abord.
   name: track()
-  fullName: track
+  fullName: track()
   langs:
   - typeScript
   type: method
@@ -183,7 +250,7 @@ items:
 - uid: onenote.OneNote.InkAnalysisWord.untrack
   summary: Version de la mémoire associée à cet objet, si elle a été précédemment suivi. Cet appel est l’abréviation de context.trackedObjects.remove(thisObject). Comportant de nombreux objets suivis ralentit l’application hôte, donc pensez à libérer les objets que vous ajoutez, une fois que vous avez terminé les utiliser. Vous devrez appeler « context.sync() » avant que la version de mémoire prenne effet.
   name: untrack()
-  fullName: untrack
+  fullName: untrack()
   langs:
   - typeScript
   type: method

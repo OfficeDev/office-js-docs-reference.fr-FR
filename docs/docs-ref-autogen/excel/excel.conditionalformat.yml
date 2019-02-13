@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 5be3dae9e1d063aaf0ab87c8dae6ee2cf3eebcee
-ms.sourcegitcommit: 3f4a320fa860d05d348c8bdec2295e046a45a34f
+ms.openlocfilehash: 9e7758795081c8a15536292bd568fc244f3fb953
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/07/2019
-ms.locfileid: "29769966"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29979931"
 items:
 - uid: excel.Excel.ConditionalFormat
   summary: >-
@@ -37,10 +37,13 @@ items:
   - excel.Excel.ConditionalFormat.iconSetOrNullObject
   - excel.Excel.ConditionalFormat.id
   - excel.Excel.ConditionalFormat.load
+  - excel.Excel.ConditionalFormat.load_1
+  - excel.Excel.ConditionalFormat.load_2
   - excel.Excel.ConditionalFormat.preset
   - excel.Excel.ConditionalFormat.presetOrNullObject
   - excel.Excel.ConditionalFormat.priority
   - excel.Excel.ConditionalFormat.set
+  - excel.Excel.ConditionalFormat.set_1
   - excel.Excel.ConditionalFormat.stopIfTrue
   - excel.Excel.ConditionalFormat.textComparison
   - excel.Excel.ConditionalFormat.textComparisonOrNullObject
@@ -199,7 +202,7 @@ items:
 
     \[[Du jeu d’API : ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: delete()
-  fullName: delete
+  fullName: delete()
   langs:
   - typeScript
   type: method
@@ -216,7 +219,7 @@ items:
 
     \[[Du jeu d’API : ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getRange()
-  fullName: getRange
+  fullName: getRange()
   langs:
   - typeScript
   type: method
@@ -233,7 +236,7 @@ items:
 
     \[[Du jeu d’API : ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getRangeOrNullObject()
-  fullName: getRangeOrNullObject
+  fullName: getRangeOrNullObject()
   langs:
   - typeScript
   type: method
@@ -298,26 +301,65 @@ items:
     Outre cette signature, cette méthode présente les signatures suivantes :
 
 
+    `load(option?: string | string[]): Excel.ConditionalFormat`-Où option est une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+
+
     `load(option?: { select?: string; expand?: string; }): Excel.ConditionalFormat`-Où option.select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options.expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
 
 
     `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.ConditionalFormat`-Uniquement disponible sur les types de la collection. Il est similaire à la signature précédente. Option.Top Spécifie le nombre maximal d’éléments pouvant être inclus dans le résultat de la collection. Option.Skip Spécifie le nombre d’éléments qui doivent être ignoré et non inclus dans le résultat. Si option.top est spécifié, le jeu de résultats démarre après l’ignorer le nombre spécifié d’éléments.
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): Excel.ConditionalFormat;'
+    content: 'load(option?: Excel.Interfaces.ConditionalFormatLoadOptions): Excel.ConditionalFormat;'
     return:
       type:
       - excel.Excel.ConditionalFormat
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - excel.Excel.Interfaces.ConditionalFormatLoadOptions
+- uid: excel.Excel.ConditionalFormat.load_1
+  summary: Files d’attente d’une commande pour charger les propriétés de l’objet spécifiées. Vous devez appeler `context.sync()` avant de lire les propriétés.
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.ConditionalFormat;'
+    return:
+      type:
+      - excel.Excel.ConditionalFormat
+      description: ''
+    parameters:
+    - id: propertyNames
       description: Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
       type:
       - string | string[]
+- uid: excel.Excel.ConditionalFormat.load_2
+  summary: Files d’attente d’une commande pour charger les propriétés de l’objet spécifiées. Vous devez appeler `context.sync()` avant de lire les propriétés.
+  name: load(propertyNamesAndPaths)
+  fullName: load(propertyNamesAndPaths)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.ConditionalFormat;'
+    return:
+      type:
+      - excel.Excel.ConditionalFormat
+      description: ''
+    parameters:
+    - id: propertyNamesAndPaths
+      description: Où propertyNamesAndPaths.select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et propertyNamesAndPaths.expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
+      type:
+      - '{ select?: string; expand?: string; }'
 - uid: excel.Excel.ConditionalFormat.preset
   summary: >-
     Renvoie le format conditionnel de critères prédéfini. Pour plus d’informations, voir Excel.PresetCriteriaConditionalFormat.
@@ -375,7 +417,7 @@ items:
 
     `set(properties: Excel.ConditionalFormat): void`
   name: set(properties, options)
-  fullName: set
+  fullName: set(properties, options)
   langs:
   - typeScript
   type: method
@@ -394,6 +436,24 @@ items:
       description: Fournit une option permettant de supprimer des erreurs si l’objet propriétés tente de définir des propriétés en lecture seule.
       type:
       - office.OfficeExtension.UpdateOptions
+- uid: excel.Excel.ConditionalFormat.set_1
+  summary: Définit plusieurs propriétés de l’objet en même temps, basé sur un objet chargé existant.
+  name: set(properties)
+  fullName: set(properties)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'set(properties: Excel.ConditionalFormat): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: properties
+      description: ''
+      type:
+      - excel.Excel.ConditionalFormat
 - uid: excel.Excel.ConditionalFormat.stopIfTrue
   summary: >-
     Si les conditions de cette mise en forme conditionnelle sont remplies, aucun format de priorité inférieure ne doit prendre effet sur cette cellule. NULL sur databars, colorscales et les jeux d’icônes qu’il n’existe pas de concept de StopIfTrue pour ces
@@ -446,7 +506,7 @@ items:
 - uid: excel.Excel.ConditionalFormat.toJSON
   summary: Remplace le code JavaScript `toJSON()` méthode afin de fournir une sortie plus utile lorsqu’un objet API est passé à `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle le `toJSON` méthode de l’objet qui lui est passé.) Tandis que l’objet Excel.ConditionalFormat d’origine est un objet d’API, la `toJSON` méthode renvoie un objet JavaScript brut (typée en tant que `Excel.Interfaces.ConditionalFormatData` <!-- -->) qui contient des copies superficielles de toutes les propriétés enfant chargé à partir de l’objet d’origine.
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method
