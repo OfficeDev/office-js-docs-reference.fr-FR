@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: abeba507e7c49fc343cfb6332221abebff8483e5
-ms.sourcegitcommit: 3f4a320fa860d05d348c8bdec2295e046a45a34f
+ms.openlocfilehash: 489f6e21bc481eeabd8b1c8ce7e4628d9a1d5177
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/07/2019
-ms.locfileid: "29770015"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29975038"
 items:
 - uid: excel.Excel.ChartSeries
   summary: >-
@@ -35,6 +35,8 @@ items:
   - excel.Excel.ChartSeries.hasDataLabels
   - excel.Excel.ChartSeries.invertIfNegative
   - excel.Excel.ChartSeries.load
+  - excel.Excel.ChartSeries.load_1
+  - excel.Excel.ChartSeries.load_2
   - excel.Excel.ChartSeries.markerBackgroundColor
   - excel.Excel.ChartSeries.markerForegroundColor
   - excel.Excel.ChartSeries.markerSize
@@ -45,6 +47,7 @@ items:
   - excel.Excel.ChartSeries.points
   - excel.Excel.ChartSeries.secondPlotSize
   - excel.Excel.ChartSeries.set
+  - excel.Excel.ChartSeries.set_1
   - excel.Excel.ChartSeries.setBubbleSizes
   - excel.Excel.ChartSeries.setValues
   - excel.Excel.ChartSeries.setXAxisValues
@@ -121,7 +124,7 @@ items:
 
     \[[Du jeu d’API : ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: delete()
-  fullName: delete
+  fullName: delete()
   langs:
   - typeScript
   type: method
@@ -261,23 +264,69 @@ items:
       - boolean
 - uid: excel.Excel.ChartSeries.load
   summary: Files d’attente d’une commande pour charger les propriétés de l’objet spécifiées. Vous devez appeler « context.sync() » avant de lire les propriétés.
-  remarks: "Outre cette signature, cette méthode présente les signatures suivantes :\n\n`load(option?: { select?: string; expand?: string; }): Excel.ChartSeries`-Où option.select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options.expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.ChartSeries`-Uniquement disponible sur les types de la collection. Il est similaire à la signature précédente. Option.Top Spécifie le nombre maximal d’éléments pouvant être inclus dans le résultat de la collection. Option.Skip Spécifie le nombre d’éléments qui doivent être ignoré et non inclus dans le résultat. Si option.top est spécifié, le jeu de résultats démarre après l’ignorer le nombre spécifié d’éléments.\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\n// Rename the 1st series of Chart1 to \"New Series Name\"\nExcel.run(function (ctx) { \n    var chart = ctx.workbook.worksheets.getItem(\"Sheet1\").charts.getItem(\"Chart1\");    \n    chart.series.getItemAt(0).name = \"New Series Name\";\n    return ctx.sync().then(function() {\n            console.log(\"Series1 Renamed\");\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: >-
+    Outre cette signature, cette méthode présente les signatures suivantes :
+
+
+    `load(option?: string | string[]): Excel.ChartSeries`-Où option est une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+
+
+    `load(option?: { select?: string; expand?: string; }): Excel.ChartSeries`-Où option.select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options.expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
+
+
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.ChartSeries`-Uniquement disponible sur les types de la collection. Il est similaire à la signature précédente. Option.Top Spécifie le nombre maximal d’éléments pouvant être inclus dans le résultat de la collection. Option.Skip Spécifie le nombre d’éléments qui doivent être ignoré et non inclus dans le résultat. Si option.top est spécifié, le jeu de résultats démarre après l’ignorer le nombre spécifié d’éléments.
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): Excel.ChartSeries;'
+    content: 'load(option?: Excel.Interfaces.ChartSeriesLoadOptions): Excel.ChartSeries;'
     return:
       type:
       - excel.Excel.ChartSeries
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - excel.Excel.Interfaces.ChartSeriesLoadOptions
+- uid: excel.Excel.ChartSeries.load_1
+  summary: Files d’attente d’une commande pour charger les propriétés de l’objet spécifiées. Vous devez appeler `context.sync()` avant de lire les propriétés.
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.ChartSeries;'
+    return:
+      type:
+      - excel.Excel.ChartSeries
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\n// Rename the 1st series of Chart1 to \"New Series Name\"\nExcel.run(function (ctx) { \n    var chart = ctx.workbook.worksheets.getItem(\"Sheet1\").charts.getItem(\"Chart1\");    \n    chart.series.getItemAt(0).name = \"New Series Name\";\n    return ctx.sync().then(function() {\n            console.log(\"Series1 Renamed\");\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+    parameters:
+    - id: propertyNames
       description: Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
       type:
       - string | string[]
+- uid: excel.Excel.ChartSeries.load_2
+  summary: Files d’attente d’une commande pour charger les propriétés de l’objet spécifiées. Vous devez appeler `context.sync()` avant de lire les propriétés.
+  name: load(propertyNamesAndPaths)
+  fullName: load(propertyNamesAndPaths)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.ChartSeries;'
+    return:
+      type:
+      - excel.Excel.ChartSeries
+      description: ''
+    parameters:
+    - id: propertyNamesAndPaths
+      description: Où propertyNamesAndPaths.select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et propertyNamesAndPaths.expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
+      type:
+      - '{ select?: string; expand?: string; }'
 - uid: excel.Excel.ChartSeries.markerBackgroundColor
   summary: >-
     Représente la couleur d’arrière-plan de marqueurs d’une série de graphiques.
@@ -434,7 +483,7 @@ items:
 
     `set(properties: Excel.ChartSeries): void`
   name: set(properties, options)
-  fullName: set
+  fullName: set(properties, options)
   langs:
   - typeScript
   type: method
@@ -453,6 +502,24 @@ items:
       description: Fournit une option permettant de supprimer des erreurs si l’objet propriétés tente de définir des propriétés en lecture seule.
       type:
       - office.OfficeExtension.UpdateOptions
+- uid: excel.Excel.ChartSeries.set_1
+  summary: Définit plusieurs propriétés de l’objet en même temps, basé sur un objet chargé existant.
+  name: set(properties)
+  fullName: set(properties)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'set(properties: Excel.ChartSeries): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: properties
+      description: ''
+      type:
+      - excel.Excel.ChartSeries
 - uid: excel.Excel.ChartSeries.setBubbleSizes
   summary: >-
     Définit des tailles de bulles pour une série de graphiques. Fonctionne uniquement pour les graphiques en bulles.
@@ -460,7 +527,7 @@ items:
 
     \[[Du jeu d’API : ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: setBubbleSizes(sourceData)
-  fullName: setBubbleSizes
+  fullName: setBubbleSizes(sourceData)
   langs:
   - typeScript
   type: method
@@ -482,7 +549,7 @@ items:
 
     \[[Du jeu d’API : ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: setValues(sourceData)
-  fullName: setValues
+  fullName: setValues(sourceData)
   langs:
   - typeScript
   type: method
@@ -504,7 +571,7 @@ items:
 
     \[[Du jeu d’API : ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: setXAxisValues(sourceData)
-  fullName: setXAxisValues
+  fullName: setXAxisValues(sourceData)
   langs:
   - typeScript
   type: method
@@ -570,7 +637,7 @@ items:
 - uid: excel.Excel.ChartSeries.toJSON
   summary: Remplace le code JavaScript `toJSON()` méthode afin de fournir une sortie plus utile lorsqu’un objet API est passé à `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle le `toJSON` méthode de l’objet qui lui est passé.) Tandis que l’objet Excel.ChartSeries d’origine est un objet d’API, la `toJSON` méthode renvoie un objet JavaScript brut (typée en tant que `Excel.Interfaces.ChartSeriesData` <!-- -->) qui contient des copies superficielles de toutes les propriétés enfant chargé à partir de l’objet d’origine.
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method

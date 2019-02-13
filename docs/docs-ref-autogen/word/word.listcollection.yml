@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 3a84d629a0fb18a6d57cb24fa5a42732de53a302
-ms.sourcegitcommit: 2dcedf6deec4167dca476a42dad411e28cc92a97
+ms.openlocfilehash: a57a86b982189048a45a7fab297990e2e59c0585
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "29384383"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29978755"
 items:
 - uid: word.Word.ListCollection
   summary: >-
@@ -29,6 +29,8 @@ items:
   - word.Word.ListCollection.getItem
   - word.Word.ListCollection.items
   - word.Word.ListCollection.load
+  - word.Word.ListCollection.load_1
+  - word.Word.ListCollection.load_2
   - word.Word.ListCollection.toJSON
   - word.Word.ListCollection.track
   - word.Word.ListCollection.untrack
@@ -51,7 +53,7 @@ items:
 
     \[[Du jeu d’API : WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
   name: getById(id)
-  fullName: getById
+  fullName: getById(id)
   langs:
   - typeScript
   type: method
@@ -73,7 +75,7 @@ items:
 
     \[[Du jeu d’API : WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
   name: getByIdOrNullObject(id)
-  fullName: getByIdOrNullObject
+  fullName: getByIdOrNullObject(id)
   langs:
   - typeScript
   type: method
@@ -95,7 +97,7 @@ items:
 
     \[[Du jeu d’API : WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
   name: getFirst()
-  fullName: getFirst
+  fullName: getFirst()
   langs:
   - typeScript
   type: method
@@ -112,7 +114,7 @@ items:
 
     \[[Du jeu d’API : WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
   name: getFirstOrNullObject()
-  fullName: getFirstOrNullObject
+  fullName: getFirstOrNullObject()
   langs:
   - typeScript
   type: method
@@ -129,7 +131,7 @@ items:
 
     \[[Du jeu d’API : WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
   name: getItem(index)
-  fullName: getItem
+  fullName: getItem(index)
   langs:
   - typeScript
   type: method
@@ -162,29 +164,67 @@ items:
     Outre cette signature, cette méthode présente les signatures suivantes :
 
 
+    `load(option?: string | string[]): Word.ListCollection`-Où option est une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+
+
     `load(option?: { select?: string; expand?: string; }): Word.ListCollection`-Où option.select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options.expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
 
 
     `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Word.ListCollection`-Uniquement disponible sur les types de la collection. Il est similaire à la signature précédente. Option.Top Spécifie le nombre maximal d’éléments pouvant être inclus dans le résultat de la collection. Option.Skip Spécifie le nombre d’éléments qui doivent être ignoré et non inclus dans le résultat. Si option.top est spécifié, le jeu de résultats démarre après l’ignorer le nombre spécifié d’éléments.
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): Word.ListCollection;'
+    content: 'load(option?: Word.Interfaces.ListCollectionLoadOptions & Word.Interfaces.CollectionLoadOptions): Word.ListCollection;'
     return:
       type:
       - word.Word.ListCollection
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - Word.Interfaces.ListCollectionLoadOptions & Word.Interfaces.CollectionLoadOptions
+- uid: word.Word.ListCollection.load_1
+  summary: Files d’attente d’une commande pour charger les propriétés de l’objet spécifiées. Vous devez appeler `context.sync()` avant de lire les propriétés.
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Word.ListCollection;'
+    return:
+      type:
+      - word.Word.ListCollection
+      description: ''
+    parameters:
+    - id: propertyNames
       description: Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
       type:
       - string | string[]
+- uid: word.Word.ListCollection.load_2
+  name: load(option)
+  fullName: load(option)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: OfficeExtension.LoadOption): Word.ListCollection;'
+    return:
+      type:
+      - word.Word.ListCollection
+      description: ''
+    parameters:
+    - id: option
+      description: ''
+      type:
+      - office.OfficeExtension.LoadOption
 - uid: word.Word.ListCollection.toJSON
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method
@@ -197,7 +237,7 @@ items:
 - uid: word.Word.ListCollection.track
   summary: Suivre l’objet pour l’ajustement automatique selon entourant les modifications dans le document. Cet appel est une abréviation de context.trackedObjects.add(thisObject). Si vous utilisez cet objet dans les appels de « .sync » et en dehors de l’exécution séquentielle d’un lot de « .run » et obtenir une erreur « InvalidObjectPath » lors de la définition d’une propriété ou d’appeler une méthode sur l’objet, vous devez avoir ajouté l’objet à l’objet suivi collection lorsque l’objet a été créé tout d’abord.
   name: track()
-  fullName: track
+  fullName: track()
   langs:
   - typeScript
   type: method
@@ -210,7 +250,7 @@ items:
 - uid: word.Word.ListCollection.untrack
   summary: Version de la mémoire associée à cet objet, si elle a été précédemment suivi. Cet appel est l’abréviation de context.trackedObjects.remove(thisObject). Comportant de nombreux objets suivis ralentit l’application hôte, donc pensez à libérer les objets que vous ajoutez, une fois que vous avez terminé les utiliser. Vous devrez appeler « context.sync() » avant que la version de mémoire prenne effet.
   name: untrack()
-  fullName: untrack
+  fullName: untrack()
   langs:
   - typeScript
   type: method
