@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 869e3c39d93af5caaeac657a1defe921670f31dd
-ms.sourcegitcommit: a68606173477c7fb4069880eea941766c7d8c50d
+ms.openlocfilehash: dd76e08c238047430deddb0d38aa07fc0da016f1
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/01/2019
-ms.locfileid: "29704078"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29977796"
 items:
 - uid: outlook.Office.Location
   summary: >-
@@ -25,7 +25,11 @@ items:
   package: outlook
   children:
   - outlook.Office.Location.getAsync
+  - outlook.Office.Location.getAsync_1
   - outlook.Office.Location.setAsync
+  - outlook.Office.Location.setAsync_1
+  - outlook.Office.Location.setAsync_2
+  - outlook.Office.Location.setAsync_3
 - uid: outlook.Office.Location.getAsync
   summary: >-
     Obtient l’emplacement d’un rendez-vous.
@@ -43,8 +47,25 @@ items:
 
 
     `getAsync(callback: (result: Office.AsyncResult<string>) => void): void;`
+
+    #### <a name="examples"></a>Exemples
+
+
+    ```javascript
+
+    var userContext = { value : 1 };
+
+    Office.context.mailbox.item.location.getAsync( { context: userContext}, callback);
+
+
+    function callback(asyncResult) {
+        var context = asyncResult.context;
+        var location = asyncResult.value;
+    }
+
+    ```
   name: getAsync(options, callback)
-  fullName: getAsync
+  fullName: getAsync(options, callback)
   langs:
   - typeScript
   type: method
@@ -58,7 +79,38 @@ items:
     - id: options
       description: 'Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. asyncContext : les développeurs peuvent fournir n’importe quel objet qu’ils souhaitent accéder dans la méthode de rappel.'
       type:
-      - office.Office.AsyncContextOptions
+      - Office.AsyncContextOptions
+    - id: callback
+      description: >-
+        Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre de rappel est appelée avec un seul paramètre de type Office.AsyncResult.
+
+
+        \[Jeu d’API : boîte aux lettres 1.1\]
+      type:
+      - '(result: Office.AsyncResult<string>) => void'
+- uid: outlook.Office.Location.getAsync_1
+  summary: >-
+    Obtient l’emplacement d’un rendez-vous.
+
+
+    La méthode getAsync lance un appel asynchrone vers le serveur Exchange pour obtenir le lieu d’un rendez-vous. Le lieu du rendez-vous est fourni sous forme de chaîne dans la propriété asyncResult.value.
+  remarks: >-
+    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition</td></tr></table>
+  name: getAsync(callback)
+  fullName: getAsync(callback)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getAsync(callback: (result: Office.AsyncResult<string>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
     - id: callback
       description: >-
         Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre de rappel est appelée avec un seul paramètre de type Office.AsyncResult.
@@ -94,7 +146,7 @@ items:
 
     `setAsync(location: string, callback: (result: Office.AsyncResult<void>) => void): void;`
   name: setAsync(location, options, callback)
-  fullName: setAsync
+  fullName: setAsync(location, options, callback)
   langs:
   - typeScript
   type: method
@@ -112,7 +164,133 @@ items:
     - id: options
       description: 'Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. asyncContext : les développeurs peuvent fournir n’importe quel objet qu’ils souhaitent accéder dans la méthode de rappel.'
       type:
-      - office.Office.AsyncContextOptions
+      - Office.AsyncContextOptions
+    - id: callback
+      description: >-
+        Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre de rappel est appelée avec un seul paramètre de type Office.AsyncResult. Si l’échec de l’emplacement, l’AsyncResult.Error, propriété contient un code d’erreur.
+
+
+        \[Jeu d’API : boîte aux lettres 1.1\]
+      type:
+      - '(result: Office.AsyncResult<void>) => void'
+- uid: outlook.Office.Location.setAsync_1
+  summary: >-
+    Définit l’emplacement d’un rendez-vous.
+
+
+    La méthode setAsync lance un appel asynchrone vers le serveur Exchange pour définir le lieu d’un rendez-vous. La définition du lieu d’un rendez-vous remplace le lieu existant.
+  remarks: >-
+    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition</td></tr>
+
+
+    <tr><td>Erreurs</td><td>DataExceedsMaximumSize - le paramètre location est supérieure à 255 caractères.</td></tr></table>
+  name: setAsync(location)
+  fullName: setAsync(location)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'setAsync(location: string): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: location
+      description: >-
+        Emplacement du rendez-vous. La chaîne est limitée à 255 caractères.
+
+
+        \[Jeu d’API : boîte aux lettres 1.1\]
+      type:
+      - string
+- uid: outlook.Office.Location.setAsync_2
+  summary: >-
+    Définit l’emplacement d’un rendez-vous.
+
+
+    La méthode setAsync lance un appel asynchrone vers le serveur Exchange pour définir le lieu d’un rendez-vous. La définition du lieu d’un rendez-vous remplace le lieu existant.
+  remarks: >-
+    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition</td></tr>
+
+
+    <tr><td>Erreurs</td><td>DataExceedsMaximumSize - le paramètre location est supérieure à 255 caractères.</td></tr></table>
+  name: setAsync(location, options)
+  fullName: setAsync(location, options)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'setAsync(location: string, options: Office.AsyncContextOptions): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: location
+      description: Emplacement du rendez-vous. La chaîne est limitée à 255 caractères.
+      type:
+      - string
+    - id: options
+      description: >-
+        Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. asyncContext : les développeurs peuvent fournir n’importe quel objet qu’ils souhaitent accéder dans la méthode de rappel.
+
+
+        \[Jeu d’API : boîte aux lettres 1.1\]
+      type:
+      - Office.AsyncContextOptions
+- uid: outlook.Office.Location.setAsync_3
+  summary: >-
+    Définit l’emplacement d’un rendez-vous.
+
+
+    La méthode setAsync lance un appel asynchrone vers le serveur Exchange pour définir le lieu d’un rendez-vous. La définition du lieu d’un rendez-vous remplace le lieu existant.
+  remarks: >-
+    <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition</td></tr>
+
+
+    <tr><td>Erreurs</td><td>DataExceedsMaximumSize - le paramètre location est supérieure à 255 caractères.</td></tr></table>
+
+    ####Exemples
+
+
+    ```javascript
+
+    Office.context.mailbox.item.location.setAsync(
+        "Room 1",
+        function (asyncResult) {
+            if (asyncResult.status === "failed") {
+                console.log("Action failed with error: " + asyncResult.error.message);
+            }
+        }
+    );
+
+    ```
+  name: setAsync(location, callback)
+  fullName: setAsync(location, callback)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'setAsync(location: string, callback: (result: Office.AsyncResult<void>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: location
+      description: Emplacement du rendez-vous. La chaîne est limitée à 255 caractères.
+      type:
+      - string
     - id: callback
       description: >-
         Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre de rappel est appelée avec un seul paramètre de type Office.AsyncResult. Si l’échec de l’emplacement, l’AsyncResult.Error, propriété contient un code d’erreur.

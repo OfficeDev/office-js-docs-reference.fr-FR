@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: b319715caa7cc1a7e072e757d28f9a4233268846
-ms.sourcegitcommit: 2dcedf6deec4167dca476a42dad411e28cc92a97
+ms.openlocfilehash: 15c457d241de588b39996baf07b0b4be2e0c96ac
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "29385083"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29977747"
 items:
 - uid: onenote.OneNote.NoteTag
   summary: >-
@@ -24,6 +24,8 @@ items:
   - onenote.OneNote.NoteTag.context
   - onenote.OneNote.NoteTag.id
   - onenote.OneNote.NoteTag.load
+  - onenote.OneNote.NoteTag.load_1
+  - onenote.OneNote.NoteTag.load_2
   - onenote.OneNote.NoteTag.status
   - onenote.OneNote.NoteTag.toJSON
   - onenote.OneNote.NoteTag.track
@@ -63,26 +65,65 @@ items:
     Outre cette signature, cette méthode présente les signatures suivantes :
 
 
+    `load(option?: string | string[]): OneNote.NoteTag`-Où option est une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+
+
     `load(option?: { select?: string; expand?: string; }): OneNote.NoteTag`-Où option.select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options.expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
 
 
     `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.NoteTag`-Uniquement disponible sur les types de la collection. Il est similaire à la signature précédente. Option.Top Spécifie le nombre maximal d’éléments pouvant être inclus dans le résultat de la collection. Option.Skip Spécifie le nombre d’éléments qui doivent être ignoré et non inclus dans le résultat. Si option.top est spécifié, le jeu de résultats démarre après l’ignorer le nombre spécifié d’éléments.
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): OneNote.NoteTag;'
+    content: 'load(option?: OneNote.Interfaces.NoteTagLoadOptions): OneNote.NoteTag;'
     return:
       type:
       - onenote.OneNote.NoteTag
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - onenote.OneNote.Interfaces.NoteTagLoadOptions
+- uid: onenote.OneNote.NoteTag.load_1
+  summary: Files d’attente d’une commande pour charger les propriétés de l’objet spécifiées. Vous devez appeler `context.sync()` avant de lire les propriétés.
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): OneNote.NoteTag;'
+    return:
+      type:
+      - onenote.OneNote.NoteTag
+      description: ''
+    parameters:
+    - id: propertyNames
       description: Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
       type:
       - string | string[]
+- uid: onenote.OneNote.NoteTag.load_2
+  summary: Files d’attente d’une commande pour charger les propriétés de l’objet spécifiées. Vous devez appeler `context.sync()` avant de lire les propriétés.
+  name: load(propertyNamesAndPaths)
+  fullName: load(propertyNamesAndPaths)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): OneNote.NoteTag;'
+    return:
+      type:
+      - onenote.OneNote.NoteTag
+      description: ''
+    parameters:
+    - id: propertyNamesAndPaths
+      description: Où propertyNamesAndPaths.select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et propertyNamesAndPaths.expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
+      type:
+      - '{ select?: string; expand?: string; }'
 - uid: onenote.OneNote.NoteTag.status
   summary: >-
     Obtient l’état de l’objet NoteTag. En lecture seule.
@@ -102,7 +143,7 @@ items:
 - uid: onenote.OneNote.NoteTag.toJSON
   summary: Remplace le code JavaScript `toJSON()` méthode afin de fournir une sortie plus utile lorsqu’un objet API est passé à `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle le `toJSON` méthode de l’objet qui lui est passé.) Tandis que l’objet OneNote.NoteTag d’origine est un objet d’API, la `toJSON` méthode renvoie un objet JavaScript brut (typée en tant que `OneNote.Interfaces.NoteTagData` <!-- -->) qui contient des copies superficielles de toutes les propriétés enfant chargé à partir de l’objet d’origine.
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method
@@ -115,7 +156,7 @@ items:
 - uid: onenote.OneNote.NoteTag.track
   summary: Suivre l’objet pour l’ajustement automatique selon entourant les modifications dans le document. Cet appel est une abréviation de context.trackedObjects.add(thisObject). Si vous utilisez cet objet dans les appels de « .sync » et en dehors de l’exécution séquentielle d’un lot de « .run » et obtenir une erreur « InvalidObjectPath » lors de la définition d’une propriété ou d’appeler une méthode sur l’objet, vous devez avoir ajouté l’objet à l’objet suivi collection lorsque l’objet a été créé tout d’abord.
   name: track()
-  fullName: track
+  fullName: track()
   langs:
   - typeScript
   type: method
@@ -144,7 +185,7 @@ items:
 - uid: onenote.OneNote.NoteTag.untrack
   summary: Version de la mémoire associée à cet objet, si elle a été précédemment suivi. Cet appel est l’abréviation de context.trackedObjects.remove(thisObject). Comportant de nombreux objets suivis ralentit l’application hôte, donc pensez à libérer les objets que vous ajoutez, une fois que vous avez terminé les utiliser. Vous devrez appeler « context.sync() » avant que la version de mémoire prenne effet.
   name: untrack()
-  fullName: untrack
+  fullName: untrack()
   langs:
   - typeScript
   type: method

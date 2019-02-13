@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: a1aa872504f6ebf90bdbfdaa8f32a5baac275380
-ms.sourcegitcommit: a68606173477c7fb4069880eea941766c7d8c50d
+ms.openlocfilehash: 38a9c2cd1956b357f02defe146767fc59039b035
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/01/2019
-ms.locfileid: "29708631"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29977838"
 items:
 - uid: outlook.Office.EnhancedLocation
   summary: >-
@@ -22,18 +22,28 @@ items:
   package: outlook
   children:
   - outlook.Office.EnhancedLocation.addAsync
+  - outlook.Office.EnhancedLocation.addAsync_1
   - outlook.Office.EnhancedLocation.getAsync
+  - outlook.Office.EnhancedLocation.getAsync_1
   - outlook.Office.EnhancedLocation.removeAsync
+  - outlook.Office.EnhancedLocation.removeAsync_1
 - uid: outlook.Office.EnhancedLocation.addAsync
   summary: >-
     Ajoute à l’ensemble des emplacements associée au rendez-vous.
 
 
     \[[Du jeu d’API : aperçu de la boîte aux lettres](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: "<table> <tr> <td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td> <td>ReadWriteItem</td> </tr> <tr> <td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td> <td>Composition</td> </tr> <tr> <td>Erreurs</td> <td>InvalidFormatError - le format de l’objet de données spécifié n’est pas valid.</td> </tr> </table>\n\nOutre cette signature, cette méthode a également les signatures suivantes :\n\n`addAsync(locationIdentifiers: LocationIdentifier[], callback?: (result: Office.AsyncResultStatus) => void): void;`\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nvar locationDetails = [ \n    {\n        \"id\": \"Contoso\",\n        \"type\": Office.MailboxEnums.LocationType.Custom\n    }\n];\nOffice.context.mailbox.item.enhancedLocation.addAsync(locationDetails);\n```"
+  remarks: >-
+    <table> <tr> <td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td> <td>ReadWriteItem</td> </tr> <tr> <td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td> <td>Composition</td> </tr> <tr> <td>Erreurs</td> <td>InvalidFormatError - le format de l’objet de données spécifié n’est pas valid.</td> </tr> </table>
+
+
+    Outre cette signature, cette méthode a également les signatures suivantes :
+
+
+    `addAsync(locationIdentifiers: LocationIdentifier[], callback?: (result: Office.AsyncResultStatus) => void): void;`
   isPreview: true
   name: addAsync(locationIdentifiers, options, callback)
-  fullName: addAsync
+  fullName: addAsync(locationIdentifiers, options, callback)
   langs:
   - typeScript
   type: method
@@ -51,7 +61,52 @@ items:
     - id: options
       description: 'Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. asyncContext : les développeurs peuvent fournir n’importe quel objet qu’ils souhaitent accéder dans la méthode de rappel.'
       type:
-      - office.Office.AsyncContextOptions
+      - Office.AsyncContextOptions
+    - id: callback
+      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre de rappel est appelée avec un seul paramètre, asyncResult, qui est un objet Office.AsyncResult. Vérifier la `status` propriété d’asyncResult afin de déterminer si l’appel a réussi.
+      type:
+      - '(result: Office.AsyncResultStatus) => void'
+- uid: outlook.Office.EnhancedLocation.addAsync_1
+  summary: >-
+    Ajoute à l’ensemble des emplacements associée au rendez-vous.
+
+
+    \[[Du jeu d’API : aperçu de la boîte aux lettres](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table> <tr> <td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td> <td>ReadWriteItem</td> </tr> <tr> <td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td> <td>Composition</td> </tr> <tr> <td>Erreurs</td> <td>InvalidFormatError - le format de l’objet de données spécifié n’est pas valid.</td> </tr> </table>
+
+    ####Exemples
+
+
+    ```javascript
+
+    var locations = [
+        {
+            "id": "Contoso",
+            "type": Office.MailboxEnums.LocationType.Custom
+        }
+    ];
+
+    Office.context.mailbox.item.enhancedLocation.addAsync(locations);
+
+    ```
+  isPreview: true
+  name: addAsync(locationIdentifiers, callback)
+  fullName: addAsync(locationIdentifiers, callback)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'addAsync(locationIdentifiers: LocationIdentifier[], callback?: (result: Office.AsyncResultStatus) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: locationIdentifiers
+      description: Les emplacements à ajouter à la liste actuelle des emplacements.
+      type:
+      - LocationIdentifier[]
     - id: callback
       description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre de rappel est appelée avec un seul paramètre, asyncResult, qui est un objet Office.AsyncResult. Vérifier la `status` propriété d’asyncResult afin de déterminer si l’appel a réussi.
       type:
@@ -70,29 +125,9 @@ items:
 
 
     `getAsync(callback?: (result: Office.AsyncResult<LocationDetails[]>) => void): void;`
-
-    #### <a name="examples"></a>Exemples
-
-
-    ```javascript
-
-    Office.context.mailbox.item.enhancedLocation.getAsync(callbackFunction);
-
-
-    function callbackFunction(asyncResult) {
-        asyncResult.value.forEach(function (place) {
-            console.log("Display name: " + place.displayName);
-            console.log("Type: " + place.locationIdentifier.type);
-            if (place.locationIdentifier.type == Office.MailboxEnums.LocationType.Room) {
-                console.log("Email address: " + place.emailAddress);
-            }
-        });
-    }
-
-    ```
   isPreview: true
   name: getAsync(options, callback)
-  fullName: getAsync
+  fullName: getAsync(options, callback)
   langs:
   - typeScript
   type: method
@@ -106,7 +141,52 @@ items:
     - id: options
       description: 'Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. asyncContext : les développeurs peuvent fournir n’importe quel objet qu’ils souhaitent accéder dans la méthode de rappel.'
       type:
-      - office.Office.AsyncContextOptions
+      - Office.AsyncContextOptions
+    - id: callback
+      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre de rappel est appelée avec un seul paramètre, asyncResult, qui est un objet Office.AsyncResult.
+      type:
+      - '(result: Office.AsyncResult<LocationDetails[]>) => void'
+- uid: outlook.Office.EnhancedLocation.getAsync_1
+  summary: >-
+    Obtient l’ensemble des emplacements associée au rendez-vous.
+
+
+    \[[Du jeu d’API : aperçu de la boîte aux lettres](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table> <tr> <td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td> <td>ReadItem</td> </tr> <tr> <td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td> <td>Composition ou lecture</td> </tr> </table>
+
+    ####Exemples
+
+
+    ```javascript
+
+    Office.context.mailbox.item.enhancedLocation.getAsync(callbackFunction);
+
+
+    function callbackFunction(asyncResult) {
+        asyncResult.value.forEach(function (place) {
+            console.log("Display name: " + place.displayName);
+            console.log("Type: " + place.locationIdentifier.type);
+            if (place.locationIdentifier.type === Office.MailboxEnums.LocationType.Room) {
+                console.log("Email address: " + place.emailAddress);
+            }
+        });
+    }
+
+    ```
+  isPreview: true
+  name: getAsync(callback)
+  fullName: getAsync(callback)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getAsync(callback?: (result: Office.AsyncResult<LocationDetails[]>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
     - id: callback
       description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre de rappel est appelée avec un seul paramètre, asyncResult, qui est un objet Office.AsyncResult.
       type:
@@ -128,25 +208,9 @@ items:
 
 
     `removeAsync(locationIdentifiers: LocationIdentifier[], callback?: (result: Office.AsyncResultStatus) => void): void;`
-
-    #### <a name="examples"></a>Exemples
-
-
-    ```javascript
-
-    Office.context.mailbox.item.enhancedLocation.getAsync(callbackFunction);
-
-
-    function callbackFunction(asyncResult) {
-        asyncResult.value.forEach(function (currentValue) {
-            Office.context.mailbox.item.enhancedLocation.removeAsync([currentValue.locationIdentifier]);
-        });
-    }
-
-    ```
   isPreview: true
   name: removeAsync(locationIdentifiers, options, callback)
-  fullName: removeAsync
+  fullName: removeAsync(locationIdentifiers, options, callback)
   langs:
   - typeScript
   type: method
@@ -164,7 +228,55 @@ items:
     - id: options
       description: 'Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. asyncContext : les développeurs peuvent fournir n’importe quel objet qu’ils souhaitent accéder dans la méthode de rappel.'
       type:
-      - office.Office.AsyncContextOptions
+      - Office.AsyncContextOptions
+    - id: callback
+      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre de rappel est appelée avec un seul paramètre, asyncResult, qui est un objet Office.AsyncResult. Vérifier la `status` propriété d’asyncResult afin de déterminer si l’appel a réussi.
+      type:
+      - '(result: Office.AsyncResultStatus) => void'
+- uid: outlook.Office.EnhancedLocation.removeAsync_1
+  summary: >-
+    Supprime l’ensemble des emplacements associée au rendez-vous.
+
+
+    S’il existe plusieurs emplacements portant le même nom, tous les emplacements correspondants seront supprimées même si seul a été spécifié dans locationIdentifiers.
+
+
+    \[[Du jeu d’API : aperçu de la boîte aux lettres](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table> <tr> <td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td> <td>ReadWriteItem</td> </tr> <tr> <td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td> <td>Composition</td> </tr> </table>
+
+    ####Exemples
+
+
+    ```javascript
+
+    Office.context.mailbox.item.enhancedLocation.getAsync(callbackFunction);
+
+
+    function callbackFunction(asyncResult) {
+        asyncResult.value.forEach(function (currentValue) {
+            Office.context.mailbox.item.enhancedLocation.removeAsync([currentValue.locationIdentifier]);
+        });
+    }
+
+    ```
+  isPreview: true
+  name: removeAsync(locationIdentifiers, callback)
+  fullName: removeAsync(locationIdentifiers, callback)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'removeAsync(locationIdentifiers: LocationIdentifier[], callback?: (result: Office.AsyncResultStatus) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: locationIdentifiers
+      description: Les emplacements à supprimer de la liste actuelle des emplacements.
+      type:
+      - LocationIdentifier[]
     - id: callback
       description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre de rappel est appelée avec un seul paramètre, asyncResult, qui est un objet Office.AsyncResult. Vérifier la `status` propriété d’asyncResult afin de déterminer si l’appel a réussi.
       type:
