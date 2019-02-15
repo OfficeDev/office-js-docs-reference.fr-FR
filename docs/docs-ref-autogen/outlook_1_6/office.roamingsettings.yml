@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 6e1e71cb06d37772368f533a99560d2291e2ed42
-ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
+ms.openlocfilehash: c5ff06eebd293572a20eefd3845e67e89cbc52fc
+ms.sourcegitcommit: b0b614f5315ab2e5c1e0ea51c687498f87684a07
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/13/2019
-ms.locfileid: "29975927"
+ms.lasthandoff: 02/15/2019
+ms.locfileid: "30056321"
 items:
 - uid: Outlook_1_6.Office.RoamingSettings
   summary: >-
@@ -20,30 +20,30 @@ items:
     L’objet RoamingSettings est accessible via la propriété roamingSettings dans l’espace de noms Office.context.
 
 
-    **Important**: RoamingSettings de l’objet est initialisé à partir du stockage persistant uniquement lorsque le complément est chargé. Des volets Office, cela signifie qu’elle est initialisée uniquement lorsque le volet Office s’ouvre. Si le volet Office navigue vers une autre page ou recharge la page actuelle, l’objet en mémoire est réinitialisée à ses valeurs initiales, même si votre complément a modifications rendues persistantes. Les modifications persistantes ne sera pas disponibles jusqu'à ce que le volet Office est fermé et rouverte.
+    **Important**: l'objet RoamingSettings est initialisé à partir du stockage persistant uniquement lorsque le complément est chargé pour la première fois. Pour les volets Office, cela signifie qu'il n'est initialisé que lors de la première ouverture du volet des tâches. Si le volet Office navigue vers une autre page ou recharge la page active, l'objet en mémoire est réinitialisé à ses valeurs initiales, même si votre complément a conservé des modifications. Les modifications persistantes ne sont pas disponibles tant que le volet Office n'est pas fermé et rouvert.
 
 
-    \[[Du jeu d’API : boîte aux lettres 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Ensemble d'API: boîte aux lettres 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
     <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>Restreinte</td></tr>
 
 
     <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition ou lecture</td></tr></table>
 
-    ####Exemples
+    ####Voici
 
 
     ```javascript
 
-    // Get the current value of the 'myKey' setting
+    // Get the current value of the 'myKey' setting.
 
     var value = Office.context.roamingSettings.get('myKey');
 
-    // Update the value of the 'myKey' setting
+    // Update the value of the 'myKey' setting.
 
     Office.context.roamingSettings.set('myKey', 'Hello World!');
 
-    // Persist the change
+    // Persist the change.
 
     Office.context.roamingSettings.saveAsync();
 
@@ -64,7 +64,7 @@ items:
     Récupère le paramètre spécifié.
 
 
-    \[[Du jeu d’API : boîte aux lettres 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Ensemble d'API: boîte aux lettres 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
     <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>Restreinte</td></tr>
 
@@ -80,7 +80,7 @@ items:
     return:
       type:
       - any
-      description: 'Type : String \| numéro \| Boolean \| objet \| tableau'
+      description: "Type: numéro \\| \\| de chaîne \\| tableau \\| d'objets booléen"
     parameters:
     - id: name
       description: Nom respectant l’emploi des majuscules et minuscules pour le paramètre à récupérer.
@@ -91,7 +91,7 @@ items:
     Supprime le paramètre spécifié
 
 
-    \[[Du jeu d’API : boîte aux lettres 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Ensemble d'API: boîte aux lettres 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
     <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>Restreinte</td></tr>
 
@@ -121,7 +121,7 @@ items:
     Tous les paramètres précédemment enregistrés par un complément sont chargés lorsqu’il est initialisé. Ainsi, pendant la durée de la session, il vous suffit d’employer les méthodes set et get pour utiliser la copie en mémoire du conteneur de propriétés de paramètres. Pour conserver les paramètres et faire en sorte qu’ils soient disponibles lors de la prochaine utilisation du complément, utilisez la méthode saveAsync.
 
 
-    \[[Du jeu d’API : boîte aux lettres 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Ensemble d'API: boîte aux lettres 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
     <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>Restreinte</td></tr>
 
@@ -140,7 +140,7 @@ items:
       description: ''
     parameters:
     - id: callback
-      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre de rappel est appelée avec un seul paramètre de type Office.AsyncResult.
+      description: Facultatif. Une fois la méthode exécutée, la fonction transmise au paramètre callback est appelée avec un seul paramètre de type Office. AsyncResult.
       type:
       - '(result: Office.AsyncResult<void>) => void'
 - uid: Outlook_1_6.Office.RoamingSettings.set
@@ -151,13 +151,13 @@ items:
     La méthode set permet de créer un paramètre du nom spécifié s’il n’existe pas déjà, ou de définir un paramètre existant du nom spécifié. La valeur est stockée dans le document sous forme de représentation JSON sérialisée de son type de données.
 
 
-    Un maximum de 32 Ko est disponible pour les paramètres de chaque complément.
+    Un maximum de 32KO est disponible pour les paramètres de chaque complément.
 
 
     Les modifications apportées aux paramètres à l’aide de la fonction set ne sont pas enregistrées sur le serveur tant que la fonction saveAsync n’est pas appelée.
 
 
-    \[[Du jeu d’API : boîte aux lettres 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Ensemble d'API: boîte aux lettres 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
     <table><tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>Restreinte</td></tr>
 
