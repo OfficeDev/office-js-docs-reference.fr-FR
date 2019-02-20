@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: f1bd1e1646577de6fbcdebf80d80b6e538527f6b
-ms.sourcegitcommit: b0b614f5315ab2e5c1e0ea51c687498f87684a07
+ms.openlocfilehash: c27c09caeb013a3ebe063bcf0dda176668541ec2
+ms.sourcegitcommit: e9bfba6ec767e9d34fd1cf7b38c30f689617900a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/15/2019
-ms.locfileid: "30055912"
+ms.lasthandoff: 02/20/2019
+ms.locfileid: "30095400"
 items:
 - uid: outlook.Office.MessageCompose
   summary: >-
@@ -617,6 +617,34 @@ items:
 
 
     \[[Ensemble d'API: aperçu de boîte aux lettres](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: <table> <tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition de message</td></tr> </table>
+  isPreview: true
+  name: getAttachmentsAsync(options, callback)
+  fullName: getAttachmentsAsync(options, callback)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getAttachmentsAsync(options?: Office.AsyncContextOptions, callback?: (result: Office.AsyncResult<AttachmentDetails[]>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: options
+      description: "Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. asyncContext: les développeurs peuvent fournir n'importe quel objet auquel ils souhaitent accéder dans la méthode de rappel."
+      type:
+      - Office.AsyncContextOptions
+    - id: callback
+      description: Facultatif. Une fois la méthode exécutée, la fonction transmise au paramètre callback est appelée avec un seul paramètre de type Office. AsyncResult. En cas d'échec de l'appel, la propriété asyncResult. Error contient le code d'erreur et la raison de l'échec.
+      type:
+      - '(result: Office.AsyncResult<AttachmentDetails[]>) => void'
+- uid: outlook.Office.MessageCompose.getAttachmentsAsync_1
+  summary: >-
+    Permet d’obtenir les pièces jointes de l’élément sous forme de tableau.
+
+
+    \[[Ensemble d'API: aperçu de boîte aux lettres](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
     <table> <tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition de message</td></tr> </table>
 
@@ -648,34 +676,6 @@ items:
     }
 
     ```
-  isPreview: true
-  name: getAttachmentsAsync(options, callback)
-  fullName: getAttachmentsAsync(options, callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getAttachmentsAsync(options?: Office.AsyncContextOptions, callback?: (result: Office.AsyncResult<AttachmentDetails[]>) => void): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: options
-      description: "Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. asyncContext: les développeurs peuvent fournir n'importe quel objet auquel ils souhaitent accéder dans la méthode de rappel."
-      type:
-      - Office.AsyncContextOptions
-    - id: callback
-      description: Facultatif. Une fois la méthode exécutée, la fonction transmise au paramètre callback est appelée avec un seul paramètre de type Office. AsyncResult. En cas d'échec de l'appel, la propriété asyncResult. Error contient le code d'erreur et la raison de l'échec.
-      type:
-      - '(result: Office.AsyncResult<AttachmentDetails[]>) => void'
-- uid: outlook.Office.MessageCompose.getAttachmentsAsync_1
-  summary: >-
-    Permet d’obtenir les pièces jointes de l’élément sous forme de tableau.
-
-
-    \[[Ensemble d'API: aperçu de boîte aux lettres](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: <table> <tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition de message</td></tr> </table>
   isPreview: true
   name: getAttachmentsAsync(callback)
   fullName: getAttachmentsAsync(callback)
@@ -816,7 +816,34 @@ items:
 
 
     \[[Ensemble d'API: boîte aux lettres 1,2](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: <table> <tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr> <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition de message</td></tr> </table>
+  remarks: >-
+    <table> <tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr> <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition de message</td></tr> </table>
+
+    ####Voici
+
+
+    ```javascript
+
+    // Get selected data.
+
+    Office.initialize = function () {
+        Office.context.mailbox.item.getSelectedDataAsync(Office.CoercionType.Text, {}, getCallback);
+    };
+
+
+    function getCallback(asyncResult) {
+        var text = asyncResult.value.data;
+        var prop = asyncResult.value.sourceProperty;
+
+        Office.context.mailbox.item.setSelectedDataAsync('Setting ' + prop + ': ' + text, {}, setCallback);
+    }
+
+
+    function setCallback(asyncResult) {
+        // Check for errors.
+    }
+
+    ```
   name: getSelectedDataAsync(coercionType, options, callback)
   fullName: getSelectedDataAsync(coercionType, options, callback)
   langs:
@@ -853,34 +880,7 @@ items:
 
 
     \[[Ensemble d'API: boîte aux lettres 1,2](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: >-
-    <table> <tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr> <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition de message</td></tr> </table>
-
-    ####Voici
-
-
-    ```javascript
-
-    // Get selected data.
-
-    Office.initialize = function () {
-        Office.context.mailbox.item.getSelectedDataAsync(Office.CoercionType.Text, {}, getCallback);
-    };
-
-
-    function getCallback(asyncResult) {
-        var text = asyncResult.value.data;
-        var prop = asyncResult.value.sourceProperty;
-
-        Office.context.mailbox.item.setSelectedDataAsync('Setting ' + prop + ': ' + text, {}, setCallback);
-    }
-
-
-    function setCallback(asyncResult) {
-        // Check for errors.
-    }
-
-    ```
+  remarks: <table> <tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr> <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition de message</td></tr> </table>
   name: getSelectedDataAsync(coercionType, callback)
   fullName: getSelectedDataAsync(coercionType, callback)
   langs:
@@ -1267,7 +1267,35 @@ items:
 
 
     \[[Ensemble d'API: boîte aux lettres 1,3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: <table> <tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr> <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition de message</td></tr> <tr><td>Erreurs</td><td>InvalidAttachmentId-l'identificateur de pièce jointe n'existe pas.</td></tr> </table>
+  remarks: >-
+    <table> <tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr> <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition de message</td></tr> <tr><td>Erreurs</td><td>InvalidAttachmentId-l'identificateur de pièce jointe n'existe pas.</td></tr> </table>
+
+    ####Voici
+
+
+    ```javascript
+
+    Office.context.mailbox.item.saveAsync(
+        function callback(result) {
+            // Process the result.
+        });
+
+    // The following is an example of the
+
+    // `result` parameter passed to the
+
+    // callback function. The `value`
+
+    // property contains the item ID of
+
+    // the item.
+
+    {
+        "value": "AAMkADI5...AAA=",
+        "status": "succeeded"
+    }
+
+    ```
   name: saveAsync(callback)
   fullName: saveAsync(callback)
   langs:
@@ -1293,17 +1321,7 @@ items:
 
 
     \[[Ensemble d'API: boîte aux lettres 1,2](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: >-
-    <table> <tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr> <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition de message</td></tr> <tr><td>Erreurs</td><td>InvalidAttachmentId-l'identificateur de pièce jointe n'existe pas.</td></tr> </table>
-
-    ####Voici
-
-
-    ```javascript
-
-    Office.context.mailbox.item.setSelectedDataAsync("Hello World!");
-
-    ```
+  remarks: <table> <tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr> <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition de message</td></tr> <tr><td>Erreurs</td><td>InvalidAttachmentId-l'identificateur de pièce jointe n'existe pas.</td></tr> </table>
   name: setSelectedDataAsync(data, options, callback)
   fullName: setSelectedDataAsync(data, options, callback)
   langs:
@@ -1337,7 +1355,17 @@ items:
 
 
     \[[Ensemble d'API: boîte aux lettres 1,2](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: <table> <tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr> <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition de message</td></tr> <tr><td>Erreurs</td><td>InvalidAttachmentId-l'identificateur de pièce jointe n'existe pas.</td></tr> </table>
+  remarks: >-
+    <table> <tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr> <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition de message</td></tr> <tr><td>Erreurs</td><td>InvalidAttachmentId-l'identificateur de pièce jointe n'existe pas.</td></tr> </table>
+
+    ####Voici
+
+
+    ```javascript
+
+    Office.context.mailbox.item.setSelectedDataAsync("Hello World!");
+
+    ```
   name: setSelectedDataAsync(data)
   fullName: setSelectedDataAsync(data)
   langs:
@@ -1363,17 +1391,7 @@ items:
 
 
     \[[Ensemble d'API: boîte aux lettres 1,2](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: >-
-    <table> <tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr> <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition de message</td></tr> <tr><td>Erreurs</td><td>InvalidAttachmentId-l'identificateur de pièce jointe n'existe pas.</td></tr> </table>
-
-    ####Voici
-
-
-    ```javascript
-
-    Office.context.mailbox.item.setSelectedDataAsync("<b>Hello World!</b>", { coercionType : "html" });
-
-    ```
+  remarks: <table> <tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr> <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition de message</td></tr> <tr><td>Erreurs</td><td>InvalidAttachmentId-l'identificateur de pièce jointe n'existe pas.</td></tr> </table>
   name: setSelectedDataAsync(data, callback)
   fullName: setSelectedDataAsync(data, callback)
   langs:

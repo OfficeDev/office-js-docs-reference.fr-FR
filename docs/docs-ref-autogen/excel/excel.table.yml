@@ -1,17 +1,17 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 5bd5b055e39908e3c3fdd513f2d48f9665544f8a
-ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
+ms.openlocfilehash: df4e5fcfaca35523f92f0da420b16f2d8eb8e7cf
+ms.sourcegitcommit: e9bfba6ec767e9d34fd1cf7b38c30f689617900a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/13/2019
-ms.locfileid: "29978384"
+ms.lasthandoff: 02/20/2019
+ms.locfileid: "30095764"
 items:
 - uid: excel.Excel.Table
   summary: >-
     Représente un tableau Excel.
 
 
-    \[[Du jeu d’API : ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: Excel.Table
   fullName: Excel.Table
   langs:
@@ -21,7 +21,9 @@ items:
   - office.OfficeExtension.ClientObject
   package: excel
   children:
+  - excel.Excel.Table.autoFilter
   - excel.Excel.Table.clearFilters
+  - excel.Excel.Table.clearStyle
   - excel.Excel.Table.columns
   - excel.Excel.Table.context
   - excel.Excel.Table.convertToRange
@@ -39,6 +41,7 @@ items:
   - excel.Excel.Table.load_2
   - excel.Excel.Table.name
   - excel.Excel.Table.onChanged
+  - excel.Excel.Table.onFiltered
   - excel.Excel.Table.onSelectionChanged
   - excel.Excel.Table.reapplyFilters
   - excel.Excel.Table.rows
@@ -53,12 +56,29 @@ items:
   - excel.Excel.Table.style
   - excel.Excel.Table.toJSON
   - excel.Excel.Table.worksheet
+- uid: excel.Excel.Table.autoFilter
+  summary: >-
+    Représente l'objet autoFilter de la table. En lecture seule.
+
+
+    \[[Ensemble d'API: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: autoFilter
+  fullName: autoFilter
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly autoFilter: Excel.AutoFilter;'
+    return:
+      type:
+      - excel.Excel.AutoFilter
 - uid: excel.Excel.Table.clearFilters
   summary: >-
     Supprime tous les filtres appliqués actuellement sur le tableau.
 
 
-    \[[Du jeu d’API : ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d'API: ExcelApi 1,2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: clearFilters()
   fullName: clearFilters()
   langs:
@@ -70,12 +90,30 @@ items:
       type:
       - void
       description: ''
+- uid: excel.Excel.Table.clearStyle
+  summary: >-
+    Modifie le tableau de façon à utiliser le style de tableau par défaut.
+
+
+    \[[Ensemble d'API: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: clearStyle()
+  fullName: clearStyle()
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'clearStyle(): void;'
+    return:
+      type:
+      - void
+      description: ''
 - uid: excel.Excel.Table.columns
   summary: >-
     Représente une collection de toutes les colonnes du tableau. En lecture seule.
 
 
-    \[[Du jeu d’API : ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: columns
   fullName: columns
   langs:
@@ -87,7 +125,7 @@ items:
       type:
       - excel.Excel.TableColumnCollection
 - uid: excel.Excel.Table.context
-  summary: Contexte de la requête associé à l’objet. Il connecte processus du complément au processus de l’application hôte Office.
+  summary: Contexte de demande associé à l'objet. Cette opération connecte le processus du complément au processus de l'application hôte Office.
   name: context
   fullName: context
   langs:
@@ -103,7 +141,7 @@ items:
     Convertit le tableau en plage normale de cellules. Toutes les données sont conservées.
 
 
-    \[[Du jeu d’API : ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d'API: ExcelApi 1,2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: convertToRange()
   fullName: convertToRange()
   langs:
@@ -114,13 +152,13 @@ items:
     return:
       type:
       - excel.Excel.Range
-      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nExcel.run(function (ctx) { \n    var tableName = 'Table1';\n    var table = ctx.workbook.tables.getItem(tableName);\n    table.convertToRange();\n    return ctx.sync(); \n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+      description: "\n#### <a name=\"examples\"></a>範例\n\n```javascript\nExcel.run(function (ctx) { \n    var tableName = 'Table1';\n    var table = ctx.workbook.tables.getItem(tableName);\n    table.convertToRange();\n    return ctx.sync(); \n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
 - uid: excel.Excel.Table.delete
   summary: >-
     Supprime le tableau.
 
 
-    \[[Du jeu d’API : ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: delete()
   fullName: delete()
   langs:
@@ -131,13 +169,13 @@ items:
     return:
       type:
       - void
-      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nExcel.run(function (ctx) { \n    var tableName = 'Table1';\n    var table = ctx.workbook.tables.getItem(tableName);\n    table.delete();\n    return ctx.sync(); \n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+      description: "\n#### <a name=\"examples\"></a>範例\n\n```javascript\nExcel.run(function (ctx) { \n    var tableName = 'Table1';\n    var table = ctx.workbook.tables.getItem(tableName);\n    table.delete();\n    return ctx.sync(); \n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
 - uid: excel.Excel.Table.getDataBodyRange
   summary: >-
     Obtient l’objet de plage associé au corps de données du tableau.
 
 
-    \[[Du jeu d’API : ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getDataBodyRange()
   fullName: getDataBodyRange()
   langs:
@@ -148,13 +186,13 @@ items:
     return:
       type:
       - excel.Excel.Range
-      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nExcel.run(function (ctx) { \n    var tableName = 'Table1';\n    var table = ctx.workbook.tables.getItem(tableName);\n    var tableDataRange = table.getDataBodyRange();\n    tableDataRange.load('address')\n    return ctx.sync().then(function() {\n            console.log(tableDataRange.address);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+      description: "\n#### <a name=\"examples\"></a>範例\n\n```javascript\nExcel.run(function (ctx) { \n    var tableName = 'Table1';\n    var table = ctx.workbook.tables.getItem(tableName);\n    var tableDataRange = table.getDataBodyRange();\n    tableDataRange.load('address')\n    return ctx.sync().then(function() {\n            console.log(tableDataRange.address);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
 - uid: excel.Excel.Table.getHeaderRowRange
   summary: >-
     Obtient l’objet de plage associé à la ligne d’en-tête du tableau.
 
 
-    \[[Du jeu d’API : ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getHeaderRowRange()
   fullName: getHeaderRowRange()
   langs:
@@ -165,13 +203,13 @@ items:
     return:
       type:
       - excel.Excel.Range
-      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nExcel.run(function (ctx) { \n    var tableName = 'Table1';\n    var table = ctx.workbook.tables.getItem(tableName);\n    var tableHeaderRange = table.getHeaderRowRange();\n    tableHeaderRange.load('address');\n    return ctx.sync().then(function() {\n        console.log(tableHeaderRange.address);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+      description: "\n#### <a name=\"examples\"></a>範例\n\n```javascript\nExcel.run(function (ctx) { \n    var tableName = 'Table1';\n    var table = ctx.workbook.tables.getItem(tableName);\n    var tableHeaderRange = table.getHeaderRowRange();\n    tableHeaderRange.load('address');\n    return ctx.sync().then(function() {\n        console.log(tableHeaderRange.address);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
 - uid: excel.Excel.Table.getRange
   summary: >-
     Renvoie l’objet de plage associé à l’intégralité du tableau.
 
 
-    \[[Du jeu d’API : ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getRange()
   fullName: getRange()
   langs:
@@ -182,13 +220,13 @@ items:
     return:
       type:
       - excel.Excel.Range
-      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nExcel.run(function (ctx) { \n    var tableName = 'Table1';\n    var table = ctx.workbook.tables.getItem(tableName);\n    var tableRange = table.getRange();\n    tableRange.load('address');    \n    return ctx.sync().then(function() {\n            console.log(tableRange.address);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+      description: "\n#### <a name=\"examples\"></a>範例\n\n```javascript\nExcel.run(function (ctx) { \n    var tableName = 'Table1';\n    var table = ctx.workbook.tables.getItem(tableName);\n    var tableRange = table.getRange();\n    tableRange.load('address');    \n    return ctx.sync().then(function() {\n            console.log(tableRange.address);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
 - uid: excel.Excel.Table.getTotalRowRange
   summary: >-
     Renvoie l’objet de plage associé à la ligne de total du tableau.
 
 
-    \[[Du jeu d’API : ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getTotalRowRange()
   fullName: getTotalRowRange()
   langs:
@@ -199,13 +237,13 @@ items:
     return:
       type:
       - excel.Excel.Range
-      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nExcel.run(function (ctx) { \n    var tableName = 'Table1';\n    var table = ctx.workbook.tables.getItem(tableName);\n    var tableTotalsRange = table.getTotalRowRange();\n    tableTotalsRange.load('address');    \n    return ctx.sync().then(function() {\n            console.log(tableTotalsRange.address);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+      description: "\n#### <a name=\"examples\"></a>範例\n\n```javascript\nExcel.run(function (ctx) { \n    var tableName = 'Table1';\n    var table = ctx.workbook.tables.getItem(tableName);\n    var tableTotalsRange = table.getTotalRowRange();\n    tableTotalsRange.load('address');    \n    return ctx.sync().then(function() {\n            console.log(tableTotalsRange.address);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
 - uid: excel.Excel.Table.highlightFirstColumn
   summary: >-
     Indique si la première colonne contient une mise en forme spéciale.
 
 
-    \[[Du jeu d’API : ExcelApi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d'API: ExcelApi 1,3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: highlightFirstColumn
   fullName: highlightFirstColumn
   langs:
@@ -221,7 +259,7 @@ items:
     Indique si la dernière colonne contient une mise en forme spéciale.
 
 
-    \[[Du jeu d’API : ExcelApi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d'API: ExcelApi 1,3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: highlightLastColumn
   fullName: highlightLastColumn
   langs:
@@ -237,7 +275,7 @@ items:
     Renvoie une valeur qui identifie le tableau dans un classeur donné. La valeur de l’identificateur reste identique, même lorsque le tableau est renommé. En lecture seule.
 
 
-    \[[Du jeu d’API : ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: id
   fullName: id
   langs:
@@ -250,10 +288,10 @@ items:
       - string
 - uid: excel.Excel.Table.legacyId
   summary: >-
-    Renvoie un identificateur numérique.
+    Renvoie un ID numérique.
 
 
-    \[[Du jeu d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d'API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: legacyId
   fullName: legacyId
   langs:
@@ -265,18 +303,18 @@ items:
       type:
       - string
 - uid: excel.Excel.Table.load
-  summary: Files d’attente d’une commande pour charger les propriétés de l’objet spécifiées. Vous devez appeler « context.sync() » avant de lire les propriétés.
+  summary: Met en file d'attente une commande pour charger les propriétés spécifiées de l'objet. Vous devez appeler «Context. Sync ()» avant de lire les propriétés.
   remarks: >-
-    Outre cette signature, cette méthode présente les signatures suivantes :
+    En plus de cette signature, cette méthode possède les signatures suivantes:
 
 
-    `load(option?: string | string[]): Excel.Table`-Où option est une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+    `load(option?: string | string[]): Excel.Table`-WHERE option est une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
 
 
-    `load(option?: { select?: string; expand?: string; }): Excel.Table`-Où option.select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options.expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
+    `load(option?: { select?: string; expand?: string; }): Excel.Table`Option-WHERE option. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
 
 
-    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Table`-Uniquement disponible sur les types de la collection. Il est similaire à la signature précédente. Option.Top Spécifie le nombre maximal d’éléments pouvant être inclus dans le résultat de la collection. Option.Skip Spécifie le nombre d’éléments qui doivent être ignoré et non inclus dans le résultat. Si option.top est spécifié, le jeu de résultats démarre après l’ignorer le nombre spécifié d’éléments.
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Table`-Uniquement disponible sur les types de collection. Elle est similaire à la signature précédente. Option. Top indique le nombre maximal d'éléments de collection qui peuvent être inclus dans le résultat. Option. Skip indique le nombre d'éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat. Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d'éléments.
   name: load(option)
   fullName: load(option)
   langs:
@@ -294,7 +332,7 @@ items:
       type:
       - excel.Excel.Interfaces.TableLoadOptions
 - uid: excel.Excel.Table.load_1
-  summary: Files d’attente d’une commande pour charger les propriétés de l’objet spécifiées. Vous devez appeler `context.sync()` avant de lire les propriétés.
+  summary: Met en file d'attente une commande pour charger les propriétés spécifiées de l'objet. Vous devez appeler `context.sync()` avant de lire les propriétés.
   name: load(propertyNames)
   fullName: load(propertyNames)
   langs:
@@ -305,14 +343,14 @@ items:
     return:
       type:
       - excel.Excel.Table
-      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\n// Get a table by name. \nExcel.run(function (ctx) { \n    var tableName = 'Table1';\n    var table = ctx.workbook.tables.getItem(tableName);\n    table.load('index')\n    return ctx.sync().then(function() {\n            console.log(table.index);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\n// Get a table by index.\nExcel.run(function (ctx) { \n    var index = 0;\n    var table = ctx.workbook.tables.getItemAt(0);\n    table.load('id')\n    return ctx.sync().then(function() {\n            console.log(table.id);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\n// Set table style. \nExcel.run(function (ctx) { \n    var tableName = 'Table1';\n    var table = ctx.workbook.tables.getItem(tableName);\n    table.name = 'Table1-Renamed';\n    table.showTotals = false;\n    table.style = 'TableStyleMedium2';\n    table.load('tableStyle');\n    return ctx.sync().then(function() {\n            console.log(table.style);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+      description: "\n#### <a name=\"examples\"></a>範例\n\n```javascript\n// Get a table by name. \nExcel.run(function (ctx) { \n    var tableName = 'Table1';\n    var table = ctx.workbook.tables.getItem(tableName);\n    table.load('index')\n    return ctx.sync().then(function() {\n            console.log(table.index);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\n// Get a table by index.\nExcel.run(function (ctx) { \n    var index = 0;\n    var table = ctx.workbook.tables.getItemAt(0);\n    table.load('id')\n    return ctx.sync().then(function() {\n            console.log(table.id);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\n// Set table style. \nExcel.run(function (ctx) { \n    var tableName = 'Table1';\n    var table = ctx.workbook.tables.getItem(tableName);\n    table.name = 'Table1-Renamed';\n    table.showTotals = false;\n    table.style = 'TableStyleMedium2';\n    table.load('tableStyle');\n    return ctx.sync().then(function() {\n            console.log(table.style);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
     parameters:
     - id: propertyNames
       description: Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
       type:
       - string | string[]
 - uid: excel.Excel.Table.load_2
-  summary: Files d’attente d’une commande pour charger les propriétés de l’objet spécifiées. Vous devez appeler `context.sync()` avant de lire les propriétés.
+  summary: Met en file d'attente une commande pour charger les propriétés spécifiées de l'objet. Vous devez appeler `context.sync()` avant de lire les propriétés.
   name: load(propertyNamesAndPaths)
   fullName: load(propertyNamesAndPaths)
   langs:
@@ -326,7 +364,7 @@ items:
       description: ''
     parameters:
     - id: propertyNamesAndPaths
-      description: Où propertyNamesAndPaths.select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et propertyNamesAndPaths.expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
+      description: Où propertyNamesAndPaths. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et propertyNamesAndPaths. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
       type:
       - '{ select?: string; expand?: string; }'
 - uid: excel.Excel.Table.name
@@ -334,7 +372,7 @@ items:
     Nom du tableau.
 
 
-    \[[Du jeu d’API : ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: name
   fullName: name
   langs:
@@ -347,10 +385,10 @@ items:
       - string
 - uid: excel.Excel.Table.onChanged
   summary: >-
-    Se produit lorsque des données dans les cellules modifiées dans une table spécifique.
+    SurVient lorsque les données des cellules changent sur une table spécifique.
 
 
-    \[[Du jeu d’API : ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d'API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: onChanged
   fullName: onChanged
   langs:
@@ -361,13 +399,30 @@ items:
     return:
       type:
       - OfficeExtension.EventHandlers<Excel.TableChangedEventArgs>
-      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\nawait Excel.run(async (context) => {\n    let table = context.workbook.tables.getItemAt(0);\n    table.onChanged.add(onChange);\n\n    await context.sync();\n    console.log(\"A handler has been registered for the onChanged event\");\n});\n```"
+      description: "\n#### <a name=\"examples\"></a>範例\n\n```typescript\nawait Excel.run(async (context) => {\n    let table = context.workbook.tables.getItemAt(0);\n    table.onChanged.add(onChange);\n\n    await context.sync();\n    console.log(\"A handler has been registered for the onChanged event\");\n});\n```"
+- uid: excel.Excel.Table.onFiltered
+  summary: >-
+    SurVient lorsque le filtre est appliqué à une table spécifique.
+
+
+    \[[Ensemble d'API: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: onFiltered
+  fullName: onFiltered
+  langs:
+  - typeScript
+  type: event
+  syntax:
+    content: 'readonly onFiltered: OfficeExtension.EventHandlers<Excel.TableFilteredEventArgs>;'
+    return:
+      type:
+      - OfficeExtension.EventHandlers<Excel.TableFilteredEventArgs>
 - uid: excel.Excel.Table.onSelectionChanged
   summary: >-
     Se produit lorsque la sélection change sur une table spécifique.
 
 
-    \[[Du jeu d’API : ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d'API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: onSelectionChanged
   fullName: onSelectionChanged
   langs:
@@ -378,13 +433,13 @@ items:
     return:
       type:
       - OfficeExtension.EventHandlers<Excel.TableSelectionChangedEventArgs>
-      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\nawait Excel.run(async (context) => {\n    let table = context.workbook.tables.getItemAt(0);\n    table.onSelectionChanged.add(onSelectionChange);\n\n    await context.sync();\n    console.log(\"A handler has been registered for table onSelectionChanged event\");\n});\n```"
+      description: "\n#### <a name=\"examples\"></a>範例\n\n```typescript\nawait Excel.run(async (context) => {\n    let table = context.workbook.tables.getItemAt(0);\n    table.onSelectionChanged.add(onSelectionChange);\n\n    await context.sync();\n    console.log(\"A handler has been registered for table onSelectionChanged event\");\n});\n```"
 - uid: excel.Excel.Table.reapplyFilters
   summary: >-
     Applique de nouveau tous les filtres actuellement appliqués sur le tableau.
 
 
-    \[[Du jeu d’API : ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d'API: ExcelApi 1,2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: reapplyFilters()
   fullName: reapplyFilters()
   langs:
@@ -401,7 +456,7 @@ items:
     Représente une collection de toutes les lignes du tableau. En lecture seule.
 
 
-    \[[Du jeu d’API : ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: rows
   fullName: rows
   langs:
@@ -413,9 +468,9 @@ items:
       type:
       - excel.Excel.TableRowCollection
 - uid: excel.Excel.Table.set
-  summary: Définir plusieurs propriétés d’un objet en même temps. Vous pouvez passer un objet brut avec les propriétés appropriées, ou un autre objet API du même type.
+  summary: Définit plusieurs propriétés d'un objet en même temps. Vous pouvez transmettre un objet plain avec les propriétés appropriées, ou un autre objet API du même type.
   remarks: >-
-    Cette méthode a la signature supplémentaire suivante :
+    Cette méthode est dotée de la signature supplémentaire suivante:
 
 
     `set(properties: Excel.Table): void`
@@ -432,15 +487,15 @@ items:
       description: ''
     parameters:
     - id: properties
-      description: Un objet JavaScript avec des propriétés qui sont structurés isomorphically pour les propriétés de l’objet sur lequel la méthode est appelée.
+      description: Objet JavaScript avec des propriétés qui sont structurées isomorphically vers les propriétés de l'objet sur lequel la méthode est appelée.
       type:
       - Interfaces.TableUpdateData
     - id: options
-      description: Fournit une option permettant de supprimer des erreurs si l’objet propriétés tente de définir des propriétés en lecture seule.
+      description: Fournit une option permettant de supprimer les erreurs si l'objet Properties tente de définir des propriétés en lecture seule.
       type:
       - office.OfficeExtension.UpdateOptions
 - uid: excel.Excel.Table.set_1
-  summary: Définit plusieurs propriétés de l’objet en même temps, basé sur un objet chargé existant.
+  summary: Définit plusieurs propriétés de l'objet en même temps, en fonction d'un objet chargé existant.
   name: set(properties)
   fullName: set(properties)
   langs:
@@ -462,7 +517,7 @@ items:
     Indique si les colonnes affichent une mise en forme à bandes dans laquelle la mise en évidence des colonnes impaires diffère de celle des colonnes paires pour faciliter la lecture du tableau.
 
 
-    \[[Du jeu d’API : ExcelApi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d'API: ExcelApi 1,3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: showBandedColumns
   fullName: showBandedColumns
   langs:
@@ -478,7 +533,7 @@ items:
     Indique si les lignes affichent une mise en forme à bandes dans laquelle la mise en évidence des lignes impaires diffère de celle des lignes paires pour faciliter la lecture du tableau.
 
 
-    \[[Du jeu d’API : ExcelApi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d'API: ExcelApi 1,3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: showBandedRows
   fullName: showBandedRows
   langs:
@@ -494,7 +549,7 @@ items:
     Indique si les boutons de filtre sont visibles dans la partie supérieure de chaque en-tête de colonne. Ce paramètre est autorisé uniquement si le tableau contient une ligne d’en-tête.
 
 
-    \[[Du jeu d’API : ExcelApi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d'API: ExcelApi 1,3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: showFilterButton
   fullName: showFilterButton
   langs:
@@ -510,7 +565,7 @@ items:
     Indique si la ligne d’en-tête est visible ou non. Cette valeur peut être définie de manière à afficher ou à masquer la ligne d’en-tête.
 
 
-    \[[Du jeu d’API : ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: showHeaders
   fullName: showHeaders
   langs:
@@ -526,7 +581,7 @@ items:
     Indique si la ligne de total est visible ou non. Cette valeur peut être définie de manière à afficher ou à masquer la ligne de total.
 
 
-    \[[Du jeu d’API : ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: showTotals
   fullName: showTotals
   langs:
@@ -542,7 +597,7 @@ items:
     Représente le tri du tableau. En lecture seule.
 
 
-    \[[Du jeu d’API : ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d'API: ExcelApi 1,2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: sort
   fullName: sort
   langs:
@@ -558,7 +613,7 @@ items:
     Valeur de constante qui représente le style du tableau. Les valeurs possibles sont les suivantes : TableStyleLight1 à TableStyleLight21, TableStyleMedium1 à TableStyleMedium28, TableStyleStyleDark1 à TableStyleStyleDark11. Vous pouvez également indiquer un style personnalisé présent dans le classeur.
 
 
-    \[[Du jeu d’API : ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: style
   fullName: style
   langs:
@@ -570,7 +625,7 @@ items:
       type:
       - string
 - uid: excel.Excel.Table.toJSON
-  summary: Remplace le code JavaScript `toJSON()` méthode afin de fournir une sortie plus utile lorsqu’un objet API est passé à `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle le `toJSON` méthode de l’objet qui lui est passé.) Tandis que l’objet Excel.Table d’origine est un objet d’API, la `toJSON` méthode renvoie un objet JavaScript brut (typée en tant que `Excel.Interfaces.TableData` <!-- -->) qui contient des copies superficielles de toutes les propriétés enfant chargé à partir de l’objet d’origine.
+  summary: Remplace la méthode JavaScript `toJSON()` afin de fournir une sortie plus utile lorsqu'un objet d'API est transmis à. `JSON.stringify()` <!-- --> (`JSON.stringify`<!-- -->, à son tour, appelle `toJSON` la méthode de l'objet qui lui est passé.) Tandis que l'objet Excel. table d'origine est un objet `toJSON` d'API, la méthode renvoie un objet JavaScript `Excel.Interfaces.TableData` <!-- -->simple (tapé comme) qui contient des copies superficielles de toutes les propriétés enfants chargées à partir de l'objet d'origine.
   name: toJSON()
   fullName: toJSON()
   langs:
@@ -587,7 +642,7 @@ items:
     Feuille de calcul contenant le tableau actif. En lecture seule.
 
 
-    \[[Du jeu d’API : ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d'API: ExcelApi 1,2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: worksheet
   fullName: worksheet
   langs:

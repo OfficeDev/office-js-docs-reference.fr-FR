@@ -1,17 +1,17 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 304d358c1d4c6cbeb86eec30e5f5500c432d82c9
-ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
+ms.openlocfilehash: a7364f74de108934b520064f974324f6fd9eadaf
+ms.sourcegitcommit: e9bfba6ec767e9d34fd1cf7b38c30f689617900a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/13/2019
-ms.locfileid: "29980764"
+ms.lasthandoff: 02/20/2019
+ms.locfileid: "30097969"
 items:
 - uid: excel.Excel.DataValidation
   summary: >-
-    Représente la validation de données appliquée à la plage actuelle.
+    Représente la validation des données appliquée à la plage actuelle.
 
 
-    \[[Du jeu d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d'API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: Excel.DataValidation
   fullName: Excel.DataValidation
   langs:
@@ -24,6 +24,8 @@ items:
   - excel.Excel.DataValidation.clear
   - excel.Excel.DataValidation.context
   - excel.Excel.DataValidation.errorAlert
+  - excel.Excel.DataValidation.getInvalidCells
+  - excel.Excel.DataValidation.getInvalidCellsOrNullObject
   - excel.Excel.DataValidation.ignoreBlanks
   - excel.Excel.DataValidation.load
   - excel.Excel.DataValidation.load_1
@@ -40,7 +42,7 @@ items:
     Efface la validation des données de la plage active.
 
 
-    \[[Du jeu d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d'API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: clear()
   fullName: clear()
   langs:
@@ -53,7 +55,7 @@ items:
       - void
       description: ''
 - uid: excel.Excel.DataValidation.context
-  summary: Contexte de la requête associé à l’objet. Il connecte processus du complément au processus de l’application hôte Office.
+  summary: Contexte de demande associé à l'objet. Cette opération connecte le processus du complément au processus de l'application hôte Office.
   name: context
   fullName: context
   langs:
@@ -69,7 +71,7 @@ items:
     Alerte d’erreur lorsque l’utilisateur entre des données non valides.
 
 
-    \[[Du jeu d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d'API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: errorAlert
   fullName: errorAlert
   langs:
@@ -80,13 +82,49 @@ items:
     return:
       type:
       - excel.Excel.DataValidationErrorAlert
-      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Decision\");\n    const commentsRange = \n        sheet.tables.getItem(\"NameOptionsTable\").columns.getItem(\"Comments\").getDataBodyRange();\n\n    // When you are developing, it is a good practice to\n    // clear the dataValidation object with each run of your code.\n    commentsRange.dataValidation.clear();   \n\n    // If the value of A2 is contained in the value of C2, then \n    // SEARCH(A2,C2) returns the number where it begins. Otherwise,\n    // it does not return a number.\n    let redundantStringRule = {\n        custom: {\n            formula: \"=NOT(ISNUMBER(SEARCH(A2,C2)))\"\n        }\n    };\n    commentsRange.dataValidation.rule = redundantStringRule;\n    commentsRange.dataValidation.errorAlert = {\n        message: \"It is redundant to include the baby name in the comment.\",\n        showAlert: true,\n        style: \"Information\",\n        title: \"Baby Name in Comment\"\n    };\n\n    await context.sync();\n});\n```"
+      description: "\n#### <a name=\"examples\"></a>範例\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Decision\");\n    const commentsRange = \n        sheet.tables.getItem(\"NameOptionsTable\").columns.getItem(\"Comments\").getDataBodyRange();\n\n    // When you are developing, it is a good practice to\n    // clear the dataValidation object with each run of your code.\n    commentsRange.dataValidation.clear();   \n\n    // If the value of A2 is contained in the value of C2, then \n    // SEARCH(A2,C2) returns the number where it begins. Otherwise,\n    // it does not return a number.\n    let redundantStringRule = {\n        custom: {\n            formula: \"=NOT(ISNUMBER(SEARCH(A2,C2)))\"\n        }\n    };\n    commentsRange.dataValidation.rule = redundantStringRule;\n    commentsRange.dataValidation.errorAlert = {\n        message: \"It is redundant to include the baby name in the comment.\",\n        showAlert: true,\n        style: \"Information\",\n        title: \"Baby Name in Comment\"\n    };\n\n    await context.sync();\n});\n```"
+- uid: excel.Excel.DataValidation.getInvalidCells
+  summary: >-
+    Renvoie une RangeAreas, comprenant une ou plusieurs plages rectangulaires, avec des valeurs de cellule non valides. Si toutes les valeurs de cellule sont valides, cette fonction génère une erreur ItemNotFound.
+
+
+    \[[Ensemble d'API: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: getInvalidCells()
+  fullName: getInvalidCells()
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getInvalidCells(): Excel.RangeAreas;'
+    return:
+      type:
+      - excel.Excel.RangeAreas
+      description: ''
+- uid: excel.Excel.DataValidation.getInvalidCellsOrNullObject
+  summary: >-
+    Renvoie une RangeAreas, comprenant une ou plusieurs plages rectangulaires, avec des valeurs de cellule non valides. Si toutes les valeurs de cellule sont valides, cette fonction renvoie la valeur null.
+
+
+    \[[Ensemble d'API: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: getInvalidCellsOrNullObject()
+  fullName: getInvalidCellsOrNullObject()
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getInvalidCellsOrNullObject(): Excel.RangeAreas;'
+    return:
+      type:
+      - excel.Excel.RangeAreas
+      description: ''
 - uid: excel.Excel.DataValidation.ignoreBlanks
   summary: >-
     Ignorer les espaces vides : aucune validation des données ne sera exécutée sur les cellules vides, la valeur par défaut est vrai.
 
 
-    \[[Du jeu d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d'API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: ignoreBlanks
   fullName: ignoreBlanks
   langs:
@@ -98,18 +136,18 @@ items:
       type:
       - boolean
 - uid: excel.Excel.DataValidation.load
-  summary: Files d’attente d’une commande pour charger les propriétés de l’objet spécifiées. Vous devez appeler « context.sync() » avant de lire les propriétés.
+  summary: Met en file d'attente une commande pour charger les propriétés spécifiées de l'objet. Vous devez appeler «Context. Sync ()» avant de lire les propriétés.
   remarks: >-
-    Outre cette signature, cette méthode présente les signatures suivantes :
+    En plus de cette signature, cette méthode possède les signatures suivantes:
 
 
-    `load(option?: string | string[]): Excel.DataValidation`-Où option est une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+    `load(option?: string | string[]): Excel.DataValidation`-WHERE option est une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
 
 
-    `load(option?: { select?: string; expand?: string; }): Excel.DataValidation`-Où option.select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options.expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
+    `load(option?: { select?: string; expand?: string; }): Excel.DataValidation`Option-WHERE option. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
 
 
-    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.DataValidation`-Uniquement disponible sur les types de la collection. Il est similaire à la signature précédente. Option.Top Spécifie le nombre maximal d’éléments pouvant être inclus dans le résultat de la collection. Option.Skip Spécifie le nombre d’éléments qui doivent être ignoré et non inclus dans le résultat. Si option.top est spécifié, le jeu de résultats démarre après l’ignorer le nombre spécifié d’éléments.
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.DataValidation`-Uniquement disponible sur les types de collection. Elle est similaire à la signature précédente. Option. Top indique le nombre maximal d'éléments de collection qui peuvent être inclus dans le résultat. Option. Skip indique le nombre d'éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat. Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d'éléments.
   name: load(option)
   fullName: load(option)
   langs:
@@ -127,7 +165,7 @@ items:
       type:
       - excel.Excel.Interfaces.DataValidationLoadOptions
 - uid: excel.Excel.DataValidation.load_1
-  summary: Files d’attente d’une commande pour charger les propriétés de l’objet spécifiées. Vous devez appeler `context.sync()` avant de lire les propriétés.
+  summary: Met en file d'attente une commande pour charger les propriétés spécifiées de l'objet. Vous devez appeler `context.sync()` avant de lire les propriétés.
   name: load(propertyNames)
   fullName: load(propertyNames)
   langs:
@@ -145,7 +183,7 @@ items:
       type:
       - string | string[]
 - uid: excel.Excel.DataValidation.load_2
-  summary: Files d’attente d’une commande pour charger les propriétés de l’objet spécifiées. Vous devez appeler `context.sync()` avant de lire les propriétés.
+  summary: Met en file d'attente une commande pour charger les propriétés spécifiées de l'objet. Vous devez appeler `context.sync()` avant de lire les propriétés.
   name: load(propertyNamesAndPaths)
   fullName: load(propertyNamesAndPaths)
   langs:
@@ -159,15 +197,15 @@ items:
       description: ''
     parameters:
     - id: propertyNamesAndPaths
-      description: Où propertyNamesAndPaths.select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et propertyNamesAndPaths.expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
+      description: Où propertyNamesAndPaths. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et propertyNamesAndPaths. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
       type:
       - '{ select?: string; expand?: string; }'
 - uid: excel.Excel.DataValidation.prompt
   summary: >-
-    Invite lorsque l’utilisateur sélectionne une cellule.
+    Invite lorsque les utilisateurs sélectionnent une cellule.
 
 
-    \[[Du jeu d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d'API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: prompt
   fullName: prompt
   langs:
@@ -180,10 +218,10 @@ items:
       - excel.Excel.DataValidationPrompt
 - uid: excel.Excel.DataValidation.rule
   summary: >-
-    Règle de validation de données qui contient les différents types de critères de validation de données.
+    Règle de validation des données qui contient différents critères de validation de données.
 
 
-    \[[Du jeu d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d'API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: rule
   fullName: rule
   langs:
@@ -195,9 +233,9 @@ items:
       type:
       - excel.Excel.DataValidationRule
 - uid: excel.Excel.DataValidation.set
-  summary: Définir plusieurs propriétés d’un objet en même temps. Vous pouvez passer un objet brut avec les propriétés appropriées, ou un autre objet API du même type.
+  summary: Définit plusieurs propriétés d'un objet en même temps. Vous pouvez transmettre un objet plain avec les propriétés appropriées, ou un autre objet API du même type.
   remarks: >-
-    Cette méthode a la signature supplémentaire suivante :
+    Cette méthode est dotée de la signature supplémentaire suivante:
 
 
     `set(properties: Excel.DataValidation): void`
@@ -214,15 +252,15 @@ items:
       description: ''
     parameters:
     - id: properties
-      description: Un objet JavaScript avec des propriétés qui sont structurés isomorphically pour les propriétés de l’objet sur lequel la méthode est appelée.
+      description: Objet JavaScript avec des propriétés qui sont structurées isomorphically vers les propriétés de l'objet sur lequel la méthode est appelée.
       type:
       - Interfaces.DataValidationUpdateData
     - id: options
-      description: Fournit une option permettant de supprimer des erreurs si l’objet propriétés tente de définir des propriétés en lecture seule.
+      description: Fournit une option permettant de supprimer les erreurs si l'objet Properties tente de définir des propriétés en lecture seule.
       type:
       - office.OfficeExtension.UpdateOptions
 - uid: excel.Excel.DataValidation.set_1
-  summary: Définit plusieurs propriétés de l’objet en même temps, basé sur un objet chargé existant.
+  summary: Définit plusieurs propriétés de l'objet en même temps, en fonction d'un objet chargé existant.
   name: set(properties)
   fullName: set(properties)
   langs:
@@ -240,7 +278,7 @@ items:
       type:
       - excel.Excel.DataValidation
 - uid: excel.Excel.DataValidation.toJSON
-  summary: Remplace le code JavaScript `toJSON()` méthode afin de fournir une sortie plus utile lorsqu’un objet API est passé à `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle le `toJSON` méthode de l’objet qui lui est passé.) Tandis que l’objet Excel.DataValidation d’origine est un objet d’API, la `toJSON` méthode renvoie un objet JavaScript brut (typée en tant que `Excel.Interfaces.DataValidationData` <!-- -->) qui contient des copies superficielles de toutes les propriétés enfant chargé à partir de l’objet d’origine.
+  summary: Remplace la méthode JavaScript `toJSON()` afin de fournir une sortie plus utile lorsqu'un objet d'API est transmis à. `JSON.stringify()` <!-- --> (`JSON.stringify`<!-- -->, à son tour, appelle `toJSON` la méthode de l'objet qui lui est passé.) Tandis que l'objet Excel. DataValidation d'origine est un objet `toJSON` d'API, la méthode renvoie un objet JavaScript `Excel.Interfaces.DataValidationData` <!-- -->simple (tapé sous la forme) qui contient des copies superficielles de toutes les propriétés enfants chargées à partir de l'objet d'origine.
   name: toJSON()
   fullName: toJSON()
   langs:
@@ -257,7 +295,7 @@ items:
     Type de validation des données, voir Excel.DataValidationType pour plus d’informations.
 
 
-    \[[Du jeu d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d'API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: type
   fullName: type
   langs:
@@ -270,10 +308,10 @@ items:
       - Excel.DataValidationType | "None" | "WholeNumber" | "Decimal" | "List" | "Date" | "Time" | "TextLength" | "Custom" | "Inconsistent" | "MixedCriteria"
 - uid: excel.Excel.DataValidation.valid
   summary: >-
-    Représente si toutes les valeurs de cellule sont valides selon les règles de validation des données. Renvoie la valeur true si toutes les valeurs de cellule sont valides, ou false si toutes les valeurs de cellule ne sont pas valides. Renvoie la valeur null s’il y a deux valeurs de cellule valides et non valides dans la plage.
+    Représente si toutes les valeurs de cellule sont valides selon les règles de validation des données. Renvoie la valeur true si toutes les valeurs de cellule sont valides ou la valeur false si toutes les valeurs de cellule ne sont pas valides. Renvoie la valeur null si les valeurs des cellules valides et non valides sont comprises dans la plage.
 
 
-    \[[Du jeu d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d'API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: valid
   fullName: valid
   langs:
