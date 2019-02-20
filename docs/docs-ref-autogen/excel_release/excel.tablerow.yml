@@ -1,0 +1,238 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: bae0d1e276c8115821cf7acdf9ae312035b82f1b
+ms.sourcegitcommit: e9bfba6ec767e9d34fd1cf7b38c30f689617900a
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 02/20/2019
+ms.locfileid: "30105348"
+items:
+- uid: excel_release.Excel.TableRow
+  summary: >-
+    Représente une ligne d’un tableau.
+
+
+    Notez que, à la différence des plages ou colonnes, qui s'ajusteront si de nouvelles lignes/colonnes sont ajoutées avant celles-ci, un objet TableRow représente l'emplacement physique de la ligne de table, mais pas les données. Autrement dit, si les données sont triées ou si de nouvelles lignes sont ajoutées, une ligne de tableau continue de pointer vers l'index pour lequel elle a été créée.
+
+
+    \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  name: Excel.TableRow
+  fullName: Excel.TableRow
+  langs:
+  - typeScript
+  type: class
+  extends:
+  - office.OfficeExtension.ClientObject
+  package: excel_release
+  children:
+  - excel_release.Excel.TableRow.context
+  - excel_release.Excel.TableRow.delete
+  - excel_release.Excel.TableRow.getRange
+  - excel_release.Excel.TableRow.index
+  - excel_release.Excel.TableRow.load
+  - excel_release.Excel.TableRow.load_1
+  - excel_release.Excel.TableRow.load_2
+  - excel_release.Excel.TableRow.set
+  - excel_release.Excel.TableRow.set_1
+  - excel_release.Excel.TableRow.toJSON
+  - excel_release.Excel.TableRow.values
+- uid: excel_release.Excel.TableRow.context
+  summary: Contexte de demande associé à l'objet. Cette opération connecte le processus du complément au processus de l'application hôte Office.
+  name: context
+  fullName: context
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type:
+      - RequestContext
+- uid: excel_release.Excel.TableRow.delete
+  summary: >-
+    Supprime la ligne du tableau.
+
+
+    \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  name: delete()
+  fullName: delete()
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'delete(): void;'
+    return:
+      type:
+      - void
+      description: "\n#### <a name=\"examples\"></a>範例\n\n```javascript\nExcel.run(function (ctx) { \n    var tableName = 'Table1';\n    var row = ctx.workbook.tables.getItem(tableName).rows.getItemAt(2);\n    row.delete();\n    return ctx.sync(); \n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- uid: excel_release.Excel.TableRow.getRange
+  summary: >-
+    Renvoie l’objet de plage associé à la ligne entière.
+
+
+    \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  name: getRange()
+  fullName: getRange()
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getRange(): Excel.Range;'
+    return:
+      type:
+      - excel.Excel.Range
+      description: "\n#### <a name=\"examples\"></a>範例\n\n```javascript\nExcel.run(function (ctx) { \n    var tableName = 'Table1';\n    var row = ctx.workbook.tables.getItem(tableName).rows.getItemAt(0);\n    var rowRange = row.getRange();\n    rowRange.load('address');\n    return ctx.sync().then(function() {\n        console.log(rowRange.address);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- uid: excel_release.Excel.TableRow.index
+  summary: >-
+    Renvoie le numéro d’indice de la ligne dans la collection de lignes du tableau. Avec indice zéro. En lecture seule.
+
+
+    \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  name: index
+  fullName: index
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly index: number;'
+    return:
+      type:
+      - number
+- uid: excel_release.Excel.TableRow.load
+  summary: Met en file d'attente une commande pour charger les propriétés spécifiées de l'objet. Vous devez appeler «Context. Sync ()» avant de lire les propriétés.
+  remarks: >-
+    En plus de cette signature, cette méthode possède les signatures suivantes:
+
+
+    `load(option?: string | string[]): Excel.TableRow`-WHERE option est une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+
+
+    `load(option?: { select?: string; expand?: string; }): Excel.TableRow`Option-WHERE option. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
+
+
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.TableRow`-Uniquement disponible sur les types de collection. Elle est similaire à la signature précédente. Option. Top indique le nombre maximal d'éléments de collection qui peuvent être inclus dans le résultat. Option. Skip indique le nombre d'éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat. Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d'éléments.
+  name: load(option)
+  fullName: load(option)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: Excel.Interfaces.TableRowLoadOptions): Excel.TableRow;'
+    return:
+      type:
+      - excel.Excel.TableRow
+      description: ''
+    parameters:
+    - id: option
+      description: ''
+      type:
+      - excel.Excel.Interfaces.TableRowLoadOptions
+- uid: excel_release.Excel.TableRow.load_1
+  summary: Met en file d'attente une commande pour charger les propriétés spécifiées de l'objet. Vous devez appeler `context.sync()` avant de lire les propriétés.
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.TableRow;'
+    return:
+      type:
+      - excel.Excel.TableRow
+      description: "\n#### <a name=\"examples\"></a>範例\n\n```javascript\nExcel.run(function (ctx) { \n    var tableName = 'Table1';\n    var row = ctx.workbook.tables.getItem(tableName).rows.getItem(0);\n    row.load('index');\n    return ctx.sync().then(function() {\n        console.log(row.index);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\nExcel.run(function (ctx) { \n    var tables = ctx.workbook.tables;\n    var newValues = [[\"New\", \"Values\", \"For\", \"New\", \"Row\"]];\n    var tableName = 'Table1';\n    var row = ctx.workbook.tables.getItem(tableName).rows.getItemAt(2);\n    row.values = newValues;\n    row.load('values');\n    return ctx.sync().then(function() {\n        console.log(row.values);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+    parameters:
+    - id: propertyNames
+      description: Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+      type:
+      - string | string[]
+- uid: excel_release.Excel.TableRow.load_2
+  summary: Met en file d'attente une commande pour charger les propriétés spécifiées de l'objet. Vous devez appeler `context.sync()` avant de lire les propriétés.
+  name: load(propertyNamesAndPaths)
+  fullName: load(propertyNamesAndPaths)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.TableRow;'
+    return:
+      type:
+      - excel.Excel.TableRow
+      description: ''
+    parameters:
+    - id: propertyNamesAndPaths
+      description: Où propertyNamesAndPaths. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et propertyNamesAndPaths. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
+      type:
+      - '{ select?: string; expand?: string; }'
+- uid: excel_release.Excel.TableRow.set
+  summary: Définit plusieurs propriétés d'un objet en même temps. Vous pouvez transmettre un objet plain avec les propriétés appropriées, ou un autre objet API du même type.
+  remarks: >-
+    Cette méthode est dotée de la signature supplémentaire suivante:
+
+
+    `set(properties: Excel.TableRow): void`
+  name: set(properties, options)
+  fullName: set(properties, options)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'set(properties: Interfaces.TableRowUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: properties
+      description: Objet JavaScript avec des propriétés qui sont structurées isomorphically vers les propriétés de l'objet sur lequel la méthode est appelée.
+      type:
+      - Interfaces.TableRowUpdateData
+    - id: options
+      description: Fournit une option permettant de supprimer les erreurs si l'objet Properties tente de définir des propriétés en lecture seule.
+      type:
+      - office.OfficeExtension.UpdateOptions
+- uid: excel_release.Excel.TableRow.set_1
+  summary: Définit plusieurs propriétés de l'objet en même temps, en fonction d'un objet chargé existant.
+  name: set(properties)
+  fullName: set(properties)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'set(properties: Excel.TableRow): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: properties
+      description: ''
+      type:
+      - excel.Excel.TableRow
+- uid: excel_release.Excel.TableRow.toJSON
+  summary: Remplace la méthode JavaScript `toJSON()` afin de fournir une sortie plus utile lorsqu'un objet d'API est transmis à. `JSON.stringify()` <!-- --> (`JSON.stringify`<!-- -->, à son tour, appelle `toJSON` la méthode de l'objet qui lui est passé.) Tandis que l'objet Excel. TableRow d'origine est un objet `toJSON` d'API, la méthode renvoie un objet JavaScript `Excel.Interfaces.TableRowData` <!-- -->simple (tapé sous la forme) qui contient des copies superficielles de toutes les propriétés enfants chargées à partir de l'objet d'origine.
+  name: toJSON()
+  fullName: toJSON()
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'toJSON(): Excel.Interfaces.TableRowData;'
+    return:
+      type:
+      - excel.Excel.Interfaces.TableRowData
+      description: ''
+- uid: excel_release.Excel.TableRow.values
+  summary: >-
+    Représente les valeurs brutes de la plage spécifiée. Les données renvoyées peuvent être de type String, Number ou Boolean. Les cellules qui contiennent une erreur renverront la chaîne d'erreur.
+
+
+    \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  name: values
+  fullName: values
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'values: any[][];'
+    return:
+      type:
+      - any[][]
