@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: db9813ddc3c8783956e5e210cbf8c8b5afa4475e
-ms.sourcegitcommit: e9bfba6ec767e9d34fd1cf7b38c30f689617900a
+ms.openlocfilehash: 7ef09172fdc4a09c76579c524c70ee306fd3cfec
+ms.sourcegitcommit: 6c48441b8be51d3a9d7dc836e386230a155feceb
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/20/2019
-ms.locfileid: "30094784"
+ms.lasthandoff: 02/22/2019
+ms.locfileid: "30198766"
 items:
 - uid: Outlook_1_4.Office.Mailbox
   summary: >-
@@ -41,9 +41,7 @@ items:
   - Outlook_1_4.Office.Mailbox.displayNewAppointmentForm
   - Outlook_1_4.Office.Mailbox.getCallbackTokenAsync
   - Outlook_1_4.Office.Mailbox.getUserIdentityTokenAsync
-  - Outlook_1_4.Office.Mailbox.getUserIdentityTokenAsync_1
   - Outlook_1_4.Office.Mailbox.makeEwsRequestAsync
-  - Outlook_1_4.Office.Mailbox.makeEwsRequestAsync_1
   - Outlook_1_4.Office.Mailbox.diagnostics
   - Outlook_1_4.Office.Mailbox.ewsUrl
   - Outlook_1_4.Office.Mailbox.item
@@ -412,7 +410,7 @@ items:
   - typeScript
   type: method
   syntax:
-    content: 'getCallbackTokenAsync(callback: (result: Office.AsyncResult<string>) => void, userContext?: any): void;'
+    content: 'getCallbackTokenAsync(callback: (asyncResult: Office.AsyncResult<string>) => void, userContext?: any): void;'
     return:
       type:
       - void
@@ -421,46 +419,12 @@ items:
     - id: callback
       description: Une fois la méthode exécutée, la fonction transmise au paramètre callback est appelée avec un seul paramètre de type Office. AsyncResult. Le jeton est fourni sous forme de chaîne dans la propriété `asyncResult.value`. Si une erreur s'est produite, les `asyncResult.error` propriétés `asyncResult.diagnostics` et peuvent fournir des informations supplémentaires.
       type:
-      - '(result: Office.AsyncResult<string>) => void'
+      - '(asyncResult: Office.AsyncResult<string>) => void'
     - id: userContext
       description: Facultatif. Données d’état transmises à la méthode asynchrone.
       type:
       - any
 - uid: Outlook_1_4.Office.Mailbox.getUserIdentityTokenAsync
-  summary: >-
-    Obtient un jeton qui identifie l’utilisateur et le complément Office.
-
-
-    Le jeton est fourni sous forme de chaîne dans la propriété asyncResult.value.
-
-
-    \[[Ensemble d'API: boîte aux lettres 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: >-
-    <table> <tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Rédaction ou lecture</td></tr> </table>
-
-
-    La méthode getUserIdentityTokenAsync renvoie un jeton qui vous permet d'identifier et d' [authentifier le complément et l'utilisateur à l'aide d'un système](https://docs.microsoft.com/outlook/add-ins/authentication)<!-- -->tiers.
-  name: getUserIdentityTokenAsync(callback, userContext)
-  fullName: getUserIdentityTokenAsync(callback, userContext)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getUserIdentityTokenAsync(callback: (result: Office.AsyncResult<string>) => void, userContext?: any): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: callback
-      description: Une fois la méthode exécutée, la fonction transmise au paramètre callback est appelée avec un seul paramètre de type Office. AsyncResult. Le jeton est fourni sous forme de chaîne dans la propriété `asyncResult.value`. Si une erreur s'est produite, les `asyncResult.error` propriétés `asyncResult.diagnostics` et peuvent fournir des informations supplémentaires.
-      type:
-      - '(result: Office.AsyncResult<string>) => void'
-    - id: userContext
-      description: Facultatif. Données d’état transmises à la méthode asynchrone.\|
-      type:
-      - any
-- uid: Outlook_1_4.Office.Mailbox.getUserIdentityTokenAsync_1
   summary: >-
     Obtient un jeton qui identifie l’utilisateur et le complément Office.
 
@@ -490,13 +454,13 @@ items:
     }
 
     ```
-  name: getUserIdentityTokenAsync(callback)
-  fullName: getUserIdentityTokenAsync(callback)
+  name: getUserIdentityTokenAsync(callback, userContext)
+  fullName: getUserIdentityTokenAsync(callback, userContext)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'getUserIdentityTokenAsync(callback: (result: Office.AsyncResult<string>) => void): void;'
+    content: 'getUserIdentityTokenAsync(callback: (asyncResult: Office.AsyncResult<string>) => void, userContext?: any): void;'
     return:
       type:
       - void
@@ -505,81 +469,12 @@ items:
     - id: callback
       description: Une fois la méthode exécutée, la fonction transmise au paramètre callback est appelée avec un seul paramètre de type Office. AsyncResult. Le jeton est fourni sous forme de chaîne dans la propriété `asyncResult.value`. Si une erreur s'est produite, les `asyncResult.error` propriétés `asyncResult.diagnostics` et peuvent fournir des informations supplémentaires.
       type:
-      - '(result: Office.AsyncResult<string>) => void'
-- uid: Outlook_1_4.Office.Mailbox.makeEwsRequestAsync
-  summary: >-
-    Effectue une demande asynchrone à un service des services Web Exchange (EWS) sur le serveur Exchange qui héberge la boîte aux lettres de l'utilisateur.
-
-
-    Dans ces cas de figure, les compléments doivent utiliser les API REST pour accéder à la boîte aux lettres de l’utilisateur.
-
-
-    La méthode makeEwsRequestAsync envoie une demande EWS à Exchange de la part du complément.
-
-
-    Vous ne pouvez pas demander des éléments associés à un dossier avec la méthode makeEwsRequestAsync.
-
-
-    La demande XML doit spécifier l’encodage UTF-8. &lt;<!-- -->version ?xml = "1.0" Encoding = "UTF-8"?<!-- -->&gt;
-
-
-    Votre complément doit disposer de l'autorisation ReadWriteMailbox pour utiliser la méthode makeEwsRequestAsync. Pour plus d'informations sur l'utilisation de l'autorisation ReadWriteMailbox et des opérations EWS que vous pouvez appeler avec la méthode makeEwsRequestAsync, voir [spécifier les autorisations pour l'accès des compléments de messagerie à la boîte aux lettres](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->de l'utilisateur.
-
-
-    Le résultat XML de l’appel EWS est fourni sous forme de chaîne dans la propriété asyncResult.value. Si la taille du résultat est supérieure à 1 Mo, un message d’erreur est renvoyé.
-
-
-    **Remarque**: cette méthode n'est pas prise en charge dans les scénarios suivants:
-
-
-    - Dans Outlook pour iOS ou Outlook pour Android.
-
-
-    - Lorsque le complément est chargé dans une boîte aux lettres gmail.
-
-
-    **Remarque**: l'administrateur de serveur doit définir OAuthAuthentication sur true dans le répertoire EWS du serveur d'accès au client pour permettre à la méthode makeEwsRequestAsync d'effectuer des demandes EWS.
-
-
-    *Différences entre les versions*
-
-
-    Lorsque vous utilisez la méthode makeEwsRequestAsync dans les applications de messagerie exécutées dans des versions d’Outlook inférieures à 15.0.4535.1004, vous devez définir la valeur d’encodage sur ISO-8859-1.
-
-
-    `<?xml version="1.0" encoding="iso-8859-1"?>`
-
-
-    Lorsque votre application de messagerie s’exécute dans Outlook sur le web, vous n’avez pas à définir la valeur d’encodage. Pour déterminer si votre application de messagerie s’exécute dans Outlook ou Outlook sur le web, utilisez la propriété mailbox.diagnostics.hostName. Pour déterminer la version d’Outlook qui est exécutée, utilisez la propriété mailbox.diagnostics.hostVersion.
-
-
-    \[[Ensemble d'API: boîte aux lettres 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: <table> <tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteMailbox</td></tr> <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Rédaction ou lecture</td></tr> </table>
-  name: makeEwsRequestAsync(data, callback, userContext)
-  fullName: makeEwsRequestAsync(data, callback, userContext)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'makeEwsRequestAsync(data: any, callback: (result: Office.AsyncResult<string>) => void, userContext?: any): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: data
-      description: Demande EWS.
-      type:
-      - any
-    - id: callback
-      description: Une fois la méthode exécutée, la fonction transmise au paramètre callback est appelée avec un seul paramètre de type Office. AsyncResult. La `value` propriété du résultat est le code XML de la demande EWS fournie sous forme de chaîne. Si la taille du résultat est supérieure à 1 Mo, un message d’erreur est renvoyé.
-      type:
-      - '(result: Office.AsyncResult<string>) => void'
+      - '(asyncResult: Office.AsyncResult<string>) => void'
     - id: userContext
-      description: Facultatif. Données d’état transmises à la méthode asynchrone.
+      description: Facultatif. Données d’état transmises à la méthode asynchrone.\|
       type:
       - any
-- uid: Outlook_1_4.Office.Mailbox.makeEwsRequestAsync_1
+- uid: Outlook_1_4.Office.Mailbox.makeEwsRequestAsync
   summary: >-
     Effectue une demande asynchrone à un service des services Web Exchange (EWS) sur le serveur Exchange qui héberge la boîte aux lettres de l'utilisateur.
 
@@ -678,13 +573,13 @@ items:
     }
 
     ```
-  name: makeEwsRequestAsync(data, callback)
-  fullName: makeEwsRequestAsync(data, callback)
+  name: makeEwsRequestAsync(data, callback, userContext)
+  fullName: makeEwsRequestAsync(data, callback, userContext)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'makeEwsRequestAsync(data: any, callback: (result: Office.AsyncResult<string>) => void): void;'
+    content: 'makeEwsRequestAsync(data: any, callback: (asyncResult: Office.AsyncResult<string>) => void, userContext?: any): void;'
     return:
       type:
       - void
@@ -697,7 +592,11 @@ items:
     - id: callback
       description: Une fois la méthode exécutée, la fonction transmise au paramètre callback est appelée avec un seul paramètre de type Office. AsyncResult. La `value` propriété du résultat est le code XML de la demande EWS fournie sous forme de chaîne. Si la taille du résultat est supérieure à 1 Mo, un message d’erreur est renvoyé.
       type:
-      - '(result: Office.AsyncResult<string>) => void'
+      - '(asyncResult: Office.AsyncResult<string>) => void'
+    - id: userContext
+      description: Facultatif. Données d’état transmises à la méthode asynchrone.
+      type:
+      - any
 - uid: Outlook_1_4.Office.Mailbox.diagnostics
   summary: >-
     Fournit des informations de diagnostic à un complément Outlook.
