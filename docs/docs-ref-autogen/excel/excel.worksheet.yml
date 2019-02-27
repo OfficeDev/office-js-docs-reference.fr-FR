@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: a3efae33e400954ea270e85c640f6f139cda2004
-ms.sourcegitcommit: e9bfba6ec767e9d34fd1cf7b38c30f689617900a
+ms.openlocfilehash: 8e825405e1f328ca931354e2d4138476887d2e8d
+ms.sourcegitcommit: fd03ef72d6a546b0e4dbe0cc9e75d2a7cf9341a1
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/20/2019
-ms.locfileid: "30095736"
+ms.lasthandoff: 02/27/2019
+ms.locfileid: "30303241"
 items:
 - uid: excel.Excel.Worksheet
   summary: >-
@@ -307,7 +307,31 @@ items:
     return:
       type:
       - excel.Excel.RangeAreas
-      description: Objet RangeArea, comprenant une ou plusieurs plages rectangulaires, qui correspondent aux critères de recherche. S'il n'y a aucune correspondance, cette fonction renverra un objet null.
+      description: >-
+        Objet RangeArea, comprenant une ou plusieurs plages rectangulaires, qui correspondent aux critères de recherche. S'il n'y a aucune correspondance, cette fonction renverra un objet null.
+
+        #### <a name="examples"></a>範例
+
+
+        ```typescript
+
+        await Excel.run(async (context) => {
+            const sheet = context.workbook.worksheets.getItem("Sample");
+            const foundRanges = sheet.findAllOrNullObject("Complete", {
+                completeMatch: true,
+                matchCase: false
+            });
+
+            await context.sync();
+
+            if (foundRanges.isNullObject) {
+                console.log("No complete projects");
+            } else {
+                foundRanges.format.fill.color = "green"
+            }
+        });
+
+        ```
     parameters:
     - id: text
       description: Chaîne à rechercher.
@@ -520,7 +544,7 @@ items:
     return:
       type:
       - excel.Excel.RangeAreas
-      description: ''
+      description: "\n#### <a name=\"examples\"></a>範例\n\n```typescript\nawait Excel.run(async (context) => {\n\n    const sheet = context.workbook.worksheets.getActiveWorksheet();\n    const specifiedRanges = sheet.getRanges(\"D3:D5, G3:G5\");\n    specifiedRanges.format.fill.color = \"pink\";\n\n    await context.sync();\n})\n```"
     parameters:
     - id: address
       description: "Facultatif. Chaîne contenant les adresses ou les noms des plages individuelles séparées par des virgules. Par exemple, «a1: B2, A5: B5». Si ce n'est pas spécifié, un objet RangeArea est renvoyé pour l'intégralité de la feuille de calcul."

@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 6ee2491ed2571cd9e34670b0778164ba9452c9bf
-ms.sourcegitcommit: e9bfba6ec767e9d34fd1cf7b38c30f689617900a
+ms.openlocfilehash: 92c35f5db99c5a152a3b1a23d7f0c058df15bbe1
+ms.sourcegitcommit: fd03ef72d6a546b0e4dbe0cc9e75d2a7cf9341a1
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/20/2019
-ms.locfileid: "30108106"
+ms.lasthandoff: 02/27/2019
+ms.locfileid: "30303038"
 items:
 - uid: excel.Excel.Shape
   summary: >-
@@ -24,6 +24,7 @@ items:
   children:
   - excel.Excel.Shape.altTextDescription
   - excel.Excel.Shape.altTextTitle
+  - excel.Excel.Shape.connectionSiteCount
   - excel.Excel.Shape.context
   - excel.Excel.Shape.delete
   - excel.Excel.Shape.fill
@@ -101,6 +102,23 @@ items:
     return:
       type:
       - string
+- uid: excel.Excel.Shape.connectionSiteCount
+  summary: >-
+    Renvoie le nombre de sites de connexion sur la forme spécifiée. En lecture seule.
+
+
+    \[[Ensemble d'API: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: connectionSiteCount
+  fullName: connectionSiteCount
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly connectionSiteCount: number;'
+    return:
+      type:
+      - number
 - uid: excel.Excel.Shape.context
   summary: Contexte de demande associé à l'objet. Cette opération connecte le processus du complément au processus de l'application hôte Office.
   isPreview: true
@@ -131,7 +149,7 @@ items:
     return:
       type:
       - void
-      description: ''
+      description: "\n#### <a name=\"examples\"></a>範例\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Shapes\");\n    const shapes = sheet.shapes;\n\n    // load all the shapes in the collection without loading their properties\n    shapes.load(\"items/$none\");\n    await context.sync();\n\n    shapes.items.forEach((shape) => shape.delete());\n    await context.sync();\n});\n```"
 - uid: excel.Excel.Shape.fill
   summary: >-
     Renvoie la mise en forme du remplissage de l'objet Shape. En lecture seule.
@@ -149,6 +167,7 @@ items:
     return:
       type:
       - excel.Excel.ShapeFill
+      description: "\n#### <a name=\"examples\"></a>範例\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Shapes\");\n    const shape = sheet.shapes.addGeometricShape(Excel.GeometricShapeType.smileyFace);\n    shape.left = 300;\n    shape.top = 100;\n    shape.height = 100;\n    shape.width = 100;\n    shape.fill.foreColor = \"yellow\"\n    await context.sync();\n});\n```"
 - uid: excel.Excel.Shape.geometricShape
   summary: >-
     Renvoie la forme géométrique de l'objet Shape. Une erreur est générée si l'objet Shape est un autre type de forme (par exemple, image, SmartArt, etc.) au lieu de GeometricShape.
@@ -268,7 +287,7 @@ items:
     return:
       type:
       - void
-      description: ''
+      description: "\n#### <a name=\"examples\"></a>範例\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Shapes\");\n    const shape = sheet.shapes.getItem(\"Square\")\n    shape.incrementLeft(-25);\n    await context.sync();\n});\n```"
     parameters:
     - id: increment
       description: Spécifie en points la distance de déplacement horizontal. Spécifiez une valeur positive pour effectuer un déplacement vers la droite, ou inversement, une valeur négative pour procéder à un déplacement vers la gauche. Si la feuille est RTL, IncrementLeft, avec une valeur positive doit déplacer la forme vers la gauche au lieu de droite.
@@ -291,7 +310,7 @@ items:
     return:
       type:
       - void
-      description: ''
+      description: "\n#### <a name=\"examples\"></a>範例\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Shapes\");\n    const shape = sheet.shapes.getItem(\"Image\");\n    shape.incrementRotation(180);\n    await context.sync();\n});\n```"
     parameters:
     - id: increment
       description: Indique de combien de degrés la forme doit pivoter autour de l'axe z. Spécifiez une valeur positive pour faire pivoter la forme dans le sens des aiguilles d'une montre, ou inversement, une valeur négative pour la faire pivoter dans le sens inverse.
@@ -314,7 +333,7 @@ items:
     return:
       type:
       - void
-      description: ''
+      description: "\n#### <a name=\"examples\"></a>範例\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Shapes\");\n    const shape = sheet.shapes.getItem(\"Pentagon\")\n    shape.incrementTop(25);\n    await context.sync();\n});\n```"
     parameters:
     - id: increment
       description: Spécifie en points la distance de décalage vertical de la forme. Spécifiez une valeur positive pour décaler la forme vers le bas, ou inversement, une valeur négative pour la décaler vers le haut.
@@ -575,6 +594,7 @@ items:
     return:
       type:
       - number
+      description: "\n#### <a name=\"examples\"></a>範例\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Shapes\");\n    const shape = sheet.shapes.addGeometricShape(Excel.GeometricShapeType.triangle);\n    shape.left = 100;\n    shape.top = 300;\n    shape.height = 150;\n    shape.width = 200;\n    shape.rotation = 45;\n    shape.fill.clear();\n    await context.sync();\n});\n```"
 - uid: excel.Excel.Shape.saveAsPicture
   summary: >-
     Enregistre la forme sous forme d'image et renvoie l'image sous la forme d'une chaîne encodée au format base64, en utilisant le DPI défini sur 96. Prend en charge uniquement les enregistrements dans Excel. PictureFormat. BMP, Excel. PictureFormat. PNG, Excel. PictureFormat. JPEG et Excel. PictureFormat. GIF.
@@ -638,7 +658,7 @@ items:
     return:
       type:
       - void
-      description: ''
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Shapes\");\n    const shape = sheet.shapes.getItem(\"Octagon\")\n    shape.scaleHeight(1.25, Excel.ShapeScaleType.currentSize);\n    shape.scaleWidth(1.25, Excel.ShapeScaleType.currentSize);\n    await context.sync();\n});\n```"
     parameters:
     - id: scaleFactor
       description: Indique le rapport entre la hauteur de la forme après son redimensionnement et sa hauteur initiale ou actuelle.
@@ -700,7 +720,7 @@ items:
     return:
       type:
       - void
-      description: ''
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Shapes\");\n    const shape = sheet.shapes.getItem(\"Octagon\")\n    shape.scaleHeight(1.25, Excel.ShapeScaleType.currentSize);\n    shape.scaleWidth(1.25, Excel.ShapeScaleType.currentSize);\n    await context.sync();\n});\n```"
     parameters:
     - id: scaleFactor
       description: Indique le rapport entre la largeur de la forme après son redimensionnement et sa largeur initiale ou actuelle.
@@ -809,7 +829,7 @@ items:
     return:
       type:
       - void
-      description: ''
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Shapes\");\n    const shape = sheet.shapes.getItem(\"Octagon\")\n    shape.setZOrder(Excel.ShapeZOrder.sendBackward);\n    await context.sync();\n});\n```"
     parameters:
     - id: value
       description: où déplacer la forme spécifiée par rapport aux autres formes. Pour plus d'informations, voir Excel. ShapeZOrder.
