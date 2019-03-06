@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: b95bc4e0e282265e30621374508614eda89b7a7f
-ms.sourcegitcommit: 5c1011d5e46e007fd1f7f620d4dff74356dcd029
+ms.openlocfilehash: 41749b406bdeb77a0f546e414b54df07bd4780ff
+ms.sourcegitcommit: 788ab9c595c9143f8b8f4822a170e8b90d72ee1d
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/01/2019
-ms.locfileid: "30359071"
+ms.lasthandoff: 03/06/2019
+ms.locfileid: "30413902"
 items:
 - uid: outlook.Office.MessageRead
   summary: >-
@@ -73,7 +73,7 @@ items:
   - typeScript
   type: method
   syntax:
-    content: 'addHandlerAsync(eventType: Office.EventType, handler: any, options?: any, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'addHandlerAsync(eventType: Office.EventType, handler: any, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     return:
       type:
       - void
@@ -84,13 +84,13 @@ items:
       type:
       - Office.EventType
     - id: handler
-      description: Fonction permettant de gérer l'événement. La fonction doit accepter un seul paramètre, qui est un littéral d'objet. La propriété type sur le paramètre correspond au paramètre eventType transmis à addHandlerAsync.
+      description: Fonction qui gère l’événement. Cette fonction doit accepter un seul paramètre, qui est un littéral d’objet. La propriété type sur le paramètre correspond au paramètre eventType transmis à addHandlerAsync.
       type:
       - any
     - id: options
       description: "Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. asyncContext: les développeurs peuvent fournir n'importe quel objet auquel ils souhaitent accéder dans la méthode de rappel."
       type:
-      - any
+      - Office.AsyncContextOptions
     - id: callback
       description: Facultatif. Une fois la méthode exécutée, la fonction transmise au paramètre callback est appelée avec un seul paramètre, asyncResult, qui est un objet Office. AsyncResult.
       type:
@@ -122,7 +122,7 @@ items:
       type:
       - Office.EventType
     - id: handler
-      description: Fonction permettant de gérer l'événement. La fonction doit accepter un seul paramètre, qui est un littéral d'objet. La propriété type sur le paramètre correspond au paramètre eventType transmis à addHandlerAsync.
+      description: Fonction qui gère l’événement. Cette fonction doit accepter un seul paramètre, qui est un littéral d’objet. La propriété type sur le paramètre correspond au paramètre eventType transmis à addHandlerAsync.
       type:
       - any
     - id: callback
@@ -137,10 +137,10 @@ items:
     Dans Outlook Web App, le formulaire de réponse s’affiche sous forme de formulaire isolé dans l’affichage à 3 colonnes et sous forme de formulaire contextuel dans l’affichage à 1 ou 2 colonnes.
 
 
-    Si un des paramètres de chaîne dépasse la limite, displayReplyAllForm génère une exception.
+    Si l'un des paramètres de chaîne dépasse la limite, displayReplyAllForm génère une exception.
 
 
-    Lorsque des pièces jointes sont spécifiées dans le paramètre formData.attachments, Outlook et Outlook Web App tentent de télécharger toutes les pièces jointes et de les joindre au formulaire de réponse. Si une pièce jointe n’est pas ajoutée, une erreur s’affiche dans l’interface utilisateur du formulaire. Si ce n’est pas possible, aucun message d’erreur n’est généré.
+    Lorsque des pièces jointes sont spécifiées dans le paramètre Formulairemode. Attachments, Outlook et Outlook Web App tentent de télécharger toutes les pièces jointes et de les joindre au formulaire de réponse. Si aucune pièce jointe n’est ajoutée, une erreur s’affiche dans l’interface utilisateur du formulaire. Si ce n’est pas possible, aucun message d’erreur n’est généré.
 
 
     **Remarque**: cette méthode n'est pas prise en charge dans Outlook pour iOS ou Outlook pour Android.
@@ -266,10 +266,10 @@ items:
     Dans Outlook Web App, le formulaire de réponse s’affiche sous forme de formulaire isolé dans l’affichage à 3 colonnes et sous forme de formulaire contextuel dans l’affichage à 1 ou 2 colonnes.
 
 
-    Si un des paramètres de chaîne dépasse la limite, displayReplyForm génère une exception.
+    Si l'un des paramètres de chaîne dépasse la limite, displayReplyForm génère une exception.
 
 
-    Lorsque des pièces jointes sont spécifiées dans le paramètre formData.attachments, Outlook et Outlook Web App tentent de télécharger toutes les pièces jointes et de les joindre au formulaire de réponse. Si une pièce jointe n’est pas ajoutée, une erreur s’affiche dans l’interface utilisateur du formulaire. Si ce n’est pas possible, aucun message d’erreur n’est généré.
+    Lorsque des pièces jointes sont spécifiées dans le paramètre Formulairemode. Attachments, Outlook et Outlook Web App tentent de télécharger toutes les pièces jointes et de les joindre au formulaire de réponse. Si aucune pièce jointe n’est ajoutée, une erreur s’affiche dans l’interface utilisateur du formulaire. Si ce n’est pas possible, aucun message d’erreur n’est généré.
 
 
     **Remarque**: cette méthode n'est pas prise en charge dans Outlook pour iOS ou Outlook pour Android.
@@ -435,7 +435,13 @@ items:
     Alors que le niveau d’autorisation minimal Restricted suffit pour utiliser cette méthode, certains types d’entité nécessitent le niveau ReadItem pour pouvoir y accéder, comme indiqué dans le tableau suivant.
 
 
-    <table> <tr> <th>Valeur de entityType</th> <th>Type des objets du tableau renvoyé</th> <th>Niveau d’autorisation requis</th> </tr> <tr> <td>Address</td> <td>String</td> <td>Restreinte</td> </tr> <tr> <td>Contact</td> <td>Contact</td> <td>ReadItem</td> </tr> <tr> <td>EmailAddress</td> <td>String</td> <td>ReadItem</td> </tr> <tr> <td>MeetingSuggestion</td> <td>MeetingSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>PhoneNumber</td> <td>PhoneNumber</td> <td>Restricted</td> </tr> <tr> <td>TaskSuggestion</td> <td>TaskSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>URL</td> <td>String</td> <td>Restricted</td> </tr> </table>
+    <table> <tr> <th>Valeur d'entityType</th> <th>Type des objets du tableau renvoyé</th> <th>Niveau d’autorisation requis</th> </tr> <tr> <td>Adresse</td> <td>String
+
+    </td> <td>Restreinte</td> </tr> <tr> <td>Contact</td> <td>Contact</td> <td>ReadItem</td> </tr> <tr> <td>EmailAddress</td> <td>String
+
+    </td> <td>ReadItem</td> </tr> <tr> <td>MeetingSuggestion</td> <td>MeetingSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>PhoneNumber</td> <td>PhoneNumber</td> <td>Restreinte</td> </tr> <tr> <td>TaskSuggestion</td> <td>TaskSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>URL</td> <td>String
+
+    </td> <td>Restreinte</td> </tr> </table>
 
     #### Exemples
 
@@ -482,7 +488,7 @@ items:
     Renvoie des entités reconnues dans l’élément sélectionné, qui transmettent le filtre nommé défini au fichier manifeste XML.
 
 
-    La méthode getFilteredEntitiesByName renvoie les entités qui correspondent à l’expression régulière définie dans l’élément de règle ItemHasKnownEntity du fichier manifeste XML ayant la valeur de l’élément FilterName spécifié.
+    La méthode getFilteredEntitiesByName retourne les entités qui correspondent à l’expression régulière définie dans chaque élément de règle ItemHasKnownEntity du fichier manifeste XML ayant la valeur de l’élément FilterName spécifié.
 
 
     **Remarque**: cette méthode n'est pas prise en charge dans Outlook pour iOS ou Outlook pour Android.
@@ -500,10 +506,10 @@ items:
     return:
       type:
       - (string | Contact | MeetingSuggestion | PhoneNumber | TaskSuggestion)[]
-      description: Si aucun élément ItemHasKnownEntity dans le manifeste n’a une valeur d’élément FilterName qui correspond au paramètre name, la méthode renvoie null. Si le paramètre name correspond à un élément ItemHasKnownEntity dans le manifeste, mais qu’aucune entité dans l’élément actif ne correspond, la méthode renvoie un tableau vide.
+      description: S'il n'existe aucun élément ItemHasKnownEntity dans le manifeste avec une valeur d'élément NomFiltre correspondant au paramètre Name, la méthode renvoie la valeur null. Si le paramètre Name correspond à un élément ItemHasKnownEntity dans le manifeste, mais qu'il n'y a aucune entité dans l'élément actuel qui correspond, la méthode renvoie un tableau vide.
     parameters:
     - id: name
-      description: Nom de l’élément de règle ItemHasKnownEntity qui définit le filtre à respecter.
+      description: Nom de l'élément de règle ItemHasKnownEntity qui définit le filtre à respecter.
       type:
       - string
 - uid: outlook.Office.MessageRead.getInitializationContextAsync
@@ -569,10 +575,10 @@ items:
     Renvoie des valeurs de chaîne dans l’élément sélectionné, qui correspondent aux expressions régulières définies dans le fichier manifeste XML.
 
 
-    La méthode getRegExMatches renvoie les chaînes qui correspondent à l’expression régulière définie dans chaque élément de règle ItemHasRegularExpressionMatch ou ItemHasKnownEntity du fichier manifeste XML. Pour une règle ItemHasRegularExpressionMatch, une chaîne correspondante doit être présente dans la propriété de l’élément spécifié par cette règle. Le type simple PropertyName définit les propriétés prises en charge.
+    La méthode getRegExMatches retourne les chaînes qui correspondent à l’expression régulière définie dans chaque élément de règle ItemHasRegularExpressionMatch ou ItemHasKnownEntity du fichier manifeste XML. Pour une règle ItemHasRegularExpressionMatch, une chaîne correspondante doit être présente dans la propriété de l’élément spécifié par cette règle. Le type simple PropertyName définit les propriétés prises en charge.
 
 
-    Si vous spécifiez une règle ItemHasRegularExpressionMatch pour la propriété du corps d’un élément, l’expression régulière doit filtrer davantage le corps. Par ailleurs, elle ne doit pas tenter de renvoyer l’intégralité du corps de l’élément. L’utilisation d’une expression régulière telle que .* pour obtenir l’intégralité du corps d’un élément ne renvoie pas toujours les résultats attendus. Utilisez plutôt la méthode Body.getAsync pour récupérer l’intégralité du corps de l’élément.
+    Si vous spécifiez une règle ItemHasRegularExpressionMatch sur la propriété Body d'un élément, l'expression régulière doit ensuite filtrer le corps et ne doit pas essayer de renvoyer l'intégralité du corps de l'élément. L'utilisation d'une expression régulière telle que. * pour obtenir l'intégralité du corps d'un élément ne renvoie pas toujours les résultats attendus. À la place, utilisez la méthode Body. getAsync pour récupérer la totalité du corps.
 
 
     **Remarque**: cette méthode n'est pas prise en charge dans Outlook pour iOS ou Outlook pour Android.
@@ -638,16 +644,16 @@ items:
     return:
       type:
       - any
-      description: Un objet qui contient les tableaux des chaînes correspondant aux expressions régulières définies dans le fichier manifeste XML. Le nom de chaque tableau est égal à la valeur correspondante de l’attribut RegExName de la règle ItemHasRegularExpressionMatch correspondante ou de l’attribut FilterName de la règle ItemHasKnownEntity correspondante.
+      description: Un objet qui contient les tableaux des chaînes correspondant aux expressions régulières définies dans le fichier manifeste XML. Le nom de chaque tableau est égal à la valeur correspondante de l'attribut RegExName de la règle ItemHasRegularExpressionMatch correspondante ou de l'attribut FilterName de la règle ItemHasKnownEntity correspondante.
 - uid: outlook.Office.MessageRead.getRegExMatchesByName
   summary: >-
     Renvoie des valeurs de chaîne dans l’élément sélectionné, qui correspondent aux expressions régulières nommées définies dans le fichier manifeste XML.
 
 
-    La méthode getRegExMatchesByName renvoie les chaînes qui correspondent à l’expression régulière définie dans l’élément de règle ItemHasRegularExpressionMatch du fichier manifeste XML ayant la valeur de l’élément RegExName spécifié.
+    La méthode getRegExMatchesByName retourne les chaînes qui correspondent à l’expression régulière définie dans chaque élément de règle ItemHasRegularExpressionMatch du fichier manifeste XML ayant la valeur de l’élément RegExName spécifié.
 
 
-    Si vous spécifiez une règle ItemHasRegularExpressionMatch pour la propriété de corps d’un élément, l’expression régulière doit filtrer davantage le corps. Par ailleurs, elle ne doit pas tenter de renvoyer l’intégralité du corps de l’élément. L’utilisation d’une expression régulière telle que .* pour obtenir l’intégralité du corps d’un élément ne renvoie pas toujours les résultats attendus.
+    Si vous spécifiez une règle ItemHasRegularExpressionMatch sur la propriété Body d'un élément, l'expression régulière doit ensuite filtrer le corps et ne doit pas essayer de renvoyer l'intégralité du corps de l'élément. L'utilisation d'une expression régulière telle que. * pour obtenir l'intégralité du corps d'un élément ne renvoie pas toujours les résultats attendus.
 
 
     **Remarque**: cette méthode n'est pas prise en charge dans Outlook pour iOS ou Outlook pour Android.
@@ -708,12 +714,12 @@ items:
       description: Un tableau qui contient les chaînes correspondant à l’expression régulière définie dans le fichier manifeste XML.
     parameters:
     - id: name
-      description: Nom de l’élément de règle ItemHasRegularExpressionMatch qui définit le filtre à respecter.
+      description: Nom de l'élément de règle ItemHasRegularExpressionMatch qui définit le filtre à respecter.
       type:
       - string
 - uid: outlook.Office.MessageRead.getSelectedEntities
   summary: >-
-    Permet d’obtenir les entités figurant dans une correspondance en surbrillance qu’un utilisateur a sélectionné. Les correspondances en surbrillance s’appliquent aux compléments contextuels.
+    Obtient les entités figurant dans une correspondance en surbrillance qu’un utilisateur a sélectionné. Les correspondances en surbrillance s’appliquent aux compléments contextuels.
 
 
     **Remarque**: cette méthode n'est pas prise en charge dans Outlook pour iOS ou Outlook pour Android.
@@ -751,10 +757,10 @@ items:
     Renvoie des valeurs de chaîne dans une correspondance en surbrillance, qui correspondent aux expressions régulières définies dans le fichier manifeste XML. Les correspondances en surbrillance s’appliquent aux compléments contextuels.
 
 
-    La méthode getSelectedRegExMatches renvoie les chaînes qui correspondent à l'expression régulière définie dans chaque élément de règle ItemHasRegularExpressionMatch ou ItemHasKnownEntity dans le fichier manifeste XML. Pour une règle ItemHasRegularExpressionMatch, une chaîne correspondante doit se produire dans la propriété de l'élément spécifié par cette règle. Le type simple PropertyName définit les propriétés prises en charge.
+    La méthode getSelectedRegExMatches renvoie les chaînes qui correspondent à l'expression régulière définie dans chaque élément de règle ItemHasRegularExpressionMatch ou ItemHasKnownEntity dans le fichier manifeste XML. Pour une règle ItemHasRegularExpressionMatch, une chaîne correspondante doit être présente dans la propriété de l’élément spécifié par cette règle. Le type simple PropertyName définit les propriétés prises en charge.
 
 
-    Si vous spécifiez une règle ItemHasRegularExpressionMatch pour la propriété du corps d’un élément, l’expression régulière doit filtrer davantage le corps. Par ailleurs, elle ne doit pas tenter de renvoyer l’intégralité du corps de l’élément. L’utilisation d’une expression régulière telle que .* pour obtenir l’intégralité du corps d’un élément ne renvoie pas toujours les résultats attendus. Utilisez plutôt la méthode Body.getAsync pour récupérer l’intégralité du corps de l’élément.
+    Si vous spécifiez une règle ItemHasRegularExpressionMatch sur la propriété Body d'un élément, l'expression régulière doit ensuite filtrer le corps et ne doit pas essayer de renvoyer l'intégralité du corps de l'élément. L'utilisation d'une expression régulière telle que. * pour obtenir l'intégralité du corps d'un élément ne renvoie pas toujours les résultats attendus. À la place, utilisez la méthode Body. getAsync pour récupérer la totalité du corps.
 
 
     **Remarque**: cette méthode n'est pas prise en charge dans Outlook pour iOS ou Outlook pour Android.
@@ -820,16 +826,16 @@ items:
     return:
       type:
       - any
-      description: Un objet qui contient les tableaux des chaînes correspondant aux expressions régulières définies dans le fichier manifeste XML. Le nom de chaque tableau est égal à la valeur correspondante de l’attribut RegExName de la règle ItemHasRegularExpressionMatch correspondante ou de l’attribut FilterName de la règle ItemHasKnownEntity correspondante.
+      description: Un objet qui contient les tableaux des chaînes correspondant aux expressions régulières définies dans le fichier manifeste XML. Le nom de chaque tableau est égal à la valeur correspondante de l'attribut RegExName de la règle ItemHasRegularExpressionMatch correspondante ou de l'attribut FilterName de la règle ItemHasKnownEntity correspondante.
 - uid: outlook.Office.MessageRead.loadCustomPropertiesAsync
   summary: >-
     Charge de manière asynchrone les propriétés personnalisées de ce complément vers l’élément sélectionné.
 
 
-    Les propriétés personnalisées sont stockées sous la forme de paires clé/valeur qui s’appliquent à une application ou un élément. Cette méthode renvoie un objet CustomProperties dans le rappel, qui fournit des méthodes pour accéder aux propriétés personnalisées propres à l’élément et au complément actifs. Les propriétés personnalisées ne sont pas chiffrées dans l’élément, par conséquent elles ne doivent pas servir d’espace de stockage sécurisé.
+    Les propriétés personnalisées sont stockées sous la forme de paires clé/valeur qui s’appliquent à une application ou un élément. Cette méthode renvoie un objet CustomProperties dans le rappel, qui fournit des méthodes pour accéder aux propriétés personnalisées spécifiques de l'élément actuel et du complément actuel. Les propriétés personnalisées ne sont pas chiffrées dans l’élément, par conséquent elles ne doivent pas servir d’espace de stockage sécurisé.
 
 
-    Les propriétés personnalisées sont fournies sous la forme d’un objet CustomProperties dans la propriété asyncResult.value. Cet objet peut être utilisé pour obtenir, définir et supprimer des propriétés personnalisées à partir de l’élément et réenregistrer les modifications apportées au jeu de propriétés personnalisées sur le serveur.
+    Les propriétés personnalisées sont fournies sous la forme d'un objet CustomProperties dans la propriété asyncResult. Value. Cet objet peut être utilisé pour obtenir, définir et supprimer des propriétés personnalisées à partir de l’élément et réenregistrer les modifications apportées au jeu de propriétés personnalisées sur le serveur.
 
 
     \[[Ensemble d'API: boîte aux lettres 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -870,7 +876,7 @@ items:
   - typeScript
   type: method
   syntax:
-    content: 'removeHandlerAsync(eventType: Office.EventType, options?: any, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'removeHandlerAsync(eventType: Office.EventType, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     return:
       type:
       - void
@@ -883,7 +889,7 @@ items:
     - id: options
       description: "Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. asyncContext: les développeurs peuvent fournir n'importe quel objet auquel ils souhaitent accéder dans la méthode de rappel."
       type:
-      - any
+      - Office.AsyncContextOptions
     - id: callback
       description: Facultatif. Une fois la méthode exécutée, la fonction transmise au paramètre callback est appelée avec un seul paramètre, asyncResult, qui est un objet Office. AsyncResult.
       type:
@@ -920,7 +926,7 @@ items:
       - '(asyncResult: Office.AsyncResult<void>) => void'
 - uid: outlook.Office.MessageRead.attachments
   summary: >-
-    Permet d’obtenir les pièces jointes de l’élément sous forme de tableau.
+    Obtient les pièces jointes de l'élément sous la forme d'un tableau.
 
 
     \[[Ensemble d'API: boîte aux lettres 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -1016,7 +1022,7 @@ items:
     Permet d’accéder aux destinataires en copie carbone (Cc) d’un message. Le type d’objet et le niveau d’accès varient selon le mode de l’élément actif.
 
 
-    La propriété cc renvoie un tableau contenant un objet EmailAddressDetails pour chaque destinataire répertorié sur la ligne Cc du message. La collection est limitée à 100 membres.
+    La propriété CC renvoie un tableau qui contient un objet EmailAddressDetails pour chaque destinataire mentionné sur la ligne CC du message. La collection est limitée à 100 membres.
 
 
     \[[Ensemble d'API: boîte aux lettres 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -1049,7 +1055,7 @@ items:
     Vous pouvez obtenir un nombre entier de cette propriété si votre application de messagerie est activée dans les formulaires de lecture ou les réponses des formulaires de composition. Si, par la suite, l’utilisateur modifie l’objet du message de réponse, lors de l’envoi de la réponse, l’ID de conversation de ce message va changer et la valeur que vous avez obtenue plus tôt ne sera plus applicable.
 
 
-    Cette propriété obtient une valeur null lorsqu’un élément est ajouté à un formulaire de composition. Si l’utilisateur définit la ligne Objet et enregistre l’élément, la propriété conversationId renvoie une valeur.
+    Cette propriété obtient une valeur null lorsqu’un élément est ajouté à un formulaire de composition. Si l'utilisateur définit un objet et enregistre l'élément, la propriété conversationId renvoie une valeur.
 
 
     \[[Ensemble d'API: boîte aux lettres 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -1139,10 +1145,10 @@ items:
       - Date
 - uid: outlook.Office.MessageRead.from
   summary: >-
-    Permet d’obtenir l’adresse de messagerie de l’expéditeur d’un message.
+    Obtient l’adresse de messagerie de l’expéditeur d’un message.
 
 
-    Les propriétés from et sender représentent la même personne, sauf si le message est envoyé par un délégué. Dans ce cas, la propriété from représente le délégant et la propriété sender représente le délégué.
+    Les propriétés from et sender représentent la même personne, sauf si le message est envoyé par un délégué. Dans ce cas, la propriété from représente la délégation, et la propriété sender représente le délégué.
 
 
     **Remarque**: la propriété recipientType de l'objet EmailAddressDetails dans la propriété from n'est pas définie.
@@ -1214,7 +1220,7 @@ items:
       - outlook.Office.InternetHeaders
 - uid: outlook.Office.MessageRead.internetMessageId
   summary: >-
-    Obtient l’identificateur de message Internet correspondant à un e-mail.
+    Obtient l’identificateur de message Internet d’un message électronique.
 
 
     \[[Ensemble d'API: boîte aux lettres 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -1254,7 +1260,7 @@ items:
     <table> <tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Lecture de message</td></tr> </table>
 
 
-    La propriété itemClass spécifie la classe de message de l’élément sélectionné. Les classes de message par défaut de l’élément de message ou de rendez-vous sont les suivantes.
+    La propriété itemClass spécifie la classe de message de l’élément sélectionné. Les éléments suivants sont les classes de message par défaut du message ou de l’élément de rendez-vous.
 
 
     <table> <tr> <th>Type</th> <th>Description</th> <th>Classe d'élément</th> </tr> <tr> <td>Éléments de rendez-vous</td> <td>Il s'agit des éléments de calendrier de la classe d'élément IPM. Rendez-vous ou IPM. Appointment. occurrence.</td> <td>Mn. Rendez-vous, IPM. Appointment. occurrence</td> </tr> <tr> <td>Éléments de message</td> <td>Ces éléments incluent les messages électroniques dont la classe de message par défaut est IPM.Note, ainsi que les demandes de réunion, les réponses et les annulations qui utilisent IPM.Schedule.Meeting comme classe de message de base.</td> <td>Mn. Remarque, IPM. La tâche Schedule. Meeting. Request, IPM. Schedule. Meeting. nég, IPM. Schedule. Meeting. POS, IPM. Schedule. Meeting. chevalet, IPM. Schedule. Meeting. Canceled</td> </tr> </table>
@@ -1331,7 +1337,7 @@ items:
     Obtient le type d’élément représenté par une instance.
 
 
-    La propriété itemType renvoie une des valeurs d’énumération ItemType indiquant si l’instance d’objet item est un message ou un rendez-vous.
+    La propriété itemType renvoie l'une des valeurs d'énumération ItemType, indiquant si l'instance de l'objet Item est un message ou un rendez-vous.
 
 
     \[[Ensemble d'API: boîte aux lettres 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -1365,7 +1371,7 @@ items:
     Obtient l'objet d'un élément, avec tous les préfixes supprimés (notamment RE: et FWD:).
 
 
-    La propriété normalizedSubject obtient l’objet de l’élément, sans les préfixes standard (par exemple, RE: et FW:) qui sont ajoutés par les programmes de messagerie électronique. Pour obtenir l’objet de l’élément avec les préfixes intacts, utilisez la propriété subject.
+    La propriété normalizedSubject obtient l'objet de l'élément, avec tous les préfixes standard (tels que RE: et FW:) ajoutés par des programmes de messagerie. Pour obtenir l'objet de l'élément avec les préfixes intacts, utilisez la propriété Subject.
 
 
     \[[Ensemble d'API: boîte aux lettres 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -1427,10 +1433,10 @@ items:
       - NotificationMessages
 - uid: outlook.Office.MessageRead.recurrence
   summary: >-
-    Obtient la périodicité d'un rendez-vous. Permet d’obtenir la périodicité d’une demande de réunion. Modes lecture et composition pour les éléments de rendez-vous. Mode lecture pour les éléments de demande de réunion.
+    Obtient la périodicité d'un rendez-vous. Obtient la périodicité d'une demande de réunion. Modes lecture et composition pour les éléments de rendez-vous. Mode lecture pour les éléments de demande de réunion.
 
 
-    La propriété Recurrence renvoie un objet Recurrence pour les demandes de réunion ou de rendez-vous périodiques si un élément est une série ou une instance dans une série. La valeur `null` est renvoyée pour les rendez-vous uniques et les demandes de réunion de rendez-vous uniques. La valeur `undefined` est renvoyée pour les messages qui ne sont pas des demandes de réunion.
+    La propriété Recurrence renvoie un objet Recurrence pour les demandes de réunion ou de rendez-vous périodiques si un élément est une série ou une instance dans une série. `null`est renvoyé pour les rendez-vous uniques et les demandes de réunion de rendez-vous uniques. `undefined`est renvoyée pour les messages qui ne sont pas des demandes de réunion.
 
 
     **Remarque**: les demandes de réunion ont une valeur itemClass IPM. Schedule. Meeting. Request.
@@ -1465,10 +1471,10 @@ items:
       - Recurrence
 - uid: outlook.Office.MessageRead.sender
   summary: >-
-    Obtient l’adresse de messagerie de l’expéditeur d’un e-mail.
+    Obtient l’adresse de messagerie de l’expéditeur d’un message électronique.
 
 
-    Les propriétés from et sender représentent la même personne, sauf si le message est envoyé par un délégué. Dans ce cas, la propriété from représente le délégant et la propriété sender représente le délégué.
+    Les propriétés from et sender représentent la même personne, sauf si le message est envoyé par un délégué. Dans ce cas, la propriété from représente la délégation, et la propriété sender représente le délégué.
 
 
     **Remarque**: la propriété recipientType de l'objet EmailAddressDetails dans la propriété sender n'est pas définie.
@@ -1502,7 +1508,7 @@ items:
       - EmailAddressDetails
 - uid: outlook.Office.MessageRead.seriesId
   summary: >-
-    Permet d’obtenir l’ID de la série à laquelle une instance appartient.
+    Obtient l'ID de la série à laquelle une instance appartient.
 
 
     Dans OWA et Outlook, seriesId renvoie l'ID des services Web Exchange (EWS) de l'élément parent (série) auquel cet élément appartient. Toutefois, dans iOS et Android, l'seriesId renvoie l'ID REST de l'élément parent.
@@ -1531,10 +1537,10 @@ items:
     Obtient la description qui apparaît dans le champ objet d'un élément.
 
 
-    La propriété subject obtient ou définit l’intégralité de l’objet de l’élément, tel qu’il est envoyé par le serveur de messagerie.
+    La propriété Subject obtient ou définit l'intégralité de l'objet de l'élément, tel qu'il est envoyé par le serveur de messagerie.
 
 
-    La propriété subject renvoie une chaîne. Utilisez la propriété normalizedSubject pour obtenir l’objet sans les préfixes tels que RE: et FW:.
+    La propriété Subject renvoie une chaîne. Utilisez la propriété normalizedSubject pour obtenir l'objet, moins tous les préfixes de début tels que RE: et FW:.
 
 
     \[[Ensemble d'API: boîte aux lettres 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -1580,7 +1586,7 @@ items:
     Permet d’accéder aux destinataires figurant sur la ligne À d’un message. Le type d’objet et le niveau d’accès varient selon le mode de l’élément actif.
 
 
-    La propriété to renvoie un tableau contenant un objet EmailAddressDetails pour chaque destinataire répertorié sur la ligne To du message. La collection est limitée à 100 membres.
+    La propriété to renvoie un tableau qui contient un objet EmailAddressDetails pour chaque destinataire mentionné sur la ligne à du message. La collection est limitée à 100 membres.
 
 
     \[[Ensemble d'API: boîte aux lettres 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
