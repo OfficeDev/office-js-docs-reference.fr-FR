@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: cc43ecfaeebdb6f7a353f87991f727717dba4713
-ms.sourcegitcommit: e9bfba6ec767e9d34fd1cf7b38c30f689617900a
+ms.openlocfilehash: 57fb4e053fa31f5ef9e670069b8628e55c6e3a47
+ms.sourcegitcommit: 6c48441b8be51d3a9d7dc836e386230a155feceb
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/20/2019
-ms.locfileid: "30098242"
+ms.lasthandoff: 02/22/2019
+ms.locfileid: "30198465"
 items:
 - uid: Outlook_1_1.Office.ItemCompose
   summary: >-
@@ -23,21 +23,17 @@ items:
   children:
   - Outlook_1_1.Office.ItemCompose.addFileAttachmentAsync
   - Outlook_1_1.Office.ItemCompose.addFileAttachmentAsync_1
-  - Outlook_1_1.Office.ItemCompose.addFileAttachmentAsync_2
   - Outlook_1_1.Office.ItemCompose.addItemAttachmentAsync
   - Outlook_1_1.Office.ItemCompose.addItemAttachmentAsync_1
-  - Outlook_1_1.Office.ItemCompose.addItemAttachmentAsync_2
   - Outlook_1_1.Office.ItemCompose.removeAttachmentAsync
   - Outlook_1_1.Office.ItemCompose.removeAttachmentAsync_1
-  - Outlook_1_1.Office.ItemCompose.removeAttachmentAsync_2
-  - Outlook_1_1.Office.ItemCompose.removeAttachmentAsync_3
   - Outlook_1_1.Office.ItemCompose.subject
 - uid: Outlook_1_1.Office.ItemCompose.addFileAttachmentAsync
   summary: >-
     Ajoute un fichier à un message ou un rendez-vous en pièce jointe.
 
 
-    La méthode addFileAttachmentAsync charge le fichier depuis l’URI spécifié et le joint à l’élément dans le formulaire de composition.
+    La méthode addFileAttachmentAsync télécharge le fichier à l'URI spécifié et le joint à l'élément dans le formulaire de composition.
 
 
     L’identificateur peut être utilisé avec la méthode removeAttachmentAsync pour supprimer la pièce jointe dans la même session.
@@ -51,7 +47,7 @@ items:
   - typeScript
   type: method
   syntax:
-    content: 'addFileAttachmentAsync(uri: string, attachmentName: string, options?: Office.AsyncContextOptions, callback?: (result: Office.AsyncResult<string>) => void): void;'
+    content: 'addFileAttachmentAsync(uri: string, attachmentName: string, options?: Office.AsyncContextOptions & { isInline: boolean }, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
     return:
       type:
       - void
@@ -62,56 +58,23 @@ items:
       type:
       - string
     - id: attachmentName
-      description: Nom de la pièce jointe affiché lors de son chargement. La taille maximale est de 255 caractères.
+      description: Nom de la pièce jointe affiché lors de son chargement. La longueur maximale est de 255 caractères.
       type:
       - string
     - id: options
       description: "Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. asyncContext: les développeurs peuvent fournir n'importe quel objet auquel ils souhaitent accéder dans la méthode de rappel. isInline: si la valeur est définie sur true, indique que la pièce jointe s'affichera en ligne dans le corps du message et ne doit pas être affichée dans la liste des pièces jointes."
       type:
-      - Office.AsyncContextOptions
+      - 'Office.AsyncContextOptions & { isInline: boolean }'
     - id: callback
-      description: Une fois la méthode exécutée, la fonction transmise au paramètre callback est appelée avec un seul paramètre de type Office. AsyncResult. En cas de réussite, l'identificateur de pièce jointe est fourni dans la propriété asyncResult. Value. En cas d’échec de téléchargement de la pièce jointe, l’objet asyncResult contient un objet Error qui fournit une description de l’erreur.
+      description: Facultatif. Une fois la méthode exécutée, la fonction transmise au paramètre callback est appelée avec un seul paramètre de type Office. AsyncResult. En cas de réussite, l'identificateur de pièce jointe est fourni dans la propriété asyncResult. Value. En cas d’échec de téléchargement de la pièce jointe, l’objet asyncResult contient un objet Error qui fournit une description de l’erreur.
       type:
-      - '(result: Office.AsyncResult<string>) => void'
+      - '(asyncResult: Office.AsyncResult<string>) => void'
 - uid: Outlook_1_1.Office.ItemCompose.addFileAttachmentAsync_1
   summary: >-
     Ajoute un fichier à un message ou un rendez-vous en pièce jointe.
 
 
-    La méthode addFileAttachmentAsync charge le fichier depuis l’URI spécifié et le joint à l’élément dans le formulaire de composition.
-
-
-    L’identificateur peut être utilisé avec la méthode removeAttachmentAsync pour supprimer la pièce jointe dans la même session.
-
-
-    \[[Ensemble d'API: boîte aux lettres 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: "<table> <tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr> <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition</td></tr> <tr><td>Erreurs</td><td>AttachmentSizeExceeded-la pièce jointe est plus grande que le nombre autorisé.</td></tr> <tr><td></td><td>FileTypeNotSupported-la pièce jointe a une extension qui n'est pas autorisée.</td></tr> <tr><td></td><td>NumberOfAttachmentsExceeded: le message ou le rendez-vous contient trop de pièces jointes.</td></tr> </table>"
-  name: addFileAttachmentAsync(uri, attachmentName)
-  fullName: addFileAttachmentAsync(uri, attachmentName)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'addFileAttachmentAsync(uri: string, attachmentName: string): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: uri
-      description: URI indiquant l’emplacement du fichier à joindre au message ou au rendez-vous. La longueur maximale est de 2 048 caractères.
-      type:
-      - string
-    - id: attachmentName
-      description: Nom de la pièce jointe affiché lors de son chargement. La taille maximale est de 255 caractères.
-      type:
-      - string
-- uid: Outlook_1_1.Office.ItemCompose.addFileAttachmentAsync_2
-  summary: >-
-    Ajoute un fichier à un message ou un rendez-vous en pièce jointe.
-
-
-    La méthode addFileAttachmentAsync charge le fichier depuis l’URI spécifié et le joint à l’élément dans le formulaire de composition.
+    La méthode addFileAttachmentAsync télécharge le fichier à l'URI spécifié et le joint à l'élément dans le formulaire de composition.
 
 
     L’identificateur peut être utilisé avec la méthode removeAttachmentAsync pour supprimer la pièce jointe dans la même session.
@@ -125,7 +88,7 @@ items:
   - typeScript
   type: method
   syntax:
-    content: 'addFileAttachmentAsync(uri: string, attachmentName: string, callback: (result: Office.AsyncResult<string>) => void): void;'
+    content: 'addFileAttachmentAsync(uri: string, attachmentName: string, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
     return:
       type:
       - void
@@ -136,25 +99,25 @@ items:
       type:
       - string
     - id: attachmentName
-      description: Nom de la pièce jointe affiché lors de son chargement. La taille maximale est de 255 caractères.
+      description: Nom de la pièce jointe affiché lors de son chargement. La longueur maximale est de 255 caractères.
       type:
       - string
     - id: callback
-      description: Une fois la méthode exécutée, la fonction transmise au paramètre callback est appelée avec un seul paramètre de type Office. AsyncResult. En cas de réussite, l'identificateur de pièce jointe est fourni dans la propriété asyncResult. Value. En cas d’échec de téléchargement de la pièce jointe, l’objet asyncResult contient un objet Error qui fournit une description de l’erreur.
+      description: Facultatif. Une fois la méthode exécutée, la fonction transmise au paramètre callback est appelée avec un seul paramètre de type Office. AsyncResult. En cas de réussite, l'identificateur de pièce jointe est fourni dans la propriété asyncResult. Value. En cas d’échec de téléchargement de la pièce jointe, l’objet asyncResult contient un objet Error qui fournit une description de l’erreur.
       type:
-      - '(result: Office.AsyncResult<string>) => void'
+      - '(asyncResult: Office.AsyncResult<string>) => void'
 - uid: Outlook_1_1.Office.ItemCompose.addItemAttachmentAsync
   summary: >-
     Ajoute un élément Exchange, comme un message, en pièce jointe au message ou au rendez-vous.
 
 
-    La méthode addItemAttachmentAsync joint l’élément avec l’identificateur Exchange spécifié à l’élément du formulaire de composition. Si vous spécifiez une méthode de rappel, la méthode est appelée avec un paramètre, asyncResult, qui contient l’identificateur de pièce jointe ou un code indiquant toute erreur survenue lors de l’ajout de l’élément en tant que pièce jointe. Si nécessaire, vous pouvez utiliser le paramètre options pour transmettre des informations d’état à la méthode de rappel.
+    La méthode addItemAttachmentAsync attache l'élément avec l'identificateur Exchange spécifié à l'élément dans le formulaire de composition. Si vous spécifiez une méthode de rappel, la méthode est appelée avec un paramètre, asyncResult, qui contient l’identificateur de pièce jointe ou un code indiquant toute erreur survenue lors de l’ajout de l’élément en tant que pièce jointe. Vous pouvez utiliser le paramètre options pour transmettre des informations d'État à la méthode de rappel, si nécessaire.
 
 
     L’identificateur peut être utilisé avec la méthode removeAttachmentAsync pour supprimer la pièce jointe dans la même session.
 
 
-    Si votre complément Office est exécuté dans Outlook Web App, la méthode addItemAttachmentAsync peut joindre des éléments à des éléments autres que ceux que vous modifiez ; mais cette action n’est pas prise en charge et est déconseillée.
+    Si votre complément Office est en cours d'exécution dans Outlook Web App, la méthode addItemAttachmentAsync peut joindre des éléments à des éléments autres que l'élément que vous modifiez; Toutefois, cette option n'est pas prise en charge et n'est pas recommandée.
 
 
     \[[Ensemble d'API: boîte aux lettres 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -165,7 +128,7 @@ items:
   - typeScript
   type: method
   syntax:
-    content: 'addItemAttachmentAsync(itemId: any, attachmentName: string, options?: Office.AsyncContextOptions, callback?: (result: Office.AsyncResult<string>) => void): void;'
+    content: 'addItemAttachmentAsync(itemId: any, attachmentName: string, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
     return:
       type:
       - void
@@ -176,65 +139,29 @@ items:
       type:
       - any
     - id: attachmentName
-      description: Nom de la pièce jointe affiché lors de son chargement. La taille maximale est de 255 caractères.
+      description: Nom de la pièce jointe affiché lors de son chargement. La longueur maximale est de 255 caractères.
       type:
       - string
     - id: options
-      description: "Littéral d’objet contenant une ou plusieurs des propriétés suivantes. asyncContext: les développeurs peuvent fournir n'importe quel objet auquel ils souhaitent accéder dans la méthode de rappel."
+      description: "Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. asyncContext: les développeurs peuvent fournir n'importe quel objet auquel ils souhaitent accéder dans la méthode de rappel."
       type:
       - Office.AsyncContextOptions
     - id: callback
-      description: Une fois la méthode exécutée, la fonction transmise au paramètre callback est appelée avec un seul paramètre de type Office. AsyncResult. En cas de réussite, l'identificateur de pièce jointe est fourni dans la propriété asyncResult. Value. En cas d'échec de l'ajout de la pièce jointe, l'objet asyncResult contient un objet Error qui fournit une description de l'erreur.
+      description: Facultatif. Une fois la méthode exécutée, la fonction transmise au paramètre callback est appelée avec un seul paramètre de type Office. AsyncResult. En cas de réussite, l'identificateur de pièce jointe est fourni dans la propriété asyncResult. Value. En cas d'échec de l'ajout de la pièce jointe, l'objet asyncResult contient un objet Error qui fournit une description de l'erreur.
       type:
-      - '(result: Office.AsyncResult<string>) => void'
+      - '(asyncResult: Office.AsyncResult<string>) => void'
 - uid: Outlook_1_1.Office.ItemCompose.addItemAttachmentAsync_1
   summary: >-
     Ajoute un élément Exchange, comme un message, en pièce jointe au message ou au rendez-vous.
 
 
-    La méthode addItemAttachmentAsync joint l’élément avec l’identificateur Exchange spécifié à l’élément du formulaire de composition. Si vous spécifiez une méthode de rappel, la méthode est appelée avec un paramètre, asyncResult, qui contient l’identificateur de pièce jointe ou un code indiquant toute erreur survenue lors de l’ajout de l’élément en tant que pièce jointe. Si nécessaire, vous pouvez utiliser le paramètre options pour transmettre des informations d’état à la méthode de rappel.
+    La méthode addItemAttachmentAsync attache l'élément avec l'identificateur Exchange spécifié à l'élément dans le formulaire de composition. Si vous spécifiez une méthode de rappel, la méthode est appelée avec un paramètre, asyncResult, qui contient l’identificateur de pièce jointe ou un code indiquant toute erreur survenue lors de l’ajout de l’élément en tant que pièce jointe. Vous pouvez utiliser le paramètre options pour transmettre des informations d'État à la méthode de rappel, si nécessaire.
 
 
     L’identificateur peut être utilisé avec la méthode removeAttachmentAsync pour supprimer la pièce jointe dans la même session.
 
 
-    Si votre complément Office est exécuté dans Outlook Web App, la méthode addItemAttachmentAsync peut joindre des éléments à des éléments autres que ceux que vous modifiez ; mais cette action n’est pas prise en charge et est déconseillée.
-
-
-    \[[Ensemble d'API: boîte aux lettres 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: '<table> <tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr> <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition</td></tr> <tr><td>Erreurs</td><td>NumberOfAttachmentsExceeded: le message ou le rendez-vous contient trop de pièces jointes.</td></tr> </table>'
-  name: addItemAttachmentAsync(itemId, attachmentName)
-  fullName: addItemAttachmentAsync(itemId, attachmentName)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'addItemAttachmentAsync(itemId: any, attachmentName: string): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: itemId
-      description: Identificateur Exchange de l’élément à joindre. La taille maximale est de 100 caractères.
-      type:
-      - any
-    - id: attachmentName
-      description: Nom de la pièce jointe affiché lors de son chargement. La taille maximale est de 255 caractères.
-      type:
-      - string
-- uid: Outlook_1_1.Office.ItemCompose.addItemAttachmentAsync_2
-  summary: >-
-    Ajoute un élément Exchange, comme un message, en pièce jointe au message ou au rendez-vous.
-
-
-    La méthode addItemAttachmentAsync joint l’élément avec l’identificateur Exchange spécifié à l’élément du formulaire de composition. Si vous spécifiez une méthode de rappel, la méthode est appelée avec un paramètre, asyncResult, qui contient l’identificateur de pièce jointe ou un code indiquant toute erreur survenue lors de l’ajout de l’élément en tant que pièce jointe. Si nécessaire, vous pouvez utiliser le paramètre options pour transmettre des informations d’état à la méthode de rappel.
-
-
-    L’identificateur peut être utilisé avec la méthode removeAttachmentAsync pour supprimer la pièce jointe dans la même session.
-
-
-    Si votre complément Office est exécuté dans Outlook Web App, la méthode addItemAttachmentAsync peut joindre des éléments à des éléments autres que ceux que vous modifiez ; mais cette action n’est pas prise en charge et est déconseillée.
+    Si votre complément Office est en cours d'exécution dans Outlook Web App, la méthode addItemAttachmentAsync peut joindre des éléments à des éléments autres que l'élément que vous modifiez; Toutefois, cette option n'est pas prise en charge et n'est pas recommandée.
 
 
     \[[Ensemble d'API: boîte aux lettres 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -245,7 +172,7 @@ items:
   - typeScript
   type: method
   syntax:
-    content: 'addItemAttachmentAsync(itemId: any, attachmentName: string, callback: (result: Office.AsyncResult<string>) => void): void;'
+    content: 'addItemAttachmentAsync(itemId: any, attachmentName: string, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
     return:
       type:
       - void
@@ -256,19 +183,19 @@ items:
       type:
       - any
     - id: attachmentName
-      description: Nom de la pièce jointe affiché lors de son chargement. La taille maximale est de 255 caractères.
+      description: Nom de la pièce jointe affiché lors de son chargement. La longueur maximale est de 255 caractères.
       type:
       - string
     - id: callback
-      description: Une fois la méthode exécutée, la fonction transmise au paramètre callback est appelée avec un seul paramètre de type Office. AsyncResult. En cas de réussite, l'identificateur de pièce jointe est fourni dans la propriété asyncResult. Value. En cas d'échec de l'ajout de la pièce jointe, l'objet asyncResult contient un objet Error qui fournit une description de l'erreur.
+      description: Facultatif. Une fois la méthode exécutée, la fonction transmise au paramètre callback est appelée avec un seul paramètre de type Office. AsyncResult. En cas de réussite, l'identificateur de pièce jointe est fourni dans la propriété asyncResult. Value. En cas d'échec de l'ajout de la pièce jointe, l'objet asyncResult contient un objet Error qui fournit une description de l'erreur.
       type:
-      - '(result: Office.AsyncResult<string>) => void'
+      - '(asyncResult: Office.AsyncResult<string>) => void'
 - uid: Outlook_1_1.Office.ItemCompose.removeAttachmentAsync
   summary: >-
     Supprime une pièce jointe d’un message ou d’un rendez-vous.
 
 
-    La méthode removeAttachmentAsync supprime la pièce jointe avec l'identificateur spécifié de l'élément. Nous vous recommandons vivement de supprimer une pièce jointe à l’aide de son identificateur uniquement si la même application de messagerie a ajouté cette pièce jointe au cours de la même session. Dans Outlook Web App et OWA pour les périphériques, l’identificateur de pièce jointe n’est valable que dans la même session. Une session est terminée lorsque l’utilisateur ferme l’application, ou si celui-ci commence à composer un formulaire incorporé qu’il fait ensuite apparaître dans une fenêtre séparée.
+    La méthode removeAttachmentAsync supprime la pièce jointe avec l'identificateur spécifié de l'élément. Nous vous recommandons vivement de supprimer une pièce jointe à l’aide de son identificateur uniquement si la même application de messagerie a ajouté cette pièce jointe au cours de la même session. Dans Outlook Web App et OWA pour les périphériques, l’identificateur de pièce jointe n’est valable que dans la même session. Une session est terminée lorsque l'utilisateur ferme l'application, ou si l'utilisateur commence à composer un formulaire inséré, puis détoure ensuite le formulaire pour continuer dans une fenêtre distincte.
 
 
     \[[Ensemble d'API: boîte aux lettres 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -279,7 +206,7 @@ items:
   - typeScript
   type: method
   syntax:
-    content: 'removeAttachmentAsync(attachmentId: string, options?: Office.AsyncContextOptions, callback?: (result: Office.AsyncResult<void>) => void): void;'
+    content: 'removeAttachmentAsync(attachmentId: string, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     return:
       type:
       - void
@@ -296,69 +223,13 @@ items:
     - id: callback
       description: Facultatif. Une fois la méthode exécutée, la fonction transmise au paramètre callback est appelée avec un seul paramètre de type Office. AsyncResult. En cas d'échec de la suppression de la pièce jointe, la propriété asyncResult. Error contient un code d'erreur correspondant à la raison de l'échec.
       type:
-      - '(result: Office.AsyncResult<void>) => void'
+      - '(asyncResult: Office.AsyncResult<void>) => void'
 - uid: Outlook_1_1.Office.ItemCompose.removeAttachmentAsync_1
   summary: >-
     Supprime une pièce jointe d’un message ou d’un rendez-vous.
 
 
-    La méthode removeAttachmentAsync supprime la pièce jointe avec l'identificateur spécifié de l'élément. Nous vous recommandons vivement de supprimer une pièce jointe à l’aide de son identificateur uniquement si la même application de messagerie a ajouté cette pièce jointe au cours de la même session. Dans Outlook Web App et OWA pour les périphériques, l’identificateur de pièce jointe n’est valable que dans la même session. Une session est terminée lorsque l’utilisateur ferme l’application, ou si celui-ci commence à composer un formulaire incorporé qu’il fait ensuite apparaître dans une fenêtre séparée.
-
-
-    \[[Ensemble d'API: boîte aux lettres 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: <table> <tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr> <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition</td></tr> <tr><td>Erreurs</td><td>InvalidAttachmentId-l'identificateur de pièce jointe n'existe pas.</td></tr> </table>
-  name: removeAttachmentAsync(attachmentId)
-  fullName: removeAttachmentAsync(attachmentId)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'removeAttachmentAsync(attachmentId: string): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: attachmentId
-      description: Identificateur de la pièce jointe à supprimer.
-      type:
-      - string
-- uid: Outlook_1_1.Office.ItemCompose.removeAttachmentAsync_2
-  summary: >-
-    Supprime une pièce jointe d’un message ou d’un rendez-vous.
-
-
-    La méthode removeAttachmentAsync supprime la pièce jointe avec l'identificateur spécifié de l'élément. Nous vous recommandons vivement de supprimer une pièce jointe à l’aide de son identificateur uniquement si la même application de messagerie a ajouté cette pièce jointe au cours de la même session. Dans Outlook Web App et OWA pour les périphériques, l’identificateur de pièce jointe n’est valable que dans la même session. Une session est terminée lorsque l’utilisateur ferme l’application, ou si celui-ci commence à composer un formulaire incorporé qu’il fait ensuite apparaître dans une fenêtre séparée.
-
-
-    \[[Ensemble d'API: boîte aux lettres 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: <table> <tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr> <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition</td></tr> <tr><td>Erreurs</td><td>InvalidAttachmentId-l'identificateur de pièce jointe n'existe pas.</td></tr> </table>
-  name: removeAttachmentAsync(attachmentId, options)
-  fullName: removeAttachmentAsync(attachmentId, options)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'removeAttachmentAsync(attachmentId: string, options: Office.AsyncContextOptions): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: attachmentId
-      description: Identificateur de la pièce jointe à supprimer.
-      type:
-      - string
-    - id: options
-      description: "Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. asyncContext: les développeurs peuvent fournir n'importe quel objet auquel ils souhaitent accéder dans la méthode de rappel."
-      type:
-      - Office.AsyncContextOptions
-- uid: Outlook_1_1.Office.ItemCompose.removeAttachmentAsync_3
-  summary: >-
-    Supprime une pièce jointe d’un message ou d’un rendez-vous.
-
-
-    La méthode removeAttachmentAsync supprime la pièce jointe avec l'identificateur spécifié de l'élément. Nous vous recommandons vivement de supprimer une pièce jointe à l’aide de son identificateur uniquement si la même application de messagerie a ajouté cette pièce jointe au cours de la même session. Dans Outlook Web App et OWA pour les périphériques, l’identificateur de pièce jointe n’est valable que dans la même session. Une session est terminée lorsque l’utilisateur ferme l’application, ou si celui-ci commence à composer un formulaire incorporé qu’il fait ensuite apparaître dans une fenêtre séparée.
+    La méthode removeAttachmentAsync supprime la pièce jointe avec l'identificateur spécifié de l'élément. Nous vous recommandons vivement de supprimer une pièce jointe à l’aide de son identificateur uniquement si la même application de messagerie a ajouté cette pièce jointe au cours de la même session. Dans Outlook Web App et OWA pour les périphériques, l’identificateur de pièce jointe n’est valable que dans la même session. Une session est terminée lorsque l'utilisateur ferme l'application, ou si l'utilisateur commence à composer un formulaire inséré, puis détoure ensuite le formulaire pour continuer dans une fenêtre distincte.
 
 
     \[[Ensemble d'API: boîte aux lettres 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -369,7 +240,7 @@ items:
   - typeScript
   type: method
   syntax:
-    content: 'removeAttachmentAsync(attachmentId: string, callback: (result: Office.AsyncResult<void>) => void): void;'
+    content: 'removeAttachmentAsync(attachmentId: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     return:
       type:
       - void
@@ -382,16 +253,16 @@ items:
     - id: callback
       description: Facultatif. Une fois la méthode exécutée, la fonction transmise au paramètre callback est appelée avec un seul paramètre de type Office. AsyncResult. En cas d'échec de la suppression de la pièce jointe, la propriété asyncResult. Error contient un code d'erreur correspondant à la raison de l'échec.
       type:
-      - '(result: Office.AsyncResult<void>) => void'
+      - '(asyncResult: Office.AsyncResult<void>) => void'
 - uid: Outlook_1_1.Office.ItemCompose.subject
   summary: >-
     Obtient ou définit la description qui apparaît dans le champ d’objet d’un élément.
 
 
-    La propriété subject obtient ou définit l’intégralité de l’objet de l’élément, tel qu’il est envoyé par le serveur de messagerie.
+    La propriété Subject obtient ou définit l'intégralité de l'objet de l'élément, tel qu'il est envoyé par le serveur de messagerie.
 
 
-    La propriété subject renvoie un objet Subject qui fournit des méthodes pour obtenir et définir l’objet.
+    La propriété Subject renvoie un objet subject qui fournit des méthodes permettant d'obtenir et de définir l'objet.
 
 
     \[[Ensemble d'API: boîte aux lettres 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
