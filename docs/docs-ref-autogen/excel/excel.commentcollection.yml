@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 71a84e47e98cb3808076adf1ea05fdcfe4882a96
-ms.sourcegitcommit: e9bfba6ec767e9d34fd1cf7b38c30f689617900a
+ms.openlocfilehash: 156142752005a80d29c7ba9a3e61dc9f8a548e7d
+ms.sourcegitcommit: 2ef4b6e6f2f27ecb9abf01fefa4cffd9498ad5dc
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/20/2019
-ms.locfileid: "30106888"
+ms.lasthandoff: 03/16/2019
+ms.locfileid: "30656793"
 items:
 - uid: excel.Excel.CommentCollection
   summary: >-
@@ -37,7 +37,7 @@ items:
   - excel.Excel.CommentCollection.toJSON
 - uid: excel.Excel.CommentCollection.add
   summary: >-
-    Crée un nouveau commentaire (thread de commentaire) en fonction de l'emplacement et du contenu de la cellule. Un argument non valide est levé si l'emplacement est plus grand qu'une cellule.
+    Crée un nouveau commentaire (fil de commentaires) basé sur les emplacements des cellules et le contenu. L’argument non valide est levé si l’emplacement est supérieur à une cellule.
 
 
     \[[Ensemble d'API: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -52,14 +52,14 @@ items:
     return:
       type:
       - excel.Excel.Comment
-      description: ''
+      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Comments\");\n    sheet.comments.add(\"TODO: add data.\", \"A2\");\n    await context.sync();\n});\n```"
     parameters:
     - id: content
       description: Contenu du commentaire.
       type:
       - string
     - id: cellAddress
-      description: Cellule à laquelle insérer le commentaire. Peut être un objet de plage Excel ou une chaîne. Si String, doit contenir l'adresse complète, y compris le nom de la feuille
+      description: Cellule à laquelle insérer le commentaire. Peut être un objet de plage Excel ou une chaîne. Si c’est une chaîne, elle doit contenir l’adresse complète, y compris le nom de la feuille.
       type:
       - Range | string
     - id: contentType
@@ -68,7 +68,7 @@ items:
       - excel.Excel.ContentType
 - uid: excel.Excel.CommentCollection.add_1
   summary: >-
-    Crée un nouveau commentaire (thread de commentaire) en fonction de l'emplacement et du contenu de la cellule. Un argument non valide est levé si l'emplacement est plus grand qu'une cellule.
+    Crée un nouveau commentaire (fil de commentaires) basé sur les emplacements des cellules et le contenu. L’argument non valide est levé si l’emplacement est supérieur à une cellule.
 
 
     \[[Ensemble d'API: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -90,7 +90,7 @@ items:
       type:
       - string
     - id: cellAddress
-      description: Cellule à laquelle insérer le commentaire. Peut être un objet de plage Excel ou une chaîne. Si String, doit contenir l'adresse complète, y compris le nom de la feuille
+      description: Cellule à laquelle insérer le commentaire. Peut être un objet de plage Excel ou une chaîne. Si c’est une chaîne, elle doit contenir l’adresse complète, y compris le nom de la feuille.
       type:
       - Range | string
     - id: contentTypeString
@@ -112,7 +112,7 @@ items:
       - RequestContext
 - uid: excel.Excel.CommentCollection.getCount
   summary: >-
-    Obtient le nombre de commentaires dans la collection.
+    Obtient le nombre de commentaires de la collection.
 
 
     \[[Ensemble d'API: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -130,7 +130,7 @@ items:
       description: ''
 - uid: excel.Excel.CommentCollection.getItem
   summary: >-
-    Renvoie un commentaire identifié par son ID. En lecture seule.
+    Renvoie un commentaire identifié via son ID. En lecture seule.
 
 
     \[[Ensemble d'API: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -153,7 +153,7 @@ items:
       - string
 - uid: excel.Excel.CommentCollection.getItemAt
   summary: >-
-    Obtient un commentaire en fonction de sa position dans la collection.
+    Obtient une colonne en fonction de sa position dans la collection.
 
 
     \[[Ensemble d'API: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -176,7 +176,7 @@ items:
       - number
 - uid: excel.Excel.CommentCollection.getItemByCell
   summary: >-
-    Obtient un commentaire sur la cellule spécifique de la collection.
+    Obtient un commentaire sur la cellule dans la collection de sites spécifique.
 
 
     \[[Ensemble d'API: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -194,12 +194,12 @@ items:
       description: ''
     parameters:
     - id: cellAddress
-      description: Cellule sur laquelle se trouve le commentaire. Peut être un objet de plage Excel ou une chaîne. Si String, doit contenir l'adresse complète, y compris le nom de la feuille
+      description: Cellule sur laquelle se trouve le commentaire. Peut être un objet de plage Excel ou une chaîne. Si c’est une chaîne, elle doit contenir l’adresse complète, y compris le nom de la feuille.
       type:
       - Range | string
 - uid: excel.Excel.CommentCollection.getItemByReplyId
   summary: >-
-    Obtient un commentaire relatif à son ID de réponse dans la collection.
+    Obtient un commentaire lié à son ID dans la collection de réponse.
 
 
     \[[Ensemble d'API: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -221,7 +221,7 @@ items:
       type:
       - string
 - uid: excel.Excel.CommentCollection.items
-  summary: Obtient les éléments enfants chargés dans cette collection.
+  summary: Obtient l’élément enfant chargé dans cette collection de sites.
   isPreview: true
   name: items
   fullName: items
@@ -234,7 +234,7 @@ items:
       type:
       - Excel.Comment[]
 - uid: excel.Excel.CommentCollection.load
-  summary: Met en file d'attente une commande pour charger les propriétés spécifiées de l'objet. Vous devez appeler «Context. Sync ()» avant de lire les propriétés.
+  summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler « context.sync() » avant de lire les propriétés.
   remarks: >-
     En plus de cette signature, cette méthode possède les signatures suivantes:
 
@@ -264,7 +264,7 @@ items:
       type:
       - Excel.Interfaces.CommentCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
 - uid: excel.Excel.CommentCollection.load_1
-  summary: Met en file d'attente une commande pour charger les propriétés spécifiées de l'objet. Vous devez appeler `context.sync()` avant de lire les propriétés.
+  summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler `context.sync()` avant de lire les propriétés.
   isPreview: true
   name: load(propertyNames)
   fullName: load(propertyNames)
@@ -301,7 +301,7 @@ items:
       type:
       - office.OfficeExtension.LoadOption
 - uid: excel.Excel.CommentCollection.toJSON
-  summary: Remplace la méthode JavaScript `toJSON()` afin de fournir une sortie plus utile lorsqu'un objet d'API est transmis à. `JSON.stringify()` <!-- --> (`JSON.stringify`<!-- -->, à son tour, appelle `toJSON` la méthode de l'objet qui lui est passé.) Tandis que `Excel.CommentCollection` l'objet d'origine est un objet `toJSON` d'API, la méthode renvoie un objet JavaScript `Excel.Interfaces.CommentCollectionData` <!-- -->simple (tapé sous la forme) qui contient un tableau d'éléments avec des copies superficielles de toutes les propriétés chargées des éléments de la collection.
+  summary: Remplace la méthode JavaScript `toJSON()` afin de fournir une sortie plus utile lorsqu'un objet d'API est transmis à`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle `toJSON` la méthode de l'objet qui lui est passé.) Tandis que `Excel.CommentCollection` l'objet d'origine est un objet `toJSON` d'API, la méthode renvoie un objet JavaScript simple (tapé comme`Excel.Interfaces.CommentCollectionData`<!-- -->) qui contient un tableau «éléments» avec des copies superficielles de toutes les propriétés chargées des éléments de la collection.
   isPreview: true
   name: toJSON()
   fullName: toJSON()
