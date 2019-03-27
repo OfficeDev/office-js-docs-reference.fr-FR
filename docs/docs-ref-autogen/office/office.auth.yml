@@ -1,0 +1,102 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: 3de618d8e5fc94960295ea196b58e2151b5e101c
+ms.sourcegitcommit: a422a2c3b9ada79477a9f873276b3c00765f7072
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 03/27/2019
+ms.locfileid: "30927696"
+items:
+- uid: office.Office.Auth
+  summary: L'espace de noms d'authentification Office, Office. Context. auth, fournit une méthode qui permet à l'hôte Office d'obtenir un jeton d'accès à l'application Web du complément. Indirectement, ceci active également le complément pour accéder aux données de Microsoft Graph de l’utilisateur sans que l’utilisateur ne doive se connecter une deuxième fois.
+  isPreview: true
+  name: Office.Auth
+  fullName: Office.Auth
+  langs:
+  - typeScript
+  type: interface
+  package: office
+  children:
+  - office.Office.Auth.getAccessTokenAsync
+  - office.Office.Auth.getAccessTokenAsync_1
+- uid: office.Office.Auth.getAccessTokenAsync
+  summary: >-
+    Appelle le point de terminaison Azure Active Directory V 2.0 pour obtenir un jeton d’accès à l’application web de votre complément. Permet à des compléments d'identifier les utilisateurs. Le code côté serveur peut utiliser ce jeton pour accéder à Microsoft Graph pour l'application Web du complément à l'aide du [flux OAuth «de la part de»](https://docs.microsoft.com/azure/active-directory/develop/active-directory-v2-protocols-oauth-on-behalf-of)<!-- -->.
+
+
+    Important: dans Outlook, cette API n'est pas prise en charge si le complément est chargé dans une boîte aux lettres Outlook.com ou gmail.
+  remarks: >-
+    <table><tr><td>Hôtes</td><td>Excel, OneNote, Outlook, PowerPoint, Word</td></tr>
+
+
+    <tr><td>Ensembles de conditions requises</td><td>[IdentityAPI](https://docs.microsoft.com/office/dev/add-ins/develop/specify-office-hosts-and-api-requirements)</td></tr></table>
+
+
+    Cette API nécessite une configuration à authentification unique qui relie le complément à une application Azure. Les utilisateurs Office se connectent à des comptes professionnels et des comptes Microsoft. Microsoft Azure renvoie des jetons destinés aux deux types de comptes utilisateur afin d’accéder aux ressources dans Microsoft Graph.
+
+    #### <a name="examples"></a>Exemples
+
+
+    ```javascript
+
+    Office.context.auth.getAccessTokenAsync(function(result) {
+        if (result.status === "succeeded") {
+            var token = result.value;
+            // ...
+        } else {
+            console.log("Error obtaining token", result.error);
+        }
+    });
+
+    ```
+  isPreview: true
+  name: getAccessTokenAsync(options, callback)
+  fullName: getAccessTokenAsync(options, callback)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getAccessTokenAsync(options?: AuthOptions, callback?: (result: AsyncResult<string>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: options
+      description: Facultatif. Accepte un objet AuthOptions pour définir les comportements d'authentification.
+      type:
+      - office.Office.AuthOptions
+    - id: callback
+      description: "Facultatif. Accepte une méthode de rappel qui peut utiliser analyser le jeton pour l'ID de l'utilisateur ou utiliser le jeton dans le flux «de la part de» pour accéder à Microsoft Graph. Si AsyncResult. Status est \"Succeeded\", alors AsyncResult. Value est le AAD brut v. 2.0: le jeton d’accès mis en forme."
+      type:
+      - '(result: AsyncResult<string>) => void'
+- uid: office.Office.Auth.getAccessTokenAsync_1
+  summary: >-
+    Appelle le point de terminaison Azure Active Directory V 2.0 pour obtenir un jeton d’accès à l’application web de votre complément. Permet à des compléments d'identifier les utilisateurs. Le code côté serveur peut utiliser ce jeton pour accéder à Microsoft Graph pour l'application Web du complément à l'aide du [flux OAuth «de la part de»](https://docs.microsoft.com/azure/active-directory/develop/active-directory-v2-protocols-oauth-on-behalf-of)<!-- -->.
+
+
+    Important: dans Outlook, cette API n'est pas prise en charge si le complément est chargé dans une boîte aux lettres Outlook.com ou gmail.
+  remarks: >-
+    <table><tr><td>Hôtes</td><td>Excel, OneNote, Outlook, PowerPoint, Word</td></tr>
+
+
+    <tr><td>Ensembles de conditions requises</td><td>[IdentityAPI](https://docs.microsoft.com/office/dev/add-ins/develop/specify-office-hosts-and-api-requirements)</td></tr></table>
+
+
+    Cette API nécessite une configuration à authentification unique qui relie le complément à une application Azure. Les utilisateurs Office se connectent à des comptes professionnels et des comptes Microsoft. Microsoft Azure renvoie des jetons destinés aux deux types de comptes utilisateur afin d’accéder aux ressources dans Microsoft Graph.
+  isPreview: true
+  name: getAccessTokenAsync(callback)
+  fullName: getAccessTokenAsync(callback)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getAccessTokenAsync(callback?: (result: AsyncResult<string>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: callback
+      description: "Facultatif. Accepte une méthode de rappel qui peut utiliser analyser le jeton pour l'ID de l'utilisateur ou utiliser le jeton dans le flux «de la part de» pour accéder à Microsoft Graph. Si AsyncResult. Status est \"Succeeded\", alors AsyncResult. Value est le AAD brut v. 2.0: le jeton d’accès mis en forme."
+      type:
+      - '(result: AsyncResult<string>) => void'
