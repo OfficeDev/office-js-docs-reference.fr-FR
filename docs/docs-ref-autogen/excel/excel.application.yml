@@ -1,319 +1,359 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: a787d67b1da6d65f43dd93aa48c4baa5e4a8a6d5
-ms.sourcegitcommit: fd03ef72d6a546b0e4dbe0cc9e75d2a7cf9341a1
-ms.translationtype: MT
-ms.contentlocale: fr-FR
-ms.lasthandoff: 02/27/2019
-ms.locfileid: "30302996"
 items:
-- uid: excel.Excel.Application
-  summary: >-
-    Représente l’application Excel qui gère le classeur.
+  - uid: excel.Excel.Application
+    summary: |-
+      Représente l’application Excel qui gère le classeur.
+
+      \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: Excel.Application
+    fullName: Excel.Application
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - office.OfficeExtension.ClientObject
+    package: excel
+    children:
+      - excel.Excel.Application.calculate
+      - excel.Excel.Application.calculate_1
+      - excel.Excel.Application.calculationEngineVersion
+      - excel.Excel.Application.calculationMode
+      - excel.Excel.Application.calculationState
+      - excel.Excel.Application.context
+      - excel.Excel.Application.iterativeCalculation
+      - excel.Excel.Application.load
+      - excel.Excel.Application.load_1
+      - excel.Excel.Application.load_2
+      - excel.Excel.Application.set
+      - excel.Excel.Application.set_1
+      - excel.Excel.Application.suspendApiCalculationUntilNextSync
+      - excel.Excel.Application.suspendScreenUpdatingUntilNextSync
+      - excel.Excel.Application.toJSON
+  - uid: excel.Excel.Application.calculate
+    summary: |-
+      Recalcule tous les classeurs actuellement ouverts dans Excel.
+
+      \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: calculate(calculationType)
+    fullName: calculate(calculationType)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'calculate(calculationType: Excel.CalculationType): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: calculationType
+          description: 'Spécifie le type de calcul à utiliser. Pour plus d''informations, voir Excel. CalculationType.'
+          type:
+            - excel.Excel.CalculationType
+  - uid: excel.Excel.Application.calculate_1
+    summary: |-
+      Recalcule tous les classeurs actuellement ouverts dans Excel.
+
+      \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: calculate(calculationTypeString)
+    fullName: calculate(calculationTypeString)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'calculate(calculationTypeString: "Recalculate" | "Full" | "FullRebuild"): void;'
+      return:
+        type:
+          - void
+        description: |-
 
 
-    \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: Excel.Application
-  fullName: Excel.Application
-  langs:
-  - typeScript
-  type: class
-  extends:
-  - office.OfficeExtension.ClientObject
-  package: excel
-  children:
-  - excel.Excel.Application.calculate
-  - excel.Excel.Application.calculate_1
-  - excel.Excel.Application.calculationEngineVersion
-  - excel.Excel.Application.calculationMode
-  - excel.Excel.Application.calculationState
-  - excel.Excel.Application.context
-  - excel.Excel.Application.iterativeCalculation
-  - excel.Excel.Application.load
-  - excel.Excel.Application.load_1
-  - excel.Excel.Application.load_2
-  - excel.Excel.Application.set
-  - excel.Excel.Application.set_1
-  - excel.Excel.Application.suspendApiCalculationUntilNextSync
-  - excel.Excel.Application.suspendScreenUpdatingUntilNextSync
-  - excel.Excel.Application.toJSON
-- uid: excel.Excel.Application.calculate
-  summary: >-
-    Recalcule tous les classeurs actuellement ouverts dans Excel.
+          #### <a name="examples"></a>Exemples
+
+          ```javascript
+          Excel.run(function (ctx) {
+              ctx.workbook.application.calculate('Full');
+              return ctx.sync();
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: calculationTypeString
+          description: 'Spécifie le type de calcul à utiliser. Pour plus d''informations, voir Excel. CalculationType.'
+          type:
+            - '"Recalculate" | "Full" | "FullRebuild"'
+  - uid: excel.Excel.Application.calculationEngineVersion
+    summary: |-
+      Renvoie des informations sur la version de Microsoft Excel dans laquelle le classeur a été entièrement recalculé. Type de données Long en lecture seule. En lecture seule.
+
+      \[[Ensemble d'API: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    isPreview: true
+    name: calculationEngineVersion
+    fullName: calculationEngineVersion
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly calculationEngineVersion: number;'
+      return:
+        type:
+          - number
+  - uid: excel.Excel.Application.calculationMode
+    summary: |-
+      Renvoie le mode de calcul utilisé dans le classeur, tel que défini par les constantes dans Excel. CalculationMode. Les valeurs possibles sont les suivantes:`Automatic`<!-- -->, où Excel contrôle le recalcul;`AutomaticExceptTables`<!-- -->, où Excel contrôle le recalcul, mais ignore les modifications apportées aux tableaux;`Manual`<!-- -->, où le calcul est effectué lorsque l'utilisateur le demande.
+
+      \[[Ensemble d'API: ExcelApi 1,1 pour Get, 1,8 pour Set](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: calculationMode
+    fullName: calculationMode
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'calculationMode: Excel.CalculationMode | "Automatic" | "AutomaticExceptTables" | "Manual";'
+      return:
+        type:
+          - Excel.CalculationMode | "Automatic" | "AutomaticExceptTables" | "Manual"
+  - uid: excel.Excel.Application.calculationState
+    summary: |-
+      Renvoie un CalculationState qui indique l’état de calcul de l’application. Pour plus d’informations, voir Excel.CalculationState. En lecture seule.
+
+      \[[Ensemble d'API: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    isPreview: true
+    name: calculationState
+    fullName: calculationState
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly calculationState: Excel.CalculationState | "Done" | "Calculating" | "Pending";'
+      return:
+        type:
+          - Excel.CalculationState | "Done" | "Calculating" | "Pending"
+  - uid: excel.Excel.Application.context
+    summary: Contexte de demande associé à l'objet. Cette opération connecte le processus du complément au processus de l'application hôte Office.
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - RequestContext
+  - uid: excel.Excel.Application.iterativeCalculation
+    summary: |-
+      Capture d’écran des paramètres de calcul itératif. Sur Excel pour Windows et Excel pour Mac, les paramètres s'appliquent à l'application Excel. Dans Excel Online et Excel pour d'autres plateformes, les paramètres s'appliquent au classeur actif.
+
+      \[[Ensemble d'API: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    isPreview: true
+    name: iterativeCalculation
+    fullName: iterativeCalculation
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly iterativeCalculation: Excel.IterativeCalculation;'
+      return:
+        type:
+          - excel.Excel.IterativeCalculation
+  - uid: excel.Excel.Application.load
+    summary: "Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler «\_context.sync()\_» avant de lire les propriétés."
+    remarks: |-
+      En plus de cette signature, cette méthode possède les signatures suivantes:
+
+      `load(option?: string | string[]): Excel.Application`-WHERE option est une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+
+      `load(option?: { select?: string; expand?: string; }): Excel.Application`Option-WHERE option. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
+
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Application`-Uniquement disponible sur les types de collection. Elle est similaire à la signature précédente. Option. Top indique le nombre maximal d'éléments de collection qui peuvent être inclus dans le résultat. Option. Skip indique le nombre d'éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat. Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d'éléments.
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: Excel.Interfaces.ApplicationLoadOptions): Excel.Application;'
+      return:
+        type:
+          - excel.Excel.Application
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - excel.Excel.Interfaces.ApplicationLoadOptions
+  - uid: excel.Excel.Application.load_1
+    summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler `context.sync()` avant de lire les propriétés.
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Excel.Application;'
+      return:
+        type:
+          - excel.Excel.Application
+        description: |-
 
 
-    \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: calculate(calculationType)
-  fullName: calculate(calculationType)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'calculate(calculationType: Excel.CalculationType): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: calculationType
-      description: Spécifie le type de calcul à utiliser. Pour plus d'informations, voir Excel. CalculationType.
-      type:
-      - excel.Excel.CalculationType
-- uid: excel.Excel.Application.calculate_1
-  summary: >-
-    Recalcule tous les classeurs actuellement ouverts dans Excel.
+          #### <a name="examples"></a>Exemples
+
+          ```javascript
+          Excel.run(function (ctx) {
+              var application = ctx.workbook.application;
+              application.load('calculationMode');
+              return ctx.sync().then(function() {
+                  console.log(application.calculationMode);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: propertyNames
+          description: Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+          type:
+            - 'string | string[]'
+  - uid: excel.Excel.Application.load_2
+    summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler `context.sync()` avant de lire les propriétés.
+    name: load(propertyNamesAndPaths)
+    fullName: load(propertyNamesAndPaths)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.Application;'
+      return:
+        type:
+          - excel.Excel.Application
+        description: ''
+      parameters:
+        - id: propertyNamesAndPaths
+          description: Où propertyNamesAndPaths. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et propertyNamesAndPaths. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
+          type:
+            - '{ select?: string; expand?: string; }'
+  - uid: excel.Excel.Application.set
+    summary: 'Définit plusieurs propriétés d''un objet en même temps. Vous pouvez transmettre un objet plain avec les propriétés appropriées, ou un autre objet API du même type.'
+    remarks: |-
+      Cette méthode est dotée de la signature supplémentaire suivante:
+
+      `set(properties: Excel.Application): void`
+    name: 'set(properties, options)'
+    fullName: 'set(properties, options)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Interfaces.ApplicationUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: Objet JavaScript avec des propriétés qui sont structurées isomorphically vers les propriétés de l'objet sur lequel la méthode est appelée.
+          type:
+            - Interfaces.ApplicationUpdateData
+        - id: options
+          description: Fournit une option permettant de supprimer les erreurs si l'objet Properties tente de définir des propriétés en lecture seule.
+          type:
+            - office.OfficeExtension.UpdateOptions
+  - uid: excel.Excel.Application.set_1
+    summary: 'Définit plusieurs propriétés de l''objet en même temps, en fonction d''un objet chargé existant.'
+    name: set(properties)
+    fullName: set(properties)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Excel.Application): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: ''
+          type:
+            - excel.Excel.Application
+  - uid: excel.Excel.Application.suspendApiCalculationUntilNextSync
+    summary: "Interrompt le calcul jusqu'à ce que la prochaine méthode «\_context.sync()\_» soit appelée. Une fois cette option définie, il incombe au développeur de recalculer le classeur afin de garantir que toutes les dépendances sont propagées.\n\n\\[[Ensemble d'API: ExcelApi 1,6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    name: suspendApiCalculationUntilNextSync()
+    fullName: suspendApiCalculationUntilNextSync()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'suspendApiCalculationUntilNextSync(): void;'
+      return:
+        type:
+          - void
+        description: ''
+  - uid: excel.Excel.Application.suspendScreenUpdatingUntilNextSync
+    summary: "Interrompt le calcul jusqu'à ce que la prochaine méthode «\_context.sync()\_» soit appelée.\n\n\\[[Ensemble d'API: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    isPreview: true
+    name: suspendScreenUpdatingUntilNextSync()
+    fullName: suspendScreenUpdatingUntilNextSync()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'suspendScreenUpdatingUntilNextSync(): void;'
+      return:
+        type:
+          - void
+        description: |-
 
 
-    \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: calculate(calculationTypeString)
-  fullName: calculate(calculationTypeString)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'calculate(calculationTypeString: "Recalculate" | "Full" | "FullRebuild"): void;'
-    return:
-      type:
-      - void
-      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nExcel.run(function (ctx) {\n    ctx.workbook.application.calculate('Full');\n    return ctx.sync();\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-    parameters:
-    - id: calculationTypeString
-      description: Spécifie le type de calcul à utiliser. Pour plus d'informations, voir Excel. CalculationType.
-      type:
-      - "\"Recalculate\" | \"Full\" | \"FullRebuild\""
-- uid: excel.Excel.Application.calculationEngineVersion
-  summary: >-
-    Renvoie une valeur indiquant la version du moteur de calcul Excel sur lequel le classeur a été entièrement recalculé. En lecture seule.
+          #### <a name="examples"></a>Exemples
 
+          ```typescript
+          await Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getActiveWorksheet();
+              const rowCount = 500;
+              const columnCount = 20;
 
-    \[[Ensemble d'API: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  isPreview: true
-  name: calculationEngineVersion
-  fullName: calculationEngineVersion
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly calculationEngineVersion: number;'
-    return:
-      type:
-      - number
-- uid: excel.Excel.Application.calculationMode
-  summary: >-
-    Renvoie le mode de calcul utilisé dans le classeur, tel que défini par les constantes dans Excel. CalculationMode. Les valeurs possibles sont `Automatic` <!-- -->les suivantes:, où Excel contrôle le recalcul; `AutomaticExceptTables`, où Excel contrôle le recalcul, mais ignore les modifications apportées aux <!-- -->tableaux; `Manual`, où le calcul est effectué lorsque l'utilisateur le <!-- -->demande.
+              const startTime = Date.now();
+              console.log("Starting...");
 
+              if (pauseScreenPainting) {
+                  context.application.suspendScreenUpdatingUntilNextSync();
+              }
 
-    \[[Ensemble d'API: ExcelApi 1,1 pour Get, 1,8 pour Set](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: calculationMode
-  fullName: calculationMode
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'calculationMode: Excel.CalculationMode | "Automatic" | "AutomaticExceptTables" | "Manual";'
-    return:
-      type:
-      - Excel.CalculationMode | "Automatic" | "AutomaticExceptTables" | "Manual"
-- uid: excel.Excel.Application.calculationState
-  summary: >-
-    Renvoie une CalculationState, qui indique l'état de calcul de l'application. Pour plus d'informations, voir Excel. CalculationState,. En lecture seule.
+              for (let i = 0; i < rowCount; i++) {
+                  for (let j = 0; j < columnCount; j++) {
+                      let cell = sheet.getCell(i, j);
+                      cell.values = [[i * j * Math.random()]];
+                      if (untrack) {
+                          cell.untrack();
+                      }
+                  }
+              }
 
+              await context.sync();
 
-    \[[Ensemble d'API: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  isPreview: true
-  name: calculationState
-  fullName: calculationState
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly calculationState: Excel.CalculationState | "Done" | "Calculating" | "Pending";'
-    return:
-      type:
-      - Excel.CalculationState | "Done" | "Calculating" | "Pending"
-- uid: excel.Excel.Application.context
-  summary: Contexte de demande associé à l'objet. Cette opération connecte le processus du complément au processus de l'application hôte Office.
-  name: context
-  fullName: context
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'context: RequestContext;'
-    return:
-      type:
-      - RequestContext
-- uid: excel.Excel.Application.iterativeCalculation
-  summary: >-
-    Renvoie les paramètres de calcul itératif. Sur Excel pour Windows et Excel pour Mac, les paramètres s'appliquent à l'application Excel. Dans Excel Online et Excel pour d'autres plateformes, les paramètres s'appliquent au classeur actif.
-
-
-    \[[Ensemble d'API: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  isPreview: true
-  name: iterativeCalculation
-  fullName: iterativeCalculation
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly iterativeCalculation: Excel.IterativeCalculation;'
-    return:
-      type:
-      - excel.Excel.IterativeCalculation
-- uid: excel.Excel.Application.load
-  summary: Met en file d'attente une commande pour charger les propriétés spécifiées de l'objet. Vous devez appeler «Context. Sync ()» avant de lire les propriétés.
-  remarks: >-
-    En plus de cette signature, cette méthode possède les signatures suivantes:
-
-
-    `load(option?: string | string[]): Excel.Application`-WHERE option est une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
-
-
-    `load(option?: { select?: string; expand?: string; }): Excel.Application`Option-WHERE option. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
-
-
-    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Application`-Uniquement disponible sur les types de collection. Elle est similaire à la signature précédente. Option. Top indique le nombre maximal d'éléments de collection qui peuvent être inclus dans le résultat. Option. Skip indique le nombre d'éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat. Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d'éléments.
-  name: load(option)
-  fullName: load(option)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(option?: Excel.Interfaces.ApplicationLoadOptions): Excel.Application;'
-    return:
-      type:
-      - excel.Excel.Application
-      description: ''
-    parameters:
-    - id: option
-      description: ''
-      type:
-      - excel.Excel.Interfaces.ApplicationLoadOptions
-- uid: excel.Excel.Application.load_1
-  summary: Met en file d'attente une commande pour charger les propriétés spécifiées de l'objet. Vous devez appeler `context.sync()` avant de lire les propriétés.
-  name: load(propertyNames)
-  fullName: load(propertyNames)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(propertyNames?: string | string[]): Excel.Application;'
-    return:
-      type:
-      - excel.Excel.Application
-      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nExcel.run(function (ctx) {\n    var application = ctx.workbook.application;\n    application.load('calculationMode');\n    return ctx.sync().then(function() {\n        console.log(application.calculationMode);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-    parameters:
-    - id: propertyNames
-      description: Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
-      type:
-      - string | string[]
-- uid: excel.Excel.Application.load_2
-  summary: Met en file d'attente une commande pour charger les propriétés spécifiées de l'objet. Vous devez appeler `context.sync()` avant de lire les propriétés.
-  name: load(propertyNamesAndPaths)
-  fullName: load(propertyNamesAndPaths)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.Application;'
-    return:
-      type:
-      - excel.Excel.Application
-      description: ''
-    parameters:
-    - id: propertyNamesAndPaths
-      description: Où propertyNamesAndPaths. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et propertyNamesAndPaths. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
-      type:
-      - '{ select?: string; expand?: string; }'
-- uid: excel.Excel.Application.set
-  summary: Définit plusieurs propriétés d'un objet en même temps. Vous pouvez transmettre un objet plain avec les propriétés appropriées, ou un autre objet API du même type.
-  remarks: >-
-    Cette méthode est dotée de la signature supplémentaire suivante:
-
-
-    `set(properties: Excel.Application): void`
-  name: set(properties, options)
-  fullName: set(properties, options)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'set(properties: Interfaces.ApplicationUpdateData, options?: OfficeExtension.UpdateOptions): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: properties
-      description: Objet JavaScript avec des propriétés qui sont structurées isomorphically vers les propriétés de l'objet sur lequel la méthode est appelée.
-      type:
-      - Interfaces.ApplicationUpdateData
-    - id: options
-      description: Fournit une option permettant de supprimer les erreurs si l'objet Properties tente de définir des propriétés en lecture seule.
-      type:
-      - office.OfficeExtension.UpdateOptions
-- uid: excel.Excel.Application.set_1
-  summary: Définit plusieurs propriétés de l'objet en même temps, en fonction d'un objet chargé existant.
-  name: set(properties)
-  fullName: set(properties)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'set(properties: Excel.Application): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: properties
-      description: ''
-      type:
-      - excel.Excel.Application
-- uid: excel.Excel.Application.suspendApiCalculationUntilNextSync
-  summary: >-
-    Interrompt le calcul jusqu'à ce que la prochaine méthode « context.sync() » soit appelée. Une fois cette option définie, il incombe au développeur de recalculer le classeur afin de garantir que toutes les dépendances sont propagées.
-
-
-    \[[Ensemble d'API: ExcelApi 1,6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: suspendApiCalculationUntilNextSync()
-  fullName: suspendApiCalculationUntilNextSync()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'suspendApiCalculationUntilNextSync(): void;'
-    return:
-      type:
-      - void
-      description: ''
-- uid: excel.Excel.Application.suspendScreenUpdatingUntilNextSync
-  summary: >-
-    Interrompt la mise à jour de sceen jusqu'à ce que le suivant «Context. Sync ()» soit appelé.
-
-
-    \[[Ensemble d'API: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  isPreview: true
-  name: suspendScreenUpdatingUntilNextSync()
-  fullName: suspendScreenUpdatingUntilNextSync()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'suspendScreenUpdatingUntilNextSync(): void;'
-    return:
-      type:
-      - void
-      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getActiveWorksheet();\n    const rowCount = 500;\n    const columnCount = 20;\n\n    const startTime = Date.now();\n    console.log(\"Starting...\");\n\n    if (pauseScreenPainting) {\n        context.application.suspendScreenUpdatingUntilNextSync();\n    }\n\n    for (let i = 0; i < rowCount; i++) {\n        for (let j = 0; j < columnCount; j++) {\n            let cell = sheet.getCell(i, j);\n            cell.values = [[i * j * Math.random()]];\n            if (untrack) {\n                cell.untrack();\n            }\n        }\n    }\n\n    await context.sync();\n\n    console.log(`Ending. Adding ${rowCount * columnCount} cells took ${Date.now() - startTime} milliseconds`);\n});\n```"
-- uid: excel.Excel.Application.toJSON
-  summary: Remplace la méthode JavaScript `toJSON()` afin de fournir une sortie plus utile lorsqu'un objet d'API est transmis à. `JSON.stringify()` <!-- --> (`JSON.stringify`<!-- -->, à son tour, appelle `toJSON` la méthode de l'objet qui lui est passé.) Tandis que l'objet Excel. application d'origine est un objet `toJSON` API, la méthode renvoie un objet JavaScript simple `Excel.Interfaces.ApplicationData` <!-- -->(tapé comme) qui contient des copies superficielles de toutes les propriétés enfants chargées à partir de l'objet d'origine.
-  name: toJSON()
-  fullName: toJSON()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'toJSON(): Excel.Interfaces.ApplicationData;'
-    return:
-      type:
-      - excel.Excel.Interfaces.ApplicationData
-      description: ''
+              console.log(`Ending. Adding ${rowCount * columnCount} cells took ${Date.now() - startTime} milliseconds`);
+          });
+          ```
+  - uid: excel.Excel.Application.toJSON
+    summary: 'Remplace la méthode JavaScript `toJSON()` afin de fournir une sortie plus utile lorsqu''un objet d''API est transmis à`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle `toJSON` la méthode de l''objet qui lui est passé.) Tandis que l''objet Excel. application d''origine est un objet `toJSON` API, la méthode renvoie un objet JavaScript simple (tapé comme`Excel.Interfaces.ApplicationData`<!-- -->) qui contient des copies superficielles de toutes les propriétés enfants chargées à partir de l''objet d''origine.'
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Excel.Interfaces.ApplicationData;'
+      return:
+        type:
+          - excel.Excel.Interfaces.ApplicationData
+        description: ''
