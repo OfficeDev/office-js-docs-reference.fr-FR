@@ -1,217 +1,225 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 80408fb196e30bbfa3f98f7fc7afc5d935721a01
-ms.sourcegitcommit: e9bfba6ec767e9d34fd1cf7b38c30f689617900a
-ms.translationtype: MT
-ms.contentlocale: fr-FR
-ms.lasthandoff: 02/20/2019
-ms.locfileid: "30111760"
 items:
-- uid: excel_release.Excel.Setting
-  summary: >-
-    Le paramètre représente une paire clé-valeur d'un paramètre conservé dans le document (par fichier et par complément). Cette paire clé-valeur personnalisée peut être utilisée pour stocker les informations d'État ou de cycle de vie requises par le complément de contenu ou de volet de tâches. Notez que les paramètres sont persistants dans le document et que, par conséquent, il ne s'agit pas d'un emplacement pour stocker des informations sensibles ou protégées, telles que les informations utilisateur et le mot de passe.
+  - uid: excel_release.Excel.Setting
+    summary: |-
+      Le paramètre représente une paire clé-valeur d'un paramètre conservé dans le document (par fichier et par complément). Cette paire clé-valeur personnalisée peut être utilisée pour stocker les informations d'État ou de cycle de vie requises par le complément de contenu ou de volet de tâches. Notez que les paramètres sont persistants dans le document et que, par conséquent, il ne s'agit pas d'un emplacement pour stocker des informations sensibles ou protégées, telles que les informations utilisateur et le mot de passe.
+
+      \[[Ensemble d'API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: Excel.Setting
+    fullName: Excel.Setting
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - office.OfficeExtension.ClientObject
+    package: excel_release
+    children:
+      - excel_release.Excel.Setting.context
+      - excel_release.Excel.Setting.delete
+      - excel_release.Excel.Setting.key
+      - excel_release.Excel.Setting.load
+      - excel_release.Excel.Setting.load_1
+      - excel_release.Excel.Setting.load_2
+      - excel_release.Excel.Setting.set
+      - excel_release.Excel.Setting.set_1
+      - excel_release.Excel.Setting.toJSON
+      - excel_release.Excel.Setting.value
+  - uid: excel_release.Excel.Setting.context
+    summary: Contexte de demande associé à l'objet. Cette opération connecte le processus du complément au processus de l'application hôte Office.
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - RequestContext
+  - uid: excel_release.Excel.Setting.delete
+    summary: |-
+      Supprime le paramètre.
+
+      \[[Ensemble d'API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: delete()
+    fullName: delete()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'delete(): void;'
+      return:
+        type:
+          - void
+        description: |-
 
 
-    \[[Ensemble d'API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: Excel.Setting
-  fullName: Excel.Setting
-  langs:
-  - typeScript
-  type: class
-  extends:
-  - office.OfficeExtension.ClientObject
-  package: excel_release
-  children:
-  - excel_release.Excel.Setting.context
-  - excel_release.Excel.Setting.delete
-  - excel_release.Excel.Setting.key
-  - excel_release.Excel.Setting.load
-  - excel_release.Excel.Setting.load_1
-  - excel_release.Excel.Setting.load_2
-  - excel_release.Excel.Setting.set
-  - excel_release.Excel.Setting.set_1
-  - excel_release.Excel.Setting.toJSON
-  - excel_release.Excel.Setting.value
-- uid: excel_release.Excel.Setting.context
-  summary: Contexte de demande associé à l'objet. Cette opération connecte le processus du complément au processus de l'application hôte Office.
-  name: context
-  fullName: context
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'context: RequestContext;'
-    return:
-      type:
-      - RequestContext
-- uid: excel_release.Excel.Setting.delete
-  summary: >-
-    Supprime le paramètre.
+          #### <a name="examples"></a>Exemples
 
+          ```typescript
+          await Excel.run(async (context) => {
+              const settings = context.workbook.settings;
+              let needsReview = settings.getItem("NeedsReview");
+              needsReview.delete();
+              needsReview = settings.getItemOrNullObject("NeedsReview");
 
-    \[[Ensemble d'API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: delete()
-  fullName: delete()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'delete(): void;'
-    return:
-      type:
-      - void
-      description: "\n#### <a name=\"examples\"></a>範例\n\n```typescript\nawait Excel.run(async (context) => {\n    const settings = context.workbook.settings;\n    let needsReview = settings.getItem(\"NeedsReview\");\n    needsReview.delete();\n    needsReview = settings.getItemOrNullObject(\"NeedsReview\");\n\n    await context.sync();\n\n    if (needsReview.isNullObject) {\n        console.log(\"The setting has been deleted\");\n    } else {\n        console.log(\"The setting was not deleted\");\n    }\n\n    await context.sync();\n});\n```"
-- uid: excel_release.Excel.Setting.key
-  summary: >-
-    Renvoie la clé qui représente l’id du paramètre. En lecture seule.
+              await context.sync();
 
+              if (needsReview.isNullObject) {
+                  console.log("The setting has been deleted");
+              } else {
+                  console.log("The setting was not deleted");
+              }
 
-    \[[Ensemble d'API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: key
-  fullName: key
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly key: string;'
-    return:
-      type:
-      - string
-- uid: excel_release.Excel.Setting.load
-  summary: Met en file d'attente une commande pour charger les propriétés spécifiées de l'objet. Vous devez appeler «Context. Sync ()» avant de lire les propriétés.
-  remarks: >-
-    En plus de cette signature, cette méthode possède les signatures suivantes:
+              await context.sync();
+          });
+          ```
+  - uid: excel_release.Excel.Setting.key
+    summary: |-
+      Renvoie la clé qui représente l’id du paramètre. En lecture seule.
 
+      \[[Ensemble d'API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: key
+    fullName: key
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly key: string;'
+      return:
+        type:
+          - string
+  - uid: excel_release.Excel.Setting.load
+    summary: "Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler «\_context.sync()\_» avant de lire les propriétés."
+    remarks: |-
+      En plus de cette signature, cette méthode possède les signatures suivantes:
 
-    `load(option?: string | string[]): Excel.Setting`-WHERE option est une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+      `load(option?: string | string[]): Excel.Setting`-WHERE option est une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
 
+      `load(option?: { select?: string; expand?: string; }): Excel.Setting`Option-WHERE option. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
 
-    `load(option?: { select?: string; expand?: string; }): Excel.Setting`Option-WHERE option. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Setting`-Uniquement disponible sur les types de collection. Elle est similaire à la signature précédente. Option. Top indique le nombre maximal d'éléments de collection qui peuvent être inclus dans le résultat. Option. Skip indique le nombre d'éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat. Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d'éléments.
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: Excel.Interfaces.SettingLoadOptions): Excel.Setting;'
+      return:
+        type:
+          - excel.Excel.Setting
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - excel.Excel.Interfaces.SettingLoadOptions
+  - uid: excel_release.Excel.Setting.load_1
+    summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler `context.sync()` avant de lire les propriétés.
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Excel.Setting;'
+      return:
+        type:
+          - excel.Excel.Setting
+        description: ''
+      parameters:
+        - id: propertyNames
+          description: Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+          type:
+            - 'string | string[]'
+  - uid: excel_release.Excel.Setting.load_2
+    summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler `context.sync()` avant de lire les propriétés.
+    name: load(propertyNamesAndPaths)
+    fullName: load(propertyNamesAndPaths)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.Setting;'
+      return:
+        type:
+          - excel.Excel.Setting
+        description: ''
+      parameters:
+        - id: propertyNamesAndPaths
+          description: Où propertyNamesAndPaths. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et propertyNamesAndPaths. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
+          type:
+            - '{ select?: string; expand?: string; }'
+  - uid: excel_release.Excel.Setting.set
+    summary: 'Définit plusieurs propriétés d''un objet en même temps. Vous pouvez transmettre un objet plain avec les propriétés appropriées, ou un autre objet API du même type.'
+    remarks: |-
+      Cette méthode est dotée de la signature supplémentaire suivante:
 
+      `set(properties: Excel.Setting): void`
+    name: 'set(properties, options)'
+    fullName: 'set(properties, options)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Interfaces.SettingUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: Objet JavaScript avec des propriétés qui sont structurées isomorphically vers les propriétés de l'objet sur lequel la méthode est appelée.
+          type:
+            - Interfaces.SettingUpdateData
+        - id: options
+          description: Fournit une option permettant de supprimer les erreurs si l'objet Properties tente de définir des propriétés en lecture seule.
+          type:
+            - office.OfficeExtension.UpdateOptions
+  - uid: excel_release.Excel.Setting.set_1
+    summary: 'Définit plusieurs propriétés de l''objet en même temps, en fonction d''un objet chargé existant.'
+    name: set(properties)
+    fullName: set(properties)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Excel.Setting): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: ''
+          type:
+            - excel.Excel.Setting
+  - uid: excel_release.Excel.Setting.toJSON
+    summary: 'Remplace la méthode JavaScript `toJSON()` afin de fournir une sortie plus utile lorsqu''un objet d''API est transmis à`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle `toJSON` la méthode de l''objet qui lui est passé.) Tandis que l''objet Excel. Setting est un objet d''API `toJSON` , la méthode renvoie un objet JavaScript simple (tapé comme`Excel.Interfaces.SettingData`<!-- -->) qui contient des copies superficielles de toutes les propriétés enfants chargées à partir de l''objet d''origine.'
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Excel.Interfaces.SettingData;'
+      return:
+        type:
+          - excel.Excel.Interfaces.SettingData
+        description: ''
+  - uid: excel_release.Excel.Setting.value
+    summary: |-
+      Représente la valeur stockée pour ce paramètre.
 
-    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Setting`-Uniquement disponible sur les types de collection. Elle est similaire à la signature précédente. Option. Top indique le nombre maximal d'éléments de collection qui peuvent être inclus dans le résultat. Option. Skip indique le nombre d'éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat. Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d'éléments.
-  name: load(option)
-  fullName: load(option)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(option?: Excel.Interfaces.SettingLoadOptions): Excel.Setting;'
-    return:
-      type:
-      - excel.Excel.Setting
-      description: ''
-    parameters:
-    - id: option
-      description: ''
-      type:
-      - excel.Excel.Interfaces.SettingLoadOptions
-- uid: excel_release.Excel.Setting.load_1
-  summary: Met en file d'attente une commande pour charger les propriétés spécifiées de l'objet. Vous devez appeler `context.sync()` avant de lire les propriétés.
-  name: load(propertyNames)
-  fullName: load(propertyNames)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(propertyNames?: string | string[]): Excel.Setting;'
-    return:
-      type:
-      - excel.Excel.Setting
-      description: ''
-    parameters:
-    - id: propertyNames
-      description: Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
-      type:
-      - string | string[]
-- uid: excel_release.Excel.Setting.load_2
-  summary: Met en file d'attente une commande pour charger les propriétés spécifiées de l'objet. Vous devez appeler `context.sync()` avant de lire les propriétés.
-  name: load(propertyNamesAndPaths)
-  fullName: load(propertyNamesAndPaths)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.Setting;'
-    return:
-      type:
-      - excel.Excel.Setting
-      description: ''
-    parameters:
-    - id: propertyNamesAndPaths
-      description: Où propertyNamesAndPaths. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et propertyNamesAndPaths. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
-      type:
-      - '{ select?: string; expand?: string; }'
-- uid: excel_release.Excel.Setting.set
-  summary: Définit plusieurs propriétés d'un objet en même temps. Vous pouvez transmettre un objet plain avec les propriétés appropriées, ou un autre objet API du même type.
-  remarks: >-
-    Cette méthode est dotée de la signature supplémentaire suivante:
-
-
-    `set(properties: Excel.Setting): void`
-  name: set(properties, options)
-  fullName: set(properties, options)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'set(properties: Interfaces.SettingUpdateData, options?: OfficeExtension.UpdateOptions): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: properties
-      description: Objet JavaScript avec des propriétés qui sont structurées isomorphically vers les propriétés de l'objet sur lequel la méthode est appelée.
-      type:
-      - Interfaces.SettingUpdateData
-    - id: options
-      description: Fournit une option permettant de supprimer les erreurs si l'objet Properties tente de définir des propriétés en lecture seule.
-      type:
-      - office.OfficeExtension.UpdateOptions
-- uid: excel_release.Excel.Setting.set_1
-  summary: Définit plusieurs propriétés de l'objet en même temps, en fonction d'un objet chargé existant.
-  name: set(properties)
-  fullName: set(properties)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'set(properties: Excel.Setting): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: properties
-      description: ''
-      type:
-      - excel.Excel.Setting
-- uid: excel_release.Excel.Setting.toJSON
-  summary: Remplace la méthode JavaScript `toJSON()` afin de fournir une sortie plus utile lorsqu'un objet d'API est transmis à. `JSON.stringify()` <!-- --> (`JSON.stringify`<!-- -->, à son tour, appelle `toJSON` la méthode de l'objet qui lui est passé.) Tandis que l'objet Excel. Setting est un objet d'API `toJSON` , la méthode renvoie un objet JavaScript simple ( `Excel.Interfaces.SettingData` <!-- -->tapé sous la forme) qui contient des copies superficielles de toutes les propriétés enfants chargées à partir de l'objet d'origine.
-  name: toJSON()
-  fullName: toJSON()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'toJSON(): Excel.Interfaces.SettingData;'
-    return:
-      type:
-      - excel.Excel.Interfaces.SettingData
-      description: ''
-- uid: excel_release.Excel.Setting.value
-  summary: >-
-    Représente la valeur stockée pour ce paramètre.
-
-
-    \[[Ensemble d'API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: value
-  fullName: value
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'value: any;'
-    return:
-      type:
-      - any
+      \[[Ensemble d'API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: value
+    fullName: value
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'value: any;'
+      return:
+        type:
+          - any

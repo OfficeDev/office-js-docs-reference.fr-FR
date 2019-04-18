@@ -1,166 +1,139 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 76ba90e68e4df524fdd7234b2365d5dbd7a666cc
-ms.sourcegitcommit: 6c48441b8be51d3a9d7dc836e386230a155feceb
-ms.translationtype: MT
-ms.contentlocale: fr-FR
-ms.lasthandoff: 02/22/2019
-ms.locfileid: "30198829"
 items:
-- uid: Outlook_1_1.Office.RoamingSettings
-  summary: >-
-    Les paramètres créés à l’aide des méthodes de l’objet RoamingSettings sont enregistrés pour chaque complément et pour chaque utilisateur. En d’autres termes, ils ne sont disponibles que pour le complément qui les a créés et uniquement dans la boîte aux lettres de l’utilisateur où ils sont enregistrés.
+  - uid: Outlook_1_1.Office.RoamingSettings
+    summary: |-
+      Les paramètres créés à l'aide des méthodes de l'objet RoamingSettings sont enregistrés par complément et par utilisateur. En d’autres termes, ils ne sont disponibles que pour le complément qui les a créés et uniquement dans la boîte aux lettres de l’utilisateur où ils sont enregistrés.
 
+      Même si l’API du complément Outlook limite l’accès à ces paramètres au complément qui les a créés, ces paramètres ne doivent pas être considérés comme un espace de stockage sécurisé. Ils sont accessibles via les services web Exchange ou l’interface MAPI étendue. Nous vous recommandons de ne pas les utiliser pour stocker des informations sensibles telles que des informations d’identification ou des jetons de sécurité.
 
-    Même si l’API du complément Outlook limite l’accès à ces paramètres au complément qui les a créés, ces paramètres ne doivent pas être considérés comme un espace de stockage sécurisé. Ils sont accessibles via les services web Exchange ou l’interface MAPI étendue. Nous vous recommandons de ne pas les utiliser pour stocker des informations sensibles telles que des informations d’identification ou des jetons de sécurité.
+      Le nom d’un paramètre est une donnée String, alors que sa valeur peut être une donnée String, Number, Boolean, Null, Object ou Array.
 
+      L'objet RoamingSettings est accessible via la propriété roamingSettings dans l'espace de noms Office. Context.
 
-    Le nom d’un paramètre est une donnée String, alors que sa valeur peut être une donnée String, Number, Boolean, Null, Object ou Array.
+      **Important**: l'objet RoamingSettings est initialisé à partir du stockage persistant uniquement lorsque le complément est chargé pour la première fois. Pour les volets Office, cela signifie qu'il n'est initialisé que lors de la première ouverture du volet des tâches. Si le volet Office navigue vers une autre page ou recharge la page active, l'objet en mémoire est réinitialisé à ses valeurs initiales, même si votre complément a conservé des modifications. Les modifications persistantes ne sont pas disponibles tant que le volet Office n'est pas fermé et rouvert.
 
+      \[[Ensemble d'API: boîte aux lettres 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      <table> <tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>Restreinte</td></tr> <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Rédaction ou lecture</td></tr> </table>
 
-    L’objet RoamingSettings est accessible via la propriété roamingSettings dans l’espace de noms Office.context.
+      #### <a name="examples"></a>Exemples
 
+      ```javascript
+      // Get the current value of the 'myKey' setting.
+      var value = Office.context.roamingSettings.get('myKey');
+      // Update the value of the 'myKey' setting.
+      Office.context.roamingSettings.set('myKey', 'Hello World!');
+      // Persist the change.
+      Office.context.roamingSettings.saveAsync();
+      ```
+    name: Office.RoamingSettings
+    fullName: Office.RoamingSettings
+    langs:
+      - typeScript
+    type: interface
+    package: Outlook_1_1
+    children:
+      - Outlook_1_1.Office.RoamingSettings.get
+      - Outlook_1_1.Office.RoamingSettings.remove
+      - Outlook_1_1.Office.RoamingSettings.saveAsync
+      - Outlook_1_1.Office.RoamingSettings.set
+  - uid: Outlook_1_1.Office.RoamingSettings.get
+    summary: |-
+      Récupère le paramètre spécifié.
 
-    **Important**: l'objet RoamingSettings est initialisé à partir du stockage persistant uniquement lorsque le complément est chargé pour la première fois. Pour les volets Office, cela signifie qu'il n'est initialisé que lors de la première ouverture du volet des tâches. Si le volet Office navigue vers une autre page ou recharge la page active, l'objet en mémoire est réinitialisé à ses valeurs initiales, même si votre complément a conservé des modifications. Les modifications persistantes ne sont pas disponibles tant que le volet Office n'est pas fermé et rouvert.
+      \[[Ensemble d'API: boîte aux lettres 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: '<table> <tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>Restreinte</td></tr> <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Rédaction ou lecture</td></tr> </table>'
+    name: get(name)
+    fullName: get(name)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'get(name: string): any;'
+      return:
+        type:
+          - any
+        description: 'Type: numéro \| \| de chaîne \| tableau \| d''objets booléen'
+      parameters:
+        - id: name
+          description: Nom respectant l’emploi des majuscules et minuscules pour le paramètre à récupérer.
+          type:
+            - string
+  - uid: Outlook_1_1.Office.RoamingSettings.remove
+    summary: |-
+      Supprime le paramètre spécifié
 
+      \[[Ensemble d'API: boîte aux lettres 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: '<table> <tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>Restreinte</td></tr> <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Rédaction ou lecture</td></tr> </table>'
+    name: remove(name)
+    fullName: remove(name)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'remove(name: string): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: name
+          description: Nom respectant l’emploi des majuscules et minuscules pour le paramètre à supprimer.
+          type:
+            - string
+  - uid: Outlook_1_1.Office.RoamingSettings.saveAsync
+    summary: |-
+      Enregistre les paramètres.
 
-    \[[Ensemble d'API: boîte aux lettres 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: >-
-    <table> <tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>Restreinte</td></tr> <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Rédaction ou lecture</td></tr> </table>
+      Tout paramètre précédemment enregistré par un complément est chargé lors de son initialisation; ainsi, pendant la durée de vie de la session, vous pouvez simplement utiliser les méthodes Set et Get pour utiliser la copie en mémoire du conteneur de propriétés des paramètres. Lorsque vous souhaitez conserver les paramètres afin qu'ils soient disponibles la prochaine fois que le complément est utilisé, utilisez la méthode saveAsync.
 
-    ####Voici
+      \[[Ensemble d'API: boîte aux lettres 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: '<table> <tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>Restreinte</td></tr> <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Rédaction ou lecture</td></tr> </table>'
+    name: saveAsync(callback)
+    fullName: saveAsync(callback)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'saveAsync(callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: callback
+          description: 'Facultatif. Une fois la méthode exécutée, la fonction transmise au paramètre callback est appelée avec un seul paramètre de type Office. AsyncResult.'
+          type:
+            - '(asyncResult: Office.AsyncResult<void>) => void'
+  - uid: Outlook_1_1.Office.RoamingSettings.set
+    summary: |-
+      Définit ou crée le paramètre spécifié.
 
+      La méthode set permet de créer un paramètre du nom spécifié s’il n’existe pas déjà, ou de définir un paramètre existant du nom spécifié. La valeur est stockée dans le document sous forme de représentation JSON sérialisée de son type de données.
 
-    ```javascript
+      Un maximum de 32KO est disponible pour les paramètres de chaque complément.
 
-    // Get the current value of the 'myKey' setting.
+      Les modifications apportées aux paramètres à l'aide de la fonction Set ne sont pas enregistrées sur le serveur tant que la fonction saveAsync n'est pas appelée.
 
-    var value = Office.context.roamingSettings.get('myKey');
-
-    // Update the value of the 'myKey' setting.
-
-    Office.context.roamingSettings.set('myKey', 'Hello World!');
-
-    // Persist the change.
-
-    Office.context.roamingSettings.saveAsync();
-
-    ```
-  name: Office.RoamingSettings
-  fullName: Office.RoamingSettings
-  langs:
-  - typeScript
-  type: interface
-  package: Outlook_1_1
-  children:
-  - Outlook_1_1.Office.RoamingSettings.get
-  - Outlook_1_1.Office.RoamingSettings.remove
-  - Outlook_1_1.Office.RoamingSettings.saveAsync
-  - Outlook_1_1.Office.RoamingSettings.set
-- uid: Outlook_1_1.Office.RoamingSettings.get
-  summary: >-
-    Récupère le paramètre spécifié.
-
-
-    \[[Ensemble d'API: boîte aux lettres 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: <table> <tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>Restreinte</td></tr> <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Rédaction ou lecture</td></tr> </table>
-  name: get(name)
-  fullName: get(name)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'get(name: string): any;'
-    return:
-      type:
-      - any
-      description: "Type: numéro \\| \\| de chaîne \\| tableau \\| d'objets booléen"
-    parameters:
-    - id: name
-      description: Nom respectant l’emploi des majuscules et minuscules pour le paramètre à récupérer.
-      type:
-      - string
-- uid: Outlook_1_1.Office.RoamingSettings.remove
-  summary: >-
-    Supprime le paramètre spécifié
-
-
-    \[[Ensemble d'API: boîte aux lettres 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: <table> <tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>Restreinte</td></tr> <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Rédaction ou lecture</td></tr> </table>
-  name: remove(name)
-  fullName: remove(name)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'remove(name: string): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: name
-      description: Nom respectant l’emploi des majuscules et minuscules pour le paramètre à supprimer.
-      type:
-      - string
-- uid: Outlook_1_1.Office.RoamingSettings.saveAsync
-  summary: >-
-    Enregistre les paramètres.
-
-
-    Tous les paramètres précédemment enregistrés par un complément sont chargés lorsqu’il est initialisé. Ainsi, pendant la durée de la session, il vous suffit d’employer les méthodes set et get pour utiliser la copie en mémoire du conteneur de propriétés de paramètres. Pour conserver les paramètres et faire en sorte qu’ils soient disponibles lors de la prochaine utilisation du complément, utilisez la méthode saveAsync.
-
-
-    \[[Ensemble d'API: boîte aux lettres 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: <table> <tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>Restreinte</td></tr> <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Rédaction ou lecture</td></tr> </table>
-  name: saveAsync(callback)
-  fullName: saveAsync(callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'saveAsync(callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: callback
-      description: Facultatif. Une fois la méthode exécutée, la fonction transmise au paramètre callback est appelée avec un seul paramètre de type Office. AsyncResult.
-      type:
-      - '(asyncResult: Office.AsyncResult<void>) => void'
-- uid: Outlook_1_1.Office.RoamingSettings.set
-  summary: >-
-    Définit ou crée le paramètre spécifié.
-
-
-    La méthode set permet de créer un paramètre du nom spécifié s’il n’existe pas déjà, ou de définir un paramètre existant du nom spécifié. La valeur est stockée dans le document sous forme de représentation JSON sérialisée de son type de données.
-
-
-    Un maximum de 32KO est disponible pour les paramètres de chaque complément.
-
-
-    Les modifications apportées aux paramètres à l’aide de la fonction set ne sont pas enregistrées sur le serveur tant que la fonction saveAsync n’est pas appelée.
-
-
-    \[[Ensemble d'API: boîte aux lettres 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: <table> <tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>Restreinte</td></tr> <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Rédaction ou lecture</td></tr> </table>
-  name: set(name, value)
-  fullName: set(name, value)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'set(name: string, value: any): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: name
-      description: Nom qui respecte la casse du paramètre à définir ou créer.
-      type:
-      - string
-    - id: value
-      description: Spécifie la valeur à stocker.
-      type:
-      - any
+      \[[Ensemble d'API: boîte aux lettres 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: '<table> <tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>Restreinte</td></tr> <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Rédaction ou lecture</td></tr> </table>'
+    name: 'set(name, value)'
+    fullName: 'set(name, value)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(name: string, value: any): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: name
+          description: Nom qui respecte la casse du paramètre à définir ou créer.
+          type:
+            - string
+        - id: value
+          description: Spécifie la valeur à stocker.
+          type:
+            - any
