@@ -1,65 +1,90 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: b52c294c7c7b30390622fec52183f8d455e9060d
-ms.sourcegitcommit: b0b614f5315ab2e5c1e0ea51c687498f87684a07
-ms.translationtype: MT
-ms.contentlocale: fr-FR
-ms.lasthandoff: 02/15/2019
-ms.locfileid: "30054981"
 items:
-- uid: outlook.Office.AttachmentContent
-  summary: >-
-    Représente le contenu d'une pièce jointe sur un message ou un élément de rendez-vous.
+  - uid: outlook.Office.AttachmentContent
+    summary: |-
+      Représente le contenu d'une pièce jointe sur un message ou un élément de rendez-vous.
+
+      \[[Ensemble d'API: aperçu de boîte aux lettres](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **<!-- --> [Niveau d'autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
+
+      **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: composition ou lecture
+    isPreview: true
+    name: Office.AttachmentContent
+    fullName: Office.AttachmentContent
+    langs:
+      - typeScript
+    type: interface
+    package: outlook
+    children:
+      - outlook.Office.AttachmentContent.content
+      - outlook.Office.AttachmentContent.format
+  - uid: outlook.Office.AttachmentContent.content
+    summary: Contenu d'une pièce jointe sous la forme d'une chaîne.
+    isPreview: true
+    name: content
+    fullName: content
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'content: string;'
+      return:
+        type:
+          - string
+  - uid: outlook.Office.AttachmentContent.format
+    summary: |-
+      Format de chaîne à utiliser pour le contenu d'une pièce jointe.
+
+      Pour les pièces jointes, la mise en forme est une chaîne codée en base64.
+
+      Pour les pièces jointes d'éléments qui représentent des messages, la mise en forme est une chaîne représentant un fichier au format. eml.
+
+      Pour les pièces jointes d'éléments qui représentent des éléments de calendrier, la mise en forme est une chaîne représentant un fichier. iCalendar.
+
+      Pour les pièces jointes dans le Cloud, la mise en forme est une chaîne d'URL.
+    isPreview: true
+    name: format
+    fullName: format
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'format: MailboxEnums.AttachmentContentFormat;'
+      return:
+        type:
+          - MailboxEnums.AttachmentContentFormat
+        description: |-
 
 
-    \[[Ensemble d'API: aperçu de boîte aux lettres](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: <table> <tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition ou lecture</td></tr> </table>
-  isPreview: true
-  name: Office.AttachmentContent
-  fullName: Office.AttachmentContent
-  langs:
-  - typeScript
-  type: interface
-  package: outlook
-  children:
-  - outlook.Office.AttachmentContent.content
-  - outlook.Office.AttachmentContent.format
-- uid: outlook.Office.AttachmentContent.content
-  summary: Contenu d'une pièce jointe sous la forme d'une chaîne.
-  isPreview: true
-  name: content
-  fullName: content
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'content: string;'
-    return:
-      type:
-      - string
-- uid: outlook.Office.AttachmentContent.format
-  summary: >-
-    Format de chaîne à utiliser pour le contenu d'une pièce jointe.
+          #### <a name="examples"></a>範例
 
+          ```javascript
+          var item = Office.context.mailbox.item;
+          var listOfAttachments = [];
+          item.getAttachmentsAsync(callback);
 
-    Pour les pièces jointes, la mise en forme est une chaîne codée en base64.
+          function callback(result) {
+              if (result.value.length > 0) {
+                  for (i = 0 ; i < result.value.length ; i++) {
+                      var options = {asyncContext: {type: result.value[i].attachmentType}};
+                      getAttachmentContentAsync(result.value[i].id, options, handleAttachmentsCallback);
+                  }
+              }
+          }
 
-
-    Pour les pièces jointes d'éléments qui représentent des messages, la mise en forme est une chaîne représentant un fichier au format. eml.
-
-
-    Pour les pièces jointes d'éléments qui représentent des éléments de calendrier, la mise en forme est une chaîne représentant un fichier. iCalendar.
-
-
-    Pour les pièces jointes dans le Cloud, la mise en forme est une chaîne d'URL.
-  isPreview: true
-  name: format
-  fullName: format
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'format: MailboxEnums.AttachmentContentFormat;'
-    return:
-      type:
-      - MailboxEnums.AttachmentContentFormat
-      description: "\n#### <a name=\"examples\"></a>範例\n\n```javascript\nvar item = Office.context.mailbox.item;\nvar listOfAttachments = [];\nitem.getAttachmentsAsync(callback);\n\nfunction callback(result) {\n    if (result.value.length > 0) {\n        for (i = 0 ; i < result.value.length ; i++) {\n            var options = {asyncContext: {type: result.value[i].attachmentType}};\n            getAttachmentContentAsync(result.value[i].id, options, handleAttachmentsCallback);\n        }\n    }\n}\n\nfunction handleAttachmentsCallback(result) {\n    // Parse string to be a url, an .eml file, a base64-encoded string, or an .icalendar file.\n    if (result.format === Office.MailboxEnums.AttachmentContentFormat.Base64) {\n        // Handle file attachment.\n    } else if (result.format === Office.MailboxEnums.AttachmentContentFormat.Eml) {\n        // Handle email item attachment.\n    } else if (result.format === Office.MailboxEnums.AttachmentContentFormat.ICalendar) {\n        // Handle .icalender attachment.\n    } else if (result.format === Office.MailboxEnums.AttachmentContentFormat.Url) {\n        // Handle cloud attachment.\n    } else {\n        // Handle attachment formats that are not supported.\n    }\n}\n```"
+          function handleAttachmentsCallback(result) {
+              // Parse string to be a url, an .eml file, a base64-encoded string, or an .icalendar file.
+              if (result.format === Office.MailboxEnums.AttachmentContentFormat.Base64) {
+                  // Handle file attachment.
+              } else if (result.format === Office.MailboxEnums.AttachmentContentFormat.Eml) {
+                  // Handle email item attachment.
+              } else if (result.format === Office.MailboxEnums.AttachmentContentFormat.ICalendar) {
+                  // Handle .icalender attachment.
+              } else if (result.format === Office.MailboxEnums.AttachmentContentFormat.Url) {
+                  // Handle cloud attachment.
+              } else {
+                  // Handle attachment formats that are not supported.
+              }
+          }
+          ```

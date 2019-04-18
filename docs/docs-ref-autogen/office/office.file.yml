@@ -1,119 +1,87 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: e82f2f2061f28e9b3e091f19ca945a4ec36a9b6a
-ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
-ms.translationtype: MT
-ms.contentlocale: fr-FR
-ms.lasthandoff: 02/13/2019
-ms.locfileid: "29980967"
 items:
-- uid: office.Office.File
-  summary: Représente le fichier du document associé à un complément Office.
-  remarks: >-
-    Accéder à l’objet de fichier avec la propriété AsyncResult.value dans la fonction de rappel passée à la méthode Document.getFileAsync.
+  - uid: office.Office.File
+    summary: Représente le fichier du document associé à un complément Office.
+    remarks: Accédez à l'objet file avec la propriété AsyncResult. value dans la fonction de rappel transmise à la méthode document. getFileAsync.
+    name: Office.File
+    fullName: Office.File
+    langs:
+      - typeScript
+    type: interface
+    package: office
+    children:
+      - office.Office.File.closeAsync
+      - office.Office.File.getSliceAsync
+      - office.Office.File.size
+      - office.Office.File.sliceCount
+  - uid: office.Office.File.closeAsync
+    summary: Ferme le fichier de document.
+    remarks: "**Ensemble de conditions requises**: [fichier](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#file)\n\nAu maximum deux documents sont autorisés à se trouver en mémoire\_; autrement, l’opération Document.getFileAsync échoue. Utilisez la méthode File.closeAsync pour fermer le fichier lorsque vous avez terminé de l’utiliser.\n\nDans la fonction de rappel passée à la méthode closeAsync, vous pouvez utiliser les propriétés de l’objet AsyncResult pour renvoyer les informations suivantes.\n\n<table> <tr> <th>Propriété</th> <th>Utiliser pour...</th> </tr> <tr> <td>AsyncResult.value</td> <td>Toujours renvoyer undefined car il n’existe aucun objet ou aucune donnée à récupérer.</td> </tr> <tr> <td>AsyncResult.status</td> <td>Déterminer si l’opération a réussi ou échoué.</td> </tr> <tr> <td>AsyncResult.error</td> <td>Accéder à un objet Error fournissant des informations sur l’erreur en cas d’échec de l’opération.</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>Élément de tout type défini par l’utilisateur qui est renvoyé dans l’objet AsyncResult sans être modifié.</td> </tr> </table>"
+    name: closeAsync(callback)
+    fullName: closeAsync(callback)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'closeAsync(callback?: (result: AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: callback
+          description: 'Facultatif. Fonction appelée lorsque le rappel est renvoyé, dont le seul paramètre est de type [Office. AsyncResult](xref:office.Office.AsyncResult)<!-- -->.'
+          type:
+            - '(result: AsyncResult<void>) => void'
+  - uid: office.Office.File.getSliceAsync
+    summary: Retourne la section spécifiée.
+    remarks: |-
+      **Ensemble de conditions requises**: [fichier](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#file)
 
+      Dans la fonction de rappel passée à la méthode getSliceAsync, vous pouvez utiliser les propriétés de l’objet AsyncResult pour renvoyer les informations suivantes.
 
-    **Informations de prise en charge**
-
-
-    MAJUSCULE Y dans le tableau suivant indique que cette interface est prise en charge dans l’application hôte Office correspondante. Une cellule vide indique que l’application hôte Office ne prennent en charge cette interface.
-
-
-    Pour plus d’informations sur les exigences des applications et le serveur hôte Office, voir [Configuration requise pour exécuter des compléments Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.
-
-
-    *Hôtes pris en charge par la plateforme* <table> <tr><th> </th><th> Office pour Bureau Windows </th><th> Office Online (dans un navigateur) </th><th> Office for iPad </th><th> Office for Mac </th></tr> <tr><td><strong>Excel</strong></td><td> v </td><td> v </td><td> v </td><td> v </td></tr> <tr><td><strong>PowerPoint</strong></td><td> v </td><td> v </td><td> v </td><td> v </td></tr> <tr><td><strong>Word</strong></td><td> v </td><td> v </td><td> v </td><td> v </td></tr> </table>
-  name: Office.File
-  fullName: Office.File
-  langs:
-  - typeScript
-  type: interface
-  package: office
-  children:
-  - office.Office.File.closeAsync
-  - office.Office.File.getSliceAsync
-  - office.Office.File.size
-  - office.Office.File.sliceCount
-- uid: office.Office.File.closeAsync
-  summary: Ferme le fichier de document.
-  remarks: >-
-    <table><tr><td>Ensembles de ressources</td><td>File</td></tr></table>
-
-
-    Au maximum deux documents sont autorisés à se trouver en mémoire ; autrement, l’opération Document.getFileAsync échoue. Utilisez la méthode File.closeAsync pour fermer le fichier lorsque vous avez terminé de l’utiliser.
-
-
-    Dans la fonction de rappel passée à la méthode closeAsync, vous pouvez utiliser les propriétés de l’objet AsyncResult pour renvoyer les informations suivantes.
-
-
-    <table> <tr> <th>Propriété</th> <th>Utiliser pour...</th> </tr> <tr> <td>AsyncResult.value</td> <td>Renvoie toujours undefined car il n’existe aucun objet ou aucune donnée à récupérer.</td> </tr> <tr> <td>AsyncResult.status</td> <td>Déterminer si l’opération a réussi ou échoué.</td> </tr> <tr> <td>AsyncResult.error</td> <td>Accéder à un objet Error fournissant des informations sur l’erreur en cas d’échec de l’opération.</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>Élément de tout type défini par l’utilisateur qui est renvoyé dans l’objet AsyncResult sans être modifié.</td> </tr> </table>
-  name: closeAsync(callback)
-  fullName: closeAsync(callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'closeAsync(callback?: (result: AsyncResult<void>) => void): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: callback
-      description: Facultatif. Une fonction qui est appelée quand le rappel retourné, dont le seul paramètre est de type [Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.
-      type:
-      - '(result: AsyncResult<void>) => void'
-- uid: office.Office.File.getSliceAsync
-  summary: Retourne la section spécifiée.
-  remarks: >-
-    <table><tr><td>Ensembles de ressources</td><td>File</td></tr></table>
-
-
-    Dans la fonction de rappel passée à la méthode getSliceAsync, vous pouvez utiliser les propriétés de l’objet AsyncResult pour renvoyer les informations suivantes.
-
-
-    <table> <tr> <th>Propriété</th> <th>Utiliser pour...</th> </tr> <tr> <td>AsyncResult.value</td> <td>Accéder à l’objet Slice.</td> </tr> <tr> <td>AsyncResult.status</td> <td>Déterminer si l’opération a réussi ou échoué.</td> </tr> <tr> <td>AsyncResult.error</td> <td>Accéder à un objet Error fournissant des informations sur l’erreur en cas d’échec de l’opération.</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>Élément de tout type défini par l’utilisateur qui est renvoyé dans l’objet AsyncResult sans être modifié.</td> </tr> </table>
-  name: getSliceAsync(sliceIndex, callback)
-  fullName: getSliceAsync(sliceIndex, callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getSliceAsync(sliceIndex: number, callback?: (result: AsyncResult<Office.Slice>) => void): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: sliceIndex
-      description: Spécifie l’index de base zéro de la section à récupérer. Obligatoire.
-      type:
-      - number
-    - id: callback
-      description: Facultatif. Une fonction qui est appelée quand le rappel retourné, dont le seul paramètre est de type [Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->. Le `value` propriété du résultat est l’objet [Office.Slice](xref:office.Office.Slice) .
-      type:
-      - '(result: AsyncResult<Office.Slice>) => void'
-- uid: office.Office.File.size
-  summary: Obtient la taille du fichier de document en octets.
-  remarks: <table><tr><td>Ensembles de ressources</td><td>File</td></tr></table>
-  name: size
-  fullName: size
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'size: number;'
-    return:
-      type:
-      - number
-- uid: office.Office.File.sliceCount
-  summary: Obtient le nombre de sections du fichier divisé.
-  name: sliceCount
-  fullName: sliceCount
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'sliceCount: number;'
-    return:
-      type:
-      - number
+      <table> <tr> <th>Propriété</th> <th>Utiliser pour...</th> </tr> <tr> <td>AsyncResult.value</td> <td>Accéder à l’objet Slice.</td> </tr> <tr> <td>AsyncResult.status</td> <td>Déterminer si l’opération a réussi ou échoué.</td> </tr> <tr> <td>AsyncResult.error</td> <td>Accéder à un objet Error fournissant des informations sur l’erreur en cas d’échec de l’opération.</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>Élément de tout type défini par l’utilisateur qui est renvoyé dans l’objet AsyncResult sans être modifié.</td> </tr> </table>
+    name: 'getSliceAsync(sliceIndex, callback)'
+    fullName: 'getSliceAsync(sliceIndex, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getSliceAsync(sliceIndex: number, callback?: (result: AsyncResult<Office.Slice>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: sliceIndex
+          description: Spécifie l’index de base zéro de la section à récupérer. Obligatoire.
+          type:
+            - number
+        - id: callback
+          description: 'Facultatif. Fonction appelée lorsque le rappel est renvoyé, dont le seul paramètre est de type [Office. AsyncResult](xref:office.Office.AsyncResult)<!-- -->. La `value` propriété du résultat est l''objet [Office. Slice](xref:office.Office.Slice) .'
+          type:
+            - '(result: AsyncResult<Office.Slice>) => void'
+  - uid: office.Office.File.size
+    summary: Obtient la taille du fichier de document en octets.
+    name: size
+    fullName: size
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'size: number;'
+      return:
+        type:
+          - number
+  - uid: office.Office.File.sliceCount
+    summary: Obtient le nombre de sections du fichier divisé.
+    name: sliceCount
+    fullName: sliceCount
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'sliceCount: number;'
+      return:
+        type:
+          - number

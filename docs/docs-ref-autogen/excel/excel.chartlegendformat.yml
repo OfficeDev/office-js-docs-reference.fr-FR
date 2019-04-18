@@ -1,217 +1,226 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 5c9b9808184197919ef66c8612778bd3efb4b0bc
-ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
-ms.translationtype: MT
-ms.contentlocale: fr-FR
-ms.lasthandoff: 02/13/2019
-ms.locfileid: "29977201"
 items:
-- uid: excel.Excel.ChartLegendFormat
-  summary: >-
-    Regroupe les propriétés de format de la légende d’un graphique.
+  - uid: excel.Excel.ChartLegendFormat
+    summary: |-
+      Regroupe les propriétés de format de la légende d’un graphique.
+
+      \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: Excel.ChartLegendFormat
+    fullName: Excel.ChartLegendFormat
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - office.OfficeExtension.ClientObject
+    package: excel
+    children:
+      - excel.Excel.ChartLegendFormat.border
+      - excel.Excel.ChartLegendFormat.context
+      - excel.Excel.ChartLegendFormat.fill
+      - excel.Excel.ChartLegendFormat.font
+      - excel.Excel.ChartLegendFormat.load
+      - excel.Excel.ChartLegendFormat.load_1
+      - excel.Excel.ChartLegendFormat.load_2
+      - excel.Excel.ChartLegendFormat.set
+      - excel.Excel.ChartLegendFormat.set_1
+      - excel.Excel.ChartLegendFormat.toJSON
+  - uid: excel.Excel.ChartLegendFormat.border
+    summary: |-
+      Représente le format bordure, qui inclut couleur, style de ligne et épaisseur. En lecture seule.
+
+      \[[Ensemble d'API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: border
+    fullName: border
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly border: Excel.ChartBorder;'
+      return:
+        type:
+          - excel.Excel.ChartBorder
+  - uid: excel.Excel.ChartLegendFormat.context
+    summary: Contexte de demande associé à l'objet. Cette opération connecte le processus du complément au processus de l'application hôte Office.
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - RequestContext
+  - uid: excel.Excel.ChartLegendFormat.fill
+    summary: |-
+      Représente le format de remplissage d’un objet, qui comprend des informations de mise en forme d’arrière-plan. En lecture seule.
+
+      \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: fill
+    fullName: fill
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly fill: Excel.ChartFill;'
+      return:
+        type:
+          - excel.Excel.ChartFill
+  - uid: excel.Excel.ChartLegendFormat.font
+    summary: |-
+      Représente les attributs de police, tels que le nom de police, la taille de police, la couleur, etc., d'une légende de graphique. En lecture seule.
+
+      \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: font
+    fullName: font
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly font: Excel.ChartFont;'
+      return:
+        type:
+          - excel.Excel.ChartFont
+        description: |-
 
 
-    \[[Du jeu d’API : ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: Excel.ChartLegendFormat
-  fullName: Excel.ChartLegendFormat
-  langs:
-  - typeScript
-  type: class
-  extends:
-  - office.OfficeExtension.ClientObject
-  package: excel
-  children:
-  - excel.Excel.ChartLegendFormat.border
-  - excel.Excel.ChartLegendFormat.context
-  - excel.Excel.ChartLegendFormat.fill
-  - excel.Excel.ChartLegendFormat.font
-  - excel.Excel.ChartLegendFormat.load
-  - excel.Excel.ChartLegendFormat.load_1
-  - excel.Excel.ChartLegendFormat.load_2
-  - excel.Excel.ChartLegendFormat.set
-  - excel.Excel.ChartLegendFormat.set_1
-  - excel.Excel.ChartLegendFormat.toJSON
-- uid: excel.Excel.ChartLegendFormat.border
-  summary: >-
-    Représente le format bordure, qui inclut couleur, style de ligne et épaisseur. En lecture seule.
+          #### <a name="examples"></a>Exemples
 
+          ```typescript
+          await Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getItem("Sample");
 
-    \[[Du jeu d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: border
-  fullName: border
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly border: Excel.ChartBorder;'
-    return:
-      type:
-      - excel.Excel.ChartBorder
-- uid: excel.Excel.ChartLegendFormat.context
-  summary: Contexte de la requête associé à l’objet. Il connecte processus du complément au processus de l’application hôte Office.
-  name: context
-  fullName: context
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'context: RequestContext;'
-    return:
-      type:
-      - RequestContext
-- uid: excel.Excel.ChartLegendFormat.fill
-  summary: >-
-    Représente le format de remplissage d’un objet, qui comprend des informations de mise en forme d’arrière-plan. En lecture seule.
+              let chart = sheet.charts.getItemAt(0);
+              chart.legend.visible = true;
 
+              // Format the legend font.
+              let font = chart.legend.format.font;
+              font.bold = true;
+              font.color = "red";
+              font.italic = true;
+              font.size = 15;
+              font.name = "Calibri";
+              font.underline = "Single";
 
-    \[[Du jeu d’API : ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: fill
-  fullName: fill
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly fill: Excel.ChartFill;'
-    return:
-      type:
-      - excel.Excel.ChartFill
-- uid: excel.Excel.ChartLegendFormat.font
-  summary: >-
-    Représente les attributs de police, comme le nom de la police, la taille de police, la couleur, etc. pour la légende d’un graphique. En lecture seule.
+              await context.sync();
+          });
+          ```
+  - uid: excel.Excel.ChartLegendFormat.load
+    summary: "Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler «\_context.sync()\_» avant de lire les propriétés."
+    remarks: |-
+      En plus de cette signature, cette méthode possède les signatures suivantes:
 
+      `load(option?: string | string[]): Excel.ChartLegendFormat`-WHERE option est une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
 
-    \[[Du jeu d’API : ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: font
-  fullName: font
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly font: Excel.ChartFont;'
-    return:
-      type:
-      - excel.Excel.ChartFont
-      description: "\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n\n    let chart = sheet.charts.getItemAt(0);\n    chart.legend.visible = true;\n\n    // Format the legend font.\n    let font = chart.legend.format.font;\n    font.bold = true;\n    font.color = \"red\";\n    font.italic = true;\n    font.size = 15;\n    font.name = \"Calibri\";\n    font.underline = \"Single\";\n\n    await context.sync();\n});\n```"
-- uid: excel.Excel.ChartLegendFormat.load
-  summary: Files d’attente d’une commande pour charger les propriétés de l’objet spécifiées. Vous devez appeler « context.sync() » avant de lire les propriétés.
-  remarks: >-
-    Outre cette signature, cette méthode présente les signatures suivantes :
+      `load(option?: { select?: string; expand?: string; }): Excel.ChartLegendFormat`Option-WHERE option. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
 
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.ChartLegendFormat`-Uniquement disponible sur les types de collection. Elle est similaire à la signature précédente. Option. Top indique le nombre maximal d'éléments de collection qui peuvent être inclus dans le résultat. Option. Skip indique le nombre d'éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat. Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d'éléments.
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: Excel.Interfaces.ChartLegendFormatLoadOptions): Excel.ChartLegendFormat;'
+      return:
+        type:
+          - excel.Excel.ChartLegendFormat
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - excel.Excel.Interfaces.ChartLegendFormatLoadOptions
+  - uid: excel.Excel.ChartLegendFormat.load_1
+    summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler `context.sync()` avant de lire les propriétés.
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Excel.ChartLegendFormat;'
+      return:
+        type:
+          - excel.Excel.ChartLegendFormat
+        description: ''
+      parameters:
+        - id: propertyNames
+          description: Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+          type:
+            - 'string | string[]'
+  - uid: excel.Excel.ChartLegendFormat.load_2
+    summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler `context.sync()` avant de lire les propriétés.
+    name: load(propertyNamesAndPaths)
+    fullName: load(propertyNamesAndPaths)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.ChartLegendFormat;'
+      return:
+        type:
+          - excel.Excel.ChartLegendFormat
+        description: ''
+      parameters:
+        - id: propertyNamesAndPaths
+          description: Où propertyNamesAndPaths. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et propertyNamesAndPaths. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
+          type:
+            - '{ select?: string; expand?: string; }'
+  - uid: excel.Excel.ChartLegendFormat.set
+    summary: 'Définit plusieurs propriétés d''un objet en même temps. Vous pouvez transmettre un objet plain avec les propriétés appropriées, ou un autre objet API du même type.'
+    remarks: |-
+      Cette méthode est dotée de la signature supplémentaire suivante:
 
-    `load(option?: string | string[]): Excel.ChartLegendFormat`-Où option est une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
-
-
-    `load(option?: { select?: string; expand?: string; }): Excel.ChartLegendFormat`-Où option.select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options.expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
-
-
-    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.ChartLegendFormat`-Uniquement disponible sur les types de la collection. Il est similaire à la signature précédente. Option.Top Spécifie le nombre maximal d’éléments pouvant être inclus dans le résultat de la collection. Option.Skip Spécifie le nombre d’éléments qui doivent être ignoré et non inclus dans le résultat. Si option.top est spécifié, le jeu de résultats démarre après l’ignorer le nombre spécifié d’éléments.
-  name: load(option)
-  fullName: load(option)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(option?: Excel.Interfaces.ChartLegendFormatLoadOptions): Excel.ChartLegendFormat;'
-    return:
-      type:
-      - excel.Excel.ChartLegendFormat
-      description: ''
-    parameters:
-    - id: option
-      description: ''
-      type:
-      - excel.Excel.Interfaces.ChartLegendFormatLoadOptions
-- uid: excel.Excel.ChartLegendFormat.load_1
-  summary: Files d’attente d’une commande pour charger les propriétés de l’objet spécifiées. Vous devez appeler `context.sync()` avant de lire les propriétés.
-  name: load(propertyNames)
-  fullName: load(propertyNames)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(propertyNames?: string | string[]): Excel.ChartLegendFormat;'
-    return:
-      type:
-      - excel.Excel.ChartLegendFormat
-      description: ''
-    parameters:
-    - id: propertyNames
-      description: Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
-      type:
-      - string | string[]
-- uid: excel.Excel.ChartLegendFormat.load_2
-  summary: Files d’attente d’une commande pour charger les propriétés de l’objet spécifiées. Vous devez appeler `context.sync()` avant de lire les propriétés.
-  name: load(propertyNamesAndPaths)
-  fullName: load(propertyNamesAndPaths)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.ChartLegendFormat;'
-    return:
-      type:
-      - excel.Excel.ChartLegendFormat
-      description: ''
-    parameters:
-    - id: propertyNamesAndPaths
-      description: Où propertyNamesAndPaths.select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et propertyNamesAndPaths.expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
-      type:
-      - '{ select?: string; expand?: string; }'
-- uid: excel.Excel.ChartLegendFormat.set
-  summary: Définir plusieurs propriétés d’un objet en même temps. Vous pouvez passer un objet brut avec les propriétés appropriées, ou un autre objet API du même type.
-  remarks: >-
-    Cette méthode a la signature supplémentaire suivante :
-
-
-    `set(properties: Excel.ChartLegendFormat): void`
-  name: set(properties, options)
-  fullName: set(properties, options)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'set(properties: Interfaces.ChartLegendFormatUpdateData, options?: OfficeExtension.UpdateOptions): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: properties
-      description: Un objet JavaScript avec des propriétés qui sont structurés isomorphically pour les propriétés de l’objet sur lequel la méthode est appelée.
-      type:
-      - Interfaces.ChartLegendFormatUpdateData
-    - id: options
-      description: Fournit une option permettant de supprimer des erreurs si l’objet propriétés tente de définir des propriétés en lecture seule.
-      type:
-      - office.OfficeExtension.UpdateOptions
-- uid: excel.Excel.ChartLegendFormat.set_1
-  summary: Définit plusieurs propriétés de l’objet en même temps, basé sur un objet chargé existant.
-  name: set(properties)
-  fullName: set(properties)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'set(properties: Excel.ChartLegendFormat): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: properties
-      description: ''
-      type:
-      - excel.Excel.ChartLegendFormat
-- uid: excel.Excel.ChartLegendFormat.toJSON
-  summary: Remplace le code JavaScript `toJSON()` méthode afin de fournir une sortie plus utile lorsqu’un objet API est passé à `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle le `toJSON` méthode de l’objet qui lui est passé.) Tandis que l’objet Excel.ChartLegendFormat d’origine est un objet d’API, la `toJSON` méthode renvoie un objet JavaScript brut (typée en tant que `Excel.Interfaces.ChartLegendFormatData` <!-- -->) qui contient des copies superficielles de toutes les propriétés enfant chargé à partir de l’objet d’origine.
-  name: toJSON()
-  fullName: toJSON()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'toJSON(): Excel.Interfaces.ChartLegendFormatData;'
-    return:
-      type:
-      - excel.Excel.Interfaces.ChartLegendFormatData
-      description: ''
+      `set(properties: Excel.ChartLegendFormat): void`
+    name: 'set(properties, options)'
+    fullName: 'set(properties, options)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Interfaces.ChartLegendFormatUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: Objet JavaScript avec des propriétés qui sont structurées isomorphically vers les propriétés de l'objet sur lequel la méthode est appelée.
+          type:
+            - Interfaces.ChartLegendFormatUpdateData
+        - id: options
+          description: Fournit une option permettant de supprimer les erreurs si l'objet Properties tente de définir des propriétés en lecture seule.
+          type:
+            - office.OfficeExtension.UpdateOptions
+  - uid: excel.Excel.ChartLegendFormat.set_1
+    summary: 'Définit plusieurs propriétés de l''objet en même temps, en fonction d''un objet chargé existant.'
+    name: set(properties)
+    fullName: set(properties)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Excel.ChartLegendFormat): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: ''
+          type:
+            - excel.Excel.ChartLegendFormat
+  - uid: excel.Excel.ChartLegendFormat.toJSON
+    summary: 'Remplace la méthode JavaScript `toJSON()` afin de fournir une sortie plus utile lorsqu''un objet d''API est transmis à`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle `toJSON` la méthode de l''objet qui lui est passé.) Tandis que l''objet Excel. ChartLegendFormat d''origine est un objet `toJSON` d''API, la méthode renvoie un objet JavaScript simple (tapé comme`Excel.Interfaces.ChartLegendFormatData`<!-- -->) qui contient des copies superficielles de toutes les propriétés enfants chargées à partir de l''objet d''origine.'
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Excel.Interfaces.ChartLegendFormatData;'
+      return:
+        type:
+          - excel.Excel.Interfaces.ChartLegendFormatData
+        description: ''

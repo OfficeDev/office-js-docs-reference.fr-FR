@@ -1,152 +1,137 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 302eef25bb6b05b3ce755a144bee343245e54266
-ms.sourcegitcommit: b0b614f5315ab2e5c1e0ea51c687498f87684a07
-ms.translationtype: MT
-ms.contentlocale: fr-FR
-ms.lasthandoff: 02/15/2019
-ms.locfileid: "30055898"
 items:
-- uid: outlook.Office.RecurrenceProperties
-  summary: >-
-    Représente les propriétés de la périodicité.
+  - uid: outlook.Office.RecurrenceProperties
+    summary: |-
+      Représente les propriétés de la périodicité.
 
+      \[[Ensemble d'API: boîte aux lettres 1,7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **<!-- --> [Niveau d'autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
 
-    \[[Ensemble d'API: boîte aux lettres 1,7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: >-
-    <table> <tr><td>[Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Composition ou lecture</td></tr> </table>
+      **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: composition ou lecture
 
-    ####Voici
+      #### <a name="examples"></a>Exemples
 
+      ```javascript
+      // This example gets the Recurrence object of an appointment item.
+      Office.context.mailbox.item.recurrence.getAsync(callback);
 
-    ```javascript
+      function callback(asyncResult) {
+          var context = asyncResult.context;
+          var recurrence = asyncResult.value;
+          if (!recurrence) {
+              console.log("One-time appointment or meeting");
+          } else {
+              console.log(JSON.stringify(recurrence));
+          }
+      }
 
-    // This example gets the Recurrence object of an appointment item.
-
-    Office.context.mailbox.item.recurrence.getAsync(callback);
-
-
-    function callback(asyncResult) {
-        var context = asyncResult.context;
-        var recurrence = asyncResult.value;
-        if (!recurrence) {
-            console.log("One-time appointment or meeting");
-        } else {
-            console.log(JSON.stringify(recurrence));
-        }
-    }
-
-
-    // The following example shows the results of the getAsync call that retrieves the recurrence for a series.
-
-    // NOTE: In this example, seriesTimeObject is a placeholder for the JSON representing the
-
-    // recurrence.seriesTime property. You should use the SeriesTime object's methods to get the
-
-    // recurrence date and time properties.
-
-    Recurrence = {
-        "recurrenceType": "weekly",
-        "recurrenceProperties": {"interval": 2, "days": ["mon","thu","fri"], "firstDayOfWeek": "sun"},
-        "seriesTime": {seriesTimeObject},
-        "recurrenceTimeZone": {"name": "Pacific Standard Time", "offset": -480}
-    }
-
-    ```
-  name: Office.RecurrenceProperties
-  fullName: Office.RecurrenceProperties
-  langs:
-  - typeScript
-  type: interface
-  package: outlook
-  children:
-  - outlook.Office.RecurrenceProperties.dayOfMonth
-  - outlook.Office.RecurrenceProperties.dayOfWeek
-  - outlook.Office.RecurrenceProperties.days
-  - outlook.Office.RecurrenceProperties.firstDayOfWeek
-  - outlook.Office.RecurrenceProperties.interval
-  - outlook.Office.RecurrenceProperties.month
-  - outlook.Office.RecurrenceProperties.weekNumber
-- uid: outlook.Office.RecurrenceProperties.dayOfMonth
-  summary: Représente le jour du mois.
-  name: dayOfMonth
-  fullName: dayOfMonth
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'dayOfMonth: number;'
-    return:
-      type:
-      - number
-- uid: outlook.Office.RecurrenceProperties.dayOfWeek
-  summary: Représente le jour de la semaine ou le type de jour, par exemple, jour de week-end vs semaine.
-  name: dayOfWeek
-  fullName: dayOfWeek
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'dayOfWeek: MailboxEnums.Days;'
-    return:
-      type:
-      - MailboxEnums.Days
-- uid: outlook.Office.RecurrenceProperties.days
-  summary: "Représente l'ensemble des jours de cette périodicité. Les valeurs valides sont: «Lun», «Mar», «Wed», «Thou», «Ven», «SAT» et «Sun»."
-  name: days
-  fullName: days
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'days: MailboxEnums.Days[];'
-    return:
-      type:
-      - MailboxEnums.Days[]
-- uid: outlook.Office.RecurrenceProperties.firstDayOfWeek
-  summary: "Représente le premier jour de la semaine choisi, autrement la valeur par défaut est celle des paramètres de l'utilisateur actuel. Les valeurs valides sont: «Lun», «Mar», «Wed», «Thou», «Ven», «SAT» et «Sun»."
-  name: firstDayOfWeek
-  fullName: firstDayOfWeek
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'firstDayOfWeek: MailboxEnums.Days;'
-    return:
-      type:
-      - MailboxEnums.Days
-- uid: outlook.Office.RecurrenceProperties.interval
-  summary: Représente la période entre les instances de la même série périodique.
-  name: interval
-  fullName: interval
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'interval: number;'
-    return:
-      type:
-      - number
-- uid: outlook.Office.RecurrenceProperties.month
-  summary: Représente le mois.
-  name: month
-  fullName: month
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'month: MailboxEnums.Month;'
-    return:
-      type:
-      - MailboxEnums.Month
-- uid: outlook.Office.RecurrenceProperties.weekNumber
-  summary: Représente le numéro de la semaine dans le mois sélectionné, par exemple «First» pour la première semaine du mois.
-  name: weekNumber
-  fullName: weekNumber
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'weekNumber: MailboxEnums.WeekNumber;'
-    return:
-      type:
-      - MailboxEnums.WeekNumber
+      // The following example shows the results of the getAsync call that retrieves the recurrence for a series.
+      // NOTE: In this example, seriesTimeObject is a placeholder for the JSON representing the
+      // recurrence.seriesTime property. You should use the SeriesTime object's methods to get the
+      // recurrence date and time properties.
+      Recurrence = {
+          "recurrenceType": "weekly",
+          "recurrenceProperties": {"interval": 2, "days": ["mon","thu","fri"], "firstDayOfWeek": "sun"},
+          "seriesTime": {seriesTimeObject},
+          "recurrenceTimeZone": {"name": "Pacific Standard Time", "offset": -480}
+      }
+      ```
+    name: Office.RecurrenceProperties
+    fullName: Office.RecurrenceProperties
+    langs:
+      - typeScript
+    type: interface
+    package: outlook
+    children:
+      - outlook.Office.RecurrenceProperties.dayOfMonth
+      - outlook.Office.RecurrenceProperties.dayOfWeek
+      - outlook.Office.RecurrenceProperties.days
+      - outlook.Office.RecurrenceProperties.firstDayOfWeek
+      - outlook.Office.RecurrenceProperties.interval
+      - outlook.Office.RecurrenceProperties.month
+      - outlook.Office.RecurrenceProperties.weekNumber
+  - uid: outlook.Office.RecurrenceProperties.dayOfMonth
+    summary: Représente le jour du mois.
+    name: dayOfMonth
+    fullName: dayOfMonth
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'dayOfMonth: number;'
+      return:
+        type:
+          - number
+  - uid: outlook.Office.RecurrenceProperties.dayOfWeek
+    summary: 'Représente le jour de la semaine ou le type de jour, par exemple, jour de week-end vs semaine.'
+    name: dayOfWeek
+    fullName: dayOfWeek
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'dayOfWeek: MailboxEnums.Days;'
+      return:
+        type:
+          - MailboxEnums.Days
+  - uid: outlook.Office.RecurrenceProperties.days
+    summary: 'Représente l''ensemble des jours de cette périodicité. Les valeurs valides sont: «Lun», «Mar», «Wed», «Thou», «Ven», «SAT» et «Sun».'
+    name: days
+    fullName: days
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'days: MailboxEnums.Days[];'
+      return:
+        type:
+          - 'MailboxEnums.Days[]'
+  - uid: outlook.Office.RecurrenceProperties.firstDayOfWeek
+    summary: 'Représente le premier jour de la semaine choisi, autrement la valeur par défaut est celle des paramètres de l''utilisateur actuel. Les valeurs valides sont: «Lun», «Mar», «Wed», «Thou», «Ven», «SAT» et «Sun».'
+    name: firstDayOfWeek
+    fullName: firstDayOfWeek
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'firstDayOfWeek: MailboxEnums.Days;'
+      return:
+        type:
+          - MailboxEnums.Days
+  - uid: outlook.Office.RecurrenceProperties.interval
+    summary: Représente la période entre les instances de la même série périodique.
+    name: interval
+    fullName: interval
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'interval: number;'
+      return:
+        type:
+          - number
+  - uid: outlook.Office.RecurrenceProperties.month
+    summary: Représente le mois.
+    name: month
+    fullName: month
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'month: MailboxEnums.Month;'
+      return:
+        type:
+          - MailboxEnums.Month
+  - uid: outlook.Office.RecurrenceProperties.weekNumber
+    summary: 'Représente le numéro de la semaine dans le mois sélectionné, par exemple «First» pour la première semaine du mois.'
+    name: weekNumber
+    fullName: weekNumber
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'weekNumber: MailboxEnums.WeekNumber;'
+      return:
+        type:
+          - MailboxEnums.WeekNumber

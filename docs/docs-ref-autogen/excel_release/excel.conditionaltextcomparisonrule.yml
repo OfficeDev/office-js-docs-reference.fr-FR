@@ -1,56 +1,63 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: deac0f2518f59467935fc2082cce0cf545d3ae94
-ms.sourcegitcommit: e9bfba6ec767e9d34fd1cf7b38c30f689617900a
-ms.translationtype: MT
-ms.contentlocale: fr-FR
-ms.lasthandoff: 02/20/2019
-ms.locfileid: "30107350"
 items:
-- uid: excel_release.Excel.ConditionalTextComparisonRule
-  summary: >-
-    Représente une règle de mise en forme conditionnelle de la valeur de la cellule
+  - uid: excel_release.Excel.ConditionalTextComparisonRule
+    summary: |-
+      Représente une règle de format conditionnel de valeur de cellule
+
+      \[[Ensemble d'API: ExcelApi 1,6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: Excel.ConditionalTextComparisonRule
+    fullName: Excel.ConditionalTextComparisonRule
+    langs:
+      - typeScript
+    type: interface
+    package: excel_release
+    children:
+      - excel_release.Excel.ConditionalTextComparisonRule.operator
+      - excel_release.Excel.ConditionalTextComparisonRule.text
+  - uid: excel_release.Excel.ConditionalTextComparisonRule.operator
+    summary: |-
+      Opérateur du format conditionnel de texte.
+
+      \[[Ensemble d'API: ExcelApi 1,6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: operator
+    fullName: operator
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'operator: Excel.ConditionalTextOperator | "Invalid" | "Contains" | "NotContains" | "BeginsWith" | "EndsWith";'
+      return:
+        type:
+          - Excel.ConditionalTextOperator | "Invalid" | "Contains" | "NotContains" | "BeginsWith" | "EndsWith"
+  - uid: excel_release.Excel.ConditionalTextComparisonRule.text
+    summary: |-
+      Valeur de texte de la mise en forme conditionnelle.
+
+      \[[Ensemble d'API: ExcelApi 1,6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: text
+    fullName: text
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'text: string;'
+      return:
+        type:
+          - string
+        description: |-
 
 
-    \[[Ensemble d'API: ExcelApi 1,6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: Excel.ConditionalTextComparisonRule
-  fullName: Excel.ConditionalTextComparisonRule
-  langs:
-  - typeScript
-  type: interface
-  package: excel_release
-  children:
-  - excel_release.Excel.ConditionalTextComparisonRule.operator
-  - excel_release.Excel.ConditionalTextComparisonRule.text
-- uid: excel_release.Excel.ConditionalTextComparisonRule.operator
-  summary: >-
-    Opérateur du format conditionnel de texte.
+          #### <a name="examples"></a>範例
 
+          ```typescript
+          await Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getItem("Sample");
+              const range = sheet.getRange("B16:D18");
+              const conditionalFormat = range.conditionalFormats
+                  .add(Excel.ConditionalFormatType.containsText);
+              conditionalFormat.textComparison.format.font.color = "red";
+              conditionalFormat.textComparison.rule = { operator: Excel.ConditionalTextOperator.contains, text: "Delayed" };
 
-    \[[Ensemble d'API: ExcelApi 1,6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: operator
-  fullName: operator
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'operator: Excel.ConditionalTextOperator | "Invalid" | "Contains" | "NotContains" | "BeginsWith" | "EndsWith";'
-    return:
-      type:
-      - Excel.ConditionalTextOperator | "Invalid" | "Contains" | "NotContains" | "BeginsWith" | "EndsWith"
-- uid: excel_release.Excel.ConditionalTextComparisonRule.text
-  summary: >-
-    Valeur de texte de la mise en forme conditionnelle.
-
-
-    \[[Ensemble d'API: ExcelApi 1,6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: text
-  fullName: text
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'text: string;'
-    return:
-      type:
-      - string
-      description: "\n#### <a name=\"examples\"></a>範例\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const range = sheet.getRange(\"B16:D18\");\n    const conditionalFormat = range.conditionalFormats\n        .add(Excel.ConditionalFormatType.containsText);\n    conditionalFormat.textComparison.format.font.color = \"red\";\n    conditionalFormat.textComparison.rule = { operator: Excel.ConditionalTextOperator.contains, text: \"Delayed\" };\n\n    await context.sync();\n});\n```"
+              await context.sync();
+          });
+          ```
