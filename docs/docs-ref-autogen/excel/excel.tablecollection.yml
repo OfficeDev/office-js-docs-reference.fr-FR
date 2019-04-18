@@ -1,333 +1,418 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 88ba140ea759e59decd510483063a02f88a3ebb9
-ms.sourcegitcommit: e9bfba6ec767e9d34fd1cf7b38c30f689617900a
-ms.translationtype: MT
-ms.contentlocale: fr-FR
-ms.lasthandoff: 02/20/2019
-ms.locfileid: "30094007"
 items:
-- uid: excel.Excel.TableCollection
-  summary: >-
-    <span data-ttu-id="3bb53-101">Représente une collection de tous les tableaux qui font partie du classeur ou de la feuille de calcul, en fonction de la méthode d’appel.</span><span class="sxs-lookup"><span data-stu-id="3bb53-101">Represents a collection of all the tables that are part of the workbook or worksheet, depending on how it was reached.</span></span>
+  - uid: excel.Excel.TableCollection
+    summary: |-
+      <span data-ttu-id="8dd8f-101">Représente une collection de tous les tableaux qui font partie du classeur ou de la feuille de calcul, en fonction de la méthode d’appel.</span><span class="sxs-lookup"><span data-stu-id="8dd8f-101">Represents a collection of all the tables that are part of the workbook or worksheet, depending on how it was reached.</span></span>
+
+      <span data-ttu-id="8dd8f-102">\[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="8dd8f-102">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: Excel.TableCollection
+    fullName: Excel.TableCollection
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - office.OfficeExtension.ClientObject
+    package: excel
+    children:
+      - excel.Excel.TableCollection.add
+      - excel.Excel.TableCollection.context
+      - excel.Excel.TableCollection.count
+      - excel.Excel.TableCollection.getCount
+      - excel.Excel.TableCollection.getItem
+      - excel.Excel.TableCollection.getItemAt
+      - excel.Excel.TableCollection.getItemOrNullObject
+      - excel.Excel.TableCollection.items
+      - excel.Excel.TableCollection.load
+      - excel.Excel.TableCollection.load_1
+      - excel.Excel.TableCollection.load_2
+      - excel.Excel.TableCollection.onAdded
+      - excel.Excel.TableCollection.onChanged
+      - excel.Excel.TableCollection.onDeleted
+      - excel.Excel.TableCollection.onFiltered
+      - excel.Excel.TableCollection.toJSON
+  - uid: excel.Excel.TableCollection.add
+    summary: |-
+      <span data-ttu-id="8dd8f-p101">Crée un tableau L’adresse de la source ou de l’objet de la plage détermine la feuille de calcul dans laquelle le tableau sera ajouté. Si l’ajout ne peut être effectué (par exemple, parce que l’adresse n’est pas valide, ou parce que le tableau empiéterait sur un autre tableau), un message d’erreur apparaît.</span><span class="sxs-lookup"><span data-stu-id="8dd8f-p101">Create a new table. The range object or source address determines the worksheet under which the table will be added. If the table cannot be added (e.g., because the address is invalid, or the table would overlap with another table), an error will be thrown.</span></span>
+
+      <span data-ttu-id="8dd8f-106">\[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="8dd8f-106">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: 'add(address, hasHeaders)'
+    fullName: 'add(address, hasHeaders)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'add(address: Range | string, hasHeaders: boolean): Excel.Table;'
+      return:
+        type:
+          - excel.Excel.Table
+        description: |-
 
 
-    <span data-ttu-id="3bb53-102">\[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="3bb53-102">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
-  name: Excel.TableCollection
-  fullName: Excel.TableCollection
-  langs:
-  - typeScript
-  type: class
-  extends:
-  - office.OfficeExtension.ClientObject
-  package: excel
-  children:
-  - excel.Excel.TableCollection.add
-  - excel.Excel.TableCollection.context
-  - excel.Excel.TableCollection.count
-  - excel.Excel.TableCollection.getCount
-  - excel.Excel.TableCollection.getItem
-  - excel.Excel.TableCollection.getItemAt
-  - excel.Excel.TableCollection.getItemOrNullObject
-  - excel.Excel.TableCollection.items
-  - excel.Excel.TableCollection.load
-  - excel.Excel.TableCollection.load_1
-  - excel.Excel.TableCollection.load_2
-  - excel.Excel.TableCollection.onAdded
-  - excel.Excel.TableCollection.onChanged
-  - excel.Excel.TableCollection.onDeleted
-  - excel.Excel.TableCollection.onFiltered
-  - excel.Excel.TableCollection.toJSON
-- uid: excel.Excel.TableCollection.add
-  summary: >-
-    <span data-ttu-id="3bb53-p101">Crée un tableau L’adresse de la source ou de l’objet de la plage détermine la feuille de calcul dans laquelle le tableau sera ajouté. Si l’ajout ne peut être effectué (par exemple, parce que l’adresse n’est pas valide, ou parce que le tableau empiéterait sur un autre tableau), un message d’erreur apparaît.</span><span class="sxs-lookup"><span data-stu-id="3bb53-p101">Create a new table. The range object or source address determines the worksheet under which the table will be added. If the table cannot be added (e.g., because the address is invalid, or the table would overlap with another table), an error will be thrown.</span></span>
+          #### <a name="examples"></a><span data-ttu-id="8dd8f-107">Exemples</span><span class="sxs-lookup"><span data-stu-id="8dd8f-107">Examples</span></span>
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var table = ctx.workbook.tables.add('Sheet1!A1:E7', true);
+              table.load('name');
+              return ctx.sync().then(function() {
+                  console.log(table.name);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: address
+          description: '<span data-ttu-id="8dd8f-108">Objet de plage ou nom/adresse (string) de la plage représentant la source de données.</span><span class="sxs-lookup"><span data-stu-id="8dd8f-108">A Range object, or a string address or name of the range representing the data source.</span></span> <span data-ttu-id="8dd8f-109">Si l’adresse ne contient pas de nom de feuille, la feuille ouverte est utilisée.</span><span class="sxs-lookup"><span data-stu-id="8dd8f-109">If the address does not contain a sheet name, the currently-active sheet is used.</span></span> <span data-ttu-id="8dd8f-110">\[Ensemble d''API: ExcelApi 1,1/1,3.</span><span class="sxs-lookup"><span data-stu-id="8dd8f-110">\[Api set: ExcelApi 1.1 / 1.3.</span></span> <span data-ttu-id="8dd8f-111">Avant ExcelApi 1,3, ce paramètre doit être une chaîne.</span><span class="sxs-lookup"><span data-stu-id="8dd8f-111">Prior to ExcelApi 1.3, this parameter must be a string.</span></span> <span data-ttu-id="8dd8f-112">À partir de l''API Excel 1,3, ce paramètre peut être un objet Range ou une chaîne.\]</span><span class="sxs-lookup"><span data-stu-id="8dd8f-112">Starting with Excel Api 1.3, this parameter may be a Range object or a string.\]</span></span>'
+          type:
+            - Range | string
+        - id: hasHeaders
+          description: '<span data-ttu-id="8dd8f-p103">Valeur booléenne qui indique si les données importées disposent d’étiquettes de colonne. Si la source ne contient pas d’en-têtes (autrement dit, lorsque cette propriété est définie sur false), Excel génère automatiquement un en-tête et décale les données d’une ligne vers le bas.</span><span class="sxs-lookup"><span data-stu-id="8dd8f-p103">Boolean value that indicates whether the data being imported has column labels. If the source does not contain headers (i.e,. when this property set to false), Excel will automatically generate header shifting the data down by one row.</span></span>'
+          type:
+            - boolean
+  - uid: excel.Excel.TableCollection.context
+    summary: <span data-ttu-id="8dd8f-116">Contexte de demande associé à l'objet.</span><span class="sxs-lookup"><span data-stu-id="8dd8f-116">The request context associated with the object.</span></span> <span data-ttu-id="8dd8f-117">Cette opération connecte le processus du complément au processus de l'application hôte Office.</span><span class="sxs-lookup"><span data-stu-id="8dd8f-117">This connects the add-in's process to the Office host application's process.</span></span>
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - RequestContext
+  - uid: excel.Excel.TableCollection.count
+    summary: |-
+      <span data-ttu-id="8dd8f-118">Renvoie le nombre de tableaux dans le classeur.</span><span class="sxs-lookup"><span data-stu-id="8dd8f-118">Returns the number of tables in the workbook.</span></span> <span data-ttu-id="8dd8f-119">En lecture seule.</span><span class="sxs-lookup"><span data-stu-id="8dd8f-119">Read-only.</span></span>
+
+      <span data-ttu-id="8dd8f-120">\[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="8dd8f-120">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: count
+    fullName: count
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly count: number;'
+      return:
+        type:
+          - number
+  - uid: excel.Excel.TableCollection.getCount
+    summary: |-
+      <span data-ttu-id="8dd8f-121">Obtient le nombre de tableaux de la collection.</span><span class="sxs-lookup"><span data-stu-id="8dd8f-121">Gets the number of tables in the collection.</span></span>
+
+      <span data-ttu-id="8dd8f-122">\[[Ensemble d'API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="8dd8f-122">\[ [API set: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: getCount()
+    fullName: getCount()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getCount(): OfficeExtension.ClientResult<number>;'
+      return:
+        type:
+          - OfficeExtension.ClientResult<number>
+        description: ''
+  - uid: excel.Excel.TableCollection.getItem
+    summary: |-
+      <span data-ttu-id="8dd8f-123">Obtient un tableau à l’aide de son nom ou de son ID.</span><span class="sxs-lookup"><span data-stu-id="8dd8f-123">Gets a table by Name or ID.</span></span>
+
+      <span data-ttu-id="8dd8f-124">\[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="8dd8f-124">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: getItem(key)
+    fullName: getItem(key)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItem(key: string): Excel.Table;'
+      return:
+        type:
+          - excel.Excel.Table
+        description: |-
 
 
-    <span data-ttu-id="3bb53-106">\[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="3bb53-106">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
-  name: add(address, hasHeaders)
-  fullName: add(address, hasHeaders)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'add(address: Range | string, hasHeaders: boolean): Excel.Table;'
-    return:
-      type:
-      - excel.Excel.Table
-      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"3bb53-107\">範例</span><span class=\"sxs-lookup\"><span data-stu-id=\"3bb53-107\">Examples</span></span>\n\n```javascript\nExcel.run(function (ctx) { \n    var table = ctx.workbook.tables.add('Sheet1!A1:E7', true);\n    table.load('name');\n    return ctx.sync().then(function() {\n        console.log(table.name);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-    parameters:
-    - id: address
-      description: "<span data-ttu-id=\"3bb53-108\">Un objet Range, ou une adresse de chaîne ou le nom de la plage représentant la source de données.</span><span class=\"sxs-lookup\"><span data-stu-id=\"3bb53-108\">A Range object, or a string address or name of the range representing the data source.</span></span> <span data-ttu-id=\"3bb53-109\">Si l'adresse ne contient pas de nom de feuille, la feuille active est utilisée.</span><span class=\"sxs-lookup\"><span data-stu-id=\"3bb53-109\">If the address does not contain a sheet name, the currently-active sheet is used.</span></span> <span data-ttu-id=\"3bb53-110\">\\[Ensemble d'API: ExcelApi 1,1/1,3.</span><span class=\"sxs-lookup\"><span data-stu-id=\"3bb53-110\">\\[Api set: ExcelApi 1.1 / 1.3.</span></span> <span data-ttu-id=\"3bb53-111\">Avant ExcelApi 1,3, ce paramètre doit être une chaîne.</span><span class=\"sxs-lookup\"><span data-stu-id=\"3bb53-111\">Prior to ExcelApi 1.3, this parameter must be a string.</span></span> <span data-ttu-id=\"3bb53-112\">À partir de l'API Excel 1,3, ce paramètre peut être un objet Range ou une chaîne.\\]</span><span class=\"sxs-lookup\"><span data-stu-id=\"3bb53-112\">Starting with Excel Api 1.3, this parameter may be a Range object or a string.\\]</span></span>"
-      type:
-      - Range | string
-    - id: hasHeaders
-      description: <span data-ttu-id="3bb53-p103">Valeur booléenne qui indique si les données importées disposent d’étiquettes de colonne. Si la source ne contient pas d’en-têtes (autrement dit, lorsque cette propriété est définie sur false), Excel génère automatiquement un en-tête et décale les données d’une ligne vers le bas.</span><span class="sxs-lookup"><span data-stu-id="3bb53-p103">Boolean value that indicates whether the data being imported has column labels. If the source does not contain headers (i.e,. when this property set to false), Excel will automatically generate header shifting the data down by one row.</span></span>
-      type:
-      - boolean
-- uid: excel.Excel.TableCollection.context
-  summary: <span data-ttu-id="3bb53-116">Contexte de demande associé à l'objet.</span><span class="sxs-lookup"><span data-stu-id="3bb53-116">The request context associated with the object.</span></span> <span data-ttu-id="3bb53-117">Cette opération connecte le processus du complément au processus de l'application hôte Office.</span><span class="sxs-lookup"><span data-stu-id="3bb53-117">This connects the add-in's process to the Office host application's process.</span></span>
-  name: context
-  fullName: context
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'context: RequestContext;'
-    return:
-      type:
-      - RequestContext
-- uid: excel.Excel.TableCollection.count
-  summary: >-
-    <span data-ttu-id="3bb53-p105">Renvoie le nombre de tableaux dans le classeur. En lecture seule.</span><span class="sxs-lookup"><span data-stu-id="3bb53-p105">Returns the number of tables in the workbook. Read-only.</span></span>
+          #### <a name="examples"></a><span data-ttu-id="8dd8f-125">Exemples</span><span class="sxs-lookup"><span data-stu-id="8dd8f-125">Examples</span></span>
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var tableName = 'Table1';
+              var table = ctx.workbook.tables.getItem(tableName);
+              table.load('name');
+              return ctx.sync().then(function() {
+                      console.log(table.name);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: key
+          description: <span data-ttu-id="8dd8f-126">Nom ou ID du tableau à récupérer.</span><span class="sxs-lookup"><span data-stu-id="8dd8f-126">Name or ID of the table to be retrieved.</span></span>
+          type:
+            - string
+  - uid: excel.Excel.TableCollection.getItemAt
+    summary: |-
+      <span data-ttu-id="8dd8f-127">Obtient un tableau en fonction de sa position dans la collection.</span><span class="sxs-lookup"><span data-stu-id="8dd8f-127">Gets a table based on its position in the collection.</span></span>
+
+      <span data-ttu-id="8dd8f-128">\[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="8dd8f-128">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: getItemAt(index)
+    fullName: getItemAt(index)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItemAt(index: number): Excel.Table;'
+      return:
+        type:
+          - excel.Excel.Table
+        description: |-
 
 
-    <span data-ttu-id="3bb53-120">\[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="3bb53-120">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
-  name: count
-  fullName: count
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly count: number;'
-    return:
-      type:
-      - number
-- uid: excel.Excel.TableCollection.getCount
-  summary: >-
-    <span data-ttu-id="3bb53-121">Obtient le nombre de tableaux de la collection.</span><span class="sxs-lookup"><span data-stu-id="3bb53-121">Gets the number of tables in the collection.</span></span>
+          #### <a name="examples"></a><span data-ttu-id="8dd8f-129">Exemples</span><span class="sxs-lookup"><span data-stu-id="8dd8f-129">Examples</span></span>
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var table = ctx.workbook.tables.getItemAt(0);
+              table.load('name');
+              return ctx.sync().then(function() {
+                      console.log(table.name);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: index
+          description: <span data-ttu-id="8dd8f-130">Valeur d’indice de l’objet à récupérer.</span><span class="sxs-lookup"><span data-stu-id="8dd8f-130">Index value of the object to be retrieved.</span></span> <span data-ttu-id="8dd8f-131">Avec indice zéro.</span><span class="sxs-lookup"><span data-stu-id="8dd8f-131">Zero-indexed.</span></span>
+          type:
+            - number
+  - uid: excel.Excel.TableCollection.getItemOrNullObject
+    summary: |-
+      <span data-ttu-id="8dd8f-132">Obtient un tableau à l’aide de son nom ou de son ID.</span><span class="sxs-lookup"><span data-stu-id="8dd8f-132">Gets a table by Name or ID.</span></span> <span data-ttu-id="8dd8f-133">Si le tableau n’existe pas, renvoie un objet null.</span><span class="sxs-lookup"><span data-stu-id="8dd8f-133">If the table does not exist, will return a null object.</span></span>
+
+      <span data-ttu-id="8dd8f-134">\[[Ensemble d'API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="8dd8f-134">\[ [API set: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: getItemOrNullObject(key)
+    fullName: getItemOrNullObject(key)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItemOrNullObject(key: string): Excel.Table;'
+      return:
+        type:
+          - excel.Excel.Table
+        description: ''
+      parameters:
+        - id: key
+          description: <span data-ttu-id="8dd8f-135">Nom ou ID du tableau à récupérer.</span><span class="sxs-lookup"><span data-stu-id="8dd8f-135">Name or ID of the table to be retrieved.</span></span>
+          type:
+            - string
+  - uid: excel.Excel.TableCollection.items
+    summary: <span data-ttu-id="8dd8f-136">Obtient l’élément enfant chargé dans cette collection de sites.</span><span class="sxs-lookup"><span data-stu-id="8dd8f-136">Gets the loaded child items in this collection.</span></span>
+    name: items
+    fullName: items
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly items: Excel.Table[];'
+      return:
+        type:
+          - 'Excel.Table[]'
+  - uid: excel.Excel.TableCollection.load
+    summary: "<span data-ttu-id=\"8dd8f-137\">Files d’attente de la commande pour charger les propriétés de l’objet spécifié.</span><span class=\"sxs-lookup\"><span data-stu-id=\"8dd8f-137\">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id=\"8dd8f-138\">Vous devez appeler «\_context.sync()\_» avant de lire les propriétés.</span><span class=\"sxs-lookup\"><span data-stu-id=\"8dd8f-138\">You must call \"context.sync()\" before reading the properties.</span></span>"
+    remarks: |-
+      <span data-ttu-id="8dd8f-139">En plus de cette signature, cette méthode possède les signatures suivantes:</span><span class="sxs-lookup"><span data-stu-id="8dd8f-139">In addition to this signature, this method has the following signatures:</span></span>
+
+      <span data-ttu-id="8dd8f-140">`load(option?: string | string[]): Excel.TableCollection`-WHERE option est une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.</span><span class="sxs-lookup"><span data-stu-id="8dd8f-140">`load(option?: string | string[]): Excel.TableCollection` - Where option is a comma-delimited string or an array of strings that specify the properties to load.</span></span>
+
+      <span data-ttu-id="8dd8f-141">`load(option?: { select?: string; expand?: string; }): Excel.TableCollection`Option-WHERE option. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.</span><span class="sxs-lookup"><span data-stu-id="8dd8f-141">`load(option?: { select?: string; expand?: string; }): Excel.TableCollection` - Where option.select is a comma-delimited string that specifies the properties to load, and options.expand is a comma-delimited string that specifies the navigation properties to load.</span></span>
+
+      <span data-ttu-id="8dd8f-142">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.TableCollection`-Uniquement disponible sur les types de collection.</span><span class="sxs-lookup"><span data-stu-id="8dd8f-142">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.TableCollection` - Only available on collection types.</span></span> <span data-ttu-id="8dd8f-143">Elle est similaire à la signature précédente.</span><span class="sxs-lookup"><span data-stu-id="8dd8f-143">It is similar to the preceding signature.</span></span> <span data-ttu-id="8dd8f-144">Option. Top indique le nombre maximal d'éléments de collection qui peuvent être inclus dans le résultat.</span><span class="sxs-lookup"><span data-stu-id="8dd8f-144">Option.top specifies the maximum number of collection items that can be included in the result.</span></span> <span data-ttu-id="8dd8f-145">Option. Skip indique le nombre d'éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat.</span><span class="sxs-lookup"><span data-stu-id="8dd8f-145">Option.skip specifies the number of items that are to be skipped and not included in the result.</span></span> <span data-ttu-id="8dd8f-146">Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d'éléments.</span><span class="sxs-lookup"><span data-stu-id="8dd8f-146">If option.top is specified, the result set will start after skipping the specified number of items.</span></span>
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: Excel.Interfaces.TableCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.TableCollection;'
+      return:
+        type:
+          - excel.Excel.TableCollection
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - Excel.Interfaces.TableCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
+  - uid: excel.Excel.TableCollection.load_1
+    summary: <span data-ttu-id="8dd8f-147">Files d’attente de la commande pour charger les propriétés de l’objet spécifié.</span><span class="sxs-lookup"><span data-stu-id="8dd8f-147">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="8dd8f-148">Vous devez appeler `context.sync()` avant de lire les propriétés.</span><span class="sxs-lookup"><span data-stu-id="8dd8f-148">You must call `context.sync()` before reading the properties.</span></span>
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Excel.TableCollection;'
+      return:
+        type:
+          - excel.Excel.TableCollection
+        description: |-
 
 
-    <span data-ttu-id="3bb53-122">\[[Ensemble d'API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="3bb53-122">\[ [API set: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
-  name: getCount()
-  fullName: getCount()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getCount(): OfficeExtension.ClientResult<number>;'
-    return:
-      type:
-      - OfficeExtension.ClientResult<number>
-      description: ''
-- uid: excel.Excel.TableCollection.getItem
-  summary: >-
-    <span data-ttu-id="3bb53-123">Obtient un tableau à l’aide de son nom ou de son ID.</span><span class="sxs-lookup"><span data-stu-id="3bb53-123">Gets a table by Name or ID.</span></span>
+          #### <a name="examples"></a><span data-ttu-id="8dd8f-149">Exemples</span><span class="sxs-lookup"><span data-stu-id="8dd8f-149">Examples</span></span>
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var tables = ctx.workbook.tables;
+              tables.load();
+              return ctx.sync().then(function() {
+                  console.log("tables Count: " + tables.count);
+                  for (var i = 0; i < tables.items.length; i++)
+                  {
+                      console.log(tables.items[i].name);
+                  }
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+          ```javascript
+          // Get the number of tables
+          Excel.run(function (ctx) { 
+              var tables = ctx.workbook.tables;
+              tables.load('count');
+              return ctx.sync().then(function() {
+                  console.log(tables.count);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: propertyNames
+          description: <span data-ttu-id="8dd8f-150">Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.</span><span class="sxs-lookup"><span data-stu-id="8dd8f-150">A comma-delimited string or an array of strings that specify the properties to load.</span></span>
+          type:
+            - 'string | string[]'
+  - uid: excel.Excel.TableCollection.load_2
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: OfficeExtension.LoadOption): Excel.TableCollection;'
+      return:
+        type:
+          - excel.Excel.TableCollection
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - office.OfficeExtension.LoadOption
+  - uid: excel.Excel.TableCollection.onAdded
+    summary: |-
+      <span data-ttu-id="8dd8f-151">Se produit lorsque le nouveau tableau est ajouté dans un classeur.</span><span class="sxs-lookup"><span data-stu-id="8dd8f-151">Occurs when new table is added in a workbook.</span></span>
+
+      <span data-ttu-id="8dd8f-152">\[[Ensemble d'API: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="8dd8f-152">\[ [API set: ExcelApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    isPreview: true
+    name: onAdded
+    fullName: onAdded
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onAdded: OfficeExtension.EventHandlers<Excel.TableAddedEventArgs>;'
+      return:
+        type:
+          - OfficeExtension.EventHandlers<Excel.TableAddedEventArgs>
+  - uid: excel.Excel.TableCollection.onChanged
+    summary: |-
+      <span data-ttu-id="8dd8f-153">SurVient lors de la modification des données d'une table dans un classeur ou d'une feuille de calcul.</span><span class="sxs-lookup"><span data-stu-id="8dd8f-153">Occurs when data changes on any table in a workbook, or a worksheet.</span></span>
+
+      <span data-ttu-id="8dd8f-154">\[[Ensemble d'API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="8dd8f-154">\[ [API set: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: onChanged
+    fullName: onChanged
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onChanged: OfficeExtension.EventHandlers<Excel.TableChangedEventArgs>;'
+      return:
+        type:
+          - OfficeExtension.EventHandlers<Excel.TableChangedEventArgs>
+        description: |-
 
 
-    <span data-ttu-id="3bb53-124">\[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="3bb53-124">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
-  name: getItem(key)
-  fullName: getItem(key)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getItem(key: string): Excel.Table;'
-    return:
-      type:
-      - excel.Excel.Table
-      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"3bb53-125\">範例</span><span class=\"sxs-lookup\"><span data-stu-id=\"3bb53-125\">Examples</span></span>\n\n```javascript\nExcel.run(function (ctx) { \n    var tableName = 'Table1';\n    var table = ctx.workbook.tables.getItem(tableName);\n    table.load('name');\n    return ctx.sync().then(function() {\n            console.log(table.name);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-    parameters:
-    - id: key
-      description: <span data-ttu-id="3bb53-126">Nom ou ID du tableau à récupérer.</span><span class="sxs-lookup"><span data-stu-id="3bb53-126">Name or ID of the table to be retrieved.</span></span>
-      type:
-      - string
-- uid: excel.Excel.TableCollection.getItemAt
-  summary: >-
-    <span data-ttu-id="3bb53-127">Obtient un tableau en fonction de sa position dans la collection.</span><span class="sxs-lookup"><span data-stu-id="3bb53-127">Gets a table based on its position in the collection.</span></span>
+          #### <a name="examples"></a><span data-ttu-id="8dd8f-155">Exemples</span><span class="sxs-lookup"><span data-stu-id="8dd8f-155">Examples</span></span>
 
+          ```typescript
+          await Excel.run(async (context) => {
+              let tables = context.workbook.tables;
+              tables.onChanged.add(onChange);
 
-    <span data-ttu-id="3bb53-128">\[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="3bb53-128">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
-  name: getItemAt(index)
-  fullName: getItemAt(index)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getItemAt(index: number): Excel.Table;'
-    return:
-      type:
-      - excel.Excel.Table
-      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"3bb53-129\">範例</span><span class=\"sxs-lookup\"><span data-stu-id=\"3bb53-129\">Examples</span></span>\n\n```javascript\nExcel.run(function (ctx) { \n    var table = ctx.workbook.tables.getItemAt(0);\n    table.load('name');\n    return ctx.sync().then(function() {\n            console.log(table.name);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-    parameters:
-    - id: index
-      description: <span data-ttu-id="3bb53-p106">Valeur d’indice de l’objet à récupérer. Avec indice zéro.</span><span class="sxs-lookup"><span data-stu-id="3bb53-p106">Index value of the object to be retrieved. Zero-indexed.</span></span>
-      type:
-      - number
-- uid: excel.Excel.TableCollection.getItemOrNullObject
-  summary: >-
-    <span data-ttu-id="3bb53-p107">Obtient un tableau à l’aide de son nom ou de son ID. Si le tableau n’existe pas, renvoie un objet null.</span><span class="sxs-lookup"><span data-stu-id="3bb53-p107">Gets a table by Name or ID. If the table does not exist, will return a null object.</span></span>
+              await context.sync();
+              console.log("A handler has been registered for the table collection onChanged event");
+          });
+          ```
+  - uid: excel.Excel.TableCollection.onDeleted
+    summary: |-
+      <span data-ttu-id="8dd8f-156">Se produit lorsque le tableau spécifié est supprimé dans un classeur.</span><span class="sxs-lookup"><span data-stu-id="8dd8f-156">Occurs when the specified table is deleted in a workbook.</span></span>
 
+      <span data-ttu-id="8dd8f-157">\[[Ensemble d'API: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="8dd8f-157">\[ [API set: ExcelApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    isPreview: true
+    name: onDeleted
+    fullName: onDeleted
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onDeleted: OfficeExtension.EventHandlers<Excel.TableDeletedEventArgs>;'
+      return:
+        type:
+          - OfficeExtension.EventHandlers<Excel.TableDeletedEventArgs>
+  - uid: excel.Excel.TableCollection.onFiltered
+    summary: |-
+      <span data-ttu-id="8dd8f-158">Se produit lorsque le filtre est appliqué sur n’importe quel tableau dans un classeur ou une feuille de calcul.</span><span class="sxs-lookup"><span data-stu-id="8dd8f-158">Occurs when filter is applied on any table in a workbook, or a worksheet.</span></span>
 
-    <span data-ttu-id="3bb53-134">\[[Ensemble d'API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="3bb53-134">\[ [API set: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
-  name: getItemOrNullObject(key)
-  fullName: getItemOrNullObject(key)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getItemOrNullObject(key: string): Excel.Table;'
-    return:
-      type:
-      - excel.Excel.Table
-      description: ''
-    parameters:
-    - id: key
-      description: <span data-ttu-id="3bb53-135">Nom ou ID du tableau à récupérer.</span><span class="sxs-lookup"><span data-stu-id="3bb53-135">Name or ID of the table to be retrieved.</span></span>
-      type:
-      - string
-- uid: excel.Excel.TableCollection.items
-  summary: <span data-ttu-id="3bb53-136">Obtient les éléments enfants chargés dans cette collection.</span><span class="sxs-lookup"><span data-stu-id="3bb53-136">Gets the loaded child items in this collection.</span></span>
-  name: items
-  fullName: items
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly items: Excel.Table[];'
-    return:
-      type:
-      - Excel.Table[]
-- uid: excel.Excel.TableCollection.load
-  summary: <span data-ttu-id="3bb53-137">Met en file d'attente une commande pour charger les propriétés spécifiées de l'objet.</span><span class="sxs-lookup"><span data-stu-id="3bb53-137">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="3bb53-138">Vous devez appeler «Context. Sync ()» avant de lire les propriétés.</span><span class="sxs-lookup"><span data-stu-id="3bb53-138">You must call "context.sync()" before reading the properties.</span></span>
-  remarks: >-
-    <span data-ttu-id="3bb53-139">En plus de cette signature, cette méthode possède les signatures suivantes:</span><span class="sxs-lookup"><span data-stu-id="3bb53-139">In addition to this signature, this method has the following signatures:</span></span>
-
-
-    <span data-ttu-id="3bb53-140">`load(option?: string | string[]): Excel.TableCollection`-WHERE option est une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.</span><span class="sxs-lookup"><span data-stu-id="3bb53-140">`load(option?: string | string[]): Excel.TableCollection` - Where option is a comma-delimited string or an array of strings that specify the properties to load.</span></span>
-
-
-    <span data-ttu-id="3bb53-141">`load(option?: { select?: string; expand?: string; }): Excel.TableCollection`Option-WHERE option. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.</span><span class="sxs-lookup"><span data-stu-id="3bb53-141">`load(option?: { select?: string; expand?: string; }): Excel.TableCollection` - Where option.select is a comma-delimited string that specifies the properties to load, and options.expand is a comma-delimited string that specifies the navigation properties to load.</span></span>
-
-
-    <span data-ttu-id="3bb53-142">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.TableCollection`-Uniquement disponible sur les types de collection.</span><span class="sxs-lookup"><span data-stu-id="3bb53-142">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.TableCollection` - Only available on collection types.</span></span> <span data-ttu-id="3bb53-143">Elle est similaire à la signature précédente.</span><span class="sxs-lookup"><span data-stu-id="3bb53-143">It is similar to the preceding signature.</span></span> <span data-ttu-id="3bb53-144">Option. Top indique le nombre maximal d'éléments de collection qui peuvent être inclus dans le résultat.</span><span class="sxs-lookup"><span data-stu-id="3bb53-144">Option.top specifies the maximum number of collection items that can be included in the result.</span></span> <span data-ttu-id="3bb53-145">Option. Skip indique le nombre d'éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat.</span><span class="sxs-lookup"><span data-stu-id="3bb53-145">Option.skip specifies the number of items that are to be skipped and not included in the result.</span></span> <span data-ttu-id="3bb53-146">Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d'éléments.</span><span class="sxs-lookup"><span data-stu-id="3bb53-146">If option.top is specified, the result set will start after skipping the specified number of items.</span></span>
-  name: load(option)
-  fullName: load(option)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(option?: Excel.Interfaces.TableCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.TableCollection;'
-    return:
-      type:
-      - excel.Excel.TableCollection
-      description: ''
-    parameters:
-    - id: option
-      description: ''
-      type:
-      - Excel.Interfaces.TableCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
-- uid: excel.Excel.TableCollection.load_1
-  summary: <span data-ttu-id="3bb53-147">Met en file d'attente une commande pour charger les propriétés spécifiées de l'objet.</span><span class="sxs-lookup"><span data-stu-id="3bb53-147">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="3bb53-148">Vous devez appeler `context.sync()` avant de lire les propriétés.</span><span class="sxs-lookup"><span data-stu-id="3bb53-148">You must call `context.sync()` before reading the properties.</span></span>
-  name: load(propertyNames)
-  fullName: load(propertyNames)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(propertyNames?: string | string[]): Excel.TableCollection;'
-    return:
-      type:
-      - excel.Excel.TableCollection
-      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"3bb53-149\">範例</span><span class=\"sxs-lookup\"><span data-stu-id=\"3bb53-149\">Examples</span></span>\n\n```javascript\nExcel.run(function (ctx) { \n    var tables = ctx.workbook.tables;\n    tables.load();\n    return ctx.sync().then(function() {\n        console.log(\"tables Count: \" + tables.count);\n        for (var i = 0; i < tables.items.length; i++)\n        {\n            console.log(tables.items[i].name);\n        }\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\n// Get the number of tables\nExcel.run(function (ctx) { \n    var tables = ctx.workbook.tables;\n    tables.load('count');\n    return ctx.sync().then(function() {\n        console.log(tables.count);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-    parameters:
-    - id: propertyNames
-      description: <span data-ttu-id="3bb53-150">Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.</span><span class="sxs-lookup"><span data-stu-id="3bb53-150">A comma-delimited string or an array of strings that specify the properties to load.</span></span>
-      type:
-      - string | string[]
-- uid: excel.Excel.TableCollection.load_2
-  name: load(option)
-  fullName: load(option)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(option?: OfficeExtension.LoadOption): Excel.TableCollection;'
-    return:
-      type:
-      - excel.Excel.TableCollection
-      description: ''
-    parameters:
-    - id: option
-      description: ''
-      type:
-      - office.OfficeExtension.LoadOption
-- uid: excel.Excel.TableCollection.onAdded
-  summary: >-
-    <span data-ttu-id="3bb53-151">SurVient lors de l'ajout d'une nouvelle table dans un classeur.</span><span class="sxs-lookup"><span data-stu-id="3bb53-151">Occurs when new table is added in a workbook.</span></span>
-
-
-    <span data-ttu-id="3bb53-152">\[[Ensemble d'API: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="3bb53-152">\[ [API set: ExcelApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
-  isPreview: true
-  name: onAdded
-  fullName: onAdded
-  langs:
-  - typeScript
-  type: event
-  syntax:
-    content: 'readonly onAdded: OfficeExtension.EventHandlers<Excel.TableAddedEventArgs>;'
-    return:
-      type:
-      - OfficeExtension.EventHandlers<Excel.TableAddedEventArgs>
-- uid: excel.Excel.TableCollection.onChanged
-  summary: >-
-    <span data-ttu-id="3bb53-153">SurVient lors de la modification des données d'une table dans un classeur ou d'une feuille de calcul.</span><span class="sxs-lookup"><span data-stu-id="3bb53-153">Occurs when data changes on any table in a workbook, or a worksheet.</span></span>
-
-
-    <span data-ttu-id="3bb53-154">\[[Ensemble d'API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="3bb53-154">\[ [API set: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
-  name: onChanged
-  fullName: onChanged
-  langs:
-  - typeScript
-  type: event
-  syntax:
-    content: 'readonly onChanged: OfficeExtension.EventHandlers<Excel.TableChangedEventArgs>;'
-    return:
-      type:
-      - OfficeExtension.EventHandlers<Excel.TableChangedEventArgs>
-      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"3bb53-155\">範例</span><span class=\"sxs-lookup\"><span data-stu-id=\"3bb53-155\">Examples</span></span>\n\n```typescript\nawait Excel.run(async (context) => {\n    let tables = context.workbook.tables;\n    tables.onChanged.add(onChange);\n\n    await context.sync();\n    console.log(\"A handler has been registered for the table collection onChanged event\");\n});\n```"
-- uid: excel.Excel.TableCollection.onDeleted
-  summary: >-
-    <span data-ttu-id="3bb53-156">Cet événement se produit lorsque la table spécifiée est supprimée dans un classeur.</span><span class="sxs-lookup"><span data-stu-id="3bb53-156">Occurs when the specified table is deleted in a workbook.</span></span>
-
-
-    <span data-ttu-id="3bb53-157">\[[Ensemble d'API: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="3bb53-157">\[ [API set: ExcelApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
-  isPreview: true
-  name: onDeleted
-  fullName: onDeleted
-  langs:
-  - typeScript
-  type: event
-  syntax:
-    content: 'readonly onDeleted: OfficeExtension.EventHandlers<Excel.TableDeletedEventArgs>;'
-    return:
-      type:
-      - OfficeExtension.EventHandlers<Excel.TableDeletedEventArgs>
-- uid: excel.Excel.TableCollection.onFiltered
-  summary: >-
-    <span data-ttu-id="3bb53-158">SurVient lors de l'application d'un filtre sur une table d'un classeur ou d'une feuille de calcul.</span><span class="sxs-lookup"><span data-stu-id="3bb53-158">Occurs when filter is applied on any table in a workbook, or a worksheet.</span></span>
-
-
-    <span data-ttu-id="3bb53-159">\[[Ensemble d'API: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="3bb53-159">\[ [API set: ExcelApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
-  isPreview: true
-  name: onFiltered
-  fullName: onFiltered
-  langs:
-  - typeScript
-  type: event
-  syntax:
-    content: 'readonly onFiltered: OfficeExtension.EventHandlers<Excel.TableFilteredEventArgs>;'
-    return:
-      type:
-      - OfficeExtension.EventHandlers<Excel.TableFilteredEventArgs>
-- uid: excel.Excel.TableCollection.toJSON
-  summary: <span data-ttu-id="3bb53-160">Remplace la méthode JavaScript `toJSON()` afin de fournir une sortie plus utile lorsqu'un objet d'API est transmis à. `JSON.stringify()` <!-- --></span><span class="sxs-lookup"><span data-stu-id="3bb53-160">Overrides the JavaScript `toJSON()` method in order to provide more useful output when an API object is passed to `JSON.stringify()`<!-- -->.</span></span> <span data-ttu-id="3bb53-161">(`JSON.stringify`<!-- -->, à son tour, appelle `toJSON` la méthode de l'objet qui lui est passé.) Tandis que `Excel.TableCollection` l'objet d'origine est un objet `toJSON` d'API, la méthode renvoie un objet JavaScript `Excel.Interfaces.TableCollectionData` <!-- -->simple (tapé sous la forme) qui contient un tableau d'éléments avec des copies superficielles de toutes les propriétés chargées des éléments de la collection.</span><span class="sxs-lookup"><span data-stu-id="3bb53-161">(`JSON.stringify`<!-- -->, in turn, calls the `toJSON` method of the object that is passed to it.) Whereas the original `Excel.TableCollection` object is an API object, the `toJSON` method returns a plain JavaScript object (typed as `Excel.Interfaces.TableCollectionData`<!-- -->) that contains an "items" array with shallow copies of any loaded properties from the collection's items.</span></span>
-  name: toJSON()
-  fullName: toJSON()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'toJSON(): Excel.Interfaces.TableCollectionData;'
-    return:
-      type:
-      - excel.Excel.Interfaces.TableCollectionData
-      description: ''
+      <span data-ttu-id="8dd8f-159">\[[Ensemble d'API: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="8dd8f-159">\[ [API set: ExcelApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    isPreview: true
+    name: onFiltered
+    fullName: onFiltered
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onFiltered: OfficeExtension.EventHandlers<Excel.TableFilteredEventArgs>;'
+      return:
+        type:
+          - OfficeExtension.EventHandlers<Excel.TableFilteredEventArgs>
+  - uid: excel.Excel.TableCollection.toJSON
+    summary: '<span data-ttu-id="8dd8f-160">Remplace la méthode JavaScript `toJSON()` afin de fournir une sortie plus utile lorsqu''un objet d''API est transmis à`JSON.stringify()`</span><span class="sxs-lookup"><span data-stu-id="8dd8f-160">Overrides the JavaScript `toJSON()` method in order to provide more useful output when an API object is passed to `JSON.stringify()`</span></span><!-- --><span data-ttu-id="8dd8f-161">.</span><span class="sxs-lookup"><span data-stu-id="8dd8f-161"></span></span> <span data-ttu-id="8dd8f-162">(`JSON.stringify`</span><span class="sxs-lookup"><span data-stu-id="8dd8f-162"></span></span><!-- --><span data-ttu-id="8dd8f-163">, à son tour, appelle `toJSON` la méthode de l''objet qui lui est passé.) Tandis que `Excel.TableCollection` l''objet d''origine est un objet `toJSON` d''API, la méthode renvoie un objet JavaScript simple (tapé comme`Excel.Interfaces.TableCollectionData`</span><span class="sxs-lookup"><span data-stu-id="8dd8f-163">, in turn, calls the `toJSON` method of the object that is passed to it.) Whereas the original `Excel.TableCollection` object is an API object, the `toJSON` method returns a plain JavaScript object (typed as `Excel.Interfaces.TableCollectionData`</span></span><!-- --><span data-ttu-id="8dd8f-164">) qui contient un tableau «éléments» avec des copies superficielles de toutes les propriétés chargées des éléments de la collection.</span><span class="sxs-lookup"><span data-stu-id="8dd8f-164">) that contains an "items" array with shallow copies of any loaded properties from the collection''s items.</span></span>'
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Excel.Interfaces.TableCollectionData;'
+      return:
+        type:
+          - excel.Excel.Interfaces.TableCollectionData
+        description: ''
