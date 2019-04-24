@@ -1,6 +1,6 @@
 # <a name="office-javascript-api-reference"></a>Référence de l’API JavaScript d’Office
 
-L’interface API JavaScript pour Office vous permet de créer des applications web qui interagissent avec les modèles objet dans les applications hôtes Office. Utilisez cette section pour en savoir plus sur les classes, méthodes et d’autres types disponibles pour la création de compléments Office.
+L’interface API JavaScript pour Office vous permet de créer des applications web qui interagissent avec les modèles objet dans les applications hôtes Office. Utilisez cette section pour en savoir plus sur les classes, les méthodes et les autres types disponibles pour créer des compléments Office.
 
 - [Excel](https://docs.microsoft.com/javascript/api/excel?view=office-js)
 - [OneNote](https://docs.microsoft.com/javascript/api/onenote?view=office-js)
@@ -12,4 +12,4 @@ L’interface API JavaScript pour Office vous permet de créer des applications 
 ## <a name="see-also"></a>Voir aussi
 
 - [API JavaScript pour Office](https://docs.microsoft.com/office/dev/add-ins/reference/javascript-api-for-office?view=office-js)
-- [Démarrages rapides, didacticiels et guides de programmation avancées pour les compléments Office](https://docs.microsoft.com/office/dev/add-ins/overview/office-add-ins?view=office-js)
+- [Démarrages rapides, didacticiels et guides de programmation avancés pour les compléments Office](https://docs.microsoft.com/office/dev/add-ins/overview/office-add-ins?view=office-js)
