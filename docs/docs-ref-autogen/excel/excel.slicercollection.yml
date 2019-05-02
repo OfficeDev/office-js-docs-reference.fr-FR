@@ -2,9 +2,9 @@
 items:
   - uid: excel.Excel.SlicerCollection
     summary: |-
-      Représente une collection de tous les objets Slicer du classeur ou d'une feuille de calcul.
+      Représente une collection de tous les objets Slicer du classeur ou d’une feuille de calcul.
 
-      \[[Ensemble d'API: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true
     name: Excel.SlicerCollection
     fullName: Excel.SlicerCollection
@@ -30,7 +30,7 @@ items:
     summary: |-
       Ajoute un nouveau segment au classeur.
 
-      \[[Ensemble d'API: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true
     name: 'add(slicerSource, sourceField, slicerDestination)'
     fullName: 'add(slicerSource, sourceField, slicerDestination)'
@@ -42,22 +42,37 @@ items:
       return:
         type:
           - excel.Excel.Slicer
-        description: Le nouveau segment.
+        description: |-
+          Le nouveau segment.
+
+          #### <a name="examples"></a>Exemples
+
+          ```typescript
+          await Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getItem("Pivot");
+              const slicer = sheet.slicers.add(
+                  "Farm Sales", /* The slicer data source. For PivotTables, this can be the PivotTable object reference or name. */
+                  "Type" /* The field in the data source to filter by. For PivotTables, this can be a PivotField object reference or ID. */
+              );
+              slicer.name = "Fruit Slicer";
+              await context.sync();
+          });
+          ```
       parameters:
         - id: slicerSource
-          description: 'Source de données sur laquelle le nouveau segment sera basé. Il peut s''agir d''un objet PivotTable, d''un objet table ou d''une chaîne. Lorsqu''un objet PivotTable est transmis, la source de données est la source de l''objet PivotTable. Lorsqu''un objet table est transmis, la source de données est l''objet table. Lorsqu''une chaîne est transmise, elle est interprétée comme le nom/l''ID d''un tableau croisé dynamique/tableau.'
+          description: 'Source de données sur laquelle le nouveau segment sera basé. Il peut s’agir d’un objet PivotTable, d’un objet table ou d’une chaîne. Lorsqu’un objet PivotTable est transmis, la source de données est la source de l’objet PivotTable. Lorsqu’un objet table est transmis, la source de données est l’objet table. Lorsqu’une chaîne est transmise, elle est interprétée comme le nom/l’ID d’un tableau croisé dynamique/tableau.'
           type:
             - string | PivotTable | Table
         - id: sourceField
-          description: 'Champ de la source de données à filtrer. Il peut s''agir d''un objet PivotField, d''un objet TableColumn, de l''ID d''un champ de tableau croisé dynamique ou de l''ID/nom de TableColumn.'
+          description: 'Champ de la source de données à filtrer. Il peut s’agir d’un objet PivotField, d’un objet TableColumn, de l’ID d’un champ de tableau croisé dynamique ou de l’ID/nom de TableColumn.'
           type:
             - string | PivotField | number | TableColumn
         - id: slicerDestination
-          description: Facultatif. Feuille de calcul dans laquelle le nouveau segment sera créé. Il peut s'agir d'un objet Worksheet ou du nom/ID d'une feuille de calcul. Ce paramètre peut être omis si la collection de segments est extraite de la feuille de calcul.
+          description: Facultatif. Feuille de calcul dans laquelle le nouveau segment sera créé. Il peut s’agir d’un objet Worksheet ou du nom/ID d’une feuille de calcul. Ce paramètre peut être omis si la collection de segments est extraite de la feuille de calcul.
           type:
             - string | Worksheet
   - uid: excel.Excel.SlicerCollection.context
-    summary: Contexte de demande associé à l'objet. Cette opération connecte le processus du complément au processus de l'application hôte Office.
+    summary: Contexte de demande associé à l’objet. Cette opération connecte le processus du complément au processus de l’application hôte Office.
     isPreview: true
     name: context
     fullName: context
@@ -73,7 +88,7 @@ items:
     summary: |-
       Renvoie le nombre de séries de la collection.
 
-      \[[Ensemble d'API: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true
     name: getCount()
     fullName: getCount()
@@ -90,7 +105,7 @@ items:
     summary: |-
       Obtient un objet de feuille de calcul à l’aide de son nom ou de son ID.
 
-      \[[Ensemble d'API: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true
     name: getItem(key)
     fullName: getItem(key)
@@ -102,7 +117,22 @@ items:
       return:
         type:
           - excel.Excel.Slicer
-        description: ''
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```typescript
+          await Excel.run(async (context) => {
+              const slicer = context.workbook.slicers.getItem("Fruit Slicer");
+              slicer.caption = "Fruit Types";
+              slicer.left = 395;
+              slicer.top = 15;
+              slicer.height = 135;
+              slicer.width = 150;
+              await context.sync();
+          });
+          ```
       parameters:
         - id: key
           description: Nom ou ID du segment.
@@ -112,7 +142,7 @@ items:
     summary: |-
       Obtient une forme en fonction de sa position dans la collection.
 
-      \[[Ensemble d'API: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true
     name: getItemAt(index)
     fullName: getItemAt(index)
@@ -134,7 +164,7 @@ items:
     summary: |-
       Obtient un objet de feuille de calcul à l’aide de son nom ou de son ID. Si la feuille de calcul n’existe pas, renvoie un objet null.
 
-      \[[Ensemble d'API: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true
     name: getItemOrNullObject(key)
     fullName: getItemOrNullObject(key)
@@ -174,7 +204,7 @@ items:
 
       `load(option?: { select?: string; expand?: string; }): Excel.SlicerCollection`Option-WHERE option. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
 
-      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.SlicerCollection`-Uniquement disponible sur les types de collection. Elle est similaire à la signature précédente. Option. Top indique le nombre maximal d'éléments de collection qui peuvent être inclus dans le résultat. Option. Skip indique le nombre d'éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat. Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d'éléments.
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.SlicerCollection`-Uniquement disponible sur les types de collection. Elle est similaire à la signature précédente. Option. Top indique le nombre maximal d’éléments de collection qui peuvent être inclus dans le résultat. Option. Skip indique le nombre d’éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat. Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d’éléments.
     isPreview: true
     name: load(option)
     fullName: load(option)
@@ -230,7 +260,7 @@ items:
           type:
             - office.OfficeExtension.LoadOption
   - uid: excel.Excel.SlicerCollection.toJSON
-    summary: 'Remplace la méthode JavaScript `toJSON()` afin de fournir une sortie plus utile lorsqu''un objet d''API est transmis à`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle `toJSON` la méthode de l''objet qui lui est passé.) Tandis que `Excel.SlicerCollection` l''objet d''origine est un objet `toJSON` d''API, la méthode renvoie un objet JavaScript simple (tapé comme`Excel.Interfaces.SlicerCollectionData`<!-- -->) qui contient un tableau «éléments» avec des copies superficielles de toutes les propriétés chargées des éléments de la collection.'
+    summary: 'Remplace la méthode JavaScript `toJSON()` afin de fournir une sortie plus utile lorsqu’un objet d’API est transmis à`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle `toJSON` la méthode de l’objet qui lui est passé.) Tandis que `Excel.SlicerCollection` l’objet d’origine est un objet `toJSON` d’API, la méthode renvoie un objet JavaScript simple (tapé comme`Excel.Interfaces.SlicerCollectionData`<!-- -->) qui contient un tableau «éléments» avec des copies superficielles de toutes les propriétés chargées des éléments de la collection.'
     isPreview: true
     name: toJSON()
     fullName: toJSON()
