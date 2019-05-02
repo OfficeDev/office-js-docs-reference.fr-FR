@@ -4,7 +4,7 @@ items:
     summary: |-
       Représente les objets de bordure qui composent la bordure de la plage.
 
-      \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: Excel.RangeBorderCollection
     fullName: Excel.RangeBorderCollection
     langs:
@@ -23,9 +23,10 @@ items:
       - excel_release.Excel.RangeBorderCollection.load
       - excel_release.Excel.RangeBorderCollection.load_1
       - excel_release.Excel.RangeBorderCollection.load_2
+      - excel_release.Excel.RangeBorderCollection.tintAndShade
       - excel_release.Excel.RangeBorderCollection.toJSON
   - uid: excel_release.Excel.RangeBorderCollection.context
-    summary: Contexte de demande associé à l'objet. Cette opération connecte le processus du complément au processus de l'application hôte Office.
+    summary: Contexte de demande associé à l’objet. Cette opération connecte le processus du complément au processus de l’application hôte Office.
     name: context
     fullName: context
     langs:
@@ -40,7 +41,7 @@ items:
     summary: |-
       Nombre d’objets de bordure de la collection. En lecture seule.
 
-      \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: count
     fullName: count
     langs:
@@ -55,7 +56,7 @@ items:
     summary: |-
       Obtient un objet de bordure à l’aide de son nom.
 
-      \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: getItem(index)
     fullName: getItem(index)
     langs:
@@ -92,14 +93,14 @@ items:
           ```
       parameters:
         - id: index
-          description: 'Valeur d’indice de l’objet de bordure à récupérer. Pour plus d''informations, voir Excel. BorderIndex.'
+          description: 'Valeur d’indice de l’objet de bordure à récupérer. Pour plus d’informations, voir Excel. BorderIndex.'
           type:
             - excel.Excel.BorderIndex
   - uid: excel_release.Excel.RangeBorderCollection.getItem_1
     summary: |-
       Obtient un objet de bordure à l’aide de son nom.
 
-      \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: getItem(indexString)
     fullName: getItem(indexString)
     langs:
@@ -113,14 +114,14 @@ items:
         description: ''
       parameters:
         - id: indexString
-          description: 'Valeur d’indice de l’objet de bordure à récupérer. Pour plus d''informations, voir Excel. BorderIndex.'
+          description: 'Valeur d’indice de l’objet de bordure à récupérer. Pour plus d’informations, voir Excel. BorderIndex.'
           type:
             - '"EdgeTop" | "EdgeBottom" | "EdgeLeft" | "EdgeRight" | "InsideVertical" | "InsideHorizontal" | "DiagonalDown" | "DiagonalUp"'
   - uid: excel_release.Excel.RangeBorderCollection.getItemAt
     summary: |-
       Obtient un objet de bordure à l’aide de son indice.
 
-      \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: getItemAt(index)
     fullName: getItemAt(index)
     langs:
@@ -180,7 +181,7 @@ items:
 
       `load(option?: { select?: string; expand?: string; }): Excel.RangeBorderCollection`Option-WHERE option. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
 
-      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.RangeBorderCollection`-Uniquement disponible sur les types de collection. Elle est similaire à la signature précédente. Option. Top indique le nombre maximal d'éléments de collection qui peuvent être inclus dans le résultat. Option. Skip indique le nombre d'éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat. Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d'éléments.
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.RangeBorderCollection`-Uniquement disponible sur les types de collection. Elle est similaire à la signature précédente. Option. Top indique le nombre maximal d’éléments de collection qui peuvent être inclus dans le résultat. Option. Skip indique le nombre d’éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat. Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d’éléments.
     name: load(option)
     fullName: load(option)
     langs:
@@ -278,8 +279,23 @@ items:
           description: ''
           type:
             - office.OfficeExtension.LoadOption
+  - uid: excel_release.Excel.RangeBorderCollection.tintAndShade
+    summary: |-
+      Renvoie ou définit un double qui s’éclaire ou assombrit une couleur de bordure de la plage, la valeur est comprise entre -1 (zones les plus sombres) et 1 (plus clair) avec 0 pour la couleur d’origine. Une valeur null indique que les collections de bordures entières n’ont pas de paramètre tintAndShade uniforme.
+
+      \[[Ensemble d’API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: tintAndShade
+    fullName: tintAndShade
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'tintAndShade: number;'
+      return:
+        type:
+          - number
   - uid: excel_release.Excel.RangeBorderCollection.toJSON
-    summary: 'Remplace la méthode JavaScript `toJSON()` afin de fournir une sortie plus utile lorsqu''un objet d''API est transmis à`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle `toJSON` la méthode de l''objet qui lui est passé.) Tandis que `Excel.RangeBorderCollection` l''objet d''origine est un objet `toJSON` d''API, la méthode renvoie un objet JavaScript simple (tapé comme`Excel.Interfaces.RangeBorderCollectionData`<!-- -->) qui contient un tableau «éléments» avec des copies superficielles de toutes les propriétés chargées des éléments de la collection.'
+    summary: 'Remplace la méthode JavaScript `toJSON()` afin de fournir une sortie plus utile lorsqu’un objet d’API est transmis à`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle `toJSON` la méthode de l’objet qui lui est passé.) Tandis que `Excel.RangeBorderCollection` l’objet d’origine est un objet `toJSON` d’API, la méthode renvoie un objet JavaScript simple (tapé comme`Excel.Interfaces.RangeBorderCollectionData`<!-- -->) qui contient un tableau «éléments» avec des copies superficielles de toutes les propriétés chargées des éléments de la collection.'
     name: toJSON()
     fullName: toJSON()
     langs:

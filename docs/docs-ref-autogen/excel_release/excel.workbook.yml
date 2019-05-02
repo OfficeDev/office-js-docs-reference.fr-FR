@@ -4,7 +4,7 @@ items:
     summary: |-
       Le classeur est l’objet de niveau supérieur qui contient des objets connexes tels que des feuilles de calcul, des tableaux, des plages, etc.
 
-      \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: Excel.Workbook
     fullName: Excel.Workbook
     langs:
@@ -15,20 +15,30 @@ items:
     package: excel_release
     children:
       - excel_release.Excel.Workbook.application
+      - excel_release.Excel.Workbook.autoSave
       - excel_release.Excel.Workbook.bindings
+      - excel_release.Excel.Workbook.calculationEngineVersion
+      - excel_release.Excel.Workbook.chartDataPointTrack
       - excel_release.Excel.Workbook.context
       - excel_release.Excel.Workbook.customXmlParts
       - excel_release.Excel.Workbook.dataConnections
       - excel_release.Excel.Workbook.functions
       - excel_release.Excel.Workbook.getActiveCell
+      - excel_release.Excel.Workbook.getActiveChart
+      - excel_release.Excel.Workbook.getActiveChartOrNullObject
+      - excel_release.Excel.Workbook.getIsActiveCollabSession
       - excel_release.Excel.Workbook.getSelectedRange
+      - excel_release.Excel.Workbook.getSelectedRanges
+      - excel_release.Excel.Workbook.isDirty
       - excel_release.Excel.Workbook.load
       - excel_release.Excel.Workbook.load_1
       - excel_release.Excel.Workbook.load_2
       - excel_release.Excel.Workbook.name
       - excel_release.Excel.Workbook.names
+      - excel_release.Excel.Workbook.onAutoSaveSettingChanged
       - excel_release.Excel.Workbook.onSelectionChanged
       - excel_release.Excel.Workbook.pivotTables
+      - excel_release.Excel.Workbook.previouslySaved
       - excel_release.Excel.Workbook.properties
       - excel_release.Excel.Workbook.protection
       - excel_release.Excel.Workbook.readOnly
@@ -38,12 +48,13 @@ items:
       - excel_release.Excel.Workbook.styles
       - excel_release.Excel.Workbook.tables
       - excel_release.Excel.Workbook.toJSON
+      - excel_release.Excel.Workbook.usePrecisionAsDisplayed
       - excel_release.Excel.Workbook.worksheets
   - uid: excel_release.Excel.Workbook.application
     summary: |-
-      Représente l'instance de l'application Excel qui contient ce classeur. En lecture seule.
+      Représente l’instance de l’application Excel qui contient ce classeur. En lecture seule.
 
-      \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: application
     fullName: application
     langs:
@@ -54,11 +65,26 @@ items:
       return:
         type:
           - excel.Excel.Application
+  - uid: excel_release.Excel.Workbook.autoSave
+    summary: |-
+      Spécifie si le classeur est en mode enregistrement automatique. En lecture seule.
+
+      \[[Ensemble d’API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: autoSave
+    fullName: autoSave
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly autoSave: boolean;'
+      return:
+        type:
+          - boolean
   - uid: excel_release.Excel.Workbook.bindings
     summary: |-
       Représente une collection de liaisons appartenant au classeur. En lecture seule.
 
-      \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: bindings
     fullName: bindings
     langs:
@@ -69,8 +95,38 @@ items:
       return:
         type:
           - excel.Excel.BindingCollection
+  - uid: excel_release.Excel.Workbook.calculationEngineVersion
+    summary: |-
+      Renvoie un nombre sur la version de moteur de calcul Excel. En lecture seule.
+
+      \[[Ensemble d’API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: calculationEngineVersion
+    fullName: calculationEngineVersion
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly calculationEngineVersion: number;'
+      return:
+        type:
+          - number
+  - uid: excel_release.Excel.Workbook.chartDataPointTrack
+    summary: |-
+      True si tous les graphiques dans le classeur suivent les points de données réelles auquel qu’il sont joints. False si les graphiques effectuent le suivi de l’index des points de données.
+
+      \[[Ensemble d’API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: chartDataPointTrack
+    fullName: chartDataPointTrack
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'chartDataPointTrack: boolean;'
+      return:
+        type:
+          - boolean
   - uid: excel_release.Excel.Workbook.context
-    summary: Contexte de demande associé à l'objet. Cette opération connecte le processus du complément au processus de l'application hôte Office.
+    summary: Contexte de demande associé à l’objet. Cette opération connecte le processus du complément au processus de l’application hôte Office.
     name: context
     fullName: context
     langs:
@@ -85,7 +141,7 @@ items:
     summary: |-
       Représente la collection de parties XML personnalisées contenues dans ce classeur. En lecture seule.
 
-      \[[Ensemble d'API: ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: customXmlParts
     fullName: customXmlParts
     langs:
@@ -100,7 +156,7 @@ items:
     summary: |-
       Représente toutes les connexions de données du classeur. En lecture seule.
 
-      \[[Ensemble d'API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: dataConnections
     fullName: dataConnections
     langs:
@@ -115,7 +171,7 @@ items:
     summary: |-
       Représente une collection de fonctions de feuille de calcul qui peuvent être utilisées pour le calcul. En lecture seule.
 
-      \[[Ensemble d'API: ExcelApi 1,2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: functions
     fullName: functions
     langs:
@@ -130,7 +186,7 @@ items:
     summary: |-
       Obtient la cellule active du classeur.
 
-      \[[Ensemble d'API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: getActiveCell()
     fullName: getActiveCell()
     langs:
@@ -158,11 +214,59 @@ items:
               console.log("The active cell is " + activeCell.address);
           });
           ```
+  - uid: excel_release.Excel.Workbook.getActiveChart
+    summary: |-
+      Obtient la feuille de calcul active du classeur. S’il n’existe aucun graphique actif, génère des exceptions lorsque appeler cette déclaration
+
+      \[[Ensemble d’API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getActiveChart()
+    fullName: getActiveChart()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getActiveChart(): Excel.Chart;'
+      return:
+        type:
+          - excel.Excel.Chart
+        description: ''
+  - uid: excel_release.Excel.Workbook.getActiveChartOrNullObject
+    summary: |-
+      Obtient la feuille de calcul active du classeur. S’il n’existe aucun graphique actif, renverra l’objet null
+
+      \[[Ensemble d’API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getActiveChartOrNullObject()
+    fullName: getActiveChartOrNullObject()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getActiveChartOrNullObject(): Excel.Chart;'
+      return:
+        type:
+          - excel.Excel.Chart
+        description: ''
+  - uid: excel_release.Excel.Workbook.getIsActiveCollabSession
+    summary: |-
+      True si le classeur est modifié par plusieurs utilisateurs (co-création). Notez qu’il peut y avoir un délai entre le moment où l’état du classeur change et le moment où les modifications sont reflétées sur le résultat de la méthode.
+
+      \[[Ensemble d’API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getIsActiveCollabSession()
+    fullName: getIsActiveCollabSession()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getIsActiveCollabSession(): OfficeExtension.ClientResult<boolean>;'
+      return:
+        type:
+          - OfficeExtension.ClientResult<boolean>
+        description: ''
   - uid: excel_release.Excel.Workbook.getSelectedRange
     summary: |-
       Obtient la plage unique actuellement sélectionnée du classeur. Si plusieurs plages sont sélectionnées, cette méthode génère une erreur.
 
-      \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: getSelectedRange()
     fullName: getSelectedRange()
     langs:
@@ -192,6 +296,50 @@ items:
               }
           });
           ```
+  - uid: excel_release.Excel.Workbook.getSelectedRanges
+    summary: |-
+      Obtient la ou les plage(s) sélectionnée(s) actuelle(s) dans le classeur. Contrairement aux getSelectedRange(), cette méthode renvoie un objet RangeAreas qui représente toutes les plages sélectionnées.
+
+      \[[Ensemble d’API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getSelectedRanges()
+    fullName: getSelectedRanges()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getSelectedRanges(): Excel.RangeAreas;'
+      return:
+        type:
+          - excel.Excel.RangeAreas
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```typescript
+          await Excel.run(async (context) => {
+
+              const selectedRanges = context.workbook.getSelectedRanges();
+              selectedRanges.format.fill.color = "lightblue";
+
+              await context.sync();
+          })
+          ```
+  - uid: excel_release.Excel.Workbook.isDirty
+    summary: |-
+      Spécifie ou non les modifications ont été apportées étant donné que le classeur a été enregistré. Vous pouvez définir cette propriété sur true si vous voulez fermer un classeur modifié sans l’enregistrer ou être invité à l’enregistrer.
+
+      \[[Ensemble d’API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: isDirty
+    fullName: isDirty
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'isDirty: boolean;'
+      return:
+        type:
+          - boolean
   - uid: excel_release.Excel.Workbook.load
     summary: "Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler «\_context.sync()\_» avant de lire les propriétés."
     remarks: |-
@@ -201,7 +349,7 @@ items:
 
       `load(option?: { select?: string; expand?: string; }): Excel.Workbook`Option-WHERE option. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
 
-      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Workbook`-Uniquement disponible sur les types de collection. Elle est similaire à la signature précédente. Option. Top indique le nombre maximal d'éléments de collection qui peuvent être inclus dans le résultat. Option. Skip indique le nombre d'éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat. Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d'éléments.
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Workbook`-Uniquement disponible sur les types de collection. Elle est similaire à la signature précédente. Option. Top indique le nombre maximal d’éléments de collection qui peuvent être inclus dans le résultat. Option. Skip indique le nombre d’éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat. Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d’éléments.
     name: load(option)
     fullName: load(option)
     langs:
@@ -258,7 +406,7 @@ items:
     summary: |-
       Obtient le nom du classeur. En lecture seule.
 
-      \[[Ensemble d'API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: name
     fullName: name
     langs:
@@ -273,7 +421,7 @@ items:
     summary: |-
       Représente une collection d’éléments nommés portant sur le classeur (appelés plages et constantes). En lecture seule.
 
-      \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: names
     fullName: names
     langs:
@@ -284,11 +432,26 @@ items:
       return:
         type:
           - excel.Excel.NamedItemCollection
+  - uid: excel_release.Excel.Workbook.onAutoSaveSettingChanged
+    summary: |-
+      Se produit lorsque le paramètre de l’enregistrement automatique est modifié dans le classeur.
+
+      \[[Ensemble d’API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: onAutoSaveSettingChanged
+    fullName: onAutoSaveSettingChanged
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onAutoSaveSettingChanged: OfficeExtension.EventHandlers<Excel.WorkbookAutoSaveSettingChangedEventArgs>;'
+      return:
+        type:
+          - OfficeExtension.EventHandlers<Excel.WorkbookAutoSaveSettingChangedEventArgs>
   - uid: excel_release.Excel.Workbook.onSelectionChanged
     summary: |-
       Se produit quand la sélection change dans le document.
 
-      \[[Ensemble d'API: ExcelApi 1,2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: onSelectionChanged
     fullName: onSelectionChanged
     langs:
@@ -303,7 +466,7 @@ items:
     summary: |-
       Représente une collection de tableaux croisés dynamiques associés au classeur. En lecture seule.
 
-      \[[Ensemble d'API: ExcelApi 1,3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: pivotTables
     fullName: pivotTables
     langs:
@@ -314,11 +477,26 @@ items:
       return:
         type:
           - excel.Excel.PivotTableCollection
+  - uid: excel_release.Excel.Workbook.previouslySaved
+    summary: |-
+      Spécifie ou non si le classeur a jamais été enregistré localement ou en ligne. En lecture seule.
+
+      \[[Ensemble d’API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: previouslySaved
+    fullName: previouslySaved
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly previouslySaved: boolean;'
+      return:
+        type:
+          - boolean
   - uid: excel_release.Excel.Workbook.properties
     summary: |-
       Obtient les propriétés du classeur. En lecture seule.
 
-      \[[Ensemble d'API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: properties
     fullName: properties
     langs:
@@ -364,7 +542,7 @@ items:
     summary: |-
       Renvoie un objet de protection de classeur pour un classeur. En lecture seule.
 
-      \[[Ensemble d'API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: protection
     fullName: protection
     langs:
@@ -379,7 +557,7 @@ items:
     summary: |-
       True si le classeur est ouvert en mode lecture seule. En lecture seule.
 
-      \[[Ensemble d'API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: readOnly
     fullName: readOnly
     langs:
@@ -391,7 +569,7 @@ items:
         type:
           - boolean
   - uid: excel_release.Excel.Workbook.set
-    summary: 'Définit plusieurs propriétés d''un objet en même temps. Vous pouvez transmettre un objet plain avec les propriétés appropriées, ou un autre objet API du même type.'
+    summary: 'Définit plusieurs propriétés d’un objet en même temps. Vous pouvez transmettre un objet plain avec les propriétés appropriées, ou un autre objet API du même type.'
     remarks: |-
       Cette méthode est dotée de la signature supplémentaire suivante:
 
@@ -409,15 +587,15 @@ items:
         description: ''
       parameters:
         - id: properties
-          description: Objet JavaScript avec des propriétés qui sont structurées isomorphically vers les propriétés de l'objet sur lequel la méthode est appelée.
+          description: Objet JavaScript avec des propriétés qui sont structurées isomorphically vers les propriétés de l’objet sur lequel la méthode est appelée.
           type:
             - Interfaces.WorkbookUpdateData
         - id: options
-          description: Fournit une option permettant de supprimer les erreurs si l'objet Properties tente de définir des propriétés en lecture seule.
+          description: Fournit une option permettant de supprimer les erreurs si l’objet Properties tente de définir des propriétés en lecture seule.
           type:
             - office.OfficeExtension.UpdateOptions
   - uid: excel_release.Excel.Workbook.set_1
-    summary: 'Définit plusieurs propriétés de l''objet en même temps, en fonction d''un objet chargé existant.'
+    summary: 'Définit plusieurs propriétés de l’objet en même temps, en fonction d’un objet chargé existant.'
     name: set(properties)
     fullName: set(properties)
     langs:
@@ -438,7 +616,7 @@ items:
     summary: |-
       Représente une collection d’objets Settings associés au classeur. En lecture seule.
 
-      \[[Ensemble d'API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: settings
     fullName: settings
     langs:
@@ -453,7 +631,7 @@ items:
     summary: |-
       Représente une collection de styles associés au classeur. En lecture seule.
 
-      \[[Ensemble d'API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: styles
     fullName: styles
     langs:
@@ -468,7 +646,7 @@ items:
     summary: |-
       Représente une collection de tableaux associés au classeur. En lecture seule.
 
-      \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: tables
     fullName: tables
     langs:
@@ -480,7 +658,7 @@ items:
         type:
           - excel.Excel.TableCollection
   - uid: excel_release.Excel.Workbook.toJSON
-    summary: 'Remplace la méthode JavaScript `toJSON()` afin de fournir une sortie plus utile lorsqu''un objet d''API est transmis à`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle `toJSON` la méthode de l''objet qui lui est passé.) Tandis que l''objet Excel. Workbook d''origine est un objet `toJSON` API, la méthode renvoie un objet JavaScript simple (tapé comme`Excel.Interfaces.WorkbookData`<!-- -->) qui contient des copies superficielles de toutes les propriétés enfants chargées à partir de l''objet d''origine.'
+    summary: 'Remplace la méthode JavaScript `toJSON()` afin de fournir une sortie plus utile lorsqu’un objet d’API est transmis à`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle `toJSON` la méthode de l’objet qui lui est passé.) Tandis que l’objet Excel. Workbook d’origine est un objet `toJSON` API, la méthode renvoie un objet JavaScript simple (tapé comme`Excel.Interfaces.WorkbookData`<!-- -->) qui contient des copies superficielles de toutes les propriétés enfants chargées à partir de l’objet d’origine.'
     name: toJSON()
     fullName: toJSON()
     langs:
@@ -492,11 +670,26 @@ items:
         type:
           - excel.Excel.Interfaces.WorkbookData
         description: ''
+  - uid: excel_release.Excel.Workbook.usePrecisionAsDisplayed
+    summary: |-
+      True si les calculs réalisés dans ce classeur utiliseront uniquement la précision des nombres tels qu’ils sont affichés.  Les données perdent définitivement en précision lors du changement de cette propriété de false à true.
+
+      \[[Ensemble d’API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: usePrecisionAsDisplayed
+    fullName: usePrecisionAsDisplayed
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'usePrecisionAsDisplayed: boolean;'
+      return:
+        type:
+          - boolean
   - uid: excel_release.Excel.Workbook.worksheets
     summary: |-
       Représente une collection de feuilles de calcul associées au classeur. En lecture seule.
 
-      \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: worksheets
     fullName: worksheets
     langs:

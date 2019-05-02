@@ -4,7 +4,7 @@ items:
     summary: |-
       Une feuille de calcul Excel est une grille de cellules. Elle peut contenir des données, des tableaux, des graphiques, etc.
 
-      \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: Excel.Worksheet
     fullName: Excel.Worksheet
     langs:
@@ -15,12 +15,16 @@ items:
     package: excel_release
     children:
       - excel_release.Excel.Worksheet.activate
+      - excel_release.Excel.Worksheet.autoFilter
       - excel_release.Excel.Worksheet.calculate
       - excel_release.Excel.Worksheet.charts
       - excel_release.Excel.Worksheet.context
       - excel_release.Excel.Worksheet.copy
       - excel_release.Excel.Worksheet.copy_1
       - excel_release.Excel.Worksheet.delete
+      - excel_release.Excel.Worksheet.enableCalculation
+      - excel_release.Excel.Worksheet.findAll
+      - excel_release.Excel.Worksheet.findAllOrNullObject
       - excel_release.Excel.Worksheet.freezePanes
       - excel_release.Excel.Worksheet.getCell
       - excel_release.Excel.Worksheet.getNext
@@ -29,8 +33,10 @@ items:
       - excel_release.Excel.Worksheet.getPreviousOrNullObject
       - excel_release.Excel.Worksheet.getRange
       - excel_release.Excel.Worksheet.getRangeByIndexes
+      - excel_release.Excel.Worksheet.getRanges
       - excel_release.Excel.Worksheet.getUsedRange
       - excel_release.Excel.Worksheet.getUsedRangeOrNullObject
+      - excel_release.Excel.Worksheet.horizontalPageBreaks
       - excel_release.Excel.Worksheet.id
       - excel_release.Excel.Worksheet.load
       - excel_release.Excel.Worksheet.load_1
@@ -41,12 +47,16 @@ items:
       - excel_release.Excel.Worksheet.onCalculated
       - excel_release.Excel.Worksheet.onChanged
       - excel_release.Excel.Worksheet.onDeactivated
+      - excel_release.Excel.Worksheet.onFormatChanged
       - excel_release.Excel.Worksheet.onSelectionChanged
+      - excel_release.Excel.Worksheet.pageLayout
       - excel_release.Excel.Worksheet.pivotTables
       - excel_release.Excel.Worksheet.position
       - excel_release.Excel.Worksheet.protection
+      - excel_release.Excel.Worksheet.replaceAll
       - excel_release.Excel.Worksheet.set
       - excel_release.Excel.Worksheet.set_1
+      - excel_release.Excel.Worksheet.shapes
       - excel_release.Excel.Worksheet.showGridlines
       - excel_release.Excel.Worksheet.showHeadings
       - excel_release.Excel.Worksheet.standardHeight
@@ -54,12 +64,13 @@ items:
       - excel_release.Excel.Worksheet.tabColor
       - excel_release.Excel.Worksheet.tables
       - excel_release.Excel.Worksheet.toJSON
+      - excel_release.Excel.Worksheet.verticalPageBreaks
       - excel_release.Excel.Worksheet.visibility
   - uid: excel_release.Excel.Worksheet.activate
     summary: |-
       Active la feuille de calcul dans l’interface utilisateur Excel.
 
-      \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: activate()
     fullName: activate()
     langs:
@@ -88,11 +99,41 @@ items:
               }
           });
           ```
+  - uid: excel_release.Excel.Worksheet.autoFilter
+    summary: |-
+      Représente l’objet AutoFilter de filtre automatique de la feuille de calcul. En lecture seule.
+
+      \[[Ensemble d’API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: autoFilter
+    fullName: autoFilter
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly autoFilter: Excel.AutoFilter;'
+      return:
+        type:
+          - excel.Excel.AutoFilter
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```typescript
+          await Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getActiveWorksheet();
+              const farmData = sheet.getUsedRange();
+
+              // This filter will only show the rows with the top 25% of values in column 3.
+              sheet.autoFilter.apply(farmData, 3, { criterion1: "25", filterOn: Excel.FilterOn.topPercent });
+              await context.sync();
+          });
+          ```
   - uid: excel_release.Excel.Worksheet.calculate
     summary: |-
       Calcule toutes les cellules d’une feuille de calcul.
 
-      \[[Ensemble d'API: ExcelApi 1,6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: calculate(markAllDirty)
     fullName: calculate(markAllDirty)
     langs:
@@ -113,7 +154,7 @@ items:
     summary: |-
       Renvoie une collection de graphiques qui font partie de la feuille de calcul. En lecture seule.
 
-      \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: charts
     fullName: charts
     langs:
@@ -125,7 +166,7 @@ items:
         type:
           - excel.Excel.ChartCollection
   - uid: excel_release.Excel.Worksheet.context
-    summary: Contexte de demande associé à l'objet. Cette opération connecte le processus du complément au processus de l'application hôte Office.
+    summary: Contexte de demande associé à l’objet. Cette opération connecte le processus du complément au processus de l’application hôte Office.
     name: context
     fullName: context
     langs:
@@ -140,7 +181,7 @@ items:
     summary: |-
       Copie une feuille de calcul et la place à la position spécifiée. Renvoie la feuille de calcul copiée.
 
-      \[[Ensemble d'API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: 'copy(positionType, relativeTo)'
     fullName: 'copy(positionType, relativeTo)'
     langs:
@@ -184,7 +225,7 @@ items:
     summary: |-
       Copie une feuille de calcul et la place à la position spécifiée. Renvoie la feuille de calcul copiée.
 
-      \[[Ensemble d'API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: 'copy(positionTypeString, relativeTo)'
     fullName: 'copy(positionTypeString, relativeTo)'
     langs:
@@ -207,9 +248,9 @@ items:
             - excel.Excel.Worksheet
   - uid: excel_release.Excel.Worksheet.delete
     summary: |-
-      Supprime la feuille de calcul du classeur.
+      Supprime la feuille de calcul du classeur. Notez que si la visibilité de la feuille de calcul est définie sur «VeryHidden», l’opération de suppression échouera avec un GeneralException.
 
-      \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: delete()
     fullName: delete()
     langs:
@@ -238,11 +279,97 @@ items:
               }
           });
           ```
+  - uid: excel_release.Excel.Worksheet.enableCalculation
+    summary: |-
+      Obtient ou définit EnableCalculation, propriété de la feuille de calcul. La valeur true si Excel recalcule la feuille de calcul lorsque cela est nécessaire. Elle a la valeur False si Excel ne recalcule pas la feuille.
+
+      \[[Ensemble d’API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: enableCalculation
+    fullName: enableCalculation
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'enableCalculation: boolean;'
+      return:
+        type:
+          - boolean
+  - uid: excel_release.Excel.Worksheet.findAll
+    summary: |-
+      Trouve toutes les occurrences de la chaîne donnée en fonction des critères spécifiées et renvoie un objet RangeAreas comprenant une ou plusieurs plages rectangulaires.
+
+      \[[Ensemble d’API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: 'findAll(text, criteria)'
+    fullName: 'findAll(text, criteria)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'findAll(text: string, criteria: Excel.WorksheetSearchCriteria): Excel.RangeAreas;'
+      return:
+        type:
+          - excel.Excel.RangeAreas
+        description: 'Objet RangeArea, comprenant une ou plusieurs plages rectangulaires, qui correspondent aux critères de recherche. Si aucune cellule ne répond à ce critère, une erreur ItemNotFound est générée.'
+      parameters:
+        - id: text
+          description: Chaîne à rechercher.
+          type:
+            - string
+        - id: criteria
+          description: Critères supplémentaires.
+          type:
+            - excel.Excel.WorksheetSearchCriteria
+  - uid: excel_release.Excel.Worksheet.findAllOrNullObject
+    summary: |-
+      Trouve toutes les occurrences de la chaîne donnée en fonction des critères spécifiées et renvoie un objet RangeAreas comprenant une ou plusieurs plages rectangulaires.
+
+      \[[Ensemble d’API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: 'findAllOrNullObject(text, criteria)'
+    fullName: 'findAllOrNullObject(text, criteria)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'findAllOrNullObject(text: string, criteria: Excel.WorksheetSearchCriteria): Excel.RangeAreas;'
+      return:
+        type:
+          - excel.Excel.RangeAreas
+        description: |-
+          Objet RangeArea, comprenant une ou plusieurs plages rectangulaires, qui correspondent aux critères de recherche. S’il n’y a aucune correspondance, cette fonction renverra un objet null.
+
+          #### <a name="examples"></a>Exemples
+
+          ```typescript
+          await Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getItem("Sample");
+              const foundRanges = sheet.findAllOrNullObject("Complete", {
+                  completeMatch: true,
+                  matchCase: false
+              });
+
+              await context.sync();
+
+              if (foundRanges.isNullObject) {
+                  console.log("No complete projects");
+              } else {
+                  foundRanges.format.fill.color = "green"
+              }
+          });
+          ```
+      parameters:
+        - id: text
+          description: Chaîne à rechercher.
+          type:
+            - string
+        - id: criteria
+          description: Critères supplémentaires.
+          type:
+            - excel.Excel.WorksheetSearchCriteria
   - uid: excel_release.Excel.Worksheet.freezePanes
     summary: |-
       Obtient un objet qui peut être utilisé pour manipuler les volets figés de la feuille de calcul. En lecture seule.
 
-      \[[Ensemble d'API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: freezePanes
     fullName: freezePanes
     langs:
@@ -255,9 +382,9 @@ items:
           - excel.Excel.WorksheetFreezePanes
   - uid: excel_release.Excel.Worksheet.getCell
     summary: |-
-      Renvoie l’objet de plage qui contient une cellule donnée sur la base des numéros de ligne et de colonne. La cellule peut être située en dehors des limites de sa plage parente, tant qu'elle reste dans la grille de la feuille de calcul.
+      Renvoie l’objet de plage qui contient une cellule donnée sur la base des numéros de ligne et de colonne. La cellule peut être située en dehors des limites de sa plage parente, tant qu’elle reste dans la grille de la feuille de calcul.
 
-      \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: 'getCell(row, column)'
     fullName: 'getCell(row, column)'
     langs:
@@ -300,9 +427,9 @@ items:
             - number
   - uid: excel_release.Excel.Worksheet.getNext
     summary: |-
-      Obtient la feuille de calcul qui suit celle-ci. S'il n'existe aucune feuille de calcul à la suite de celle-ci, cette méthode génère une erreur.
+      Obtient la feuille de calcul qui suit celle-ci. S’il n’existe aucune feuille de calcul à la suite de celle-ci, cette méthode génère une erreur.
 
-      \[[Ensemble d'API: ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: getNext(visibleOnly)
     fullName: getNext(visibleOnly)
     langs:
@@ -351,9 +478,9 @@ items:
             - boolean
   - uid: excel_release.Excel.Worksheet.getNextOrNullObject
     summary: |-
-      Obtient la feuille de calcul qui suit celle-ci. S'il n'existe aucune feuille de calcul à la suite de celle-ci, cette méthode renvoie un objet null.
+      Obtient la feuille de calcul qui suit celle-ci. S’il n’existe aucune feuille de calcul à la suite de celle-ci, cette méthode renvoie un objet null.
 
-      \[[Ensemble d'API: ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: getNextOrNullObject(visibleOnly)
     fullName: getNextOrNullObject(visibleOnly)
     langs:
@@ -372,9 +499,9 @@ items:
             - boolean
   - uid: excel_release.Excel.Worksheet.getPrevious
     summary: |-
-      Obtient la feuille de calcul qui précède celle-ci. S'il n'y a pas de feuille de calcul précédente, cette méthode génère une erreur.
+      Obtient la feuille de calcul qui précède celle-ci. S’il n’y a pas de feuille de calcul précédente, cette méthode génère une erreur.
 
-      \[[Ensemble d'API: ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: getPrevious(visibleOnly)
     fullName: getPrevious(visibleOnly)
     langs:
@@ -419,9 +546,9 @@ items:
             - boolean
   - uid: excel_release.Excel.Worksheet.getPreviousOrNullObject
     summary: |-
-      Obtient la feuille de calcul qui précède celle-ci. S'il n'y a pas de feuille de calcul précédente, cette méthode renvoie une valeur null.
+      Obtient la feuille de calcul qui précède celle-ci. S’il n’y a pas de feuille de calcul précédente, cette méthode renvoie une valeur null.
 
-      \[[Ensemble d'API: ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: getPreviousOrNullObject(visibleOnly)
     fullName: getPreviousOrNullObject(visibleOnly)
     langs:
@@ -440,9 +567,9 @@ items:
             - boolean
   - uid: excel_release.Excel.Worksheet.getRange
     summary: |-
-      Obtient l'objet de plage, représentant un seul bloc de cellules rectangulaires, spécifié par l'adresse ou le nom.
+      Obtient l’objet de plage, représentant un seul bloc de cellules rectangulaires, spécifié par l’adresse ou le nom.
 
-      \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: getRange(address)
     fullName: getRange(address)
     langs:
@@ -495,14 +622,14 @@ items:
           ```
       parameters:
         - id: address
-          description: 'Facultatif. La chaîne représentant l''adresse ou le nom de la plage. Par exemple, «a1: B2». Si cette propriété n’est pas définie, la plage de la feuille de calcul toute entière est renvoyée.'
+          description: 'Facultatif. La chaîne représentant l’adresse ou le nom de la plage. Par exemple, «a1: B2». Si cette propriété n’est pas définie, la plage de la feuille de calcul toute entière est renvoyée.'
           type:
             - string
   - uid: excel_release.Excel.Worksheet.getRangeByIndexes
     summary: |-
       Obtient l’objet plage commençant à un index de ligne et de colonne particulier et couvrant un certain nombre de lignes et de colonnes.
 
-      \[[Ensemble d'API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: 'getRangeByIndexes(startRow, startColumn, rowCount, columnCount)'
     fullName: 'getRangeByIndexes(startRow, startColumn, rowCount, columnCount)'
     langs:
@@ -531,11 +658,46 @@ items:
           description: Nombre de colonnes à inclure dans la plage.
           type:
             - number
+  - uid: excel_release.Excel.Worksheet.getRanges
+    summary: |-
+      Obtient l’objet RangeAreas représentant un ou plusieurs blocs de plages rectangulaires, spécifiés par nom ou l’adresse.
+
+      \[[Ensemble d’API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getRanges(address)
+    fullName: getRanges(address)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getRanges(address?: string): Excel.RangeAreas;'
+      return:
+        type:
+          - excel.Excel.RangeAreas
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```typescript
+          await Excel.run(async (context) => {
+
+              const sheet = context.workbook.worksheets.getActiveWorksheet();
+              const specifiedRanges = sheet.getRanges("D3:D5, G3:G5");
+              specifiedRanges.format.fill.color = "pink";
+
+              await context.sync();
+          })
+          ```
+      parameters:
+        - id: address
+          description: 'Facultatif. Chaîne contenant les adresses ou les noms des plages individuelles séparées par des virgules. Par exemple, «a1: B2, A5: B5». Si ce n’est pas spécifié, un objet RangeArea est renvoyé pour l’intégralité de la feuille de calcul.'
+          type:
+            - string
   - uid: excel_release.Excel.Worksheet.getUsedRange
     summary: |-
-      La plage utilisée est la plus petite plage qui englobe toutes les cellules auxquelles une valeur ou un format est affecté. Si la feuille de calcul entière est vide, cette fonction renvoie la cellule supérieure gauche (autrement dit, elle ne génère *pas* d'erreur).
+      La plage utilisée est la plus petite plage qui englobe toutes les cellules auxquelles une valeur ou un format est affecté. Si la feuille de calcul entière est vide, cette fonction renvoie la cellule supérieure gauche (autrement dit, elle ne génère *pas* d’erreur).
 
-      \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: getUsedRange(valuesOnly)
     fullName: getUsedRange(valuesOnly)
     langs:
@@ -569,14 +731,14 @@ items:
           ```
       parameters:
         - id: valuesOnly
-          description: 'Facultatif. Si la valeur est true, ne prend en compte que les cellules contenant des valeurs comme cellules utilisées (en ignorant la mise en forme). \[Ensemble d''API: ExcelApi 1,2\]'
+          description: 'Facultatif. Si la valeur est true, ne prend en compte que les cellules contenant des valeurs comme cellules utilisées (en ignorant la mise en forme). \[Ensemble d’API: ExcelApi 1,2\]'
           type:
             - boolean
   - uid: excel_release.Excel.Worksheet.getUsedRangeOrNullObject
     summary: |-
       La plage utilisée est la plus petite plage qui englobe toutes les cellules auxquelles une valeur ou un format est affecté. Si la feuille de calcul entière est vide, cette fonction renvoie un objet null.
 
-      \[[Ensemble d'API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: getUsedRangeOrNullObject(valuesOnly)
     fullName: getUsedRangeOrNullObject(valuesOnly)
     langs:
@@ -593,11 +755,26 @@ items:
           description: Facultatif. Prend uniquement en compte les cellules avec des valeurs sous forme de cellules utilisées.
           type:
             - boolean
+  - uid: excel_release.Excel.Worksheet.horizontalPageBreaks
+    summary: |-
+      Obtient la collection de saut de page horizontal pour la feuille de calcul. Cette collection contient uniquement les sauts de page manuels.
+
+      \[[Ensemble d’API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: horizontalPageBreaks
+    fullName: horizontalPageBreaks
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly horizontalPageBreaks: Excel.PageBreakCollection;'
+      return:
+        type:
+          - excel.Excel.PageBreakCollection
   - uid: excel_release.Excel.Worksheet.id
     summary: |-
       Renvoie une valeur qui permet d’identifier la feuille de calcul de façon unique dans un classeur donné. La valeur de l’identificateur reste identique, même lorsque la feuille de calcul est renommée ou déplacée. En lecture seule.
 
-      \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: id
     fullName: id
     langs:
@@ -617,7 +794,7 @@ items:
 
       `load(option?: { select?: string; expand?: string; }): Excel.Worksheet`Option-WHERE option. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
 
-      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Worksheet`-Uniquement disponible sur les types de collection. Elle est similaire à la signature précédente. Option. Top indique le nombre maximal d'éléments de collection qui peuvent être inclus dans le résultat. Option. Skip indique le nombre d'éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat. Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d'éléments.
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Worksheet`-Uniquement disponible sur les types de collection. Elle est similaire à la signature précédente. Option. Top indique le nombre maximal d’éléments de collection qui peuvent être inclus dans le résultat. Option. Skip indique le nombre d’éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat. Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d’éléments.
     name: load(option)
     fullName: load(option)
     langs:
@@ -708,7 +885,7 @@ items:
     summary: |-
       Nom complet de la feuille de calcul.
 
-      \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: name
     fullName: name
     langs:
@@ -723,7 +900,7 @@ items:
     summary: |-
       Collection de noms inclus dans l’étendue de la feuille de calcul active. En lecture seule.
 
-      \[[Ensemble d'API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: names
     fullName: names
     langs:
@@ -738,7 +915,7 @@ items:
     summary: |-
       Se produit lorsque la feuille de calcul est activée.
 
-      \[[Ensemble d'API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: onActivated
     fullName: onActivated
     langs:
@@ -770,7 +947,7 @@ items:
     summary: |-
       Se produit lors du calcul de la feuille de calcul.
 
-      \[[Ensemble d'API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: onCalculated
     fullName: onCalculated
     langs:
@@ -802,7 +979,7 @@ items:
     summary: |-
       Se produit lorsque des données sont modifiées dans une feuille de calcul spécifique.
 
-      \[[Ensemble d'API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: onChanged
     fullName: onChanged
     langs:
@@ -831,7 +1008,7 @@ items:
     summary: |-
       Se produit lorsque la feuille de calcul est désactivée.
 
-      \[[Ensemble d'API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: onDeactivated
     fullName: onDeactivated
     langs:
@@ -859,11 +1036,26 @@ items:
               return context.sync();
           });
           ```
+  - uid: excel_release.Excel.Worksheet.onFormatChanged
+    summary: |-
+      Se produit lorsque le filtre est modifié sur un tableau spécifique.
+
+      \[[Ensemble d’API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: onFormatChanged
+    fullName: onFormatChanged
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onFormatChanged: OfficeExtension.EventHandlers<Excel.WorksheetFormatChangedEventArgs>;'
+      return:
+        type:
+          - OfficeExtension.EventHandlers<Excel.WorksheetFormatChangedEventArgs>
   - uid: excel_release.Excel.Worksheet.onSelectionChanged
     summary: |-
       Se produit lorsque la sélection change dans une feuille de calcul spécifique.
 
-      \[[Ensemble d'API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: onSelectionChanged
     fullName: onSelectionChanged
     langs:
@@ -891,11 +1083,26 @@ items:
               return context.sync();
           });
           ```
+  - uid: excel_release.Excel.Worksheet.pageLayout
+    summary: |-
+      Obtient l’objet PageLayout de la feuille de calcul.
+
+      \[[Ensemble d’API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: pageLayout
+    fullName: pageLayout
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly pageLayout: Excel.PageLayout;'
+      return:
+        type:
+          - excel.Excel.PageLayout
   - uid: excel_release.Excel.Worksheet.pivotTables
     summary: |-
       Collection de tableaux croisés dynamiques qui font partie de la feuille de calcul. En lecture seule.
 
-      \[[Ensemble d'API: ExcelApi 1,3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: pivotTables
     fullName: pivotTables
     langs:
@@ -910,7 +1117,7 @@ items:
     summary: |-
       Position de la feuille de calcul au sein du classeur (sur une base zéro).
 
-      \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: position
     fullName: position
     langs:
@@ -925,7 +1132,7 @@ items:
     summary: |-
       Renvoie un objet de protection de feuille pour une feuille de calcul. En lecture seule.
 
-      \[[Ensemble d'API: ExcelApi 1,2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: protection
     fullName: protection
     langs:
@@ -936,8 +1143,37 @@ items:
       return:
         type:
           - excel.Excel.WorksheetProtection
+  - uid: excel_release.Excel.Worksheet.replaceAll
+    summary: |-
+      Détecte et remplace la chaîne donnée basée sur les critères spécifiés dans la plage active.
+
+      \[[Ensemble d’API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: 'replaceAll(text, replacement, criteria)'
+    fullName: 'replaceAll(text, replacement, criteria)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'replaceAll(text: string, replacement: string, criteria: Excel.ReplaceCriteria): OfficeExtension.ClientResult<number>;'
+      return:
+        type:
+          - OfficeExtension.ClientResult<number>
+        description: Nombre de remplacements effectués.
+      parameters:
+        - id: text
+          description: Chaîne à rechercher.
+          type:
+            - string
+        - id: replacement
+          description: Chaîne de remplacement de l’original par.
+          type:
+            - string
+        - id: criteria
+          description: Critères de remplacement supplémentaires.
+          type:
+            - excel.Excel.ReplaceCriteria
   - uid: excel_release.Excel.Worksheet.set
-    summary: 'Définit plusieurs propriétés d''un objet en même temps. Vous pouvez transmettre un objet plain avec les propriétés appropriées, ou un autre objet API du même type.'
+    summary: 'Définit plusieurs propriétés d’un objet en même temps. Vous pouvez transmettre un objet plain avec les propriétés appropriées, ou un autre objet API du même type.'
     remarks: |-
       Cette méthode est dotée de la signature supplémentaire suivante:
 
@@ -955,15 +1191,15 @@ items:
         description: ''
       parameters:
         - id: properties
-          description: Objet JavaScript avec des propriétés qui sont structurées isomorphically vers les propriétés de l'objet sur lequel la méthode est appelée.
+          description: Objet JavaScript avec des propriétés qui sont structurées isomorphically vers les propriétés de l’objet sur lequel la méthode est appelée.
           type:
             - Interfaces.WorksheetUpdateData
         - id: options
-          description: Fournit une option permettant de supprimer les erreurs si l'objet Properties tente de définir des propriétés en lecture seule.
+          description: Fournit une option permettant de supprimer les erreurs si l’objet Properties tente de définir des propriétés en lecture seule.
           type:
             - office.OfficeExtension.UpdateOptions
   - uid: excel_release.Excel.Worksheet.set_1
-    summary: 'Définit plusieurs propriétés de l''objet en même temps, en fonction d''un objet chargé existant.'
+    summary: 'Définit plusieurs propriétés de l’objet en même temps, en fonction d’un objet chargé existant.'
     name: set(properties)
     fullName: set(properties)
     langs:
@@ -980,11 +1216,26 @@ items:
           description: ''
           type:
             - excel.Excel.Worksheet
+  - uid: excel_release.Excel.Worksheet.shapes
+    summary: |-
+      Renvoie une collection de tous les objets Forme sur la feuille de calcul. En lecture seule.
+
+      \[[Ensemble d’API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: shapes
+    fullName: shapes
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly shapes: Excel.ShapeCollection;'
+      return:
+        type:
+          - excel.Excel.ShapeCollection
   - uid: excel_release.Excel.Worksheet.showGridlines
     summary: |-
-      Obtient ou définit l’indicateur de quadrillage de la feuille de calcul. Cet indicateur détermine si le quadrillage est visible par l'utilisateur.
+      Obtient ou définit l’indicateur de quadrillage de la feuille de calcul. Cet indicateur détermine si le quadrillage est visible par l’utilisateur.
 
-      \[[Ensemble d'API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: showGridlines
     fullName: showGridlines
     langs:
@@ -1010,9 +1261,9 @@ items:
           ```
   - uid: excel_release.Excel.Worksheet.showHeadings
     summary: |-
-      Obtient ou définit l’indicateur d’en-tête de la feuille de calcul. Cet indicateur détermine si les en-têtes sont visibles par l'utilisateur.
+      Obtient ou définit l’indicateur d’en-tête de la feuille de calcul. Cet indicateur détermine si les en-têtes sont visibles par l’utilisateur.
 
-      \[[Ensemble d'API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: showHeadings
     fullName: showHeadings
     langs:
@@ -1027,7 +1278,7 @@ items:
     summary: |-
       Renvoie la hauteur standard (par défaut) de toutes les lignes dans la feuille de calcul, en points. En lecture seule.
 
-      \[[Ensemble d'API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: standardHeight
     fullName: standardHeight
     langs:
@@ -1042,7 +1293,7 @@ items:
     summary: |-
       Renvoie ou définit la largeur standard (par défaut) de toutes les colonnes dans la feuille de calcul. Une unité de largeur de colonne est égale à la largeur d'un caractère du style Normal. Dans le cas des polices proportionnelles, la largeur du caractère 0 (zéro) est utilisée.
 
-      \[[Ensemble d'API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: standardWidth
     fullName: standardWidth
     langs:
@@ -1055,9 +1306,9 @@ items:
           - number
   - uid: excel_release.Excel.Worksheet.tabColor
     summary: |-
-      Obtient ou modifie la couleur d’onglet de la feuille de calcul. Lors de l'extraction de la couleur d'onglet, si la feuille de calcul est invisible, la valeur est null. Si la feuille de calcul est visible mais que la couleur d'onglet est définie sur auto, une chaîne vide est renvoyée. Dans le cas contraire, la propriété est définie sur une couleur, au format\#«123456» lors de la définition de la couleur, utilisez une chaîne vide pour définir une couleur «automatique» ou une autre couleur réelle.
+      Obtient ou modifie la couleur d’onglet de la feuille de calcul. Lors de l’extraction de la couleur d’onglet, si la feuille de calcul est invisible, la valeur est null. Si la feuille de calcul est visible mais que la couleur d’onglet est définie sur auto, une chaîne vide est renvoyée. Dans le cas contraire, la propriété est définie sur une couleur, au format\#«123456» lors de la définition de la couleur, utilisez une chaîne vide pour définir une couleur «automatique» ou une autre couleur réelle.
 
-      \[[Ensemble d'API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: tabColor
     fullName: tabColor
     langs:
@@ -1085,7 +1336,7 @@ items:
     summary: |-
       Collection de tableaux qui font partie de la feuille de calcul. En lecture seule.
 
-      \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: tables
     fullName: tables
     langs:
@@ -1097,7 +1348,7 @@ items:
         type:
           - excel.Excel.TableCollection
   - uid: excel_release.Excel.Worksheet.toJSON
-    summary: 'Remplace la méthode JavaScript `toJSON()` afin de fournir une sortie plus utile lorsqu''un objet d''API est transmis à`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle `toJSON` la méthode de l''objet qui lui est passé.) Tandis que l''objet Excel. Worksheet d''origine est un objet `toJSON` API, la méthode renvoie un objet JavaScript simple (tapé comme`Excel.Interfaces.WorksheetData`<!-- -->) qui contient des copies superficielles de toutes les propriétés enfants chargées à partir de l''objet d''origine.'
+    summary: 'Remplace la méthode JavaScript `toJSON()` afin de fournir une sortie plus utile lorsqu’un objet d’API est transmis à`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle `toJSON` la méthode de l’objet qui lui est passé.) Tandis que l’objet Excel. Worksheet d’origine est un objet `toJSON` API, la méthode renvoie un objet JavaScript simple (tapé comme`Excel.Interfaces.WorksheetData`<!-- -->) qui contient des copies superficielles de toutes les propriétés enfants chargées à partir de l’objet d’origine.'
     name: toJSON()
     fullName: toJSON()
     langs:
@@ -1109,11 +1360,26 @@ items:
         type:
           - excel.Excel.Interfaces.WorksheetData
         description: ''
+  - uid: excel_release.Excel.Worksheet.verticalPageBreaks
+    summary: |-
+      Obtient la collection de saut de page vertical pour la feuille de calcul. Cette collection contient uniquement les sauts de page manuels.
+
+      \[[Ensemble d’API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: verticalPageBreaks
+    fullName: verticalPageBreaks
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly verticalPageBreaks: Excel.PageBreakCollection;'
+      return:
+        type:
+          - excel.Excel.PageBreakCollection
   - uid: excel_release.Excel.Worksheet.visibility
     summary: |-
       Visibilité de la feuille de calcul.
 
-      \[[Ensemble d'API: ExcelApi 1,1 pour la lecture de la visibilité; 1,2 pour le définir.](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
+      \[[Ensemble d’API: ExcelApi 1,1 pour la lecture de la visibilité; 1,2 pour le définir.](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
     name: visibility
     fullName: visibility
     langs:
