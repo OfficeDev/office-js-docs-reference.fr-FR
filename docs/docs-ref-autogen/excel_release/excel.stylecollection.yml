@@ -4,7 +4,7 @@ items:
     summary: |-
       Représente une collection de tous les styles.
 
-      \[[Ensemble d'API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: Excel.StyleCollection
     fullName: Excel.StyleCollection
     langs:
@@ -16,7 +16,9 @@ items:
     children:
       - excel_release.Excel.StyleCollection.add
       - excel_release.Excel.StyleCollection.context
+      - excel_release.Excel.StyleCollection.getCount
       - excel_release.Excel.StyleCollection.getItem
+      - excel_release.Excel.StyleCollection.getItemAt
       - excel_release.Excel.StyleCollection.items
       - excel_release.Excel.StyleCollection.load
       - excel_release.Excel.StyleCollection.load_1
@@ -26,7 +28,7 @@ items:
     summary: |-
       Ajoute un nouveau style à la collection.
 
-      \[[Ensemble d'API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: add(name)
     fullName: add(name)
     langs:
@@ -70,7 +72,7 @@ items:
           type:
             - string
   - uid: excel_release.Excel.StyleCollection.context
-    summary: Contexte de demande associé à l'objet. Cette opération connecte le processus du complément au processus de l'application hôte Office.
+    summary: Contexte de demande associé à l’objet. Cette opération connecte le processus du complément au processus de l’application hôte Office.
     name: context
     fullName: context
     langs:
@@ -81,11 +83,27 @@ items:
       return:
         type:
           - RequestContext
+  - uid: excel_release.Excel.StyleCollection.getCount
+    summary: |-
+      Obtient le nombre de tableaux de la collection.
+
+      \[[Ensemble d’API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getCount()
+    fullName: getCount()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getCount(): OfficeExtension.ClientResult<number>;'
+      return:
+        type:
+          - OfficeExtension.ClientResult<number>
+        description: ''
   - uid: excel_release.Excel.StyleCollection.getItem
     summary: |-
       Obtient un style par nom.
 
-      \[[Ensemble d'API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: getItem(name)
     fullName: getItem(name)
     langs:
@@ -128,6 +146,27 @@ items:
           description: Nom du style à récupérer.
           type:
             - string
+  - uid: excel_release.Excel.StyleCollection.getItemAt
+    summary: |-
+      Obtient une forme en fonction de sa position dans la collection.
+
+      \[[Ensemble d’API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getItemAt(index)
+    fullName: getItemAt(index)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItemAt(index: number): Excel.Style;'
+      return:
+        type:
+          - excel.Excel.Style
+        description: ''
+      parameters:
+        - id: index
+          description: Valeur d’index de l’objet de style à récupérer. Avec indice zéro.
+          type:
+            - number
   - uid: excel_release.Excel.StyleCollection.items
     summary: Obtient l’élément enfant chargé dans cette collection de sites.
     name: items
@@ -149,7 +188,7 @@ items:
 
       `load(option?: { select?: string; expand?: string; }): Excel.StyleCollection`Option-WHERE option. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
 
-      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.StyleCollection`-Uniquement disponible sur les types de collection. Elle est similaire à la signature précédente. Option. Top indique le nombre maximal d'éléments de collection qui peuvent être inclus dans le résultat. Option. Skip indique le nombre d'éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat. Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d'éléments.
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.StyleCollection`-Uniquement disponible sur les types de collection. Elle est similaire à la signature précédente. Option. Top indique le nombre maximal d’éléments de collection qui peuvent être inclus dans le résultat. Option. Skip indique le nombre d’éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat. Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d’éléments.
     name: load(option)
     fullName: load(option)
     langs:
@@ -202,7 +241,7 @@ items:
           type:
             - office.OfficeExtension.LoadOption
   - uid: excel_release.Excel.StyleCollection.toJSON
-    summary: 'Remplace la méthode JavaScript `toJSON()` afin de fournir une sortie plus utile lorsqu''un objet d''API est transmis à`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle `toJSON` la méthode de l''objet qui lui est passé.) Tandis que `Excel.StyleCollection` l''objet d''origine est un objet `toJSON` d''API, la méthode renvoie un objet JavaScript simple (tapé comme`Excel.Interfaces.StyleCollectionData`<!-- -->) qui contient un tableau «éléments» avec des copies superficielles de toutes les propriétés chargées des éléments de la collection.'
+    summary: 'Remplace la méthode JavaScript `toJSON()` afin de fournir une sortie plus utile lorsqu’un objet d’API est transmis à`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle `toJSON` la méthode de l’objet qui lui est passé.) Tandis que `Excel.StyleCollection` l’objet d’origine est un objet `toJSON` d’API, la méthode renvoie un objet JavaScript simple (tapé comme`Excel.Interfaces.StyleCollectionData`<!-- -->) qui contient un tableau «éléments» avec des copies superficielles de toutes les propriétés chargées des éléments de la collection.'
     name: toJSON()
     fullName: toJSON()
     langs:

@@ -4,7 +4,7 @@ items:
     summary: |-
       Représente une collection de tous les tableaux qui font partie du classeur ou de la feuille de calcul, en fonction de la méthode d’appel.
 
-      \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: Excel.TableCollection
     fullName: Excel.TableCollection
     langs:
@@ -25,13 +25,15 @@ items:
       - excel_release.Excel.TableCollection.load
       - excel_release.Excel.TableCollection.load_1
       - excel_release.Excel.TableCollection.load_2
+      - excel_release.Excel.TableCollection.onAdded
       - excel_release.Excel.TableCollection.onChanged
+      - excel_release.Excel.TableCollection.onDeleted
       - excel_release.Excel.TableCollection.toJSON
   - uid: excel_release.Excel.TableCollection.add
     summary: |-
       Crée un tableau L’adresse de la source ou de l’objet de la plage détermine la feuille de calcul dans laquelle le tableau sera ajouté. Si l’ajout ne peut être effectué (par exemple, parce que l’adresse n’est pas valide, ou parce que le tableau empiéterait sur un autre tableau), un message d’erreur apparaît.
 
-      \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: 'add(address, hasHeaders)'
     fullName: 'add(address, hasHeaders)'
     langs:
@@ -63,7 +65,7 @@ items:
           ```
       parameters:
         - id: address
-          description: 'Objet de plage ou nom/adresse (string) de la plage représentant la source de données. Si l’adresse ne contient pas de nom de feuille, la feuille ouverte est utilisée. \[Ensemble d''API: ExcelApi 1,1/1,3. Avant ExcelApi 1,3, ce paramètre doit être une chaîne. À partir de l''API Excel 1,3, ce paramètre peut être un objet Range ou une chaîne.\]'
+          description: 'Objet de plage ou nom/adresse (string) de la plage représentant la source de données. Si l’adresse ne contient pas de nom de feuille, la feuille ouverte est utilisée. \[Ensemble d’API: ExcelApi 1,1/1,3. Avant ExcelApi 1,3, ce paramètre doit être une chaîne. À partir de l’API Excel 1,3, ce paramètre peut être un objet Range ou une chaîne.\]'
           type:
             - Range | string
         - id: hasHeaders
@@ -71,7 +73,7 @@ items:
           type:
             - boolean
   - uid: excel_release.Excel.TableCollection.context
-    summary: Contexte de demande associé à l'objet. Cette opération connecte le processus du complément au processus de l'application hôte Office.
+    summary: Contexte de demande associé à l’objet. Cette opération connecte le processus du complément au processus de l’application hôte Office.
     name: context
     fullName: context
     langs:
@@ -86,7 +88,7 @@ items:
     summary: |-
       Renvoie le nombre de tableaux dans le classeur. En lecture seule.
 
-      \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: count
     fullName: count
     langs:
@@ -101,7 +103,7 @@ items:
     summary: |-
       Obtient le nombre de tableaux de la collection.
 
-      \[[Ensemble d'API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: getCount()
     fullName: getCount()
     langs:
@@ -117,7 +119,7 @@ items:
     summary: |-
       Obtient un tableau à l’aide de son nom ou de son ID.
 
-      \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: getItem(key)
     fullName: getItem(key)
     langs:
@@ -157,7 +159,7 @@ items:
     summary: |-
       Obtient un tableau en fonction de sa position dans la collection.
 
-      \[[Ensemble d'API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: getItemAt(index)
     fullName: getItemAt(index)
     langs:
@@ -196,7 +198,7 @@ items:
     summary: |-
       Obtient un tableau à l’aide de son nom ou de son ID. Si le tableau n’existe pas, renvoie un objet null.
 
-      \[[Ensemble d'API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: getItemOrNullObject(key)
     fullName: getItemOrNullObject(key)
     langs:
@@ -234,7 +236,7 @@ items:
 
       `load(option?: { select?: string; expand?: string; }): Excel.TableCollection`Option-WHERE option. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
 
-      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.TableCollection`-Uniquement disponible sur les types de collection. Elle est similaire à la signature précédente. Option. Top indique le nombre maximal d'éléments de collection qui peuvent être inclus dans le résultat. Option. Skip indique le nombre d'éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat. Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d'éléments.
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.TableCollection`-Uniquement disponible sur les types de collection. Elle est similaire à la signature précédente. Option. Top indique le nombre maximal d’éléments de collection qui peuvent être inclus dans le résultat. Option. Skip indique le nombre d’éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat. Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d’éléments.
     name: load(option)
     fullName: load(option)
     langs:
@@ -323,11 +325,26 @@ items:
           description: ''
           type:
             - office.OfficeExtension.LoadOption
+  - uid: excel_release.Excel.TableCollection.onAdded
+    summary: |-
+      Se produit lorsque le nouveau tableau est ajouté dans un classeur.
+
+      \[[Ensemble d’API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: onAdded
+    fullName: onAdded
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onAdded: OfficeExtension.EventHandlers<Excel.TableAddedEventArgs>;'
+      return:
+        type:
+          - OfficeExtension.EventHandlers<Excel.TableAddedEventArgs>
   - uid: excel_release.Excel.TableCollection.onChanged
     summary: |-
-      SurVient lors de la modification des données d'une table dans un classeur ou d'une feuille de calcul.
+      Survient lors de la modification des données d’une table dans un classeur ou d’une feuille de calcul.
 
-      \[[Ensemble d'API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: onChanged
     fullName: onChanged
     langs:
@@ -352,8 +369,23 @@ items:
               console.log("A handler has been registered for the table collection onChanged event");
           });
           ```
+  - uid: excel_release.Excel.TableCollection.onDeleted
+    summary: |-
+      Se produit lorsque le tableau spécifié est supprimé dans un classeur.
+
+      \[[Ensemble d’API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: onDeleted
+    fullName: onDeleted
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onDeleted: OfficeExtension.EventHandlers<Excel.TableDeletedEventArgs>;'
+      return:
+        type:
+          - OfficeExtension.EventHandlers<Excel.TableDeletedEventArgs>
   - uid: excel_release.Excel.TableCollection.toJSON
-    summary: 'Remplace la méthode JavaScript `toJSON()` afin de fournir une sortie plus utile lorsqu''un objet d''API est transmis à`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle `toJSON` la méthode de l''objet qui lui est passé.) Tandis que `Excel.TableCollection` l''objet d''origine est un objet `toJSON` d''API, la méthode renvoie un objet JavaScript simple (tapé comme`Excel.Interfaces.TableCollectionData`<!-- -->) qui contient un tableau «éléments» avec des copies superficielles de toutes les propriétés chargées des éléments de la collection.'
+    summary: 'Remplace la méthode JavaScript `toJSON()` afin de fournir une sortie plus utile lorsqu’un objet d’API est transmis à`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle `toJSON` la méthode de l’objet qui lui est passé.) Tandis que `Excel.TableCollection` l’objet d’origine est un objet `toJSON` d’API, la méthode renvoie un objet JavaScript simple (tapé comme`Excel.Interfaces.TableCollectionData`<!-- -->) qui contient un tableau «éléments» avec des copies superficielles de toutes les propriétés chargées des éléments de la collection.'
     name: toJSON()
     fullName: toJSON()
     langs:

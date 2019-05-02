@@ -2,9 +2,9 @@
 items:
   - uid: excel_release.Excel.WorksheetChangedEventArgs
     summary: |-
-      Fournit des informations sur la feuille de calcul qui a déclenché l'événement Changed.
+      Fournit des informations sur la feuille de calcul qui a déclenché l’événement Changed.
 
-      \[[Ensemble d'API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: Excel.WorksheetChangedEventArgs
     fullName: Excel.WorksheetChangedEventArgs
     langs:
@@ -16,6 +16,7 @@ items:
       - excel_release.Excel.WorksheetChangedEventArgs.getRangeOrNullObject
       - excel_release.Excel.WorksheetChangedEventArgs.address
       - excel_release.Excel.WorksheetChangedEventArgs.changeType
+      - excel_release.Excel.WorksheetChangedEventArgs.details
       - excel_release.Excel.WorksheetChangedEventArgs.source
       - excel_release.Excel.WorksheetChangedEventArgs.type
       - excel_release.Excel.WorksheetChangedEventArgs.worksheetId
@@ -23,7 +24,7 @@ items:
     summary: |-
       Obtient l’adresse de plage qui représente la zone modifiée dans une feuille de calcul spécifique.
 
-      \[[Ensemble d'API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: getRange(ctx)
     fullName: getRange(ctx)
     langs:
@@ -44,7 +45,7 @@ items:
     summary: |-
       Obtient l’adresse de plage qui représente la zone modifiée dans une feuille de calcul spécifique. Il peut renvoyer un objet null.
 
-      \[[Ensemble d'API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: getRangeOrNullObject(ctx)
     fullName: getRangeOrNullObject(ctx)
     langs:
@@ -65,7 +66,7 @@ items:
     summary: |-
       Obtient l’adresse de plage qui représente la zone modifiée dans une feuille de calcul spécifique.
 
-      \[[Ensemble d'API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: address
     fullName: address
     langs:
@@ -78,9 +79,9 @@ items:
           - string
   - uid: excel_release.Excel.WorksheetChangedEventArgs.changeType
     summary: |-
-      Obtient le type de modification qui représente la manière dont est déclenché l’événement modifié. Pour plus d'informations, voir Excel. DataChangeType.
+      Obtient le type de modification qui représente la manière dont est déclenché l’événement modifié. Pour plus d’informations, voir Excel. DataChangeType.
 
-      \[[Ensemble d'API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: changeType
     fullName: changeType
     langs:
@@ -91,11 +92,45 @@ items:
       return:
         type:
           - Excel.DataChangeType | "Unknown" | "RangeEdited" | "RowInserted" | "RowDeleted" | "ColumnInserted" | "ColumnDeleted" | "CellInserted" | "CellDeleted"
+  - uid: excel_release.Excel.WorksheetChangedEventArgs.details
+    summary: |-
+      Représente des informations sur les détails de modification
+
+      \[[Ensemble d’API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: details
+    fullName: details
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'details: Excel.ChangedEventDetail;'
+      return:
+        type:
+          - excel.Excel.ChangedEventDetail
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```javascript
+          // This function would be used as an event handler for the Worksheet.onChanged event.
+          function onWorksheetChanged(eventArgs) {
+              Excel.run(function (context) {
+                  var details = eventArgs.details;
+                  var address = eventArgs.address;
+
+                  // Print the before and after types and values to the console.
+                  console.log(`Change at ${address}: was ${details.valueBefore}(${details.valueTypeBefore}),`
+                      + ` now is ${details.valueAfter}(${details.valueTypeAfter})`);
+                  return context.sync();
+              });
+          }
+          ```
   - uid: excel_release.Excel.WorksheetChangedEventArgs.source
     summary: |-
       Obtient la source de l’événement. Pour plus d’informations, voir Excel.EventSource.
 
-      \[[Ensemble d'API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: source
     fullName: source
     langs:
@@ -110,7 +145,7 @@ items:
     summary: |-
       Obtient le type de l’événement. Pour plus d’informations, voir Excel.EventType.
 
-      \[[Ensemble d'API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: type
     fullName: type
     langs:
@@ -125,7 +160,7 @@ items:
     summary: |-
       Obtient l’id de la feuille de calcul dans laquelle les données sont modifiées.
 
-      \[[Ensemble d'API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Ensemble d’API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: worksheetId
     fullName: worksheetId
     langs:
