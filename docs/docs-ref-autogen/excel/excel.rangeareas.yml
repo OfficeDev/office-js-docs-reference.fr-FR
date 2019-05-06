@@ -349,6 +349,24 @@ items:
       return:
         type:
           - excel.Excel.RangeFormat
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```typescript
+          await Excel.run(async (context) => {
+
+              const sheet = context.workbook.worksheets.getActiveWorksheet();
+              const usedRange = sheet.getUsedRange();
+
+              // Find the ranges with formulas
+              const formulaRanges = usedRange.getSpecialCells("Formulas");
+              formulaRanges.format.fill.color = "lightgreen";
+
+              await context.sync();
+          });
+          ```
   - uid: excel.Excel.RangeAreas.getEntireColumn
     summary: "Renvoie un objet qui représente la colonne entière de la RangeAreas (par exemple, si la RangeAreas actuelle représente les cellules «B4:E11, H2\_», elle renvoie une plage RangeAreas qui représente les colonnes «\_B:E, H:H»).\n\n\\[[Ensemble d’API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: getEntireColumn()
