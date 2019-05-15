@@ -22,6 +22,7 @@ items:
       - word.Word.Range.expandTo
       - word.Word.Range.expandToOrNullObject
       - word.Word.Range.font
+      - word.Word.Range.getBookmarks
       - word.Word.Range.getHtml
       - word.Word.Range.getHyperlinkRanges
       - word.Word.Range.getNextTextRange
@@ -32,6 +33,7 @@ items:
       - word.Word.Range.getTextRanges
       - word.Word.Range.hyperlink
       - word.Word.Range.inlinePictures
+      - word.Word.Range.insertBookmark
       - word.Word.Range.insertBreak
       - word.Word.Range.insertBreak_1
       - word.Word.Range.insertContentControl
@@ -270,6 +272,32 @@ items:
       return:
         type:
           - word.Word.Font
+  - uid: word.Word.Range.getBookmarks
+    summary: |-
+      Obtient le nom de tous les signets dans la plage ou qui se chevauchent. Un signet est masqué si son nom commence par le caractère de soulignement.
+
+      \[[Ensemble d’API: WORDAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
+    name: 'getBookmarks(includeHidden, includeAdjacent)'
+    fullName: 'getBookmarks(includeHidden, includeAdjacent)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getBookmarks(includeHidden?: boolean, includeAdjacent?: boolean): OfficeExtension.ClientResult<string[]>;'
+      return:
+        type:
+          - 'OfficeExtension.ClientResult<string[]>'
+        description: ''
+      parameters:
+        - id: includeHidden
+          description: 'Facultatif. Indique s’il faut inclure des signets masqués. La valeur par défaut est false, ce qui indique que les signets masqués sont exclus.'
+          type:
+            - boolean
+        - id: includeAdjacent
+          description: 'Facultatif. Indique s’il faut inclure des signets adjacents à la plage. La valeur par défaut est false, ce qui indique que les signets adjacents sont exclus.'
+          type:
+            - boolean
   - uid: word.Word.Range.getHtml
     summary: |-
       Obtient une représentation HTML de l’objet de plage. Lorsqu’elle est affichée dans une page Web ou dans la visionneuse HTML, la mise en forme est une correspondance étroite, mais pas exacte, de la mise en forme du document. Cette méthode ne renvoie pas exactement le même code HTML pour le même document sur différentes plateformes (Windows, Mac, Word Online, etc.). Si vous avez besoin d’une fidélité exacte ou d’une cohérence `Range.getOoxml()` entre les plateformes, utilisez et convertissez le code XML renvoyé en html.
@@ -552,6 +580,28 @@ items:
       return:
         type:
           - word.Word.InlinePictureCollection
+  - uid: word.Word.Range.insertBookmark
+    summary: |-
+      Insère un signet dans la plage. Si un signet du même nom existe quelque part, il est d’abord supprimé.
+
+      \[[Ensemble d’API: WORDAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
+    name: insertBookmark(name)
+    fullName: insertBookmark(name)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'insertBookmark(name: string): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: name
+          description: 'Obligatoire. Nom du signet, qui ne respecte pas la casse. Si le nom commence par un caractère de soulignement, le signet est masqué.'
+          type:
+            - string
   - uid: word.Word.Range.insertBreak
     summary: "Insère un saut à l’emplacement spécifié du document principal. La valeur insertLocation peut être définie sur «\_Before\_» (avant) ou «\_After\_» (après).\n\n\\[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\\]"
     name: 'insertBreak(breakType, insertLocation)'
@@ -985,7 +1035,10 @@ items:
           type:
             - '"Before" | "After" | "Start" | "End" | "Replace"'
   - uid: word.Word.Range.insertParagraph
-    summary: "Insère un paragraphe à l’emplacement spécifié. La valeur insertLocation peut être définie sur «\_Before\_» (avant) ou «\_After\_» (après).\n\n\\[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\\]"
+    summary: |-
+      Insère un paragraphe à l’emplacement spécifié. La valeur insertLocation peut être définie sur « Before » (avant) ou « After » (après).
+
+      \[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
     name: 'insertParagraph(paragraphText, insertLocation)'
     fullName: 'insertParagraph(paragraphText, insertLocation)'
     langs:
@@ -1035,7 +1088,10 @@ items:
           type:
             - Word.InsertLocation
   - uid: word.Word.Range.insertParagraph_1
-    summary: "Insère un paragraphe à l’emplacement spécifié. La valeur insertLocation peut être définie sur «\_Before\_» (avant) ou «\_After\_» (après).\n\n\\[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\\]"
+    summary: |-
+      Insère un paragraphe à l’emplacement spécifié. La valeur insertLocation peut être définie sur « Before » (avant) ou « After » (après).
+
+      \[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
     name: 'insertParagraph(paragraphText, insertLocationString)'
     fullName: 'insertParagraph(paragraphText, insertLocationString)'
     langs:

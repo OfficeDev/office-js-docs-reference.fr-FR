@@ -2,9 +2,9 @@
 items:
   - uid: word.Word.List
     summary: |-
-      Contient une collection d'objets [Word. paragraph](xref:word.Word.Paragraph) .
+      Contient une collection d’objets [Word. paragraph](xref:word.Word.Paragraph) .
 
-      \[[Ensemble d'API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+      \[[Ensemble d’API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
     name: Word.List
     fullName: Word.List
     langs:
@@ -15,7 +15,9 @@ items:
     package: word
     children:
       - word.Word.List.context
+      - word.Word.List.getLevelFont
       - word.Word.List.getLevelParagraphs
+      - word.Word.List.getLevelPicture
       - word.Word.List.getLevelString
       - word.Word.List.id
       - word.Word.List.insertParagraph
@@ -26,6 +28,7 @@ items:
       - word.Word.List.load_1
       - word.Word.List.load_2
       - word.Word.List.paragraphs
+      - word.Word.List.resetLevelFont
       - word.Word.List.setLevelAlignment
       - word.Word.List.setLevelAlignment_1
       - word.Word.List.setLevelBullet
@@ -33,12 +36,13 @@ items:
       - word.Word.List.setLevelIndents
       - word.Word.List.setLevelNumbering
       - word.Word.List.setLevelNumbering_1
+      - word.Word.List.setLevelPicture
       - word.Word.List.setLevelStartingNumber
       - word.Word.List.toJSON
       - word.Word.List.track
       - word.Word.List.untrack
   - uid: word.Word.List.context
-    summary: Contexte de demande associé à l'objet. Cette opération connecte le processus du complément au processus de l'application hôte Office.
+    summary: Contexte de demande associé à l’objet. Cette opération connecte le processus du complément au processus de l’application hôte Office.
     name: context
     fullName: context
     langs:
@@ -49,11 +53,33 @@ items:
       return:
         type:
           - RequestContext
+  - uid: word.Word.List.getLevelFont
+    summary: |-
+      Obtient la police de la puce, du numéro ou de l’image au niveau spécifié dans la liste.
+
+      \[[Ensemble d’API: WORDAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
+    name: getLevelFont(level)
+    fullName: getLevelFont(level)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getLevelFont(level: number): Word.Font;'
+      return:
+        type:
+          - word.Word.Font
+        description: ''
+      parameters:
+        - id: level
+          description: Obligatoire. Niveau dans la liste.
+          type:
+            - number
   - uid: word.Word.List.getLevelParagraphs
     summary: |-
       Obtient les paragraphes qui figurent au niveau spécifié de la liste.
 
-      \[[Ensemble d'API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+      \[[Ensemble d’API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
     name: getLevelParagraphs(level)
     fullName: getLevelParagraphs(level)
     langs:
@@ -70,11 +96,33 @@ items:
           description: Obligatoire. Niveau dans la liste.
           type:
             - number
+  - uid: word.Word.List.getLevelPicture
+    summary: |-
+      Obtient la représentation sous forme de chaîne codée en base64 de l’image au niveau spécifié dans la liste.
+
+      \[[Ensemble d’API: WORDAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
+    name: getLevelPicture(level)
+    fullName: getLevelPicture(level)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getLevelPicture(level: number): OfficeExtension.ClientResult<string>;'
+      return:
+        type:
+          - OfficeExtension.ClientResult<string>
+        description: ''
+      parameters:
+        - id: level
+          description: Obligatoire. Niveau dans la liste.
+          type:
+            - number
   - uid: word.Word.List.getLevelString
     summary: |-
       Obtient la puce, le nombre ou l’image au niveau spécifié, sous la forme d’une chaîne.
 
-      \[[Ensemble d'API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+      \[[Ensemble d’API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
     name: getLevelString(level)
     fullName: getLevelString(level)
     langs:
@@ -93,9 +141,9 @@ items:
             - number
   - uid: word.Word.List.id
     summary: |-
-      Obtient l'ID de la liste.
+      Obtient l’ID de la liste.
 
-      \[[Ensemble d'API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+      \[[Ensemble d’API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
     name: id
     fullName: id
     langs:
@@ -110,7 +158,7 @@ items:
     summary: |-
       Insère un paragraphe à l’emplacement spécifié. La valeur insertLocation peut être «Start», «end», «Before» ou «after».
 
-      \[[Ensemble d'API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+      \[[Ensemble d’API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
     name: 'insertParagraph(paragraphText, insertLocation)'
     fullName: 'insertParagraph(paragraphText, insertLocation)'
     langs:
@@ -135,7 +183,7 @@ items:
     summary: |-
       Insère un paragraphe à l’emplacement spécifié. La valeur insertLocation peut être «Start», «end», «Before» ou «after».
 
-      \[[Ensemble d'API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+      \[[Ensemble d’API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
     name: 'insertParagraph(paragraphText, insertLocationString)'
     fullName: 'insertParagraph(paragraphText, insertLocationString)'
     langs:
@@ -160,7 +208,7 @@ items:
     summary: |-
       Vérifie si chacun des 9 niveaux existe dans la liste. Une valeur True indique le niveau existe, ce qui signifie qu’il existe au moins un élément de liste à ce niveau. En lecture seule.
 
-      \[[Ensemble d'API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+      \[[Ensemble d’API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
     name: levelExistences
     fullName: levelExistences
     langs:
@@ -175,7 +223,7 @@ items:
     summary: |-
       Obtient les 9 types de niveau de la liste. Chaque type peut être «puce», «nombre» ou «image». En lecture seule.
 
-      \[[Ensemble d'API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+      \[[Ensemble d’API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
     name: levelTypes
     fullName: levelTypes
     langs:
@@ -195,7 +243,7 @@ items:
 
       `load(option?: { select?: string; expand?: string; }): Word.List`Option-WHERE option. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
 
-      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Word.List`-Uniquement disponible sur les types de collection. Elle est similaire à la signature précédente. Option. Top indique le nombre maximal d'éléments de collection qui peuvent être inclus dans le résultat. Option. Skip indique le nombre d'éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat. Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d'éléments.
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Word.List`-Uniquement disponible sur les types de collection. Elle est similaire à la signature précédente. Option. Top indique le nombre maximal d’éléments de collection qui peuvent être inclus dans le résultat. Option. Skip indique le nombre d’éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat. Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d’éléments.
     name: load(option)
     fullName: load(option)
     langs:
@@ -252,7 +300,7 @@ items:
     summary: |-
       Obtient les paragraphes de la liste. En lecture seule.
 
-      \[[Ensemble d'API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+      \[[Ensemble d’API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
     name: paragraphs
     fullName: paragraphs
     langs:
@@ -263,11 +311,37 @@ items:
       return:
         type:
           - Word.ParagraphCollection
+  - uid: word.Word.List.resetLevelFont
+    summary: |-
+      Rétablit la police de la puce, du numéro ou de l’image au niveau spécifié dans la liste.
+
+      \[[Ensemble d’API: WORDAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
+    name: 'resetLevelFont(level, resetFontName)'
+    fullName: 'resetLevelFont(level, resetFontName)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'resetLevelFont(level: number, resetFontName?: boolean): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: level
+          description: Obligatoire. Niveau dans la liste.
+          type:
+            - number
+        - id: resetFontName
+          description: 'Facultatif. Indique s’il faut réinitialiser le nom de la police. La valeur par défaut est false, ce qui indique que le nom de la police est conservé inchangé.'
+          type:
+            - boolean
   - uid: word.Word.List.setLevelAlignment
     summary: |-
       Définit l’alignement de la puce, du numéro ou de l’image au niveau spécifié de la liste.
 
-      \[[Ensemble d'API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+      \[[Ensemble d’API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
     name: 'setLevelAlignment(level, alignment)'
     fullName: 'setLevelAlignment(level, alignment)'
     langs:
@@ -292,7 +366,7 @@ items:
     summary: |-
       Définit l’alignement de la puce, du numéro ou de l’image au niveau spécifié de la liste.
 
-      \[[Ensemble d'API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+      \[[Ensemble d’API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
     name: 'setLevelAlignment(level, alignmentString)'
     fullName: 'setLevelAlignment(level, alignmentString)'
     langs:
@@ -314,7 +388,7 @@ items:
           type:
             - '"Mixed" | "Unknown" | "Left" | "Centered" | "Right" | "Justified"'
   - uid: word.Word.List.setLevelBullet
-    summary: "Définit le format de puce au niveau spécifié de la liste. Si la puce est «\_Custom\_», la valeur charCode est requise.\n\n\\[[Ensemble d'API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\\]"
+    summary: "Définit le format de puce au niveau spécifié de la liste. Si la puce est «\_Custom\_», la valeur charCode est requise.\n\n\\[[Ensemble d’API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\\]"
     name: 'setLevelBullet(level, listBullet, charCode, fontName)'
     fullName: 'setLevelBullet(level, listBullet, charCode, fontName)'
     langs:
@@ -336,15 +410,15 @@ items:
           type:
             - word.Word.ListBullet
         - id: charCode
-          description: Facultatif. Valeur de code du caractère de puce. Utilisé uniquement si la puce est'Custom'.
+          description: Facultatif. Valeur de code du caractère de puce. Utilisé uniquement si la puce est’Custom'.
           type:
             - number
         - id: fontName
-          description: Facultatif. Nom de la police de la puce. Utilisé uniquement si la puce est'Custom'.
+          description: Facultatif. Nom de la police de la puce. Utilisé uniquement si la puce est’Custom'.
           type:
             - string
   - uid: word.Word.List.setLevelBullet_1
-    summary: "Définit le format de puce au niveau spécifié de la liste. Si la puce est «\_Custom\_», la valeur charCode est requise.\n\n\\[[Ensemble d'API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\\]"
+    summary: "Définit le format de puce au niveau spécifié de la liste. Si la puce est «\_Custom\_», la valeur charCode est requise.\n\n\\[[Ensemble d’API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\\]"
     name: 'setLevelBullet(level, listBulletString, charCode, fontName)'
     fullName: 'setLevelBullet(level, listBulletString, charCode, fontName)'
     langs:
@@ -366,18 +440,18 @@ items:
           type:
             - '"Custom" | "Solid" | "Hollow" | "Square" | "Diamonds" | "Arrow" | "Checkmark"'
         - id: charCode
-          description: Facultatif. Valeur de code du caractère de puce. Utilisé uniquement si la puce est'Custom'.
+          description: Facultatif. Valeur de code du caractère de puce. Utilisé uniquement si la puce est’Custom'.
           type:
             - number
         - id: fontName
-          description: Facultatif. Nom de la police de la puce. Utilisé uniquement si la puce est'Custom'.
+          description: Facultatif. Nom de la police de la puce. Utilisé uniquement si la puce est’Custom'.
           type:
             - string
   - uid: word.Word.List.setLevelIndents
     summary: |-
       Définit les deux retraits du niveau spécifié de la liste.
 
-      \[[Ensemble d'API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+      \[[Ensemble d’API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
     name: 'setLevelIndents(level, textIndent, bulletNumberPictureIndent)'
     fullName: 'setLevelIndents(level, textIndent, bulletNumberPictureIndent)'
     langs:
@@ -399,14 +473,14 @@ items:
           type:
             - number
         - id: bulletNumberPictureIndent
-          description: 'Obligatoire. Retrait relatif, exprimé en points, de la puce, du numéro ou de l''image. Il est identique au premier retrait de ligne de paragraphe.'
+          description: 'Obligatoire. Retrait relatif, exprimé en points, de la puce, du numéro ou de l’image. Il est identique au premier retrait de ligne de paragraphe.'
           type:
             - number
   - uid: word.Word.List.setLevelNumbering
     summary: |-
       Définit le format de numérotation du niveau spécifié de la liste.
 
-      \[[Ensemble d'API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+      \[[Ensemble d’API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
     name: 'setLevelNumbering(level, listNumbering, formatString)'
     fullName: 'setLevelNumbering(level, listNumbering, formatString)'
     langs:
@@ -428,14 +502,14 @@ items:
           type:
             - word.Word.ListNumbering
         - id: formatString
-          description: 'Facultatif. Format de chaîne de numérotation défini sous forme de tableau de chaînes et/ou d''entiers. Chaque entier est un niveau de type de nombre supérieur ou égal à ce niveau. Par exemple, un tableau de \["(", Level-1, ".", Level, ")"\] peut définir le format "(2. c)", où 2 est le numéro d''élément du parent et c le numéro d''élément de ce niveau.'
+          description: 'Facultatif. Format de chaîne de numérotation défini sous forme de tableau de chaînes et/ou d’entiers. Chaque entier est un niveau de type de nombre supérieur ou égal à ce niveau. Par exemple, un tableau de \["(", Level-1, ".", Level, ")"\] peut définir le format "(2. c)", où 2 est le numéro d’élément du parent et c le numéro d’élément de ce niveau.'
           type:
             - Array<string | number>
   - uid: word.Word.List.setLevelNumbering_1
     summary: |-
       Définit le format de numérotation du niveau spécifié de la liste.
 
-      \[[Ensemble d'API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+      \[[Ensemble d’API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
     name: 'setLevelNumbering(level, listNumberingString, formatString)'
     fullName: 'setLevelNumbering(level, listNumberingString, formatString)'
     langs:
@@ -457,14 +531,40 @@ items:
           type:
             - '"None" | "Arabic" | "UpperRoman" | "LowerRoman" | "UpperLetter" | "LowerLetter"'
         - id: formatString
-          description: 'Facultatif. Format de chaîne de numérotation défini sous forme de tableau de chaînes et/ou d''entiers. Chaque entier est un niveau de type de nombre supérieur ou égal à ce niveau. Par exemple, un tableau de \["(", Level-1, ".", Level, ")"\] peut définir le format "(2. c)", où 2 est le numéro d''élément du parent et c le numéro d''élément de ce niveau.'
+          description: 'Facultatif. Format de chaîne de numérotation défini sous forme de tableau de chaînes et/ou d’entiers. Chaque entier est un niveau de type de nombre supérieur ou égal à ce niveau. Par exemple, un tableau de \["(", Level-1, ".", Level, ")"\] peut définir le format "(2. c)", où 2 est le numéro d’élément du parent et c le numéro d’élément de ce niveau.'
           type:
             - Array<string | number>
+  - uid: word.Word.List.setLevelPicture
+    summary: |-
+      Définit l’image au niveau spécifié dans la liste.
+
+      \[[Ensemble d’API: WORDAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
+    name: 'setLevelPicture(level, base64EncodedImage)'
+    fullName: 'setLevelPicture(level, base64EncodedImage)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'setLevelPicture(level: number, base64EncodedImage?: string): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: level
+          description: Obligatoire. Niveau dans la liste.
+          type:
+            - number
+        - id: base64EncodedImage
+          description: 'Facultatif. Image encodée en base64 à définir. Si elle n’est pas spécifiée, l’image par défaut est définie.'
+          type:
+            - string
   - uid: word.Word.List.setLevelStartingNumber
     summary: |-
       Définit le numéro de départ du niveau spécifié de la liste. La valeur par défaut est 1.
 
-      \[[Ensemble d'API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+      \[[Ensemble d’API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
     name: 'setLevelStartingNumber(level, startingNumber)'
     fullName: 'setLevelStartingNumber(level, startingNumber)'
     langs:
@@ -486,7 +586,7 @@ items:
           type:
             - number
   - uid: word.Word.List.toJSON
-    summary: 'Remplace la méthode JavaScript `toJSON()` afin de fournir une sortie plus utile lorsqu''un objet d''API est transmis à`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle `toJSON` la méthode de l''objet qui lui est passé.) Tandis que l''objet Word. list d''origine est un objet `toJSON` d''API, la méthode renvoie un objet JavaScript simple (tapé comme`Word.Interfaces.ListData`<!-- -->) qui contient des copies superficielles de toutes les propriétés enfants chargées à partir de l''objet d''origine.'
+    summary: 'Remplace la méthode JavaScript `toJSON()` afin de fournir une sortie plus utile lorsqu’un objet d’API est transmis à`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle `toJSON` la méthode de l’objet qui lui est passé.) Tandis que l’objet Word. list d’origine est un objet `toJSON` d’API, la méthode renvoie un objet JavaScript simple (tapé comme`Word.Interfaces.ListData`<!-- -->) qui contient des copies superficielles de toutes les propriétés enfants chargées à partir de l’objet d’origine.'
     name: toJSON()
     fullName: toJSON()
     langs:

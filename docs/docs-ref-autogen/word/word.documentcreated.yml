@@ -2,9 +2,9 @@
 items:
   - uid: word.Word.DocumentCreated
     summary: |-
-      L'objet DocumentCreated est l'objet de niveau supérieur créé par application. CreateDocument. Un objet DocumentCreated est un objet document spécial.
+      L’objet DocumentCreated est l’objet de niveau supérieur créé par application. CreateDocument. Un objet DocumentCreated est un objet document spécial.
 
-      \[[Ensemble d'API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+      \[[Ensemble d’API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
     name: Word.DocumentCreated
     fullName: Word.DocumentCreated
     langs:
@@ -17,6 +17,10 @@ items:
       - word.Word.DocumentCreated.body
       - word.Word.DocumentCreated.contentControls
       - word.Word.DocumentCreated.context
+      - word.Word.DocumentCreated.customXmlParts
+      - word.Word.DocumentCreated.deleteBookmark
+      - word.Word.DocumentCreated.getBookmarkRange
+      - word.Word.DocumentCreated.getBookmarkRangeOrNullObject
       - word.Word.DocumentCreated.load
       - word.Word.DocumentCreated.load_1
       - word.Word.DocumentCreated.load_2
@@ -27,14 +31,16 @@ items:
       - word.Word.DocumentCreated.sections
       - word.Word.DocumentCreated.set
       - word.Word.DocumentCreated.set_1
+      - word.Word.DocumentCreated.settings
       - word.Word.DocumentCreated.toJSON
       - word.Word.DocumentCreated.track
       - word.Word.DocumentCreated.untrack
   - uid: word.Word.DocumentCreated.body
     summary: |-
-      Obtient l'objet de corps du document. Le corps du document correspond à l’ensemble du texte, à l’exception des en-têtes, des pieds de page, des notes de bas de page, des zones de texte, etc. En lecture seule.
+      Obtient l’objet de corps du document. Le corps du document correspond à l’ensemble du texte, à l’exception des en-têtes, des pieds de page, des notes de bas de page, des zones de texte, etc. En lecture seule.
 
-      \[[Ensemble d'API: WordApiHiddenDocument 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+      \[[Ensemble d’API: WordApiHiddenDocument 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
     name: body
     fullName: body
     langs:
@@ -47,9 +53,10 @@ items:
           - Word.Body
   - uid: word.Word.DocumentCreated.contentControls
     summary: |-
-      Obtient la collection d'objets de contrôle de contenu dans le document. Cela inclut les contrôles de contenu dans le corps du document, les en-têtes, les pieds de page, les zones de texte, etc.. En lecture seule.
+      Obtient la collection d’objets de contrôle de contenu dans le document. Cela inclut les contrôles de contenu dans le corps du document, les en-têtes, les pieds de page, les zones de texte, etc.. En lecture seule.
 
-      \[[Ensemble d'API: WordApiHiddenDocument 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+      \[[Ensemble d’API: WordApiHiddenDocument 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
     name: contentControls
     fullName: contentControls
     langs:
@@ -61,7 +68,7 @@ items:
         type:
           - word.Word.ContentControlCollection
   - uid: word.Word.DocumentCreated.context
-    summary: Contexte de demande associé à l'objet. Cette opération connecte le processus du complément au processus de l'application hôte Office.
+    summary: Contexte de demande associé à l’objet. Cette opération connecte le processus du complément au processus de l’application hôte Office.
     name: context
     fullName: context
     langs:
@@ -72,6 +79,88 @@ items:
       return:
         type:
           - RequestContext
+  - uid: word.Word.DocumentCreated.customXmlParts
+    summary: |-
+      Obtient les parties XML personnalisées dans le document. En lecture seule.
+
+      \[[Ensemble d’API: WordApiHiddenDocument 1,4](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
+    name: customXmlParts
+    fullName: customXmlParts
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly customXmlParts: Word.CustomXmlPartCollection;'
+      return:
+        type:
+          - Word.CustomXmlPartCollection
+  - uid: word.Word.DocumentCreated.deleteBookmark
+    summary: |-
+      Supprime un signet, le cas échéant, du document.
+
+      \[[Ensemble d’API: WordApiHiddenDocument 1,4](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
+    name: deleteBookmark(name)
+    fullName: deleteBookmark(name)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'deleteBookmark(name: string): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: name
+          description: 'Obligatoire. Nom du signet, qui ne respecte pas la casse.'
+          type:
+            - string
+  - uid: word.Word.DocumentCreated.getBookmarkRange
+    summary: |-
+      Obtient la plage d’un signet. Lève une exception si le signet n’existe pas.
+
+      \[[Ensemble d’API: WordApiHiddenDocument 1,4](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
+    name: getBookmarkRange(name)
+    fullName: getBookmarkRange(name)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getBookmarkRange(name: string): Word.Range;'
+      return:
+        type:
+          - Word.Range
+        description: ''
+      parameters:
+        - id: name
+          description: 'Obligatoire. Nom du signet, qui ne respecte pas la casse.'
+          type:
+            - string
+  - uid: word.Word.DocumentCreated.getBookmarkRangeOrNullObject
+    summary: |-
+      Obtient la plage d’un signet. Renvoie un objet null si le signet n’existe pas.
+
+      \[[Ensemble d’API: WordApiHiddenDocument 1,4](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
+    name: getBookmarkRangeOrNullObject(name)
+    fullName: getBookmarkRangeOrNullObject(name)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getBookmarkRangeOrNullObject(name: string): Word.Range;'
+      return:
+        type:
+          - Word.Range
+        description: ''
+      parameters:
+        - id: name
+          description: 'Obligatoire. Nom du signet, qui ne respecte pas la casse.'
+          type:
+            - string
   - uid: word.Word.DocumentCreated.load
     summary: "Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler «\_context.sync()\_» avant de lire les propriétés."
     remarks: |-
@@ -81,7 +170,7 @@ items:
 
       `load(option?: { select?: string; expand?: string; }): Word.DocumentCreated`Option-WHERE option. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
 
-      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Word.DocumentCreated`-Uniquement disponible sur les types de collection. Elle est similaire à la signature précédente. Option. Top indique le nombre maximal d'éléments de collection qui peuvent être inclus dans le résultat. Option. Skip indique le nombre d'éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat. Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d'éléments.
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Word.DocumentCreated`-Uniquement disponible sur les types de collection. Elle est similaire à la signature précédente. Option. Top indique le nombre maximal d’éléments de collection qui peuvent être inclus dans le résultat. Option. Skip indique le nombre d’éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat. Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d’éléments.
     name: load(option)
     fullName: load(option)
     langs:
@@ -138,7 +227,7 @@ items:
     summary: |-
       Ouvre le document.
 
-      \[[Ensemble d'API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+      \[[Ensemble d’API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
     name: open()
     fullName: open()
     langs:
@@ -154,7 +243,8 @@ items:
     summary: |-
       Obtient les propriétés du document. En lecture seule.
 
-      \[[Ensemble d'API: WordApiHiddenDocument 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+      \[[Ensemble d’API: WordApiHiddenDocument 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
     name: properties
     fullName: properties
     langs:
@@ -169,7 +259,8 @@ items:
     summary: |-
       Enregistre le document. Cette option utilise la convention de dénomination des fichiers par défaut de Word si le document n’a jamais été enregistré précédemment.
 
-      \[[Ensemble d'API: WordApiHiddenDocument 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+      \[[Ensemble d’API: WordApiHiddenDocument 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
     name: save()
     fullName: save()
     langs:
@@ -185,7 +276,8 @@ items:
     summary: |-
       Indique si les modifications apportées au document ont été enregistrées. La valeur true indique que le document n’a pas été modifié depuis son enregistrement. En lecture seule.
 
-      \[[Ensemble d'API: WordApiHiddenDocument 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+      \[[Ensemble d’API: WordApiHiddenDocument 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
     name: saved
     fullName: saved
     langs:
@@ -198,9 +290,10 @@ items:
           - boolean
   - uid: word.Word.DocumentCreated.sections
     summary: |-
-      Obtient la collection d'objets section dans le document. En lecture seule.
+      Obtient la collection d’objets section dans le document. En lecture seule.
 
-      \[[Ensemble d'API: WordApiHiddenDocument 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+      \[[Ensemble d’API: WordApiHiddenDocument 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
     name: sections
     fullName: sections
     langs:
@@ -212,7 +305,7 @@ items:
         type:
           - Word.SectionCollection
   - uid: word.Word.DocumentCreated.set
-    summary: 'Définit plusieurs propriétés d''un objet en même temps. Vous pouvez transmettre un objet plain avec les propriétés appropriées, ou un autre objet API du même type.'
+    summary: 'Définit plusieurs propriétés d’un objet en même temps. Vous pouvez transmettre un objet plain avec les propriétés appropriées, ou un autre objet API du même type.'
     remarks: |-
       Cette méthode est dotée de la signature supplémentaire suivante:
 
@@ -230,15 +323,15 @@ items:
         description: ''
       parameters:
         - id: properties
-          description: Objet JavaScript avec des propriétés qui sont structurées isomorphically vers les propriétés de l'objet sur lequel la méthode est appelée.
+          description: Objet JavaScript avec des propriétés qui sont structurées isomorphically vers les propriétés de l’objet sur lequel la méthode est appelée.
           type:
             - Interfaces.DocumentCreatedUpdateData
         - id: options
-          description: Fournit une option permettant de supprimer les erreurs si l'objet Properties tente de définir des propriétés en lecture seule.
+          description: Fournit une option permettant de supprimer les erreurs si l’objet Properties tente de définir des propriétés en lecture seule.
           type:
             - office.OfficeExtension.UpdateOptions
   - uid: word.Word.DocumentCreated.set_1
-    summary: 'Définit plusieurs propriétés de l''objet en même temps, en fonction d''un objet chargé existant.'
+    summary: 'Définit plusieurs propriétés de l’objet en même temps, en fonction d’un objet chargé existant.'
     name: set(properties)
     fullName: set(properties)
     langs:
@@ -255,8 +348,24 @@ items:
           description: ''
           type:
             - word.Word.DocumentCreated
+  - uid: word.Word.DocumentCreated.settings
+    summary: |-
+      Obtient les paramètres du complément dans le document. En lecture seule.
+
+      \[[Ensemble d’API: WordApiHiddenDocument 1,4](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
+    name: settings
+    fullName: settings
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly settings: Word.SettingCollection;'
+      return:
+        type:
+          - Word.SettingCollection
   - uid: word.Word.DocumentCreated.toJSON
-    summary: 'Remplace la méthode JavaScript `toJSON()` afin de fournir une sortie plus utile lorsqu''un objet d''API est transmis à`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle `toJSON` la méthode de l''objet qui lui est passé.) Tandis que l''objet Word. DocumentCreated d''origine est un objet `toJSON` API, la méthode renvoie un objet JavaScript simple (tapé comme`Word.Interfaces.DocumentCreatedData`<!-- -->) qui contient des copies superficielles de toutes les propriétés enfants chargées à partir de l''objet d''origine.'
+    summary: 'Remplace la méthode JavaScript `toJSON()` afin de fournir une sortie plus utile lorsqu’un objet d’API est transmis à`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle `toJSON` la méthode de l’objet qui lui est passé.) Tandis que l’objet Word. DocumentCreated d’origine est un objet `toJSON` API, la méthode renvoie un objet JavaScript simple (tapé comme`Word.Interfaces.DocumentCreatedData`<!-- -->) qui contient des copies superficielles de toutes les propriétés enfants chargées à partir de l’objet d’origine.'
     name: toJSON()
     fullName: toJSON()
     langs:
