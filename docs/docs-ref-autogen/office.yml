@@ -12,6 +12,7 @@ items:
       - office.Office.AddBindingFromPromptOptions
       - office.Office.AddBindingFromSelectionOptions
       - office.Office.AddinCommands.Event
+      - office.Office.AddinCommands.EventCompletedOptions
       - office.Office.AddinCommands.Source
       - office.Office.AsyncContextOptions
       - office.Office.AsyncResult
@@ -103,19 +104,19 @@ items:
     summary: |-
       Se produit quand l’environnement d’exécution est chargé et que le complément est prêt à interagir avec l’application et le document hébergé.
 
-      Le paramètre Reason de la fonction d'écouteur d'événements Initialize renvoie `InitializationReason` une valeur d'énumération qui spécifie comment l'initialisation s'est produite. Un complément du volet Office ou de contenu peut être initialisé de deux façons :
+      Le paramètre Reason de la fonction d’écouteur d’événements Initialize renvoie `InitializationReason` une valeur d’énumération qui spécifie comment l’initialisation s’est produite. Un complément du volet Office ou de contenu peut être initialisé de deux façons :
 
-      - L'utilisateur vient de l'insérer à partir de la section compléments récemment utilisés de la liste déroulante complément sous l'onglet Insertion du ruban dans l'application hôte Office ou à partir de la boîte de dialogue Insérer un complément.
+      - L’utilisateur vient de l’insérer à partir de la section compléments récemment utilisés de la liste déroulante complément sous l’onglet Insertion du ruban dans l’application hôte Office ou à partir de la boîte de dialogue Insérer un complément.
 
       - L’utilisateur a ouvert un document qui contient déjà le complément.
 
-      *Remarque*: le paramètre Reason de la fonction d'écouteur d'événements Initialize ne renvoie `InitializationReason` qu'une valeur d'énumération pour les compléments de contenu et du volet Office. Elle ne renvoie pas de valeur pour les compléments Outlook.
+      *Remarque*: le paramètre Reason de la fonction d’écouteur d’événements Initialize ne renvoie `InitializationReason` qu’une valeur d’énumération pour les compléments de contenu et du volet Office. Elle ne renvoie pas de valeur pour les compléments Outlook.
     remarks: |-
       **Informations de support technique**
 
       Un Y majuscule dans la matrice suivante indique que cette méthode est prise en charge dans l'application hôte Office correspondante. Une cellule vide indique que l'application hôte Office ne prend pas en charge cette méthode.
 
-      Pour plus d'informations sur les exigences de l'application et du serveur hôtes Office, voir [Configuration requise pour exécuter des compléments Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.
+      Pour plus d’informations sur les exigences de l’application et du serveur hôtes Office, voir [Configuration requise pour exécuter des compléments Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.
 
       *Hôtes pris en charge par la plateforme* <table> <tr><th> </th><th> Office pour Bureau Windows </th><th> Office Online (dans un navigateur) </th><th> Office pour iPad </th><th> OWA pour les périphériques </th><th> Office pour Mac </th></tr> <tr><td><strong>Access</strong></td><td> </td><td> v </td><td> </td><td> </td><td> </td></tr> <tr><td><strong>Excel</strong></td><td> v </td><td> v </td><td> v </td><td> </td><td> </td></tr> <tr><td><strong>Microsoft</strong></td><td> v </td><td> v </td><td> </td><td> v </td><td> v </td></tr> <tr><td><strong>Présentations</strong></td><td> v </td><td> v </td><td> v </td><td> </td><td> </td></tr> <tr><td><strong>Projet</strong></td><td> v </td><td> </td><td> </td><td> </td><td> </td></tr> <tr><td><strong>Automatique</strong></td><td> v </td><td> v </td><td> v </td><td> </td><td> </td></tr> </table>
 
@@ -157,11 +158,11 @@ items:
         description: ''
       parameters:
         - id: reason
-          description: Indique la façon dont l'application a été initialisée.
+          description: Indique la façon dont l’application a été initialisée.
           type:
             - office.Office.InitializationReason
   - uid: office.Office.onReady
-    summary: 'Garantit que les API JavaScript Office sont prêtes à être appelées par le complément. Si l''infrastructure n''a pas encore été initialisée, le rappel ou la promesse attendra jusqu''à ce que l''hôte Office soit prêt à accepter les appels d''API. Notez que bien que cette API soit destinée à être utilisée dans un complément Office, elle peut également être utilisée en dehors du complément. Dans ce cas, une fois qu''Office. js a déterminé qu''il s''exécute en dehors d''une application hôte Office, le rappel est appelé et la promesse est résolue avec «NULL» pour l''hôte et la plateforme.'
+    summary: 'Garantit que les API JavaScript Office sont prêtes à être appelées par le complément. Si l’infrastructure n’a pas encore été initialisée, le rappel ou la promesse attendra jusqu’à ce que l’hôte Office soit prêt à accepter les appels d’API. Notez que bien que cette API soit destinée à être utilisée dans un complément Office, elle peut également être utilisée en dehors du complément. Dans ce cas, une fois qu’Office. js a déterminé qu’il s’exécute en dehors d’une application hôte Office, le rappel est appelé et la promesse est résolue avec «NULL» pour l’hôte et la plateforme.'
     name: Office.onReady
     fullName: Office.onReady
     langs:
@@ -172,20 +173,20 @@ items:
       return:
         type:
           - 'Promise<{ host: HostType, platform: PlatformType }>'
-        description: 'Promesse qui contient les informations sur l''hôte et la plateforme, une fois l''initialisation terminée.'
+        description: 'Promesse qui contient les informations sur l’hôte et la plateforme, une fois l’initialisation terminée.'
       parameters:
         - id: callback
-          description: 'Méthode de rappel facultative qui recevra les informations sur l''hôte et la plateforme. Par ailleurs, au lieu d''utiliser un rappel, un complément peut simplement attendre la promesse renvoyée par la fonction pour résoudre.'
+          description: 'Méthode de rappel facultative qui recevra les informations sur l’hôte et la plateforme. Par ailleurs, au lieu d’utiliser un rappel, un complément peut simplement attendre la promesse renvoyée par la fonction pour résoudre.'
           type:
             - '(info: { host: HostType, platform: PlatformType }) => any'
   - uid: office.Office.select
-    summary: Renvoie une promesse d'un objet décrit dans l'expression. Le rappel est appelé uniquement si la méthode échoue.
+    summary: Renvoie une promesse d’un objet décrit dans l’expression. Le rappel est appelé uniquement si la méthode échoue.
     remarks: |-
       **Informations de support technique**
 
       Un Y majuscule dans la matrice suivante indique que cette méthode est prise en charge dans l'application hôte Office correspondante. Une cellule vide indique que l'application hôte Office ne prend pas en charge cette méthode.
 
-      Pour plus d'informations sur les exigences de l'application et du serveur hôtes Office, voir [Configuration requise pour exécuter des compléments Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.
+      Pour plus d’informations sur les exigences de l’application et du serveur hôtes Office, voir [Configuration requise pour exécuter des compléments Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.
 
       *Hôtes pris en charge par la plateforme* <table> <tr><th> </th><th> Office pour Bureau Windows </th><th> Office Online (dans un navigateur) </th><th> Office pour iPad </th></tr> <tr><td><strong>Access</strong></td><td> </td><td> v </td><td> </td></tr> <tr><td><strong>Excel</strong></td><td> v </td><td> v </td><td> v </td></tr> <tr><td><strong>Automatique</strong></td><td> v </td><td> </td><td> v </td></tr> </table>
 
@@ -215,7 +216,7 @@ items:
         description: ''
       parameters:
         - id: expression
-          description: 'Objet à récupérer. Exemple de "Bindings\#BindingName", récupère une promesse de liaison pour une liaison nommée''BindingName'''
+          description: 'Objet à récupérer. Exemple de "Bindings\#BindingName", récupère une promesse de liaison pour une liaison nommée’BindingName'''
           type:
             - string
         - id: callback
@@ -223,13 +224,13 @@ items:
           type:
             - '(result: AsyncResult<any>) => void'
   - uid: office.Office.useShortNamespace
-    summary: Active et désactive l' `Office` alias pour l'espace de noms `Microsoft.Office.WebExtension` complet.
+    summary: Active et désactive l' `Office` alias pour l’espace de noms `Microsoft.Office.WebExtension` complet.
     remarks: |-
       **Informations de support technique**
 
       Un Y majuscule dans la matrice suivante indique que cette méthode est prise en charge dans l'application hôte Office correspondante. Une cellule vide indique que l'application hôte Office ne prend pas en charge cette méthode.
 
-      Pour plus d'informations sur les exigences de l'application et du serveur hôtes Office, voir [Configuration requise pour exécuter des compléments Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.
+      Pour plus d’informations sur les exigences de l’application et du serveur hôtes Office, voir [Configuration requise pour exécuter des compléments Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.
 
       *Hôtes pris en charge par la plateforme* <table> <tr><th> </th><th> Office pour Bureau Windows </th><th> Office Online (dans un navigateur) </th><th> Office pour iPad </th><th> OWA pour les périphériques </th><th> Office pour Mac </th></tr> <tr><td><strong>Access</strong></td><td> </td><td> v </td><td> </td><td> </td><td> </td></tr> <tr><td><strong>Excel</strong></td><td> v </td><td> v </td><td> v </td><td> </td><td> </td></tr> <tr><td><strong>Microsoft</strong></td><td> v </td><td> v </td><td> </td><td> v </td><td> v </td></tr> <tr><td><strong>Présentations</strong></td><td> v </td><td> v </td><td> v </td><td> </td><td> </td></tr> <tr><td><strong>Projet</strong></td><td> v </td><td> </td><td> </td><td> </td><td> </td></tr> <tr><td><strong>Automatique</strong></td><td> v </td><td> v </td><td> v </td><td> </td><td> </td></tr> </table>
 
@@ -274,7 +275,7 @@ items:
         description: ''
       parameters:
         - id: useShortNamespace
-          description: 'True pour utiliser l''alias de raccourci; Sinon, false pour le désactiver. La valeur par défaut est True.'
+          description: 'True pour utiliser l’alias de raccourci; Sinon, false pour le désactiver. La valeur par défaut est True.'
           type:
             - boolean
 references:
@@ -288,6 +289,8 @@ references:
     name: Office.AddBindingFromSelectionOptions
   - uid: office.Office.AddinCommands.Event
     name: Office.AddinCommands.Event
+  - uid: office.Office.AddinCommands.EventCompletedOptions
+    name: Office.AddinCommands.EventCompletedOptions
   - uid: office.Office.AddinCommands.Source
     name: Office.AddinCommands.Source
   - uid: office.Office.AsyncContextOptions
