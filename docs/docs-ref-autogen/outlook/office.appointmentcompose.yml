@@ -28,6 +28,8 @@ items:
       - outlook.Office.AppointmentCompose.getAttachmentsAsync_1
       - outlook.Office.AppointmentCompose.getInitializationContextAsync
       - outlook.Office.AppointmentCompose.getInitializationContextAsync_1
+      - outlook.Office.AppointmentCompose.getItemIdAsync
+      - outlook.Office.AppointmentCompose.getItemIdAsync_1
       - outlook.Office.AppointmentCompose.getSelectedDataAsync
       - outlook.Office.AppointmentCompose.getSelectedDataAsync_1
       - outlook.Office.AppointmentCompose.loadCustomPropertiesAsync
@@ -638,6 +640,76 @@ items:
       parameters:
         - id: callback
           description: 'Facultatif. Une fois la méthode exécutée, la fonction transmise au paramètre callback est appelée avec un seul paramètre de type Office. AsyncResult. En cas de réussite, les données d’initialisation sont fournies dans la propriété asyncResult. Value sous forme de chaîne. S’il n’existe pas de contexte d’initialisation, l’objet asyncResult contient un objet Error dont la propriété code a la valeur 9020 et sa propriété Name a la valeur GenericResponseError.'
+          type:
+            - '(asyncResult: Office.AsyncResult<string>) => void'
+  - uid: outlook.Office.AppointmentCompose.getItemIdAsync
+    summary: |-
+      Obtient de manière asynchrone l’ID d’un élément enregistré.
+
+      Lorsqu’elle est appelée, cette méthode renvoie l’ID de l’élément par le biais de la méthode de rappel.
+
+      **Remarque**: Si votre complément appelle `getItemIdAsync` sur un élément en mode composition (par exemple, pour obtenir un à utiliser avec `itemId` EWS ou l’API REST), sachez que lorsqu’Outlook est en mode mis en cache, l’élément peut prendre un certain temps avant la synchronisation de l’élément avec le serveur. Tant que l’élément n’est pas synchronisé `itemId` , le n’est pas reconnu et son utilisation renvoie une erreur.
+
+      \[[Ensemble d’API: aperçu de boîte aux lettres](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
+
+      **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: organisateur de rendez-vous
+
+      **Erreurs**:
+
+      - `ItemNotSaved`<!-- -->: L’ID ne peut pas être récupéré tant que l’élément n’est pas enregistré.
+    name: 'getItemIdAsync(options, callback)'
+    fullName: 'getItemIdAsync(options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItemIdAsync(options: Office.AsyncContextOptions, callback: (asyncResult: Office.AsyncResult<string>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: options
+          description: 'Littéral d’objet contenant une ou plusieurs des propriétés suivantes. asyncContext: les développeurs peuvent fournir n’importe quel objet auquel ils souhaitent accéder dans la méthode de rappel.'
+          type:
+            - Office.AsyncContextOptions
+        - id: callback
+          description: 'Une fois la méthode exécutée, la fonction transmise au paramètre callback est appelée avec un seul paramètre de type Office. AsyncResult.'
+          type:
+            - '(asyncResult: Office.AsyncResult<string>) => void'
+  - uid: outlook.Office.AppointmentCompose.getItemIdAsync_1
+    summary: |-
+      Obtient de manière asynchrone l’ID d’un élément enregistré.
+
+      Lorsqu’elle est appelée, cette méthode renvoie l’ID de l’élément par le biais de la méthode de rappel.
+
+      **Remarque**: Si votre complément appelle `getItemIdAsync` sur un élément en mode composition (par exemple, pour obtenir un à utiliser avec `itemId` EWS ou l’API REST), sachez que lorsqu’Outlook est en mode mis en cache, l’élément peut prendre un certain temps avant la synchronisation de l’élément avec le serveur. Tant que l’élément n’est pas synchronisé `itemId` , le n’est pas reconnu et son utilisation renvoie une erreur.
+
+      \[[Ensemble d’API: aperçu de boîte aux lettres](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
+
+      **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: organisateur de rendez-vous
+
+      **Erreurs**:
+
+      - `ItemNotSaved`<!-- -->: L’ID ne peut pas être récupéré tant que l’élément n’est pas enregistré.
+    name: getItemIdAsync(callback)
+    fullName: getItemIdAsync(callback)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItemIdAsync(callback: (asyncResult: Office.AsyncResult<string>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: callback
+          description: 'Une fois la méthode exécutée, la fonction transmise au paramètre callback est appelée avec un seul paramètre de type Office. AsyncResult.'
           type:
             - '(asyncResult: Office.AsyncResult<string>) => void'
   - uid: outlook.Office.AppointmentCompose.getSelectedDataAsync
