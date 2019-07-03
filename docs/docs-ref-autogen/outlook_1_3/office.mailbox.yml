@@ -33,7 +33,7 @@ items:
 
       Les ID d’élément extraits via une API REST (telle que l’API Courrier Outlook ou Microsoft Graph) utilisent un format différent de celui employé par les services web Exchange (EWS). La méthode convertToEwsId convertit un ID mis en forme REST au format approprié pour EWS.
 
-      **Remarque**: cette méthode n’est pas prise en charge dans Outlook pour iOS ou Outlook pour Android.
+      **Remarque**: cette méthode n’est pas prise en charge dans Outlook sur iOS ou Android.
 
       \[[Ensemble d’API: boîte aux lettres 1,3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
@@ -71,7 +71,14 @@ items:
           type:
             - MailboxEnums.RestVersion | string
   - uid: Outlook_1_3.Office.Mailbox.convertToLocalClientTime
-    summary: "Obtient un dictionnaire contenant les informations d’heure dans l’heure locale du client.\n\nLes dates et heures utilisées par une application de messagerie pour Outlook ou Outlook\_Web\_App peuvent utiliser des fuseaux horaires différents. Outlook utilise le fuseau horaire de l’ordinateur\_; Outlook\_Web\_App utilise le fuseau horaire défini dans le Centre d’administration Exchange (CAE). Vous devez gérer les valeurs de date et d’heure afin que les valeurs que vous affichez sur l’interface utilisateur soient toujours cohérentes avec le fuseau horaire attendu par l’utilisateur.\n\nSi l’application de messagerie s’exécute dans Outlook, la méthode convertToLocalClientTime retourne un objet Dictionary avec les valeurs définies avec le fuseau horaire de l’ordinateur client. Si l’application de messagerie est en cours d’exécution dans Outlook Web App, la méthode convertToLocalClientTime renvoie un objet Dictionary dont les valeurs sont définies sur le fuseau horaire spécifié dans le centre d’administration Exchange.\n\n\\[[Ensemble d’API: boîte aux lettres 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
+    summary: |-
+      Obtient un dictionnaire contenant les informations d’heure dans l’heure locale du client.
+
+      Les dates et heures utilisées par une application de messagerie pour Outlook sur le Web ou les clients de bureau peuvent utiliser différents fuseaux horaires. Outlook utilise le fuseau horaire de l’ordinateur client; Outlook sur le Web utilise le fuseau horaire défini dans le centre d’administration Exchange. Vous devez gérer les valeurs de date et d’heure afin que les valeurs que vous affichez sur l’interface utilisateur soient toujours cohérentes avec le fuseau horaire attendu par l’utilisateur.
+
+      Si l’application de messagerie est en cours d’exécution dans Outlook sur des clients de bureau, la méthode convertToLocalClientTime renvoie un objet Dictionary dont les valeurs sont définies sur le fuseau horaire de l’ordinateur client. Si l’application de messagerie est en cours d’exécution dans Outlook sur le Web, la méthode convertToLocalClientTime renvoie un objet Dictionary dont les valeurs sont définies sur le fuseau horaire spécifié dans le centre d’administration Exchange.
+
+      \[[Ensemble d’API: boîte aux lettres 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
 
@@ -96,7 +103,7 @@ items:
     summary: |-
       Convertit un ID d’élément mis en forme pour EWS au format REST.
 
-      **Remarque**: cette méthode n’est pas prise en charge dans Outlook pour iOS ou Outlook pour Android.
+      **Remarque**: cette méthode n’est pas prise en charge dans Outlook sur iOS ou Android.
 
       \[[Ensemble d’API: boîte aux lettres 1,3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
@@ -163,7 +170,20 @@ items:
           type:
             - LocalClientTime
   - uid: Outlook_1_3.Office.Mailbox.displayAppointmentForm
-    summary: "Affiche un rendez-vous de calendrier existant.\n\nLa méthode displayAppointmentForm ouvre un rendez-vous du calendrier existant dans une nouvelle fenêtre du Bureau ou dans une boîte de dialogue sur les appareils mobiles.\n\nDans Outlook\_pour\_Mac, vous pouvez utiliser cette méthode pour afficher un seul rendez-vous qui ne fait pas partie d’une série périodique, ou le rendez-vous principal d’une série périodique, mais vous ne pouvez pas afficher une instance de la série. En effet, dans Outlook\_pour\_Mac, vous ne pouvez pas accéder aux propriétés (notamment l’ID d’élément) des instances d’une série périodique.\n\nDans Outlook\_Web\_App, cette méthode ouvre le formulaire spécifié uniquement si le corps du formulaire comprend 32\_Ko de caractères maximum.\n\nSi l’identificateur de l’élément spécifié n’identifie aucun rendez-vous existant, un volet vierge s’ouvre sur l’ordinateur ou l’appareil client. Par ailleurs, aucun message d’erreur n’est retourné.\n\n**Remarque**: cette méthode n’est pas prise en charge dans Outlook pour iOS ou Outlook pour Android.\n\n\\[[Ensemble d’API: boîte aux lettres 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
+    summary: |-
+      Affiche un rendez-vous de calendrier existant.
+
+      La méthode displayAppointmentForm ouvre un rendez-vous du calendrier existant dans une nouvelle fenêtre du Bureau ou dans une boîte de dialogue sur les appareils mobiles.
+
+      Dans Outlook sur Mac, vous pouvez utiliser cette méthode pour afficher un seul rendez-vous qui ne fait pas partie d’une série périodique ou le rendez-vous principal d’une série périodique, mais vous ne pouvez pas afficher une instance de la série. En effet, dans Outlook sur Mac, vous ne pouvez pas accéder aux propriétés (y compris l’ID d’élément) des instances d’une série périodique.
+
+      Dans Outlook sur le Web, cette méthode ouvre le formulaire spécifié uniquement si le corps du formulaire est inférieur ou égal à 32KO nombre de caractères.
+
+      Si l’identificateur de l’élément spécifié n’identifie aucun rendez-vous existant, un volet vierge s’ouvre sur l’ordinateur ou l’appareil client. Par ailleurs, aucun message d’erreur n’est retourné.
+
+      **Remarque**: cette méthode n’est pas prise en charge dans Outlook sur iOS ou Android.
+
+      \[[Ensemble d’API: boîte aux lettres 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
 
@@ -191,7 +211,20 @@ items:
           type:
             - string
   - uid: Outlook_1_3.Office.Mailbox.displayMessageForm
-    summary: "Affiche un message existant.\n\nLa méthode displayMessageForm ouvre un message existant dans une nouvelle fenêtre du Bureau ou dans une boîte de dialogue sur les appareils mobiles.\n\nDans Outlook\_Web\_App, cette méthode ouvre le formulaire indiqué uniquement si le corps du formulaire comprend 32\_Ko de caractères maximum.\n\nSi l’identificateur de l’élément spécifié n’identifie aucun message existant, aucun message ne s’affiche sur l’ordinateur client. Par ailleurs, aucun message d’erreur n’est retourné.\n\nN’utilisez pas la méthode displayMessageForm avec une valeur itemId qui représente un rendez-vous. Utilisez la méthode displayAppointmentForm pour afficher un rendez-vous existant et displayNewAppointmentForm pour afficher un formulaire afin de créer un rendez-vous.\n\n**Remarque**: cette méthode n’est pas prise en charge dans Outlook pour iOS ou Outlook pour Android.\n\n\\[[Ensemble d’API: boîte aux lettres 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
+    summary: |-
+      Affiche un message existant.
+
+      La méthode displayMessageForm ouvre un message existant dans une nouvelle fenêtre du Bureau ou dans une boîte de dialogue sur les appareils mobiles.
+
+      Dans Outlook sur le Web, cette méthode ouvre le formulaire spécifié uniquement si le corps du formulaire est inférieur ou égal à 32 Ko nombre de caractères.
+
+      Si l’identificateur de l’élément spécifié n’identifie aucun message existant, aucun message ne s’affiche sur l’ordinateur client. Par ailleurs, aucun message d’erreur n’est retourné.
+
+      N’utilisez pas la méthode displayMessageForm avec une valeur itemId qui représente un rendez-vous. Utilisez la méthode displayAppointmentForm pour afficher un rendez-vous existant et displayNewAppointmentForm pour afficher un formulaire afin de créer un rendez-vous.
+
+      **Remarque**: cette méthode n’est pas prise en charge dans Outlook sur iOS ou Android.
+
+      \[[Ensemble d’API: boîte aux lettres 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
 
@@ -219,7 +252,20 @@ items:
           type:
             - string
   - uid: Outlook_1_3.Office.Mailbox.displayNewAppointmentForm
-    summary: "Affiche un formulaire permettant de créer un rendez-vous du calendrier.\n\nLa méthode displayNewAppointmentForm ouvre un formulaire qui permet à l’utilisateur de créer un rendez-vous ou une réunion. Si des paramètres sont spécifiés, les champs du formulaire de rendez-vous sont remplis automatiquement avec le contenu des paramètres.\n\nDans Outlook\_Web\_App et OWA\_pour\_les périphériques, cette méthode affiche toujours un formulaire contenant un champ Participants. Si vous ne spécifiez pas de participants comme arguments d’entrée, la méthode affiche un formulaire contenant le bouton Enregistrer. Si vous avez spécifié des participants, le formulaire inclut ces derniers, en plus du bouton Envoyer.\n\nDans le client riche Outlook et Outlook RT, si vous spécifiez des participants ou des ressources dans le paramètre requiredAttendees, optionalAttendees ou Resources, cette méthode affiche un formulaire de réunion avec un bouton Envoyer. Si vous ne spécifiez pas de destinataires, cette méthode affiche un formulaire de &amp; rendez-vous avec un bouton Enregistrer Fermer.\n\nSi l’un des paramètres dépasse les limites définies en matière de taille ou si un nom de paramètre inconnu est spécifié, une exception est levée.\n\n**Remarque**: cette méthode n’est pas prise en charge dans Outlook pour iOS ou Outlook pour Android.\n\n\\[[Ensemble d’API: boîte aux lettres 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
+    summary: |-
+      Affiche un formulaire permettant de créer un rendez-vous du calendrier.
+
+      La méthode displayNewAppointmentForm ouvre un formulaire qui permet à l’utilisateur de créer un rendez-vous ou une réunion. Si des paramètres sont spécifiés, les champs du formulaire de rendez-vous sont remplis automatiquement avec le contenu des paramètres.
+
+      Dans Outlook sur le Web, cette méthode affiche toujours un formulaire avec un champ participants. Si vous ne spécifiez pas de participants comme arguments d’entrée, la méthode affiche un formulaire contenant le bouton Enregistrer. Si vous avez spécifié des participants, le formulaire inclut ces derniers, en plus du bouton Envoyer.
+
+      Dans le client riche Outlook et Outlook RT, si vous spécifiez des participants ou des ressources dans le paramètre requiredAttendees, optionalAttendees ou Resources, cette méthode affiche un formulaire de réunion avec un bouton Envoyer. Si vous ne spécifiez pas de destinataires, cette méthode affiche un formulaire de &amp; rendez-vous avec un bouton Enregistrer Fermer.
+
+      Si l’un des paramètres dépasse les limites définies en matière de taille ou si un nom de paramètre inconnu est spécifié, une exception est levée.
+
+      **Remarque**: cette méthode n’est pas prise en charge dans Outlook sur iOS ou Android.
+
+      \[[Ensemble d’API: boîte aux lettres 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
 
@@ -349,7 +395,7 @@ items:
           type:
             - any
   - uid: Outlook_1_3.Office.Mailbox.makeEwsRequestAsync
-    summary: "Effectue une demande asynchrone à un service des services Web Exchange (EWS) sur le serveur Exchange qui héberge la boîte aux lettres de l’utilisateur.\n\nDans ces cas de figure, les compléments doivent utiliser les API REST pour accéder à la boîte aux lettres de l’utilisateur.\n\nLa méthode makeEwsRequestAsync envoie une demande EWS de la part du complément à Exchange.\n\nVous ne pouvez pas demander des éléments associés à un dossier avec la méthode makeEwsRequestAsync.\n\nLa demande\_XML doit spécifier l’encodage\_UTF-8. &lt;<!-- -->? XML version = \"1.0\" Encoding = \"UTF-8\"?<!-- -->&gt;\n\nVotre complément doit disposer de l’autorisation ReadWriteMailbox pour utiliser la méthode makeEwsRequestAsync. Pour plus d’informations sur l’utilisation de l’autorisation ReadWriteMailbox et des opérations EWS que vous pouvez appeler avec la méthode makeEwsRequestAsync, reportez-vous à la rubrique [spécifier les autorisations pour l’accès des compléments de messagerie à la boîte aux lettres de l’utilisateur](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->.\n\nLe résultat XML de l’appel EWS est fourni sous forme de chaîne dans la propriété asyncResult. Value. Si la taille du résultat est supérieure à 1\_Mo, un message d’erreur est renvoyé.\n\n**Remarque**: cette méthode n’est pas prise en charge dans les scénarios suivants:\n\n- Dans Outlook pour iOS ou Outlook pour Android.\n\n- Lorsque le complément est chargé dans une boîte aux lettres gmail.\n\n**Remarque**: l’administrateur de serveur doit définir OAuthAuthentication sur true dans le répertoire EWS du serveur d’accès au client pour permettre à la méthode makeEwsRequestAsync d’effectuer des demandes EWS.\n\n*Différences entre les versions*\n\nLorsque vous utilisez la méthode makeEwsRequestAsync dans les applications de messagerie exécutées dans des versions d’Outlook inférieures à\_15.0.4535.1004, vous devez définir la valeur d’encodage sur\_ISO-8859-1.\n\n`<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>`\n\nLorsque votre application de messagerie s’exécute dans Outlook\_sur\_le\_web, vous n’avez pas à définir la valeur d’encodage. Pour déterminer si votre application de messagerie s’exécute dans Outlook ou Outlook\_sur\_le\_web, utilisez la propriété mailbox.diagnostics.hostName. Pour déterminer la version d’Outlook qui est exécutée, utilisez la propriété mailbox.diagnostics.hostVersion.\n\n\\[[Ensemble d’API: boîte aux lettres 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
+    summary: "Effectue une demande asynchrone à un service des services Web Exchange (EWS) sur le serveur Exchange qui héberge la boîte aux lettres de l’utilisateur.\n\nDans ces cas de figure, les compléments doivent utiliser les API REST pour accéder à la boîte aux lettres de l’utilisateur.\n\nLa méthode makeEwsRequestAsync envoie une demande EWS de la part du complément à Exchange.\n\nVous ne pouvez pas demander des éléments associés à un dossier avec la méthode makeEwsRequestAsync.\n\nLa demande\_XML doit spécifier l’encodage\_UTF-8. &lt;<!-- -->? XML version = \"1.0\" Encoding = \"UTF-8\"?<!-- -->&gt;\n\nVotre complément doit disposer de l’autorisation ReadWriteMailbox pour utiliser la méthode makeEwsRequestAsync. Pour plus d’informations sur l’utilisation de l’autorisation ReadWriteMailbox et des opérations EWS que vous pouvez appeler avec la méthode makeEwsRequestAsync, reportez-vous à la rubrique [spécifier les autorisations pour l’accès des compléments de messagerie à la boîte aux lettres de l’utilisateur](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->.\n\nLe résultat XML de l’appel EWS est fourni sous forme de chaîne dans la propriété asyncResult. Value. Si la taille du résultat est supérieure à 1\_Mo, un message d’erreur est renvoyé.\n\n**Remarque**: cette méthode n’est pas prise en charge dans les scénarios suivants:\n\n- Dans Outlook sur iOS ou Android.\n\n- Lorsque le complément est chargé dans une boîte aux lettres gmail.\n\n**Remarque**: l’administrateur de serveur doit définir OAuthAuthentication sur true dans le répertoire EWS du serveur d’accès au client pour permettre à la méthode makeEwsRequestAsync d’effectuer des demandes EWS.\n\n*Différences entre les versions*\n\nLorsque vous utilisez la méthode makeEwsRequestAsync dans les applications de messagerie exécutées dans des versions d’Outlook inférieures à\_15.0.4535.1004, vous devez définir la valeur d’encodage sur\_ISO-8859-1.\n\n`<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>`\n\nLorsque votre application de messagerie s’exécute dans Outlook\_sur\_le\_web, vous n’avez pas à définir la valeur d’encodage. Pour déterminer si votre application de messagerie s’exécute dans Outlook ou Outlook\_sur\_le\_web, utilisez la propriété mailbox.diagnostics.hostName. Pour déterminer la version d’Outlook qui est exécutée, utilisez la propriété mailbox.diagnostics.hostVersion.\n\n\\[[Ensemble d’API: boîte aux lettres 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
     remarks: |-
       **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadWriteMailbox
 
@@ -430,9 +476,9 @@ items:
 
       - hostName (String): chaîne qui représente le nom de l’application hôte. Il s’agit de l’une des valeurs suivantes: Outlook, Mac Outlook, OutlookIOS ou OutlookWebApp.
 
-      - hostVersion (String): une chaîne qui représente la version de l’application hôte ou du serveur Exchange. Si le complément de messagerie est en cours d’exécution sur le client de bureau Outlook ou sur Outlook pour iOS, la propriété hostVersion renvoie la version de l’application hôte, Outlook. Dans Outlook Web App, la propriété renvoie la version du serveur Exchange. La chaîne 15.0.468.0 est un exemple.
+      - hostVersion (String): une chaîne qui représente la version de l’application hôte ou du serveur Exchange. Si le complément de messagerie est exécuté dans Outlook sur les clients de bureau ou iOS, la propriété hostVersion renvoie la version de l’application hôte, Outlook. Dans Outlook sur le Web, la propriété renvoie la version du serveur Exchange. La chaîne 15.0.468.0 est un exemple.
 
-      - OWAView (MailboxEnums. OWAView ou chaîne): énumération (ou littéral de chaîne) qui représente la vue actuelle d’Outlook Web App. Si l’application hôte n’est pas Outlook Web App, l’accès à cette propriété entraîne l’absence de définition. Outlook Web App propose trois vues (OneColumn-s’affiche lorsque l’écran est étroit, TwoColumns-affiché lorsque l’écran est plus large et ThreeColumns-affiché lorsque l’écran est large) qui correspond à la largeur de l’écran et de la fenêtre, ainsi qu’au nombre de colonnes qui peut être affiché.
+      - OWAView (MailboxEnums. OWAView ou chaîne): énumération (ou littéral de chaîne) qui représente la vue actuelle d’Outlook sur le Web. Si l’application hôte n’est pas Outlook sur le Web, l’accès à cette propriété entraîne l’absence de définition. Outlook sur le Web comporte trois vues (OneColumn-affiché lorsque l’écran est étroit, TwoColumns-affiché lorsque l’écran est plus large et ThreeColumns-affiché lorsque l’écran est large) qui correspond à la largeur de l’écran et de la fenêtre, et au nombre de colonnes qui peut être affiché.
 
       Pour plus d’informations, reportez-vous à [Office. Diagnostics](xref:Outlook_1_3.Office.Diagnostics)<!-- -->.
 
@@ -460,7 +506,7 @@ items:
 
       La valeur ewsUrl peut être utilisée par un service distant pour effectuer des appels EWS à la boîte aux lettres de l’utilisateur. Par exemple, vous pouvez créer un service distant pour [obtenir des pièces jointes à partir de l’élément sélectionné](https://docs.microsoft.com/outlook/add-ins/get-attachments-of-an-outlook-item) .<!-- -->.
 
-      **Remarque**: ce membre n’est pas pris en charge dans Outlook pour iOS ou Outlook pour Android.
+      **Remarque**: ce membre n’est pas pris en charge dans Outlook sur iOS ou Android.
     name: ewsUrl
     fullName: ewsUrl
     langs:
