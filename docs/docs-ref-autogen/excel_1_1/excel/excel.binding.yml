@@ -1,0 +1,266 @@
+### YamlMime:UniversalReference
+items:
+  - uid: excel.Excel.Binding
+    summary: |-
+      Représente une liaison Office.js définie dans le classeur.
+
+      \[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: Excel.Binding
+    fullName: Excel.Binding
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - 'OfficeExtension.ClientObject '
+    package: excel
+    children:
+      - excel.Excel.Binding.context
+      - excel.Excel.Binding.getRange
+      - excel.Excel.Binding.getTable
+      - excel.Excel.Binding.getText
+      - excel.Excel.Binding.id
+      - excel.Excel.Binding.load
+      - excel.Excel.Binding.load_1
+      - excel.Excel.Binding.load_2
+      - excel.Excel.Binding.toJSON
+      - excel.Excel.Binding.type
+  - uid: excel.Excel.Binding.context
+    summary: Contexte de demande associé à l’objet. Cette opération connecte le processus du complément au processus de l’application hôte Office.
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - excel.Excel.RequestContext
+  - uid: excel.Excel.Binding.getRange
+    summary: |-
+      Renvoie la plage représentée par la liaison. Génère une erreur si la liaison n’est pas du type approprié.
+
+      \[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getRange()
+    fullName: getRange()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getRange(): Excel.Range;'
+      return:
+        type:
+          - excel.Excel.Range
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var binding = ctx.workbook.bindings.getItemAt(0);
+              var range = binding.getRange();
+              range.load('cellCount');
+              return ctx.sync().then(function() {
+                  console.log(range.cellCount);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: excel.Excel.Binding.getTable
+    summary: |-
+      Renvoie le tableau représenté par la liaison. Génère une erreur si la liaison n’est pas du type approprié.
+
+      \[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getTable()
+    fullName: getTable()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getTable(): Excel.Table;'
+      return:
+        type:
+          - excel.Excel.Table
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var binding = ctx.workbook.bindings.getItemAt(0);
+              var table = binding.getTable();
+              table.load('name');
+              return ctx.sync().then(function() {
+                      console.log(table.name);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: excel.Excel.Binding.getText
+    summary: |-
+      Renvoie le texte représenté par la liaison. Génère une erreur si la liaison n’est pas du type approprié.
+
+      \[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getText()
+    fullName: getText()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getText(): OfficeExtension.ClientResult<string>;'
+      return:
+        type:
+          - OfficeExtension.ClientResult<string>
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var binding = ctx.workbook.bindings.getItemAt(0);
+              var text = binding.getText();
+              binding.load('text');
+              return ctx.sync().then(function() {
+                  console.log(text);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: excel.Excel.Binding.id
+    summary: |-
+      Représente l’identificateur de liaison. En lecture seule.
+
+      \[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: id
+    fullName: id
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly id: string;'
+      return:
+        type:
+          - string
+  - uid: excel.Excel.Binding.load
+    summary: "Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler «\_context.sync()\_» avant de lire les propriétés."
+    remarks: |-
+      En plus de cette signature, cette méthode possède les signatures suivantes:
+
+      `load(option?: string | string[]): Excel.Binding`-WHERE option est une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+
+      `load(option?: { select?: string; expand?: string; }): Excel.Binding`Option-WHERE option. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
+
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Binding`-Uniquement disponible sur les types de collection. Elle est similaire à la signature précédente. Option. Top indique le nombre maximal d’éléments de collection qui peuvent être inclus dans le résultat. Option. Skip indique le nombre d’éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat. Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d’éléments.
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: Excel.Interfaces.BindingLoadOptions): Excel.Binding;'
+      return:
+        type:
+          - excel.Excel.Binding
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - excel.Excel.Interfaces.BindingLoadOptions
+  - uid: excel.Excel.Binding.load_1
+    summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler `context.sync()` avant de lire les propriétés.
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Excel.Binding;'
+      return:
+        type:
+          - excel.Excel.Binding
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var binding = ctx.workbook.bindings.getItemAt(0);
+              binding.load('type');
+              return ctx.sync().then(function() {
+                  console.log(binding.type);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: propertyNames
+          description: Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+          type:
+            - 'string | string[]'
+  - uid: excel.Excel.Binding.load_2
+    summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler `context.sync()` avant de lire les propriétés.
+    name: load(propertyNamesAndPaths)
+    fullName: load(propertyNamesAndPaths)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.Binding;'
+      return:
+        type:
+          - excel.Excel.Binding
+        description: ''
+      parameters:
+        - id: propertyNamesAndPaths
+          description: Où propertyNamesAndPaths. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et propertyNamesAndPaths. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
+          type:
+            - '{ select?: string; expand?: string; }'
+  - uid: excel.Excel.Binding.toJSON
+    summary: 'Remplace la méthode JavaScript `toJSON()` afin de fournir une sortie plus utile lorsqu’un objet d’API est transmis à`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle `toJSON` la méthode de l’objet qui lui est passé.) Tandis que l’objet Excel. Binding est un objet d’API `toJSON` , la méthode renvoie un objet JavaScript simple (tapé comme`Excel.Interfaces.BindingData`<!-- -->) qui contient des copies superficielles de toutes les propriétés enfants chargées à partir de l’objet d’origine.'
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Excel.Interfaces.BindingData;'
+      return:
+        type:
+          - excel.Excel.Interfaces.BindingData
+        description: ''
+  - uid: excel.Excel.Binding.type
+    summary: |-
+      Renvoie le type de la liaison. Pour plus d’informations, voir Excel. BindingType. En lecture seule.
+
+      \[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: type
+    fullName: type
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly type: Excel.BindingType | "Range" | "Table" | "Text";'
+      return:
+        type:
+          - Excel.BindingType | "Range" | "Table" | "Text"
