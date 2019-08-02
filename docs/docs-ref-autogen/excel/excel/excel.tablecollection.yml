@@ -1,0 +1,416 @@
+### YamlMime:UniversalReference
+items:
+  - uid: excel.Excel.TableCollection
+    summary: |-
+      Représente une collection de tous les tableaux qui font partie du classeur ou de la feuille de calcul, en fonction de la méthode d’appel.
+
+      \[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: Excel.TableCollection
+    fullName: Excel.TableCollection
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - 'OfficeExtension.ClientObject '
+    package: excel
+    children:
+      - excel.Excel.TableCollection.add
+      - excel.Excel.TableCollection.context
+      - excel.Excel.TableCollection.count
+      - excel.Excel.TableCollection.getCount
+      - excel.Excel.TableCollection.getItem
+      - excel.Excel.TableCollection.getItemAt
+      - excel.Excel.TableCollection.getItemOrNullObject
+      - excel.Excel.TableCollection.items
+      - excel.Excel.TableCollection.load
+      - excel.Excel.TableCollection.load_1
+      - excel.Excel.TableCollection.load_2
+      - excel.Excel.TableCollection.onAdded
+      - excel.Excel.TableCollection.onChanged
+      - excel.Excel.TableCollection.onDeleted
+      - excel.Excel.TableCollection.onFiltered
+      - excel.Excel.TableCollection.toJSON
+  - uid: excel.Excel.TableCollection.add
+    summary: |-
+      Crée un tableau L’adresse de la source ou de l’objet de la plage détermine la feuille de calcul dans laquelle le tableau sera ajouté. Si l’ajout ne peut être effectué (par exemple, parce que l’adresse n’est pas valide, ou parce que le tableau empiéterait sur un autre tableau), un message d’erreur apparaît.
+
+      \[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: 'add(address, hasHeaders)'
+    fullName: 'add(address, hasHeaders)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'add(address: Range | string, hasHeaders: boolean): Excel.Table;'
+      return:
+        type:
+          - excel.Excel.Table
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var table = ctx.workbook.tables.add('Sheet1!A1:E7', true);
+              table.load('name');
+              return ctx.sync().then(function() {
+                  console.log(table.name);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: address
+          description: 'Objet de plage ou nom/adresse (string) de la plage représentant la source de données. Si l’adresse ne contient pas de nom de feuille, la feuille ouverte est utilisée. \[Ensemble d’API: ExcelApi 1,1/1,3. Avant ExcelApi 1,3, ce paramètre doit être une chaîne. À partir de l’API Excel 1,3, ce paramètre peut être un objet Range ou une chaîne.\]'
+          type:
+            - Range | string
+        - id: hasHeaders
+          description: 'Valeur booléenne qui indique si les données importées disposent d’étiquettes de colonne. Si la source ne contient pas d’en-têtes (autrement dit, lorsque cette propriété est définie sur false), Excel génère automatiquement un en-tête et décale les données d’une ligne vers le bas.'
+          type:
+            - boolean
+  - uid: excel.Excel.TableCollection.context
+    summary: Contexte de demande associé à l’objet. Cette opération connecte le processus du complément au processus de l’application hôte Office.
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - excel.Excel.RequestContext
+  - uid: excel.Excel.TableCollection.count
+    summary: |-
+      Renvoie le nombre de tableaux dans le classeur. En lecture seule.
+
+      \[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: count
+    fullName: count
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly count: number;'
+      return:
+        type:
+          - number
+  - uid: excel.Excel.TableCollection.getCount
+    summary: |-
+      Obtient le nombre de tableaux de la collection.
+
+      \[[Ensemble d’API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getCount()
+    fullName: getCount()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getCount(): OfficeExtension.ClientResult<number>;'
+      return:
+        type:
+          - OfficeExtension.ClientResult<number>
+        description: ''
+  - uid: excel.Excel.TableCollection.getItem
+    summary: |-
+      Obtient un tableau à l’aide de son nom ou de son ID.
+
+      \[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getItem(key)
+    fullName: getItem(key)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItem(key: string): Excel.Table;'
+      return:
+        type:
+          - excel.Excel.Table
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var tableName = 'Table1';
+              var table = ctx.workbook.tables.getItem(tableName);
+              table.load('name');
+              return ctx.sync().then(function() {
+                      console.log(table.name);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: key
+          description: Nom ou ID du tableau à récupérer.
+          type:
+            - string
+  - uid: excel.Excel.TableCollection.getItemAt
+    summary: |-
+      Obtient un tableau en fonction de sa position dans la collection.
+
+      \[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getItemAt(index)
+    fullName: getItemAt(index)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItemAt(index: number): Excel.Table;'
+      return:
+        type:
+          - excel.Excel.Table
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var table = ctx.workbook.tables.getItemAt(0);
+              table.load('name');
+              return ctx.sync().then(function() {
+                      console.log(table.name);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: index
+          description: Valeur d’indice de l’objet à récupérer. Avec indice zéro.
+          type:
+            - number
+  - uid: excel.Excel.TableCollection.getItemOrNullObject
+    summary: |-
+      Obtient un tableau à l’aide de son nom ou de son ID. Si le tableau n’existe pas, renvoie un objet null.
+
+      \[[Ensemble d’API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getItemOrNullObject(key)
+    fullName: getItemOrNullObject(key)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItemOrNullObject(key: string): Excel.Table;'
+      return:
+        type:
+          - excel.Excel.Table
+        description: ''
+      parameters:
+        - id: key
+          description: Nom ou ID du tableau à récupérer.
+          type:
+            - string
+  - uid: excel.Excel.TableCollection.items
+    summary: Obtient l’élément enfant chargé dans cette collection de sites.
+    name: items
+    fullName: items
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly items: Excel.Table[];'
+      return:
+        type:
+          - 'Excel.Table[]'
+  - uid: excel.Excel.TableCollection.load
+    summary: "Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler «\_context.sync()\_» avant de lire les propriétés."
+    remarks: |-
+      En plus de cette signature, cette méthode possède les signatures suivantes:
+
+      `load(option?: string | string[]): Excel.TableCollection`-WHERE option est une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+
+      `load(option?: { select?: string; expand?: string; }): Excel.TableCollection`Option-WHERE option. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
+
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.TableCollection`-Uniquement disponible sur les types de collection. Elle est similaire à la signature précédente. Option. Top indique le nombre maximal d’éléments de collection qui peuvent être inclus dans le résultat. Option. Skip indique le nombre d’éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat. Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d’éléments.
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: Excel.Interfaces.TableCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.TableCollection;'
+      return:
+        type:
+          - excel.Excel.TableCollection
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - Excel.Interfaces.TableCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
+  - uid: excel.Excel.TableCollection.load_1
+    summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler `context.sync()` avant de lire les propriétés.
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Excel.TableCollection;'
+      return:
+        type:
+          - excel.Excel.TableCollection
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var tables = ctx.workbook.tables;
+              tables.load();
+              return ctx.sync().then(function() {
+                  console.log("tables Count: " + tables.count);
+                  for (var i = 0; i < tables.items.length; i++)
+                  {
+                      console.log(tables.items[i].name);
+                  }
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+          ```javascript
+          // Get the number of tables
+          Excel.run(function (ctx) { 
+              var tables = ctx.workbook.tables;
+              tables.load('count');
+              return ctx.sync().then(function() {
+                  console.log(tables.count);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: propertyNames
+          description: Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+          type:
+            - 'string | string[]'
+  - uid: excel.Excel.TableCollection.load_2
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: OfficeExtension.LoadOption): Excel.TableCollection;'
+      return:
+        type:
+          - excel.Excel.TableCollection
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - OfficeExtension.LoadOption
+  - uid: excel.Excel.TableCollection.onAdded
+    summary: |-
+      Se produit lorsque la nouvelle table est ajoutée dans un classeur.
+
+      \[[Ensemble d’API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: onAdded
+    fullName: onAdded
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onAdded: OfficeExtension.EventHandlers<Excel.TableAddedEventArgs>;'
+      return:
+        type:
+          - OfficeExtension.EventHandlers<Excel.TableAddedEventArgs>
+  - uid: excel.Excel.TableCollection.onChanged
+    summary: |-
+      Survient lors de la modification des données d’une table dans un classeur ou d’une feuille de calcul.
+
+      \[[Ensemble d’API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: onChanged
+    fullName: onChanged
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onChanged: OfficeExtension.EventHandlers<Excel.TableChangedEventArgs>;'
+      return:
+        type:
+          - OfficeExtension.EventHandlers<Excel.TableChangedEventArgs>
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```typescript
+          await Excel.run(async (context) => {
+              let tables = context.workbook.tables;
+              tables.onChanged.add(onChange);
+
+              await context.sync();
+              console.log("A handler has been registered for the table collection onChanged event");
+          });
+          ```
+  - uid: excel.Excel.TableCollection.onDeleted
+    summary: |-
+      Se produit lorsque le tableau spécifié est supprimé dans un classeur.
+
+      \[[Ensemble d’API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: onDeleted
+    fullName: onDeleted
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onDeleted: OfficeExtension.EventHandlers<Excel.TableDeletedEventArgs>;'
+      return:
+        type:
+          - OfficeExtension.EventHandlers<Excel.TableDeletedEventArgs>
+  - uid: excel.Excel.TableCollection.onFiltered
+    summary: |-
+      Se produit lorsque le filtre est appliqué sur n’importe quel tableau dans un classeur ou une feuille de calcul.
+
+      \[[Ensemble d’API: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    isPreview: true
+    name: onFiltered
+    fullName: onFiltered
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onFiltered: OfficeExtension.EventHandlers<Excel.TableFilteredEventArgs>;'
+      return:
+        type:
+          - OfficeExtension.EventHandlers<Excel.TableFilteredEventArgs>
+  - uid: excel.Excel.TableCollection.toJSON
+    summary: 'Remplace la méthode JavaScript `toJSON()` afin de fournir une sortie plus utile lorsqu’un objet d’API est transmis à`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle `toJSON` la méthode de l’objet qui lui est passé.) Tandis que `Excel.TableCollection` l’objet d’origine est un objet `toJSON` d’API, la méthode renvoie un objet JavaScript simple (tapé comme`Excel.Interfaces.TableCollectionData`<!-- -->) qui contient un tableau «éléments» avec des copies superficielles de toutes les propriétés chargées des éléments de la collection.'
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Excel.Interfaces.TableCollectionData;'
+      return:
+        type:
+          - excel.Excel.Interfaces.TableCollectionData
+        description: ''
