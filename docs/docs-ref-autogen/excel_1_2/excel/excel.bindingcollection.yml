@@ -1,0 +1,281 @@
+### YamlMime:UniversalReference
+items:
+  - uid: excel.Excel.BindingCollection
+    summary: |-
+      Représente la collection de l’ensemble des objets de liaison qui font partie du classeur.
+
+      \[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: Excel.BindingCollection
+    fullName: Excel.BindingCollection
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - 'OfficeExtension.ClientObject '
+    package: excel
+    children:
+      - excel.Excel.BindingCollection.context
+      - excel.Excel.BindingCollection.count
+      - excel.Excel.BindingCollection.getItem
+      - excel.Excel.BindingCollection.getItemAt
+      - excel.Excel.BindingCollection.items
+      - excel.Excel.BindingCollection.load
+      - excel.Excel.BindingCollection.load_1
+      - excel.Excel.BindingCollection.load_2
+      - excel.Excel.BindingCollection.toJSON
+  - uid: excel.Excel.BindingCollection.context
+    summary: Contexte de demande associé à l’objet. Cette opération connecte le processus du complément au processus de l’application hôte Office.
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - excel.Excel.RequestContext
+  - uid: excel.Excel.BindingCollection.count
+    summary: |-
+      Renvoie le nombre de liaisons de la collection. En lecture seule.
+
+      \[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: count
+    fullName: count
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly count: number;'
+      return:
+        type:
+          - number
+  - uid: excel.Excel.BindingCollection.getItem
+    summary: |-
+      Obtient un objet de liaison par ID.
+
+      \[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getItem(id)
+    fullName: getItem(id)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItem(id: string): Excel.Binding;'
+      return:
+        type:
+          - excel.Excel.Binding
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```javascript
+          // Create a table binding to monitor data changes in the table. 
+          // When data is changed, the background color of the table will be changed to orange.
+          function addEventHandler() {
+              // Create Table1
+              Excel.run(function (ctx) { 
+                  ctx.workbook.tables.add("Sheet1!A1:C4", true);
+                  return ctx.sync().then(function() {
+                          console.log("My Diet Data Inserted!");
+                  })
+                  .catch(function (error) {
+                          console.log(JSON.stringify(error));
+                  });
+              });
+              //Create a new table binding for Table1
+              Office.context.document.bindings.addFromNamedItemAsync(
+                  "Table1", Office.CoercionType.Table, { id: "myBinding" }, function (asyncResult) {
+                  if (asyncResult.status == "failed") {
+                      console.log("Action failed with error: " + asyncResult.error.message);
+                  }
+                  else {
+                      // If succeeded, then add event handler to the table binding.
+                      Office.select("bindings#myBinding").addHandlerAsync(
+                          Office.EventType.BindingDataChanged, onBindingDataChanged);
+                  }
+              });
+          }
+              
+          // when data in the table is changed, this event will be triggered.
+          function onBindingDataChanged(eventArgs) {
+              Excel.run(function (ctx) { 
+                  // highlight the table in orange to indicate data has been changed.
+                  ctx.workbook.bindings.getItem(eventArgs.binding.id).getTable().getDataBodyRange().format.fill.color = "Orange";
+                  return ctx.sync().then(function() {
+                          console.log("The value in this table got changed!");
+                  })
+                  .catch(function (error) {
+                          console.log(JSON.stringify(error));
+                  });
+              });
+          }
+          ```
+      parameters:
+        - id: id
+          description: ID de l’objet de liaison à récupérer.
+          type:
+            - string
+  - uid: excel.Excel.BindingCollection.getItemAt
+    summary: |-
+      Obtient un objet de liaison en fonction de sa position dans le tableau d’éléments.
+
+      \[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getItemAt(index)
+    fullName: getItemAt(index)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItemAt(index: number): Excel.Binding;'
+      return:
+        type:
+          - excel.Excel.Binding
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var lastPosition = ctx.workbook.bindings.count - 1;
+              var binding = ctx.workbook.bindings.getItemAt(lastPosition);
+              binding.load('type')
+              return ctx.sync().then(function() {
+                      console.log(binding.type); 
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: index
+          description: Valeur d’indice de l’objet à récupérer. Avec indice zéro.
+          type:
+            - number
+  - uid: excel.Excel.BindingCollection.items
+    summary: Obtient l’élément enfant chargé dans cette collection de sites.
+    name: items
+    fullName: items
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly items: Excel.Binding[];'
+      return:
+        type:
+          - 'Excel.Binding[]'
+  - uid: excel.Excel.BindingCollection.load
+    summary: "Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler «\_context.sync()\_» avant de lire les propriétés."
+    remarks: |-
+      En plus de cette signature, cette méthode possède les signatures suivantes:
+
+      `load(option?: string | string[]): Excel.BindingCollection`-WHERE option est une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+
+      `load(option?: { select?: string; expand?: string; }): Excel.BindingCollection`Option-WHERE option. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
+
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.BindingCollection`-Uniquement disponible sur les types de collection. Elle est similaire à la signature précédente. Option. Top indique le nombre maximal d’éléments de collection qui peuvent être inclus dans le résultat. Option. Skip indique le nombre d’éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat. Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d’éléments.
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: Excel.Interfaces.BindingCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.BindingCollection;'
+      return:
+        type:
+          - excel.Excel.BindingCollection
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - Excel.Interfaces.BindingCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
+  - uid: excel.Excel.BindingCollection.load_1
+    summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler `context.sync()` avant de lire les propriétés.
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Excel.BindingCollection;'
+      return:
+        type:
+          - excel.Excel.BindingCollection
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var bindings = ctx.workbook.bindings;
+              bindings.load('items');
+              return ctx.sync().then(function() {
+                  for (var i = 0; i < bindings.items.length; i++)
+                  {
+                      console.log(bindings.items[i].id);
+                  }
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+          ```javascript
+          // Get the number of bindings
+          Excel.run(function (ctx) { 
+              var bindings = ctx.workbook.bindings;
+              bindings.load('count');
+              return ctx.sync().then(function() {
+                  console.log("Bindings: Count= " + bindings.count);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: propertyNames
+          description: Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+          type:
+            - 'string | string[]'
+  - uid: excel.Excel.BindingCollection.load_2
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: OfficeExtension.LoadOption): Excel.BindingCollection;'
+      return:
+        type:
+          - excel.Excel.BindingCollection
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - OfficeExtension.LoadOption
+  - uid: excel.Excel.BindingCollection.toJSON
+    summary: 'Remplace la méthode JavaScript `toJSON()` afin de fournir une sortie plus utile lorsqu’un objet d’API est transmis à`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle `toJSON` la méthode de l’objet qui lui est passé.) Tandis que `Excel.BindingCollection` l’objet d’origine est un objet `toJSON` d’API, la méthode renvoie un objet JavaScript simple (tapé comme`Excel.Interfaces.BindingCollectionData`<!-- -->) qui contient un tableau «éléments» avec des copies superficielles de toutes les propriétés chargées des éléments de la collection.'
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Excel.Interfaces.BindingCollectionData;'
+      return:
+        type:
+          - excel.Excel.Interfaces.BindingCollectionData
+        description: ''
