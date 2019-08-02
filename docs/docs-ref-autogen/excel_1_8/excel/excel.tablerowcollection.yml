@@ -1,0 +1,286 @@
+### YamlMime:UniversalReference
+items:
+  - uid: excel.Excel.TableRowCollection
+    summary: |-
+      Représente une collection de toutes les lignes du tableau.
+
+      Notez que, à la différence des plages ou colonnes, qui s’ajusteront si de nouvelles lignes/colonnes sont ajoutées avant celles-ci, un objet TableRow représente l’emplacement physique de la ligne de table, mais pas les données. Autrement dit, si les données sont triées ou si de nouvelles lignes sont ajoutées, une ligne de tableau continue de pointer vers l’index pour lequel elle a été créée.
+
+      \[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: Excel.TableRowCollection
+    fullName: Excel.TableRowCollection
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - 'OfficeExtension.ClientObject '
+    package: excel
+    children:
+      - excel.Excel.TableRowCollection.add
+      - excel.Excel.TableRowCollection.context
+      - excel.Excel.TableRowCollection.count
+      - excel.Excel.TableRowCollection.getCount
+      - excel.Excel.TableRowCollection.getItemAt
+      - excel.Excel.TableRowCollection.items
+      - excel.Excel.TableRowCollection.load
+      - excel.Excel.TableRowCollection.load_1
+      - excel.Excel.TableRowCollection.load_2
+      - excel.Excel.TableRowCollection.toJSON
+  - uid: excel.Excel.TableRowCollection.add
+    summary: |-
+      Ajoute une ou plusieurs lignes dans le tableau. L’objet renvoyé sera placé en premier dans les lignes récemment ajoutées.
+
+      Notez que, à la différence des plages ou colonnes, qui s’ajusteront si de nouvelles lignes/colonnes sont ajoutées avant celles-ci, un objet TableRow représente l’emplacement physique de la ligne de table, mais pas les données. Autrement dit, si les données sont triées ou si de nouvelles lignes sont ajoutées, une ligne de tableau continue de pointer vers l’index pour lequel elle a été créée.
+
+      \[[Ensemble d’API: ExcelApi 1,1 pour l’ajout d’une seule ligne; 1,4 permet l’ajout de plusieurs lignes.](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
+    name: 'add(index, values)'
+    fullName: 'add(index, values)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'add(index?: number, values?: Array<Array<boolean | string | number>> | boolean | string | number): Excel.TableRow;'
+      return:
+        type:
+          - excel.Excel.TableRow
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var tables = ctx.workbook.tables;
+              var values = [["Sample", "Values", "For", "New", "Row"]];
+              var row = tables.getItem("Table1").rows.add(null, values);
+              row.load('index');
+              return ctx.sync().then(function() {
+                  console.log(row.index);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: index
+          description: 'Facultatif. Spécifie la position relative de la nouvelle ligne. Si la valeur est null ou -1, la ligne est ajoutée à la fin. Toutes les lignes en dessous de la ligne insérée sont déplacées vers le bas. Avec indice zéro.'
+          type:
+            - number
+        - id: values
+          description: "Facultatif. Matrice\_2D des valeurs non mises en forme de la ligne du tableau."
+          type:
+            - Array<Array<boolean | string | number>> | boolean | string | number
+  - uid: excel.Excel.TableRowCollection.context
+    summary: Contexte de demande associé à l’objet. Cette opération connecte le processus du complément au processus de l’application hôte Office.
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - excel.Excel.RequestContext
+  - uid: excel.Excel.TableRowCollection.count
+    summary: |-
+      Renvoie le nombre de lignes du tableau. En lecture seule.
+
+      \[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: count
+    fullName: count
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly count: number;'
+      return:
+        type:
+          - number
+  - uid: excel.Excel.TableRowCollection.getCount
+    summary: |-
+      Obtient le nombre de lignes dans le tableau.
+
+      \[[Ensemble d’API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getCount()
+    fullName: getCount()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getCount(): OfficeExtension.ClientResult<number>;'
+      return:
+        type:
+          - OfficeExtension.ClientResult<number>
+        description: ''
+  - uid: excel.Excel.TableRowCollection.getItemAt
+    summary: |-
+      Obtient une ligne en fonction de sa position dans la collection.
+
+      Notez que, à la différence des plages ou colonnes, qui s’ajusteront si de nouvelles lignes/colonnes sont ajoutées avant celles-ci, un objet TableRow représente l’emplacement physique de la ligne de table, mais pas les données. Autrement dit, si les données sont triées ou si de nouvelles lignes sont ajoutées, une ligne de tableau continue de pointer vers l’index pour lequel elle a été créée.
+
+      \[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getItemAt(index)
+    fullName: getItemAt(index)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItemAt(index: number): Excel.TableRow;'
+      return:
+        type:
+          - excel.Excel.TableRow
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var tablerow = ctx.workbook.tables.getItem('Table1').rows.getItemAt(0);
+              tablerow.load('name');
+              return ctx.sync().then(function() {
+                      console.log(tablerow.name);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: index
+          description: Valeur d’indice de l’objet à récupérer. Avec indice zéro.
+          type:
+            - number
+  - uid: excel.Excel.TableRowCollection.items
+    summary: Obtient l’élément enfant chargé dans cette collection de sites.
+    name: items
+    fullName: items
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly items: Excel.TableRow[];'
+      return:
+        type:
+          - 'Excel.TableRow[]'
+  - uid: excel.Excel.TableRowCollection.load
+    summary: "Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler «\_context.sync()\_» avant de lire les propriétés."
+    remarks: |-
+      En plus de cette signature, cette méthode possède les signatures suivantes:
+
+      `load(option?: string | string[]): Excel.TableRowCollection`-WHERE option est une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+
+      `load(option?: { select?: string; expand?: string; }): Excel.TableRowCollection`Option-WHERE option. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
+
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.TableRowCollection`-Uniquement disponible sur les types de collection. Elle est similaire à la signature précédente. Option. Top indique le nombre maximal d’éléments de collection qui peuvent être inclus dans le résultat. Option. Skip indique le nombre d’éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat. Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d’éléments.
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: Excel.Interfaces.TableRowCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.TableRowCollection;'
+      return:
+        type:
+          - excel.Excel.TableRowCollection
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - Excel.Interfaces.TableRowCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
+  - uid: excel.Excel.TableRowCollection.load_1
+    summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler `context.sync()` avant de lire les propriétés.
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Excel.TableRowCollection;'
+      return:
+        type:
+          - excel.Excel.TableRowCollection
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var tablerows = ctx.workbook.tables.getItem('Table1').rows;
+              tablerows.load('items');
+              return ctx.sync().then(function() {
+                  console.log("tablerows Count: " + tablerows.count);
+                  for (var i = 0; i < tablerows.items.length; i++)
+                  {
+                      console.log(tablerows.items[i].index);
+                  }
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+          ```javascript
+          // In the example, we'll select the top 100 rows of the table.
+          Excel.run(function (ctx) { 
+              var table = ctx.workbook.tables.getItem("Table1");
+              var tableRows = table.rows.load({"select" : "index, values","top": 100, "skip": 0 })
+              return ctx.sync().then(function() {
+                  for (var i = 0; i < tableRows.items.length; i++)
+                  {
+                      console.log(tableRows.items[i].index);
+                      console.log(tableRows.items[i].values);
+                  }
+              });
+          }).catch(function(error) {
+                  console.log("Error: " + error);
+                  if (error instanceof OfficeExtension.Error) {
+                      console.log("Debug info: " + JSON.stringify(error.debugInfo));
+                  }
+          });
+          ```
+      parameters:
+        - id: propertyNames
+          description: Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+          type:
+            - 'string | string[]'
+  - uid: excel.Excel.TableRowCollection.load_2
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: OfficeExtension.LoadOption): Excel.TableRowCollection;'
+      return:
+        type:
+          - excel.Excel.TableRowCollection
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - OfficeExtension.LoadOption
+  - uid: excel.Excel.TableRowCollection.toJSON
+    summary: 'Remplace la méthode JavaScript `toJSON()` afin de fournir une sortie plus utile lorsqu’un objet d’API est transmis à`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle `toJSON` la méthode de l’objet qui lui est passé.) Tandis que `Excel.TableRowCollection` l’objet d’origine est un objet `toJSON` d’API, la méthode renvoie un objet JavaScript simple (tapé comme`Excel.Interfaces.TableRowCollectionData`<!-- -->) qui contient un tableau «éléments» avec des copies superficielles de toutes les propriétés chargées des éléments de la collection.'
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Excel.Interfaces.TableRowCollectionData;'
+      return:
+        type:
+          - excel.Excel.Interfaces.TableRowCollectionData
+        description: ''
