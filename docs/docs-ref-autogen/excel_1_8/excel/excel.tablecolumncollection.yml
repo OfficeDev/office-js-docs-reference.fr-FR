@@ -1,0 +1,326 @@
+### YamlMime:UniversalReference
+items:
+  - uid: excel.Excel.TableColumnCollection
+    summary: |-
+      <span data-ttu-id="79399-101">Représente une collection de toutes les colonnes du tableau.</span><span class="sxs-lookup"><span data-stu-id="79399-101">Represents a collection of all the columns that are part of the table.</span></span>
+
+      <span data-ttu-id="79399-102">\[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="79399-102">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: Excel.TableColumnCollection
+    fullName: Excel.TableColumnCollection
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - 'OfficeExtension.ClientObject '
+    package: excel
+    children:
+      - excel.Excel.TableColumnCollection.add
+      - excel.Excel.TableColumnCollection.context
+      - excel.Excel.TableColumnCollection.count
+      - excel.Excel.TableColumnCollection.getCount
+      - excel.Excel.TableColumnCollection.getItem
+      - excel.Excel.TableColumnCollection.getItemAt
+      - excel.Excel.TableColumnCollection.getItemOrNullObject
+      - excel.Excel.TableColumnCollection.items
+      - excel.Excel.TableColumnCollection.load
+      - excel.Excel.TableColumnCollection.load_1
+      - excel.Excel.TableColumnCollection.load_2
+      - excel.Excel.TableColumnCollection.toJSON
+  - uid: excel.Excel.TableColumnCollection.add
+    summary: |-
+      <span data-ttu-id="79399-103">Ajoute une nouvelle colonne au tableau.</span><span class="sxs-lookup"><span data-stu-id="79399-103">Adds a new column to the table.</span></span>
+
+      <span data-ttu-id="79399-104">\[[Ensemble d’API: ExcelApi 1,1 nécessite un index plus petit que le nombre total de colonnes; 1,4 permet à l’index d’être facultatif (null ou-1) et ajoute une colonne à la fin; 1,4 autorise le paramètre Name au moment de la création.](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)</span><span class="sxs-lookup"><span data-stu-id="79399-104">\[ [API set: ExcelApi 1.1 requires an index smaller than the total column count; 1.4 allows index to be optional (null or -1) and will append a column at the end; 1.4 allows name parameter at creation time.](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)</span></span> <span data-ttu-id="79399-105">\]</span><span class="sxs-lookup"><span data-stu-id="79399-105"></span></span>
+    name: 'add(index, values, name)'
+    fullName: 'add(index, values, name)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'add(index?: number, values?: Array<Array<boolean | string | number>> | boolean | string | number, name?: string): Excel.TableColumn;'
+      return:
+        type:
+          - excel.Excel.TableColumn
+        description: |-
+
+
+          #### <a name="examples"></a><span data-ttu-id="79399-106">Exemples</span><span class="sxs-lookup"><span data-stu-id="79399-106">Examples</span></span>
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var tables = ctx.workbook.tables;
+              var values = [["Sample"], ["Values"], ["For"], ["New"], ["Column"]];
+              var column = tables.getItem("Table1").columns.add(null, values);
+              column.load('name');
+              return ctx.sync().then(function() {
+                  console.log(column.name);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: index
+          description: '<span data-ttu-id="79399-p102">Facultatif. Spécifie la position relative de la nouvelle colonne. Si la valeur est null ou -1, la ligne est ajoutée à la fin. Les colonnes avec un index supérieur seront décalées sur le côté. Avec indice zéro.</span><span class="sxs-lookup"><span data-stu-id="79399-p102">Optional. Specifies the relative position of the new column. If null or -1, the addition happens at the end. Columns with a higher index will be shifted to the side. Zero-indexed.</span></span>'
+          type:
+            - number
+        - id: values
+          description: "<span data-ttu-id=\"79399-112\">Facultatif.</span><span class=\"sxs-lookup\"><span data-stu-id=\"79399-112\">Optional.</span></span> <span data-ttu-id=\"79399-113\">Matrice\_2D des valeurs non mises en forme de la colonne du tableau.</span><span class=\"sxs-lookup\"><span data-stu-id=\"79399-113\">A 2-dimensional array of unformatted values of the table column.</span></span>"
+          type:
+            - Array<Array<boolean | string | number>> | boolean | string | number
+        - id: name
+          description: '<span data-ttu-id="79399-114">Facultatif.</span><span class="sxs-lookup"><span data-stu-id="79399-114">Optional.</span></span> <span data-ttu-id="79399-115">Spécifie le nom de la nouvelle colonne.</span><span class="sxs-lookup"><span data-stu-id="79399-115">Specifies the name of the new column.</span></span> <span data-ttu-id="79399-116">Si la valeur est null, le nom par défaut est utilisé.</span><span class="sxs-lookup"><span data-stu-id="79399-116">If null, the default name will be used.</span></span>'
+          type:
+            - string
+  - uid: excel.Excel.TableColumnCollection.context
+    summary: <span data-ttu-id="79399-117">Contexte de demande associé à l’objet.</span><span class="sxs-lookup"><span data-stu-id="79399-117">The request context associated with the object.</span></span> <span data-ttu-id="79399-118">Cette opération connecte le processus du complément au processus de l’application hôte Office.</span><span class="sxs-lookup"><span data-stu-id="79399-118">This connects the add-in's process to the Office host application's process.</span></span>
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - excel.Excel.RequestContext
+  - uid: excel.Excel.TableColumnCollection.count
+    summary: |-
+      <span data-ttu-id="79399-119">Renvoie le nombre de colonnes du tableau.</span><span class="sxs-lookup"><span data-stu-id="79399-119">Returns the number of columns in the table.</span></span> <span data-ttu-id="79399-120">En lecture seule.</span><span class="sxs-lookup"><span data-stu-id="79399-120">Read-only.</span></span>
+
+      <span data-ttu-id="79399-121">\[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="79399-121">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: count
+    fullName: count
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly count: number;'
+      return:
+        type:
+          - number
+  - uid: excel.Excel.TableColumnCollection.getCount
+    summary: |-
+      <span data-ttu-id="79399-122">Obtient le nombre de colonnes dans le tableau.</span><span class="sxs-lookup"><span data-stu-id="79399-122">Gets the number of columns in the table.</span></span>
+
+      <span data-ttu-id="79399-123">\[[Ensemble d’API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="79399-123">\[ [API set: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: getCount()
+    fullName: getCount()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getCount(): OfficeExtension.ClientResult<number>;'
+      return:
+        type:
+          - OfficeExtension.ClientResult<number>
+        description: ''
+  - uid: excel.Excel.TableColumnCollection.getItem
+    summary: |-
+      <span data-ttu-id="79399-124">Obtient un objet de colonne par son nom ou son ID.</span><span class="sxs-lookup"><span data-stu-id="79399-124">Gets a column object by Name or ID.</span></span>
+
+      <span data-ttu-id="79399-125">\[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="79399-125">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: getItem(key)
+    fullName: getItem(key)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItem(key: number | string): Excel.TableColumn;'
+      return:
+        type:
+          - excel.Excel.TableColumn
+        description: |-
+
+
+          #### <a name="examples"></a><span data-ttu-id="79399-126">Exemples</span><span class="sxs-lookup"><span data-stu-id="79399-126">Examples</span></span>
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var tablecolumn = ctx.workbook.tables.getItem('Table1').columns.getItem(0);
+              tablecolumn.load('name');
+              return ctx.sync().then(function() {
+                      console.log(tablecolumn.name);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: key
+          description: <span data-ttu-id="79399-127">Nom ou ID de la colonne.</span><span class="sxs-lookup"><span data-stu-id="79399-127">Column Name or ID.</span></span>
+          type:
+            - number | string
+  - uid: excel.Excel.TableColumnCollection.getItemAt
+    summary: |-
+      <span data-ttu-id="79399-128">Obtient une colonne en fonction de sa position dans la collection.</span><span class="sxs-lookup"><span data-stu-id="79399-128">Gets a column based on its position in the collection.</span></span>
+
+      <span data-ttu-id="79399-129">\[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="79399-129">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: getItemAt(index)
+    fullName: getItemAt(index)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItemAt(index: number): Excel.TableColumn;'
+      return:
+        type:
+          - excel.Excel.TableColumn
+        description: |-
+
+
+          #### <a name="examples"></a><span data-ttu-id="79399-130">Exemples</span><span class="sxs-lookup"><span data-stu-id="79399-130">Examples</span></span>
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var tablecolumn = ctx.workbook.tables.getItem['Table1'].columns.getItemAt(0);
+              tablecolumn.load('name');
+              return ctx.sync().then(function() {
+                      console.log(tablecolumn.name);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: index
+          description: <span data-ttu-id="79399-131">Valeur d’indice de l’objet à récupérer.</span><span class="sxs-lookup"><span data-stu-id="79399-131">Index value of the object to be retrieved.</span></span> <span data-ttu-id="79399-132">Avec indice zéro.</span><span class="sxs-lookup"><span data-stu-id="79399-132">Zero-indexed.</span></span>
+          type:
+            - number
+  - uid: excel.Excel.TableColumnCollection.getItemOrNullObject
+    summary: |-
+      <span data-ttu-id="79399-133">Obtient un objet de colonne par nom ou par ID.</span><span class="sxs-lookup"><span data-stu-id="79399-133">Gets a column object by Name or ID.</span></span> <span data-ttu-id="79399-134">Si la colonne n’existe pas, renvoie un objet null.</span><span class="sxs-lookup"><span data-stu-id="79399-134">If the column does not exist, will return a null object.</span></span>
+
+      <span data-ttu-id="79399-135">\[[Ensemble d’API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="79399-135">\[ [API set: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: getItemOrNullObject(key)
+    fullName: getItemOrNullObject(key)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItemOrNullObject(key: number | string): Excel.TableColumn;'
+      return:
+        type:
+          - excel.Excel.TableColumn
+        description: ''
+      parameters:
+        - id: key
+          description: <span data-ttu-id="79399-136">Nom ou ID de la colonne.</span><span class="sxs-lookup"><span data-stu-id="79399-136">Column Name or ID.</span></span>
+          type:
+            - number | string
+  - uid: excel.Excel.TableColumnCollection.items
+    summary: <span data-ttu-id="79399-137">Obtient l’élément enfant chargé dans cette collection de sites.</span><span class="sxs-lookup"><span data-stu-id="79399-137">Gets the loaded child items in this collection.</span></span>
+    name: items
+    fullName: items
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly items: Excel.TableColumn[];'
+      return:
+        type:
+          - 'Excel.TableColumn[]'
+  - uid: excel.Excel.TableColumnCollection.load
+    summary: "<span data-ttu-id=\"79399-138\">Files d’attente de la commande pour charger les propriétés de l’objet spécifié.</span><span class=\"sxs-lookup\"><span data-stu-id=\"79399-138\">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id=\"79399-139\">Vous devez appeler «\_context.sync()\_» avant de lire les propriétés.</span><span class=\"sxs-lookup\"><span data-stu-id=\"79399-139\">You must call \"context.sync()\" before reading the properties.</span></span>"
+    remarks: |-
+      <span data-ttu-id="79399-140">En plus de cette signature, cette méthode possède les signatures suivantes:</span><span class="sxs-lookup"><span data-stu-id="79399-140">In addition to this signature, this method has the following signatures:</span></span>
+
+      <span data-ttu-id="79399-141">`load(option?: string | string[]): Excel.TableColumnCollection`-WHERE option est une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.</span><span class="sxs-lookup"><span data-stu-id="79399-141">`load(option?: string | string[]): Excel.TableColumnCollection` - Where option is a comma-delimited string or an array of strings that specify the properties to load.</span></span>
+
+      <span data-ttu-id="79399-142">`load(option?: { select?: string; expand?: string; }): Excel.TableColumnCollection`Option-WHERE option. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.</span><span class="sxs-lookup"><span data-stu-id="79399-142">`load(option?: { select?: string; expand?: string; }): Excel.TableColumnCollection` - Where option.select is a comma-delimited string that specifies the properties to load, and options.expand is a comma-delimited string that specifies the navigation properties to load.</span></span>
+
+      <span data-ttu-id="79399-143">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.TableColumnCollection`-Uniquement disponible sur les types de collection.</span><span class="sxs-lookup"><span data-stu-id="79399-143">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.TableColumnCollection` - Only available on collection types.</span></span> <span data-ttu-id="79399-144">Elle est similaire à la signature précédente.</span><span class="sxs-lookup"><span data-stu-id="79399-144">It is similar to the preceding signature.</span></span> <span data-ttu-id="79399-145">Option. Top indique le nombre maximal d’éléments de collection qui peuvent être inclus dans le résultat.</span><span class="sxs-lookup"><span data-stu-id="79399-145">Option.top specifies the maximum number of collection items that can be included in the result.</span></span> <span data-ttu-id="79399-146">Option. Skip indique le nombre d’éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat.</span><span class="sxs-lookup"><span data-stu-id="79399-146">Option.skip specifies the number of items that are to be skipped and not included in the result.</span></span> <span data-ttu-id="79399-147">Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d’éléments.</span><span class="sxs-lookup"><span data-stu-id="79399-147">If option.top is specified, the result set will start after skipping the specified number of items.</span></span>
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: Excel.Interfaces.TableColumnCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.TableColumnCollection;'
+      return:
+        type:
+          - excel.Excel.TableColumnCollection
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - Excel.Interfaces.TableColumnCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
+  - uid: excel.Excel.TableColumnCollection.load_1
+    summary: <span data-ttu-id="79399-148">Files d’attente de la commande pour charger les propriétés de l’objet spécifié.</span><span class="sxs-lookup"><span data-stu-id="79399-148">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="79399-149">Vous devez appeler `context.sync()` avant de lire les propriétés.</span><span class="sxs-lookup"><span data-stu-id="79399-149">You must call `context.sync()` before reading the properties.</span></span>
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Excel.TableColumnCollection;'
+      return:
+        type:
+          - excel.Excel.TableColumnCollection
+        description: |-
+
+
+          #### <a name="examples"></a><span data-ttu-id="79399-150">Exemples</span><span class="sxs-lookup"><span data-stu-id="79399-150">Examples</span></span>
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var tablecolumns = ctx.workbook.tables.getItem('Table1').columns;
+              tablecolumns.load('items');
+              return ctx.sync().then(function() {
+                  console.log("tablecolumns Count: " + tablecolumns.count);
+                  for (var i = 0; i < tablecolumns.items.length; i++) {
+                      console.log(tablecolumns.items[i].name);
+                  }
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: propertyNames
+          description: <span data-ttu-id="79399-151">Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.</span><span class="sxs-lookup"><span data-stu-id="79399-151">A comma-delimited string or an array of strings that specify the properties to load.</span></span>
+          type:
+            - 'string | string[]'
+  - uid: excel.Excel.TableColumnCollection.load_2
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: OfficeExtension.LoadOption): Excel.TableColumnCollection;'
+      return:
+        type:
+          - excel.Excel.TableColumnCollection
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - OfficeExtension.LoadOption
+  - uid: excel.Excel.TableColumnCollection.toJSON
+    summary: '<span data-ttu-id="79399-152">Remplace la méthode JavaScript `toJSON()` afin de fournir une sortie plus utile lorsqu’un objet d’API est transmis à`JSON.stringify()`</span><span class="sxs-lookup"><span data-stu-id="79399-152">Overrides the JavaScript `toJSON()` method in order to provide more useful output when an API object is passed to `JSON.stringify()`</span></span><!-- --><span data-ttu-id="79399-153">.</span><span class="sxs-lookup"><span data-stu-id="79399-153"></span></span> <span data-ttu-id="79399-154">(`JSON.stringify`</span><span class="sxs-lookup"><span data-stu-id="79399-154"></span></span><!-- --><span data-ttu-id="79399-155">, à son tour, appelle `toJSON` la méthode de l’objet qui lui est passé.) Tandis que `Excel.TableColumnCollection` l’objet d’origine est un objet `toJSON` d’API, la méthode renvoie un objet JavaScript simple (tapé comme`Excel.Interfaces.TableColumnCollectionData`</span><span class="sxs-lookup"><span data-stu-id="79399-155">, in turn, calls the `toJSON` method of the object that is passed to it.) Whereas the original `Excel.TableColumnCollection` object is an API object, the `toJSON` method returns a plain JavaScript object (typed as `Excel.Interfaces.TableColumnCollectionData`</span></span><!-- --><span data-ttu-id="79399-156">) qui contient un tableau «éléments» avec des copies superficielles de toutes les propriétés chargées des éléments de la collection.</span><span class="sxs-lookup"><span data-stu-id="79399-156">) that contains an "items" array with shallow copies of any loaded properties from the collection''s items.</span></span>'
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Excel.Interfaces.TableColumnCollectionData;'
+      return:
+        type:
+          - excel.Excel.Interfaces.TableColumnCollectionData
+        description: ''
