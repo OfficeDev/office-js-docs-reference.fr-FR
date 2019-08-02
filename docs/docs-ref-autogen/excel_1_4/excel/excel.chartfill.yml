@@ -1,0 +1,159 @@
+### YamlMime:UniversalReference
+items:
+  - uid: excel.Excel.ChartFill
+    summary: |-
+      Représente le format de remplissage d’un élément de graphique.
+
+      \[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: Excel.ChartFill
+    fullName: Excel.ChartFill
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - 'OfficeExtension.ClientObject '
+    package: excel
+    children:
+      - excel.Excel.ChartFill.clear
+      - excel.Excel.ChartFill.context
+      - excel.Excel.ChartFill.load
+      - excel.Excel.ChartFill.setSolidColor
+      - excel.Excel.ChartFill.toJSON
+  - uid: excel.Excel.ChartFill.clear
+    summary: |-
+      Supprime la couleur de remplissage d’un élément de graphique.
+
+      \[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: clear()
+    fullName: clear()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'clear(): void;'
+      return:
+        type:
+          - void
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```javascript
+          // Clear the line format of the major Gridlines on value axis of the Chart named "Chart1"
+          Excel.run(function (ctx) { 
+              var gridlines = ctx.workbook.worksheets.getItem("Sheet1").charts.getItem("Chart1").axes.valueAxis.majorGridlines;
+              gridlines.format.line.clear();
+              return ctx.sync().then(function() {
+                      console.log("Chart Major Gridlines Format Cleared");
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: excel.Excel.ChartFill.context
+    summary: Contexte de demande associé à l’objet. Cette opération connecte le processus du complément au processus de l’application hôte Office.
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - excel.Excel.RequestContext
+  - uid: excel.Excel.ChartFill.load
+    summary: "Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler «\_context.sync()\_» avant de lire les propriétés."
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: string | string[] | OfficeExtension.LoadOption): Excel.ChartFill;'
+      return:
+        type:
+          - excel.Excel.ChartFill
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - 'string | string[] | OfficeExtension.LoadOption'
+  - uid: excel.Excel.ChartFill.setSolidColor
+    summary: |-
+      Définit le format de remplissage d’un élément de graphique sur une couleur unie.
+
+      \[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: setSolidColor(color)
+    fullName: setSolidColor(color)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'setSolidColor(color: string): void;'
+      return:
+        type:
+          - void
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var chart = ctx.workbook.worksheets.getItem("Sheet1").charts.getItem("Chart1");    
+
+              chart.format.fill.setSolidColor("#FF0000");
+
+              return ctx.sync().then(function() {
+                      console.log("Chart1 Background Color Changed.");
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+          ```typescript
+          await Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getItem("Sample");
+
+              let pointsCollection = sheet.charts.getItemAt(0).series.getItemAt(0).points;
+              let point = pointsCollection.getItemAt(2);
+
+              // Set color for chart point.
+              point.format.fill.setSolidColor('red');
+
+              await context.sync();        
+          });
+          ```
+      parameters:
+        - id: color
+          description: 'Code couleur HTML qui représente la couleur de la ligne de bordure, sous \#la forme RRGGBB (par exemple, «FFA500») ou sous forme de couleur HTML nommée (par exemple, «orange»).'
+          type:
+            - string
+  - uid: excel.Excel.ChartFill.toJSON
+    summary: 'Remplace la méthode JavaScript `toJSON()` afin de fournir une sortie plus utile lorsqu’un objet d’API est transmis à`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle `toJSON` la méthode de l’objet qui lui est passé.) Tandis que l’objet Excel. ChartFill d’origine est un objet `toJSON` d’API, la méthode renvoie un objet JavaScript simple (tapé comme`Excel.Interfaces.ChartFillData`<!-- -->) qui contient des copies superficielles de toutes les propriétés enfants chargées à partir de l’objet d’origine.'
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: |-
+        toJSON(): {
+                    [key: string]: string;
+                };
+      return:
+        type:
+          - |-
+            {
+                        [key: string]: string;
+                    }
+        description: ''

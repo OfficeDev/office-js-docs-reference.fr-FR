@@ -1,0 +1,183 @@
+### YamlMime:UniversalReference
+items:
+  - uid: excel.Excel.NamedItemCollection
+    summary: |-
+      Collection de tous les objets NamedItem qui font partie du classeur ou de la feuille de calcul, en fonction de la manière dont ils ont été atteints.
+
+      \[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: Excel.NamedItemCollection
+    fullName: Excel.NamedItemCollection
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - 'OfficeExtension.ClientObject '
+    package: excel
+    children:
+      - excel.Excel.NamedItemCollection.context
+      - excel.Excel.NamedItemCollection.getItem
+      - excel.Excel.NamedItemCollection.items
+      - excel.Excel.NamedItemCollection.load
+      - excel.Excel.NamedItemCollection.load_1
+      - excel.Excel.NamedItemCollection.load_2
+      - excel.Excel.NamedItemCollection.toJSON
+  - uid: excel.Excel.NamedItemCollection.context
+    summary: Contexte de demande associé à l’objet. Cette opération connecte le processus du complément au processus de l’application hôte Office.
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - excel.Excel.RequestContext
+  - uid: excel.Excel.NamedItemCollection.getItem
+    summary: |-
+      Obtient un objet NamedItem à l’aide de son nom.
+
+      \[[Ensemble d’API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getItem(name)
+    fullName: getItem(name)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItem(name: string): Excel.NamedItem;'
+      return:
+        type:
+          - excel.Excel.NamedItem
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var sheetName = 'Sheet1';
+              var nameditem = ctx.workbook.names.getItem(sheetName);
+              nameditem.load('type');
+              return ctx.sync().then(function() {
+                      console.log(nameditem.type);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: name
+          description: Nom NamedItem.
+          type:
+            - string
+  - uid: excel.Excel.NamedItemCollection.items
+    summary: Obtient l’élément enfant chargé dans cette collection de sites.
+    name: items
+    fullName: items
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly items: Excel.NamedItem[];'
+      return:
+        type:
+          - 'Excel.NamedItem[]'
+  - uid: excel.Excel.NamedItemCollection.load
+    summary: "Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler «\_context.sync()\_» avant de lire les propriétés."
+    remarks: |-
+      En plus de cette signature, cette méthode possède les signatures suivantes:
+
+      `load(option?: string | string[]): Excel.NamedItemCollection`-WHERE option est une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+
+      `load(option?: { select?: string; expand?: string; }): Excel.NamedItemCollection`Option-WHERE option. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
+
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.NamedItemCollection`-Uniquement disponible sur les types de collection. Elle est similaire à la signature précédente. Option. Top indique le nombre maximal d’éléments de collection qui peuvent être inclus dans le résultat. Option. Skip indique le nombre d’éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat. Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d’éléments.
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: Excel.Interfaces.NamedItemCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.NamedItemCollection;'
+      return:
+        type:
+          - excel.Excel.NamedItemCollection
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - Excel.Interfaces.NamedItemCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
+  - uid: excel.Excel.NamedItemCollection.load_1
+    summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler `context.sync()` avant de lire les propriétés.
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Excel.NamedItemCollection;'
+      return:
+        type:
+          - excel.Excel.NamedItemCollection
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var nameditems = ctx.workbook.names;
+              nameditems.load('items');
+              return ctx.sync().then(function() {
+                  for (var i = 0; i < nameditems.items.length; i++)
+                  {
+                      console.log(nameditems.items[i].name);
+                      console.log(nameditems.items[i].index);
+                  }
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: propertyNames
+          description: Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+          type:
+            - 'string | string[]'
+  - uid: excel.Excel.NamedItemCollection.load_2
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: OfficeExtension.LoadOption): Excel.NamedItemCollection;'
+      return:
+        type:
+          - excel.Excel.NamedItemCollection
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - OfficeExtension.LoadOption
+  - uid: excel.Excel.NamedItemCollection.toJSON
+    summary: 'Remplace la méthode JavaScript `toJSON()` afin de fournir une sortie plus utile lorsqu’un objet d’API est transmis à`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle `toJSON` la méthode de l’objet qui lui est passé.) Tandis que `Excel.NamedItemCollection` l’objet d’origine est un objet `toJSON` d’API, la méthode renvoie un objet JavaScript simple (tapé comme`Excel.Interfaces.NamedItemCollectionData`<!-- -->) qui contient un tableau «éléments» avec des copies superficielles de toutes les propriétés chargées des éléments de la collection.'
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Excel.Interfaces.NamedItemCollectionData;'
+      return:
+        type:
+          - excel.Excel.Interfaces.NamedItemCollectionData
+        description: ''
