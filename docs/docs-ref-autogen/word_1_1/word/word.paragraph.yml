@@ -1,0 +1,1500 @@
+### YamlMime:UniversalReference
+items:
+  - uid: word.Word.Paragraph
+    summary: |-
+      Représente un seul paragraphe dans une sélection, une plage, un contrôle de contenu ou le corps d’un document.
+
+      \[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: Word.Paragraph
+    fullName: Word.Paragraph
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - 'OfficeExtension.ClientObject '
+    package: word
+    children:
+      - word.Word.Paragraph.alignment
+      - word.Word.Paragraph.clear
+      - word.Word.Paragraph.contentControls
+      - word.Word.Paragraph.context
+      - word.Word.Paragraph.delete
+      - word.Word.Paragraph.firstLineIndent
+      - word.Word.Paragraph.font
+      - word.Word.Paragraph.getHtml
+      - word.Word.Paragraph.getOoxml
+      - word.Word.Paragraph.inlinePictures
+      - word.Word.Paragraph.insertBreak
+      - word.Word.Paragraph.insertBreak_1
+      - word.Word.Paragraph.insertContentControl
+      - word.Word.Paragraph.insertFileFromBase64
+      - word.Word.Paragraph.insertFileFromBase64_1
+      - word.Word.Paragraph.insertHtml
+      - word.Word.Paragraph.insertHtml_1
+      - word.Word.Paragraph.insertInlinePictureFromBase64
+      - word.Word.Paragraph.insertInlinePictureFromBase64_1
+      - word.Word.Paragraph.insertOoxml
+      - word.Word.Paragraph.insertOoxml_1
+      - word.Word.Paragraph.insertParagraph
+      - word.Word.Paragraph.insertParagraph_1
+      - word.Word.Paragraph.insertText
+      - word.Word.Paragraph.insertText_1
+      - word.Word.Paragraph.leftIndent
+      - word.Word.Paragraph.lineSpacing
+      - word.Word.Paragraph.lineUnitAfter
+      - word.Word.Paragraph.lineUnitBefore
+      - word.Word.Paragraph.load
+      - word.Word.Paragraph.load_1
+      - word.Word.Paragraph.load_2
+      - word.Word.Paragraph.outlineLevel
+      - word.Word.Paragraph.parentContentControl
+      - word.Word.Paragraph.rightIndent
+      - word.Word.Paragraph.search
+      - word.Word.Paragraph.select
+      - word.Word.Paragraph.select_1
+      - word.Word.Paragraph.set
+      - word.Word.Paragraph.set_1
+      - word.Word.Paragraph.spaceAfter
+      - word.Word.Paragraph.spaceBefore
+      - word.Word.Paragraph.style
+      - word.Word.Paragraph.text
+      - word.Word.Paragraph.toJSON
+      - word.Word.Paragraph.track
+      - word.Word.Paragraph.untrack
+  - uid: word.Word.Paragraph.alignment
+    summary: "Obtient ou définit l’alignement d’un paragraphe. La valeur peut être «\_left\_» (gauche), «\_centered\_» (centré), «\_right\_» (droite) ou «\_justified\_» (justifié).\n\n\\[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\\]"
+    name: alignment
+    fullName: alignment
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'alignment: Word.Alignment | "Mixed" | "Unknown" | "Left" | "Centered" | "Right" | "Justified";'
+      return:
+        type:
+          - Word.Alignment | "Mixed" | "Unknown" | "Left" | "Centered" | "Right" | "Justified"
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```typescript
+          await Word.run(async (context) => {
+            // Centers last paragraph alignment.
+            context.document.body.paragraphs.getLast().alignment = "Centered";
+
+            await context.sync();
+          });
+          ```
+  - uid: word.Word.Paragraph.clear
+    summary: |-
+      Efface le contenu de l’objet de paragraphe. L’utilisateur peut effectuer l’opération d’annulation sur le contenu effacé.
+
+      \[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: clear()
+    fullName: clear()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'clear(): void;'
+      return:
+        type:
+          - void
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Create a proxy object for the paragraphs collection.
+              var paragraphs = context.document.body.paragraphs;
+
+              // Queue a commmand to load the style property for all of the paragraphs.
+              context.load(paragraphs, 'style');
+
+              // Synchronize the document state by executing the queued commands,
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+
+                  // Queue a command to clear the contents of the first paragraph.
+                  paragraphs.items[0].clear();
+
+                  // Synchronize the document state by executing the queued commands,
+                  // and return a promise to indicate task completion.
+                  return context.sync().then(function () {
+                      console.log('Cleared the contents of the first paragraph.');
+                  });
+              });
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: word.Word.Paragraph.contentControls
+    summary: |-
+      Obtient la collection d’objets de contrôle de contenu dans le paragraphe. En lecture seule.
+
+      \[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: contentControls
+    fullName: contentControls
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly contentControls: Word.ContentControlCollection;'
+      return:
+        type:
+          - word.Word.ContentControlCollection
+  - uid: word.Word.Paragraph.context
+    summary: Contexte de demande associé à l’objet. Cette opération connecte le processus du complément au processus de l’application hôte Office.
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - word.Word.RequestContext
+  - uid: word.Word.Paragraph.delete
+    summary: |-
+      Supprime le paragraphe et son contenu du document.
+
+      \[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: delete()
+    fullName: delete()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'delete(): void;'
+      return:
+        type:
+          - void
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Create a proxy object for the paragraphs collection.
+              var paragraphs = context.document.body.paragraphs;
+
+              // Queue a commmand to load the text property for all of the paragraphs.
+              context.load(paragraphs, 'text');
+
+              // Synchronize the document state by executing the queued commands,
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+
+                  // Queue a command to delete the first paragraph.
+                  paragraphs.items[0].delete();
+
+                  // Synchronize the document state by executing the queued commands,
+                  // and return a promise to indicate task completion.
+                  return context.sync().then(function () {
+                      console.log('Deleted the first paragraph.');
+                  });
+              });
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: word.Word.Paragraph.firstLineIndent
+    summary: |-
+      Renvoie ou définit la valeur, en points, du retrait de première ligne ou du retrait négatif. Utilisez une valeur positive pour définir un retrait de première ligne et une valeur négative pour définir un retrait négatif.
+
+      \[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: firstLineIndent
+    fullName: firstLineIndent
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'firstLineIndent: number;'
+      return:
+        type:
+          - number
+  - uid: word.Word.Paragraph.font
+    summary: |-
+      Obtient le format de texte du paragraphe. Utilisez cette propriété pour obtenir et définir le nom de la police, la taille, la couleur et d’autres propriétés. En lecture seule.
+
+      \[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: font
+    fullName: font
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly font: Word.Font;'
+      return:
+        type:
+          - word.Word.Font
+  - uid: word.Word.Paragraph.getHtml
+    summary: |-
+      Obtient une représentation HTML de l’objet Paragraph. Lorsqu’elle est affichée dans une page Web ou dans la visionneuse HTML, la mise en forme est une correspondance ferme, mais pas exacte, avec la mise en forme du document. Cette méthode ne renvoie pas exactement le même code HTML pour le même document sur différentes plateformes (Windows, Mac, etc.). Si vous avez besoin d’une fidélité exacte ou d’une cohérence `Paragraph.getOoxml()` entre les plateformes, utilisez et convertissez le code XML renvoyé en html.
+
+      \[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: getHtml()
+    fullName: getHtml()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getHtml(): OfficeExtension.ClientResult<string>;'
+      return:
+        type:
+          - OfficeExtension.ClientResult<string>
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Create a proxy object for the paragraphs collection.
+              var paragraphs = context.document.body.paragraphs;
+
+              // Queue a commmand to load the style property for all of the paragraphs.
+              context.load(paragraphs, 'style');
+
+              // Synchronize the document state by executing the queued commands,
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+
+                  // Queue a a set of commands to get the HTML of the first paragraph.
+                  var html = paragraphs.items[0].getHtml();
+
+                  // Synchronize the document state by executing the queued commands,
+                  // and return a promise to indicate task completion.
+                  return context.sync().then(function () {
+                      console.log('Paragraph HTML: ' + html.value);
+                  });
+              });
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: word.Word.Paragraph.getOoxml
+    summary: |-
+      Obtient la représentation Office Open XML (OOXML) de l’objet de paragraphe.
+
+      \[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: getOoxml()
+    fullName: getOoxml()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getOoxml(): OfficeExtension.ClientResult<string>;'
+      return:
+        type:
+          - OfficeExtension.ClientResult<string>
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Create a proxy object for the paragraphs collection.
+              var paragraphs = context.document.body.paragraphs;
+
+              // Queue a commmand to load the style property for the top 2 paragraphs.
+              context.load(paragraphs, {select: 'style', top: 2} );
+
+              // Synchronize the document state by executing the queued commands,
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+
+                  // Queue a a set of commands to get the OOXML of the first paragraph.
+                  var ooxml = paragraphs.items[0].getOoxml();
+
+                  // Synchronize the document state by executing the queued commands,
+                  // and return a promise to indicate task completion.
+                  return context.sync().then(function () {
+                      console.log('Paragraph OOXML: ' + ooxml.value);
+                  });
+              });
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: word.Word.Paragraph.inlinePictures
+    summary: |-
+      Obtient la collection d’objets InlinePicture dans le paragraphe. La collection n’inclut pas d’images flottantes. En lecture seule.
+
+      \[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: inlinePictures
+    fullName: inlinePictures
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly inlinePictures: Word.InlinePictureCollection;'
+      return:
+        type:
+          - word.Word.InlinePictureCollection
+  - uid: word.Word.Paragraph.insertBreak
+    summary: "Insère un saut à l’emplacement spécifié du document principal. La valeur insertLocation peut être définie sur «\_Before\_» (avant) ou «\_After\_» (après).\n\n\\[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\\]"
+    name: 'insertBreak(breakType, insertLocation)'
+    fullName: 'insertBreak(breakType, insertLocation)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'insertBreak(breakType: Word.BreakType, insertLocation: Word.InsertLocation): void;'
+      return:
+        type:
+          - void
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```typescript
+          Word.run(async (context) => {
+            context.document.body.paragraphs.getFirst().insertBreak(Word.BreakType.line, "After");
+
+            await context.sync();
+            console.log("success");
+          });
+          ```
+          ```typescript
+          await Word.run(async (context) => {
+            context.document.body.paragraphs.getFirst().insertBreak(Word.BreakType.page, "After");
+
+            await context.sync();
+            console.log("success");
+          });
+          ```
+      parameters:
+        - id: breakType
+          description: Obligatoire. Type de saut à ajouter au document.
+          type:
+            - word.Word.BreakType
+        - id: insertLocation
+          description: "Obligatoire. La valeur peut être «\_Before\_» (avant) » ou «\_After\_» (après)."
+          type:
+            - word.Word.InsertLocation
+  - uid: word.Word.Paragraph.insertBreak_1
+    summary: "Insère un saut à l’emplacement spécifié du document principal. La valeur insertLocation peut être définie sur «\_Before\_» (avant) ou «\_After\_» (après).\n\n\\[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\\]"
+    name: 'insertBreak(breakTypeString, insertLocation)'
+    fullName: 'insertBreak(breakTypeString, insertLocation)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'insertBreak(breakTypeString: "Page" | "Next" | "SectionNext" | "SectionContinuous" | "SectionEven" | "SectionOdd" | "Line", insertLocation: "Before" | "After" | "Start" | "End" | "Replace"): void;'
+      return:
+        type:
+          - void
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Create a proxy object for the paragraphs collection.
+              var paragraphs = context.document.body.paragraphs;
+
+              // Queue a commmand to load the style property for the top 2 paragraphs.
+              // We never perform an empty load. We always must request a property.
+              context.load(paragraphs, {select: 'style', top: 2} );
+
+              // Synchronize the document state by executing the queued commands,
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+
+                  // Queue a command to get the first paragraph.
+                  var paragraph = paragraphs.items[0];
+
+                  // Queue a command to insert a page break after the first paragraph.
+                  paragraph.insertBreak('page', 'After');
+
+                  // Synchronize the document state by executing the queued commands,
+                  // and return a promise to indicate task completion.
+                  return context.sync().then(function () {
+                      console.log('Inserted a page break after the paragraph.');
+                  });
+              });
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: breakTypeString
+          description: Obligatoire. Type de saut à ajouter au document.
+          type:
+            - '"Page" | "Next" | "SectionNext" | "SectionContinuous" | "SectionEven" | "SectionOdd" | "Line"'
+        - id: insertLocation
+          description: "Obligatoire. La valeur peut être «\_Before\_» (avant) » ou «\_After\_» (après)."
+          type:
+            - '"Before" | "After" | "Start" | "End" | "Replace"'
+  - uid: word.Word.Paragraph.insertContentControl
+    summary: |-
+      Encadre l’objet de paragraphe avec un contrôle de contenu de texte enrichi.
+
+      \[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: insertContentControl()
+    fullName: insertContentControl()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'insertContentControl(): Word.ContentControl;'
+      return:
+        type:
+          - word.Word.ContentControl
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Create a proxy object for the paragraphs collection.
+              var paragraphs = context.document.body.paragraphs;
+
+              // Queue a commmand to load the style property for the top 2 paragraphs.
+              // We never perform an empty load. We always must request a property.
+              context.load(paragraphs, {select: 'style', top: 2} );
+
+              // Synchronize the document state by executing the queued commands,
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+
+                  // Queue a command to get the first paragraph.
+                  var paragraph = paragraphs.items[0];
+
+                  // Queue a command to wrap the first paragraph in a rich text content control.
+                  paragraph.insertContentControl();
+
+                  // Synchronize the document state by executing the queued commands,
+                  // and return a promise to indicate task completion.
+                  return context.sync().then(function () {
+                      console.log('Wrapped the first paragraph in a content control.');
+                  });
+              });
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: word.Word.Paragraph.insertFileFromBase64
+    summary: "Insère un document dans le paragraphe à l’emplacement spécifié. La valeur insertLocation peut être «\_Replace\_» (remplacer), «\_Start\_» (début) ou «\_End\_» (fin).\n\n\\[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\\]"
+    name: 'insertFileFromBase64(base64File, insertLocation)'
+    fullName: 'insertFileFromBase64(base64File, insertLocation)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'insertFileFromBase64(base64File: string, insertLocation: Word.InsertLocation): Word.Range;'
+      return:
+        type:
+          - word.Word.Range
+        description: ''
+      parameters:
+        - id: base64File
+          description: Obligatoire. Contenu encodé en base64 d’un fichier. docx.
+          type:
+            - string
+        - id: insertLocation
+          description: "Obligatoire. La valeur peut être «\_Replace\_» (remplacer), «\_Start\_» (début) ou «\_End\_» (fin)."
+          type:
+            - word.Word.InsertLocation
+  - uid: word.Word.Paragraph.insertFileFromBase64_1
+    summary: "Insère un document dans le paragraphe à l’emplacement spécifié. La valeur insertLocation peut être «\_Replace\_» (remplacer), «\_Start\_» (début) ou «\_End\_» (fin).\n\n\\[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\\]"
+    name: 'insertFileFromBase64(base64File, insertLocationString)'
+    fullName: 'insertFileFromBase64(base64File, insertLocationString)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'insertFileFromBase64(base64File: string, insertLocationString: "Before" | "After" | "Start" | "End" | "Replace"): Word.Range;'
+      return:
+        type:
+          - word.Word.Range
+        description: ''
+      parameters:
+        - id: base64File
+          description: Obligatoire. Contenu encodé en base64 d’un fichier. docx.
+          type:
+            - string
+        - id: insertLocationString
+          description: "Obligatoire. La valeur peut être «\_Replace\_» (remplacer), «\_Start\_» (début) ou «\_End\_» (fin)."
+          type:
+            - '"Before" | "After" | "Start" | "End" | "Replace"'
+  - uid: word.Word.Paragraph.insertHtml
+    summary: "Insère du code HTML dans le paragraphe à l’emplacement spécifié. La valeur insertLocation peut être «\_Replace\_» (remplacer), «\_Start\_» (début) ou «\_End\_» (fin).\n\n\\[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\\]"
+    name: 'insertHtml(html, insertLocation)'
+    fullName: 'insertHtml(html, insertLocation)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'insertHtml(html: string, insertLocation: Word.InsertLocation): Word.Range;'
+      return:
+        type:
+          - word.Word.Range
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Create a proxy object for the paragraphs collection.
+              var paragraphs = context.document.body.paragraphs;
+
+              // Queue a commmand to load the style property for the top 2 paragraphs.
+              // We never perform an empty load. We always must request a property.
+              context.load(paragraphs, {select: 'style', top: 2} );
+
+              // Synchronize the document state by executing the queued commands,
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+
+                  // Queue a command to get the first paragraph.
+                  var paragraph = paragraphs.items[0];
+
+                  // Queue a command to insert HTML content at the end of the first paragraph.
+                  paragraph.insertHtml('<strong>Inserted HTML.</strong>', Word.InsertLocation.end);
+
+                  // Synchronize the document state by executing the queued commands,
+                  // and return a promise to indicate task completion.
+                  return context.sync().then(function () {
+                      console.log('Inserted HTML content at the end of the first paragraph.');
+                  });
+              });
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: html
+          description: Obligatoire. Code HTML à insérer dans le paragraphe.
+          type:
+            - string
+        - id: insertLocation
+          description: "Obligatoire. La valeur peut être «\_Replace\_» (remplacer), «\_Start\_» (début) ou «\_End\_» (fin)."
+          type:
+            - word.Word.InsertLocation
+  - uid: word.Word.Paragraph.insertHtml_1
+    summary: "Insère du code HTML dans le paragraphe à l’emplacement spécifié. La valeur insertLocation peut être «\_Replace\_» (remplacer), «\_Start\_» (début) ou «\_End\_» (fin).\n\n\\[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\\]"
+    name: 'insertHtml(html, insertLocationString)'
+    fullName: 'insertHtml(html, insertLocationString)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'insertHtml(html: string, insertLocationString: "Before" | "After" | "Start" | "End" | "Replace"): Word.Range;'
+      return:
+        type:
+          - word.Word.Range
+        description: ''
+      parameters:
+        - id: html
+          description: Obligatoire. Code HTML à insérer dans le paragraphe.
+          type:
+            - string
+        - id: insertLocationString
+          description: "Obligatoire. La valeur peut être «\_Replace\_» (remplacer), «\_Start\_» (début) ou «\_End\_» (fin)."
+          type:
+            - '"Before" | "After" | "Start" | "End" | "Replace"'
+  - uid: word.Word.Paragraph.insertInlinePictureFromBase64
+    summary: "Insère une image dans le paragraphe à l’emplacement spécifié. La valeur insertLocation peut être «\_Replace\_» (remplacer), «\_Start\_» (début) ou «\_End\_» (fin).\n\n\\[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\\]"
+    name: 'insertInlinePictureFromBase64(base64EncodedImage, insertLocation)'
+    fullName: 'insertInlinePictureFromBase64(base64EncodedImage, insertLocation)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'insertInlinePictureFromBase64(base64EncodedImage: string, insertLocation: Word.InsertLocation): Word.InlinePicture;'
+      return:
+        type:
+          - word.Word.InlinePicture
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Create a proxy object for the paragraphs collection.
+              var paragraphs = context.document.body.paragraphs;
+
+              // Queue a commmand to load the style property for all of the paragraphs.
+              context.load(paragraphs, 'style');
+
+              // Synchronize the document state by executing the queued commands,
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+
+                  // Queue a command to get the first paragraph.
+                  var paragraph = paragraphs.items[0];
+
+                  var b64encodedImg = "iVBORw0KGgoAAAANSUhEUgAAAB4AAAANCAIAAAAxEEnAAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACFSURBVDhPtY1BEoQwDMP6/0+XgIMTBAeYoTqso9Rkx1zG+tNj1H94jgGzeNSjteO5vtQQuG2seO0av8LzGbe3anzRoJ4ybm/VeKEerAEbAUpW4aWQCmrGFWykRzGBCnYy2ha3oAIq2MloW9yCCqhgJ6NtcQsqoIKdjLbFLaiACnYyf2fODbrjZcXfr2F4AAAAAElFTkSuQmCC";
+
+                  // Queue a command to insert a base64 encoded image at the beginning of the first paragraph.
+                  paragraph.insertInlinePictureFromBase64(b64encodedImg, Word.InsertLocation.start);
+
+                  // Synchronize the document state by executing the queued commands,
+                  // and return a promise to indicate task completion.
+                  return context.sync().then(function () {
+                      console.log('Added an image to the first paragraph.');
+                  });
+              });
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: base64EncodedImage
+          description: Obligatoire. Image encodée en base64 à insérer.
+          type:
+            - string
+        - id: insertLocation
+          description: "Obligatoire. La valeur peut être «\_Replace\_» (remplacer), «\_Start\_» (début) ou «\_End\_» (fin)."
+          type:
+            - word.Word.InsertLocation
+  - uid: word.Word.Paragraph.insertInlinePictureFromBase64_1
+    summary: "Insère une image dans le paragraphe à l’emplacement spécifié. La valeur insertLocation peut être «\_Replace\_» (remplacer), «\_Start\_» (début) ou «\_End\_» (fin).\n\n\\[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\\]"
+    name: 'insertInlinePictureFromBase64(base64EncodedImage, insertLocationString)'
+    fullName: 'insertInlinePictureFromBase64(base64EncodedImage, insertLocationString)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'insertInlinePictureFromBase64(base64EncodedImage: string, insertLocationString: "Before" | "After" | "Start" | "End" | "Replace"): Word.InlinePicture;'
+      return:
+        type:
+          - word.Word.InlinePicture
+        description: ''
+      parameters:
+        - id: base64EncodedImage
+          description: Obligatoire. Image encodée en base64 à insérer.
+          type:
+            - string
+        - id: insertLocationString
+          description: "Obligatoire. La valeur peut être «\_Replace\_» (remplacer), «\_Start\_» (début) ou «\_End\_» (fin)."
+          type:
+            - '"Before" | "After" | "Start" | "End" | "Replace"'
+  - uid: word.Word.Paragraph.insertOoxml
+    summary: "Insère OOXML dans le paragraphe à l’emplacement spécifié. La valeur insertLocation peut être «\_Replace\_» (remplacer), «\_Start\_» (début) ou «\_End\_» (fin).\n\n\\[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\\]"
+    name: 'insertOoxml(ooxml, insertLocation)'
+    fullName: 'insertOoxml(ooxml, insertLocation)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'insertOoxml(ooxml: string, insertLocation: Word.InsertLocation): Word.Range;'
+      return:
+        type:
+          - word.Word.Range
+        description: ''
+      parameters:
+        - id: ooxml
+          description: Obligatoire. OOXML à insérer dans le paragraphe.
+          type:
+            - string
+        - id: insertLocation
+          description: "Obligatoire. La valeur peut être «\_Replace\_» (remplacer), «\_Start\_» (début) ou «\_End\_» (fin)."
+          type:
+            - word.Word.InsertLocation
+  - uid: word.Word.Paragraph.insertOoxml_1
+    summary: "Insère OOXML dans le paragraphe à l’emplacement spécifié. La valeur insertLocation peut être «\_Replace\_» (remplacer), «\_Start\_» (début) ou «\_End\_» (fin).\n\n\\[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\\]"
+    name: 'insertOoxml(ooxml, insertLocationString)'
+    fullName: 'insertOoxml(ooxml, insertLocationString)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'insertOoxml(ooxml: string, insertLocationString: "Before" | "After" | "Start" | "End" | "Replace"): Word.Range;'
+      return:
+        type:
+          - word.Word.Range
+        description: ''
+      parameters:
+        - id: ooxml
+          description: Obligatoire. OOXML à insérer dans le paragraphe.
+          type:
+            - string
+        - id: insertLocationString
+          description: "Obligatoire. La valeur peut être «\_Replace\_» (remplacer), «\_Start\_» (début) ou «\_End\_» (fin)."
+          type:
+            - '"Before" | "After" | "Start" | "End" | "Replace"'
+  - uid: word.Word.Paragraph.insertParagraph
+    summary: "Insère un paragraphe à l’emplacement spécifié. La valeur insertLocation peut être définie sur «\_Before\_» (avant) ou «\_After\_» (après).\n\n\\[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\\]"
+    name: 'insertParagraph(paragraphText, insertLocation)'
+    fullName: 'insertParagraph(paragraphText, insertLocation)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'insertParagraph(paragraphText: string, insertLocation: Word.InsertLocation): Word.Paragraph;'
+      return:
+        type:
+          - word.Word.Paragraph
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Create a proxy object for the paragraphs collection.
+              var paragraphs = context.document.body.paragraphs;
+
+              // Queue a commmand to load the style property for the top 2 paragraphs.
+              // We never perform an empty load. We always must request a property.
+              context.load(paragraphs, {select: 'style', top: 2} );
+
+              // Synchronize the document state by executing the queued commands,
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+
+                  // Queue a command to get the first paragraph.
+                  var paragraph = paragraphs.items[0];
+
+                  // Queue a command to insert the paragraph after the current paragraph.
+                  paragraph.insertParagraph('Content of a new paragraph', Word.InsertLocation.after);
+
+                  // Synchronize the document state by executing the queued commands,
+                  // and return a promise to indicate task completion.
+                  return context.sync().then(function () {
+                      console.log('Inserted a new paragraph at the end of the first paragraph.');
+                  });
+              });
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+          ```typescript
+          await Word.run(async (context) => {
+            // Second sentence, let's insert it as a paragraph after the previously inserted one.
+            let secondSentence = context.document.body.insertParagraph(
+              "This is the first text with a custom style.",
+              "End"
+            );
+            secondSentence.font.set({
+              bold: false,
+              italic: true,
+              name: "Berlin Sans FB",
+              color: "blue",
+              size: 30
+            });
+
+            await context.sync();
+          });
+          ```
+      parameters:
+        - id: paragraphText
+          description: Obligatoire. Texte de paragraphe à insérer.
+          type:
+            - string
+        - id: insertLocation
+          description: "Obligatoire. La valeur peut être «\_Before\_» (avant) » ou «\_After\_» (après)."
+          type:
+            - word.Word.InsertLocation
+  - uid: word.Word.Paragraph.insertParagraph_1
+    summary: "Insère un paragraphe à l’emplacement spécifié. La valeur insertLocation peut être définie sur «\_Before\_» (avant) ou «\_After\_» (après).\n\n\\[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\\]"
+    name: 'insertParagraph(paragraphText, insertLocationString)'
+    fullName: 'insertParagraph(paragraphText, insertLocationString)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'insertParagraph(paragraphText: string, insertLocationString: "Before" | "After" | "Start" | "End" | "Replace"): Word.Paragraph;'
+      return:
+        type:
+          - word.Word.Paragraph
+        description: ''
+      parameters:
+        - id: paragraphText
+          description: Obligatoire. Texte de paragraphe à insérer.
+          type:
+            - string
+        - id: insertLocationString
+          description: "Obligatoire. La valeur peut être «\_Before\_» (avant) » ou «\_After\_» (après)."
+          type:
+            - '"Before" | "After" | "Start" | "End" | "Replace"'
+  - uid: word.Word.Paragraph.insertText
+    summary: "Insère du texte dans le paragraphe à l’emplacement spécifié. La valeur insertLocation peut être «\_Replace\_» (remplacer), «\_Start\_» (début) ou «\_End\_» (fin).\n\n\\[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\\]"
+    name: 'insertText(text, insertLocation)'
+    fullName: 'insertText(text, insertLocation)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'insertText(text: string, insertLocation: Word.InsertLocation): Word.Range;'
+      return:
+        type:
+          - word.Word.Range
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Create a proxy object for the paragraphs collection.
+              var paragraphs = context.document.body.paragraphs;
+
+              // Queue a commmand to load the style property for the top 2 paragraphs.
+              // We never perform an empty load. We always must request a property.
+              context.load(paragraphs, {select: 'style', top: 2} );
+
+              // Synchronize the document state by executing the queued commands,
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+
+                  // Queue a command to get the first paragraph.
+                  var paragraph = paragraphs.items[0];
+
+                  // Queue a command to insert text into the end of the paragraph.
+                  paragraph.insertText('New text inserted into the paragraph.', Word.InsertLocation.end);
+
+                  // Synchronize the document state by executing the queued commands,
+                  // and return a promise to indicate task completion.
+                  return context.sync().then(function () {
+                      console.log('Inserted text at the end of the first paragraph.');
+                  });
+              });
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+          ```typescript
+          await Word.run(async (context) => {
+            // Replace the last paragraph.
+            let range = context.document.body.paragraphs.getLast().insertText("Just replaced the last paragraph!", "Replace");
+            range.font.highlightColor = "black";
+            range.font.color = "white";
+
+            await context.sync();
+          });
+          ```
+      parameters:
+        - id: text
+          description: Obligatoire. Texte à insérer.
+          type:
+            - string
+        - id: insertLocation
+          description: "Obligatoire. La valeur peut être «\_Replace\_» (remplacer), «\_Start\_» (début) ou «\_End\_» (fin)."
+          type:
+            - word.Word.InsertLocation
+  - uid: word.Word.Paragraph.insertText_1
+    summary: "Insère du texte dans le paragraphe à l’emplacement spécifié. La valeur insertLocation peut être «\_Replace\_» (remplacer), «\_Start\_» (début) ou «\_End\_» (fin).\n\n\\[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\\]"
+    name: 'insertText(text, insertLocationString)'
+    fullName: 'insertText(text, insertLocationString)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'insertText(text: string, insertLocationString: "Before" | "After" | "Start" | "End" | "Replace"): Word.Range;'
+      return:
+        type:
+          - word.Word.Range
+        description: ''
+      parameters:
+        - id: text
+          description: Obligatoire. Texte à insérer.
+          type:
+            - string
+        - id: insertLocationString
+          description: "Obligatoire. La valeur peut être «\_Replace\_» (remplacer), «\_Start\_» (début) ou «\_End\_» (fin)."
+          type:
+            - '"Before" | "After" | "Start" | "End" | "Replace"'
+  - uid: word.Word.Paragraph.leftIndent
+    summary: |-
+      Obtient ou définit la valeur de retrait à gauche, en points, pour le paragraphe.
+
+      \[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: leftIndent
+    fullName: leftIndent
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'leftIndent: number;'
+      return:
+        type:
+          - number
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```typescript
+          await Word.run(async (context) => {
+            // Indents the first paragraph.
+            context.document.body.paragraphs.getFirst().leftIndent = 75; //units = points
+
+            return context.sync();
+          });
+          ```
+  - uid: word.Word.Paragraph.lineSpacing
+    summary: "Obtient ou définit l’interligne, en points, pour le paragraphe spécifié. Dans l’interface utilisateur de Word, cette valeur est divisée par\_12.\n\n\\[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\\]"
+    name: lineSpacing
+    fullName: lineSpacing
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'lineSpacing: number;'
+      return:
+        type:
+          - number
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```typescript
+          await Word.run(async (context) => {
+            // Adjusts line spacing.
+            context.document.body.paragraphs.getFirst().lineSpacing = 20;
+
+            await context.sync();
+          });
+          ```
+  - uid: word.Word.Paragraph.lineUnitAfter
+    summary: |-
+      Obtient ou définit la quantité d’espace, dans le quadrillage, après le paragraphe.
+
+      \[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: lineUnitAfter
+    fullName: lineUnitAfter
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'lineUnitAfter: number;'
+      return:
+        type:
+          - number
+  - uid: word.Word.Paragraph.lineUnitBefore
+    summary: |-
+      Obtient ou définit la quantité d’espace, en lignes de quadrillage, avant le paragraphe.
+
+      \[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: lineUnitBefore
+    fullName: lineUnitBefore
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'lineUnitBefore: number;'
+      return:
+        type:
+          - number
+  - uid: word.Word.Paragraph.load
+    summary: "Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler «\_context.sync()\_» avant de lire les propriétés."
+    remarks: |-
+      En plus de cette signature, cette méthode possède les signatures suivantes:
+
+      `load(option?: string | string[]): Word.Paragraph`-WHERE option est une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+
+      `load(option?: { select?: string; expand?: string; }): Word.Paragraph`Option-WHERE option. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
+
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Word.Paragraph`-Uniquement disponible sur les types de collection. Elle est similaire à la signature précédente. Option. Top indique le nombre maximal d’éléments de collection qui peuvent être inclus dans le résultat. Option. Skip indique le nombre d’éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat. Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d’éléments.
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: Word.Interfaces.ParagraphLoadOptions): Word.Paragraph;'
+      return:
+        type:
+          - word.Word.Paragraph
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - word.Word.Interfaces.ParagraphLoadOptions
+  - uid: word.Word.Paragraph.load_1
+    summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler `context.sync()` avant de lire les propriétés.
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Word.Paragraph;'
+      return:
+        type:
+          - word.Word.Paragraph
+        description: ''
+      parameters:
+        - id: propertyNames
+          description: Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+          type:
+            - 'string | string[]'
+  - uid: word.Word.Paragraph.load_2
+    summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler `context.sync()` avant de lire les propriétés.
+    name: load(propertyNamesAndPaths)
+    fullName: load(propertyNamesAndPaths)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Word.Paragraph;'
+      return:
+        type:
+          - word.Word.Paragraph
+        description: ''
+      parameters:
+        - id: propertyNamesAndPaths
+          description: Où propertyNamesAndPaths. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et propertyNamesAndPaths. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
+          type:
+            - '{ select?: string; expand?: string; }'
+  - uid: word.Word.Paragraph.outlineLevel
+    summary: |-
+      Obtient ou définit le niveau hiérarchique pour le paragraphe.
+
+      \[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: outlineLevel
+    fullName: outlineLevel
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'outlineLevel: number;'
+      return:
+        type:
+          - number
+  - uid: word.Word.Paragraph.parentContentControl
+    summary: |-
+      Obtient le contrôle de contenu qui contient le paragraphe. S’il n’existe pas de contrôle de contenu parent. En lecture seule.
+
+      \[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: parentContentControl
+    fullName: parentContentControl
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly parentContentControl: Word.ContentControl;'
+      return:
+        type:
+          - word.Word.ContentControl
+  - uid: word.Word.Paragraph.rightIndent
+    summary: |-
+      Obtient ou définit la valeur de retrait à droite, en points, pour le paragraphe.
+
+      \[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: rightIndent
+    fullName: rightIndent
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'rightIndent: number;'
+      return:
+        type:
+          - number
+  - uid: word.Word.Paragraph.search
+    summary: |-
+      Effectue une recherche avec le SearchOptions spécifié sur l’étendue de l’objet Paragraph. Les résultats de la recherche sont un ensemble d’objets de plage.
+
+      \[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: 'search(searchText, searchOptions)'
+    fullName: 'search(searchText, searchOptions)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: |-
+        search(searchText: string, searchOptions?: Word.SearchOptions | {
+                    ignorePunct?: boolean;
+                    ignoreSpace?: boolean;
+                    matchCase?: boolean;
+                    matchPrefix?: boolean;
+                    matchSuffix?: boolean;
+                    matchWholeWord?: boolean;
+                    matchWildcards?: boolean;
+                }): Word.RangeCollection;
+      return:
+        type:
+          - word.Word.RangeCollection
+        description: ''
+      parameters:
+        - id: searchText
+          description: Obligatoire. Texte de recherche.
+          type:
+            - string
+        - id: searchOptions
+          description: Facultatif. Options de la recherche.
+          type:
+            - |-
+              Word.SearchOptions | {
+                          ignorePunct?: boolean;
+                          ignoreSpace?: boolean;
+                          matchCase?: boolean;
+                          matchPrefix?: boolean;
+                          matchSuffix?: boolean;
+                          matchWholeWord?: boolean;
+                          matchWildcards?: boolean;
+                      }
+  - uid: word.Word.Paragraph.select
+    summary: |-
+      Sélectionne le paragraphe et y accède via l’interface utilisateur de Word.
+
+      \[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: select(selectionMode)
+    fullName: select(selectionMode)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'select(selectionMode?: Word.SelectionMode): void;'
+      return:
+        type:
+          - void
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Create a proxy object for the paragraphs collection.
+              var paragraphs = context.document.body.paragraphs;
+
+              // Queue a commmand to load the style property for all of the paragraphs.
+              context.load(paragraphs, 'style');
+
+              // Synchronize the document state by executing the queued commands,
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+
+                  // Queue a command to get the last paragraph a create a
+                  // proxy paragraph object.
+                  var paragraph = paragraphs.items[paragraphs.items.length - 1];
+
+                  // Queue a command to select the paragraph. The Word UI will
+                  // move to the selected paragraph.
+                  paragraph.select();
+
+                  // Synchronize the document state by executing the queued commands,
+                  // and return a promise to indicate task completion.
+                  return context.sync().then(function () {
+                      console.log('Selected the last paragraph.');
+                  });
+              });
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+          ```typescript
+          await Word.run(async (context) => {
+            // If select is called with no parameters, it selects the object.
+            context.document.body.paragraphs.getLast().select();
+
+            await context.sync();
+          });
+          ```
+          ```typescript
+          await Word.run(async (context) => {
+            // Select can be at the start or end of a range; this by definition moves the insertion point without selecting the range.
+            context.document.body.paragraphs.getLast().select("End");
+
+            await context.sync();
+          });
+          ```
+      parameters:
+        - id: selectionMode
+          description: "Facultatif. Le mode de sélection peut être «\_Select\_» (sélectionner), «\_Start\_» (début) ou «\_End\_» (fin). «\_Select\_» (sélectionner) est la valeur par défaut."
+          type:
+            - word.Word.SelectionMode
+  - uid: word.Word.Paragraph.select_1
+    summary: |-
+      Sélectionne le paragraphe et y accède via l’interface utilisateur de Word.
+
+      \[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: select(selectionModeString)
+    fullName: select(selectionModeString)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'select(selectionModeString?: "Select" | "Start" | "End"): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: selectionModeString
+          description: "Facultatif. Le mode de sélection peut être «\_Select\_» (sélectionner), «\_Start\_» (début) ou «\_End\_» (fin). «\_Select\_» (sélectionner) est la valeur par défaut."
+          type:
+            - '"Select" | "Start" | "End"'
+  - uid: word.Word.Paragraph.set
+    summary: 'Définit plusieurs propriétés d’un objet en même temps. Vous pouvez transmettre un objet plain avec les propriétés appropriées, ou un autre objet API du même type.'
+    remarks: |-
+      Cette méthode est dotée de la signature supplémentaire suivante:
+
+      `set(properties: Word.Paragraph): void`
+
+      #### <a name="examples"></a>Exemples
+
+      ```typescript
+      await Word.run(async (context) => {
+        const paragraph = context.document.body.paragraphs.getFirst();
+        paragraph.set({
+          leftIndent: 30,
+          font: {
+            bold: true,
+            color: "red"
+          }
+        });
+
+        await context.sync();
+      });
+      ```
+      ```typescript
+      await Word.run(async (context) => {
+        const firstParagraph = context.document.body.paragraphs.getFirst();
+        const secondParagraph = firstParagraph.getNext();
+        firstParagraph.load("text, font/color, font/bold, leftIndent");
+
+        await context.sync();
+
+        secondParagraph.set(firstParagraph);
+
+        await context.sync();
+      });
+      ```
+    name: 'set(properties, options)'
+    fullName: 'set(properties, options)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Interfaces.ParagraphUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: Objet JavaScript avec des propriétés qui sont structurées isomorphically vers les propriétés de l’objet sur lequel la méthode est appelée.
+          type:
+            - Interfaces.ParagraphUpdateData
+        - id: options
+          description: Fournit une option permettant de supprimer les erreurs si l’objet Properties tente de définir des propriétés en lecture seule.
+          type:
+            - OfficeExtension.UpdateOptions
+  - uid: word.Word.Paragraph.set_1
+    summary: 'Définit plusieurs propriétés de l’objet en même temps, en fonction d’un objet chargé existant.'
+    name: set(properties)
+    fullName: set(properties)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Word.Paragraph): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: ''
+          type:
+            - word.Word.Paragraph
+  - uid: word.Word.Paragraph.spaceAfter
+    summary: |-
+      Obtient ou définit l’espacement, en points, après le paragraphe.
+
+      \[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: spaceAfter
+    fullName: spaceAfter
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'spaceAfter: number;'
+      return:
+        type:
+          - number
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```typescript
+          await Word.run(async (context) => {
+            // Adjust space between paragraphs.
+            context.document.body.paragraphs.getFirst().spaceAfter = 20;
+
+            await context.sync();
+          });
+          ```
+  - uid: word.Word.Paragraph.spaceBefore
+    summary: |-
+      Obtient ou définit l’espacement, en points, avant le paragraphe.
+
+      \[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: spaceBefore
+    fullName: spaceBefore
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'spaceBefore: number;'
+      return:
+        type:
+          - number
+  - uid: word.Word.Paragraph.style
+    summary: "Obtient ou définit le nom du style du paragraphe. Utilisez cette propriété pour les noms des styles personnalisés et localisés. Pour utiliser les styles prédéfinis qui sont portables entre différents paramètres régionaux, voir la propriété «\_styleBuiltIn\_».\n\n\\[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\\]"
+    name: style
+    fullName: style
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'style: string;'
+      return:
+        type:
+          - string
+  - uid: word.Word.Paragraph.text
+    summary: |-
+      Obtient le texte du paragraphe. En lecture seule.
+
+      \[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: text
+    fullName: text
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly text: string;'
+      return:
+        type:
+          - string
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```typescript
+          await Word.run(async (context) => {
+            // The collection of paragraphs of the current selection returns the full paragraphs contained in it.
+            let paragraph = context.document.getSelection().paragraphs.getFirst();
+            paragraph.load("text");
+
+            await context.sync();
+            console.log(paragraph.text);
+          });
+          ```
+  - uid: word.Word.Paragraph.toJSON
+    summary: 'Remplace la méthode JavaScript `toJSON()` afin de fournir une sortie plus utile lorsqu’un objet d’API est transmis à`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle `toJSON` la méthode de l’objet qui lui est passé.) Tandis que l’objet Word. Paragraph d’origine est un objet `toJSON` d’API, la méthode renvoie un objet JavaScript simple (tapé comme`Word.Interfaces.ParagraphData`<!-- -->) qui contient des copies superficielles de toutes les propriétés enfants chargées à partir de l’objet d’origine.'
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Word.Interfaces.ParagraphData;'
+      return:
+        type:
+          - word.Word.Interfaces.ParagraphData
+        description: ''
+  - uid: word.Word.Paragraph.track
+    summary: "Effectuer le suivi de l’objet pour l’ajustement automatique en fonction environnant des modifications dans le document. Cet appel est abréviations context.trackedObjects.add(thisObject). Si vous utilisez cet objet au sein de «\_.sync\_» appels et en dehors de l’exécution séquentielle d’un lot de «\_.run\_» et rencontrez un message d’erreur «\_InvalidObjectPath\_» lors de la définition d’une propriété ou appeler une méthode sur l’objet, vous devez ajouter l’objet à l’objet de suivi collection de sites lors de l’objet a été créé."
+    name: track()
+    fullName: track()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'track(): Word.Paragraph;'
+      return:
+        type:
+          - word.Word.Paragraph
+        description: ''
+  - uid: word.Word.Paragraph.untrack
+    summary: "Publication mémoire associée à cet objet si elle a été précédemment suivie. Cet appel est abréviations context.trackedObjects.add(thisObject). Vous rencontrez de nombreux objets suivies ralentit l’application hôte, donc n’oubliez pas de libérer les objets que l'on ajoute, une fois que vous avez terminé à les utiliser. Vous devez appeler «\_context.sync()\_» avant la publication de mémoire prend effet."
+    name: untrack()
+    fullName: untrack()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'untrack(): Word.Paragraph;'
+      return:
+        type:
+          - word.Word.Paragraph
+        description: ''

@@ -1,0 +1,386 @@
+### YamlMime:UniversalReference
+items:
+  - uid: word.Word.Document
+    summary: |-
+      L’objet Document est l’objet de niveau supérieur. Un objet Document comporte des sections, des contrôles de contenu et le corps dans lequel se trouve le contenu du document.
+
+      \[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: Word.Document
+    fullName: Word.Document
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - 'OfficeExtension.ClientObject '
+    package: word
+    children:
+      - word.Word.Document.body
+      - word.Word.Document.contentControls
+      - word.Word.Document.context
+      - word.Word.Document.getSelection
+      - word.Word.Document.load
+      - word.Word.Document.load_1
+      - word.Word.Document.load_2
+      - word.Word.Document.save
+      - word.Word.Document.saved
+      - word.Word.Document.sections
+      - word.Word.Document.set
+      - word.Word.Document.set_1
+      - word.Word.Document.toJSON
+      - word.Word.Document.track
+      - word.Word.Document.untrack
+  - uid: word.Word.Document.body
+    summary: |-
+      Obtient l’objet de corps du document. Le corps du document correspond à l’ensemble du texte, à l’exception des en-têtes, des pieds de page, des notes de bas de page, des zones de texte, etc. En lecture seule.
+
+      \[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: body
+    fullName: body
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly body: Word.Body;'
+      return:
+        type:
+          - word.Word.Body
+  - uid: word.Word.Document.contentControls
+    summary: |-
+      Obtient la collection d’objets de contrôle de contenu dans le document. Cela inclut les contrôles de contenu dans le corps du document, les en-têtes, les pieds de page, les zones de texte, etc.. En lecture seule.
+
+      \[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: contentControls
+    fullName: contentControls
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly contentControls: Word.ContentControlCollection;'
+      return:
+        type:
+          - word.Word.ContentControlCollection
+  - uid: word.Word.Document.context
+    summary: Contexte de demande associé à l’objet. Cette opération connecte le processus du complément au processus de l’application hôte Office.
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - word.Word.RequestContext
+  - uid: word.Word.Document.getSelection
+    summary: |-
+      Obtient la sélection actuelle du document. Les sélections multiples ne sont pas prises en charge.
+
+      \[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: getSelection()
+    fullName: getSelection()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getSelection(): Word.Range;'
+      return:
+        type:
+          - word.Word.Range
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+              
+              var textSample = 'This is an example of the insert text method. This is a method ' + 
+                  'which allows users to insert text into a selection. It can insert text into a ' +
+                  'relative location or it can overwrite the current selection. Since the ' +
+                  'getSelection method returns a range object, look up the range object documentation ' +
+                  'for everything you can do with a selection.';
+              
+              // Create a range proxy object for the current selection.
+              var range = context.document.getSelection();
+              
+              // Queue a commmand to insert text at the end of the selection.
+              range.insertText(textSample, Word.InsertLocation.end);
+              
+              // Synchronize the document state by executing the queued commands, 
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+                  console.log('Inserted the text at the end of the selection.');
+              });  
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: word.Word.Document.load
+    summary: "Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler «\_context.sync()\_» avant de lire les propriétés."
+    remarks: |-
+      En plus de cette signature, cette méthode possède les signatures suivantes:
+
+      `load(option?: string | string[]): Word.Document`-WHERE option est une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+
+      `load(option?: { select?: string; expand?: string; }): Word.Document`Option-WHERE option. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
+
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Word.Document`-Uniquement disponible sur les types de collection. Elle est similaire à la signature précédente. Option. Top indique le nombre maximal d’éléments de collection qui peuvent être inclus dans le résultat. Option. Skip indique le nombre d’éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat. Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d’éléments.
+
+      #### <a name="examples"></a>Exemples
+
+      ```javascript
+      // Run a batch operation against the Word object model.
+      Word.run(function (context) {
+          
+          // Create a proxy object for the document.
+          var thisDocument = context.document;
+          
+          // Queue a command to load content control properties.
+          context.load(thisDocument, 'contentControls/id, contentControls/text, contentControls/tag');
+          
+          // Synchronize the document state by executing the queued commands, 
+          // and return a promise to indicate task completion.
+          return context.sync().then(function () {
+              if (thisDocument.contentControls.items.length !== 0) {
+                  for (var i = 0; i < thisDocument.contentControls.items.length; i++) {
+                      console.log(thisDocument.contentControls.items[i].id);
+                      console.log(thisDocument.contentControls.items[i].text);
+                      console.log(thisDocument.contentControls.items[i].tag);
+                  }
+              } else {
+                  console.log('No content controls in this document.');
+              }
+          });  
+      })
+      .catch(function (error) {
+          console.log('Error: ' + JSON.stringify(error));
+          if (error instanceof OfficeExtension.Error) {
+              console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+          }
+      });
+      ```
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: Word.Interfaces.DocumentLoadOptions): Word.Document;'
+      return:
+        type:
+          - word.Word.Document
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - word.Word.Interfaces.DocumentLoadOptions
+  - uid: word.Word.Document.load_1
+    summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler `context.sync()` avant de lire les propriétés.
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Word.Document;'
+      return:
+        type:
+          - word.Word.Document
+        description: ''
+      parameters:
+        - id: propertyNames
+          description: Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+          type:
+            - 'string | string[]'
+  - uid: word.Word.Document.load_2
+    summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler `context.sync()` avant de lire les propriétés.
+    name: load(propertyNamesAndPaths)
+    fullName: load(propertyNamesAndPaths)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Word.Document;'
+      return:
+        type:
+          - word.Word.Document
+        description: ''
+      parameters:
+        - id: propertyNamesAndPaths
+          description: Où propertyNamesAndPaths. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et propertyNamesAndPaths. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
+          type:
+            - '{ select?: string; expand?: string; }'
+  - uid: word.Word.Document.save
+    summary: |-
+      Enregistre le document. Cette option utilise la convention de dénomination des fichiers par défaut de Word si le document n’a jamais été enregistré précédemment.
+
+      \[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: save()
+    fullName: save()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'save(): void;'
+      return:
+        type:
+          - void
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+              
+              // Create a proxy object for the document.
+              var thisDocument = context.document;
+
+              // Queue a commmand to load the document save state (on the saved property).
+              context.load(thisDocument, 'saved');    
+              
+              // Synchronize the document state by executing the queued commands, 
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+                  
+                  if (thisDocument.saved === false) {
+                      // Queue a command to save this document.
+                      thisDocument.save();
+                      
+                      // Synchronize the document state by executing the queued commands, 
+                      // and return a promise to indicate task completion.
+                      return context.sync().then(function () {
+                          console.log('Saved the document');
+                      });
+                  } else {
+                      console.log('The document has not changed since the last save.');
+                  }
+              });  
+          })
+          .catch(function (error) {
+              console.log("Error: " + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: word.Word.Document.saved
+    summary: |-
+      Indique si les modifications apportées au document ont été enregistrées. La valeur true indique que le document n’a pas été modifié depuis son enregistrement. En lecture seule.
+
+      \[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: saved
+    fullName: saved
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly saved: boolean;'
+      return:
+        type:
+          - boolean
+  - uid: word.Word.Document.sections
+    summary: |-
+      Obtient la collection d’objets section dans le document. En lecture seule.
+
+      \[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: sections
+    fullName: sections
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly sections: Word.SectionCollection;'
+      return:
+        type:
+          - word.Word.SectionCollection
+  - uid: word.Word.Document.set
+    summary: 'Définit plusieurs propriétés d’un objet en même temps. Vous pouvez transmettre un objet plain avec les propriétés appropriées, ou un autre objet API du même type.'
+    remarks: |-
+      Cette méthode est dotée de la signature supplémentaire suivante:
+
+      `set(properties: Word.Document): void`
+    name: 'set(properties, options)'
+    fullName: 'set(properties, options)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Interfaces.DocumentUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: Objet JavaScript avec des propriétés qui sont structurées isomorphically vers les propriétés de l’objet sur lequel la méthode est appelée.
+          type:
+            - Interfaces.DocumentUpdateData
+        - id: options
+          description: Fournit une option permettant de supprimer les erreurs si l’objet Properties tente de définir des propriétés en lecture seule.
+          type:
+            - OfficeExtension.UpdateOptions
+  - uid: word.Word.Document.set_1
+    summary: 'Définit plusieurs propriétés de l’objet en même temps, en fonction d’un objet chargé existant.'
+    name: set(properties)
+    fullName: set(properties)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Word.Document): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: ''
+          type:
+            - word.Word.Document
+  - uid: word.Word.Document.toJSON
+    summary: 'Remplace la méthode JavaScript `toJSON()` afin de fournir une sortie plus utile lorsqu’un objet d’API est transmis à`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle `toJSON` la méthode de l’objet qui lui est passé.) Tandis que l’objet Word. document d’origine est un objet `toJSON` d’API, la méthode renvoie un objet JavaScript simple (tapé comme`Word.Interfaces.DocumentData`<!-- -->) qui contient des copies superficielles de toutes les propriétés enfants chargées à partir de l’objet d’origine.'
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Word.Interfaces.DocumentData;'
+      return:
+        type:
+          - word.Word.Interfaces.DocumentData
+        description: ''
+  - uid: word.Word.Document.track
+    summary: "Effectuer le suivi de l’objet pour l’ajustement automatique en fonction environnant des modifications dans le document. Cet appel est abréviations context.trackedObjects.add(thisObject). Si vous utilisez cet objet au sein de «\_.sync\_» appels et en dehors de l’exécution séquentielle d’un lot de «\_.run\_» et rencontrez un message d’erreur «\_InvalidObjectPath\_» lors de la définition d’une propriété ou appeler une méthode sur l’objet, vous devez ajouter l’objet à l’objet de suivi collection de sites lors de l’objet a été créé."
+    name: track()
+    fullName: track()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'track(): Word.Document;'
+      return:
+        type:
+          - word.Word.Document
+        description: ''
+  - uid: word.Word.Document.untrack
+    summary: "Publication mémoire associée à cet objet si elle a été précédemment suivie. Cet appel est abréviations context.trackedObjects.add(thisObject). Vous rencontrez de nombreux objets suivies ralentit l’application hôte, donc n’oubliez pas de libérer les objets que l'on ajoute, une fois que vous avez terminé à les utiliser. Vous devez appeler «\_context.sync()\_» avant la publication de mémoire prend effet."
+    name: untrack()
+    fullName: untrack()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'untrack(): Word.Document;'
+      return:
+        type:
+          - word.Word.Document
+        description: ''
