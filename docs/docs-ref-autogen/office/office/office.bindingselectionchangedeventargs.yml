@@ -1,0 +1,203 @@
+### YamlMime:UniversalReference
+items:
+  - uid: office.Office.BindingSelectionChangedEventArgs
+    summary: <span data-ttu-id="4552d-101">Fournit des informations sur la liaison qui a déclenché l’événement SelectionChanged.</span><span class="sxs-lookup"><span data-stu-id="4552d-101">Provides information about the binding that raised the SelectionChanged event.</span></span>
+    name: Office.BindingSelectionChangedEventArgs
+    fullName: Office.BindingSelectionChangedEventArgs
+    langs:
+      - typeScript
+    type: interface
+    package: office
+    children:
+      - office.Office.BindingSelectionChangedEventArgs.binding
+      - office.Office.BindingSelectionChangedEventArgs.columnCount
+      - office.Office.BindingSelectionChangedEventArgs.rowCount
+      - office.Office.BindingSelectionChangedEventArgs.startColumn
+      - office.Office.BindingSelectionChangedEventArgs.startRow
+      - office.Office.BindingSelectionChangedEventArgs.type
+  - uid: office.Office.BindingSelectionChangedEventArgs.binding
+    summary: '<span data-ttu-id="4552d-102">Obtient un objet [Office. Binding](xref:office.Office.Binding) qui représente la liaison qui a déclenché l’événement SelectionChanged.</span><span class="sxs-lookup"><span data-stu-id="4552d-102">Gets an [Office.Binding](xref:office.Office.Binding) object that represents the binding that raised the SelectionChanged event.</span></span>'
+    name: binding
+    fullName: binding
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'binding: Binding;'
+      return:
+        type:
+          - office.Office.Binding
+  - uid: office.Office.BindingSelectionChangedEventArgs.columnCount
+    summary: "<span data-ttu-id=\"4552d-103\">Obtient le nombre de colonnes sélectionnées.</span><span class=\"sxs-lookup\"><span data-stu-id=\"4552d-103\">Gets the number of columns selected.</span></span> <span data-ttu-id=\"4552d-104\">Si une seule cellule est sélectionnée, retourne\_1.</span><span class=\"sxs-lookup\"><span data-stu-id=\"4552d-104\">If a single cell is selected returns 1.</span></span>\n\n<span data-ttu-id=\"4552d-105\">Si l’utilisateur effectue une sélection non contiguë, le décompte de la dernière sélection contiguë au sein de la liaison est retourné.</span><span class=\"sxs-lookup\"><span data-stu-id=\"4552d-105\">If the user makes a non-contiguous selection, the count for the last contiguous selection within the binding is returned.</span></span>\n\n<span data-ttu-id=\"4552d-106\">Pour Word, cette propriété ne fonctionne que pour les liaisons d' [Office. BindingType](xref:office.Office.BindingType) «table».</span><span class=\"sxs-lookup\"><span data-stu-id=\"4552d-106\">For Word, this property will work only for bindings of [Office.BindingType](xref:office.Office.BindingType) \"table\".</span></span> <span data-ttu-id=\"4552d-107\">Si la liaison est de type « matrix », une valeur null est retournée.</span><span class=\"sxs-lookup\"><span data-stu-id=\"4552d-107\">If the binding is of type \"matrix\", null is returned.</span></span> <span data-ttu-id=\"4552d-108\">En outre, l’appel échoue si le tableau contient des cellules fusionnées, car la structure du tableau doit être uniforme pour que cette propriété fonctionne correctement.</span><span class=\"sxs-lookup\"><span data-stu-id=\"4552d-108\">Also, the call will fail if the table contains merged cells, because the structure of the table must be uniform for this property to work correctly.</span></span>"
+    name: columnCount
+    fullName: columnCount
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'columnCount: number;'
+      return:
+        type:
+          - number
+        description: |-
+
+
+          #### <a name="examples"></a><span data-ttu-id="4552d-109">Exemples</span><span class="sxs-lookup"><span data-stu-id="4552d-109">Examples</span></span>
+
+          ```javascript
+          // The following example adds an event handler for the SelectionChanged event to the binding with an id of myTable.
+          // When the user changes the selection, the handler displays the coordinates of the first cell in the selection,
+          // and the number of row and columns selected.
+          function addSelectionHandler() {
+              Office.context.document.bindings.getByIdAsync("myTable", function (result) {
+                  result.value.addHandlerAsync("bindingSelectionChanged", myHandler);
+              });
+          }
+
+          // Display selection start coordinates and row/column count.
+          function myHandler(bArgs) {
+              write("Selection start row/col: " + bArgs.startRow + "," + bArgs.startColumn);
+              write("Selection row count: " + bArgs.rowCount);
+              write("Selection col count: " + bArgs.columnCount);
+          }
+          // Function that writes to a div with id='message' on the page.
+          function write(message){
+              document.getElementById('message').innerText += message; 
+          }
+          ```
+  - uid: office.Office.BindingSelectionChangedEventArgs.rowCount
+    summary: "<span data-ttu-id=\"4552d-110\">Obtient le nombre de lignes sélectionnées.</span><span class=\"sxs-lookup\"><span data-stu-id=\"4552d-110\">Gets the number of rows selected.</span></span> <span data-ttu-id=\"4552d-111\">Si une seule cellule est sélectionnée, retourne\_1.</span><span class=\"sxs-lookup\"><span data-stu-id=\"4552d-111\">If a single cell is selected returns 1.</span></span>\n\n<span data-ttu-id=\"4552d-112\">Si l’utilisateur effectue une sélection non contiguë, le décompte de la dernière sélection contiguë au sein de la liaison est retourné.</span><span class=\"sxs-lookup\"><span data-stu-id=\"4552d-112\">If the user makes a non-contiguous selection, the count for the last contiguous selection within the binding is returned.</span></span>\n\n<span data-ttu-id=\"4552d-113\">Pour Word, cette propriété ne fonctionne que pour les liaisons d' [Office. BindingType](xref:office.Office.BindingType) «table».</span><span class=\"sxs-lookup\"><span data-stu-id=\"4552d-113\">For Word, this property will work only for bindings of [Office.BindingType](xref:office.Office.BindingType) \"table\".</span></span> <span data-ttu-id=\"4552d-114\">Si la liaison est de type « matrix », une valeur null est retournée.</span><span class=\"sxs-lookup\"><span data-stu-id=\"4552d-114\">If the binding is of type \"matrix\", null is returned.</span></span> <span data-ttu-id=\"4552d-115\">En outre, l’appel échoue si le tableau contient des cellules fusionnées, car la structure du tableau doit être uniforme pour que cette propriété fonctionne correctement.</span><span class=\"sxs-lookup\"><span data-stu-id=\"4552d-115\">Also, the call will fail if the table contains merged cells, because the structure of the table must be uniform for this property to work correctly.</span></span>"
+    name: rowCount
+    fullName: rowCount
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'rowCount: number;'
+      return:
+        type:
+          - number
+        description: |-
+
+
+          #### <a name="examples"></a><span data-ttu-id="4552d-116">Exemples</span><span class="sxs-lookup"><span data-stu-id="4552d-116">Examples</span></span>
+
+          ```javascript
+          // The following example adds an event handler for the SelectionChanged event to the binding with an id of myTable.
+          // When the user changes the selection, the handler displays the coordinates of the first cell in the selection,
+          // and the number of row and columns selected.
+          function addSelectionHandler() {
+              Office.context.document.bindings.getByIdAsync("myTable", function (result) {
+                  result.value.addHandlerAsync("bindingSelectionChanged", myHandler);
+              });
+          }
+
+          // Display selection start coordinates and row/column count.
+          function myHandler(bArgs) {
+              write("Selection start row/col: " + bArgs.startRow + "," + bArgs.startColumn);
+              write("Selection row count: " + bArgs.rowCount);
+              write("Selection col count: " + bArgs.columnCount);
+          }
+          // Function that writes to a div with id='message' on the page.
+          function write(message){
+              document.getElementById('message').innerText += message; 
+          }
+          ```
+  - uid: office.Office.BindingSelectionChangedEventArgs.startColumn
+    summary: |-
+      <span data-ttu-id="4552d-117">Index de base zéro de la première colonne de la sélection à partir de la colonne la plus à gauche de la liaison.</span><span class="sxs-lookup"><span data-stu-id="4552d-117">The zero-based index of the first column of the selection counting from the leftmost column in the binding.</span></span>
+
+      <span data-ttu-id="4552d-118">Si l’utilisateur effectue une sélection non contiguë, les coordonnées de la dernière sélection contiguë au sein de la liaison sont retournées.</span><span class="sxs-lookup"><span data-stu-id="4552d-118">If the user makes a non-contiguous selection, the coordinates for the last contiguous selection within the binding are returned.</span></span>
+
+      <span data-ttu-id="4552d-119">Pour Word, cette propriété ne fonctionne que pour les liaisons d' [Office. BindingType](xref:office.Office.BindingType) «table».</span><span class="sxs-lookup"><span data-stu-id="4552d-119">For Word, this property will work only for bindings of [Office.BindingType](xref:office.Office.BindingType) "table".</span></span> <span data-ttu-id="4552d-120">Si la liaison est de type « matrix », une valeur null est retournée.</span><span class="sxs-lookup"><span data-stu-id="4552d-120">If the binding is of type "matrix", null is returned.</span></span> <span data-ttu-id="4552d-121">En outre, l’appel échoue si le tableau contient des cellules fusionnées, car la structure du tableau doit être uniforme pour que cette propriété fonctionne correctement.</span><span class="sxs-lookup"><span data-stu-id="4552d-121">Also, the call will fail if the table contains merged cells, because the structure of the table must be uniform for this property to work correctly.</span></span>
+    name: startColumn
+    fullName: startColumn
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'startColumn: number;'
+      return:
+        type:
+          - number
+        description: |-
+
+
+          #### <a name="examples"></a><span data-ttu-id="4552d-122">Exemples</span><span class="sxs-lookup"><span data-stu-id="4552d-122">Examples</span></span>
+
+          ```javascript
+          // The following example adds an event handler for the SelectionChanged event to the binding with an id of myTable.
+          // When the user changes the selection, the handler displays the coordinates of the first cell in the selection,
+          // and the number of row and columns selected.
+          function addSelectionHandler() {
+              Office.context.document.bindings.getByIdAsync("myTable", function (result) {
+                  result.value.addHandlerAsync("bindingSelectionChanged", myHandler);
+              });
+          }
+
+          // Display selection start coordinates and row/column count.
+          function myHandler(bArgs) {
+              write("Selection start row/col: " + bArgs.startRow + "," + bArgs.startColumn);
+              write("Selection row count: " + bArgs.rowCount);
+              write("Selection col count: " + bArgs.columnCount);
+          }
+          // Function that writes to a div with id='message' on the page.
+          function write(message){
+              document.getElementById('message').innerText += message; 
+          }
+          ```
+  - uid: office.Office.BindingSelectionChangedEventArgs.startRow
+    summary: |-
+      <span data-ttu-id="4552d-123">Index de base zéro de la première ligne de la sélection à partir de la première ligne de la liaison.</span><span class="sxs-lookup"><span data-stu-id="4552d-123">The zero-based index of the first row of the selection counting from the first row in the binding.</span></span>
+
+      <span data-ttu-id="4552d-124">Si l’utilisateur effectue une sélection non contiguë, les coordonnées de la dernière sélection contiguë au sein de la liaison sont retournées.</span><span class="sxs-lookup"><span data-stu-id="4552d-124">If the user makes a non-contiguous selection, the coordinates for the last contiguous selection within the binding are returned.</span></span>
+
+      <span data-ttu-id="4552d-125">Pour Word, cette propriété ne fonctionne que pour les liaisons d' [Office. BindingType](xref:office.Office.BindingType) «table».</span><span class="sxs-lookup"><span data-stu-id="4552d-125">For Word, this property will work only for bindings of [Office.BindingType](xref:office.Office.BindingType) "table".</span></span> <span data-ttu-id="4552d-126">Si la liaison est de type « matrix », une valeur null est retournée.</span><span class="sxs-lookup"><span data-stu-id="4552d-126">If the binding is of type "matrix", null is returned.</span></span> <span data-ttu-id="4552d-127">En outre, l’appel échoue si le tableau contient des cellules fusionnées, car la structure du tableau doit être uniforme pour que cette propriété fonctionne correctement.</span><span class="sxs-lookup"><span data-stu-id="4552d-127">Also, the call will fail if the table contains merged cells, because the structure of the table must be uniform for this property to work correctly.</span></span>
+    name: startRow
+    fullName: startRow
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'startRow: number;'
+      return:
+        type:
+          - number
+        description: |-
+
+
+          #### <a name="examples"></a><span data-ttu-id="4552d-128">Exemples</span><span class="sxs-lookup"><span data-stu-id="4552d-128">Examples</span></span>
+
+          ```javascript
+          // The following example adds an event handler for the SelectionChanged event to the binding with an id of myTable.
+          // When the user changes the selection, the handler displays the coordinates of the first cell in the selection,
+          // and the number of row and columns selected.
+          function addSelectionHandler() {
+              Office.context.document.bindings.getByIdAsync("myTable", function (result) {
+                  result.value.addHandlerAsync("bindingSelectionChanged", myHandler);
+              });
+          }
+
+          // Display selection start coordinates and row/column count.
+          function myHandler(bArgs) {
+              write("Selection start row/col: " + bArgs.startRow + "," + bArgs.startColumn);
+              write("Selection row count: " + bArgs.rowCount);
+              write("Selection col count: " + bArgs.columnCount);
+          }
+          // Function that writes to a div with id='message' on the page.
+          function write(message){
+              document.getElementById('message').innerText += message; 
+          }
+          ```
+  - uid: office.Office.BindingSelectionChangedEventArgs.type
+    summary: '<span data-ttu-id="4552d-129">Obtient une valeur d’énumération [Office. EventType](xref:office.Office.EventType) qui identifie le type d’événement qui a été déclenché.</span><span class="sxs-lookup"><span data-stu-id="4552d-129">Gets an [Office.EventType](xref:office.Office.EventType) enumeration value that identifies the kind of event that was raised.</span></span>'
+    name: type
+    fullName: type
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'type: EventType;'
+      return:
+        type:
+          - office.Office.EventType
