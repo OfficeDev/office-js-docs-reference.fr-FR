@@ -1,0 +1,94 @@
+### YamlMime:UniversalReference
+items:
+  - uid: office.OfficeExtension.LoadOption
+    summary: Spécifie les propriétés d’un objet qui doivent être chargées. Cette charge se produit lors de l’exécution de la méthode Sync (). Cela permet de synchroniser les États entre les objets Office et les objets proxy JavaScript correspondants.
+    remarks: "Pour Word, la méthode préférée pour spécifier les propriétés et les informations de pagination consiste à utiliser un littéral de chaîne. Les deux premiers exemples illustrent la méthode recommandée pour demander les propriétés de texte et de taille de police pour les paragraphes d’une collection\_:\n\n`context.load(paragraphs, 'text, font/size');`\n\n`paragraphs.load('text, font/size');`\n\nVoici un exemple similaire qui utilise la notation d’objet (y compris la pagination)\_:\n\n`context.load(paragraphs, {select: 'text, font/size', expand: 'font', top: 50, skip: 0});`\n\n`paragraphs.load({select: 'text, font/size', expand: 'font', top: 50, skip: 0});`\n\nNotez que si aucune propriété spécifique n’est définie pour l’objet de police dans l’instruction select, l’instruction expand, si elle est définie seule, indique que toutes les propriétés de police sont chargées.\n\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\n// This example shows how to get the paragraphs in the Word document\n// along with their text and font size properties.\n\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n    // Create a proxy object for the paragraphs collection.\n    var paragraphs = context.document.body.paragraphs;\n\n    // Queue a commmand to load the text and font properties.\n    // It is best practice to always specify the property set.\n    // Otherwise, all properties are returned on the object.\n    context.load(paragraphs, 'text, font/size');\n\n    // Synchronize the document state by executing the queued commands,\n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n        // Insert code that works with the paragraphs loaded by context.load().\n    })\n})\n.catch(function (error) {\n    console.log('Error: ' + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Debug info: ' + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+    name: OfficeExtension.LoadOption
+    fullName: OfficeExtension.LoadOption
+    langs:
+      - typeScript
+    type: interface
+    package: office
+    children:
+      - office.OfficeExtension.LoadOption.expand
+      - office.OfficeExtension.LoadOption.select
+      - office.OfficeExtension.LoadOption.skip
+      - office.OfficeExtension.LoadOption.top
+  - uid: office.OfficeExtension.LoadOption.expand
+    summary: 'Chaîne délimitée par des virgules, ou tableau de chaînes, qui spécifie les propriétés de navigation à charger.'
+    name: expand
+    fullName: expand
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'expand?: string | string[];'
+      return:
+        type:
+          - 'string | string[]'
+  - uid: office.OfficeExtension.LoadOption.select
+    summary: 'Chaîne délimitée par des virgules, ou tableau de chaînes, qui spécifie les propriétés à charger.'
+    name: select
+    fullName: select
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'select?: string | string[];'
+      return:
+        type:
+          - 'string | string[]'
+  - uid: office.OfficeExtension.LoadOption.skip
+    summary: 'Utilisable uniquement sur les types de collection. Spécifie le nombre d’éléments dans la collection qui doivent être ignorés et qui ne sont pas inclus dans le résultat. Si Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d’éléments.'
+    name: skip
+    fullName: skip
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'skip?: number;'
+      return:
+        type:
+          - number
+  - uid: office.OfficeExtension.LoadOption.top
+    summary: Utilisable uniquement sur les types de collection. Spécifie le nombre maximal d’éléments de collection qui peuvent être inclus dans le résultat.
+    name: top
+    fullName: top
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'top?: number;'
+      return:
+        type:
+          - number
+        description: |-
+
+
+          #### <a name="examples"></a>範例
+
+          ```javascript
+          // This OneNote example shows how to get the page title and indentation level
+          // of the top five pages in the current section.
+          OneNote.run(function (context) {
+              // Get the pages in the current section.
+              var pages = context.application.getActiveSection().pages;
+
+              // Queue a command to load the pages.           
+              pages.load({ "select":"title,pageLevel", "top":5, "skip":0 });
+              return context.sync()
+                  .then(function() {
+                      // Iterate through the collection of pages.    
+                      $.each(pages.items, function(index, page) {
+                          // Show some properties.
+                          console.log("Page title: " + page.title);
+                          console.log("Indentation level: " + page.pageLevel);
+                      });
+                  }).catch(function(error) {
+                      console.log("Error: " + error);
+                      if (error instanceof OfficeExtension.Error) {
+                          console.log("Debug info: " + JSON.stringify(error.debugInfo));
+                      }
+                  })
+              });
+          ```
