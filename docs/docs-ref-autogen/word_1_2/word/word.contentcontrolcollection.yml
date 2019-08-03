@@ -1,0 +1,450 @@
+### YamlMime:UniversalReference
+items:
+  - uid: word.Word.ContentControlCollection
+    summary: |-
+      <span data-ttu-id="e5e27-101">Contient une collection d’objets [Word. ContentControl](xref:word.Word.ContentControl) .</span><span class="sxs-lookup"><span data-stu-id="e5e27-101">Contains a collection of [Word.ContentControl](xref:word.Word.ContentControl) objects.</span></span> <span data-ttu-id="e5e27-102">Les contrôles de contenu sont des régions liées et potentiellement étiquetées d’un document qui servent de conteneur pour des types de contenu spécifiques.</span><span class="sxs-lookup"><span data-stu-id="e5e27-102">Content controls are bounded and potentially labeled regions in a document that serve as containers for specific types of content.</span></span> <span data-ttu-id="e5e27-103">Chaque contrôle de contenu peut comporter des images, des tableaux ou des paragraphes de texte mis en forme.</span><span class="sxs-lookup"><span data-stu-id="e5e27-103">Individual content controls may contain contents such as images, tables, or paragraphs of formatted text.</span></span> <span data-ttu-id="e5e27-104">Actuellement, seuls les contrôles de contenu à texte enrichi sont pris en charge.</span><span class="sxs-lookup"><span data-stu-id="e5e27-104">Currently, only rich text content controls are supported.</span></span>
+
+      <span data-ttu-id="e5e27-105">\[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="e5e27-105">\[ [API set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]</span></span>
+    name: Word.ContentControlCollection
+    fullName: Word.ContentControlCollection
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - 'OfficeExtension.ClientObject '
+    package: word
+    children:
+      - word.Word.ContentControlCollection.context
+      - word.Word.ContentControlCollection.getById
+      - word.Word.ContentControlCollection.getByTag
+      - word.Word.ContentControlCollection.getByTitle
+      - word.Word.ContentControlCollection.getItem
+      - word.Word.ContentControlCollection.items
+      - word.Word.ContentControlCollection.load
+      - word.Word.ContentControlCollection.load_1
+      - word.Word.ContentControlCollection.load_2
+      - word.Word.ContentControlCollection.toJSON
+      - word.Word.ContentControlCollection.track
+      - word.Word.ContentControlCollection.untrack
+  - uid: word.Word.ContentControlCollection.context
+    summary: <span data-ttu-id="e5e27-106">Contexte de demande associé à l’objet.</span><span class="sxs-lookup"><span data-stu-id="e5e27-106">The request context associated with the object.</span></span> <span data-ttu-id="e5e27-107">Cette opération connecte le processus du complément au processus de l’application hôte Office.</span><span class="sxs-lookup"><span data-stu-id="e5e27-107">This connects the add-in's process to the Office host application's process.</span></span>
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - word.Word.RequestContext
+  - uid: word.Word.ContentControlCollection.getById
+    summary: |-
+      <span data-ttu-id="e5e27-108">Obtient un contrôle de contenu par son identificateur.</span><span class="sxs-lookup"><span data-stu-id="e5e27-108">Gets a content control by its identifier.</span></span> <span data-ttu-id="e5e27-109">Lève une exception s’il n’existe pas de contrôle de contenu avec l’identificateur dans cette collection.</span><span class="sxs-lookup"><span data-stu-id="e5e27-109">Throws if there isn't a content control with the identifier in this collection.</span></span>
+
+      <span data-ttu-id="e5e27-110">\[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="e5e27-110">\[ [API set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]</span></span>
+    name: getById(id)
+    fullName: getById(id)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getById(id: number): Word.ContentControl;'
+      return:
+        type:
+          - word.Word.ContentControl
+        description: |-
+
+
+          #### <a name="examples"></a><span data-ttu-id="e5e27-111">Exemples</span><span class="sxs-lookup"><span data-stu-id="e5e27-111">Examples</span></span>
+
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Create a proxy object for the content control that contains a specific id.
+              var contentControl = context.document.contentControls.getById(30086310);
+
+              // Queue a command to load the text property for a content control.
+              context.load(contentControl, 'text');
+
+              // Synchronize the document state by executing the queued commands,
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+                  console.log('The content control with that Id has been found in this document.');
+              });
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Create a proxy object for the content control that contains a specific id.
+              var contentControl = context.document.contentControls.getByIdOrNullObject(30086310);
+
+              // Queue a command to load the text property for a content control.
+              context.load(contentControl, 'text');
+
+              // Synchronize the document state by executing the queued commands,
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+                  if (contentControl.isNullObject) {
+                      console.log('There is no content control with that ID.')
+                  } else {
+                      console.log('The content control with that ID has been found in this document.');
+                  }
+              });
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: id
+          description: <span data-ttu-id="e5e27-112">Obligatoire.</span><span class="sxs-lookup"><span data-stu-id="e5e27-112">Required.</span></span> <span data-ttu-id="e5e27-113">Identificateur de contrôle de contenu.</span><span class="sxs-lookup"><span data-stu-id="e5e27-113">A content control identifier.</span></span>
+          type:
+            - number
+  - uid: word.Word.ContentControlCollection.getByTag
+    summary: |-
+      <span data-ttu-id="e5e27-114">Obtient les contrôles de contenu qui portent l’indicateur spécifié.</span><span class="sxs-lookup"><span data-stu-id="e5e27-114">Gets the content controls that have the specified tag.</span></span>
+
+      <span data-ttu-id="e5e27-115">\[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="e5e27-115">\[ [API set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]</span></span>
+    name: getByTag(tag)
+    fullName: getByTag(tag)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getByTag(tag: string): Word.ContentControlCollection;'
+      return:
+        type:
+          - word.Word.ContentControlCollection
+        description: |-
+
+
+          #### <a name="examples"></a><span data-ttu-id="e5e27-116">Exemples</span><span class="sxs-lookup"><span data-stu-id="e5e27-116">Examples</span></span>
+
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Create a proxy object for the content controls collection that contains a specific tag.
+              var contentControlsWithTag = context.document.contentControls.getByTag('Customer-Address');
+
+              // Queue a command to load the text property for all of content controls with a specific tag.
+              context.load(contentControlsWithTag, 'text');
+
+              // Synchronize the document state by executing the queued commands,
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+                  if (contentControlsWithTag.items.length === 0) {
+                      console.log("There isn't a content control with a tag of Customer-Address in this document.");
+                  } else {
+                      console.log(
+                          'The first content control with the tag of Customer-Address has this text: ' + 
+                          contentControlsWithTag.items[0].text);
+                  }
+
+              });
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+
+          // The Word-Add-in-DocumentAssembly sample has another example of using the getByTag method.
+          // https://github.com/OfficeDev/Word-Add-in-DocumentAssembly
+          ```
+          ```typescript
+          await Word.run(async (context) => {
+              let contentControls = context.document.contentControls.getByTag("customer");
+              contentControls.load("text");
+
+              await context.sync();
+
+              for (let i = 0; i < contentControls.items.length; i++) {
+                contentControls.items[i].insertText("Fabrikam", "Replace");
+              }
+
+              await context.sync();
+          });
+          ```
+      parameters:
+        - id: tag
+          description: <span data-ttu-id="e5e27-117">Obligatoire.</span><span class="sxs-lookup"><span data-stu-id="e5e27-117">Required.</span></span> <span data-ttu-id="e5e27-118">Indicateur défini sur un contrôle de contenu.</span><span class="sxs-lookup"><span data-stu-id="e5e27-118">A tag set on a content control.</span></span>
+          type:
+            - string
+  - uid: word.Word.ContentControlCollection.getByTitle
+    summary: |-
+      <span data-ttu-id="e5e27-119">Obtient les contrôles de contenu qui ont le titre spécifié.</span><span class="sxs-lookup"><span data-stu-id="e5e27-119">Gets the content controls that have the specified title.</span></span>
+
+      <span data-ttu-id="e5e27-120">\[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="e5e27-120">\[ [API set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]</span></span>
+    name: getByTitle(title)
+    fullName: getByTitle(title)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getByTitle(title: string): Word.ContentControlCollection;'
+      return:
+        type:
+          - word.Word.ContentControlCollection
+        description: |-
+
+
+          #### <a name="examples"></a><span data-ttu-id="e5e27-121">Exemples</span><span class="sxs-lookup"><span data-stu-id="e5e27-121">Examples</span></span>
+
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Create a proxy object for the content controls collection that contains a specific title.
+              var contentControlsWithTitle = context.document.contentControls.getByTitle('Enter Customer Address Here');
+
+              // Queue a command to load the text property for all of content controls with a specific title.
+              context.load(contentControlsWithTitle, 'text');
+
+              // Synchronize the document state by executing the queued commands,
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+                  if (contentControlsWithTitle.items.length === 0) {
+                      console.log(
+                          "There isn't a content control with a title of 'Enter Customer Address Here' in this document.");
+                  } else {
+                      console.log(
+                          "The first content control with the title of 'Enter Customer Address Here' has this text: " + 
+                          contentControlsWithTitle.items[0].text);
+                  }
+
+              });
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+
+          // The Word-Add-in-DocumentAssembly sample has another example of using the getByTitle method.
+          // https://github.com/OfficeDev/Word-Add-in-DocumentAssembly
+          ```
+      parameters:
+        - id: title
+          description: <span data-ttu-id="e5e27-122">Obligatoire.</span><span class="sxs-lookup"><span data-stu-id="e5e27-122">Required.</span></span> <span data-ttu-id="e5e27-123">Titre d’un contrôle de contenu.</span><span class="sxs-lookup"><span data-stu-id="e5e27-123">The title of a content control.</span></span>
+          type:
+            - string
+  - uid: word.Word.ContentControlCollection.getItem
+    summary: |-
+      <span data-ttu-id="e5e27-124">Obtient un contrôle de contenu par son index dans la collection.</span><span class="sxs-lookup"><span data-stu-id="e5e27-124">Gets a content control by its index in the collection.</span></span>
+
+      <span data-ttu-id="e5e27-125">\[[Ensemble d’API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="e5e27-125">\[ [API set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]</span></span>
+    name: getItem(index)
+    fullName: getItem(index)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItem(index: number): Word.ContentControl;'
+      return:
+        type:
+          - word.Word.ContentControl
+        description: ''
+      parameters:
+        - id: index
+          description: <span data-ttu-id="e5e27-126">Index.</span><span class="sxs-lookup"><span data-stu-id="e5e27-126">The index.</span></span>
+          type:
+            - number
+  - uid: word.Word.ContentControlCollection.items
+    summary: <span data-ttu-id="e5e27-127">Obtient l’élément enfant chargé dans cette collection de sites.</span><span class="sxs-lookup"><span data-stu-id="e5e27-127">Gets the loaded child items in this collection.</span></span>
+    name: items
+    fullName: items
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly items: Word.ContentControl[];'
+      return:
+        type:
+          - 'Word.ContentControl[]'
+  - uid: word.Word.ContentControlCollection.load
+    summary: "<span data-ttu-id=\"e5e27-128\">Files d’attente de la commande pour charger les propriétés de l’objet spécifié.</span><span class=\"sxs-lookup\"><span data-stu-id=\"e5e27-128\">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id=\"e5e27-129\">Vous devez appeler «\_context.sync()\_» avant de lire les propriétés.</span><span class=\"sxs-lookup\"><span data-stu-id=\"e5e27-129\">You must call \"context.sync()\" before reading the properties.</span></span>"
+    remarks: |-
+      <span data-ttu-id="e5e27-130">En plus de cette signature, cette méthode possède les signatures suivantes:</span><span class="sxs-lookup"><span data-stu-id="e5e27-130">In addition to this signature, this method has the following signatures:</span></span>
+
+      <span data-ttu-id="e5e27-131">`load(option?: string | string[]): Word.ContentControlCollection`-WHERE option est une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.</span><span class="sxs-lookup"><span data-stu-id="e5e27-131">`load(option?: string | string[]): Word.ContentControlCollection` - Where option is a comma-delimited string or an array of strings that specify the properties to load.</span></span>
+
+      <span data-ttu-id="e5e27-132">`load(option?: { select?: string; expand?: string; }): Word.ContentControlCollection`Option-WHERE option. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.</span><span class="sxs-lookup"><span data-stu-id="e5e27-132">`load(option?: { select?: string; expand?: string; }): Word.ContentControlCollection` - Where option.select is a comma-delimited string that specifies the properties to load, and options.expand is a comma-delimited string that specifies the navigation properties to load.</span></span>
+
+      <span data-ttu-id="e5e27-133">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Word.ContentControlCollection`-Uniquement disponible sur les types de collection.</span><span class="sxs-lookup"><span data-stu-id="e5e27-133">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Word.ContentControlCollection` - Only available on collection types.</span></span> <span data-ttu-id="e5e27-134">Elle est similaire à la signature précédente.</span><span class="sxs-lookup"><span data-stu-id="e5e27-134">It is similar to the preceding signature.</span></span> <span data-ttu-id="e5e27-135">Option. Top indique le nombre maximal d’éléments de collection qui peuvent être inclus dans le résultat.</span><span class="sxs-lookup"><span data-stu-id="e5e27-135">Option.top specifies the maximum number of collection items that can be included in the result.</span></span> <span data-ttu-id="e5e27-136">Option. Skip indique le nombre d’éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat.</span><span class="sxs-lookup"><span data-stu-id="e5e27-136">Option.skip specifies the number of items that are to be skipped and not included in the result.</span></span> <span data-ttu-id="e5e27-137">Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d’éléments.</span><span class="sxs-lookup"><span data-stu-id="e5e27-137">If option.top is specified, the result set will start after skipping the specified number of items.</span></span>
+
+      #### <a name="examples"></a><span data-ttu-id="e5e27-138">Exemples</span><span class="sxs-lookup"><span data-stu-id="e5e27-138">Examples</span></span>
+
+      ```javascript
+      // Run a batch operation against the Word object model.
+      Word.run(function (context) {
+
+          // Create a proxy object for the content controls collection.
+          var contentControls = context.document.contentControls;
+
+          // Queue a command to load the id property for all of the content controls.
+          context.load(contentControls, 'id');
+
+          // Synchronize the document state by executing the queued commands,
+          // and return a promise to indicate task completion.
+          return context.sync().then(function () {
+              if (contentControls.items.length === 0) {
+                  console.log('No content control found.');
+              }
+              else {
+                  // Queue a command to load the properties on the first content control.
+                  contentControls.items[0].load(  'appearance,' +
+                                                  'cannotDelete,' +
+                                                  'cannotEdit,' +
+                                                  'id,' +
+                                                  'placeHolderText,' +
+                                                  'removeWhenEdited,' +
+                                                  'title,' +
+                                                  'text,' +
+                                                  'type,' +
+                                                  'style,' +
+                                                  'tag,' +
+                                                  'font/size,' +
+                                                  'font/name,' +
+                                                  'font/color');
+
+                  // Synchronize the document state by executing the queued commands,
+                  // and return a promise to indicate task completion.
+                  return context.sync()
+                      .then(function () {
+                          console.log('Property values of the first content control:' +
+                              '   ----- appearance: ' + contentControls.items[0].appearance +
+                              '   ----- cannotDelete: ' + contentControls.items[0].cannotDelete +
+                              '   ----- cannotEdit: ' + contentControls.items[0].cannotEdit +
+                              '   ----- color: ' + contentControls.items[0].color +
+                              '   ----- id: ' + contentControls.items[0].id +
+                              '   ----- placeHolderText: ' + contentControls.items[0].placeholderText +
+                              '   ----- removeWhenEdited: ' + contentControls.items[0].removeWhenEdited +
+                              '   ----- title: ' + contentControls.items[0].title +
+                              '   ----- text: ' + contentControls.items[0].text +
+                              '   ----- type: ' + contentControls.items[0].type +
+                              '   ----- style: ' + contentControls.items[0].style +
+                              '   ----- tag: ' + contentControls.items[0].tag +
+                              '   ----- font size: ' + contentControls.items[0].font.size +
+                              '   ----- font name: ' + contentControls.items[0].font.name +
+                              '   ----- font color: ' + contentControls.items[0].font.color);
+                  });
+              }
+          });
+      })
+      .catch(function (error) {
+          console.log('Error: ' + JSON.stringify(error));
+          if (error instanceof OfficeExtension.Error) {
+              console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+          }
+      });
+
+      // The Silly stories add-in sample shows how the load method is used
+      // to load the content control collection with the tag and title properties.
+      // https://aka.ms/sillystorywordaddin
+      ```
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: Word.Interfaces.ContentControlCollectionLoadOptions & Word.Interfaces.CollectionLoadOptions): Word.ContentControlCollection;'
+      return:
+        type:
+          - word.Word.ContentControlCollection
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - Word.Interfaces.ContentControlCollectionLoadOptions & Word.Interfaces.CollectionLoadOptions
+  - uid: word.Word.ContentControlCollection.load_1
+    summary: <span data-ttu-id="e5e27-139">Files d’attente de la commande pour charger les propriétés de l’objet spécifié.</span><span class="sxs-lookup"><span data-stu-id="e5e27-139">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="e5e27-140">Vous devez appeler `context.sync()` avant de lire les propriétés.</span><span class="sxs-lookup"><span data-stu-id="e5e27-140">You must call `context.sync()` before reading the properties.</span></span>
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Word.ContentControlCollection;'
+      return:
+        type:
+          - word.Word.ContentControlCollection
+        description: ''
+      parameters:
+        - id: propertyNames
+          description: <span data-ttu-id="e5e27-141">Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.</span><span class="sxs-lookup"><span data-stu-id="e5e27-141">A comma-delimited string or an array of strings that specify the properties to load.</span></span>
+          type:
+            - 'string | string[]'
+  - uid: word.Word.ContentControlCollection.load_2
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: OfficeExtension.LoadOption): Word.ContentControlCollection;'
+      return:
+        type:
+          - word.Word.ContentControlCollection
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - OfficeExtension.LoadOption
+  - uid: word.Word.ContentControlCollection.toJSON
+    summary: '<span data-ttu-id="e5e27-142">Remplace la méthode JavaScript `toJSON()` afin de fournir une sortie plus utile lorsqu’un objet d’API est transmis à`JSON.stringify()`</span><span class="sxs-lookup"><span data-stu-id="e5e27-142">Overrides the JavaScript `toJSON()` method in order to provide more useful output when an API object is passed to `JSON.stringify()`</span></span><!-- --><span data-ttu-id="e5e27-143">.</span><span class="sxs-lookup"><span data-stu-id="e5e27-143"></span></span> <span data-ttu-id="e5e27-144">(`JSON.stringify`</span><span class="sxs-lookup"><span data-stu-id="e5e27-144"></span></span><!-- --><span data-ttu-id="e5e27-145">, à son tour, appelle `toJSON` la méthode de l’objet qui lui est passé.) Tandis que `Word.ContentControlCollection` l’objet d’origine est un objet `toJSON` d’API, la méthode renvoie un objet JavaScript simple (tapé comme`Word.Interfaces.ContentControlCollectionData`</span><span class="sxs-lookup"><span data-stu-id="e5e27-145">, in turn, calls the `toJSON` method of the object that is passed to it.) Whereas the original `Word.ContentControlCollection` object is an API object, the `toJSON` method returns a plain JavaScript object (typed as `Word.Interfaces.ContentControlCollectionData`</span></span><!-- --><span data-ttu-id="e5e27-146">) qui contient un tableau «éléments» avec des copies superficielles de toutes les propriétés chargées des éléments de la collection.</span><span class="sxs-lookup"><span data-stu-id="e5e27-146">) that contains an "items" array with shallow copies of any loaded properties from the collection''s items.</span></span>'
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Word.Interfaces.ContentControlCollectionData;'
+      return:
+        type:
+          - word.Word.Interfaces.ContentControlCollectionData
+        description: ''
+  - uid: word.Word.ContentControlCollection.track
+    summary: "<span data-ttu-id=\"e5e27-147\">Effectuer le suivi de l’objet pour l’ajustement automatique en fonction environnant des modifications dans le document.</span><span class=\"sxs-lookup\"><span data-stu-id=\"e5e27-147\">Track the object for automatic adjustment based on surrounding changes in the document.</span></span> <span data-ttu-id=\"e5e27-148\">Cet appel est abréviations context.trackedObjects.add(thisObject).</span><span class=\"sxs-lookup\"><span data-stu-id=\"e5e27-148\">This call is a shorthand for context.trackedObjects.add(thisObject).</span></span> <span data-ttu-id=\"e5e27-149\">Si vous utilisez cet objet au sein de «\_.sync\_» appels et en dehors de l’exécution séquentielle d’un lot de «\_.run\_» et rencontrez un message d’erreur «\_InvalidObjectPath\_» lors de la définition d’une propriété ou appeler une méthode sur l’objet, vous devez ajouter l’objet à l’objet de suivi collection de sites lors de l’objet a été créé.</span><span class=\"sxs-lookup\"><span data-stu-id=\"e5e27-149\">If you are using this object across \".sync\" calls and outside the sequential execution of a \".run\" batch, and get an \"InvalidObjectPath\" error when setting a property or invoking a method on the object, you needed to have added the object to the tracked object collection when the object was first created.</span></span>"
+    name: track()
+    fullName: track()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'track(): Word.ContentControlCollection;'
+      return:
+        type:
+          - word.Word.ContentControlCollection
+        description: ''
+  - uid: word.Word.ContentControlCollection.untrack
+    summary: "<span data-ttu-id=\"e5e27-150\">Publication mémoire associée à cet objet si elle a été précédemment suivie.</span><span class=\"sxs-lookup\"><span data-stu-id=\"e5e27-150\">Release the memory associated with this object, if it has previously been tracked.</span></span> <span data-ttu-id=\"e5e27-151\">Cet appel est abréviations context.trackedObjects.add(thisObject).</span><span class=\"sxs-lookup\"><span data-stu-id=\"e5e27-151\">This call is shorthand for context.trackedObjects.remove(thisObject).</span></span> <span data-ttu-id=\"e5e27-152\">Vous rencontrez de nombreux objets suivies ralentit l’application hôte, donc n’oubliez pas de libérer les objets que l'on ajoute, une fois que vous avez terminé à les utiliser.</span><span class=\"sxs-lookup\"><span data-stu-id=\"e5e27-152\">Having many tracked objects slows down the host application, so please remember to free any objects you add, once you're done using them.</span></span> <span data-ttu-id=\"e5e27-153\">Vous devez appeler «\_context.sync()\_» avant la publication de mémoire prend effet.</span><span class=\"sxs-lookup\"><span data-stu-id=\"e5e27-153\">You will need to call \"context.sync()\" before the memory release takes effect.</span></span>"
+    name: untrack()
+    fullName: untrack()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'untrack(): Word.ContentControlCollection;'
+      return:
+        type:
+          - word.Word.ContentControlCollection
+        description: ''
