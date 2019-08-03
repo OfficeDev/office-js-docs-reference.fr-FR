@@ -1,0 +1,181 @@
+### YamlMime:UniversalReference
+items:
+  - uid: visio.Visio.ShapeDataItemCollection
+    summary: |-
+      Représente la collection d’éléments de données pour une forme donnée.
+
+      \[[Ensemble d’API: 1,1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
+    name: Visio.ShapeDataItemCollection
+    fullName: Visio.ShapeDataItemCollection
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - 'OfficeExtension.ClientObject '
+    package: visio
+    children:
+      - visio.Visio.ShapeDataItemCollection.context
+      - visio.Visio.ShapeDataItemCollection.getCount
+      - visio.Visio.ShapeDataItemCollection.getItem
+      - visio.Visio.ShapeDataItemCollection.items
+      - visio.Visio.ShapeDataItemCollection.load
+      - visio.Visio.ShapeDataItemCollection.load_1
+      - visio.Visio.ShapeDataItemCollection.load_2
+      - visio.Visio.ShapeDataItemCollection.toJSON
+  - uid: visio.Visio.ShapeDataItemCollection.context
+    summary: Contexte de demande associé à l’objet. Cette opération connecte le processus du complément au processus de l’application hôte Office.
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - visio.Visio.RequestContext
+  - uid: visio.Visio.ShapeDataItemCollection.getCount
+    summary: |-
+      Obtient le nombre d’éléments de données de forme.
+
+      \[[Ensemble d’API: 1,1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
+    name: getCount()
+    fullName: getCount()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getCount(): OfficeExtension.ClientResult<number>;'
+      return:
+        type:
+          - OfficeExtension.ClientResult<number>
+        description: ''
+  - uid: visio.Visio.ShapeDataItemCollection.getItem
+    summary: |-
+      Obtient l’élément de données de forme à l’aide de son nom.
+
+      \[[Ensemble d’API: 1,1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
+    name: getItem(key)
+    fullName: getItem(key)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItem(key: string): Visio.ShapeDataItem;'
+      return:
+        type:
+          - visio.Visio.ShapeDataItem
+        description: ''
+      parameters:
+        - id: key
+          description: La clé est le nom de l’élément de données de forme à récupérer.
+          type:
+            - string
+  - uid: visio.Visio.ShapeDataItemCollection.items
+    summary: Obtient l’élément enfant chargé dans cette collection de sites.
+    name: items
+    fullName: items
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly items: Visio.ShapeDataItem[];'
+      return:
+        type:
+          - 'Visio.ShapeDataItem[]'
+  - uid: visio.Visio.ShapeDataItemCollection.load
+    summary: "Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler «\_context.sync()\_» avant de lire les propriétés."
+    remarks: |-
+      En plus de cette signature, cette méthode possède les signatures suivantes:
+
+      `load(option?: string | string[]): Visio.ShapeDataItemCollection`-WHERE option est une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+
+      `load(option?: { select?: string; expand?: string; }): Visio.ShapeDataItemCollection`Option-WHERE option. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
+
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Visio.ShapeDataItemCollection`-Uniquement disponible sur les types de collection. Elle est similaire à la signature précédente. Option. Top indique le nombre maximal d’éléments de collection qui peuvent être inclus dans le résultat. Option. Skip indique le nombre d’éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat. Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d’éléments.
+
+      #### <a name="examples"></a>Exemples
+
+      ```javascript
+      Visio.run(session, function (ctx) {
+          var activePage = ctx.document.getActivePage();
+          var shape = activePage.shapes.getItem(0);
+          var shapeDataItems = shape.shapeDataItems;
+          shapeDataItems.load(["label", "value"]);
+          return ctx.sync().then(function() {
+              for (var i = 0; i < shapeDataItems.items.length; i++) {
+                  console.log(shapeDataItems.items[i].label);
+                  console.log(shapeDataItems.items[i].value);
+              }
+          });
+      }).catch(function(error) {
+          console.log("Error: " + error);
+          if (error instanceof OfficeExtension.Error) {
+              console.log("Debug info: " + JSON.stringify(error.debugInfo));
+          }
+      });
+      ```
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: Visio.Interfaces.ShapeDataItemCollectionLoadOptions & Visio.Interfaces.CollectionLoadOptions): Visio.ShapeDataItemCollection;'
+      return:
+        type:
+          - visio.Visio.ShapeDataItemCollection
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - Visio.Interfaces.ShapeDataItemCollectionLoadOptions & Visio.Interfaces.CollectionLoadOptions
+  - uid: visio.Visio.ShapeDataItemCollection.load_1
+    summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler `context.sync()` avant de lire les propriétés.
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Visio.ShapeDataItemCollection;'
+      return:
+        type:
+          - visio.Visio.ShapeDataItemCollection
+        description: ''
+      parameters:
+        - id: propertyNames
+          description: Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+          type:
+            - 'string | string[]'
+  - uid: visio.Visio.ShapeDataItemCollection.load_2
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: OfficeExtension.LoadOption): Visio.ShapeDataItemCollection;'
+      return:
+        type:
+          - visio.Visio.ShapeDataItemCollection
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - OfficeExtension.LoadOption
+  - uid: visio.Visio.ShapeDataItemCollection.toJSON
+    summary: 'Remplace la méthode JavaScript `toJSON()` afin de fournir une sortie plus utile lorsqu’un objet d’API est transmis à`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle `toJSON` la méthode de l’objet qui lui est passé.) Tandis que `Visio.ShapeDataItemCollection` l’objet d’origine est un objet `toJSON` d’API, la méthode renvoie un objet JavaScript simple (tapé comme`Visio.Interfaces.ShapeDataItemCollectionData`<!-- -->) qui contient un tableau «éléments» avec des copies superficielles de toutes les propriétés chargées des éléments de la collection.'
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Visio.Interfaces.ShapeDataItemCollectionData;'
+      return:
+        type:
+          - visio.Visio.Interfaces.ShapeDataItemCollectionData
+        description: ''
