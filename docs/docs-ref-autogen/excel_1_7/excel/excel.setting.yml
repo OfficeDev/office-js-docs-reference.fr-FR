@@ -1,0 +1,225 @@
+### YamlMime:UniversalReference
+items:
+  - uid: excel.Excel.Setting
+    summary: |-
+      <span data-ttu-id="4d347-101">Le paramètre représente une paire clé-valeur d’un paramètre conservé dans le document (par fichier et par complément).</span><span class="sxs-lookup"><span data-stu-id="4d347-101">Setting represents a key-value pair of a setting persisted to the document (per file per add-in).</span></span> <span data-ttu-id="4d347-102">Cette paire clé-valeur personnalisée peut être utilisée pour stocker les informations d’État ou de cycle de vie requises par le complément de contenu ou de volet de tâches.</span><span class="sxs-lookup"><span data-stu-id="4d347-102">These custom key-value pair can be used to store state or lifecycle information needed by the content or task-pane add-in.</span></span> <span data-ttu-id="4d347-103">Notez que les paramètres sont persistants dans le document et que, par conséquent, il ne s’agit pas d’un emplacement pour stocker des informations sensibles ou protégées, telles que les informations utilisateur et le mot de passe.</span><span class="sxs-lookup"><span data-stu-id="4d347-103">Note that settings are persisted in the document and hence it is not a place to store any sensitive or protected information such as user information and password.</span></span>
+
+      <span data-ttu-id="4d347-104">\[[Ensemble d’API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="4d347-104">\[ [API set: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: Excel.Setting
+    fullName: Excel.Setting
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - 'OfficeExtension.ClientObject '
+    package: excel
+    children:
+      - excel.Excel.Setting.context
+      - excel.Excel.Setting.delete
+      - excel.Excel.Setting.key
+      - excel.Excel.Setting.load
+      - excel.Excel.Setting.load_1
+      - excel.Excel.Setting.load_2
+      - excel.Excel.Setting.set
+      - excel.Excel.Setting.set_1
+      - excel.Excel.Setting.toJSON
+      - excel.Excel.Setting.value
+  - uid: excel.Excel.Setting.context
+    summary: <span data-ttu-id="4d347-105">Contexte de demande associé à l’objet.</span><span class="sxs-lookup"><span data-stu-id="4d347-105">The request context associated with the object.</span></span> <span data-ttu-id="4d347-106">Cette opération connecte le processus du complément au processus de l’application hôte Office.</span><span class="sxs-lookup"><span data-stu-id="4d347-106">This connects the add-in's process to the Office host application's process.</span></span>
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - excel.Excel.RequestContext
+  - uid: excel.Excel.Setting.delete
+    summary: |-
+      <span data-ttu-id="4d347-107">Supprime le paramètre.</span><span class="sxs-lookup"><span data-stu-id="4d347-107">Deletes the setting.</span></span>
+
+      <span data-ttu-id="4d347-108">\[[Ensemble d’API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="4d347-108">\[ [API set: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: delete()
+    fullName: delete()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'delete(): void;'
+      return:
+        type:
+          - void
+        description: |-
+
+
+          #### <a name="examples"></a><span data-ttu-id="4d347-109">Exemples</span><span class="sxs-lookup"><span data-stu-id="4d347-109">Examples</span></span>
+
+          ```typescript
+          await Excel.run(async (context) => {
+              const settings = context.workbook.settings;
+              let needsReview = settings.getItem("NeedsReview");
+              needsReview.delete();
+              needsReview = settings.getItemOrNullObject("NeedsReview");
+
+              await context.sync();
+
+              if (needsReview.isNullObject) {
+                  console.log("The setting has been deleted");
+              } else {
+                  console.log("The setting was not deleted");
+              }
+
+              await context.sync();
+          });
+          ```
+  - uid: excel.Excel.Setting.key
+    summary: |-
+      <span data-ttu-id="4d347-110">Renvoie la clé qui représente l’id du paramètre.</span><span class="sxs-lookup"><span data-stu-id="4d347-110">Returns the key that represents the id of the Setting.</span></span> <span data-ttu-id="4d347-111">En lecture seule.</span><span class="sxs-lookup"><span data-stu-id="4d347-111">Read-only.</span></span>
+
+      <span data-ttu-id="4d347-112">\[[Ensemble d’API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="4d347-112">\[ [API set: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: key
+    fullName: key
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly key: string;'
+      return:
+        type:
+          - string
+  - uid: excel.Excel.Setting.load
+    summary: "<span data-ttu-id=\"4d347-113\">Files d’attente de la commande pour charger les propriétés de l’objet spécifié.</span><span class=\"sxs-lookup\"><span data-stu-id=\"4d347-113\">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id=\"4d347-114\">Vous devez appeler «\_context.sync()\_» avant de lire les propriétés.</span><span class=\"sxs-lookup\"><span data-stu-id=\"4d347-114\">You must call \"context.sync()\" before reading the properties.</span></span>"
+    remarks: |-
+      <span data-ttu-id="4d347-115">En plus de cette signature, cette méthode possède les signatures suivantes:</span><span class="sxs-lookup"><span data-stu-id="4d347-115">In addition to this signature, this method has the following signatures:</span></span>
+
+      <span data-ttu-id="4d347-116">`load(option?: string | string[]): Excel.Setting`-WHERE option est une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.</span><span class="sxs-lookup"><span data-stu-id="4d347-116">`load(option?: string | string[]): Excel.Setting` - Where option is a comma-delimited string or an array of strings that specify the properties to load.</span></span>
+
+      <span data-ttu-id="4d347-117">`load(option?: { select?: string; expand?: string; }): Excel.Setting`Option-WHERE option. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.</span><span class="sxs-lookup"><span data-stu-id="4d347-117">`load(option?: { select?: string; expand?: string; }): Excel.Setting` - Where option.select is a comma-delimited string that specifies the properties to load, and options.expand is a comma-delimited string that specifies the navigation properties to load.</span></span>
+
+      <span data-ttu-id="4d347-118">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Setting`-Uniquement disponible sur les types de collection.</span><span class="sxs-lookup"><span data-stu-id="4d347-118">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Setting` - Only available on collection types.</span></span> <span data-ttu-id="4d347-119">Elle est similaire à la signature précédente.</span><span class="sxs-lookup"><span data-stu-id="4d347-119">It is similar to the preceding signature.</span></span> <span data-ttu-id="4d347-120">Option. Top indique le nombre maximal d’éléments de collection qui peuvent être inclus dans le résultat.</span><span class="sxs-lookup"><span data-stu-id="4d347-120">Option.top specifies the maximum number of collection items that can be included in the result.</span></span> <span data-ttu-id="4d347-121">Option. Skip indique le nombre d’éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat.</span><span class="sxs-lookup"><span data-stu-id="4d347-121">Option.skip specifies the number of items that are to be skipped and not included in the result.</span></span> <span data-ttu-id="4d347-122">Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d’éléments.</span><span class="sxs-lookup"><span data-stu-id="4d347-122">If option.top is specified, the result set will start after skipping the specified number of items.</span></span>
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: Excel.Interfaces.SettingLoadOptions): Excel.Setting;'
+      return:
+        type:
+          - excel.Excel.Setting
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - excel.Excel.Interfaces.SettingLoadOptions
+  - uid: excel.Excel.Setting.load_1
+    summary: <span data-ttu-id="4d347-123">Files d’attente de la commande pour charger les propriétés de l’objet spécifié.</span><span class="sxs-lookup"><span data-stu-id="4d347-123">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="4d347-124">Vous devez appeler `context.sync()` avant de lire les propriétés.</span><span class="sxs-lookup"><span data-stu-id="4d347-124">You must call `context.sync()` before reading the properties.</span></span>
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Excel.Setting;'
+      return:
+        type:
+          - excel.Excel.Setting
+        description: ''
+      parameters:
+        - id: propertyNames
+          description: <span data-ttu-id="4d347-125">Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.</span><span class="sxs-lookup"><span data-stu-id="4d347-125">A comma-delimited string or an array of strings that specify the properties to load.</span></span>
+          type:
+            - 'string | string[]'
+  - uid: excel.Excel.Setting.load_2
+    summary: <span data-ttu-id="4d347-126">Files d’attente de la commande pour charger les propriétés de l’objet spécifié.</span><span class="sxs-lookup"><span data-stu-id="4d347-126">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="4d347-127">Vous devez appeler `context.sync()` avant de lire les propriétés.</span><span class="sxs-lookup"><span data-stu-id="4d347-127">You must call `context.sync()` before reading the properties.</span></span>
+    name: load(propertyNamesAndPaths)
+    fullName: load(propertyNamesAndPaths)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.Setting;'
+      return:
+        type:
+          - excel.Excel.Setting
+        description: ''
+      parameters:
+        - id: propertyNamesAndPaths
+          description: '<span data-ttu-id="4d347-128">Où propertyNamesAndPaths. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et propertyNamesAndPaths. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.</span><span class="sxs-lookup"><span data-stu-id="4d347-128">Where propertyNamesAndPaths.select is a comma-delimited string that specifies the properties to load, and propertyNamesAndPaths.expand is a comma-delimited string that specifies the navigation properties to load.</span></span>'
+          type:
+            - '{ select?: string; expand?: string; }'
+  - uid: excel.Excel.Setting.set
+    summary: '<span data-ttu-id="4d347-129">Définit plusieurs propriétés d’un objet en même temps.</span><span class="sxs-lookup"><span data-stu-id="4d347-129">Sets multiple properties of an object at the same time.</span></span> <span data-ttu-id="4d347-130">Vous pouvez transmettre un objet plain avec les propriétés appropriées, ou un autre objet API du même type.</span><span class="sxs-lookup"><span data-stu-id="4d347-130">You can pass either a plain object with the appropriate properties, or another API object of the same type.</span></span>'
+    remarks: |-
+      <span data-ttu-id="4d347-131">Cette méthode est dotée de la signature supplémentaire suivante:</span><span class="sxs-lookup"><span data-stu-id="4d347-131">This method has the following additional signature:</span></span>
+
+      `set(properties: Excel.Setting): void`
+    name: 'set(properties, options)'
+    fullName: 'set(properties, options)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Interfaces.SettingUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: <span data-ttu-id="4d347-132">Objet JavaScript avec des propriétés qui sont structurées isomorphically vers les propriétés de l’objet sur lequel la méthode est appelée.</span><span class="sxs-lookup"><span data-stu-id="4d347-132">A JavaScript object with properties that are structured isomorphically to the properties of the object on which the method is called.</span></span>
+          type:
+            - Interfaces.SettingUpdateData
+        - id: options
+          description: <span data-ttu-id="4d347-133">Fournit une option permettant de supprimer les erreurs si l’objet Properties tente de définir des propriétés en lecture seule.</span><span class="sxs-lookup"><span data-stu-id="4d347-133">Provides an option to suppress errors if the properties object tries to set any read-only properties.</span></span>
+          type:
+            - OfficeExtension.UpdateOptions
+  - uid: excel.Excel.Setting.set_1
+    summary: '<span data-ttu-id="4d347-134">Définit plusieurs propriétés de l’objet en même temps, en fonction d’un objet chargé existant.</span><span class="sxs-lookup"><span data-stu-id="4d347-134">Sets multiple properties on the object at the same time, based on an existing loaded object.</span></span>'
+    name: set(properties)
+    fullName: set(properties)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Excel.Setting): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: ''
+          type:
+            - excel.Excel.Setting
+  - uid: excel.Excel.Setting.toJSON
+    summary: '<span data-ttu-id="4d347-135">Remplace la méthode JavaScript `toJSON()` afin de fournir une sortie plus utile lorsqu’un objet d’API est transmis à`JSON.stringify()`</span><span class="sxs-lookup"><span data-stu-id="4d347-135">Overrides the JavaScript `toJSON()` method in order to provide more useful output when an API object is passed to `JSON.stringify()`</span></span><!-- --><span data-ttu-id="4d347-136">.</span><span class="sxs-lookup"><span data-stu-id="4d347-136"></span></span> <span data-ttu-id="4d347-137">(`JSON.stringify`</span><span class="sxs-lookup"><span data-stu-id="4d347-137"></span></span><!-- --><span data-ttu-id="4d347-138">, à son tour, appelle `toJSON` la méthode de l’objet qui lui est passé.) Tandis que l’objet Excel. Setting est un objet d’API `toJSON` , la méthode renvoie un objet JavaScript simple (tapé comme`Excel.Interfaces.SettingData`</span><span class="sxs-lookup"><span data-stu-id="4d347-138">, in turn, calls the `toJSON` method of the object that is passed to it.) Whereas the original Excel.Setting object is an API object, the `toJSON` method returns a plain JavaScript object (typed as `Excel.Interfaces.SettingData`</span></span><!-- --><span data-ttu-id="4d347-139">) qui contient des copies superficielles de toutes les propriétés enfants chargées à partir de l’objet d’origine.</span><span class="sxs-lookup"><span data-stu-id="4d347-139">) that contains shallow copies of any loaded child properties from the original object.</span></span>'
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Excel.Interfaces.SettingData;'
+      return:
+        type:
+          - excel.Excel.Interfaces.SettingData
+        description: ''
+  - uid: excel.Excel.Setting.value
+    summary: |-
+      <span data-ttu-id="4d347-140">Représente la valeur stockée pour ce paramètre.</span><span class="sxs-lookup"><span data-stu-id="4d347-140">Represents the value stored for this setting.</span></span>
+
+      <span data-ttu-id="4d347-141">\[[Ensemble d’API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="4d347-141">\[ [API set: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: value
+    fullName: value
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'value: any;'
+      return:
+        type:
+          - any
