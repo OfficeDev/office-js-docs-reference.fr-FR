@@ -1,30 +1,30 @@
 ### YamlMime:UniversalReference
 items:
-  - uid: office.Office.Bindings
+  - uid: 'office!Office.Bindings:interface'
     summary: Représente les liaisons du complément au sein du document.
     name: Office.Bindings
     fullName: Office.Bindings
     langs:
       - typeScript
     type: interface
-    package: office
+    package: office!
     children:
-      - office.Office.Bindings.addFromNamedItemAsync
-      - office.Office.Bindings.addFromNamedItemAsync_1
-      - office.Office.Bindings.addFromPromptAsync
-      - office.Office.Bindings.addFromPromptAsync_1
-      - office.Office.Bindings.addFromSelectionAsync
-      - office.Office.Bindings.addFromSelectionAsync_1
-      - office.Office.Bindings.getAllAsync
-      - office.Office.Bindings.getAllAsync_1
-      - office.Office.Bindings.getByIdAsync
-      - office.Office.Bindings.getByIdAsync_1
-      - office.Office.Bindings.releaseByIdAsync
-      - office.Office.Bindings.releaseByIdAsync_1
-      - office.Office.Bindings.document
-  - uid: office.Office.Bindings.addFromNamedItemAsync
+      - 'office!Office.Bindings#addFromNamedItemAsync:member(1)'
+      - 'office!Office.Bindings#addFromNamedItemAsync:member(2)'
+      - 'office!Office.Bindings#addFromPromptAsync:member(1)'
+      - 'office!Office.Bindings#addFromPromptAsync:member(2)'
+      - 'office!Office.Bindings#addFromSelectionAsync:member(1)'
+      - 'office!Office.Bindings#addFromSelectionAsync:member(2)'
+      - 'office!Office.Bindings#document:member'
+      - 'office!Office.Bindings#getAllAsync:member(1)'
+      - 'office!Office.Bindings#getAllAsync:member(2)'
+      - 'office!Office.Bindings#getByIdAsync:member(1)'
+      - 'office!Office.Bindings#getByIdAsync:member(2)'
+      - 'office!Office.Bindings#releaseByIdAsync:member(1)'
+      - 'office!Office.Bindings#releaseByIdAsync:member(2)'
+  - uid: 'office!Office.Bindings#addFromNamedItemAsync:member(1)'
     summary: Crée une liaison par rapport à un objet nommé dans le document.
-    remarks: "**Ensembles de conditions requises**:\n\n- [MatrixBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixbindings)\n\n- [TableBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablebindings)\n\n- [TextBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textbindings)\n\nPour Excel, le paramètre itemName peut faire référence à une plage nommée ou à un tableau.\n\nPar défaut, l’ajout d’un tableau dans Excel entraîne l’affectation du nom «\_Tableau1\_» pour le premier tableau que vous ajoutez, «\_Tableau2\_» pour le deuxième tableau que vous ajoutez, et ainsi de suite. Pour attribuer un nom explicite à une table dans l’interface utilisateur Excel, utilisez la propriété nom de la table sous \\| l’onglet Outils de tableau du ruban.\n\n**Remarque**: dans Excel, lorsque vous spécifiez un tableau en tant qu’élément nommé, vous devez qualifier complètement le nom pour inclure le nom de la feuille de calcul dans le nom de la table au format suivant: \"Sheet1! Table1\n\nPour Word, le paramètre itemName fait référence à la propriété Title d’un contrôle de contenu de texte enrichi. (Vous ne pouvez pas établir de liaison avec des contrôles de contenu autres que le contrôle de contenu de texte enrichi).\n\nPar défaut, aucune valeur de titre n’est affectée à un contrôle de contenu. Pour affecter un nom significatif dans l’interface utilisateur de Word, après l’insertion d’un contrôle de contenu Texte enrichi à partir du groupe Contrôles sur l’onglet Développeur du ruban, utilisez la commande Propriétés du groupe Contrôles pour afficher la boîte de dialogue Propriétés du contrôle de contenu. Définissez ensuite la propriété  Titre du contrôle de contenu sur le nom auquel vous souhaitez faire référence à partir de votre code.\n\n**Remarque**: dans Word, s’il existe plusieurs contrôles de contenu de texte enrichi avec la même valeur de propriété Title (Name) et que vous essayez de créer une liaison avec ces contrôles de contenu avec cette méthode (en spécifiant son nom comme paramètre itemName), l’opération échouera.\n\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\n// The following example adds a binding to the myRange named item in Excel as a \"matrix\" binding,\n// and assigns the binding's id as myMatrix.\nfunction bindNamedItem() {\n    Office.context.document.bindings.addFromNamedItemAsync(\n        \"myRange\", \"matrix\", {id:'myMatrix'}, function (result) {\n        if (result.status == 'succeeded'){\n            write('Added new binding with type: ' + result.value.type + ' and id: ' + result.value.id);\n            }\n        else\n            write('Error: ' + result.error.message);\n    });\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n\n// The following example adds a binding to the Table1 named item in Excel as a \"table\" binding,\n// and assigns the binding's id as myTable.\nfunction bindNamedItem() {\n    Office.context.document.bindings.addFromNamedItemAsync(\n        \"Table1\", \"table\", {id:'myTable'}, function (result) {\n        if (result.status == 'succeeded'){\n            write('Added new binding with type: ' + result.value.type + ' and id: ' + result.value.id);\n            }\n        else\n            write('Error: ' + result.error.message);\n    });\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n\n// The following example creates a text binding in Word to a rich text content control named \"FirstName\",\n// assigns the id \"firstName\", and then displays that information.\nfunction bindContentControl() {\n    Office.context.document.bindings.addFromNamedItemAsync('FirstName', \n        Office.BindingType.Text, {id:'firstName'},\n        function (result) {\n            if (result.status === Office.AsyncResultStatus.Succeeded) {\n                write('Control bound. Binding.id: '\n                    + result.value.id + ' Binding.type: ' + result.value.type);\n            } else {\n                write('Error:', result.error.message);\n            }\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+    remarks: "**Ensembles de conditions requises**:\n\n- [MatrixBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixbindings)\n\n- [TableBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablebindings)\n\n- [TextBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textbindings)\n\nPour Excel, le paramètre itemName peut faire référence à une plage nommée ou à un tableau.\n\nPar défaut, l’ajout d’un tableau dans Excel entraîne l’affectation du nom «\_Tableau1\_» pour le premier tableau que vous ajoutez, «\_Tableau2\_» pour le deuxième tableau que vous ajoutez, et ainsi de suite. Pour attribuer un nom explicite à une table dans l’interface utilisateur Excel, utilisez la propriété nom de la table sous \\| l’onglet Outils de tableau du ruban.\n\n**Remarque**: dans Excel, lorsque vous spécifiez un tableau en tant qu’élément nommé, vous devez qualifier complètement le nom pour inclure le nom de la feuille de calcul dans le nom de la table au format suivant\_: \"Sheet1\_! Table1\n\nPour Word, le paramètre itemName fait référence à la propriété Title d’un contrôle de contenu de texte enrichi. (Vous ne pouvez pas établir de liaison avec des contrôles de contenu autres que le contrôle de contenu de texte enrichi).\n\nPar défaut, aucune valeur de titre n’est affectée à un contrôle de contenu. Pour affecter un nom significatif dans l’interface utilisateur de Word, après l’insertion d’un contrôle de contenu Texte enrichi à partir du groupe Contrôles sur l’onglet Développeur du ruban, utilisez la commande Propriétés du groupe Contrôles pour afficher la boîte de dialogue Propriétés du contrôle de contenu. Définissez ensuite la propriété  Titre du contrôle de contenu sur le nom auquel vous souhaitez faire référence à partir de votre code.\n\n**Remarque**: dans Word, s’il existe plusieurs contrôles de contenu de texte enrichi avec la même valeur de propriété Title (Name) et que vous essayez de créer une liaison avec ces contrôles de contenu avec cette méthode (en spécifiant son nom comme paramètre itemName), l’opération échouera.\n\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\n// The following example adds a binding to the myRange named item in Excel as a \"matrix\" binding,\n// and assigns the binding's id as myMatrix.\nfunction bindNamedItem() {\n    Office.context.document.bindings.addFromNamedItemAsync(\n        \"myRange\", \"matrix\", {id:'myMatrix'}, function (result) {\n        if (result.status == 'succeeded'){\n            write('Added new binding with type: ' + result.value.type + ' and id: ' + result.value.id);\n            }\n        else\n            write('Error: ' + result.error.message);\n    });\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n\n// The following example adds a binding to the Table1 named item in Excel as a \"table\" binding,\n// and assigns the binding's id as myTable.\nfunction bindNamedItem() {\n    Office.context.document.bindings.addFromNamedItemAsync(\n        \"Table1\", \"table\", {id:'myTable'}, function (result) {\n        if (result.status == 'succeeded'){\n            write('Added new binding with type: ' + result.value.type + ' and id: ' + result.value.id);\n            }\n        else\n            write('Error: ' + result.error.message);\n    });\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n\n// The following example creates a text binding in Word to a rich text content control named \"FirstName\",\n// assigns the id \"firstName\", and then displays that information.\nfunction bindContentControl() {\n    Office.context.document.bindings.addFromNamedItemAsync('FirstName', \n        Office.BindingType.Text, {id:'firstName'},\n        function (result) {\n            if (result.status === Office.AsyncResultStatus.Succeeded) {\n                write('Control bound. Binding.id: '\n                    + result.value.id + ' Binding.type: ' + result.value.type);\n            } else {\n                write('Error:', result.error.message);\n            }\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
     name: 'addFromNamedItemAsync(itemName, bindingType, options, callback)'
     fullName: 'addFromNamedItemAsync(itemName, bindingType, options, callback)'
     langs:
@@ -38,24 +38,24 @@ items:
         description: ''
       parameters:
         - id: itemName
-          description: 'Nom de l’objet pouvant être lié dans le document. Par exemple, table «MyExpenses» dans Excel».'
+          description: "Nom de l’objet pouvant être lié dans le document. Par exemple, table «\_MyExpenses\_» dans Excel»."
           type:
             - string
         - id: bindingType
-          description: '[Office. BindingType](xref:office.Office.BindingType) pour les données. La méthode renvoie la valeur null si l’objet sélectionné ne peut pas être converti dans le type spécifié.'
+          description: '[Office. BindingType](xref:office!Office.BindingType:enum) pour les données. La méthode renvoie la valeur null si l’objet sélectionné ne peut pas être converti dans le type spécifié.'
           type:
-            - office.Office.BindingType
+            - 'office!Office.BindingType:enum'
         - id: options
           description: Fournit des options pour la configuration de la liaison qui est créée.
           type:
-            - office.Office.AddBindingFromNamedItemOptions
+            - 'office!Office.AddBindingFromNamedItemOptions:interface'
         - id: callback
-          description: 'Facultatif. Fonction appelée lorsque le rappel est renvoyé, dont le seul paramètre est de type [Office. AsyncResult](xref:office.Office.AsyncResult)<!-- -->. La `value` propriété du résultat est l’objet Binding qui représente l’élément nommé spécifié.'
+          description: 'Facultatif. Fonction appelée lorsque le rappel est renvoyé, dont le seul paramètre est de type [Office. AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propriété du résultat est l’objet Binding qui représente l’élément nommé spécifié.'
           type:
-            - '(result: AsyncResult<Binding>) => void'
-  - uid: office.Office.Bindings.addFromNamedItemAsync_1
+            - 'office!Office.Bindings#addFromNamedItemAsync~0:complex'
+  - uid: 'office!Office.Bindings#addFromNamedItemAsync:member(2)'
     summary: Crée une liaison par rapport à un objet nommé dans le document.
-    remarks: "[MatrixBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixbindings)<!-- -->, [TableBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablebindings)<!-- -->, [TextBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textbindings)\n\nPour Excel, le paramètre itemName peut faire référence à une plage nommée ou à un tableau.\n\nPar défaut, l’ajout d’un tableau dans Excel entraîne l’affectation du nom «\_Tableau1\_» pour le premier tableau que vous ajoutez, «\_Tableau2\_» pour le deuxième tableau que vous ajoutez, et ainsi de suite. Pour attribuer un nom explicite à une table dans l’interface utilisateur Excel, utilisez la propriété nom de la table sous \\| l’onglet Outils de tableau du ruban.\n\n**Remarque**: dans Excel, lorsque vous spécifiez un tableau en tant qu’élément nommé, vous devez qualifier complètement le nom pour inclure le nom de la feuille de calcul dans le nom de la table au format suivant: \"Sheet1! Table1\n\nPour Word, le paramètre itemName fait référence à la propriété Title d’un contrôle de contenu de texte enrichi. (Vous ne pouvez pas établir de liaison avec des contrôles de contenu autres que le contrôle de contenu de texte enrichi).\n\nPar défaut, aucune valeur de titre n’est affectée à un contrôle de contenu. Pour affecter un nom significatif dans l’interface utilisateur de Word, après l’insertion d’un contrôle de contenu Texte enrichi à partir du groupe Contrôles sur l’onglet Développeur du ruban, utilisez la commande Propriétés du groupe Contrôles pour afficher la boîte de dialogue Propriétés du contrôle de contenu. Définissez ensuite la propriété  Titre du contrôle de contenu sur le nom auquel vous souhaitez faire référence à partir de votre code.\n\n**Remarque**: dans Word, s’il existe plusieurs contrôles de contenu de texte enrichi avec la même valeur de propriété Title (Name) et que vous essayez de créer une liaison avec ces contrôles de contenu avec cette méthode (en spécifiant son nom comme paramètre itemName), l’opération échouera."
+    remarks: "[MatrixBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixbindings)<!-- -->, [TableBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablebindings)<!-- -->, [TextBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textbindings)\n\nPour Excel, le paramètre itemName peut faire référence à une plage nommée ou à un tableau.\n\nPar défaut, l’ajout d’un tableau dans Excel entraîne l’affectation du nom «\_Tableau1\_» pour le premier tableau que vous ajoutez, «\_Tableau2\_» pour le deuxième tableau que vous ajoutez, et ainsi de suite. Pour attribuer un nom explicite à une table dans l’interface utilisateur Excel, utilisez la propriété nom de la table sous \\| l’onglet Outils de tableau du ruban.\n\n**Remarque**: dans Excel, lorsque vous spécifiez un tableau en tant qu’élément nommé, vous devez qualifier complètement le nom pour inclure le nom de la feuille de calcul dans le nom de la table au format suivant\_: \"Sheet1\_! Table1\n\nPour Word, le paramètre itemName fait référence à la propriété Title d’un contrôle de contenu de texte enrichi. (Vous ne pouvez pas établir de liaison avec des contrôles de contenu autres que le contrôle de contenu de texte enrichi).\n\nPar défaut, aucune valeur de titre n’est affectée à un contrôle de contenu. Pour affecter un nom significatif dans l’interface utilisateur de Word, après l’insertion d’un contrôle de contenu Texte enrichi à partir du groupe Contrôles sur l’onglet Développeur du ruban, utilisez la commande Propriétés du groupe Contrôles pour afficher la boîte de dialogue Propriétés du contrôle de contenu. Définissez ensuite la propriété  Titre du contrôle de contenu sur le nom auquel vous souhaitez faire référence à partir de votre code.\n\n**Remarque**: dans Word, s’il existe plusieurs contrôles de contenu de texte enrichi avec la même valeur de propriété Title (Name) et que vous essayez de créer une liaison avec ces contrôles de contenu avec cette méthode (en spécifiant son nom comme paramètre itemName), l’opération échouera."
     name: 'addFromNamedItemAsync(itemName, bindingType, callback)'
     fullName: 'addFromNamedItemAsync(itemName, bindingType, callback)'
     langs:
@@ -69,18 +69,18 @@ items:
         description: ''
       parameters:
         - id: itemName
-          description: 'Nom de l’objet pouvant être lié dans le document. Par exemple, table «MyExpenses» dans Excel».'
+          description: "Nom de l’objet pouvant être lié dans le document. Par exemple, table «\_MyExpenses\_» dans Excel»."
           type:
             - string
         - id: bindingType
-          description: '[Office. BindingType](xref:office.Office.BindingType) pour les données. La méthode renvoie la valeur null si l’objet sélectionné ne peut pas être converti dans le type spécifié.'
+          description: '[Office. BindingType](xref:office!Office.BindingType:enum) pour les données. La méthode renvoie la valeur null si l’objet sélectionné ne peut pas être converti dans le type spécifié.'
           type:
-            - office.Office.BindingType
+            - 'office!Office.BindingType:enum'
         - id: callback
-          description: 'Facultatif. Fonction appelée lorsque le rappel est renvoyé, dont le seul paramètre est de type [Office. AsyncResult](xref:office.Office.AsyncResult)<!-- -->. La `value` propriété du résultat est l’objet Binding qui représente l’élément nommé spécifié.'
+          description: 'Facultatif. Fonction appelée lorsque le rappel est renvoyé, dont le seul paramètre est de type [Office. AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propriété du résultat est l’objet Binding qui représente l’élément nommé spécifié.'
           type:
-            - '(result: AsyncResult<Binding>) => void'
-  - uid: office.Office.Bindings.addFromPromptAsync
+            - 'office!Office.Bindings#addFromNamedItemAsync~1:complex'
+  - uid: 'office!Office.Bindings#addFromPromptAsync:member(1)'
     summary: Créer une liaison en invitant l’utilisateur à effectuer une sélection dans le document.
     remarks: |-
       **Ensemble de conditions requises**: [pas dans un ensemble](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#methods-that-arent-part-of-a-requirement-set)
@@ -118,16 +118,16 @@ items:
         - id: bindingType
           description: Spécifie le type de l’objet de liaison à créer. Obligatoire. Renvoie la valeur null si l’objet sélectionné ne peut pas être converti dans le type spécifié.
           type:
-            - office.Office.BindingType
+            - 'office!Office.BindingType:enum'
         - id: options
           description: Fournit des options pour la configuration de l’invite et l’identification de la liaison qui est créée.
           type:
-            - office.Office.AddBindingFromPromptOptions
+            - 'office!Office.AddBindingFromPromptOptions:interface'
         - id: callback
-          description: 'Facultatif. Fonction appelée lorsque le rappel est renvoyé, dont le seul paramètre est de type [Office. AsyncResult](xref:office.Office.AsyncResult)<!-- -->. La `value` propriété du résultat est l’objet Binding qui représente la sélection spécifiée par l’utilisateur.'
+          description: 'Facultatif. Fonction appelée lorsque le rappel est renvoyé, dont le seul paramètre est de type [Office. AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propriété du résultat est l’objet Binding qui représente la sélection spécifiée par l’utilisateur.'
           type:
-            - '(result: AsyncResult<Binding>) => void'
-  - uid: office.Office.Bindings.addFromPromptAsync_1
+            - 'office!Office.Bindings#addFromPromptAsync~0:complex'
+  - uid: 'office!Office.Bindings#addFromPromptAsync:member(2)'
     summary: Créer une liaison en invitant l’utilisateur à effectuer une sélection dans le document.
     remarks: |-
       **Ensemble de conditions requises**: [pas dans un ensemble](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#methods-that-arent-part-of-a-requirement-set)
@@ -148,12 +148,12 @@ items:
         - id: bindingType
           description: Spécifie le type de l’objet de liaison à créer. Obligatoire. Renvoie la valeur null si l’objet sélectionné ne peut pas être converti dans le type spécifié.
           type:
-            - office.Office.BindingType
+            - 'office!Office.BindingType:enum'
         - id: callback
-          description: 'Facultatif. Fonction appelée lorsque le rappel est renvoyé, dont le seul paramètre est de type [Office. AsyncResult](xref:office.Office.AsyncResult)<!-- -->. La `value` propriété du résultat est l’objet Binding qui représente la sélection spécifiée par l’utilisateur.'
+          description: 'Facultatif. Fonction appelée lorsque le rappel est renvoyé, dont le seul paramètre est de type [Office. AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propriété du résultat est l’objet Binding qui représente la sélection spécifiée par l’utilisateur.'
           type:
-            - '(result: AsyncResult<Binding>) => void'
-  - uid: office.Office.Bindings.addFromSelectionAsync
+            - 'office!Office.Bindings#addFromPromptAsync~1:complex'
+  - uid: 'office!Office.Bindings#addFromSelectionAsync:member(1)'
     summary: Créer une liaison basée sur la sélection actuelle de l’utilisateur.
     remarks: |-
       **Ensembles de conditions requises**:
@@ -198,16 +198,16 @@ items:
         - id: bindingType
           description: Spécifie le type de l’objet de liaison à créer. Obligatoire. Renvoie la valeur null si l’objet sélectionné ne peut pas être converti dans le type spécifié.
           type:
-            - office.Office.BindingType
+            - 'office!Office.BindingType:enum'
         - id: options
           description: Fournit des options pour la configuration de l’invite et l’identification de la liaison qui est créée.
           type:
-            - office.Office.AddBindingFromSelectionOptions
+            - 'office!Office.AddBindingFromSelectionOptions:interface'
         - id: callback
-          description: 'Facultatif. Fonction appelée lorsque le rappel est renvoyé, dont le seul paramètre est de type [Office. AsyncResult](xref:office.Office.AsyncResult)<!-- -->. La `value` propriété du résultat est l’objet Binding qui représente la sélection spécifiée par l’utilisateur.'
+          description: 'Facultatif. Fonction appelée lorsque le rappel est renvoyé, dont le seul paramètre est de type [Office. AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propriété du résultat est l’objet Binding qui représente la sélection spécifiée par l’utilisateur.'
           type:
-            - '(result: AsyncResult<Binding>) => void'
-  - uid: office.Office.Bindings.addFromSelectionAsync_1
+            - 'office!Office.Bindings#addFromSelectionAsync~0:complex'
+  - uid: 'office!Office.Bindings#addFromSelectionAsync:member(2)'
     summary: Créer une liaison basée sur la sélection actuelle de l’utilisateur.
     remarks: |-
       **Ensembles de conditions requises**:
@@ -236,12 +236,24 @@ items:
         - id: bindingType
           description: Spécifie le type de l’objet de liaison à créer. Obligatoire. Renvoie la valeur null si l’objet sélectionné ne peut pas être converti dans le type spécifié.
           type:
-            - office.Office.BindingType
+            - 'office!Office.BindingType:enum'
         - id: callback
-          description: 'Facultatif. Fonction appelée lorsque le rappel est renvoyé, dont le seul paramètre est de type [Office. AsyncResult](xref:office.Office.AsyncResult)<!-- -->. La `value` propriété du résultat est l’objet Binding qui représente la sélection spécifiée par l’utilisateur.'
+          description: 'Facultatif. Fonction appelée lorsque le rappel est renvoyé, dont le seul paramètre est de type [Office. AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propriété du résultat est l’objet Binding qui représente la sélection spécifiée par l’utilisateur.'
           type:
-            - '(result: AsyncResult<Binding>) => void'
-  - uid: office.Office.Bindings.getAllAsync
+            - 'office!Office.Bindings#addFromSelectionAsync~1:complex'
+  - uid: 'office!Office.Bindings#document:member'
+    summary: 'Obtient un objet [Office. document](xref:office!Office.Document:interface) qui représente le document associé à cet ensemble de liaisons.'
+    name: document
+    fullName: document
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'document: Document;'
+      return:
+        type:
+          - 'office!Office.Document:interface'
+  - uid: 'office!Office.Bindings#getAllAsync:member(1)'
     summary: Obtient toutes les liaisons qui ont été créées précédemment.
     remarks: |-
       **Ensembles de conditions requises**:
@@ -266,12 +278,12 @@ items:
         - id: options
           description: 'Fournit une option permettant de conserver les données de contexte de n’importe quel type, inchangées, pour une utilisation dans un rappel.'
           type:
-            - office.Office.AsyncContextOptions
+            - 'office!Office.AsyncContextOptions:interface'
         - id: callback
-          description: 'Fonction appelée lorsque le rappel est renvoyé, dont le seul paramètre est de type [Office. AsyncResult](xref:office.Office.AsyncResult)<!-- -->. La `value` propriété du résultat est un tableau qui contient chaque liaison créée pour l’objet Bindings référencé.'
+          description: 'Fonction appelée lorsque le rappel est renvoyé, dont le seul paramètre est de type [Office. AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propriété du résultat est un tableau qui contient chaque liaison créée pour l’objet Bindings référencé.'
           type:
-            - '(result: AsyncResult<Binding[]>) => void'
-  - uid: office.Office.Bindings.getAllAsync_1
+            - 'office!Office.Bindings#getAllAsync~0:complex'
+  - uid: 'office!Office.Bindings#getAllAsync:member(2)'
     summary: Obtient toutes les liaisons qui ont été créées précédemment.
     remarks: |-
       **Ensembles de conditions requises**:
@@ -312,10 +324,10 @@ items:
         description: ''
       parameters:
         - id: callback
-          description: 'Fonction appelée lorsque le rappel est renvoyé, dont le seul paramètre est de type [Office. AsyncResult](xref:office.Office.AsyncResult)<!-- -->. La `value` propriété du résultat est un tableau qui contient chaque liaison créée pour l’objet Bindings référencé.'
+          description: 'Fonction appelée lorsque le rappel est renvoyé, dont le seul paramètre est de type [Office. AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propriété du résultat est un tableau qui contient chaque liaison créée pour l’objet Bindings référencé.'
           type:
-            - '(result: AsyncResult<Binding[]>) => void'
-  - uid: office.Office.Bindings.getByIdAsync
+            - 'office!Office.Bindings#getAllAsync~1:complex'
+  - uid: 'office!Office.Bindings#getByIdAsync:member(1)'
     summary: Récupère une liaison en fonction de son nom
     remarks: |-
       **Ensembles de conditions requises**:
@@ -346,12 +358,12 @@ items:
         - id: options
           description: 'Fournit une option permettant de conserver les données de contexte de n’importe quel type, inchangées, pour une utilisation dans un rappel.'
           type:
-            - office.Office.AsyncContextOptions
+            - 'office!Office.AsyncContextOptions:interface'
         - id: callback
-          description: 'Facultatif. Fonction appelée lorsque le rappel est renvoyé, dont le seul paramètre est de type [Office. AsyncResult](xref:office.Office.AsyncResult)<!-- -->. La `value` propriété du résultat est l’objet Binding spécifié par l’ID dans l’appel.'
+          description: 'Facultatif. Fonction appelée lorsque le rappel est renvoyé, dont le seul paramètre est de type [Office. AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propriété du résultat est l’objet Binding spécifié par l’ID dans l’appel.'
           type:
-            - '(result: AsyncResult<Binding>) => void'
-  - uid: office.Office.Bindings.getByIdAsync_1
+            - 'office!Office.Bindings#getByIdAsync~0:complex'
+  - uid: 'office!Office.Bindings#getByIdAsync:member(2)'
     summary: Récupère une liaison en fonction de son nom
     remarks: |-
       **Ensembles de conditions requises**:
@@ -394,10 +406,10 @@ items:
           type:
             - string
         - id: callback
-          description: 'Facultatif. Fonction appelée lorsque le rappel est renvoyé, dont le seul paramètre est de type [Office. AsyncResult](xref:office.Office.AsyncResult)<!-- -->. La `value` propriété du résultat est l’objet Binding spécifié par l’ID dans l’appel.'
+          description: 'Facultatif. Fonction appelée lorsque le rappel est renvoyé, dont le seul paramètre est de type [Office. AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propriété du résultat est l’objet Binding spécifié par l’ID dans l’appel.'
           type:
-            - '(result: AsyncResult<Binding>) => void'
-  - uid: office.Office.Bindings.releaseByIdAsync
+            - 'office!Office.Bindings#getByIdAsync~1:complex'
+  - uid: 'office!Office.Bindings#releaseByIdAsync:member(1)'
     summary: Supprime la liaison du document.
     remarks: |-
       **Ensembles de conditions requises**:
@@ -428,12 +440,12 @@ items:
         - id: options
           description: 'Fournit une option permettant de conserver les données de contexte de n’importe quel type, inchangées, pour une utilisation dans un rappel.'
           type:
-            - office.Office.AsyncContextOptions
+            - 'office!Office.AsyncContextOptions:interface'
         - id: callback
-          description: 'Facultatif. Fonction appelée lorsque le rappel est renvoyé, dont le seul paramètre est de type [Office. AsyncResult](xref:office.Office.AsyncResult)<!-- -->.'
+          description: 'Facultatif. Fonction appelée lorsque le rappel est renvoyé, dont le seul paramètre est de type [Office. AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.'
           type:
-            - '(result: AsyncResult<void>) => void'
-  - uid: office.Office.Bindings.releaseByIdAsync_1
+            - 'office!Office.Bindings#releaseByIdAsync~0:complex'
+  - uid: 'office!Office.Bindings#releaseByIdAsync:member(2)'
     summary: Supprime la liaison du document.
     remarks: |-
       **Ensembles de conditions requises**:
@@ -474,18 +486,201 @@ items:
           type:
             - string
         - id: callback
-          description: 'Facultatif. Fonction appelée lorsque le rappel est renvoyé, dont le seul paramètre est de type [Office. AsyncResult](xref:office.Office.AsyncResult)<!-- -->.'
+          description: 'Facultatif. Fonction appelée lorsque le rappel est renvoyé, dont le seul paramètre est de type [Office. AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.'
           type:
-            - '(result: AsyncResult<void>) => void'
-  - uid: office.Office.Bindings.document
-    summary: 'Obtient un objet [Office. document](xref:office.Office.Document) qui représente le document associé à cet ensemble de liaisons.'
-    name: document
-    fullName: document
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'document: Document;'
-      return:
-        type:
-          - office.Office.Document
+            - 'office!Office.Bindings#releaseByIdAsync~1:complex'
+references:
+  - uid: 'office!Office.BindingType:enum'
+    name: BindingType
+  - uid: 'office!Office.AddBindingFromNamedItemOptions:interface'
+    name: AddBindingFromNamedItemOptions
+  - uid: 'office!Office.Bindings#addFromNamedItemAsync~0:complex'
+    name: '(result: AsyncResult<Binding>) => void'
+    fullName: '(result: Office.AsyncResult<Office.Binding>) => void'
+    spec.typeScript:
+      - name: '(result: '
+        fullName: '(result: '
+      - uid: 'office!Office.AsyncResult:interface'
+        name: AsyncResult
+        fullName: Office.AsyncResult
+      - name: <
+        fullName: <
+      - uid: 'office!Office.Binding:interface'
+        name: Binding
+        fullName: Office.Binding
+      - name: '>) => void'
+        fullName: '>) => void'
+  - uid: 'office!Office.Bindings#addFromNamedItemAsync~1:complex'
+    name: '(result: AsyncResult<Binding>) => void'
+    fullName: '(result: Office.AsyncResult<Office.Binding>) => void'
+    spec.typeScript:
+      - name: '(result: '
+        fullName: '(result: '
+      - uid: 'office!Office.AsyncResult:interface'
+        name: AsyncResult
+        fullName: Office.AsyncResult
+      - name: <
+        fullName: <
+      - uid: 'office!Office.Binding:interface'
+        name: Binding
+        fullName: Office.Binding
+      - name: '>) => void'
+        fullName: '>) => void'
+  - uid: 'office!Office.AddBindingFromPromptOptions:interface'
+    name: AddBindingFromPromptOptions
+  - uid: 'office!Office.Bindings#addFromPromptAsync~0:complex'
+    name: '(result: AsyncResult<Binding>) => void'
+    fullName: '(result: Office.AsyncResult<Office.Binding>) => void'
+    spec.typeScript:
+      - name: '(result: '
+        fullName: '(result: '
+      - uid: 'office!Office.AsyncResult:interface'
+        name: AsyncResult
+        fullName: Office.AsyncResult
+      - name: <
+        fullName: <
+      - uid: 'office!Office.Binding:interface'
+        name: Binding
+        fullName: Office.Binding
+      - name: '>) => void'
+        fullName: '>) => void'
+  - uid: 'office!Office.Bindings#addFromPromptAsync~1:complex'
+    name: '(result: AsyncResult<Binding>) => void'
+    fullName: '(result: Office.AsyncResult<Office.Binding>) => void'
+    spec.typeScript:
+      - name: '(result: '
+        fullName: '(result: '
+      - uid: 'office!Office.AsyncResult:interface'
+        name: AsyncResult
+        fullName: Office.AsyncResult
+      - name: <
+        fullName: <
+      - uid: 'office!Office.Binding:interface'
+        name: Binding
+        fullName: Office.Binding
+      - name: '>) => void'
+        fullName: '>) => void'
+  - uid: 'office!Office.AddBindingFromSelectionOptions:interface'
+    name: AddBindingFromSelectionOptions
+  - uid: 'office!Office.Bindings#addFromSelectionAsync~0:complex'
+    name: '(result: AsyncResult<Binding>) => void'
+    fullName: '(result: Office.AsyncResult<Office.Binding>) => void'
+    spec.typeScript:
+      - name: '(result: '
+        fullName: '(result: '
+      - uid: 'office!Office.AsyncResult:interface'
+        name: AsyncResult
+        fullName: Office.AsyncResult
+      - name: <
+        fullName: <
+      - uid: 'office!Office.Binding:interface'
+        name: Binding
+        fullName: Office.Binding
+      - name: '>) => void'
+        fullName: '>) => void'
+  - uid: 'office!Office.Bindings#addFromSelectionAsync~1:complex'
+    name: '(result: AsyncResult<Binding>) => void'
+    fullName: '(result: Office.AsyncResult<Office.Binding>) => void'
+    spec.typeScript:
+      - name: '(result: '
+        fullName: '(result: '
+      - uid: 'office!Office.AsyncResult:interface'
+        name: AsyncResult
+        fullName: Office.AsyncResult
+      - name: <
+        fullName: <
+      - uid: 'office!Office.Binding:interface'
+        name: Binding
+        fullName: Office.Binding
+      - name: '>) => void'
+        fullName: '>) => void'
+  - uid: 'office!Office.Document:interface'
+    name: Document
+  - uid: 'office!Office.AsyncContextOptions:interface'
+    name: Office.AsyncContextOptions
+  - uid: 'office!Office.Bindings#getAllAsync~0:complex'
+    name: '(result: AsyncResult<Binding[]>) => void'
+    fullName: '(result: Office.AsyncResult<Office.Binding[]>) => void'
+    spec.typeScript:
+      - name: '(result: '
+        fullName: '(result: '
+      - uid: 'office!Office.AsyncResult:interface'
+        name: AsyncResult
+        fullName: Office.AsyncResult
+      - name: <
+        fullName: <
+      - uid: 'office!Office.Binding:interface'
+        name: Binding
+        fullName: Office.Binding
+      - name: '[]>) => void'
+        fullName: '[]>) => void'
+  - uid: 'office!Office.Bindings#getAllAsync~1:complex'
+    name: '(result: AsyncResult<Binding[]>) => void'
+    fullName: '(result: Office.AsyncResult<Office.Binding[]>) => void'
+    spec.typeScript:
+      - name: '(result: '
+        fullName: '(result: '
+      - uid: 'office!Office.AsyncResult:interface'
+        name: AsyncResult
+        fullName: Office.AsyncResult
+      - name: <
+        fullName: <
+      - uid: 'office!Office.Binding:interface'
+        name: Binding
+        fullName: Office.Binding
+      - name: '[]>) => void'
+        fullName: '[]>) => void'
+  - uid: 'office!Office.Bindings#getByIdAsync~0:complex'
+    name: '(result: AsyncResult<Binding>) => void'
+    fullName: '(result: Office.AsyncResult<Office.Binding>) => void'
+    spec.typeScript:
+      - name: '(result: '
+        fullName: '(result: '
+      - uid: 'office!Office.AsyncResult:interface'
+        name: AsyncResult
+        fullName: Office.AsyncResult
+      - name: <
+        fullName: <
+      - uid: 'office!Office.Binding:interface'
+        name: Binding
+        fullName: Office.Binding
+      - name: '>) => void'
+        fullName: '>) => void'
+  - uid: 'office!Office.Bindings#getByIdAsync~1:complex'
+    name: '(result: AsyncResult<Binding>) => void'
+    fullName: '(result: Office.AsyncResult<Office.Binding>) => void'
+    spec.typeScript:
+      - name: '(result: '
+        fullName: '(result: '
+      - uid: 'office!Office.AsyncResult:interface'
+        name: AsyncResult
+        fullName: Office.AsyncResult
+      - name: <
+        fullName: <
+      - uid: 'office!Office.Binding:interface'
+        name: Binding
+        fullName: Office.Binding
+      - name: '>) => void'
+        fullName: '>) => void'
+  - uid: 'office!Office.Bindings#releaseByIdAsync~0:complex'
+    name: '(result: AsyncResult<void>) => void'
+    fullName: '(result: Office.AsyncResult<void>) => void'
+    spec.typeScript:
+      - name: '(result: '
+        fullName: '(result: '
+      - uid: 'office!Office.AsyncResult:interface'
+        name: AsyncResult
+        fullName: Office.AsyncResult
+      - name: <void>) => void
+        fullName: <void>) => void
+  - uid: 'office!Office.Bindings#releaseByIdAsync~1:complex'
+    name: '(result: AsyncResult<void>) => void'
+    fullName: '(result: Office.AsyncResult<void>) => void'
+    spec.typeScript:
+      - name: '(result: '
+        fullName: '(result: '
+      - uid: 'office!Office.AsyncResult:interface'
+        name: AsyncResult
+        fullName: Office.AsyncResult
+      - name: <void>) => void
+        fullName: <void>) => void
