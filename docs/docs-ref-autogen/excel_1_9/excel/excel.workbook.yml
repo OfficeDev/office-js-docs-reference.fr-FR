@@ -293,22 +293,21 @@ items:
         type:
           - boolean
   - uid: 'excel!Excel.Workbook#load:member(1)'
-    summary: "Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler «\_context.sync()\_» avant de lire les propriétés."
-    remarks: "En plus de cette signature, cette méthode possède les signatures suivantes\_:\n\n`load(option?: string | string[]): Excel.Workbook`-WHERE option est une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.\n\n`load(option?: { select?: string; expand?: string; }): Excel.Workbook`Option-WHERE option. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Workbook`-Uniquement disponible sur les types de collection. Elle est similaire à la signature précédente. Option. Top indique le nombre maximal d’éléments de collection qui peuvent être inclus dans le résultat. Option. Skip indique le nombre d’éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat. Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d’éléments."
-    name: load(option)
-    fullName: load(option)
+    summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler `context.sync()` avant de lire les propriétés.
+    name: load(options)
+    fullName: load(options)
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'load(option?: Excel.Interfaces.WorkbookLoadOptions): Excel.Workbook;'
+      content: 'load(options?: Excel.Interfaces.WorkbookLoadOptions): Excel.Workbook;'
       return:
         type:
           - 'excel!Excel.Workbook:class'
         description: ''
       parameters:
-        - id: option
-          description: ''
+        - id: options
+          description: Fournit des options pour les propriétés de l’objet à charger.
           type:
             - 'excel!Excel.Interfaces.WorkbookLoadOptions:interface'
   - uid: 'excel!Excel.Workbook#load:member(2)'
@@ -337,16 +336,24 @@ items:
       - typeScript
     type: method
     syntax:
-      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.Workbook;'
+      content: |-
+        load(propertyNamesAndPaths?: {
+                    select?: string;
+                    expand?: string;
+                }): Excel.Workbook;
       return:
         type:
           - 'excel!Excel.Workbook:class'
         description: ''
       parameters:
         - id: propertyNamesAndPaths
-          description: Où propertyNamesAndPaths. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et propertyNamesAndPaths. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
+          description: '`propertyNamesAndPaths.select`est une chaîne délimitée par des virgules qui spécifie les propriétés à `propertyNamesAndPaths.expand` charger et une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.'
           type:
-            - '{ select?: string; expand?: string; }'
+            - |-
+              {
+                          select?: string;
+                          expand?: string;
+                      }
   - uid: 'excel!Excel.Workbook#name:member'
     summary: "Obtient le nom du classeur. En lecture seule.\n\n\\[[Ensemble d’API\_: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: name
@@ -551,6 +558,33 @@ items:
       return:
         type:
           - 'excel!Excel.StyleCollection:class'
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```typescript
+          await Excel.run(async (context) => {
+              let styles = context.workbook.styles;
+
+              // Add a new style to the style collection.
+              // Styles is in the Home tab ribbon.
+              styles.add("Diagonal Orientation Style");
+                    
+              let newStyle = styles.getItem("Diagonal Orientation Style");
+              
+              // The "Diagonal Orientation Style" properties.
+              newStyle.textOrientation = 38;
+              newStyle.autoIndent = true;
+              newStyle.includeProtection = true;
+              newStyle.shrinkToFit = true;
+              newStyle.locked = false;
+              
+              await context.sync();
+
+              console.log("Successfully added a new style with diagonal orientation to the Home tab ribbon.");
+          });
+          ```
   - uid: 'excel!Excel.Workbook#tables:member'
     summary: "Représente une collection de tableaux associés au classeur. En lecture seule.\n\n\\[[Ensemble d’API\_: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: tables
