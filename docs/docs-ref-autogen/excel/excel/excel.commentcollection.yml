@@ -26,15 +26,15 @@ items:
       - 'excel!Excel.CommentCollection#load:member(3)'
       - 'excel!Excel.CommentCollection#toJSON:member(1)'
   - uid: 'excel!Excel.CommentCollection#add:member(1)'
-    summary: "Crée un nouveau commentaire (thread de commentaire) avec le contenu donné sur la cellule donnée. Une `InvalidArgument` erreur est générée si la plage fournie est plus grande qu’une cellule.\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Crée un nouveau commentaire avec le contenu donné sur la cellule donnée. Une `InvalidArgument` erreur est générée si la plage fournie est plus grande qu’une cellule.\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     isPreview: true
-    name: 'add(content, cellAddress, contentType)'
-    fullName: 'add(content, cellAddress, contentType)'
+    name: 'add(cellAddress, content, contentType)'
+    fullName: 'add(cellAddress, content, contentType)'
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'add(content: string, cellAddress: Range | string, contentType?: Excel.ContentType): Excel.Comment;'
+      content: 'add(cellAddress: Range | string, content: CommentRichContent | string, contentType?: Excel.ContentType): Excel.Comment;'
       return:
         type:
           - 'excel!Excel.Comment:class'
@@ -53,45 +53,45 @@ items:
           });
           ```
       parameters:
-        - id: content
-          description: Contenu du commentaire.
-          type:
-            - string
         - id: cellAddress
           description: 'Cellule à laquelle le commentaire est ajouté. Il peut s’agir d’un objet Range ou d’une chaîne. S’il s’agit d’une chaîne, elle doit contenir l’adresse complète, y compris le nom de la feuille. Une `InvalidArgument` erreur est générée si la plage fournie est plus grande qu’une cellule.'
           type:
             - 'excel!Excel.CommentCollection#add~0:complex'
+        - id: content
+          description: "Contenu du commentaire. Il peut s’agir d’un objet String ou CommentRichContent. Les chaînes sont utilisées pour le texte brut. Les objets CommentRichContent permettent d’autres fonctionnalités de commentaire, telles que des mentions. \\[Ensemble d’API\_: ExcelApi BETA (aperçu uniquement) pour la chaîne, ExcelApi Preview pour l’objet CommentRichContent\\]"
+          type:
+            - 'excel!Excel.CommentCollection#add~1:complex'
         - id: contentType
-          description: Facultatif. Le type de contenu de commentaire
+          description: Facultatif. Type de contenu contenu dans le commentaire. La valeur par défaut est enum`ContentType.plain`<!-- -->.
           type:
             - 'excel!Excel.ContentType:enum'
   - uid: 'excel!Excel.CommentCollection#add:member(2)'
-    summary: "Crée un nouveau commentaire (thread de commentaire) avec le contenu donné sur la cellule donnée. Une `InvalidArgument` erreur est générée si la plage fournie est plus grande qu’une cellule.\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Crée un nouveau commentaire avec le contenu donné sur la cellule donnée. Une `InvalidArgument` erreur est générée si la plage fournie est plus grande qu’une cellule.\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     isPreview: true
-    name: 'add(content, cellAddress, contentTypeString)'
-    fullName: 'add(content, cellAddress, contentTypeString)'
+    name: 'add(cellAddress, content, contentTypeString)'
+    fullName: 'add(cellAddress, content, contentTypeString)'
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'add(content: string, cellAddress: Range | string, contentTypeString?: "Plain"): Excel.Comment;'
+      content: 'add(cellAddress: Range | string, content: CommentRichContent | string, contentTypeString?: "Plain" | "Mention"): Excel.Comment;'
       return:
         type:
           - 'excel!Excel.Comment:class'
         description: ''
       parameters:
-        - id: content
-          description: Contenu du commentaire.
-          type:
-            - string
         - id: cellAddress
           description: 'Cellule à laquelle le commentaire est ajouté. Il peut s’agir d’un objet Range ou d’une chaîne. S’il s’agit d’une chaîne, elle doit contenir l’adresse complète, y compris le nom de la feuille. Une `InvalidArgument` erreur est générée si la plage fournie est plus grande qu’une cellule.'
           type:
-            - 'excel!Excel.CommentCollection#add~1:complex'
-        - id: contentTypeString
-          description: Facultatif. Le type de contenu de commentaire
+            - 'excel!Excel.CommentCollection#add~2:complex'
+        - id: content
+          description: "Contenu du commentaire. Il peut s’agir d’un objet String ou CommentRichContent. Les chaînes sont utilisées pour le texte brut. Les objets CommentRichContent permettent d’autres fonctionnalités de commentaire, telles que des mentions. \\[Ensemble d’API\_: ExcelApi BETA (aperçu uniquement) pour la chaîne, ExcelApi Preview pour l’objet CommentRichContent\\]"
           type:
-            - '"Plain"'
+            - 'excel!Excel.CommentCollection#add~3:complex'
+        - id: contentTypeString
+          description: Facultatif. Type de contenu contenu dans le commentaire. La valeur par défaut est enum`ContentType.plain`<!-- -->.
+          type:
+            - '"Plain" | "Mention"'
   - uid: 'excel!Excel.CommentCollection#context:member'
     summary: Contexte de demande associé à l’objet. Cette opération connecte le processus du complément au processus de l’application hôte Office.
     isPreview: true
@@ -177,7 +177,7 @@ items:
           type:
             - 'excel!Excel.CommentCollection#getItemByCell~0:complex'
   - uid: 'excel!Excel.CommentCollection#getItemByReplyId:member(1)'
-    summary: "Obtient un commentaire lié à son ID dans la collection de réponse.\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Obtient le commentaire auquel la réponse donnée est connectée.\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     isPreview: true
     name: getItemByReplyId(replyId)
     fullName: getItemByReplyId(replyId)
@@ -209,23 +209,22 @@ items:
         type:
           - 'excel!Excel.CommentCollection#items~0:complex'
   - uid: 'excel!Excel.CommentCollection#load:member(1)'
-    summary: "Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler «\_context.sync()\_» avant de lire les propriétés."
-    remarks: "En plus de cette signature, cette méthode possède les signatures suivantes\_:\n\n`load(option?: string | string[]): Excel.CommentCollection`-WHERE option est une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.\n\n`load(option?: { select?: string; expand?: string; }): Excel.CommentCollection`Option-WHERE option. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.CommentCollection`-Uniquement disponible sur les types de collection. Elle est similaire à la signature précédente. Option. Top indique le nombre maximal d’éléments de collection qui peuvent être inclus dans le résultat. Option. Skip indique le nombre d’éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat. Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d’éléments."
+    summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler `context.sync()` avant de lire les propriétés.
     isPreview: true
-    name: load(option)
-    fullName: load(option)
+    name: load(options)
+    fullName: load(options)
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'load(option?: Excel.Interfaces.CommentCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.CommentCollection;'
+      content: 'load(options?: Excel.Interfaces.CommentCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.CommentCollection;'
       return:
         type:
           - 'excel!Excel.CommentCollection:class'
         description: ''
       parameters:
-        - id: option
-          description: ''
+        - id: options
+          description: Fournit des options pour les propriétés de l’objet à charger.
           type:
             - 'excel!Excel.CommentCollection#load~0:complex'
   - uid: 'excel!Excel.CommentCollection#load:member(2)'
@@ -248,21 +247,22 @@ items:
           type:
             - 'string | string[]'
   - uid: 'excel!Excel.CommentCollection#load:member(3)'
+    summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler `context.sync()` avant de lire les propriétés.
     isPreview: true
-    name: load(option)
-    fullName: load(option)
+    name: load(propertyNamesAndPaths)
+    fullName: load(propertyNamesAndPaths)
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'load(option?: OfficeExtension.LoadOption): Excel.CommentCollection;'
+      content: 'load(propertyNamesAndPaths?: OfficeExtension.LoadOption): Excel.CommentCollection;'
       return:
         type:
           - 'excel!Excel.CommentCollection:class'
         description: ''
       parameters:
-        - id: option
-          description: ''
+        - id: propertyNamesAndPaths
+          description: '`propertyNamesAndPaths.select`est une chaîne délimitée par des virgules qui spécifie les propriétés à `propertyNamesAndPaths.expand` charger et une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.'
           type:
             - 'excel!OfficeExtension.LoadOption:interface'
   - uid: 'excel!Excel.CommentCollection#toJSON:member(1)'
@@ -293,15 +293,33 @@ references:
         fullName: Excel.Range
       - name: ' | string'
         fullName: ' | string'
+  - uid: 'excel!Excel.CommentCollection#add~1:complex'
+    name: CommentRichContent | string
+    fullName: Excel.CommentRichContent | string
+    spec.typeScript:
+      - uid: 'excel!Excel.CommentRichContent:interface'
+        name: CommentRichContent
+        fullName: Excel.CommentRichContent
+      - name: ' | string'
+        fullName: ' | string'
   - uid: 'excel!Excel.ContentType:enum'
     name: Excel.ContentType
-  - uid: 'excel!Excel.CommentCollection#add~1:complex'
+  - uid: 'excel!Excel.CommentCollection#add~2:complex'
     name: Range | string
     fullName: Excel.Range | string
     spec.typeScript:
       - uid: 'excel!Excel.Range:class'
         name: Range
         fullName: Excel.Range
+      - name: ' | string'
+        fullName: ' | string'
+  - uid: 'excel!Excel.CommentCollection#add~3:complex'
+    name: CommentRichContent | string
+    fullName: Excel.CommentRichContent | string
+    spec.typeScript:
+      - uid: 'excel!Excel.CommentRichContent:interface'
+        name: CommentRichContent
+        fullName: Excel.CommentRichContent
       - name: ' | string'
         fullName: ' | string'
   - uid: 'excel!Excel.RequestContext:class'

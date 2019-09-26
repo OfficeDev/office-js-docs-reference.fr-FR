@@ -1,7 +1,7 @@
 ### YamlMime:UniversalReference
 items:
   - uid: 'excel!Excel.CommentReply:class'
-    summary: "Représente un objet de réponse de commentaire de cellule dans le classeur.\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Représente une réponse de commentaire dans le classeur.\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     isPreview: true
     name: Excel.CommentReply
     fullName: Excel.CommentReply
@@ -24,10 +24,13 @@ items:
       - 'excel!Excel.CommentReply#load:member(1)'
       - 'excel!Excel.CommentReply#load:member(2)'
       - 'excel!Excel.CommentReply#load:member(3)'
+      - 'excel!Excel.CommentReply#mentions:member'
       - 'excel!Excel.CommentReply#resolved:member'
+      - 'excel!Excel.CommentReply#richContent:member'
       - 'excel!Excel.CommentReply#set:member(1)'
       - 'excel!Excel.CommentReply#set:member(2)'
       - 'excel!Excel.CommentReply#toJSON:member(1)'
+      - 'excel!Excel.CommentReply#updateMentions:member(1)'
   - uid: 'excel!Excel.CommentReply#authorEmail:member'
     summary: "Obtenir l’adresse email de l’auteur de la réponse au commentaire.\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     isPreview: true
@@ -175,23 +178,22 @@ items:
         type:
           - string
   - uid: 'excel!Excel.CommentReply#load:member(1)'
-    summary: "Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler «\_context.sync()\_» avant de lire les propriétés."
-    remarks: "En plus de cette signature, cette méthode possède les signatures suivantes\_:\n\n`load(option?: string | string[]): Excel.CommentReply`-WHERE option est une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.\n\n`load(option?: { select?: string; expand?: string; }): Excel.CommentReply`Option-WHERE option. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.CommentReply`-Uniquement disponible sur les types de collection. Elle est similaire à la signature précédente. Option. Top indique le nombre maximal d’éléments de collection qui peuvent être inclus dans le résultat. Option. Skip indique le nombre d’éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat. Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d’éléments."
+    summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler `context.sync()` avant de lire les propriétés.
     isPreview: true
-    name: load(option)
-    fullName: load(option)
+    name: load(options)
+    fullName: load(options)
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'load(option?: Excel.Interfaces.CommentReplyLoadOptions): Excel.CommentReply;'
+      content: 'load(options?: Excel.Interfaces.CommentReplyLoadOptions): Excel.CommentReply;'
       return:
         type:
           - 'excel!Excel.CommentReply:class'
         description: ''
       parameters:
-        - id: option
-          description: ''
+        - id: options
+          description: Fournit des options pour les propriétés de l’objet à charger.
           type:
             - 'excel!Excel.Interfaces.CommentReplyLoadOptions:interface'
   - uid: 'excel!Excel.CommentReply#load:member(2)'
@@ -222,16 +224,37 @@ items:
       - typeScript
     type: method
     syntax:
-      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.CommentReply;'
+      content: |-
+        load(propertyNamesAndPaths?: {
+                    select?: string;
+                    expand?: string;
+                }): Excel.CommentReply;
       return:
         type:
           - 'excel!Excel.CommentReply:class'
         description: ''
       parameters:
         - id: propertyNamesAndPaths
-          description: Où propertyNamesAndPaths. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et propertyNamesAndPaths. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
+          description: '`propertyNamesAndPaths.select`est une chaîne délimitée par des virgules qui spécifie les propriétés à `propertyNamesAndPaths.expand` charger et une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.'
           type:
-            - '{ select?: string; expand?: string; }'
+            - |-
+              {
+                          select?: string;
+                          expand?: string;
+                      }
+  - uid: 'excel!Excel.CommentReply#mentions:member'
+    summary: "Obtient les entités (par exemple, les personnes) mentionnées dans les commentaires.\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    isPreview: true
+    name: mentions
+    fullName: mentions
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly mentions: Excel.CommentMention[];'
+      return:
+        type:
+          - 'excel!Excel.CommentReply#mentions~0:complex'
   - uid: 'excel!Excel.CommentReply#resolved:member'
     summary: "Obtient ou définit l’état de la réponse de commentaire. La valeur «\_true\_» signifie que la réponse au commentaire est dans l’État résolu.\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     isPreview: true
@@ -245,6 +268,19 @@ items:
       return:
         type:
           - boolean
+  - uid: 'excel!Excel.CommentReply#richContent:member'
+    summary: "Obtient le contenu de commentaire enrichi (par exemple, les mentions dans les commentaires). Cette chaîne n’est pas destinée à être affichée aux utilisateurs finaux. Votre complément doit uniquement l’utiliser pour analyser le contenu de commentaire enrichi.\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    isPreview: true
+    name: richContent
+    fullName: richContent
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly richContent: string;'
+      return:
+        type:
+          - string
   - uid: 'excel!Excel.CommentReply#set:member(1)'
     summary: 'Définit plusieurs propriétés d’un objet en même temps. Vous pouvez transmettre un objet plain avec les propriétés appropriées, ou un autre objet API du même type.'
     remarks: "Cette méthode est dotée de la signature supplémentaire suivante\_:\n\n`set(properties: Excel.CommentReply): void`"
@@ -302,6 +338,25 @@ items:
         type:
           - 'excel!Excel.Interfaces.CommentReplyData:interface'
         description: ''
+  - uid: 'excel!Excel.CommentReply#updateMentions:member(1)'
+    summary: "Met à jour le contenu de commentaire avec une chaîne spécialement mise en forme et une liste de mentions.\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    isPreview: true
+    name: updateMentions(contentWithMentions)
+    fullName: updateMentions(contentWithMentions)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'updateMentions(contentWithMentions: Excel.CommentRichContent): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: contentWithMentions
+          description: Contenu du commentaire. Il contient une chaîne spécialement mise en forme et une liste de mentions qui seront analysées dans la chaîne lors de son affichage par Excel.
+          type:
+            - 'excel!Excel.CommentRichContent:interface'
 references:
   - uid: 'excel!OfficeExtension.ClientObject:class'
     name: OfficeExtension.ClientObject
@@ -317,9 +372,20 @@ references:
     name: Excel.CommentReply
   - uid: 'excel!Excel.Interfaces.CommentReplyLoadOptions:interface'
     name: Excel.Interfaces.CommentReplyLoadOptions
+  - uid: 'excel!Excel.CommentReply#mentions~0:complex'
+    name: 'Excel.CommentMention[]'
+    fullName: 'Excel.CommentMention[]'
+    spec.typeScript:
+      - uid: 'excel!Excel.CommentMention:interface'
+        name: Excel.CommentMention
+        fullName: Excel.CommentMention
+      - name: '[]'
+        fullName: '[]'
   - uid: 'excel!Excel.Interfaces.CommentReplyUpdateData:interface'
     name: Interfaces.CommentReplyUpdateData
   - uid: 'excel!OfficeExtension.UpdateOptions:interface'
     name: OfficeExtension.UpdateOptions
   - uid: 'excel!Excel.Interfaces.CommentReplyData:interface'
     name: Excel.Interfaces.CommentReplyData
+  - uid: 'excel!Excel.CommentRichContent:interface'
+    name: Excel.CommentRichContent
