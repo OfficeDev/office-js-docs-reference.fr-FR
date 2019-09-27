@@ -11,6 +11,7 @@ items:
       - 'excel!OfficeExtension.ClientObject:class'
     package: excel!
     children:
+      - 'excel!Excel.RangeFormat#adjustIndent:member(1)'
       - 'excel!Excel.RangeFormat#autofitColumns:member(1)'
       - 'excel!Excel.RangeFormat#autofitRows:member(1)'
       - 'excel!Excel.RangeFormat#autoIndent:member'
@@ -36,6 +37,25 @@ items:
       - 'excel!Excel.RangeFormat#useStandardWidth:member'
       - 'excel!Excel.RangeFormat#verticalAlignment:member'
       - 'excel!Excel.RangeFormat#wrapText:member'
+  - uid: 'excel!Excel.RangeFormat#adjustIndent:member(1)'
+    summary: "Ajuste la mise en retrait de la plage de mise en forme. La valeur de retrait est comprise entre 0 et 250.\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    isPreview: true
+    name: adjustIndent(amount)
+    fullName: adjustIndent(amount)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'adjustIndent(amount: number): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: amount
+          description: "Nombre d’espaces de caractères par lesquels le retrait actuel est ajusté. Cette valeur doit être comprise entre-250 et 250. * Note * *\_: si la valeur augmente le niveau de retrait au-dessus de 250, le niveau de retrait reste avec 250. De même, si la valeur diminue le niveau de retrait en dessous de 0, le niveau de retrait reste 0."
+          type:
+            - number
   - uid: 'excel!Excel.RangeFormat#autofitColumns:member(1)'
     summary: "Modifie la largeur des colonnes de la plage active pour obtenir le meilleur ajustement, en fonction des données présentes dans les colonnes.\n\n\\[[Ensemble d’API\_: ExcelApi 1,2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: autofitColumns()
@@ -159,22 +179,21 @@ items:
         type:
           - number
   - uid: 'excel!Excel.RangeFormat#load:member(1)'
-    summary: "Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler «\_context.sync()\_» avant de lire les propriétés."
-    remarks: "En plus de cette signature, cette méthode possède les signatures suivantes\_:\n\n`load(option?: string | string[]): Excel.RangeFormat`-WHERE option est une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.\n\n`load(option?: { select?: string; expand?: string; }): Excel.RangeFormat`Option-WHERE option. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.RangeFormat`-Uniquement disponible sur les types de collection. Elle est similaire à la signature précédente. Option. Top indique le nombre maximal d’éléments de collection qui peuvent être inclus dans le résultat. Option. Skip indique le nombre d’éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat. Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d’éléments."
-    name: load(option)
-    fullName: load(option)
+    summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler `context.sync()` avant de lire les propriétés.
+    name: load(options)
+    fullName: load(options)
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'load(option?: Excel.Interfaces.RangeFormatLoadOptions): Excel.RangeFormat;'
+      content: 'load(options?: Excel.Interfaces.RangeFormatLoadOptions): Excel.RangeFormat;'
       return:
         type:
           - 'excel!Excel.RangeFormat:class'
         description: ''
       parameters:
-        - id: option
-          description: ''
+        - id: options
+          description: Fournit des options pour les propriétés de l’objet à charger.
           type:
             - 'excel!Excel.Interfaces.RangeFormatLoadOptions:interface'
   - uid: 'excel!Excel.RangeFormat#load:member(2)'
@@ -264,16 +283,24 @@ items:
       - typeScript
     type: method
     syntax:
-      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.RangeFormat;'
+      content: |-
+        load(propertyNamesAndPaths?: {
+                    select?: string;
+                    expand?: string;
+                }): Excel.RangeFormat;
       return:
         type:
           - 'excel!Excel.RangeFormat:class'
         description: ''
       parameters:
         - id: propertyNamesAndPaths
-          description: Où propertyNamesAndPaths. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et propertyNamesAndPaths. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
+          description: '`propertyNamesAndPaths.select`est une chaîne délimitée par des virgules qui spécifie les propriétés à `propertyNamesAndPaths.expand` charger et une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.'
           type:
-            - '{ select?: string; expand?: string; }'
+            - |-
+              {
+                          select?: string;
+                          expand?: string;
+                      }
   - uid: 'excel!Excel.RangeFormat#protection:member'
     summary: "Renvoie l’objet de protection du format pour une plage. En lecture seule.\n\n\\[[Ensemble d’API\_: ExcelApi 1,2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: protection
