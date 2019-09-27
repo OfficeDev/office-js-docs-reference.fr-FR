@@ -148,7 +148,7 @@ items:
         type:
           - string
   - uid: 'excel!Excel.Range#autoFill:member(1)'
-    summary: "Remplit la plage de la plage actuelle jusqu’à la plage de destination à l’aide de la logique de remplissage automatique spécifiée. La plage de destination peut être null ou peut étendre la source à l’horizontale ou à la verticale. Si la plage de destination est null, les données sont remplies en fonction des cellules environnantes (ce qui est le comportement lorsque vous double-cliquez sur la poignée de remplissage de la plage de l’interface utilisateur).\n\nPour plus d’informations, consultez la lecture de l' [AutoFill et du remplissage instantané](https://support.office.com/article/video-use-autofill-and-flash-fill-2e79a709-c814-4b27-8bc2-c4dc84d49464)<!-- -->.\n\n\\[[Ensemble d’API\_: ExcelApi 1,9, EXCELAPI Beta (aperçu uniquement) pour `destinationRange` null](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Remplit la plage de la plage actuelle jusqu’à la plage de destination à l’aide de la logique de remplissage automatique spécifiée. La plage de destination peut être null ou peut étendre la source à l’horizontale ou à la verticale. Les plages discontinues ne sont pas prises en charge. Pour plus d’informations, consultez la lecture de l' [AutoFill et du remplissage instantané](https://support.office.com/article/video-use-autofill-and-flash-fill-2e79a709-c814-4b27-8bc2-c4dc84d49464)<!-- -->.\n\n\\[[Ensemble d’API\_: ExcelApi 1,9, EXCELAPI Beta (aperçu uniquement) pour `destinationRange` null](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: 'autoFill(destinationRange, autoFillType)'
     fullName: 'autoFill(destinationRange, autoFillType)'
     langs:
@@ -159,10 +159,25 @@ items:
       return:
         type:
           - void
-        description: ''
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```typescript
+          await Excel.run(async (context) => {
+            const sheet = context.workbook.worksheets.getActiveWorksheet();
+            const sumCell = sheet.getRange("P4");
+            
+            // Copy everything. The formulas will be contextually updated based on their new locations.
+            sumCell.autoFill("P4:P7", Excel.AutoFillType.fillCopy);
+            sumCell.format.autofitColumns();
+            await context.sync();
+          });
+          ```
       parameters:
         - id: destinationRange
-          description: Plage de destination à remplir. Les plages discontinues ne sont pas prises en charge.
+          description: 'La plage de destination à AutoFill. Si la plage de destination est null, les données sont remplies en fonction des cellules environnantes (ce qui est le comportement lorsque vous double-cliquez sur la poignée de remplissage de la plage de l’interface utilisateur).'
           type:
             - 'excel!Excel.Range#autoFill~0:complex'
         - id: autoFillType
@@ -170,7 +185,7 @@ items:
           type:
             - 'excel!Excel.AutoFillType:enum'
   - uid: 'excel!Excel.Range#autoFill:member(2)'
-    summary: "Remplit la plage de la plage actuelle jusqu’à la plage de destination à l’aide de la logique de remplissage automatique spécifiée. La plage de destination peut être null ou peut étendre la source à l’horizontale ou à la verticale. Si la plage de destination est null, les données sont remplies en fonction des cellules environnantes (ce qui est le comportement lorsque vous double-cliquez sur la poignée de remplissage de la plage de l’interface utilisateur).\n\nPour plus d’informations, consultez la lecture de l' [AutoFill et du remplissage instantané](https://support.office.com/article/video-use-autofill-and-flash-fill-2e79a709-c814-4b27-8bc2-c4dc84d49464)<!-- -->.\n\n\\[[Ensemble d’API\_: ExcelApi 1,9, EXCELAPI Beta (aperçu uniquement) pour `destinationRange` null](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Remplit la plage de la plage actuelle jusqu’à la plage de destination à l’aide de la logique de remplissage automatique spécifiée. La plage de destination peut être null ou peut étendre la source à l’horizontale ou à la verticale. Les plages discontinues ne sont pas prises en charge. Pour plus d’informations, consultez la lecture de l' [AutoFill et du remplissage instantané](https://support.office.com/article/video-use-autofill-and-flash-fill-2e79a709-c814-4b27-8bc2-c4dc84d49464)<!-- -->.\n\n\\[[Ensemble d’API\_: ExcelApi 1,9, EXCELAPI Beta (aperçu uniquement) pour `destinationRange` null](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: 'autoFill(destinationRange, autoFillTypeString)'
     fullName: 'autoFill(destinationRange, autoFillTypeString)'
     langs:
@@ -184,7 +199,7 @@ items:
         description: ''
       parameters:
         - id: destinationRange
-          description: Plage de destination à remplir. Les plages discontinues ne sont pas prises en charge.
+          description: 'La plage de destination à AutoFill. Si la plage de destination est null, les données sont remplies en fonction des cellules environnantes (ce qui est le comportement lorsque vous double-cliquez sur la poignée de remplissage de la plage de l’interface utilisateur).'
           type:
             - 'excel!Excel.Range#autoFill~1:complex'
         - id: autoFillTypeString
@@ -397,7 +412,7 @@ items:
           ```
       parameters:
         - id: sourceRange
-          description: 'Plage source ou RangeAreas à partir de laquelle effectuer la copie. Lorsque le RangeAreas source est doté de plusieurs plages, il doit se présenter sous la forme d’un plan, qui peut être créé en supprimant des lignes ou des colonnes entières d’une plage rectangulaire.'
+          description: 'Plage source ou RangeAreas à partir de laquelle effectuer la copie. Lorsque la RangeAreas source est composée de plusieurs plages, son formulaire doit pouvoir être créé en supprimant des lignes ou des colonnes entières d’une plage rectangulaire.'
           type:
             - 'excel!Excel.Range#copyFrom~0:complex'
         - id: copyType
@@ -427,7 +442,7 @@ items:
         description: ''
       parameters:
         - id: sourceRange
-          description: 'Plage source ou RangeAreas à partir de laquelle effectuer la copie. Lorsque le RangeAreas source est doté de plusieurs plages, il doit se présenter sous la forme d’un plan, qui peut être créé en supprimant des lignes ou des colonnes entières d’une plage rectangulaire.'
+          description: 'Plage source ou RangeAreas à partir de laquelle effectuer la copie. Lorsque la RangeAreas source est composée de plusieurs plages, son formulaire doit pouvoir être créé en supprimant des lignes ou des colonnes entières d’une plage rectangulaire.'
           type:
             - 'excel!Excel.Range#copyFrom~1:complex'
         - id: copyTypeString
@@ -521,7 +536,7 @@ items:
         type:
           - 'excel!Excel.Range:class'
         description: |-
-          Plage correspondant aux critères de recherche.
+          Objet Range qui représente la première cellule contenant une valeur correspondant au texte et aux critères de recherche.
 
           #### <a name="examples"></a>Exemples
 
@@ -1735,7 +1750,26 @@ items:
       return:
         type:
           - void
-        description: ''
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```typescript
+          Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getActiveWorksheet();
+              
+              // Group the larger, main level. Note that the outline controls
+              // will be on row 10, meaning 4-9 will collapse and expand.
+              sheet.getRange("4:9").group(Excel.GroupOption.byRows);
+
+              // Group the smaller, sublevels. Note that the outline controls
+              // will be on rows 6 and 9, meaning 4-5 and 7-8 will collapse and expand.
+              sheet.getRange("4:5").group(Excel.GroupOption.byRows);
+              sheet.getRange("7:8").group(Excel.GroupOption.byRows);
+              await context.sync();
+          });
+          ```
       parameters:
         - id: groupOption
           description: "Indique comment la plage peut être regroupée par ligne ou par colonne. Une `InvalidArgument` erreur est générée lorsque l’option de groupe diffère de la propriété `isEntireRow` ou `isEntireColumn` de `range.isEntireRow` la plage (elle a la valeur `groupOption` true et est «\_ByColumns `range.isEntireColumn` » ou est `groupOption` true et est «\_ByRows\_»)."
@@ -1984,22 +2018,21 @@ items:
         type:
           - 'excel!Excel.Range#linkedDataTypeState~0:complex'
   - uid: 'excel!Excel.Range#load:member(1)'
-    summary: "Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler «\_context.sync()\_» avant de lire les propriétés."
-    remarks: "En plus de cette signature, cette méthode possède les signatures suivantes\_:\n\n`load(option?: string | string[]): Excel.Range`-WHERE option est une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.\n\n`load(option?: { select?: string; expand?: string; }): Excel.Range`Option-WHERE option. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Range`-Uniquement disponible sur les types de collection. Elle est similaire à la signature précédente. Option. Top indique le nombre maximal d’éléments de collection qui peuvent être inclus dans le résultat. Option. Skip indique le nombre d’éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat. Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d’éléments."
-    name: load(option)
-    fullName: load(option)
+    summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler `context.sync()` avant de lire les propriétés.
+    name: load(options)
+    fullName: load(options)
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'load(option?: Excel.Interfaces.RangeLoadOptions): Excel.Range;'
+      content: 'load(options?: Excel.Interfaces.RangeLoadOptions): Excel.Range;'
       return:
         type:
           - 'excel!Excel.Range:class'
         description: ''
       parameters:
-        - id: option
-          description: ''
+        - id: options
+          description: Fournit des options pour les propriétés de l’objet à charger.
           type:
             - 'excel!Excel.Interfaces.RangeLoadOptions:interface'
   - uid: 'excel!Excel.Range#load:member(2)'
@@ -2089,16 +2122,24 @@ items:
       - typeScript
     type: method
     syntax:
-      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.Range;'
+      content: |-
+        load(propertyNamesAndPaths?: {
+                    select?: string;
+                    expand?: string;
+                }): Excel.Range;
       return:
         type:
           - 'excel!Excel.Range:class'
         description: ''
       parameters:
         - id: propertyNamesAndPaths
-          description: Où propertyNamesAndPaths. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et propertyNamesAndPaths. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
+          description: '`propertyNamesAndPaths.select`est une chaîne délimitée par des virgules qui spécifie les propriétés à `propertyNamesAndPaths.expand` charger et une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.'
           type:
-            - '{ select?: string; expand?: string; }'
+            - |-
+              {
+                          select?: string;
+                          expand?: string;
+                      }
   - uid: 'excel!Excel.Range#merge:member(1)'
     summary: "Fusionne la plage de cellules dans une zone de la feuille de calcul.\n\n\\[[Ensemble d’API\_: ExcelApi 1,2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: merge(across)
@@ -2275,7 +2316,7 @@ items:
         type:
           - number
   - uid: 'excel!Excel.Range#savedAsArray:member'
-    summary: "Représente si toutes les cellules sont enregistrées sous la forme d’une formule matricielle. Renvoie la valeur true si toutes les cellules doivent être enregistrées sous forme de tableau ou la valeur false si toutes les cellules ne sont pas enregistrées sous forme de formule matricielle. Renvoie la valeur null s’il existe un mélange de cellules qui serait et ne serait pas enregistré sous forme de formule matricielle.\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Représente si toutes les cellules sont enregistrées sous la forme d’une formule matricielle. Renvoie la valeur true si toutes les cellules doivent être enregistrées sous forme de formule matricielle ou la valeur false si toutes les cellules ne sont pas enregistrées sous forme de formule matricielle. Renvoie la valeur null si certaines cellules sont enregistrées sous la forme d’une formule matricielle et d’autres non.\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     isPreview: true
     name: savedAsArray
     fullName: savedAsArray
@@ -2665,7 +2706,7 @@ items:
         type:
           - number
   - uid: 'excel!Excel.Range#track:member(1)'
-    summary: "Effectuer le suivi de l’objet pour l’ajustement automatique en fonction environnant des modifications dans le document. Cet appel est abréviations context.trackedObjects.add(thisObject). Si vous utilisez cet objet au sein de «\_.sync\_» appels et en dehors de l’exécution séquentielle d’un lot de «\_.run\_» et rencontrez un message d’erreur «\_InvalidObjectPath\_» lors de la définition d’une propriété ou appeler une méthode sur l’objet, vous devez ajouter l’objet à l’objet de suivi collection de sites lors de l’objet a été créé."
+    summary: "Effectuer le suivi de l’objet pour l’ajustement automatique en fonction environnant des modifications dans le document. Cet appel est un raccourci pour`context.trackedObjects.add(thisObject)`<!-- -->. Si vous utilisez cet objet entre `.sync` les appels et en dehors de l’exécution séquentielle d’un lot «\_. Run\_», et si vous obtenez une erreur «\_InvalidObjectPath\_» lors de la définition d’une propriété ou de l’appel d’une méthode sur l’objet, vous deviez ajouter l’objet à l’objet suivi. collection lors de la création initiale de l’objet."
     name: track()
     fullName: track()
     langs:
@@ -2690,7 +2731,24 @@ items:
       return:
         type:
           - void
-        description: ''
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```typescript
+          Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getActiveWorksheet();
+              
+              // This removes two levels of groups from the "A1-R10" range.
+              // Any groups at the same level on the same dimension will be removed by a single call.
+              sheet.getRange("A1:R10").ungroup(Excel.GroupOption.byRows);
+              sheet.getRange("A1:R10").ungroup(Excel.GroupOption.byRows);
+              sheet.getRange("A1:R10").ungroup(Excel.GroupOption.byColumns);
+              sheet.getRange("A1:R10").ungroup(Excel.GroupOption.byColumns);
+              await context.sync();
+          });
+          ```
       parameters:
         - id: groupOption
           description: Indique comment la plage peut être dissociée par des lignes ou des colonnes.
@@ -2747,7 +2805,7 @@ items:
           });
           ```
   - uid: 'excel!Excel.Range#untrack:member(1)'
-    summary: "Publication mémoire associée à cet objet si elle a été précédemment suivie. Cet appel est abréviations context.trackedObjects.add(thisObject). Vous rencontrez de nombreux objets suivies ralentit l’application hôte, donc n’oubliez pas de libérer les objets que l'on ajoute, une fois que vous avez terminé à les utiliser. Vous devez appeler «\_context.sync()\_» avant la publication de mémoire prend effet."
+    summary: 'Publication mémoire associée à cet objet si elle a été précédemment suivie. Cet appel est un raccourci pour`context.trackedObjects.remove(thisObject)`<!-- -->. Vous rencontrez de nombreux objets suivies ralentit l’application hôte, donc n’oubliez pas de libérer les objets que l''on ajoute, une fois que vous avez terminé à les utiliser. Vous devrez appeler `context.sync()` avant que la version de mémoire ne prenne effet.'
     name: untrack()
     fullName: untrack()
     langs:

@@ -221,7 +221,7 @@ items:
           type:
             - string
   - uid: 'excel!Excel.RangeAreas#copyFrom:member(1)'
-    summary: "Copie les cellules de données ou de mise en forme à partir de la plage source ou RangeAreas à la plage active. La taille de la rangeAreas de destination peut être différente de celle de la plage source ou de la RangeAreas. La destination est étendue automatiquement si elle est plus petite que la source.\n\n\\[[Ensemble d’API\_: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Copie les cellules de données ou de mise en forme à partir de la plage source ou RangeAreas à la plage active. La taille de l’rangeAreas de destination peut être différente de celle de la plage source ou de la RangeAreas. La destination est étendue automatiquement si elle est plus petite que la source.\n\n\\[[Ensemble d’API\_: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: 'copyFrom(sourceRange, copyType, skipBlanks, transpose)'
     fullName: 'copyFrom(sourceRange, copyType, skipBlanks, transpose)'
     langs:
@@ -235,7 +235,7 @@ items:
         description: ''
       parameters:
         - id: sourceRange
-          description: 'Plage source ou RangeAreas à partir de laquelle effectuer la copie. Lorsque le RangeAreas source est doté de plusieurs plages, il doit se présenter sous la forme hiérarchique qui peut être créée en supprimant des lignes ou des colonnes entières d’une plage rectangulaire.'
+          description: 'Plage source ou RangeAreas à partir de laquelle effectuer la copie. Lorsque la RangeAreas source est composée de plusieurs plages, son formulaire doit pouvoir être créé en supprimant des lignes ou des colonnes entières d’une plage rectangulaire.'
           type:
             - 'excel!Excel.RangeAreas#copyFrom~0:complex'
         - id: copyType
@@ -251,7 +251,7 @@ items:
           type:
             - boolean
   - uid: 'excel!Excel.RangeAreas#copyFrom:member(2)'
-    summary: "Copie les cellules de données ou de mise en forme à partir de la plage source ou RangeAreas à la plage active. La taille de la rangeAreas de destination peut être différente de celle de la plage source ou de la RangeAreas. La destination est étendue automatiquement si elle est plus petite que la source.\n\n\\[[Ensemble d’API\_: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Copie les cellules de données ou de mise en forme à partir de la plage source ou RangeAreas à la plage active. La taille de l’rangeAreas de destination peut être différente de celle de la plage source ou de la RangeAreas. La destination est étendue automatiquement si elle est plus petite que la source.\n\n\\[[Ensemble d’API\_: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: 'copyFrom(sourceRange, copyTypeString, skipBlanks, transpose)'
     fullName: 'copyFrom(sourceRange, copyTypeString, skipBlanks, transpose)'
     langs:
@@ -265,7 +265,7 @@ items:
         description: ''
       parameters:
         - id: sourceRange
-          description: 'Plage source ou RangeAreas à partir de laquelle effectuer la copie. Lorsque le RangeAreas source est doté de plusieurs plages, il doit se présenter sous la forme hiérarchique qui peut être créée en supprimant des lignes ou des colonnes entières d’une plage rectangulaire.'
+          description: 'Plage source ou RangeAreas à partir de laquelle effectuer la copie. Lorsque la RangeAreas source est composée de plusieurs plages, son formulaire doit pouvoir être créé en supprimant des lignes ou des colonnes entières d’une plage rectangulaire.'
           type:
             - 'excel!Excel.RangeAreas#copyFrom~1:complex'
         - id: copyTypeString
@@ -573,22 +573,21 @@ items:
         type:
           - boolean
   - uid: 'excel!Excel.RangeAreas#load:member(1)'
-    summary: "Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler «\_context.sync()\_» avant de lire les propriétés."
-    remarks: "En plus de cette signature, cette méthode possède les signatures suivantes\_:\n\n`load(option?: string | string[]): Excel.RangeAreas`-WHERE option est une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.\n\n`load(option?: { select?: string; expand?: string; }): Excel.RangeAreas`Option-WHERE option. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.RangeAreas`-Uniquement disponible sur les types de collection. Elle est similaire à la signature précédente. Option. Top indique le nombre maximal d’éléments de collection qui peuvent être inclus dans le résultat. Option. Skip indique le nombre d’éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat. Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d’éléments."
-    name: load(option)
-    fullName: load(option)
+    summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler `context.sync()` avant de lire les propriétés.
+    name: load(options)
+    fullName: load(options)
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'load(option?: Excel.Interfaces.RangeAreasLoadOptions): Excel.RangeAreas;'
+      content: 'load(options?: Excel.Interfaces.RangeAreasLoadOptions): Excel.RangeAreas;'
       return:
         type:
           - 'excel!Excel.RangeAreas:class'
         description: ''
       parameters:
-        - id: option
-          description: ''
+        - id: options
+          description: Fournit des options pour les propriétés de l’objet à charger.
           type:
             - 'excel!Excel.Interfaces.RangeAreasLoadOptions:interface'
   - uid: 'excel!Excel.RangeAreas#load:member(2)'
@@ -617,16 +616,24 @@ items:
       - typeScript
     type: method
     syntax:
-      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.RangeAreas;'
+      content: |-
+        load(propertyNamesAndPaths?: {
+                    select?: string;
+                    expand?: string;
+                }): Excel.RangeAreas;
       return:
         type:
           - 'excel!Excel.RangeAreas:class'
         description: ''
       parameters:
         - id: propertyNamesAndPaths
-          description: Où propertyNamesAndPaths. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et propertyNamesAndPaths. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
+          description: '`propertyNamesAndPaths.select`est une chaîne délimitée par des virgules qui spécifie les propriétés à `propertyNamesAndPaths.expand` charger et une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.'
           type:
-            - '{ select?: string; expand?: string; }'
+            - |-
+              {
+                          select?: string;
+                          expand?: string;
+                      }
   - uid: 'excel!Excel.RangeAreas#set:member(1)'
     summary: 'Définit plusieurs propriétés d’un objet en même temps. Vous pouvez transmettre un objet plain avec les propriétés appropriées, ou un autre objet API du même type.'
     remarks: "Cette méthode est dotée de la signature supplémentaire suivante\_:\n\n`set(properties: Excel.RangeAreas): void`"
@@ -707,7 +714,7 @@ items:
           - 'excel!Excel.Interfaces.RangeAreasData:interface'
         description: ''
   - uid: 'excel!Excel.RangeAreas#track:member(1)'
-    summary: "Effectuer le suivi de l’objet pour l’ajustement automatique en fonction environnant des modifications dans le document. Cet appel est abréviations context.trackedObjects.add(thisObject). Si vous utilisez cet objet au sein de «\_.sync\_» appels et en dehors de l’exécution séquentielle d’un lot de «\_.run\_» et rencontrez un message d’erreur «\_InvalidObjectPath\_» lors de la définition d’une propriété ou appeler une méthode sur l’objet, vous devez ajouter l’objet à l’objet de suivi collection de sites lors de l’objet a été créé."
+    summary: "Effectuer le suivi de l’objet pour l’ajustement automatique en fonction environnant des modifications dans le document. Cet appel est un raccourci pour`context.trackedObjects.add(thisObject)`<!-- -->. Si vous utilisez cet objet entre `.sync` les appels et en dehors de l’exécution séquentielle d’un lot «\_. Run\_», et si vous obtenez une erreur «\_InvalidObjectPath\_» lors de la définition d’une propriété ou de l’appel d’une méthode sur l’objet, vous deviez ajouter l’objet à l’objet suivi. collection lors de la création initiale de l’objet."
     name: track()
     fullName: track()
     langs:
@@ -720,7 +727,7 @@ items:
           - 'excel!Excel.RangeAreas:class'
         description: ''
   - uid: 'excel!Excel.RangeAreas#untrack:member(1)'
-    summary: "Publication mémoire associée à cet objet si elle a été précédemment suivie. Cet appel est abréviations context.trackedObjects.add(thisObject). Vous rencontrez de nombreux objets suivies ralentit l’application hôte, donc n’oubliez pas de libérer les objets que l'on ajoute, une fois que vous avez terminé à les utiliser. Vous devez appeler «\_context.sync()\_» avant la publication de mémoire prend effet."
+    summary: 'Publication mémoire associée à cet objet si elle a été précédemment suivie. Cet appel est un raccourci pour`context.trackedObjects.remove(thisObject)`<!-- -->. Vous rencontrez de nombreux objets suivies ralentit l’application hôte, donc n’oubliez pas de libérer les objets que l''on ajoute, une fois que vous avez terminé à les utiliser. Vous devrez appeler `context.sync()` avant que la version de mémoire ne prenne effet.'
     name: untrack()
     fullName: untrack()
     langs:

@@ -127,7 +127,7 @@ items:
           - 'excel!Excel.Slicer#getSelectedItems~0:complex'
         description: ''
   - uid: 'excel!Excel.Slicer#height:member'
-    summary: "Représente la hauteur, exprimée en points, de l’axe de graphique. Renvoie une exception d’argument non valide lorsqu’elle est définie avec une valeur négative ou égale à zéro comme entrée.\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Représente la hauteur, exprimée en points, de l’axe de graphique. Renvoie un «\_l’argument est non valide ou manquant ou a un format incorrect.\_» exception lorsqu’elle est définie avec une valeur négative ou zéro comme entrée.\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     isPreview: true
     name: height
     fullName: height
@@ -166,7 +166,7 @@ items:
         type:
           - boolean
   - uid: 'excel!Excel.Slicer#left:member'
-    summary: "Représente la distance, en points, entre le côté gauche du graphique et l’origine de la feuille de calcul. Renvoie une exception d’argument non valide lorsqu’elle est définie avec une valeur négative comme entrée.\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Représente la distance, en points, entre le côté gauche du graphique et l’origine de la feuille de calcul. Renvoie un «\_l’argument est non valide ou manquant ou a un format incorrect.\_» exception lorsqu’elle est définie avec une valeur négative comme entrée.\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     isPreview: true
     name: left
     fullName: left
@@ -179,23 +179,22 @@ items:
         type:
           - number
   - uid: 'excel!Excel.Slicer#load:member(1)'
-    summary: "Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler «\_context.sync()\_» avant de lire les propriétés."
-    remarks: "En plus de cette signature, cette méthode possède les signatures suivantes\_:\n\n`load(option?: string | string[]): Excel.Slicer`-WHERE option est une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.\n\n`load(option?: { select?: string; expand?: string; }): Excel.Slicer`Option-WHERE option. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Slicer`-Uniquement disponible sur les types de collection. Elle est similaire à la signature précédente. Option. Top indique le nombre maximal d’éléments de collection qui peuvent être inclus dans le résultat. Option. Skip indique le nombre d’éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat. Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d’éléments."
+    summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler `context.sync()` avant de lire les propriétés.
     isPreview: true
-    name: load(option)
-    fullName: load(option)
+    name: load(options)
+    fullName: load(options)
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'load(option?: Excel.Interfaces.SlicerLoadOptions): Excel.Slicer;'
+      content: 'load(options?: Excel.Interfaces.SlicerLoadOptions): Excel.Slicer;'
       return:
         type:
           - 'excel!Excel.Slicer:class'
         description: ''
       parameters:
-        - id: option
-          description: ''
+        - id: options
+          description: Fournit des options pour les propriétés de l’objet à charger.
           type:
             - 'excel!Excel.Interfaces.SlicerLoadOptions:interface'
   - uid: 'excel!Excel.Slicer#load:member(2)'
@@ -226,16 +225,24 @@ items:
       - typeScript
     type: method
     syntax:
-      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.Slicer;'
+      content: |-
+        load(propertyNamesAndPaths?: {
+                    select?: string;
+                    expand?: string;
+                }): Excel.Slicer;
       return:
         type:
           - 'excel!Excel.Slicer:class'
         description: ''
       parameters:
         - id: propertyNamesAndPaths
-          description: Où propertyNamesAndPaths. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et propertyNamesAndPaths. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
+          description: '`propertyNamesAndPaths.select`est une chaîne délimitée par des virgules qui spécifie les propriétés à `propertyNamesAndPaths.expand` charger et une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.'
           type:
-            - '{ select?: string; expand?: string; }'
+            - |-
+              {
+                          select?: string;
+                          expand?: string;
+                      }
   - uid: 'excel!Excel.Slicer#name:member'
     summary: "Représente le nom de la forme.\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     isPreview: true
@@ -263,7 +270,7 @@ items:
         type:
           - string
   - uid: 'excel!Excel.Slicer#selectItems:member(1)'
-    summary: "Éléments de segment à sélection multiple en fonction de leur nom. Sélection précédente est désactivée. Tous les éléments seront sélectionnés par défaut si le tableau est vide.\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Sélectionne les éléments du Slicer en fonction de leurs clés. Les sélections précédentes sont effacées. Tous les éléments seront sélectionnés par défaut si le tableau est vide.\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     isPreview: true
     name: selectItems(items)
     fullName: selectItems(items)
@@ -349,7 +356,7 @@ items:
         type:
           - 'excel!Excel.SlicerItemCollection:class'
   - uid: 'excel!Excel.Slicer#sortBy:member'
-    summary: "Représente l’ordre de tri des éléments dans le segment. Les valeurs possibles sont\_: DataSourceOrder par ordre croissant, par ordre décroissant.\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Représente l’ordre de tri des éléments dans le segment. Les valeurs possibles sont\_: \"DataSourceOrder\", \"ascending\", \"Descending\".\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     isPreview: true
     name: sortBy
     fullName: sortBy
@@ -401,7 +408,7 @@ items:
           - 'excel!Excel.Interfaces.SlicerData:interface'
         description: ''
   - uid: 'excel!Excel.Slicer#top:member'
-    summary: "Représente la distance, en points, du bord supérieur de la section à la partie droite de la feuille de calcul. Renvoie une exception d’argument non valide lorsqu’elle est définie avec une valeur négative comme entrée.\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Représente la distance, en points, du bord supérieur de la section à la partie droite de la feuille de calcul. Renvoie un «\_l’argument est non valide ou manquant ou a un format incorrect.\_» exception lorsqu’elle est définie avec une valeur négative comme entrée.\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     isPreview: true
     name: top
     fullName: top
@@ -414,7 +421,7 @@ items:
         type:
           - number
   - uid: 'excel!Excel.Slicer#width:member'
-    summary: "Représente la largeur, en points, de la forme. Renvoie une exception d’argument non valide lorsqu’elle est définie avec une valeur négative ou égale à zéro comme entrée.\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Représente la largeur, en points, de la forme. Renvoie un «\_l’argument est non valide ou manquant ou a un format incorrect.\_» exception lorsqu’elle est définie avec une valeur négative ou zéro comme entrée.\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     isPreview: true
     name: width
     fullName: width
