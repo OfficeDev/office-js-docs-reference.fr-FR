@@ -77,7 +77,8 @@ items:
 
           ```typescript
           await Excel.run(async (context) => {
-              const comment = context.workbook.comments.getItemAt(0);
+              const sheet = context.workbook.worksheets.getItem("Comments");
+              const comment = sheet.comments.getItemAt(0);
               comment.content = "PLEASE add headers here.";
               await context.sync();
           });
@@ -277,6 +278,18 @@ items:
       return:
         type:
           - boolean
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```typescript
+          await Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getItem("Comments");
+              sheet.comments.getItemAt(0).resolved = true;
+              await context.sync();
+          });
+          ```
   - uid: 'excel!Excel.Comment#richContent:member'
     summary: "Obtient le contenu de commentaire enrichi (par exemple, les mentions dans les commentaires). Cette chaîne n’est pas destinée à être affichée aux utilisateurs finaux. Votre complément doit uniquement l’utiliser pour analyser le contenu de commentaire enrichi.\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     isPreview: true
