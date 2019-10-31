@@ -1,13 +1,13 @@
 ---
 title: Référence de l’API JavaScript d’Office
 description: Ensemble de conditions requises pour les API JavaScript pour Office par hôte
-ms.date: 07/25/2019
-ms.openlocfilehash: e4b45370dcaf82a60d39264a97f1e28c0dab543d
-ms.sourcegitcommit: ceb67bed1111b63e75e3a69a9a42a27ccc4d5749
+ms.date: 10/24/2019
+ms.openlocfilehash: fb6f228306c6fc5840c2f8b9c9bc46d56b43f50c
+ms.sourcegitcommit: dc57153a05b103a8493370c8aa1bd936f4d5f7c4
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/02/2019
-ms.locfileid: "36144048"
+ms.lasthandoff: 10/31/2019
+ms.locfileid: "37907711"
 ---
 # <a name="office-javascript-api-reference"></a>Référence de l’API JavaScript d’Office
 
@@ -21,6 +21,7 @@ La liste suivante répertorie les ensembles de conditions requises propres à l�
 ## <a name="excel"></a>Excel
 
 - [Préversion ExcelApi](/javascript/api/excel?view=excel-js-preview)
+- [ExcelApi 1.10](/javascript/api/excel?view=excel-js-1.10)
 - [ExcelApi 1.9](/javascript/api/excel?view=excel-js-1.9)
 - [ExcelApi 1.8](/javascript/api/excel?view=excel-js-1.8)
 - [ExcelApi 1.7](/javascript/api/excel?view=excel-js-1.7)
@@ -38,6 +39,7 @@ La liste suivante répertorie les ensembles de conditions requises propres à l�
 ## <a name="outlook"></a>Outlook
 
 - [Aperçu de boîte aux lettres](/javascript/api/outlook?view=outlook-js-preview)
+- [Boîte aux lettres 1,8](/javascript/api/outlook?view=outlook-js-1.8)
 - [Mailbox 1.7](/javascript/api/outlook?view=outlook-js-1.7)
 - [Mailbox 1.6](/javascript/api/outlook?view=outlook-js-1.6)
 - [Mailbox 1.5](/javascript/api/outlook?view=outlook-js-1.5)
@@ -48,7 +50,7 @@ La liste suivante répertorie les ensembles de conditions requises propres à l�
 
 ## <a name="powerpoint"></a>PowerPoint
 
-- [PowerPointApi 1,1](/javascript/api/powerpoint?view=powerpoint-js-1.1)
+- [PowerPointApi 1.1](/javascript/api/powerpoint?view=powerpoint-js-1.1)
 
 ## <a name="visio"></a>Visio
 
@@ -57,9 +59,9 @@ La liste suivante répertorie les ensembles de conditions requises propres à l�
 ## <a name="word"></a>Word
 
 - [Aperçu de Word](/javascript/api/word?view=word-js-preview)
-- [WordApi 1.3](/javascript/api/word?view=word-js-1.3)
-- [WordApi 1.2](/javascript/api/word?view=word-js-1.2)
-- [WordApi 1.1](/javascript/api/word?view=word-js-1.1)
+- [WordApi 1.3](/javascript/api/word?view=word-js-1.3)
+- [WordApi 1.2](/javascript/api/word?view=word-js-1.2)
+- [WordApi 1.1](/javascript/api/word?view=word-js-1.1)
 
 ## <a name="common-api"></a>API communes
 
