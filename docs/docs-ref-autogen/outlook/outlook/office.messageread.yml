@@ -28,6 +28,7 @@ items:
       - 'outlook!Office.MessageRead#displayReplyForm:member(1)'
       - 'outlook!Office.MessageRead#from:member'
       - 'outlook!Office.MessageRead#getAllInternetHeadersAsync:member(1)'
+      - 'outlook!Office.MessageRead#getAllInternetHeadersAsync:member(2)'
       - 'outlook!Office.MessageRead#getEntities:member(1)'
       - 'outlook!Office.MessageRead#getEntitiesByType:member(1)'
       - 'outlook!Office.MessageRead#getFilteredEntitiesByName:member(1)'
@@ -52,7 +53,7 @@ items:
       - 'outlook!Office.MessageRead#subject:member'
       - 'outlook!Office.MessageRead#to:member'
   - uid: 'outlook!Office.MessageRead#addHandlerAsync:member(1)'
-    summary: "ajoute un gestionnaire d’événements pour un événement pris en charge. **Remarque**: les événements ne sont disponibles qu’avec le volet Office.\n\nActuellement, les types d’événement pris en charge sont`Office.EventType.AppointmentTimeChanged`<!-- -->, `Office.EventType.RecipientsChanged`<!-- -->, et`Office.EventType.RecurrenceChanged`<!-- -->. En mode Aperçu `Office.EventType.AttachmentsChanged` , `Office.EventType.EnhancedLocationsChanged` et sont également pris en charge.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
+    summary: "ajoute un gestionnaire d’événements pour un événement pris en charge. **Remarque**: les événements ne sont disponibles qu’avec le volet Office.\n\nPour savoir quels types d’événements sont pris en `Office.EventType` charge, reportez-vous à pour plus de détails.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
     remarks: |-
       **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
 
@@ -86,7 +87,7 @@ items:
           type:
             - 'outlook!Office.MessageRead#addHandlerAsync~1:complex'
   - uid: 'outlook!Office.MessageRead#addHandlerAsync:member(2)'
-    summary: "ajoute un gestionnaire d’événements pour un événement pris en charge. **Remarque**: les événements ne sont disponibles qu’avec le volet Office.\n\nActuellement, les types d’événement pris en charge sont`Office.EventType.AppointmentTimeChanged`<!-- -->, `Office.EventType.RecipientsChanged`<!-- -->, et`Office.EventType.RecurrenceChanged`<!-- -->. En mode Aperçu `Office.EventType.AttachmentsChanged` , `Office.EventType.EnhancedLocationsChanged` et sont également pris en charge.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
+    summary: "ajoute un gestionnaire d’événements pour un événement pris en charge. **Remarque**: les événements ne sont disponibles qu’avec le volet Office.\n\nPour savoir quels types d’événements sont pris en `Office.EventType` charge, reportez-vous à pour plus de détails.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
     remarks: |-
       **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
 
@@ -192,7 +193,7 @@ items:
         type:
           - 'outlook!Office.Body:interface'
   - uid: 'outlook!Office.MessageRead#categories:member'
-    summary: "Obtient un objet qui fournit des méthodes pour la gestion des catégories de l’élément.\n\n\\[[Ensemble d’API\_: aperçu de boîte aux lettres](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
+    summary: "Obtient un objet qui fournit des méthodes pour la gestion des catégories de l’élément.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
     remarks: |-
       **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
 
@@ -209,7 +210,6 @@ items:
           }
       });
       ```
-    isPreview: true
     name: categories
     fullName: categories
     langs:
@@ -221,7 +221,7 @@ items:
         type:
           - 'outlook!Office.Categories:interface'
   - uid: 'outlook!Office.MessageRead#cc:member'
-    summary: "Permet d’accéder aux destinataires en copie carbone (Cc) d’un message. Le type d’objet et le niveau d’accès varient selon le mode de l’élément actif.\n\nLa propriété CC renvoie un tableau qui contient un objet EmailAddressDetails pour chaque destinataire mentionné sur la ligne CC du message. Par défaut, la collection est limitée à un maximum de 100 membres. Toutefois, sous Windows et Mac, vous pouvez obtenir 500 membres au maximum.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
+    summary: "Permet d’accéder aux destinataires en copie carbone (Cc) d’un message. Le type d’objet et le niveau d’accès varient selon le mode de l’élément actif.\n\nLa propriété CC renvoie un tableau qui contient un objet EmailAddressDetails pour chaque destinataire mentionné sur la ligne CC du message. Par défaut, la collection est limitée à 100\_membres. Cependant, sous Windows et Mac, vous pouvez obtenir 500\_membres au maximum.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
     remarks: |-
       **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
 
@@ -400,7 +400,7 @@ items:
         description: ''
       parameters:
         - id: formData
-          description: 'Chaîne qui contient du texte et des éléments HTML et qui représente le corps du formulaire de réponse. La chaîne est limitée à 32 Ko ou un objet [Office. ReplyFormData](xref:outlook!Office.ReplyFormData:interface) qui contient les données de corps ou de pièces jointes et une fonction de rappel.'
+          description: 'Chaîne qui contient du texte et des éléments HTML et qui représente le corps du formulaire de réponse. La chaîne est limitée à 32 Ko ou un objet [ReplyFormData](xref:outlook!Office.ReplyFormData:interface) qui contient les données de corps ou de pièces jointes et une fonction de rappel.'
           type:
             - 'outlook!Office.MessageRead#displayReplyAllForm~0:complex'
         - id: callback
@@ -494,7 +494,7 @@ items:
         description: ''
       parameters:
         - id: formData
-          description: 'Chaîne qui contient du texte et des éléments HTML et qui représente le corps du formulaire de réponse. La chaîne est limitée à 32 Ko ou un objet [Office. ReplyFormData](xref:outlook!Office.ReplyFormData:interface) qui contient les données de corps ou de pièces jointes et une fonction de rappel.'
+          description: 'Chaîne qui contient du texte et des éléments HTML et qui représente le corps du formulaire de réponse. La chaîne est limitée à 32 Ko ou un objet [ReplyFormData](xref:outlook!Office.ReplyFormData:interface) qui contient les données de corps ou de pièces jointes et une fonction de rappel.'
           type:
             - 'outlook!Office.MessageRead#displayReplyForm~0:complex'
         - id: callback
@@ -525,7 +525,7 @@ items:
         type:
           - 'outlook!Office.EmailAddressDetails:interface'
   - uid: 'outlook!Office.MessageRead#getAllInternetHeadersAsync:member(1)'
-    summary: "Obtient tous les en-têtes Internet pour le message sous forme de chaîne.\n\n\\[[Ensemble d’API\_: aperçu de boîte aux lettres](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
+    summary: "Obtient tous les en-têtes Internet pour le message sous forme de chaîne.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
     remarks: |-
       **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
 
@@ -550,7 +550,6 @@ items:
           }
       );
       ```
-    isPreview: true
     name: 'getAllInternetHeadersAsync(options, callback)'
     fullName: 'getAllInternetHeadersAsync(options, callback)'
     langs:
@@ -571,6 +570,28 @@ items:
           description: 'Facultatif. Une fois la méthode exécutée, la fonction transmise au paramètre callback est appelée avec un seul paramètre, asyncResult, qui est un objet Office. AsyncResult. En cas de réussite, les données des en-têtes Internet sont fournies dans la propriété asyncResult. Value sous forme de chaîne. Reportez-vous à la [norme RFC 2183](https://tools.ietf.org/html/rfc2183) pour les informations de mise en forme de la valeur de chaîne renvoyée. En cas d’échec de l’appel, la propriété asyncResult. Error contient un code d’erreur correspondant à la raison de l’échec.'
           type:
             - 'outlook!Office.MessageRead#getAllInternetHeadersAsync~0:complex'
+  - uid: 'outlook!Office.MessageRead#getAllInternetHeadersAsync:member(2)'
+    summary: "Obtient tous les en-têtes Internet pour le message sous forme de chaîne.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
+    remarks: |-
+      **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
+
+      **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: lecture de message
+    name: getAllInternetHeadersAsync(callback)
+    fullName: getAllInternetHeadersAsync(callback)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getAllInternetHeadersAsync(callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: callback
+          description: 'Facultatif. Une fois la méthode exécutée, la fonction transmise au paramètre callback est appelée avec un seul paramètre, asyncResult, qui est un objet Office. AsyncResult. En cas de réussite, les données des en-têtes Internet sont fournies dans la propriété asyncResult. Value sous forme de chaîne. Reportez-vous à la [norme RFC 2183](https://tools.ietf.org/html/rfc2183) pour les informations de mise en forme de la valeur de chaîne renvoyée. En cas d’échec de l’appel, la propriété asyncResult. Error contient un code d’erreur correspondant à la raison de l’échec.'
+          type:
+            - 'outlook!Office.MessageRead#getAllInternetHeadersAsync~1:complex'
   - uid: 'outlook!Office.MessageRead#getEntities:member(1)'
     summary: "Permet d’obtenir les entités figurant dans le corps de l’élément sélectionné.\n\n**Remarque**: cette méthode n’est pas prise en charge dans Outlook sur iOS ou Android.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
     remarks: |-
@@ -605,7 +626,7 @@ items:
 
       Alors que le niveau d’autorisation minimal Restricted suffit pour utiliser cette méthode, certains types d’entité nécessitent le niveau ReadItem pour pouvoir y accéder, comme indiqué dans le tableau suivant.
 
-      <table> <tr> <th>Valeur d’entityType</th> <th>Type des objets du tableau renvoyé</th> <th>Niveau d’autorisation requis</th> </tr> <tr> <td>Adresse</td> <td>Chaîne</td> <td>Restreinte</td> </tr> <tr> <td>Contact</td> <td>Contact</td> <td>ReadItem</td> </tr> <tr> <td>EmailAddress</td> <td>Chaîne</td> <td>ReadItem</td> </tr> <tr> <td>MeetingSuggestion</td> <td>MeetingSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>PhoneNumber</td> <td>PhoneNumber</td> <td>Restreinte</td> </tr> <tr> <td>TaskSuggestion</td> <td>TaskSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>URL</td> <td>Chaîne</td> <td>Restreinte</td> </tr> </table>
+      <table> <tr> <th>Valeur d’entityType</th> <th>Type des objets du tableau renvoyé</th> <th>Niveau d’autorisation requis</th> </tr> <tr> <td>Adresse</td> <td>String</td> <td>Restreinte</td> </tr> <tr> <td>Contact</td> <td>Contact</td> <td>ReadItem</td> </tr> <tr> <td>EmailAddress</td> <td>String</td> <td>ReadItem</td> </tr> <tr> <td>MeetingSuggestion</td> <td>MeetingSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>PhoneNumber</td> <td>PhoneNumber</td> <td>Restreinte</td> </tr> <tr> <td>TaskSuggestion</td> <td>TaskSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>URL</td> <td>String</td> <td>Restreinte</td> </tr> </table>
 
       #### <a name="examples"></a>Exemples
 
@@ -1075,7 +1096,7 @@ items:
         type:
           - 'outlook!Office.Recurrence:interface'
   - uid: 'outlook!Office.MessageRead#removeHandlerAsync:member(1)'
-    summary: "Supprime les gestionnaires d’événements pour un type d’événement pris en charge. **Remarque**: les événements ne sont disponibles qu’avec le volet Office.\n\nActuellement, les types d’événement pris en charge sont`Office.EventType.AppointmentTimeChanged`<!-- -->, `Office.EventType.RecipientsChanged`<!-- -->, et`Office.EventType.RecurrenceChanged`<!-- -->. En mode Aperçu `Office.EventType.AttachmentsChanged` , `Office.EventType.EnhancedLocationsChanged` et sont également pris en charge.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
+    summary: "Supprime les gestionnaires d’événements pour un type d’événement pris en charge. **Remarque**: les événements ne sont disponibles qu’avec le volet Office.\n\nPour savoir quels types d’événements sont pris en `Office.EventType` charge, reportez-vous à pour plus de détails.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
     remarks: |-
       **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
 
@@ -1105,7 +1126,7 @@ items:
           type:
             - 'outlook!Office.MessageRead#removeHandlerAsync~1:complex'
   - uid: 'outlook!Office.MessageRead#removeHandlerAsync:member(2)'
-    summary: "Supprime les gestionnaires d’événements pour un type d’événement pris en charge. **Remarque**: les événements ne sont disponibles qu’avec le volet Office.\n\nActuellement, les types d’événement pris en charge sont`Office.EventType.AppointmentTimeChanged`<!-- -->, `Office.EventType.RecipientsChanged`<!-- -->, et`Office.EventType.RecurrenceChanged`<!-- -->. En mode Aperçu `Office.EventType.AttachmentsChanged` , `Office.EventType.EnhancedLocationsChanged` et sont également pris en charge.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
+    summary: "Supprime les gestionnaires d’événements pour un type d’événement pris en charge. **Remarque**: les événements ne sont disponibles qu’avec le volet Office.\n\nPour savoir quels types d’événements sont pris en `Office.EventType` charge, reportez-vous à pour plus de détails.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
     remarks: |-
       **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
 
@@ -1220,7 +1241,7 @@ items:
         type:
           - string
   - uid: 'outlook!Office.MessageRead#to:member'
-    summary: "Permet d’accéder aux destinataires figurant sur la ligne À d’un message. Le type d’objet et le niveau d’accès varient selon le mode de l’élément actif.\n\nLa propriété to renvoie un tableau qui contient un objet EmailAddressDetails pour chaque destinataire mentionné sur la ligne à du message. Par défaut, la collection est limitée à un maximum de 100 membres. Toutefois, sous Windows et Mac, vous pouvez obtenir 500 membres au maximum.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
+    summary: "Permet d’accéder aux destinataires figurant sur la ligne À d’un message. Le type d’objet et le niveau d’accès varient selon le mode de l’élément actif.\n\nLa propriété to renvoie un tableau qui contient un objet EmailAddressDetails pour chaque destinataire mentionné sur la ligne à du message. Par défaut, la collection est limitée à 100\_membres. Cependant, sous Windows et Mac, vous pouvez obtenir 500\_membres au maximum.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
     remarks: |-
       **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
 
@@ -1355,6 +1376,17 @@ references:
   - uid: 'outlook!Office.EmailAddressDetails:interface'
     name: EmailAddressDetails
   - uid: 'outlook!Office.MessageRead#getAllInternetHeadersAsync~0:complex'
+    name: '(asyncResult: Office.AsyncResult<string>) => void'
+    fullName: '(asyncResult: Office.AsyncResult<string>) => void'
+    spec.typeScript:
+      - name: '(asyncResult: '
+        fullName: '(asyncResult: '
+      - uid: 'outlook!Office.AsyncResult:interface'
+        name: Office.AsyncResult
+        fullName: Office.AsyncResult
+      - name: <string>) => void
+        fullName: <string>) => void
+  - uid: 'outlook!Office.MessageRead#getAllInternetHeadersAsync~1:complex'
     name: '(asyncResult: Office.AsyncResult<string>) => void'
     fullName: '(asyncResult: Office.AsyncResult<string>) => void'
     spec.typeScript:
