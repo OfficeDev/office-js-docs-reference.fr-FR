@@ -602,7 +602,7 @@ items:
           type:
             - 'outlook!Office.MessageCompose#getItemIdAsync~1:complex'
   - uid: 'outlook!Office.MessageCompose#getSelectedDataAsync:member(1)'
-    summary: "Renvoie de manière asynchrone les données sélectionnées à partir de l’objet ou du corps d’un message.\n\nSi aucune sélection n’est effectuée, mais que le curseur est placé dans le corps ou l’objet, la méthode renvoie la valeur null pour les données sélectionnées. Si un champ autre que le corps ou l’objet est sélectionné, la méthode renvoie l’erreur InvalidSelection.\n\nPour accéder aux données sélectionnées via la méthode de rappel, appelez la méthode asyncResult.value.data. Pour accéder à la propriété source d’origine de la sélection, appelez asyncResult. Value. sourceProperty, qui sera le corps ou l’objet.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,2](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
+    summary: "Renvoie de manière asynchrone les données sélectionnées à partir de l’objet ou du corps d’un message.\n\nS’il n’y a aucune sélection, mais que le curseur se trouve dans le corps ou l’objet, la méthode renvoie une chaîne vide pour les données sélectionnées. Si un champ autre que le corps ou l’objet est sélectionné, la méthode renvoie l’erreur InvalidSelection.\n\nPour accéder aux données sélectionnées via la méthode de rappel, appelez la méthode asyncResult.value.data. Pour accéder à la propriété source d’origine de la sélection, appelez asyncResult. Value. sourceProperty, qui sera le corps ou l’objet.\n\n**Remarque**: dans Outlook sur le Web, la méthode renvoie la chaîne «\_NULL\_» si aucun texte n’est sélectionné, mais que le curseur se trouve dans le corps du message.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,2](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
     remarks: |-
       **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
 
@@ -620,11 +620,13 @@ items:
           var text = asyncResult.value.data;
           var prop = asyncResult.value.sourceProperty;
 
-          Office.context.mailbox.item.setSelectedDataAsync('Setting ' + prop + ': ' + text, {}, setCallback);
-      }
+          // Handle where Outlook on the web erroneously returns "null" instead of empty string.
+          if (Office.context.mailbox.diagnostics.hostName === 'OutlookWebApp'
+              && asyncResult.value.endPosition === asyncResult.value.startPosition) {
+              text = "";
+          }
 
-      function setCallback(asyncResult) {
-          // Check for errors.
+          console.log("Selected text in " + prop + ": " + text);
       }
       ```
     name: 'getSelectedDataAsync(coercionType, options, callback)'
@@ -652,7 +654,7 @@ items:
           type:
             - 'outlook!Office.MessageCompose#getSelectedDataAsync~1:complex'
   - uid: 'outlook!Office.MessageCompose#getSelectedDataAsync:member(2)'
-    summary: "Renvoie de manière asynchrone les données sélectionnées à partir de l’objet ou du corps d’un message.\n\nSi aucune sélection n’est effectuée, mais que le curseur est placé dans le corps ou l’objet, la méthode renvoie la valeur null pour les données sélectionnées. Si un champ autre que le corps ou l’objet est sélectionné, la méthode renvoie l’erreur InvalidSelection.\n\nPour accéder aux données sélectionnées via la méthode de rappel, appelez la méthode asyncResult.value.data. Pour accéder à la propriété source d’origine de la sélection, appelez asyncResult. Value. sourceProperty, qui sera le corps ou l’objet.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,2](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
+    summary: "Renvoie de manière asynchrone les données sélectionnées à partir de l’objet ou du corps d’un message.\n\nS’il n’y a aucune sélection, mais que le curseur se trouve dans le corps ou l’objet, la méthode renvoie une chaîne vide pour les données sélectionnées. Si un champ autre que le corps ou l’objet est sélectionné, la méthode renvoie l’erreur InvalidSelection.\n\nPour accéder aux données sélectionnées via la méthode de rappel, appelez la méthode asyncResult.value.data. Pour accéder à la propriété source d’origine de la sélection, appelez asyncResult. Value. sourceProperty, qui sera le corps ou l’objet.\n\n**Remarque**: dans Outlook sur le Web, la méthode renvoie la chaîne «\_NULL\_» si aucun texte n’est sélectionné, mais que le curseur se trouve dans le corps du message.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,2](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
     remarks: |-
       **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
 
