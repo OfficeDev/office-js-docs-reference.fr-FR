@@ -22,10 +22,13 @@ items:
       - 'excel!Excel.Comment#load:member(1)'
       - 'excel!Excel.Comment#load:member(2)'
       - 'excel!Excel.Comment#load:member(3)'
+      - 'excel!Excel.Comment#mentions:member'
       - 'excel!Excel.Comment#replies:member'
+      - 'excel!Excel.Comment#richContent:member'
       - 'excel!Excel.Comment#set:member(1)'
       - 'excel!Excel.Comment#set:member(2)'
       - 'excel!Excel.Comment#toJSON:member(1)'
+      - 'excel!Excel.Comment#updateMentions:member(1)'
   - uid: 'excel!Excel.Comment#authorEmail:member'
     summary: "Obtenir l’adresse email de l’auteur du commentaire.\n\n\\[[Ensemble d’API\_: ExcelApi 1,10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: authorEmail
@@ -223,6 +226,18 @@ items:
                           select?: string;
                           expand?: string;
                       }
+  - uid: 'excel!Excel.Comment#mentions:member'
+    summary: "Obtient les entités (par exemple, les personnes) mentionnées dans les commentaires.\n\n\\[[Ensemble d’API\_: ExcelApiOnline 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    name: mentions
+    fullName: mentions
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly mentions: Excel.CommentMention[];'
+      return:
+        type:
+          - 'excel!Excel.Comment#mentions~0:complex'
   - uid: 'excel!Excel.Comment#replies:member'
     summary: "Représente une collection de feuilles de calcul associées au classeur. En lecture seule.\n\n\\[[Ensemble d’API\_: ExcelApi 1,10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: replies
@@ -235,6 +250,18 @@ items:
       return:
         type:
           - 'excel!Excel.CommentReplyCollection:class'
+  - uid: 'excel!Excel.Comment#richContent:member'
+    summary: "Obtient le contenu de commentaire enrichi (par exemple, les mentions dans les commentaires). Cette chaîne n’est pas destinée à être affichée aux utilisateurs finaux. Votre complément doit uniquement l’utiliser pour analyser le contenu de commentaire enrichi.\n\n\\[[Ensemble d’API\_: ExcelApiOnline 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    name: richContent
+    fullName: richContent
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly richContent: string;'
+      return:
+        type:
+          - string
   - uid: 'excel!Excel.Comment#set:member(1)'
     summary: 'Définit plusieurs propriétés d’un objet en même temps. Vous pouvez transmettre un objet plain avec les propriétés appropriées, ou un autre objet API du même type.'
     remarks: "Cette méthode est dotée de la signature supplémentaire suivante\_:\n\n`set(properties: Excel.Comment): void`"
@@ -289,6 +316,24 @@ items:
         type:
           - 'excel!Excel.Interfaces.CommentData:interface'
         description: ''
+  - uid: 'excel!Excel.Comment#updateMentions:member(1)'
+    summary: "Met à jour le contenu de commentaire avec une chaîne spécialement mise en forme et une liste de mentions.\n\n\\[[Ensemble d’API\_: ExcelApiOnline 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    name: updateMentions(contentWithMentions)
+    fullName: updateMentions(contentWithMentions)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'updateMentions(contentWithMentions: Excel.CommentRichContent): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: contentWithMentions
+          description: Contenu du commentaire. Il contient une chaîne spécialement mise en forme et une liste de mentions qui seront analysées dans la chaîne lors de son affichage par Excel.
+          type:
+            - 'excel!Excel.CommentRichContent:interface'
 references:
   - uid: 'excel!OfficeExtension.ClientObject:class'
     name: OfficeExtension.ClientObject
@@ -302,6 +347,15 @@ references:
     name: Excel.Comment
   - uid: 'excel!Excel.Interfaces.CommentLoadOptions:interface'
     name: Excel.Interfaces.CommentLoadOptions
+  - uid: 'excel!Excel.Comment#mentions~0:complex'
+    name: 'Excel.CommentMention[]'
+    fullName: 'Excel.CommentMention[]'
+    spec.typeScript:
+      - uid: 'excel!Excel.CommentMention:interface'
+        name: Excel.CommentMention
+        fullName: Excel.CommentMention
+      - name: '[]'
+        fullName: '[]'
   - uid: 'excel!Excel.CommentReplyCollection:class'
     name: Excel.CommentReplyCollection
   - uid: 'excel!Excel.Interfaces.CommentUpdateData:interface'
@@ -310,3 +364,5 @@ references:
     name: OfficeExtension.UpdateOptions
   - uid: 'excel!Excel.Interfaces.CommentData:interface'
     name: Excel.Interfaces.CommentData
+  - uid: 'excel!Excel.CommentRichContent:interface'
+    name: Excel.CommentRichContent
