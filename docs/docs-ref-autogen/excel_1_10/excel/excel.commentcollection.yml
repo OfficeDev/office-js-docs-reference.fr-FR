@@ -13,6 +13,7 @@ items:
     children:
       - 'excel!Excel.CommentCollection#add:member(1)'
       - 'excel!Excel.CommentCollection#add:member(2)'
+      - 'excel!Excel.CommentCollection#add:member(3)'
       - 'excel!Excel.CommentCollection#context:member'
       - 'excel!Excel.CommentCollection#getCount:member(1)'
       - 'excel!Excel.CommentCollection#getItem:member(1)'
@@ -25,7 +26,7 @@ items:
       - 'excel!Excel.CommentCollection#load:member(3)'
       - 'excel!Excel.CommentCollection#toJSON:member(1)'
   - uid: 'excel!Excel.CommentCollection#add:member(1)'
-    summary: "Crée un nouveau commentaire avec le contenu donné sur la cellule donnée. Une `InvalidArgument` erreur est générée si la plage fournie est plus grande qu’une cellule.\n\n\\[[Ensemble d’API\_: ExcelApi 1,10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Crée un nouveau commentaire avec le contenu donné sur la cellule donnée. Une `InvalidArgument` erreur est générée si la plage fournie est plus grande qu’une cellule.\n\n\\[[Ensemble d’API\_: ExcelApiOnline 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: 'add(cellAddress, content, contentType)'
     fullName: 'add(cellAddress, content, contentType)'
     langs:
@@ -39,7 +40,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```typescript
           await Excel.run(async (context) => {
@@ -56,15 +57,15 @@ items:
           type:
             - 'excel!Excel.CommentCollection#add~0:complex'
         - id: content
-          description: "Contenu du commentaire. Il peut s’agir d’un objet String ou CommentRichContent. Les chaînes sont utilisées pour le texte brut. Les objets CommentRichContent permettent d’autres fonctionnalités de commentaire, telles que des mentions. \\[Ensemble d’API\_: ExcelApi 1,10 pour String, ExcelApiOnline 1,1 pour l’objet CommentRichContent\\]"
+          description: 'Contenu du commentaire. Il peut s’agir d’un objet String ou CommentRichContent. Les chaînes sont utilisées pour le texte brut. Les objets CommentRichContent permettent d’autres fonctionnalités de commentaire, telles que des mentions.'
           type:
             - 'excel!Excel.CommentCollection#add~1:complex'
         - id: contentType
-          description: "Facultatif. Type de contenu contenu dans le commentaire. La valeur par défaut est enum`ContentType.Plain`<!-- -->. \\[Ensemble d’API\_: ExcelApi 1,10 pour enum ContentType. Plain, ExcelApiOnline 1,1 pour enum ContentType. specifier\\]"
+          description: Facultatif. Type de contenu contenu dans le commentaire. La valeur par défaut est enum`ContentType.Plain`<!-- -->.
           type:
             - 'excel!Excel.ContentType:enum'
   - uid: 'excel!Excel.CommentCollection#add:member(2)'
-    summary: "Crée un nouveau commentaire avec le contenu donné sur la cellule donnée. Une `InvalidArgument` erreur est générée si la plage fournie est plus grande qu’une cellule.\n\n\\[[Ensemble d’API\_: ExcelApi 1,10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Crée un nouveau commentaire avec le contenu donné sur la cellule donnée. Une `InvalidArgument` erreur est générée si la plage fournie est plus grande qu’une cellule.\n\n\\[[Ensemble d’API\_: ExcelApiOnline 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: 'add(cellAddress, content, contentTypeString)'
     fullName: 'add(cellAddress, content, contentTypeString)'
     langs:
@@ -82,13 +83,35 @@ items:
           type:
             - 'excel!Excel.CommentCollection#add~2:complex'
         - id: content
-          description: "Contenu du commentaire. Il peut s’agir d’un objet String ou CommentRichContent. Les chaînes sont utilisées pour le texte brut. Les objets CommentRichContent permettent d’autres fonctionnalités de commentaire, telles que des mentions. \\[Ensemble d’API\_: ExcelApi 1,10 pour String, ExcelApiOnline 1,1 pour l’objet CommentRichContent\\]"
+          description: 'Contenu du commentaire. Il peut s’agir d’un objet String ou CommentRichContent. Les chaînes sont utilisées pour le texte brut. Les objets CommentRichContent permettent d’autres fonctionnalités de commentaire, telles que des mentions.'
           type:
             - 'excel!Excel.CommentCollection#add~3:complex'
         - id: contentTypeString
-          description: "Facultatif. Type de contenu contenu dans le commentaire. La valeur par défaut est enum`ContentType.Plain`<!-- -->. \\[Ensemble d’API\_: ExcelApi 1,10 pour enum ContentType. Plain, ExcelApiOnline 1,1 pour enum ContentType. specifier\\]"
+          description: Facultatif. Type de contenu contenu dans le commentaire. La valeur par défaut est enum`ContentType.Plain`<!-- -->.
           type:
             - '"Plain" | "Mention"'
+  - uid: 'excel!Excel.CommentCollection#add:member(3)'
+    summary: "Crée un nouveau commentaire avec le contenu donné sur la cellule donnée. Une `InvalidArgument` erreur est générée si la plage fournie est plus grande qu’une cellule.\n\n\\[[Ensemble d’API\_: ExcelApi 1,10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    name: 'add(cellAddress, content)'
+    fullName: 'add(cellAddress, content)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'add(cellAddress: Range | string, content: string): Excel.Comment;'
+      return:
+        type:
+          - 'excel!Excel.Comment:class'
+        description: ''
+      parameters:
+        - id: cellAddress
+          description: 'Cellule à laquelle le commentaire est ajouté. Il peut s’agir d’un objet Range ou d’une chaîne. S’il s’agit d’une chaîne, elle doit contenir l’adresse complète, y compris le nom de la feuille. Une `InvalidArgument` erreur est générée si la plage fournie est plus grande qu’une cellule.'
+          type:
+            - 'excel!Excel.CommentCollection#add~4:complex'
+        - id: content
+          description: 'Le contenu du commentaire, sous la forme d’une chaîne représentant du texte brut.'
+          type:
+            - string
   - uid: 'excel!Excel.CommentCollection#context:member'
     summary: Contexte de demande associé à l’objet. Cette opération connecte le processus du complément au processus de l’application hôte Office.
     name: context
@@ -306,6 +329,15 @@ references:
       - uid: 'excel!Excel.CommentRichContent:interface'
         name: CommentRichContent
         fullName: Excel.CommentRichContent
+      - name: ' | string'
+        fullName: ' | string'
+  - uid: 'excel!Excel.CommentCollection#add~4:complex'
+    name: Range | string
+    fullName: Excel.Range | string
+    spec.typeScript:
+      - uid: 'excel!Excel.Range:class'
+        name: Range
+        fullName: Excel.Range
       - name: ' | string'
         fullName: ' | string'
   - uid: 'excel!Excel.RequestContext:class'
