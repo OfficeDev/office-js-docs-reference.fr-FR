@@ -24,7 +24,7 @@ items:
       - 'office!Office.Bindings#releaseByIdAsync:member(2)'
   - uid: 'office!Office.Bindings#addFromNamedItemAsync:member(1)'
     summary: Crée une liaison par rapport à un objet nommé dans le document.
-    remarks: "**Ensembles de conditions requises**:\n\n- [MatrixBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixbindings)\n\n- [TableBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablebindings)\n\n- [TextBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textbindings)\n\nPour Excel, le paramètre itemName peut faire référence à une plage nommée ou à un tableau.\n\nPar défaut, l’ajout d’un tableau dans Excel entraîne l’affectation du nom «\_Tableau1\_» pour le premier tableau que vous ajoutez, «\_Tableau2\_» pour le deuxième tableau que vous ajoutez, et ainsi de suite. Pour attribuer un nom explicite à une table dans l’interface utilisateur Excel, utilisez la propriété nom de la table sous \\| l’onglet Outils de tableau du ruban.\n\n**Remarque**: dans Excel, lorsque vous spécifiez un tableau en tant qu’élément nommé, vous devez qualifier complètement le nom pour inclure le nom de la feuille de calcul dans le nom de la table au format suivant\_: \"Sheet1\_! Table1\n\nPour Word, le paramètre itemName fait référence à la propriété Title d’un contrôle de contenu de texte enrichi. (Vous ne pouvez pas établir de liaison avec des contrôles de contenu autres que le contrôle de contenu de texte enrichi).\n\nPar défaut, aucune valeur de titre n’est affectée à un contrôle de contenu. Pour affecter un nom significatif dans l’interface utilisateur de Word, après l’insertion d’un contrôle de contenu Texte enrichi à partir du groupe Contrôles sur l’onglet Développeur du ruban, utilisez la commande Propriétés du groupe Contrôles pour afficher la boîte de dialogue Propriétés du contrôle de contenu. Définissez ensuite la propriété  Titre du contrôle de contenu sur le nom auquel vous souhaitez faire référence à partir de votre code.\n\n**Remarque**: dans Word, s’il existe plusieurs contrôles de contenu de texte enrichi avec la même valeur de propriété Title (Name) et que vous essayez de créer une liaison avec ces contrôles de contenu avec cette méthode (en spécifiant son nom comme paramètre itemName), l’opération échouera.\n\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\n// The following example adds a binding to the myRange named item in Excel as a \"matrix\" binding,\n// and assigns the binding's id as myMatrix.\nfunction bindNamedItem() {\n    Office.context.document.bindings.addFromNamedItemAsync(\n        \"myRange\", \"matrix\", {id:'myMatrix'}, function (result) {\n        if (result.status == 'succeeded'){\n            write('Added new binding with type: ' + result.value.type + ' and id: ' + result.value.id);\n            }\n        else\n            write('Error: ' + result.error.message);\n    });\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n\n// The following example adds a binding to the Table1 named item in Excel as a \"table\" binding,\n// and assigns the binding's id as myTable.\nfunction bindNamedItem() {\n    Office.context.document.bindings.addFromNamedItemAsync(\n        \"Table1\", \"table\", {id:'myTable'}, function (result) {\n        if (result.status == 'succeeded'){\n            write('Added new binding with type: ' + result.value.type + ' and id: ' + result.value.id);\n            }\n        else\n            write('Error: ' + result.error.message);\n    });\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n\n// The following example creates a text binding in Word to a rich text content control named \"FirstName\",\n// assigns the id \"firstName\", and then displays that information.\nfunction bindContentControl() {\n    Office.context.document.bindings.addFromNamedItemAsync('FirstName', \n        Office.BindingType.Text, {id:'firstName'},\n        function (result) {\n            if (result.status === Office.AsyncResultStatus.Succeeded) {\n                write('Control bound. Binding.id: '\n                    + result.value.id + ' Binding.type: ' + result.value.type);\n            } else {\n                write('Error:', result.error.message);\n            }\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+    remarks: "**Ensembles de conditions requises**:\n\n- [MatrixBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixbindings)\n\n- [TableBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablebindings)\n\n- [TextBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textbindings)\n\nPour Excel, le paramètre itemName peut faire référence à une plage nommée ou à un tableau.\n\nPar défaut, l’ajout d’un tableau dans Excel entraîne l’affectation du nom «\_Tableau1\_» pour le premier tableau que vous ajoutez, «\_Tableau2\_» pour le deuxième tableau que vous ajoutez, et ainsi de suite. Pour attribuer un nom explicite à une table dans l’interface utilisateur Excel, utilisez la propriété nom de la table sous \\| l’onglet Outils de tableau du ruban.\n\n**Remarque**: dans Excel, lorsque vous spécifiez un tableau en tant qu’élément nommé, vous devez qualifier complètement le nom pour inclure le nom de la feuille de calcul dans le nom de la table au format suivant\_: \"Sheet1\_! Table1\n\nPour Word, le paramètre itemName fait référence à la propriété Title d’un contrôle de contenu de texte enrichi. (Vous ne pouvez pas établir de liaison avec des contrôles de contenu autres que le contrôle de contenu de texte enrichi).\n\nPar défaut, aucune valeur de titre n’est affectée à un contrôle de contenu. Pour affecter un nom significatif dans l’interface utilisateur de Word, après l’insertion d’un contrôle de contenu Texte enrichi à partir du groupe Contrôles sur l’onglet Développeur du ruban, utilisez la commande Propriétés du groupe Contrôles pour afficher la boîte de dialogue Propriétés du contrôle de contenu. Définissez ensuite la propriété  Titre du contrôle de contenu sur le nom auquel vous souhaitez faire référence à partir de votre code.\n\n**Remarque**: dans Word, s’il existe plusieurs contrôles de contenu de texte enrichi avec la même valeur de propriété Title (Name) et que vous essayez de créer une liaison avec ces contrôles de contenu avec cette méthode (en spécifiant son nom comme paramètre itemName), l’opération échouera.\n\n#### <a name=\"examples\"></a>範例\n\n```javascript\n// The following example adds a binding to the myRange named item in Excel as a \"matrix\" binding,\n// and assigns the binding's id as myMatrix.\nfunction bindNamedItem() {\n    Office.context.document.bindings.addFromNamedItemAsync(\n        \"myRange\", \"matrix\", {id:'myMatrix'}, function (result) {\n        if (result.status == 'succeeded'){\n            write('Added new binding with type: ' + result.value.type + ' and id: ' + result.value.id);\n            }\n        else\n            write('Error: ' + result.error.message);\n    });\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n\n// The following example adds a binding to the Table1 named item in Excel as a \"table\" binding,\n// and assigns the binding's id as myTable.\nfunction bindNamedItem() {\n    Office.context.document.bindings.addFromNamedItemAsync(\n        \"Table1\", \"table\", {id:'myTable'}, function (result) {\n        if (result.status == 'succeeded'){\n            write('Added new binding with type: ' + result.value.type + ' and id: ' + result.value.id);\n            }\n        else\n            write('Error: ' + result.error.message);\n    });\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n\n// The following example creates a text binding in Word to a rich text content control named \"FirstName\",\n// assigns the id \"firstName\", and then displays that information.\nfunction bindContentControl() {\n    Office.context.document.bindings.addFromNamedItemAsync('FirstName', \n        Office.BindingType.Text, {id:'firstName'},\n        function (result) {\n            if (result.status === Office.AsyncResultStatus.Succeeded) {\n                write('Control bound. Binding.id: '\n                    + result.value.id + ' Binding.type: ' + result.value.type);\n            } else {\n                write('Error:', result.error.message);\n            }\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
     name: 'addFromNamedItemAsync(itemName, bindingType, options, callback)'
     fullName: 'addFromNamedItemAsync(itemName, bindingType, options, callback)'
     langs:
@@ -87,7 +87,7 @@ items:
 
       Ajoute un objet de liaison du type spécifié à la collection Bindings, qui est identifiée à l’aide du paramètre id indiqué. La méthode échoue si la sélection spécifiée est introuvable.
 
-      #### <a name="examples"></a>Exemples
+      #### <a name="examples"></a>範例
 
       ```javascript
       function addBindingFromPrompt() {
@@ -168,7 +168,7 @@ items:
 
       Remarque dans Excel, si vous appelez la méthode addFromSelectionAsync en transmettant le Binding.id d’une liaison existante, la propriété Binding. type de cette liaison est utilisée et son type ne peut pas être modifié en spécifiant une autre valeur pour le paramètre bindingType. Si vous devez utiliser un id existant et que vous modifiez le bindingType, appelez la méthode Bindings.releaseByIdAsync avant de désactiver la liaison, puis appelez la méthode addFromSelectionAsync pour la rétablir avec un nouveau type.
 
-      #### <a name="examples"></a>Exemples
+      #### <a name="examples"></a>範例
 
       ```javascript
       function addBindingFromSelection() {
@@ -200,7 +200,7 @@ items:
           type:
             - 'office!Office.BindingType:enum'
         - id: options
-          description: Fournit des options pour la configuration de l’invite et l’identification de la liaison qui est créée.
+          description: Fournit des options pour l’identification de la liaison qui est créée.
           type:
             - 'office!Office.AddBindingFromSelectionOptions:interface'
         - id: callback
@@ -294,7 +294,7 @@ items:
 
       - [TextBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textbindings)
 
-      #### <a name="examples"></a>Exemples
+      #### <a name="examples"></a>範例
 
       ```javascript
       function displayAllBindingNames() {
@@ -376,7 +376,7 @@ items:
 
       Échoue si l’ID spécifié n’existe pas.
 
-      #### <a name="examples"></a>Exemples
+      #### <a name="examples"></a>範例
 
       ```javascript
       function displayBindingType() {
@@ -458,7 +458,7 @@ items:
 
       Échoue si l’ID spécifié n’existe pas.
 
-      #### <a name="examples"></a>Exemples
+      #### <a name="examples"></a>範例
 
       ```javascript
       Office.context.document.bindings.releaseByIdAsync("MyBinding", function (asyncResult) { 
