@@ -32,8 +32,8 @@ items:
       - 'outlook!Office.AppointmentCompose#start:member'
       - 'outlook!Office.AppointmentCompose#subject:member'
   - uid: 'outlook!Office.AppointmentCompose#addFileAttachmentAsync:member(1)'
-    summary: "Ajoute un fichier à un message ou un rendez-vous en pièce jointe.\n\nLa méthode addFileAttachmentAsync télécharge le fichier à l’URI spécifié et le joint à l’élément dans le formulaire de composition.\n\nL’identificateur peut être utilisé avec la méthode removeAttachmentAsync pour supprimer la pièce jointe dans la même session.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
-    remarks: "**<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadWriteItem\n\n**<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: organisateur de rendez-vous\n\n**Erreurs**:\n\n- AttachmentSizeExceeded\_: la pièce jointe est plus grande que autorisée.\n\n- FileTypeNotSupported\_: la pièce jointe a une extension qui n’est pas autorisée.\n\n- NumberOfAttachmentsExceeded\_: le message ou le rendez-vous contient trop de pièces jointes.\n\n#### <a name=\"examples\"></a>範例\n\n```javascript\nfunction callback(result) {\n    if (result.error) {\n        console.log(result.error);\n    } else {\n        console.log(\"Attachment added\");\n    }\n}\n\nfunction addAttachment() {\n    // The values in asyncContext can be accessed in the callback.\n    var options = { 'asyncContext': { var1: 1, var2: 2 } };\n\n    var attachmentURL = \"https://contoso.com/rtm/icon.png\";\n    Office.context.mailbox.item.addFileAttachmentAsync(attachmentURL, attachmentURL, options, callback);\n}\n```"
+    summary: "Ajoute un fichier à un message ou un rendez-vous en pièce jointe.\n\nLa méthode addFileAttachmentAsync télécharge le fichier à l’URI spécifié et le joint à l’élément dans le formulaire de composition.\n\nL’identificateur peut être utilisé avec la méthode removeAttachmentAsync pour supprimer la pièce jointe dans la même session.\n\n**Important**: dans les versions récentes d’Outlook sur Windows, un bogue a été introduit, qui ajoute de `Authorization: Bearer` manière incorrecte un en-tête à cette action (utilisation de cette API ou de l’interface utilisateur d’Outlook). Pour contourner ce problème, vous pouvez essayer d’utiliser `addFileAttachmentFromBase64` l’API introduite avec l’ensemble de conditions requises 1,8.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
+    remarks: "**<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadWriteItem\n\n**<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: organisateur de rendez-vous\n\n**Erreurs**:\n\n- AttachmentSizeExceeded\_: la pièce jointe est plus grande que autorisée.\n\n- FileTypeNotSupported\_: la pièce jointe a une extension qui n’est pas autorisée.\n\n- NumberOfAttachmentsExceeded\_: le message ou le rendez-vous contient trop de pièces jointes.\n\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nfunction callback(result) {\n    if (result.error) {\n        console.log(result.error);\n    } else {\n        console.log(\"Attachment added\");\n    }\n}\n\nfunction addAttachment() {\n    // The values in asyncContext can be accessed in the callback.\n    var options = { 'asyncContext': { var1: 1, var2: 2 } };\n\n    var attachmentURL = \"https://contoso.com/rtm/icon.png\";\n    Office.context.mailbox.item.addFileAttachmentAsync(attachmentURL, attachmentURL, options, callback);\n}\n```"
     name: 'addFileAttachmentAsync(uri, attachmentName, options, callback)'
     fullName: 'addFileAttachmentAsync(uri, attachmentName, options, callback)'
     langs:
@@ -63,7 +63,7 @@ items:
           type:
             - 'outlook!Office.AppointmentCompose#addFileAttachmentAsync~1:complex'
   - uid: 'outlook!Office.AppointmentCompose#addFileAttachmentAsync:member(2)'
-    summary: "Ajoute un fichier à un message ou un rendez-vous en pièce jointe.\n\nLa méthode addFileAttachmentAsync télécharge le fichier à l’URI spécifié et le joint à l’élément dans le formulaire de composition.\n\nL’identificateur peut être utilisé avec la méthode removeAttachmentAsync pour supprimer la pièce jointe dans la même session.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
+    summary: "Ajoute un fichier à un message ou un rendez-vous en pièce jointe.\n\nLa méthode addFileAttachmentAsync télécharge le fichier à l’URI spécifié et le joint à l’élément dans le formulaire de composition.\n\nL’identificateur peut être utilisé avec la méthode removeAttachmentAsync pour supprimer la pièce jointe dans la même session.\n\n**Important**: dans les versions récentes d’Outlook sur Windows, un bogue a été introduit, qui ajoute de `Authorization: Bearer` manière incorrecte un en-tête à cette action (utilisation de cette API ou de l’interface utilisateur d’Outlook). Pour contourner ce problème, vous pouvez essayer d’utiliser `addFileAttachmentFromBase64` l’API introduite avec l’ensemble de conditions requises 1,8.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
     remarks: "**<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadWriteItem\n\n**<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: organisateur de rendez-vous\n\n**Erreurs**:\n\n- AttachmentSizeExceeded\_: la pièce jointe est plus grande que autorisée.\n\n- FileTypeNotSupported\_: la pièce jointe a une extension qui n’est pas autorisée.\n\n- NumberOfAttachmentsExceeded\_: le message ou le rendez-vous contient trop de pièces jointes."
     name: 'addFileAttachmentAsync(uri, attachmentName, callback)'
     fullName: 'addFileAttachmentAsync(uri, attachmentName, callback)'
@@ -91,7 +91,7 @@ items:
             - 'outlook!Office.AppointmentCompose#addFileAttachmentAsync~2:complex'
   - uid: 'outlook!Office.AppointmentCompose#addItemAttachmentAsync:member(1)'
     summary: "Ajoute un élément Exchange, comme un message, en pièce jointe au message ou au rendez-vous.\n\nLa méthode addItemAttachmentAsync attache l’élément avec l’identificateur Exchange spécifié à l’élément dans le formulaire de composition. Si vous spécifiez une méthode de rappel, la méthode est appelée avec un paramètre, asyncResult, qui contient l’identificateur de pièce jointe ou un code indiquant toute erreur survenue lors de l’ajout de l’élément en tant que pièce jointe. Vous pouvez utiliser le paramètre options pour transmettre des informations d’État à la méthode de rappel, si nécessaire.\n\nL’identificateur peut être utilisé avec la méthode removeAttachmentAsync pour supprimer la pièce jointe dans la même session.\n\nSi votre complément Office est en cours d’exécution dans Outlook sur le Web, la méthode addItemAttachmentAsync peut joindre des éléments à des éléments autres que l’élément que vous modifiez\_; Toutefois, cette option n’est pas prise en charge et n’est pas recommandée.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
-    remarks: "**<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadWriteItem\n\n**<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: organisateur de rendez-vous\n\n**Erreurs**:\n\n- NumberOfAttachmentsExceeded\_: le message ou le rendez-vous contient trop de pièces jointes.\n\n#### <a name=\"examples\"></a>範例\n\n```javascript\n// The following example adds an existing Outlook item as an attachment\n// with the name `My Attachment`.\nfunction callback(result) {\n    if (result.error) {\n        console.log(result.error);\n    } else {\n        console.log(\"Attachment added\");\n    }\n}\n\nfunction addAttachment() {\n    // EWS ID of item to attach (shortened for readability).\n    var itemId = \"AAMkADI1...AAA=\";\n\n    // The values in asyncContext can be accessed in the callback.\n    var options = { 'asyncContext': { var1: 1, var2: 2 } };\n\n    Office.context.mailbox.item.addItemAttachmentAsync(itemId, \"My Attachment\", options, callback);\n}\n```"
+    remarks: "**<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadWriteItem\n\n**<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: organisateur de rendez-vous\n\n**Erreurs**:\n\n- NumberOfAttachmentsExceeded\_: le message ou le rendez-vous contient trop de pièces jointes.\n\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\n// The following example adds an existing Outlook item as an attachment\n// with the name `My Attachment`.\nfunction callback(result) {\n    if (result.error) {\n        console.log(result.error);\n    } else {\n        console.log(\"Attachment added\");\n    }\n}\n\nfunction addAttachment() {\n    // EWS ID of item to attach (shortened for readability).\n    var itemId = \"AAMkADI1...AAA=\";\n\n    // The values in asyncContext can be accessed in the callback.\n    var options = { 'asyncContext': { var1: 1, var2: 2 } };\n\n    Office.context.mailbox.item.addItemAttachmentAsync(itemId, \"My Attachment\", options, callback);\n}\n```"
     name: 'addItemAttachmentAsync(itemId, attachmentName, options, callback)'
     fullName: 'addItemAttachmentAsync(itemId, attachmentName, options, callback)'
     langs:
@@ -154,7 +154,7 @@ items:
 
       **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: organisateur de rendez-vous
 
-      #### <a name="examples"></a>範例
+      #### <a name="examples"></a>Exemples
 
       ```javascript
       // This example gets the body of the item as plain text.
@@ -194,7 +194,7 @@ items:
 
       **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: organisateur de rendez-vous
 
-      #### <a name="examples"></a>範例
+      #### <a name="examples"></a>Exemples
 
       ```javascript
       // The following example sets the end time of an appointment in compose mode by
@@ -230,7 +230,7 @@ items:
 
       **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: organisateur de rendez-vous
 
-      #### <a name="examples"></a>範例
+      #### <a name="examples"></a>Exemples
 
       ```javascript
       // Get selected data.
@@ -305,7 +305,7 @@ items:
 
       **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: organisateur de rendez-vous
 
-      #### <a name="examples"></a>範例
+      #### <a name="examples"></a>Exemples
 
       ```javascript
       if (Office.context.mailbox.item.itemType === Office.MailboxEnums.ItemType.Appointment) {
@@ -336,7 +336,7 @@ items:
 
       **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: organisateur de rendez-vous
 
-      #### <a name="examples"></a>範例
+      #### <a name="examples"></a>Exemples
 
       ```javascript
       // The following example shows how to use the loadCustomPropertiesAsync method
@@ -393,7 +393,7 @@ items:
 
       **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: organisateur de rendez-vous
 
-      #### <a name="examples"></a>範例
+      #### <a name="examples"></a>Exemples
 
       ```javascript
       var userContext = { value : 1 };
@@ -421,7 +421,7 @@ items:
 
       **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: organisateur de rendez-vous
 
-      #### <a name="examples"></a>範例
+      #### <a name="examples"></a>Exemples
 
       ```javascript
       Office.context.mailbox.item.optionalAttendees.setAsync( ['alice@contoso.com', 'bob@contoso.com'] );
@@ -444,7 +444,7 @@ items:
           - 'outlook!Office.Recipients:interface'
   - uid: 'outlook!Office.AppointmentCompose#removeAttachmentAsync:member(1)'
     summary: "Supprime une pièce jointe d’un message ou d’un rendez-vous.\n\nLa méthode removeAttachmentAsync supprime la pièce jointe avec l’identificateur spécifié de l’élément. Nous vous recommandons vivement de supprimer une pièce jointe à l’aide de son identificateur uniquement si la même application de messagerie a ajouté cette pièce jointe au cours de la même session. Dans Outlook sur le web et sur les appareils mobiles, l’identificateur de pièce jointe n’est valable que dans la même session. Une session est terminée lorsque l’utilisateur ferme l’application, ou si l’utilisateur commence à composer un formulaire inséré, puis détoure ensuite le formulaire pour continuer dans une fenêtre distincte.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
-    remarks: "**<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadWriteItem\n\n**<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: organisateur de rendez-vous\n\n**Erreurs**:\n\n- InvalidAttachmentId\_: l’identificateur de pièce jointe n’existe pas.\n\n#### <a name=\"examples\"></a>範例\n\n```javascript\n// The following code removes an attachment with an identifier of '0'.\nOffice.context.mailbox.item.removeAttachmentAsync(\n    '0',\n    { asyncContext : null },\n    function (asyncResult)\n    {\n        console.log(asyncResult.status);\n    }\n);\n```"
+    remarks: "**<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadWriteItem\n\n**<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: organisateur de rendez-vous\n\n**Erreurs**:\n\n- InvalidAttachmentId\_: l’identificateur de pièce jointe n’existe pas.\n\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\n// The following code removes an attachment with an identifier of '0'.\nOffice.context.mailbox.item.removeAttachmentAsync(\n    '0',\n    { asyncContext : null },\n    function (asyncResult)\n    {\n        console.log(asyncResult.status);\n    }\n);\n```"
     name: 'removeAttachmentAsync(attachmentId, options, callback)'
     fullName: 'removeAttachmentAsync(attachmentId, options, callback)'
     langs:
@@ -499,7 +499,7 @@ items:
 
       **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: organisateur de rendez-vous
 
-      #### <a name="examples"></a>範例
+      #### <a name="examples"></a>Exemples
 
       ```javascript
       Office.context.mailbox.item.requiredAttendees.setAsync( ['alice@contoso.com', 'bob@contoso.com'] );
@@ -523,7 +523,7 @@ items:
           - 'outlook!Office.Recipients:interface'
   - uid: 'outlook!Office.AppointmentCompose#setSelectedDataAsync:member(1)'
     summary: "Insère les données dans le corps ou l’objet d’un message de manière asynchrone.\n\nLa méthode setSelectedDataAsync insère la chaîne spécifiée à l’emplacement du curseur dans l’objet ou le corps de l’élément, ou si du texte est sélectionné dans l’éditeur, il remplace le texte sélectionné. Si le curseur ne se trouve pas dans le champ Body ou Subject, une erreur est renvoyée. Après l’insertion, le curseur est placé à la fin du contenu inséré.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,2](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
-    remarks: "**<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadWriteItem\n\n**<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: organisateur de rendez-vous\n\n**Erreurs**:\n\n- InvalidAttachmentId\_: l’identificateur de pièce jointe n’existe pas.\n\n#### <a name=\"examples\"></a>範例\n\n```javascript\nOffice.context.mailbox.item.setSelectedDataAsync(\"<b>Hello World!</b>\", { coercionType : \"html\" });\n```"
+    remarks: "**<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadWriteItem\n\n**<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: organisateur de rendez-vous\n\n**Erreurs**:\n\n- InvalidAttachmentId\_: l’identificateur de pièce jointe n’existe pas.\n\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nOffice.context.mailbox.item.setSelectedDataAsync(\"<b>Hello World!</b>\", { coercionType : \"html\" });\n```"
     name: 'setSelectedDataAsync(data, options, callback)'
     fullName: 'setSelectedDataAsync(data, options, callback)'
     langs:
@@ -550,7 +550,7 @@ items:
             - 'outlook!Office.AppointmentCompose#setSelectedDataAsync~1:complex'
   - uid: 'outlook!Office.AppointmentCompose#setSelectedDataAsync:member(2)'
     summary: "Insère les données dans le corps ou l’objet d’un message de manière asynchrone.\n\nLa méthode setSelectedDataAsync insère la chaîne spécifiée à l’emplacement du curseur dans l’objet ou le corps de l’élément, ou si du texte est sélectionné dans l’éditeur, il remplace le texte sélectionné. Si le curseur ne se trouve pas dans le champ Body ou Subject, une erreur est renvoyée. Après l’insertion, le curseur est placé à la fin du contenu inséré.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,2](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
-    remarks: "**<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadWriteItem\n\n**<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: organisateur de rendez-vous\n\n**Erreurs**:\n\n- InvalidAttachmentId\_: l’identificateur de pièce jointe n’existe pas.\n\n#### <a name=\"examples\"></a>範例\n\n```javascript\nOffice.context.mailbox.item.setSelectedDataAsync(\"Hello World!\");\n```"
+    remarks: "**<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadWriteItem\n\n**<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: organisateur de rendez-vous\n\n**Erreurs**:\n\n- InvalidAttachmentId\_: l’identificateur de pièce jointe n’existe pas.\n\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nOffice.context.mailbox.item.setSelectedDataAsync(\"Hello World!\");\n```"
     name: 'setSelectedDataAsync(data, callback)'
     fullName: 'setSelectedDataAsync(data, callback)'
     langs:
@@ -583,7 +583,7 @@ items:
 
       **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: organisateur de rendez-vous
 
-      #### <a name="examples"></a>範例
+      #### <a name="examples"></a>Exemples
 
       ```javascript
       // The following example sets the start time of an appointment in compose mode by
