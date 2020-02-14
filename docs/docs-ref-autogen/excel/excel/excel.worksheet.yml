@@ -87,7 +87,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```javascript
           Excel.run(function (ctx) { 
@@ -117,7 +117,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```typescript
           await Excel.run(async (context) => {
@@ -198,7 +198,7 @@ items:
         description: |-
           Feuille de calcul nouvellement créée.
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```typescript
           await Excel.run(async (context) => {
@@ -274,7 +274,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```javascript
           Excel.run(function (ctx) { 
@@ -338,7 +338,7 @@ items:
         description: |-
           Objet RangeArea, comprenant une ou plusieurs plages rectangulaires, qui correspondent aux critères de recherche. S’il n’y a aucune correspondance, cette fonction renverra un objet null.
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```typescript
           await Excel.run(async (context) => {
@@ -393,7 +393,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```javascript
           Excel.run(function (ctx) { 
@@ -435,7 +435,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```typescript
           await Excel.run(async (context) => {
@@ -501,7 +501,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```typescript
           await Excel.run(async (context) => {
@@ -563,7 +563,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```javascript
           // Below example uses range address to get the range object.
@@ -650,7 +650,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```typescript
           await Excel.run(async (context) => {
@@ -682,7 +682,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```javascript
           Excel.run(function (ctx) { 
@@ -780,7 +780,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```javascript
           // Get worksheet properties based on sheet name.
@@ -882,13 +882,13 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```javascript
           Excel.run(function (context) {
               var sheet = context.workbook.worksheets.getItem("Sample");
               sheet.onActivated.add(function (event) {
-                  return Excel.run((context) => {
+                  return Excel.run(function (context) {
                       console.log("The activated worksheet ID is: " + event.worksheetId);
                       return context.sync();
                   });
@@ -911,13 +911,13 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```javascript
           Excel.run(function (context) {
               var sheet = context.workbook.worksheets.getItem("Sample");
               sheet.onCalculated.add(function (event) {
-                  return Excel.run((context) => {
+                  return Excel.run(function (context) {
                       console.log("The worksheet has recalculated.");
                       return context.sync();
                   });
@@ -940,7 +940,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```typescript
           await Excel.run(async (context) => {
@@ -966,7 +966,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```typescript
           await Excel.run(async (context) => {
@@ -1005,13 +1005,13 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```javascript
           Excel.run(function (context) {
               var sheet = context.workbook.worksheets.getItem("Sample");
               sheet.onDeactivated.add(function (event) {
-                  return Excel.run((context) => {
+                  return Excel.run(function (context) {
                       console.log("The deactivated worksheet is: " + event.worksheetId);
                       return context.sync();
                   });
@@ -1057,6 +1057,23 @@ items:
       return:
         type:
           - 'excel!Excel.Worksheet#onRowHiddenChanged~0:complex'
+        description: |-
+
+
+          #### <a name="examples"></a>範例
+
+          ```javascript
+          Excel.run(function (context) {
+              const sheet = context.workbook.worksheets.getActiveWorksheet();
+              sheet.onRowHiddenChanged.add(function (event)   {
+                  return Excel.run(function (context) {
+                      console.log(`Row ${event.address} is now ${event.changeType}`);
+                      return context.sync();
+                  });
+              });
+              return context.sync();
+          });
+          ```
   - uid: 'excel!Excel.Worksheet#onRowSorted:member'
     summary: "Se produit lorsqu’une ou plusieurs lignes ont été triées. Cela se produit en raison d’une opération de tri de haut en bas.\n\n\\[[Ensemble d’API\_: ExcelApi 1,10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: onRowSorted
@@ -1072,7 +1089,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```typescript
           await Excel.run(async (context) => {
@@ -1111,13 +1128,13 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```javascript
           Excel.run(function (context) {
               var sheet = context.workbook.worksheets.getItem("Sample");
               sheet.onSelectionChanged.add(function (event) {
-                  return Excel.run((context) => {
+                  return Excel.run(function (context) {
                       console.log("The selected range has changed to: " + event.address);
                       return context.sync();
                   });
@@ -1140,7 +1157,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```typescript
           await Excel.run(async (context) => {
@@ -1299,7 +1316,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```typescript
           await Excel.run(async (context) => {
@@ -1336,7 +1353,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```typescript
           Excel.run(async (context) => {
@@ -1380,7 +1397,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```typescript
           await Excel.run(async (context) => {
@@ -1432,7 +1449,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```typescript
           await Excel.run(async (context) => {
