@@ -68,7 +68,7 @@ items:
 
       **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: composition ou lecture
 
-      #### <a name="examples"></a>Exemples
+      #### <a name="examples"></a>範例
 
       ```javascript
       // Create three notifications, each with a different key.
@@ -86,6 +86,46 @@ items:
           type: "errorMessage",
           message : "The add-in failed to process this message."
       });
+      ```
+      ```javascript
+      var id = $("#notificationId").val();
+      var details =
+        {
+          type: "progressIndicator",
+          message: "Progress indicator with id = " + id
+        };
+      Office.context.mailbox.item.notificationMessages.addAsync(id, details, handleResult);
+      ```
+      ```javascript
+      var id = $("#notificationId").val();
+      var details =
+        {
+          type: "informationalMessage",
+          message: "Non-persistent informational notification message with id = " + id,
+          icon: "icon1",
+          persistent: false
+        };
+      Office.context.mailbox.item.notificationMessages.addAsync(id, details, handleResult);
+      ```
+      ```javascript
+      var id = $("#notificationId").val();
+      var details =
+        {
+          type: "informationalMessage",
+          message: "Persistent informational notification message with id = " + id,
+          icon: "icon1",
+          persistent: true
+        };
+      Office.context.mailbox.item.notificationMessages.addAsync(id, details, handleResult);
+      ```
+      ```javascript
+      var id = $("#notificationId").val();
+      var details =
+        {
+          type: "errorMessage",
+          message: "Error notification message with id = " + id
+        };
+      Office.context.mailbox.item.notificationMessages.addAsync(id, details, handleResult);
       ```
     name: 'addAsync(key, JSONmessage, callback)'
     fullName: 'addAsync(key, JSONmessage, callback)'
@@ -144,7 +184,7 @@ items:
 
       **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: composition ou lecture
 
-      #### <a name="examples"></a>Exemples
+      #### <a name="examples"></a>範例
 
       ```javascript
       // Get all notifications.
@@ -158,6 +198,9 @@ items:
               });
           }
       });
+      ```
+      ```javascript
+      Office.context.mailbox.item.notificationMessages.getAllAsync(handleResult);          
       ```
     name: getAllAsync(callback)
     fullName: getAllAsync(callback)
@@ -212,11 +255,15 @@ items:
 
       **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: composition ou lecture
 
-      #### <a name="examples"></a>Exemples
+      #### <a name="examples"></a>範例
 
       ```javascript
       // Remove a notification.
       Office.context.mailbox.item.notificationMessages.removeAsync("progress");
+      ```
+      ```javascript
+      var id = $("#notificationId").val();
+      Office.context.mailbox.item.notificationMessages.removeAsync(id, handleResult);
       ```
     name: 'removeAsync(key, callback)'
     fullName: 'removeAsync(key, callback)'
@@ -279,7 +326,7 @@ items:
 
       **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: composition ou lecture
 
-      #### <a name="examples"></a>Exemples
+      #### <a name="examples"></a>範例
 
       ```javascript
       // Replace a notification with an informational notification.
@@ -289,6 +336,18 @@ items:
           icon : "iconid",
           persistent: false
       });
+      ```
+      ```javascript
+      var id = $("#notificationId").val();
+      Office.context.mailbox.item.notificationMessages.replaceAsync(
+        id,
+        {
+          type: "informationalMessage",
+          message: "Notification message with id = " + id + " has been replaced with an informational message.",
+          icon: "icon2",
+          persistent: false
+        },
+        handleResult);
       ```
     name: 'replaceAsync(key, JSONmessage, callback)'
     fullName: 'replaceAsync(key, JSONmessage, callback)'
