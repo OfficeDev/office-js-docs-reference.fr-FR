@@ -58,7 +58,7 @@ items:
 
       **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: composition ou lecture
 
-      #### <a name="examples"></a>Exemples
+      #### <a name="examples"></a>範例
 
       ```javascript
       // This example gets the Recurrence object of an appointment item.
@@ -84,6 +84,20 @@ items:
           "seriesTime": {seriesTimeObject},
           "recurrenceTimeZone": {"name": "Pacific Standard Time", "offset": -480}
       }
+      ```
+      ```javascript
+      Office.context.mailbox.item.recurrence.getAsync(function(asyncResult) {
+        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+          var recurrence = asyncResult.value;
+          if (recurrence === null) {
+            console.log("This is a single appointment.");
+          } else {
+            console.log(recurrence);
+          }
+        } else {
+          console.error(asyncResult.error);
+        }
+      });
       ```
     name: getAsync(callback)
     fullName: getAsync(callback)
@@ -194,7 +208,7 @@ items:
             - 'outlook!Office.Recurrence#setAsync~0:complex'
   - uid: 'outlook!Office.Recurrence#setAsync:member(2)'
     summary: "Définit la périodicité d’une série de rendez-vous.\n\n**Remarque**: setAsync doit être disponible uniquement pour les éléments de série et non pour les éléments d’instance.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
-    remarks: "**<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadWriteItem\n\n**<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: composition\n\n**Erreurs**:\n\n- InvalidEndTime\_: l’heure de fin du rendez-vous est antérieure à son heure de début.\n\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\n// The following example sets the recurrence pattern of an appointment series.\nvar seriesTimeObject = new Office.SeriesTime();\nseriesTimeObject.setStartDate(2019,10,2);\nseriesTimeObject.setEndDate(2019,11,2);\nseriesTimeObject.setStartTime(10,30);\nseriesTimeObject.setDuration(30);\n\nvar pattern = {\n    \"seriesTime\": seriesTimeObject,\n    \"recurrenceType\": \"weekly\",\n    \"recurrenceProperties\": {\"interval\": 1, \"days\": [\"tue\", \"thu\"], \"firstDayOfWeek\": \"sun\"},\n    \"recurrenceTimeZone\": {\"name\": \"Pacific Standard Time\"}};\n\nOffice.context.mailbox.item.recurrence.setAsync(pattern, callback);\n\nfunction callback(asyncResult)\n{\n    console.log(JSON.stringify(asyncResult));\n}\n\n// Result: This created a recurring event from November 2, 2019 to December 2, 2019\n//         at 10:30 A.M. to 11 A.M. PST every Tuesday and Thursday.\n```"
+    remarks: "**<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadWriteItem\n\n**<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: composition\n\n**Erreurs**:\n\n- InvalidEndTime\_: l’heure de fin du rendez-vous est antérieure à son heure de début.\n\n#### <a name=\"examples\"></a>範例\n\n```javascript\n// The following example sets the recurrence pattern of an appointment series.\nvar seriesTimeObject = new Office.SeriesTime();\nseriesTimeObject.setStartDate(2019,10,2);\nseriesTimeObject.setEndDate(2019,11,2);\nseriesTimeObject.setStartTime(10,30);\nseriesTimeObject.setDuration(30);\n\nvar pattern = {\n    \"seriesTime\": seriesTimeObject,\n    \"recurrenceType\": \"weekly\",\n    \"recurrenceProperties\": {\"interval\": 1, \"days\": [\"tue\", \"thu\"], \"firstDayOfWeek\": \"sun\"},\n    \"recurrenceTimeZone\": {\"name\": \"Pacific Standard Time\"}};\n\nOffice.context.mailbox.item.recurrence.setAsync(pattern, callback);\n\nfunction callback(asyncResult)\n{\n    console.log(JSON.stringify(asyncResult));\n}\n\n// Result: This created a recurring event from November 2, 2019 to December 2, 2019\n//         at 10:30 A.M. to 11 A.M. PST every Tuesday and Thursday.\n```"
     name: 'setAsync(recurrencePattern, callback)'
     fullName: 'setAsync(recurrencePattern, callback)'
     langs:
