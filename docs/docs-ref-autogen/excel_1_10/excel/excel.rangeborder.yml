@@ -77,53 +77,7 @@ items:
       return:
         type:
           - 'excel!Excel.RangeBorder:class'
-        description: |-
-
-
-          #### <a name="examples"></a>Exemples
-
-          ```javascript
-          Excel.run(function (ctx) { 
-              var sheetName = "Sheet1";
-              var rangeAddress = "A1:F8";
-              var worksheet = ctx.workbook.worksheets.getItem(sheetName);
-              var range = worksheet.getRange(rangeAddress);
-              var borders = range.format.borders;
-              borders.load('items');
-              return ctx.sync().then(function() {
-                  console.log(borders.count);
-                  for (var i = 0; i < borders.items.length; i++)
-                  {
-                      console.log(borders.items[i].sideIndex);
-                  }
-              });
-          }).catch(function(error) {
-              console.log("Error: " + error);
-              if (error instanceof OfficeExtension.Error) {
-                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
-              }
-          });
-          ```
-          ```javascript
-          // The example below adds grid border around the range.
-          Excel.run(function (ctx) { 
-              var sheetName = "Sheet1";
-              var rangeAddress = "A1:F8";
-              var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeAddress);
-              range.format.borders.getItem('InsideHorizontal').style = 'Continuous';
-              range.format.borders.getItem('InsideVertical').style = 'Continuous';
-              range.format.borders.getItem('EdgeBottom').style = 'Continuous';
-              range.format.borders.getItem('EdgeLeft').style = 'Continuous';
-              range.format.borders.getItem('EdgeRight').style = 'Continuous';
-              range.format.borders.getItem('EdgeTop').style = 'Continuous';
-              return ctx.sync(); 
-          }).catch(function(error) {
-              console.log("Error: " + error);
-              if (error instanceof OfficeExtension.Error) {
-                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
-              }
-          });
-          ```
+        description: ''
       parameters:
         - id: propertyNames
           description: Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
@@ -197,7 +151,7 @@ items:
           type:
             - 'excel!Excel.RangeBorder:class'
   - uid: 'excel!Excel.RangeBorder#sideIndex:member'
-    summary: "Valeur constante qui indique un côté spécifique de la bordure. Pour plus d’informations, voir Excel. BorderIndex. Lecture seule.\n\n\\[[Ensemble d’API\_: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Valeur constante qui indique un côté spécifique de la bordure. Pour plus d’informations, voir Excel. BorderIndex. En lecture seule.\n\n\\[[Ensemble d’API\_: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: sideIndex
     fullName: sideIndex
     langs:
@@ -220,6 +174,31 @@ items:
       return:
         type:
           - 'excel!Excel.RangeBorder#style~0:complex'
+        description: |-
+
+
+          #### <a name="examples"></a>範例
+
+          ```javascript
+          // The example below adds grid border around the range.
+          Excel.run(function (ctx) { 
+              var sheetName = "Sheet1";
+              var rangeAddress = "A1:F8";
+              var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeAddress);
+              range.format.borders.getItem('InsideHorizontal').style = 'Continuous';
+              range.format.borders.getItem('InsideVertical').style = 'Continuous';
+              range.format.borders.getItem('EdgeBottom').style = 'Continuous';
+              range.format.borders.getItem('EdgeLeft').style = 'Continuous';
+              range.format.borders.getItem('EdgeRight').style = 'Continuous';
+              range.format.borders.getItem('EdgeTop').style = 'Continuous';
+              return ctx.sync(); 
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
   - uid: 'excel!Excel.RangeBorder#tintAndShade:member'
     summary: "Renvoie ou définit un double qui s’éclaire ou assombrit une couleur de bordure de la plage, la valeur est comprise entre -1 (zones les plus sombres) et 1 (plus clair) avec 0 pour la couleur d’origine. Une valeur null indique que la bordure n’a pas de paramètre tintAndShade uniforme.\n\n\\[[Ensemble d’API\_: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: tintAndShade

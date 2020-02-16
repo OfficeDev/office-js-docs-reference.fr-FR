@@ -54,7 +54,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```javascript
           // Run a batch operation against the Word object model.
@@ -70,33 +70,6 @@ items:
               // and return a promise to indicate task completion.
               return context.sync().then(function () {
                   console.log('The content control with that Id has been found in this document.');
-              });
-          })
-          .catch(function (error) {
-              console.log('Error: ' + JSON.stringify(error));
-              if (error instanceof OfficeExtension.Error) {
-                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
-              }
-          });
-          ```
-          ```javascript
-          // Run a batch operation against the Word object model.
-          Word.run(function (context) {
-
-              // Create a proxy object for the content control that contains a specific id.
-              var contentControl = context.document.contentControls.getByIdOrNullObject(30086310);
-
-              // Queue a command to load the text property for a content control.
-              context.load(contentControl, 'text');
-
-              // Synchronize the document state by executing the queued commands,
-              // and return a promise to indicate task completion.
-              return context.sync().then(function () {
-                  if (contentControl.isNullObject) {
-                      console.log('There is no content control with that ID.')
-                  } else {
-                      console.log('The content control with that ID has been found in this document.');
-                  }
               });
           })
           .catch(function (error) {
@@ -126,7 +99,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```javascript
           // Run a batch operation against the Word object model.
@@ -175,41 +148,8 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
-          ```javascript
-          // Run a batch operation against the Word object model.
-          Word.run(function (context) {
-
-              // Create a proxy object for the content controls collection that contains a specific tag.
-              var contentControlsWithTag = context.document.contentControls.getByTag('Customer-Address');
-
-              // Queue a command to load the text property for all of content controls with a specific tag.
-              context.load(contentControlsWithTag, 'text');
-
-              // Synchronize the document state by executing the queued commands,
-              // and return a promise to indicate task completion.
-              return context.sync().then(function () {
-                  if (contentControlsWithTag.items.length === 0) {
-                      console.log("There isn't a content control with a tag of Customer-Address in this document.");
-                  } else {
-                      console.log(
-                          'The first content control with the tag of Customer-Address has this text: ' + 
-                          contentControlsWithTag.items[0].text);
-                  }
-
-              });
-          })
-          .catch(function (error) {
-              console.log('Error: ' + JSON.stringify(error));
-              if (error instanceof OfficeExtension.Error) {
-                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
-              }
-          });
-
-          // The Word-Add-in-DocumentAssembly sample has another example of using the getByTag method.
-          // https://github.com/OfficeDev/Word-Add-in-DocumentAssembly
-          ```
           ```typescript
           await Word.run(async (context) => {
               let contentControls = context.document.contentControls.getByTag("customer");
@@ -244,7 +184,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```javascript
           // Run a batch operation against the Word object model.
@@ -318,7 +258,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```javascript
           // Run a batch operation against the Word object model.
@@ -392,7 +332,7 @@ items:
           - 'word!Word.ContentControlCollection#items~0:complex'
   - uid: 'word!Word.ContentControlCollection#load:member(1)'
     summary: "Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler «\_context.sync()\_» avant de lire les propriétés."
-    remarks: "En plus de cette signature, cette méthode possède les signatures suivantes\_:\n\n`load(option?: string | string[]): Word.ContentControlCollection`-WHERE option est une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.\n\n`load(option?: { select?: string; expand?: string; }): Word.ContentControlCollection`Option-WHERE option. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Word.ContentControlCollection`-Uniquement disponible sur les types de collection. Elle est similaire à la signature précédente. Option. Top indique le nombre maximal d’éléments de collection qui peuvent être inclus dans le résultat. Option. Skip indique le nombre d’éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat. Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d’éléments.\n\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n\n    // Create a proxy object for the content controls collection.\n    var contentControls = context.document.contentControls;\n\n    // Queue a command to load the id property for all of the content controls.\n    context.load(contentControls, 'id');\n\n    // Synchronize the document state by executing the queued commands,\n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n        if (contentControls.items.length === 0) {\n            console.log('No content control found.');\n        }\n        else {\n            // Queue a command to load the properties on the first content control.\n            contentControls.items[0].load(  'appearance,' +\n                                            'cannotDelete,' +\n                                            'cannotEdit,' +\n                                            'color,' +\n                                            'id,' +\n                                            'placeHolderText,' +\n                                            'removeWhenEdited,' +\n                                            'title,' +\n                                            'text,' +\n                                            'type,' +\n                                            'style,' +\n                                            'tag,' +\n                                            'font/size,' +\n                                            'font/name,' +\n                                            'font/color');\n\n            // Synchronize the document state by executing the queued commands,\n            // and return a promise to indicate task completion.\n            return context.sync()\n                .then(function () {\n                    console.log('Property values of the first content control:' +\n                        '   ----- appearance: ' + contentControls.items[0].appearance +\n                        '   ----- cannotDelete: ' + contentControls.items[0].cannotDelete +\n                        '   ----- cannotEdit: ' + contentControls.items[0].cannotEdit +\n                        '   ----- color: ' + contentControls.items[0].color +\n                        '   ----- id: ' + contentControls.items[0].id +\n                        '   ----- placeHolderText: ' + contentControls.items[0].placeholderText +\n                        '   ----- removeWhenEdited: ' + contentControls.items[0].removeWhenEdited +\n                        '   ----- title: ' + contentControls.items[0].title +\n                        '   ----- text: ' + contentControls.items[0].text +\n                        '   ----- type: ' + contentControls.items[0].type +\n                        '   ----- style: ' + contentControls.items[0].style +\n                        '   ----- tag: ' + contentControls.items[0].tag +\n                        '   ----- font size: ' + contentControls.items[0].font.size +\n                        '   ----- font name: ' + contentControls.items[0].font.name +\n                        '   ----- font color: ' + contentControls.items[0].font.color);\n            });\n        }\n    });\n})\n.catch(function (error) {\n    console.log('Error: ' + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Debug info: ' + JSON.stringify(error.debugInfo));\n    }\n});\n\n// The Silly stories add-in sample shows how the load method is used\n// to load the content control collection with the tag and title properties.\n// https://aka.ms/sillystorywordaddin\n```"
+    remarks: "En plus de cette signature, cette méthode possède les signatures suivantes\_:\n\n`load(option?: string | string[]): Word.ContentControlCollection`-WHERE option est une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.\n\n`load(option?: { select?: string; expand?: string; }): Word.ContentControlCollection`Option-WHERE option. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Word.ContentControlCollection`-Uniquement disponible sur les types de collection. Elle est similaire à la signature précédente. Option. Top indique le nombre maximal d’éléments de collection qui peuvent être inclus dans le résultat. Option. Skip indique le nombre d’éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat. Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d’éléments.\n\n#### <a name=\"examples\"></a>範例\n\n```javascript\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n\n    // Create a proxy object for the content controls collection.\n    var contentControls = context.document.contentControls;\n\n    // Queue a command to load the id property for all of the content controls.\n    context.load(contentControls, 'id');\n\n    // Synchronize the document state by executing the queued commands,\n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n        if (contentControls.items.length === 0) {\n            console.log('No content control found.');\n        }\n        else {\n            // Queue a command to load the properties on the first content control.\n            contentControls.items[0].load(  'appearance,' +\n                                            'cannotDelete,' +\n                                            'cannotEdit,' +\n                                            'color,' +\n                                            'id,' +\n                                            'placeHolderText,' +\n                                            'removeWhenEdited,' +\n                                            'title,' +\n                                            'text,' +\n                                            'type,' +\n                                            'style,' +\n                                            'tag,' +\n                                            'font/size,' +\n                                            'font/name,' +\n                                            'font/color');\n\n            // Synchronize the document state by executing the queued commands,\n            // and return a promise to indicate task completion.\n            return context.sync()\n                .then(function () {\n                    console.log('Property values of the first content control:' +\n                        '   ----- appearance: ' + contentControls.items[0].appearance +\n                        '   ----- cannotDelete: ' + contentControls.items[0].cannotDelete +\n                        '   ----- cannotEdit: ' + contentControls.items[0].cannotEdit +\n                        '   ----- color: ' + contentControls.items[0].color +\n                        '   ----- id: ' + contentControls.items[0].id +\n                        '   ----- placeHolderText: ' + contentControls.items[0].placeholderText +\n                        '   ----- removeWhenEdited: ' + contentControls.items[0].removeWhenEdited +\n                        '   ----- title: ' + contentControls.items[0].title +\n                        '   ----- text: ' + contentControls.items[0].text +\n                        '   ----- type: ' + contentControls.items[0].type +\n                        '   ----- style: ' + contentControls.items[0].style +\n                        '   ----- tag: ' + contentControls.items[0].tag +\n                        '   ----- font size: ' + contentControls.items[0].font.size +\n                        '   ----- font name: ' + contentControls.items[0].font.name +\n                        '   ----- font color: ' + contentControls.items[0].font.color);\n            });\n        }\n    });\n})\n.catch(function (error) {\n    console.log('Error: ' + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Debug info: ' + JSON.stringify(error.debugInfo));\n    }\n});\n\n// The Silly stories add-in sample shows how the load method is used\n// to load the content control collection with the tag and title properties.\n// https://aka.ms/sillystorywordaddin\n```"
     name: load(option)
     fullName: load(option)
     langs:

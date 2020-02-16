@@ -295,25 +295,6 @@ items:
               }
           });
           ```
-          ```javascript
-          // Set table style. 
-          Excel.run(function (ctx) { 
-              var tableName = 'Table1';
-              var table = ctx.workbook.tables.getItem(tableName);
-              table.name = 'Table1-Renamed';
-              table.showTotals = false;
-              table.style = 'TableStyleMedium2';
-              table.load('tableStyle');
-              return ctx.sync().then(function() {
-                      console.log(table.style);
-              });
-          }).catch(function(error) {
-              console.log("Error: " + error);
-              if (error instanceof OfficeExtension.Error) {
-                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
-              }
-          });
-          ```
       parameters:
         - id: propertyNames
           description: Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
@@ -446,6 +427,30 @@ items:
       return:
         type:
           - string
+        description: |-
+
+
+          #### <a name="examples"></a>範例
+
+          ```javascript
+          // Set table style. 
+          Excel.run(function (ctx) { 
+              var tableName = 'Table1';
+              var table = ctx.workbook.tables.getItem(tableName);
+              table.name = 'Table1-Renamed';
+              table.showTotals = false;
+              table.style = 'TableStyleMedium2';
+              table.load('tableStyle');
+              return ctx.sync().then(function() {
+                      console.log(table.style);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
   - uid: 'excel!Excel.Table#toJSON:member(1)'
     summary: 'Remplace la méthode JavaScript `toJSON()` afin de fournir une sortie plus utile lorsqu’un objet d’API est transmis à`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle `toJSON` la méthode de l’objet qui lui est passé.) Tandis que l’objet Excel. table d’origine est un objet `toJSON` d’API, la méthode renvoie un objet JavaScript simple (tapé comme`Excel.Interfaces.TableData`<!-- -->) qui contient des copies superficielles de toutes les propriétés enfants chargées à partir de l’objet d’origine.'
     name: toJSON()
