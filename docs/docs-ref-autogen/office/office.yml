@@ -11,6 +11,7 @@ items:
       - 'office!Office.AddBindingFromNamedItemOptions:interface'
       - 'office!Office.AddBindingFromPromptOptions:interface'
       - 'office!Office.AddBindingFromSelectionOptions:interface'
+      - 'office!Office.Addin:interface'
       - 'office!Office.AddinCommands.Event:interface'
       - 'office!Office.AddinCommands.EventCompletedOptions:interface'
       - 'office!Office.AddinCommands.Source:interface'
@@ -27,6 +28,7 @@ items:
       - 'office!Office.CoercionType:enum'
       - 'office!Office.Context:interface'
       - 'office!Office.ContextInformation:interface'
+      - 'office!Office.Control:interface'
       - 'office!Office.CustomXmlNode:interface'
       - 'office!Office.CustomXMLNodeType:enum'
       - 'office!Office.CustomXmlPart:interface'
@@ -43,6 +45,7 @@ items:
       - 'office!Office.FileProperties:interface'
       - 'office!Office.FileType:enum'
       - 'office!Office.FilterType:enum'
+      - 'office!Office.Gallery:interface'
       - 'office!Office.GetBindingDataOptions:interface'
       - 'office!Office.GetFileOptions:interface'
       - 'office!Office.GetSelectedDataOptions:interface'
@@ -53,6 +56,7 @@ items:
       - 'office!Office.InitializationReason:enum'
       - 'office!Office.initialize:function(1)'
       - 'office!Office.IPromiseConstructor:interface'
+      - 'office!Office.isSetSupported:function(1)'
       - 'office!Office.MatrixBinding:interface'
       - 'office!Office.NodeDeletedEventArgs:interface'
       - 'office!Office.NodeInsertedEventArgs:interface'
@@ -68,6 +72,8 @@ items:
       - 'office!Office.RangeFormatConfiguration:interface'
       - 'office!Office.RemoveHandlerOptions:interface'
       - 'office!Office.RequirementSetSupport:interface'
+      - 'office!Office.Ribbon:interface'
+      - 'office!Office.RibbonUpdaterData:interface'
       - 'office!Office.SaveSettingsOptions:interface'
       - 'office!Office.select:function(1)'
       - 'office!Office.SelectionMode:enum'
@@ -76,6 +82,8 @@ items:
       - 'office!Office.Settings:interface'
       - 'office!Office.SettingsChangedEventArgs:interface'
       - 'office!Office.Slice:interface'
+      - 'office!Office.StartupBehavior:enum'
+      - 'office!Office.Tab:interface'
       - 'office!Office.Table:enum'
       - 'office!Office.TableBinding:interface'
       - 'office!Office.TableData:class'
@@ -83,6 +91,8 @@ items:
       - 'office!Office.UI:interface'
       - 'office!Office.useShortNamespace:function(1)'
       - 'office!Office.ValueFormat:enum'
+      - 'office!Office.VisibilityMode:enum'
+      - 'office!Office.VisibilityModeChangedMessage:interface'
       - 'office!OfficeExtension.ClientObject:class'
       - 'office!OfficeExtension.ClientRequestContext:class'
       - 'office!OfficeExtension.ClientResult:class'
@@ -102,25 +112,25 @@ items:
       - 'office!OfficeExtension.UpdateOptions:interface'
   - uid: 'office!Office.initialize:function(1)'
     summary: |-
-      <span data-ttu-id="f5879-101">Se produit quand l’environnement d’exécution est chargé et que le complément est prêt à interagir avec l’application et le document hébergé.</span><span class="sxs-lookup"><span data-stu-id="f5879-101">Occurs when the runtime environment is loaded and the add-in is ready to start interacting with the application and hosted document.</span></span>
+      Se produit quand l’environnement d’exécution est chargé et que le complément est prêt à interagir avec l’application et le document hébergé.
 
-      <span data-ttu-id="f5879-102">Le paramètre Reason de la fonction d’écouteur d’événements Initialize renvoie `InitializationReason` une valeur d’énumération qui spécifie comment l’initialisation s’est produite.</span><span class="sxs-lookup"><span data-stu-id="f5879-102">The reason parameter of the initialize event listener function returns an `InitializationReason` enumeration value that specifies how initialization occurred.</span></span> <span data-ttu-id="f5879-103">Un complément du volet Office ou de contenu peut être initialisé de deux façons :</span><span class="sxs-lookup"><span data-stu-id="f5879-103">A task pane or content add-in can be initialized in two ways:</span></span>
+      Le paramètre Reason de la fonction d’écouteur d’événements Initialize renvoie `InitializationReason` une valeur d’énumération qui spécifie comment l’initialisation s’est produite. Un complément du volet Office ou de contenu peut être initialisé de deux façons :
 
-      - <span data-ttu-id="f5879-104">L’utilisateur vient de l’insérer à partir de la section compléments récemment utilisés de la liste déroulante complément sous l’onglet Insertion du ruban dans l’application hôte Office ou à partir de la boîte de dialogue Insérer un complément.</span><span class="sxs-lookup"><span data-stu-id="f5879-104">The user just inserted it from Recently Used Add-ins section of the Add-in drop-down list on the Insert tab of the ribbon in the Office host application, or from Insert add-in dialog box.</span></span>
+      - L’utilisateur vient de l’insérer à partir de la section compléments récemment utilisés de la liste déroulante complément sous l’onglet Insertion du ruban dans l’application hôte Office ou à partir de la boîte de dialogue Insérer un complément.
 
-      - <span data-ttu-id="f5879-105">L’utilisateur a ouvert un document qui contient déjà le complément.</span><span class="sxs-lookup"><span data-stu-id="f5879-105">The user opened a document that already contains the add-in.</span></span>
+      - L’utilisateur a ouvert un document qui contient déjà le complément.
 
-      <span data-ttu-id="f5879-106">*Remarque*: le paramètre Reason de la fonction d’écouteur d’événements Initialize ne renvoie `InitializationReason` qu’une valeur d’énumération pour les compléments de contenu et du volet Office. Elle ne renvoie pas de valeur pour les compléments Outlook.</span><span class="sxs-lookup"><span data-stu-id="f5879-106">*Note*: The reason parameter of the initialize event listener function only returns an `InitializationReason` enumeration value for task pane and content add-ins. It does not return a value for Outlook add-ins.</span></span>
+      *Remarque*: le paramètre Reason de la fonction d’écouteur d’événements Initialize ne renvoie `InitializationReason` qu’une valeur d’énumération pour les compléments de contenu et du volet Office. Elle ne renvoie pas de valeur pour les compléments Outlook.
     remarks: |-
-      <span data-ttu-id="f5879-107">**Informations de support technique**</span><span class="sxs-lookup"><span data-stu-id="f5879-107">**Support details**</span></span>
+      **Informations de support technique**
 
-      <span data-ttu-id="f5879-p102">Un Y majuscule dans la matrice suivante indique que cette méthode est prise en charge dans l'application hôte Office correspondante. Une cellule vide indique que l'application hôte Office ne prend pas en charge cette méthode.</span><span class="sxs-lookup"><span data-stu-id="f5879-p102">A capital Y in the following matrix indicates that this method is supported in the corresponding Office host application. An empty cell indicates that the Office host application doesn't support this method.</span></span>
+      Un Y majuscule dans la matrice suivante indique que cette méthode est prise en charge dans l'application hôte Office correspondante. Une cellule vide indique que l'application hôte Office ne prend pas en charge cette méthode.
 
-      <span data-ttu-id="f5879-110">Pour plus d’informations sur les exigences de l’application et du serveur hôtes Office, voir [Configuration requise pour exécuter des compléments Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)</span><span class="sxs-lookup"><span data-stu-id="f5879-110">For more information about Office host application and server requirements, see [Requirements for running Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)</span></span><!-- --><span data-ttu-id="f5879-111">.</span><span class="sxs-lookup"><span data-stu-id="f5879-111"></span></span>
+      Pour plus d’informations sur les exigences de l’application et du serveur hôtes Office, voir [Configuration requise pour exécuter des compléments Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.
 
-      <span data-ttu-id="f5879-112">*Hôtes pris en charge par la plateforme*</span><span class="sxs-lookup"><span data-stu-id="f5879-112">*Supported hosts, by platform*</span></span> <table> <tr><th> </th><th> <span data-ttu-id="f5879-113">Office pour Windows</span><span class="sxs-lookup"><span data-stu-id="f5879-113">Office on Windows</span></span> </th><th> <span data-ttu-id="f5879-114">Office dans un navigateur Web</span><span class="sxs-lookup"><span data-stu-id="f5879-114">Office in web browser</span></span> </th><th> <span data-ttu-id="f5879-115">Office sur iPad</span><span class="sxs-lookup"><span data-stu-id="f5879-115">Office on iPad</span></span> </th><th> <span data-ttu-id="f5879-116">Outlook sur les appareils mobiles</span><span class="sxs-lookup"><span data-stu-id="f5879-116">Outlook on mobile devices</span></span> </th><th> <span data-ttu-id="f5879-117">Office sur Mac</span><span class="sxs-lookup"><span data-stu-id="f5879-117">Office on Mac</span></span> </th></tr> <tr><td><span data-ttu-id="f5879-118"><strong>Excel</strong></span><span class="sxs-lookup"><span data-stu-id="f5879-118"><strong> Excel </strong></span></span></td><td> <span data-ttu-id="f5879-119">v</span><span class="sxs-lookup"><span data-stu-id="f5879-119">Y</span></span> </td><td> <span data-ttu-id="f5879-120">v</span><span class="sxs-lookup"><span data-stu-id="f5879-120">Y</span></span> </td><td> <span data-ttu-id="f5879-121">v</span><span class="sxs-lookup"><span data-stu-id="f5879-121">Y</span></span> </td><td> </td><td> </td></tr> <tr><td><span data-ttu-id="f5879-122"><strong>Microsoft</strong></span><span class="sxs-lookup"><span data-stu-id="f5879-122"><strong> Outlook </strong></span></span></td><td> <span data-ttu-id="f5879-123">v</span><span class="sxs-lookup"><span data-stu-id="f5879-123">Y</span></span> </td><td> <span data-ttu-id="f5879-124">v</span><span class="sxs-lookup"><span data-stu-id="f5879-124">Y</span></span> </td><td> </td><td> <span data-ttu-id="f5879-125">v</span><span class="sxs-lookup"><span data-stu-id="f5879-125">Y</span></span> </td><td> <span data-ttu-id="f5879-126">v</span><span class="sxs-lookup"><span data-stu-id="f5879-126">Y</span></span> </td></tr> <tr><td><span data-ttu-id="f5879-127"><strong>Présentations</strong></span><span class="sxs-lookup"><span data-stu-id="f5879-127"><strong> PowerPoint </strong></span></span></td><td> <span data-ttu-id="f5879-128">v</span><span class="sxs-lookup"><span data-stu-id="f5879-128">Y</span></span> </td><td> <span data-ttu-id="f5879-129">v</span><span class="sxs-lookup"><span data-stu-id="f5879-129">Y</span></span> </td><td> <span data-ttu-id="f5879-130">v</span><span class="sxs-lookup"><span data-stu-id="f5879-130">Y</span></span> </td><td> </td><td> </td></tr> <tr><td><span data-ttu-id="f5879-131"><strong>Projet</strong></span><span class="sxs-lookup"><span data-stu-id="f5879-131"><strong> Project </strong></span></span></td><td> <span data-ttu-id="f5879-132">v</span><span class="sxs-lookup"><span data-stu-id="f5879-132">Y</span></span> </td><td> </td><td> </td><td> </td><td> </td></tr> <tr><td><span data-ttu-id="f5879-133"><strong>Automatique</strong></span><span class="sxs-lookup"><span data-stu-id="f5879-133"><strong> Word </strong></span></span></td><td> <span data-ttu-id="f5879-134">v</span><span class="sxs-lookup"><span data-stu-id="f5879-134">Y</span></span> </td><td> <span data-ttu-id="f5879-135">v</span><span class="sxs-lookup"><span data-stu-id="f5879-135">Y</span></span> </td><td> <span data-ttu-id="f5879-136">v</span><span class="sxs-lookup"><span data-stu-id="f5879-136">Y</span></span> </td><td> </td><td> </td></tr> </table>
+      *Hôtes pris en charge par la plateforme* <table> <tr><th> </th><th> Office pour Windows </th><th> Office dans un navigateur Web </th><th> Office sur iPad </th><th> Outlook sur les appareils mobiles </th><th> Office sur Mac </th></tr> <tr><td><strong>Excel</strong></td><td> v </td><td> v </td><td> v </td><td> </td><td> </td></tr> <tr><td><strong>Microsoft</strong></td><td> v </td><td> v </td><td> </td><td> v </td><td> v </td></tr> <tr><td><strong>Présentations</strong></td><td> v </td><td> v </td><td> v </td><td> </td><td> </td></tr> <tr><td><strong>Projet</strong></td><td> v </td><td> </td><td> </td><td> </td><td> </td></tr> <tr><td><strong>Automatique</strong></td><td> v </td><td> v </td><td> v </td><td> </td><td> </td></tr> </table>
 
-      #### <a name="examples"></a><span data-ttu-id="f5879-137">Exemples</span><span class="sxs-lookup"><span data-stu-id="f5879-137">Examples</span></span>
+      #### <a name="examples"></a>Exemples
 
       ```javascript
       // You can use the value of the InitializationEnumeration to implement different logic for
@@ -158,11 +168,33 @@ items:
         description: ''
       parameters:
         - id: reason
-          description: <span data-ttu-id="f5879-138">Indique la façon dont l’application a été initialisée.</span><span class="sxs-lookup"><span data-stu-id="f5879-138">Indicates how the app was initialized.</span></span>
+          description: Indique la façon dont l’application a été initialisée.
           type:
             - 'office!Office.InitializationReason:enum'
+  - uid: 'office!Office.isSetSupported:function(1)'
+    summary: Vérifie si l’ensemble de conditions spécifié est pris en charge par l’application Office hôte.
+    name: 'Office.isSetSupported(name, minVersion)'
+    fullName: 'Office.isSetSupported(name, minVersion)'
+    langs:
+      - typeScript
+    type: function
+    syntax:
+      content: 'export function isSetSupported(name: string, minVersion?: string): boolean;'
+      return:
+        type:
+          - boolean
+        description: ''
+      parameters:
+        - id: name
+          description: "Définir le nom\_; par exemple, «\_MatrixBindings\_»."
+          type:
+            - string
+        - id: minVersion
+          description: "La version minimale requise\_; par exemple, «\_1,4\_»."
+          type:
+            - string
   - uid: 'office!Office.onReady:function(1)'
-    summary: "<span data-ttu-id=\"f5879-139\">Garantit que les API JavaScript Office sont prêtes à être appelées par le complément.</span><span class=\"sxs-lookup\"><span data-stu-id=\"f5879-139\">Ensures that the Office JavaScript APIs are ready to be called by the add-in.</span></span> <span data-ttu-id=\"f5879-140\">Si l’infrastructure n’a pas encore été initialisée, le rappel ou la promesse attendra jusqu’à ce que l’hôte Office soit prêt à accepter les appels d’API.</span><span class=\"sxs-lookup\"><span data-stu-id=\"f5879-140\">If the framework hasn't initialized yet, the callback or promise will wait until the Office host is ready to accept API calls.</span></span> <span data-ttu-id=\"f5879-141\">Notez que bien que cette API soit destinée à être utilisée dans un complément Office, elle peut également être utilisée en dehors du complément.</span><span class=\"sxs-lookup\"><span data-stu-id=\"f5879-141\">Note that though this API is intended to be used inside an Office add-in, it can also be used outside the add-in.</span></span> <span data-ttu-id=\"f5879-142\">Dans ce cas, une fois qu’Office. js a déterminé qu’il s’exécute en dehors d’une application hôte Office, le rappel est appelé et la promesse est résolue avec «\_NULL\_» pour l’hôte et la plateforme.</span><span class=\"sxs-lookup\"><span data-stu-id=\"f5879-142\">In that case, once Office.js determines that it is running outside of an Office host application, it will call the callback and resolve the promise with \"null\" for both the host and platform.</span></span>"
+    summary: "Garantit que les API JavaScript Office sont prêtes à être appelées par le complément. Si l’infrastructure n’a pas encore été initialisée, le rappel ou la promesse attendra jusqu’à ce que l’hôte Office soit prêt à accepter les appels d’API. Notez que bien que cette API soit destinée à être utilisée dans un complément Office, elle peut également être utilisée en dehors du complément. Dans ce cas, une fois qu’Office. js a déterminé qu’il s’exécute en dehors d’une application hôte Office, le rappel est appelé et la promesse est résolue avec «\_NULL\_» pour l’hôte et la plateforme."
     name: Office.onReady(callback)
     fullName: Office.onReady(callback)
     langs:
@@ -173,24 +205,24 @@ items:
       return:
         type:
           - 'office!Office.onReady~0:complex'
-        description: '<span data-ttu-id="f5879-143">Promesse qui contient les informations sur l’hôte et la plateforme, une fois l’initialisation terminée.</span><span class="sxs-lookup"><span data-stu-id="f5879-143">A Promise that contains the host and platform info, once initialization is completed.</span></span>'
+        description: 'Promesse qui contient les informations sur l’hôte et la plateforme, une fois l’initialisation terminée.'
       parameters:
         - id: callback
-          description: '<span data-ttu-id="f5879-144">Méthode de rappel facultative qui recevra les informations sur l’hôte et la plateforme.</span><span class="sxs-lookup"><span data-stu-id="f5879-144">An optional callback method, that will receive the host and platform info.</span></span> <span data-ttu-id="f5879-145">Par ailleurs, au lieu d’utiliser un rappel, un complément peut simplement attendre la promesse renvoyée par la fonction pour résoudre.</span><span class="sxs-lookup"><span data-stu-id="f5879-145">Alternatively, rather than use a callback, an add-in may simply wait for the Promise returned by the function to resolve.</span></span>'
+          description: 'Méthode de rappel facultative qui recevra les informations sur l’hôte et la plateforme. Par ailleurs, au lieu d’utiliser un rappel, un complément peut simplement attendre la promesse renvoyée par la fonction pour résoudre.'
           type:
             - 'office!Office.onReady~1:complex'
   - uid: 'office!Office.select:function(1)'
-    summary: <span data-ttu-id="f5879-146">Renvoie une promesse d’un objet décrit dans l’expression.</span><span class="sxs-lookup"><span data-stu-id="f5879-146">Returns a promise of an object described in the expression.</span></span> <span data-ttu-id="f5879-147">Le rappel est appelé uniquement si la méthode échoue.</span><span class="sxs-lookup"><span data-stu-id="f5879-147">Callback is invoked only if method fails.</span></span>
+    summary: Renvoie une promesse d’un objet décrit dans l’expression. Le rappel est appelé uniquement si la méthode échoue.
     remarks: |-
-      <span data-ttu-id="f5879-148">**Informations de support technique**</span><span class="sxs-lookup"><span data-stu-id="f5879-148">**Support details**</span></span>
+      **Informations de support technique**
 
-      <span data-ttu-id="f5879-p106">Un Y majuscule dans la matrice suivante indique que cette méthode est prise en charge dans l'application hôte Office correspondante. Une cellule vide indique que l'application hôte Office ne prend pas en charge cette méthode.</span><span class="sxs-lookup"><span data-stu-id="f5879-p106">A capital Y in the following matrix indicates that this method is supported in the corresponding Office host application. An empty cell indicates that the Office host application doesn't support this method.</span></span>
+      Un Y majuscule dans la matrice suivante indique que cette méthode est prise en charge dans l'application hôte Office correspondante. Une cellule vide indique que l'application hôte Office ne prend pas en charge cette méthode.
 
-      <span data-ttu-id="f5879-151">Pour plus d’informations sur les exigences de l’application et du serveur hôtes Office, voir [Configuration requise pour exécuter des compléments Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)</span><span class="sxs-lookup"><span data-stu-id="f5879-151">For more information about Office host application and server requirements, see [Requirements for running Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)</span></span><!-- --><span data-ttu-id="f5879-152">.</span><span class="sxs-lookup"><span data-stu-id="f5879-152"></span></span>
+      Pour plus d’informations sur les exigences de l’application et du serveur hôtes Office, voir [Configuration requise pour exécuter des compléments Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.
 
-      <span data-ttu-id="f5879-153">*Hôtes pris en charge par la plateforme*</span><span class="sxs-lookup"><span data-stu-id="f5879-153">*Supported hosts, by platform*</span></span> <table> <tr><th> </th><th> <span data-ttu-id="f5879-154">Office pour Windows</span><span class="sxs-lookup"><span data-stu-id="f5879-154">Office on Windows</span></span> </th><th> <span data-ttu-id="f5879-155">Office dans un navigateur Web</span><span class="sxs-lookup"><span data-stu-id="f5879-155">Office in web browser</span></span> </th><th> <span data-ttu-id="f5879-156">Office sur iPad</span><span class="sxs-lookup"><span data-stu-id="f5879-156">Office on iPad</span></span> </th></tr> <tr><td><span data-ttu-id="f5879-157"><strong>Excel</strong></span><span class="sxs-lookup"><span data-stu-id="f5879-157"><strong> Excel </strong></span></span></td><td> <span data-ttu-id="f5879-158">v</span><span class="sxs-lookup"><span data-stu-id="f5879-158">Y</span></span> </td><td> <span data-ttu-id="f5879-159">v</span><span class="sxs-lookup"><span data-stu-id="f5879-159">Y</span></span> </td><td> <span data-ttu-id="f5879-160">v</span><span class="sxs-lookup"><span data-stu-id="f5879-160">Y</span></span> </td></tr> <tr><td><span data-ttu-id="f5879-161"><strong>Automatique</strong></span><span class="sxs-lookup"><span data-stu-id="f5879-161"><strong> Word </strong></span></span></td><td> <span data-ttu-id="f5879-162">v</span><span class="sxs-lookup"><span data-stu-id="f5879-162">Y</span></span> </td><td> </td><td> <span data-ttu-id="f5879-163">v</span><span class="sxs-lookup"><span data-stu-id="f5879-163">Y</span></span> </td></tr> </table>
+      *Hôtes pris en charge par la plateforme* <table> <tr><th> </th><th> Office pour Windows </th><th> Office dans un navigateur Web </th><th> Office sur iPad </th></tr> <tr><td><strong>Excel</strong></td><td> v </td><td> v </td><td> v </td></tr> <tr><td><strong>Automatique</strong></td><td> v </td><td> </td><td> v </td></tr> </table>
 
-      #### <a name="examples"></a><span data-ttu-id="f5879-164">Exemples</span><span class="sxs-lookup"><span data-stu-id="f5879-164">Examples</span></span>
+      #### <a name="examples"></a>Exemples
 
       ```javascript
       // The following code example uses the select method to retrieve a binding with the id "cities" from
@@ -216,25 +248,25 @@ items:
         description: ''
       parameters:
         - id: expression
-          description: '<span data-ttu-id="f5879-165">Objet à récupérer.</span><span class="sxs-lookup"><span data-stu-id="f5879-165">The object to be retrieved.</span></span> <span data-ttu-id="f5879-166">Exemple de "Bindings\#BindingName", récupère une promesse de liaison pour une liaison nommée’BindingName''</span><span class="sxs-lookup"><span data-stu-id="f5879-166">Example "bindings\#BindingName", retrieves a binding promise for a binding named ''BindingName''</span></span>'
+          description: 'Objet à récupérer. Exemple de "Bindings\#BindingName", récupère une promesse de liaison pour une liaison nommée’BindingName'''
           type:
             - string
         - id: callback
-          description: '<span data-ttu-id="f5879-167">Facultatif.</span><span class="sxs-lookup"><span data-stu-id="f5879-167">Optional.</span></span> <span data-ttu-id="f5879-168">Fonction appelée lorsque le rappel est renvoyé, dont le seul paramètre est de type [Office. AsyncResult](xref:office!Office.AsyncResult:interface)</span><span class="sxs-lookup"><span data-stu-id="f5879-168">A function that is invoked when the callback returns, whose only parameter is of type [Office.AsyncResult](xref:office!Office.AsyncResult:interface)</span></span><!-- --><span data-ttu-id="f5879-169">.</span><span class="sxs-lookup"><span data-stu-id="f5879-169"></span></span>'
+          description: 'Facultatif. Fonction appelée lorsque le rappel est renvoyé, dont le seul paramètre est de type [Office. AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.'
           type:
             - 'office!Office.select~0:complex'
   - uid: 'office!Office.useShortNamespace:function(1)'
-    summary: <span data-ttu-id="f5879-170">Active et désactive l' `Office` alias pour l’espace de noms `Microsoft.Office.WebExtension` complet.</span><span class="sxs-lookup"><span data-stu-id="f5879-170">Toggles on and off the `Office` alias for the full `Microsoft.Office.WebExtension` namespace.</span></span>
+    summary: Active et désactive l' `Office` alias pour l’espace de noms `Microsoft.Office.WebExtension` complet.
     remarks: |-
-      <span data-ttu-id="f5879-171">**Informations de support technique**</span><span class="sxs-lookup"><span data-stu-id="f5879-171">**Support details**</span></span>
+      **Informations de support technique**
 
-      <span data-ttu-id="f5879-p109">Un Y majuscule dans la matrice suivante indique que cette méthode est prise en charge dans l'application hôte Office correspondante. Une cellule vide indique que l'application hôte Office ne prend pas en charge cette méthode.</span><span class="sxs-lookup"><span data-stu-id="f5879-p109">A capital Y in the following matrix indicates that this method is supported in the corresponding Office host application. An empty cell indicates that the Office host application doesn't support this method.</span></span>
+      Un Y majuscule dans la matrice suivante indique que cette méthode est prise en charge dans l'application hôte Office correspondante. Une cellule vide indique que l'application hôte Office ne prend pas en charge cette méthode.
 
-      <span data-ttu-id="f5879-174">Pour plus d’informations sur les exigences de l’application et du serveur hôtes Office, voir [Configuration requise pour exécuter des compléments Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)</span><span class="sxs-lookup"><span data-stu-id="f5879-174">For more information about Office host application and server requirements, see [Requirements for running Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)</span></span><!-- --><span data-ttu-id="f5879-175">.</span><span class="sxs-lookup"><span data-stu-id="f5879-175"></span></span>
+      Pour plus d’informations sur les exigences de l’application et du serveur hôtes Office, voir [Configuration requise pour exécuter des compléments Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.
 
-      <span data-ttu-id="f5879-176">*Hôtes pris en charge par la plateforme*</span><span class="sxs-lookup"><span data-stu-id="f5879-176">*Supported hosts, by platform*</span></span> <table> <tr><th> </th><th> <span data-ttu-id="f5879-177">Office pour Windows</span><span class="sxs-lookup"><span data-stu-id="f5879-177">Office on Windows</span></span> </th><th> <span data-ttu-id="f5879-178">Office dans un navigateur Web</span><span class="sxs-lookup"><span data-stu-id="f5879-178">Office in web browser</span></span> </th><th> <span data-ttu-id="f5879-179">Office sur iPad</span><span class="sxs-lookup"><span data-stu-id="f5879-179">Office on iPad</span></span> </th><th> <span data-ttu-id="f5879-180">Outlook sur les appareils mobiles</span><span class="sxs-lookup"><span data-stu-id="f5879-180">Outlook on mobile devices</span></span> </th><th> <span data-ttu-id="f5879-181">Office sur Mac</span><span class="sxs-lookup"><span data-stu-id="f5879-181">Office on Mac</span></span> </th></tr> <tr><td><span data-ttu-id="f5879-182"><strong>Excel</strong></span><span class="sxs-lookup"><span data-stu-id="f5879-182"><strong> Excel </strong></span></span></td><td> <span data-ttu-id="f5879-183">v</span><span class="sxs-lookup"><span data-stu-id="f5879-183">Y</span></span> </td><td> <span data-ttu-id="f5879-184">v</span><span class="sxs-lookup"><span data-stu-id="f5879-184">Y</span></span> </td><td> <span data-ttu-id="f5879-185">v</span><span class="sxs-lookup"><span data-stu-id="f5879-185">Y</span></span> </td><td> </td><td> </td></tr> <tr><td><span data-ttu-id="f5879-186"><strong>Microsoft</strong></span><span class="sxs-lookup"><span data-stu-id="f5879-186"><strong> Outlook </strong></span></span></td><td> <span data-ttu-id="f5879-187">v</span><span class="sxs-lookup"><span data-stu-id="f5879-187">Y</span></span> </td><td> <span data-ttu-id="f5879-188">v</span><span class="sxs-lookup"><span data-stu-id="f5879-188">Y</span></span> </td><td> </td><td> <span data-ttu-id="f5879-189">v</span><span class="sxs-lookup"><span data-stu-id="f5879-189">Y</span></span> </td><td> <span data-ttu-id="f5879-190">v</span><span class="sxs-lookup"><span data-stu-id="f5879-190">Y</span></span> </td></tr> <tr><td><span data-ttu-id="f5879-191"><strong>Présentations</strong></span><span class="sxs-lookup"><span data-stu-id="f5879-191"><strong> PowerPoint </strong></span></span></td><td> <span data-ttu-id="f5879-192">v</span><span class="sxs-lookup"><span data-stu-id="f5879-192">Y</span></span> </td><td> <span data-ttu-id="f5879-193">v</span><span class="sxs-lookup"><span data-stu-id="f5879-193">Y</span></span> </td><td> <span data-ttu-id="f5879-194">v</span><span class="sxs-lookup"><span data-stu-id="f5879-194">Y</span></span> </td><td> </td><td> </td></tr> <tr><td><span data-ttu-id="f5879-195"><strong>Projet</strong></span><span class="sxs-lookup"><span data-stu-id="f5879-195"><strong> Project </strong></span></span></td><td> <span data-ttu-id="f5879-196">v</span><span class="sxs-lookup"><span data-stu-id="f5879-196">Y</span></span> </td><td> </td><td> </td><td> </td><td> </td></tr> <tr><td><span data-ttu-id="f5879-197"><strong>Automatique</strong></span><span class="sxs-lookup"><span data-stu-id="f5879-197"><strong> Word </strong></span></span></td><td> <span data-ttu-id="f5879-198">v</span><span class="sxs-lookup"><span data-stu-id="f5879-198">Y</span></span> </td><td> <span data-ttu-id="f5879-199">v</span><span class="sxs-lookup"><span data-stu-id="f5879-199">Y</span></span> </td><td> <span data-ttu-id="f5879-200">v</span><span class="sxs-lookup"><span data-stu-id="f5879-200">Y</span></span> </td><td> </td><td> </td></tr> </table>
+      *Hôtes pris en charge par la plateforme* <table> <tr><th> </th><th> Office pour Windows </th><th> Office dans un navigateur Web </th><th> Office sur iPad </th><th> Outlook sur les appareils mobiles </th><th> Office sur Mac </th></tr> <tr><td><strong>Excel</strong></td><td> v </td><td> v </td><td> v </td><td> </td><td> </td></tr> <tr><td><strong>Microsoft</strong></td><td> v </td><td> v </td><td> </td><td> v </td><td> v </td></tr> <tr><td><strong>Présentations</strong></td><td> v </td><td> v </td><td> v </td><td> </td><td> </td></tr> <tr><td><strong>Projet</strong></td><td> v </td><td> </td><td> </td><td> </td><td> </td></tr> <tr><td><strong>Automatique</strong></td><td> v </td><td> v </td><td> v </td><td> </td><td> </td></tr> </table>
 
-      #### <a name="examples"></a><span data-ttu-id="f5879-201">Exemples</span><span class="sxs-lookup"><span data-stu-id="f5879-201">Examples</span></span>
+      #### <a name="examples"></a>Exemples
 
       ```javascript
       function startUsingShortNamespace() {
@@ -275,7 +307,7 @@ items:
         description: ''
       parameters:
         - id: useShortNamespace
-          description: "<span data-ttu-id=\"f5879-202\">True pour utiliser l’alias de raccourci\_; Sinon, false pour le désactiver.</span><span class=\"sxs-lookup\"><span data-stu-id=\"f5879-202\">True to use the shortcut alias; otherwise false to disable it.</span></span> <span data-ttu-id=\"f5879-203\">La valeur par défaut est True.</span><span class=\"sxs-lookup\"><span data-stu-id=\"f5879-203\">The default is true.</span></span>"
+          description: "True pour utiliser l’alias de raccourci\_; Sinon, false pour le désactiver. La valeur par défaut est True."
           type:
             - boolean
 references:
@@ -287,6 +319,8 @@ references:
     name: Office.AddBindingFromPromptOptions
   - uid: 'office!Office.AddBindingFromSelectionOptions:interface'
     name: Office.AddBindingFromSelectionOptions
+  - uid: 'office!Office.Addin:interface'
+    name: Office.Addin
   - uid: 'office!Office.AddinCommands.Event:interface'
     name: Office.AddinCommands.Event
   - uid: 'office!Office.AddinCommands.EventCompletedOptions:interface'
@@ -319,6 +353,8 @@ references:
     name: Office.Context
   - uid: 'office!Office.ContextInformation:interface'
     name: Office.ContextInformation
+  - uid: 'office!Office.Control:interface'
+    name: Office.Control
   - uid: 'office!Office.CustomXmlNode:interface'
     name: Office.CustomXmlNode
   - uid: 'office!Office.CustomXMLNodeType:enum'
@@ -351,6 +387,8 @@ references:
     name: Office.FileType
   - uid: 'office!Office.FilterType:enum'
     name: Office.FilterType
+  - uid: 'office!Office.Gallery:interface'
+    name: Office.Gallery
   - uid: 'office!Office.GetBindingDataOptions:interface'
     name: Office.GetBindingDataOptions
   - uid: 'office!Office.GetFileOptions:interface'
@@ -432,6 +470,10 @@ references:
     name: Office.RemoveHandlerOptions
   - uid: 'office!Office.RequirementSetSupport:interface'
     name: Office.RequirementSetSupport
+  - uid: 'office!Office.Ribbon:interface'
+    name: Office.Ribbon
+  - uid: 'office!Office.RibbonUpdaterData:interface'
+    name: Office.RibbonUpdaterData
   - uid: 'office!Office.SaveSettingsOptions:interface'
     name: Office.SaveSettingsOptions
   - uid: 'office!Office.select~0:complex'
@@ -457,6 +499,10 @@ references:
     name: Office.SettingsChangedEventArgs
   - uid: 'office!Office.Slice:interface'
     name: Office.Slice
+  - uid: 'office!Office.StartupBehavior:enum'
+    name: Office.StartupBehavior
+  - uid: 'office!Office.Tab:interface'
+    name: Office.Tab
   - uid: 'office!Office.Table:enum'
     name: Office.Table
   - uid: 'office!Office.TableBinding:interface'
@@ -469,6 +515,10 @@ references:
     name: Office.UI
   - uid: 'office!Office.ValueFormat:enum'
     name: Office.ValueFormat
+  - uid: 'office!Office.VisibilityMode:enum'
+    name: Office.VisibilityMode
+  - uid: 'office!Office.VisibilityModeChangedMessage:interface'
+    name: Office.VisibilityModeChangedMessage
   - uid: 'office!OfficeExtension.ClientObject:class'
     name: OfficeExtension.ClientObject
   - uid: 'office!OfficeExtension.ClientRequestContext:class'
