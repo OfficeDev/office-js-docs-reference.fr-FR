@@ -2,13 +2,13 @@
 items:
   - uid: 'outlook!Office.CustomProperties:interface'
     summary: |-
-      L’objet CustomProperties représente des propriétés personnalisées spécifiques à un élément particulier et spécifiques à un complément de messagerie pour Outlook. Par exemple, il peut s’avérer nécessaire pour un complément de messagerie d’enregistrer certaines données propres au message électronique actif ayant activé le complément. Quand l’utilisateur consulte à nouveau le même message et réactive le complément de messagerie, ce dernier peut récupérer les données enregistrées en tant que propriétés personnalisées. **Important**: la longueur maximale d’un objet JSON de l’objet JSON est de 2500 caractères.
+      L’objet `CustomProperties` représente les propriétés personnalisées qui sont propres à un élément particulier et à un complément de messagerie pour Outlook. Par exemple, il peut s’avérer nécessaire pour un complément de messagerie d’enregistrer certaines données propres au message électronique actif ayant activé le complément. Quand l’utilisateur consulte à nouveau le même message et réactive le complément de messagerie, ce dernier peut récupérer les données enregistrées en tant que propriétés personnalisées. **Important**: la longueur maximale d’un `CustomProperties` objet JSON est de 2500 caractères.
 
       Étant donné qu’Outlook sur Mac ne met pas en cache les propriétés personnalisées, si le réseau de l’utilisateur tombe en panne, les compléments de messagerie ne peuvent pas accéder à leurs propriétés personnalisées.
     remarks: |-
-      **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
+      **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
 
-      **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: composition ou lecture
+      **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: composition ou lecture
     name: Office.CustomProperties
     fullName: Office.CustomProperties
     langs:
@@ -23,11 +23,11 @@ items:
   - uid: 'outlook!Office.CustomProperties#get:member(1)'
     summary: Retourne la valeur de la propriété personnalisée spécifiée.
     remarks: |-
-      **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
+      **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
 
-      **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: composition ou lecture
+      **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: composition ou lecture
 
-      #### <a name="examples"></a>範例
+      #### <a name="examples"></a>Exemples
 
       ```javascript
       var propertyName = $("#propertyName").val();
@@ -55,13 +55,13 @@ items:
     summary: |-
       Supprime la propriété spécifiée de la collection de propriétés personnalisées.
 
-      Pour rendre permanente la suppression de la propriété, vous devez appeler la méthode saveAsync de l’objet CustomProperties.
+      Pour rendre la suppression de la propriété permanente, vous devez appeler la méthode `saveAsync` de l’objet `CustomProperties`.
     remarks: |-
-      **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
+      **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
 
-      **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: composition ou lecture
+      **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: composition ou lecture
 
-      #### <a name="examples"></a>範例
+      #### <a name="examples"></a>Exemples
 
       ```javascript
       var propertyName = $("#propertyName").val();
@@ -81,22 +81,22 @@ items:
         description: ''
       parameters:
         - id: name
-          description: Nom de la propriété à supprimer.
+          description: '`name` De la propriété à supprimer.'
           type:
             - string
   - uid: 'outlook!Office.CustomProperties#saveAsync:member(1)'
     summary: |-
       Enregistre les propriétés personnalisées propres aux éléments sur le serveur.
 
-      Vous devez appeler la méthode saveAsync pour faire persister les modifications apportées à la méthode set ou remove de l’objet CustomProperties. L’enregistrement est une action asynchrone.
+      Vous devez appeler la méthode `saveAsync` pour conserver les modifications effectuées avec la méthode `set` ou la méthode `remove` de l’objet `CustomProperties`. L’enregistrement est une action asynchrone.
 
-      Il est recommandé que votre fonction de rappel vérifie et gère les erreurs à partir de saveAsync. Plus particulièrement, un complément de lecture peut être activé lorsque l’utilisateur est connecté dans un formulaire de lecture, puis l’utilisateur peut se déconnecter. Si le complément appelle saveAsync lorsque l’État est déconnecté, saveAsync renvoie une erreur. La méthode de rappel doit pouvoir gérer cette erreur.
+      Il est recommandé que votre fonction de rappel vérifie et gère les erreurs à partir de`saveAsync`<!-- -->. Plus particulièrement, un complément de lecture peut être activé lorsque l’utilisateur est connecté dans un formulaire de lecture, puis l’utilisateur peut se déconnecter. Si le complément appelle `saveAsync` lorsqu’il est déconnecté, `saveAsync` renvoie une erreur. La méthode de rappel doit pouvoir gérer cette erreur.
     remarks: |-
-      **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
+      **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
 
-      **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: composition ou lecture
+      **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: composition ou lecture
 
-      #### <a name="examples"></a>範例
+      #### <a name="examples"></a>Exemples
 
       ```javascript
       // The following JavaScript code sample shows how to asynchronously use
@@ -150,7 +150,7 @@ items:
         description: ''
       parameters:
         - id: callback
-          description: 'Facultatif. Une fois la méthode exécutée, la fonction transmise au paramètre callback est appelée avec un seul paramètre de type Office. AsyncResult.'
+          description: 'Facultatif. Une fois la méthode exécutée, la fonction transmise `callback` au paramètre est appelée avec un seul paramètre de type`Office.AsyncResult`<!-- -->.'
           type:
             - 'outlook!Office.CustomProperties#saveAsync~0:complex'
         - id: asyncContext
@@ -158,13 +158,13 @@ items:
           type:
             - any
   - uid: 'outlook!Office.CustomProperties#set:member(1)'
-    summary: "Affecte la valeur spécifiée à la propriété spécifiée.\n\nLa méthode set affecte la valeur spécifiée à la propriété indiquée. Vous devez utiliser la méthode saveAsync pour enregistrer la propriété sur le serveur.\n\nLa méthode set crée une propriété si la propriété spécifiée n’existe pas déjà\_; sinon, la valeur existante est remplacée par la nouvelle valeur. Le paramètre value peut être de n’importe quel type\_; toutefois, il est toujours passé au serveur en tant que chaîne."
+    summary: "Affecte la valeur spécifiée à la propriété spécifiée.\n\nLa méthode `set` affecte la valeur spécifiée à la propriété spécifiée. Vous devez utiliser la méthode `saveAsync` pour enregistrer la propriété sur le serveur.\n\nLa méthode `set` crée une propriété si la propriété spécifiée n’existe pas déjà\_; sinon, la valeur existante est remplacée par la nouvelle valeur. Le paramètre `value` peut être de n’importe quel type\_; toutefois, il est toujours transmis au serveur sous forme de chaîne."
     remarks: |-
-      **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
+      **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
 
-      **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: composition ou lecture
+      **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: composition ou lecture
 
-      #### <a name="examples"></a>範例
+      #### <a name="examples"></a>Exemples
 
       ```javascript
       var propertyName = $("#propertyName").val();
