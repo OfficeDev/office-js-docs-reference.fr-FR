@@ -1,11 +1,11 @@
 ### YamlMime:UniversalReference
 items:
   - uid: 'outlook!Office.Recipients:interface'
-    summary: "\\[[Ensemble d’API\_: boîte aux lettres 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
+    summary: "Représente les destinataires d’un élément. Mode composition uniquement.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
     remarks: |-
-      **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
+      **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
 
-      **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: composition
+      **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: composition
     name: Office.Recipients
     fullName: Office.Recipients
     langs:
@@ -20,8 +20,15 @@ items:
       - 'outlook!Office.Recipients#setAsync:member(1)'
       - 'outlook!Office.Recipients#setAsync:member(2)'
   - uid: 'outlook!Office.Recipients#addAsync:member(1)'
-    summary: "Ajoute une liste de destinataires aux destinataires existants d’un rendez-vous ou d’un message.\n\nLe paramètre Recipients peut être un tableau d’un des éléments suivants\_:\n\n- Chaînes contenant des adresses de messagerie SMTP\n\n- Objets EmailUser\n\n- Objets EmailAddressDetails\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
-    remarks: "**<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadWriteItem\n\n**<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: composition\n\n**Erreurs**:\n\n- NumberOfRecipientsExceeded\_: le nombre de destinataires est supérieur à 100 entrées."
+    summary: "Ajoute une liste de destinataires aux destinataires existants d’un rendez-vous ou d’un message.\n\nLe paramètre Recipients peut être un tableau d’un des éléments suivants\_:\n\n- Chaînes contenant des adresses de messagerie SMTP\n\n- Objets [EmailUser](xref:outlook!Office.EmailUser:interface)\n\n- Objets [EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface)\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
+    remarks: |-
+      **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadWriteItem`
+
+      **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: composition
+
+      **Erreurs**:
+
+      - `NumberOfRecipientsExceeded`<!-- -->: Le nombre de destinataires est supérieur à 100 entrées.
     name: 'addAsync(recipients, options, callback)'
     fullName: 'addAsync(recipients, options, callback)'
     langs:
@@ -39,16 +46,48 @@ items:
           type:
             - 'outlook!Office.Recipients#addAsync~0:complex'
         - id: options
-          description: "Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. asyncContext\_: les développeurs peuvent fournir n’importe quel objet auquel ils souhaitent accéder dans la méthode de rappel."
+          description: 'Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: Les développeurs peuvent fournir n’importe quel objet auquel ils souhaitent accéder dans la méthode de rappel.'
           type:
             - 'outlook!Office.AsyncContextOptions:interface'
         - id: callback
-          description: 'Facultatif. Une fois la méthode exécutée, la fonction transmise au paramètre callback est appelée avec un seul paramètre de type Office. AsyncResult. En cas d’échec de l’ajout des destinataires, la propriété asyncResult. Error contient un code d’erreur.'
+          description: 'Facultatif. Une fois la méthode exécutée, la fonction transmise `callback` au paramètre est appelée avec un seul paramètre de type`Office.AsyncResult`<!-- -->. En cas d’échec de l’ajout des destinataires, la propriété `asyncResult.error` contient un code d’erreur.'
           type:
             - 'outlook!Office.Recipients#addAsync~1:complex'
   - uid: 'outlook!Office.Recipients#addAsync:member(2)'
     summary: "Ajoute une liste de destinataires aux destinataires existants d’un rendez-vous ou d’un message.\n\nLe paramètre Recipients peut être un tableau d’un des éléments suivants\_:\n\n- Chaînes contenant des adresses de messagerie SMTP\n\n- Objets [EmailUser](xref:outlook!Office.EmailUser:interface)\n\n- Objets [EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface)\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
-    remarks: "**<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadWriteItem\n\n**<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: composition\n\n**Erreurs**:\n\n- NumberOfRecipientsExceeded\_: le nombre de destinataires est supérieur à 100 entrées.\n\n#### <a name=\"examples\"></a>範例\n\n```javascript\n// The following example creates an array of EmailUser objects\n// and adds them to the To recipients of the message.\nvar newRecipients = [\n    {\n        \"displayName\": \"Allie Bellew\",\n        \"emailAddress\": \"allieb@contoso.com\"\n    },\n    {\n        \"displayName\": \"Alex Darrow\",\n        \"emailAddress\": \"alexd@contoso.com\"\n    }\n];\n\nOffice.context.mailbox.item.to.addAsync(newRecipients, function(result) {\n    if (result.error) {\n        console.log(result.error);\n    } else {\n        console.log(\"Recipients added\");\n    }\n});\n```"
+    remarks: |-
+      **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadWriteItem`
+
+      **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: composition
+
+      **Erreurs**:
+
+      - `NumberOfRecipientsExceeded`<!-- -->: Le nombre de destinataires est supérieur à 100 entrées.
+
+      #### <a name="examples"></a>Exemples
+
+      ```javascript
+      // The following example creates an array of EmailUser objects
+      // and adds them to the To recipients of the message.
+      var newRecipients = [
+          {
+              "displayName": "Allie Bellew",
+              "emailAddress": "allieb@contoso.com"
+          },
+          {
+              "displayName": "Alex Darrow",
+              "emailAddress": "alexd@contoso.com"
+          }
+      ];
+
+      Office.context.mailbox.item.to.addAsync(newRecipients, function(result) {
+          if (result.error) {
+              console.log(result.error);
+          } else {
+              console.log("Recipients added");
+          }
+      });
+      ```
     name: 'addAsync(recipients, callback)'
     fullName: 'addAsync(recipients, callback)'
     langs:
@@ -66,15 +105,15 @@ items:
           type:
             - 'outlook!Office.Recipients#addAsync~2:complex'
         - id: callback
-          description: 'Facultatif. Une fois la méthode exécutée, la fonction transmise au paramètre callback est appelée avec un seul paramètre de type Office. AsyncResult. En cas d’échec de l’ajout des destinataires, la propriété asyncResult. Error contient un code d’erreur.'
+          description: 'Facultatif. Une fois la méthode exécutée, la fonction transmise `callback` au paramètre est appelée avec un seul paramètre de type`Office.AsyncResult`<!-- -->. En cas d’échec de l’ajout des destinataires, la propriété `asyncResult.error` contient un code d’erreur.'
           type:
             - 'outlook!Office.Recipients#addAsync~3:complex'
   - uid: 'outlook!Office.Recipients#getAsync:member(1)'
-    summary: "Obtient une liste de destinataires pour un rendez-vous ou un message.\n\nLorsque l’appel est terminé, la propriété asyncResult. value contient un tableau d’objets [EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface) .\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
+    summary: "Obtient une liste de destinataires pour un rendez-vous ou un message.\n\nUne fois l’appel terminé, la `asyncResult.value` propriété contient un tableau d’objets [EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface) .\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
     remarks: |-
-      **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
+      **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
 
-      **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: composition
+      **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: composition
     name: 'getAsync(options, callback)'
     fullName: 'getAsync(options, callback)'
     langs:
@@ -88,21 +127,21 @@ items:
         description: ''
       parameters:
         - id: options
-          description: "Littéral d’objet contenant une ou plusieurs des propriétés suivantes. asyncContext\_: les développeurs peuvent fournir n’importe quel objet auquel ils souhaitent accéder dans la méthode de rappel."
+          description: 'Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: Les développeurs peuvent fournir n’importe quel objet auquel ils souhaitent accéder dans la méthode de rappel.'
           type:
             - 'outlook!Office.AsyncContextOptions:interface'
         - id: callback
-          description: 'Une fois la méthode exécutée, la fonction transmise au paramètre callback est appelée avec un seul paramètre de type Office. AsyncResult. La `value` propriété du résultat est un tableau d’objets EmailAddressDetails.'
+          description: 'Une fois la méthode exécutée, la fonction transmise `callback` au paramètre est appelée avec un seul paramètre de type`Office.AsyncResult`<!-- -->. La `value` propriété du résultat est un tableau d'' `EmailAddressDetails` objets.'
           type:
             - 'outlook!Office.Recipients#getAsync~0:complex'
   - uid: 'outlook!Office.Recipients#getAsync:member(2)'
-    summary: "Obtient une liste de destinataires pour un rendez-vous ou un message.\n\nLorsque l’appel est terminé, la propriété asyncResult. value contient un tableau d’objets [EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface) .\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
+    summary: "Obtient une liste de destinataires pour un rendez-vous ou un message.\n\nUne fois l’appel terminé, la `asyncResult.value` propriété contient un tableau d’objets [EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface) .\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
     remarks: |-
-      **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
+      **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
 
-      **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: composition
+      **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: composition
 
-      #### <a name="examples"></a>範例
+      #### <a name="examples"></a>Exemples
 
       ```javascript
       // The following example gets the optional attendees of a meeting.
@@ -208,12 +247,19 @@ items:
         description: ''
       parameters:
         - id: callback
-          description: 'Une fois la méthode exécutée, la fonction transmise au paramètre callback est appelée avec un seul paramètre de type Office. AsyncResult. La `value` propriété du résultat est un tableau d’objets EmailAddressDetails.'
+          description: 'Une fois la méthode exécutée, la fonction transmise `callback` au paramètre est appelée avec un seul paramètre de type`Office.AsyncResult`<!-- -->. La `value` propriété du résultat est un tableau d'' `EmailAddressDetails` objets.'
           type:
             - 'outlook!Office.Recipients#getAsync~1:complex'
   - uid: 'outlook!Office.Recipients#setAsync:member(1)'
-    summary: "Définit une liste de destinataires pour un rendez-vous ou un message.\n\nLa méthode setAsync remplace la liste de destinataires actuelle.\n\nLe paramètre Recipients peut être un tableau d’un des éléments suivants\_:\n\n- Chaînes contenant des adresses de messagerie SMTP\n\n- Objets [EmailUser](xref:outlook!Office.EmailUser:interface)\n\n- Objets [EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface)\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
-    remarks: "**<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadWriteItem\n\n**<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: composition\n\n**Erreurs**:\n\n- NumberOfRecipientsExceeded\_: le nombre de destinataires est supérieur à 100 entrées."
+    summary: "Définit une liste de destinataires pour un rendez-vous ou un message.\n\nLa méthode `setAsync` remplace la liste des destinataires active.\n\nLe paramètre Recipients peut être un tableau d’un des éléments suivants\_:\n\n- Chaînes contenant des adresses de messagerie SMTP\n\n- Objets [EmailUser](xref:outlook!Office.EmailUser:interface)\n\n- Objets [EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface)\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
+    remarks: |-
+      **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadWriteItem`
+
+      **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: composition
+
+      **Erreurs**:
+
+      - `NumberOfRecipientsExceeded`<!-- -->: Le nombre de destinataires est supérieur à 100 entrées.
     name: 'setAsync(recipients, options, callback)'
     fullName: 'setAsync(recipients, options, callback)'
     langs:
@@ -231,16 +277,48 @@ items:
           type:
             - 'outlook!Office.Recipients#setAsync~0:complex'
         - id: options
-          description: "Littéral d’objet contenant une ou plusieurs des propriétés suivantes. asyncContext\_: les développeurs peuvent fournir n’importe quel objet auquel ils souhaitent accéder dans la méthode de rappel."
+          description: 'Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: Les développeurs peuvent fournir n’importe quel objet auquel ils souhaitent accéder dans la méthode de rappel.'
           type:
             - 'outlook!Office.AsyncContextOptions:interface'
         - id: callback
-          description: 'Une fois la méthode exécutée, la fonction transmise au paramètre callback est appelée avec un seul paramètre de type Office. AsyncResult. Si la définition des destinataires échoue, la propriété asyncResult. Error contient un code indiquant toute erreur survenue lors de l’ajout des données.'
+          description: 'Une fois la méthode exécutée, la fonction transmise `callback` au paramètre est appelée avec un seul paramètre de type`Office.AsyncResult`<!-- -->. En cas d’échec de la définition des destinataires, la propriété `asyncResult.error` contient un code indiquant toute erreur survenue lors de l’ajout des données.'
           type:
             - 'outlook!Office.Recipients#setAsync~1:complex'
   - uid: 'outlook!Office.Recipients#setAsync:member(2)'
-    summary: "Définit une liste de destinataires pour un rendez-vous ou un message.\n\nLa méthode setAsync remplace la liste de destinataires actuelle.\n\nLe paramètre Recipients peut être un tableau d’un des éléments suivants\_:\n\n- Chaînes contenant des adresses de messagerie SMTP\n\n- Objets [EmailUser](xref:outlook!Office.EmailUser:interface)\n\n- Objets [EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface)\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
-    remarks: "**<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadWriteItem\n\n**<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: composition\n\n**Erreurs**:\n\n- NumberOfRecipientsExceeded\_: le nombre de destinataires est supérieur à 100 entrées.\n\n#### <a name=\"examples\"></a>範例\n\n```javascript\n// The following example creates an array of EmailUser objects and\n// replaces the CC recipients of the message with the array.\nvar newRecipients = [\n    {\n        \"displayName\": \"Allie Bellew\",\n        \"emailAddress\": \"allieb@contoso.com\"\n    },\n    {\n        \"displayName\": \"Alex Darrow\",\n        \"emailAddress\": \"alexd@contoso.com\"\n    }\n];\n\nOffice.context.mailbox.item.cc.setAsync(newRecipients, function(result) {\n    if (result.error) {\n        console.log(result.error);\n    } else {\n        console.log(\"Recipients overwritten\");\n    }\n});\n```"
+    summary: "Définit une liste de destinataires pour un rendez-vous ou un message.\n\nLa méthode `setAsync` remplace la liste des destinataires active.\n\nLe paramètre Recipients peut être un tableau d’un des éléments suivants\_:\n\n- Chaînes contenant des adresses de messagerie SMTP\n\n- Objets [EmailUser](xref:outlook!Office.EmailUser:interface)\n\n- Objets [EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface)\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
+    remarks: |-
+      **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadWriteItem`
+
+      **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: composition
+
+      **Erreurs**:
+
+      - `NumberOfRecipientsExceeded`<!-- -->: Le nombre de destinataires est supérieur à 100 entrées.
+
+      #### <a name="examples"></a>Exemples
+
+      ```javascript
+      // The following example creates an array of EmailUser objects and
+      // replaces the CC recipients of the message with the array.
+      var newRecipients = [
+          {
+              "displayName": "Allie Bellew",
+              "emailAddress": "allieb@contoso.com"
+          },
+          {
+              "displayName": "Alex Darrow",
+              "emailAddress": "alexd@contoso.com"
+          }
+      ];
+
+      Office.context.mailbox.item.cc.setAsync(newRecipients, function(result) {
+          if (result.error) {
+              console.log(result.error);
+          } else {
+              console.log("Recipients overwritten");
+          }
+      });
+      ```
     name: 'setAsync(recipients, callback)'
     fullName: 'setAsync(recipients, callback)'
     langs:
@@ -258,7 +336,7 @@ items:
           type:
             - 'outlook!Office.Recipients#setAsync~2:complex'
         - id: callback
-          description: 'Une fois la méthode exécutée, la fonction transmise au paramètre callback est appelée avec un seul paramètre de type Office. AsyncResult. Si la définition des destinataires échoue, la propriété asyncResult. Error contient un code indiquant toute erreur survenue lors de l’ajout des données.'
+          description: 'Une fois la méthode exécutée, la fonction transmise `callback` au paramètre est appelée avec un seul paramètre de type`Office.AsyncResult`<!-- -->. En cas d’échec de la définition des destinataires, la propriété `asyncResult.error` contient un code indiquant toute erreur survenue lors de l’ajout des données.'
           type:
             - 'outlook!Office.Recipients#setAsync~3:complex'
 references:

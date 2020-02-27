@@ -3,9 +3,9 @@ items:
   - uid: 'outlook!Office.MasterCategories:interface'
     summary: "Représente la liste de formes de base des catégories dans la boîte aux lettres.\n\nDans Outlook, un utilisateur peut regrouper des messages et des rendez-vous à l’aide d’une catégorie pour leur appliquer un code de couleur. L’utilisateur définit les catégories dans une liste sur sa boîte aux lettres principale. Ils peuvent ensuite appliquer une ou plusieurs catégories à un élément.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
     remarks: |-
-      **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadWriteMailbox
+      **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadWriteMailbox`
 
-      **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: composition ou lecture
+      **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: composition ou lecture
     name: Office.MasterCategories
     fullName: Office.MasterCategories
     langs:
@@ -20,8 +20,17 @@ items:
       - 'outlook!Office.MasterCategories#removeAsync:member(1)'
       - 'outlook!Office.MasterCategories#removeAsync:member(2)'
   - uid: 'outlook!Office.MasterCategories#addAsync:member(1)'
-    summary: 'Ajoute des catégories à la liste principale d’une boîte aux lettres. Chaque catégorie doit avoir un nom unique, mais plusieurs catégories peuvent utiliser la même couleur.'
-    remarks: "**<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadWriteMailbox\n\n**<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: composition ou lecture\n\n**Erreurs**:\n\n- DuplicateCategory\_: l’une des catégories fournies est déjà dans la liste principale des catégories.\n\n- PermissionDenied\_: l’utilisateur n’est pas autorisé à effectuer cette action."
+    summary: "Ajoute des catégories à la liste principale d’une boîte aux lettres. Chaque catégorie doit avoir un nom unique, mais plusieurs catégories peuvent utiliser la même couleur.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
+    remarks: |-
+      **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadWriteMailbox`
+
+      **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: composition ou lecture
+
+      **Erreurs**:
+
+      - `DuplicateCategory`<!-- -->: L’une des catégories fournies est déjà dans la liste principale des catégories.
+
+      - `PermissionDenied`<!-- -->: L’utilisateur n’est pas autorisé à effectuer cette action.
     name: 'addAsync(categories, options, callback)'
     fullName: 'addAsync(categories, options, callback)'
     langs:
@@ -39,16 +48,44 @@ items:
           type:
             - 'outlook!Office.MasterCategories#addAsync~0:complex'
         - id: options
-          description: "Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. asyncContext\_: les développeurs peuvent fournir n’importe quel objet auquel ils souhaitent accéder dans la méthode de rappel."
+          description: 'Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: Les développeurs peuvent fournir n’importe quel objet auquel ils souhaitent accéder dans la méthode de rappel.'
           type:
             - 'outlook!Office.AsyncContextOptions:interface'
         - id: callback
-          description: "Facultatif. Une fois la méthode exécutée, la fonction transmise au paramètre callback est appelée avec un seul paramètre de type Office. AsyncResult.\n\n\\[Ensemble d’API\_: boîte aux lettres 1,8\\]"
+          description: 'Facultatif. Une fois la méthode exécutée, la fonction transmise `callback` au paramètre est appelée avec un seul paramètre de type`Office.AsyncResult`<!-- -->.'
           type:
             - 'outlook!Office.MasterCategories#addAsync~1:complex'
   - uid: 'outlook!Office.MasterCategories#addAsync:member(2)'
-    summary: 'Ajoute des catégories à la liste principale d’une boîte aux lettres. Chaque catégorie doit avoir un nom unique, mais plusieurs catégories peuvent utiliser la même couleur.'
-    remarks: "**<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadWriteMailbox\n\n**<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: composition ou lecture\n\n**Erreurs**:\n\n- DuplicateCategory\_: l’une des catégories fournies est déjà dans la liste principale des catégories.\n\n- PermissionDenied\_: l’utilisateur n’est pas autorisé à effectuer cette action.\n\n#### <a name=\"examples\"></a>範例\n\n```javascript\nvar masterCategoriesToAdd = [\n    {\n        \"displayName\": \"Urgent!\",\n        \"color\": Office.MailboxEnums.CategoryColor.Preset0\n    }\n];\n\nOffice.context.mailbox.masterCategories.addAsync(masterCategoriesToAdd, function (asyncResult) {\n    if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {\n        console.log(\"Successfully added categories to master list\");\n    } else {\n        console.log(\"masterCategories.addAsync call failed with error: \" + asyncResult.error.message);\n    }\n});\n```"
+    summary: "Ajoute des catégories à la liste principale d’une boîte aux lettres. Chaque catégorie doit avoir un nom unique, mais plusieurs catégories peuvent utiliser la même couleur.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
+    remarks: |-
+      **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadWriteMailbox`
+
+      **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: composition ou lecture
+
+      **Erreurs**:
+
+      - `DuplicateCategory`<!-- -->: L’une des catégories fournies est déjà dans la liste principale des catégories.
+
+      - `PermissionDenied`<!-- -->: L’utilisateur n’est pas autorisé à effectuer cette action.
+
+      #### <a name="examples"></a>Exemples
+
+      ```javascript
+      var masterCategoriesToAdd = [
+          {
+              "displayName": "Urgent!",
+              "color": Office.MailboxEnums.CategoryColor.Preset0
+          }
+      ];
+
+      Office.context.mailbox.masterCategories.addAsync(masterCategoriesToAdd, function (asyncResult) {
+          if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+              console.log("Successfully added categories to master list");
+          } else {
+              console.log("masterCategories.addAsync call failed with error: " + asyncResult.error.message);
+          }
+      });
+      ```
     name: 'addAsync(categories, callback)'
     fullName: 'addAsync(categories, callback)'
     langs:
@@ -66,15 +103,15 @@ items:
           type:
             - 'outlook!Office.MasterCategories#addAsync~2:complex'
         - id: callback
-          description: "Une fois la méthode exécutée, la fonction transmise au paramètre callback est appelée avec un seul paramètre de type Office. AsyncResult. Si l’ajout de catégories échoue, la propriété asyncResult. Error contient un code d’erreur.\n\n\\[Ensemble d’API\_: boîte aux lettres 1,8\\]"
+          description: 'Une fois la méthode exécutée, la fonction transmise `callback` au paramètre est appelée avec un seul paramètre de type`Office.AsyncResult`<!-- -->. Si l’ajout de catégories échoue `asyncResult.error` , la propriété contient un code d’erreur.'
           type:
             - 'outlook!Office.MasterCategories#addAsync~3:complex'
   - uid: 'outlook!Office.MasterCategories#getAsync:member(1)'
-    summary: Obtient la liste principale des catégories d’une boîte aux lettres.
+    summary: "Obtient la liste principale des catégories d’une boîte aux lettres.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
     remarks: |-
-      **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadWriteMailbox
+      **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadWriteMailbox`
 
-      **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: composition ou lecture
+      **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: composition ou lecture
     name: 'getAsync(options, callback)'
     fullName: 'getAsync(options, callback)'
     langs:
@@ -88,21 +125,21 @@ items:
         description: ''
       parameters:
         - id: options
-          description: "Littéral d’objet contenant une ou plusieurs des propriétés suivantes. asyncContext\_: les développeurs peuvent fournir n’importe quel objet auquel ils souhaitent accéder dans la méthode de rappel."
+          description: 'Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: Les développeurs peuvent fournir n’importe quel objet auquel ils souhaitent accéder dans la méthode de rappel.'
           type:
             - 'outlook!Office.AsyncContextOptions:interface'
         - id: callback
-          description: "Une fois la méthode exécutée, la fonction transmise au paramètre callback est appelée avec un seul paramètre de type Office. AsyncResult. Si l’ajout de catégories échoue, la propriété asyncResult. Error contient un code d’erreur.\n\n\\[Ensemble d’API\_: boîte aux lettres 1,8\\]"
+          description: 'Une fois la méthode exécutée, la fonction transmise `callback` au paramètre est appelée avec un seul paramètre de type`Office.AsyncResult`<!-- -->. Si l’ajout de catégories échoue `asyncResult.error` , la propriété contient un code d’erreur.'
           type:
             - 'outlook!Office.MasterCategories#getAsync~0:complex'
   - uid: 'outlook!Office.MasterCategories#getAsync:member(2)'
-    summary: Obtient la liste principale des catégories d’une boîte aux lettres.
+    summary: "Obtient la liste principale des catégories d’une boîte aux lettres.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
     remarks: |-
-      **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadWriteMailbox
+      **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadWriteMailbox`
 
-      **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: composition ou lecture
+      **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: composition ou lecture
 
-      #### <a name="examples"></a>範例
+      #### <a name="examples"></a>Exemples
 
       ```javascript
       Office.context.mailbox.masterCategories.getAsync(function (asyncResult) {
@@ -144,12 +181,19 @@ items:
         description: ''
       parameters:
         - id: callback
-          description: "Une fois la méthode exécutée, la fonction transmise au paramètre callback est appelée avec un seul paramètre de type Office. AsyncResult.\n\n\\[Ensemble d’API\_: boîte aux lettres 1,8\\]"
+          description: 'Une fois la méthode exécutée, la fonction transmise `callback` au paramètre est appelée avec un seul paramètre de type`Office.AsyncResult`<!-- -->.'
           type:
             - 'outlook!Office.MasterCategories#getAsync~1:complex'
   - uid: 'outlook!Office.MasterCategories#removeAsync:member(1)'
-    summary: Supprime les catégories de la liste principale dans une boîte aux lettres.
-    remarks: "**<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadWriteMailbox\n\n**<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: composition ou lecture\n\n**Erreurs**:\n\n- PermissionDenied\_: l’utilisateur n’est pas autorisé à effectuer cette action."
+    summary: "Supprime les catégories de la liste principale dans une boîte aux lettres.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
+    remarks: |-
+      **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadWriteMailbox`
+
+      **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: composition ou lecture
+
+      **Erreurs**:
+
+      - `PermissionDenied`<!-- -->: L’utilisateur n’est pas autorisé à effectuer cette action.
     name: 'removeAsync(categories, options, callback)'
     fullName: 'removeAsync(categories, options, callback)'
     langs:
@@ -167,16 +211,37 @@ items:
           type:
             - 'string[]'
         - id: options
-          description: "Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. asyncContext\_: les développeurs peuvent fournir n’importe quel objet auquel ils souhaitent accéder dans la méthode de rappel."
+          description: 'Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: Les développeurs peuvent fournir n’importe quel objet auquel ils souhaitent accéder dans la méthode de rappel.'
           type:
             - 'outlook!Office.AsyncContextOptions:interface'
         - id: callback
-          description: "Facultatif. Une fois la méthode exécutée, la fonction transmise au paramètre callback est appelée avec un seul paramètre de type Office. AsyncResult. Si la suppression de catégories échoue, la propriété asyncResult. Error contient un code d’erreur.\n\n\\[Ensemble d’API\_: boîte aux lettres 1,8\\]"
+          description: 'Facultatif. Une fois la méthode exécutée, la fonction transmise `callback` au paramètre est appelée avec un seul paramètre de type`Office.AsyncResult`<!-- -->. Si la suppression de catégories échoue `asyncResult.error` , la propriété contient un code d’erreur.'
           type:
             - 'outlook!Office.MasterCategories#removeAsync~0:complex'
   - uid: 'outlook!Office.MasterCategories#removeAsync:member(2)'
-    summary: Supprime les catégories de la liste principale dans une boîte aux lettres.
-    remarks: "**<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadWriteMailbox\n\n**<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: composition ou lecture\n\n**Erreurs**:\n\n- PermissionDenied\_: l’utilisateur n’est pas autorisé à effectuer cette action.\n\n#### <a name=\"examples\"></a>範例\n\n```javascript\nvar masterCategoriesToRemove = [\"Urgent!\"];\n\nOffice.context.mailbox.masterCategories.removeAsync(masterCategoriesToRemove, function (asyncResult) {\n    if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {\n        console.log(\"Successfully removed categories from master list\");\n    } else {\n        console.log(\"masterCategories.removeAsync call failed with error: \" + asyncResult.error.message);\n    }\n});\n```"
+    summary: "Supprime les catégories de la liste principale dans une boîte aux lettres.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
+    remarks: |-
+      **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadWriteMailbox`
+
+      **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: composition ou lecture
+
+      **Erreurs**:
+
+      - `PermissionDenied`<!-- -->: L’utilisateur n’est pas autorisé à effectuer cette action.
+
+      #### <a name="examples"></a>Exemples
+
+      ```javascript
+      var masterCategoriesToRemove = ["Urgent!"];
+
+      Office.context.mailbox.masterCategories.removeAsync(masterCategoriesToRemove, function (asyncResult) {
+          if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+              console.log("Successfully removed categories from master list");
+          } else {
+              console.log("masterCategories.removeAsync call failed with error: " + asyncResult.error.message);
+          }
+      });
+      ```
     name: 'removeAsync(categories, callback)'
     fullName: 'removeAsync(categories, callback)'
     langs:
@@ -194,7 +259,7 @@ items:
           type:
             - 'string[]'
         - id: callback
-          description: "Une fois la méthode exécutée, la fonction transmise au paramètre callback est appelée avec un seul paramètre de type Office. AsyncResult. Si la suppression de catégories échoue, la propriété asyncResult. Error contient un code d’erreur.\n\n\\[Ensemble d’API\_: boîte aux lettres 1,8\\]"
+          description: 'Une fois la méthode exécutée, la fonction transmise `callback` au paramètre est appelée avec un seul paramètre de type`Office.AsyncResult`<!-- -->. Si la suppression de catégories échoue `asyncResult.error` , la propriété contient un code d’erreur.'
           type:
             - 'outlook!Office.MasterCategories#removeAsync~1:complex'
 references:
