@@ -12,10 +12,46 @@ items:
     type: interface
     package: office!
     children:
+      - 'office!Office.UI#addHandlerAsync:member(1)'
       - 'office!Office.UI#closeContainer:member(1)'
       - 'office!Office.UI#displayDialogAsync:member(1)'
       - 'office!Office.UI#displayDialogAsync:member(2)'
       - 'office!Office.UI#messageParent:member(1)'
+  - uid: 'office!Office.UI#addHandlerAsync:member(1)'
+    summary: Ajoute un gestionnaire d’événements à l’objet à l’aide du type d’événement spécifié.
+    remarks: |-
+      **Ensemble de conditions requises**: TBD
+
+      Vous pouvez ajouter plusieurs gestionnaires d’événements pour le type d’événement spécifié tant que le nom de chaque fonction de gestionnaire d’événements est unique.
+    isPreview: true
+    name: 'addHandlerAsync(eventType, handler, options, callback)'
+    fullName: 'addHandlerAsync(eventType, handler, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'addHandlerAsync(eventType: Office.EventType, handler: (result: any) => void, options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: eventType
+          description: Spécifie le type d’événement à ajouter. Il doit s’agir`Office.EventType.DialogParentMessageReceived`<!-- -->.
+          type:
+            - 'office!Office.EventType:enum'
+        - id: handler
+          description: 'Fonction du gestionnaire d’événements à ajouter, dont le seul paramètre est de type.'
+          type:
+            - '(result: any) => void'
+        - id: options
+          description: 'Facultatif. Fournit une option permettant de conserver les données de contexte de n’importe quel type, inchangées, pour une utilisation dans un rappel.'
+          type:
+            - 'office!Office.AsyncContextOptions:interface'
+        - id: callback
+          description: 'Facultatif. Fonction appelée lorsque l’inscription du gestionnaire est retournée, dont le seul paramètre est de type [Office. AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.'
+          type:
+            - 'office!Office.UI#addHandlerAsync~0:complex'
   - uid: 'office!Office.UI#closeContainer:member(1)'
     summary: "Ferme le conteneur d’IU où le code\_JavaScript est exécuté."
     remarks: "**Hôtes**: Excel, Word, PowerPoint, Outlook (configuration minimale requise\_: boîte aux lettres 1,5)\n\n**Ensemble de conditions requises**: [DialogAPI](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/dialog-api-requirement-sets)\n\nLe comportement de cette méthode est spécifié par les éléments suivants\_:\n\n- Appelé à partir d’un bouton de commande sans interface utilisateur\_: sans effet. Les boîtes de dialogue ouvertes par displayDialogAsync restent ouvertes.\n\n- Appelé à partir d’un volet Office\_: le volet Office se ferme. Toutes les boîtes de dialogue ouvertes par displayDialogAsync se ferment également. Si le volet des tâches prend en charge l’épinglage et qu’il a été épinglé par l’utilisateur, il sera annulé.\n\n- Appelé à partir d’une extension de module\_: aucun effet."
@@ -100,6 +136,21 @@ items:
           type:
             - boolean | string
 references:
+  - uid: 'office!Office.EventType:enum'
+    name: Office.EventType
+  - uid: 'office!Office.AsyncContextOptions:interface'
+    name: Office.AsyncContextOptions
+  - uid: 'office!Office.UI#addHandlerAsync~0:complex'
+    name: '(result: AsyncResult<void>) => void'
+    fullName: '(result: Office.AsyncResult<void>) => void'
+    spec.typeScript:
+      - name: '(result: '
+        fullName: '(result: '
+      - uid: 'office!Office.AsyncResult:interface'
+        name: AsyncResult
+        fullName: Office.AsyncResult
+      - name: <void>) => void
+        fullName: <void>) => void
   - uid: 'office!Office.DialogOptions:interface'
     name: DialogOptions
   - uid: 'office!Office.UI#displayDialogAsync~0:complex'
