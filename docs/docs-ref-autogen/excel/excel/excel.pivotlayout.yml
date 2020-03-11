@@ -27,11 +27,13 @@ items:
       - 'excel!Excel.PivotLayout#load:member(1)'
       - 'excel!Excel.PivotLayout#load:member(2)'
       - 'excel!Excel.PivotLayout#load:member(3)'
+      - 'excel!Excel.PivotLayout#pivotStyle:member'
       - 'excel!Excel.PivotLayout#preserveFormatting:member'
       - 'excel!Excel.PivotLayout#set:member(1)'
       - 'excel!Excel.PivotLayout#set:member(2)'
       - 'excel!Excel.PivotLayout#setAutoSortOnCell:member(1)'
       - 'excel!Excel.PivotLayout#setAutoSortOnCell:member(2)'
+      - 'excel!Excel.PivotLayout#setStyle:member(1)'
       - 'excel!Excel.PivotLayout#showColumnGrandTotals:member'
       - 'excel!Excel.PivotLayout#showRowGrandTotals:member'
       - 'excel!Excel.PivotLayout#subtotalLocation:member'
@@ -322,6 +324,19 @@ items:
                           select?: string;
                           expand?: string;
                       }
+  - uid: 'excel!Excel.PivotLayout#pivotStyle:member'
+    summary: "Style appliqué au tableau croisé dynamique.\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    isPreview: true
+    name: pivotStyle
+    fullName: pivotStyle
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly pivotStyle: Excel.PivotTableStyle;'
+      return:
+        type:
+          - 'excel!Excel.PivotTableStyle:class'
   - uid: 'excel!Excel.PivotLayout#preserveFormatting:member'
     summary: "Spécifie si la mise en forme est conservée lorsque le rapport est actualisé ou recalculé par des opérations telles que par glissement, tri ou en modifiant des éléments de champ de page.\n\n\\[[Ensemble d’API\_: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: preserveFormatting
@@ -419,6 +434,25 @@ items:
           description: Sens du tri.
           type:
             - '"Ascending" | "Descending"'
+  - uid: 'excel!Excel.PivotLayout#setStyle:member(1)'
+    summary: "Définit le style appliqué au tableau croisé dynamique.\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    isPreview: true
+    name: setStyle(style)
+    fullName: setStyle(style)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'setStyle(style: string | PivotTableStyle | BuiltInPivotTableStyle): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: style
+          description: Style à appliquer au tableau croisé dynamique. Une `InvalidArgumentException` exception est générée si une chaîne qui ne correspond pas au nom d’un style est fournie.
+          type:
+            - 'excel!Excel.PivotLayout#setStyle~0:complex'
   - uid: 'excel!Excel.PivotLayout#showColumnGrandTotals:member'
     summary: "Indique si le rapport de tableau croisé dynamique affiche les totaux généraux des colonnes.\n\n\\[[Ensemble d’API\_: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: showColumnGrandTotals
@@ -584,6 +618,8 @@ references:
     name: Excel.PivotLayout
   - uid: 'excel!Excel.Interfaces.PivotLayoutLoadOptions:interface'
     name: Excel.Interfaces.PivotLayoutLoadOptions
+  - uid: 'excel!Excel.PivotTableStyle:class'
+    name: Excel.PivotTableStyle
   - uid: 'excel!Excel.Interfaces.PivotLayoutUpdateData:interface'
     name: Interfaces.PivotLayoutUpdateData
   - uid: 'excel!OfficeExtension.UpdateOptions:interface'
@@ -608,6 +644,20 @@ references:
         fullName: Excel.Range
       - name: ' | string'
         fullName: ' | string'
+  - uid: 'excel!Excel.PivotLayout#setStyle~0:complex'
+    name: string | PivotTableStyle | BuiltInPivotTableStyle
+    fullName: string | Excel.PivotTableStyle | Excel.BuiltInPivotTableStyle
+    spec.typeScript:
+      - name: 'string | '
+        fullName: 'string | '
+      - uid: 'excel!Excel.PivotTableStyle:class'
+        name: PivotTableStyle
+        fullName: Excel.PivotTableStyle
+      - name: ' | '
+        fullName: ' | '
+      - uid: 'excel!Excel.BuiltInPivotTableStyle:enum'
+        name: BuiltInPivotTableStyle
+        fullName: Excel.BuiltInPivotTableStyle
   - uid: 'excel!Excel.PivotLayout#subtotalLocation~0:complex'
     name: Excel.SubtotalLocationType | "AtTop" | "AtBottom" | "Off"
     fullName: Excel.SubtotalLocationType | "AtTop" | "AtBottom" | "Off"

@@ -28,7 +28,9 @@ items:
       - 'excel!Excel.Slicer#selectItems:member(1)'
       - 'excel!Excel.Slicer#set:member(1)'
       - 'excel!Excel.Slicer#set:member(2)'
+      - 'excel!Excel.Slicer#setStyle:member(1)'
       - 'excel!Excel.Slicer#slicerItems:member'
+      - 'excel!Excel.Slicer#slicerStyle:member'
       - 'excel!Excel.Slicer#sortBy:member'
       - 'excel!Excel.Slicer#style:member'
       - 'excel!Excel.Slicer#toJSON:member(1)'
@@ -108,7 +110,7 @@ items:
           });
           ```
   - uid: 'excel!Excel.Slicer#getSelectedItems:member(1)'
-    summary: "Renvoie une matrice de noms d’éléments sélectionnés. Lecture seule.\n\n\\[[Ensemble d’API\_: ExcelApi 1,10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Renvoie une matrice de noms d’éléments sélectionnés. En lecture seule.\n\n\\[[Ensemble d’API\_: ExcelApi 1,10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: getSelectedItems()
     fullName: getSelectedItems()
     langs:
@@ -133,7 +135,7 @@ items:
         type:
           - number
   - uid: 'excel!Excel.Slicer#id:member'
-    summary: "Représente l’id unique du segment. Lecture seule.\n\n\\[[Ensemble d’API\_: ExcelApi 1,10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Représente l’id unique du segment. En lecture seule.\n\n\\[[Ensemble d’API\_: ExcelApi 1,10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: id
     fullName: id
     langs:
@@ -325,6 +327,25 @@ items:
           description: ''
           type:
             - 'excel!Excel.Slicer:class'
+  - uid: 'excel!Excel.Slicer#setStyle:member(1)'
+    summary: "Définit le style appliqué au segment.\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    isPreview: true
+    name: setStyle(style)
+    fullName: setStyle(style)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'setStyle(style: string | PivotTableStyle | BuiltInSlicerStyle): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: style
+          description: Style à appliquer au tableau croisé dynamique. Une `InvalidArgumentException` exception est générée si une chaîne qui ne correspond pas au nom d’un style est fournie.
+          type:
+            - 'excel!Excel.Slicer#setStyle~0:complex'
   - uid: 'excel!Excel.Slicer#slicerItems:member'
     summary: "Représente la collection de SlicerItems qui font partie du segment. En lecture seule.\n\n\\[[Ensemble d’API\_: ExcelApi 1,10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: slicerItems
@@ -337,6 +358,19 @@ items:
       return:
         type:
           - 'excel!Excel.SlicerItemCollection:class'
+  - uid: 'excel!Excel.Slicer#slicerStyle:member'
+    summary: "Style appliqué au Slicer.\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    isPreview: true
+    name: slicerStyle
+    fullName: slicerStyle
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly slicerStyle: Excel.SlicerStyle;'
+      return:
+        type:
+          - 'excel!Excel.SlicerStyle:class'
   - uid: 'excel!Excel.Slicer#sortBy:member'
     summary: "Représente l’ordre de tri des éléments dans le segment. Les valeurs possibles sont\_: \"DataSourceOrder\", \"ascending\", \"Descending\".\n\n\\[[Ensemble d’API\_: ExcelApi 1,10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: sortBy
@@ -444,8 +478,24 @@ references:
     name: Interfaces.SlicerUpdateData
   - uid: 'excel!OfficeExtension.UpdateOptions:interface'
     name: OfficeExtension.UpdateOptions
+  - uid: 'excel!Excel.Slicer#setStyle~0:complex'
+    name: string | PivotTableStyle | BuiltInSlicerStyle
+    fullName: string | Excel.PivotTableStyle | Excel.BuiltInSlicerStyle
+    spec.typeScript:
+      - name: 'string | '
+        fullName: 'string | '
+      - uid: 'excel!Excel.PivotTableStyle:class'
+        name: PivotTableStyle
+        fullName: Excel.PivotTableStyle
+      - name: ' | '
+        fullName: ' | '
+      - uid: 'excel!Excel.BuiltInSlicerStyle:enum'
+        name: BuiltInSlicerStyle
+        fullName: Excel.BuiltInSlicerStyle
   - uid: 'excel!Excel.SlicerItemCollection:class'
     name: Excel.SlicerItemCollection
+  - uid: 'excel!Excel.SlicerStyle:class'
+    name: Excel.SlicerStyle
   - uid: 'excel!Excel.Slicer#sortBy~0:complex'
     name: Excel.SlicerSortType | "DataSourceOrder" | "Ascending" | "Descending"
     fullName: Excel.SlicerSortType | "DataSourceOrder" | "Ascending" | "Descending"
