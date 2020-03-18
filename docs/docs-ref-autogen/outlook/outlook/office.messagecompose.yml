@@ -26,11 +26,15 @@ items:
       - 'outlook!Office.MessageCompose#cc:member'
       - 'outlook!Office.MessageCompose#close:member(1)'
       - 'outlook!Office.MessageCompose#conversationId:member'
+      - 'outlook!Office.MessageCompose#disableClientSignatureAsync:member(1)'
+      - 'outlook!Office.MessageCompose#disableClientSignatureAsync:member(2)'
       - 'outlook!Office.MessageCompose#from:member'
       - 'outlook!Office.MessageCompose#getAttachmentContentAsync:member(1)'
       - 'outlook!Office.MessageCompose#getAttachmentContentAsync:member(2)'
       - 'outlook!Office.MessageCompose#getAttachmentsAsync:member(1)'
       - 'outlook!Office.MessageCompose#getAttachmentsAsync:member(2)'
+      - 'outlook!Office.MessageCompose#getComposeTypeAsync:member(1)'
+      - 'outlook!Office.MessageCompose#getComposeTypeAsync:member(2)'
       - 'outlook!Office.MessageCompose#getInitializationContextAsync:member(1)'
       - 'outlook!Office.MessageCompose#getInitializationContextAsync:member(2)'
       - 'outlook!Office.MessageCompose#getItemIdAsync:member(1)'
@@ -40,6 +44,8 @@ items:
       - 'outlook!Office.MessageCompose#getSharedPropertiesAsync:member(1)'
       - 'outlook!Office.MessageCompose#getSharedPropertiesAsync:member(2)'
       - 'outlook!Office.MessageCompose#internetHeaders:member'
+      - 'outlook!Office.MessageCompose#isClientSignatureEnabledAsync:member(1)'
+      - 'outlook!Office.MessageCompose#isClientSignatureEnabledAsync:member(2)'
       - 'outlook!Office.MessageCompose#itemType:member'
       - 'outlook!Office.MessageCompose#loadCustomPropertiesAsync:member(1)'
       - 'outlook!Office.MessageCompose#notificationMessages:member'
@@ -683,6 +689,60 @@ items:
       return:
         type:
           - string
+  - uid: 'outlook!Office.MessageCompose#disableClientSignatureAsync:member(1)'
+    summary: "Désactive la signature du client Outlook.\n\nPour les clients riches Windows et Mac, cette API définit la signature sous les sections «\_nouveau message\_» et «\_réponses/transferts\_» pour le compte d’envoi sur «\_(aucun)\_», ce qui a pour effet de désactiver la signature. Pour Outlook sur le Web, l’API doit désactiver l’option de signature pour les nouveaux messages, les réponses et les transferts. Si la signature est sélectionnée, cet appel de l’API doit la désactiver.\n\n\\[[Ensemble d’API\_: aperçu de boîte aux lettres](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]\n\n**<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadWriteItem`\n\n**<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/#extension-points)**: composition de message"
+    name: 'disableClientSignatureAsync(options, callback)'
+    fullName: 'disableClientSignatureAsync(options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'disableClientSignatureAsync(options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: options
+          description: 'Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: Les développeurs peuvent fournir n’importe quel objet auquel ils souhaitent accéder dans la méthode de rappel.'
+          type:
+            - 'outlook!Office.AsyncContextOptions:interface'
+        - id: callback
+          description: 'Facultatif. Une fois la méthode terminée, la fonction transmise au paramètre callback est appelée avec un seul paramètre,`asyncResult`<!-- -->, qui est un `Office.AsyncResult` objet.'
+          type:
+            - 'outlook!Office.MessageCompose#disableClientSignatureAsync~0:complex'
+  - uid: 'outlook!Office.MessageCompose#disableClientSignatureAsync:member(2)'
+    summary: "Désactive la signature du client Outlook.\n\nPour les clients riches Windows et Mac, cette API définit la signature sous les sections «\_nouveau message\_» et «\_réponses/transferts\_» pour le compte d’envoi sur «\_(aucun)\_», ce qui a pour effet de désactiver la signature. Pour Outlook sur le Web, l’API doit désactiver l’option de signature pour les nouveaux messages, les réponses et les transferts. Si la signature est sélectionnée, cet appel de l’API doit la désactiver.\n\n\\[[Ensemble d’API\_: aperçu de boîte aux lettres](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]\n\n**<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadWriteItem`\n\n**<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/#extension-points)**: composition de message"
+    name: disableClientSignatureAsync(callback)
+    fullName: disableClientSignatureAsync(callback)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'disableClientSignatureAsync(callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```javascript
+          // Disable the client signature.
+          Office.context.mailbox.item.disableClientSignatureAsync(function(asyncResult) {
+            if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+              console.log("disableClientSignatureAsync succeeded");
+            } else {
+              console.error(asyncResult.error);
+            }
+          });
+          ```
+      parameters:
+        - id: callback
+          description: 'Facultatif. Une fois la méthode terminée, la fonction transmise au paramètre callback est appelée avec un seul paramètre,`asyncResult`<!-- -->, qui est un `Office.AsyncResult` objet.'
+          type:
+            - 'outlook!Office.MessageCompose#disableClientSignatureAsync~1:complex'
   - uid: 'outlook!Office.MessageCompose#from:member'
     summary: "Obtient l’adresse de messagerie de l’expéditeur d’un message.\n\nLes propriétés `from` et `sender` représentent la même personne, sauf si le message est envoyé par un délégué. Dans ce cas, la `from` propriété représente le propriétaire et la `sender` propriété représente le délégué.\n\nLa `from` propriété renvoie un `From` objet qui fournit une méthode pour obtenir la valeur de.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
     remarks: |-
@@ -951,6 +1011,72 @@ items:
           description: 'Facultatif. Une fois la méthode terminée, la fonction transmise au paramètre callback est appelée avec un seul paramètre de type`Office.AsyncResult`<!-- -->. En cas d’échec de l'' `asyncResult.error` appel, la propriété contient un code d’erreur correspondant à la raison de l’échec.'
           type:
             - 'outlook!Office.MessageCompose#getAttachmentsAsync~1:complex'
+  - uid: 'outlook!Office.MessageCompose#getComposeTypeAsync:member(1)'
+    summary: Spécifie le type de composition de message et son type de forçage de type. Le message peut être nouveau ou répondre ou transférer. Le type de forçage de type peut être au format HTML ou texte brut.
+    remarks: |-
+      **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+
+      **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/#extension-points)**: composition de message
+    name: 'getComposeTypeAsync(options, callback)'
+    fullName: 'getComposeTypeAsync(options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getComposeTypeAsync(options: Office.AsyncContextOptions, callback: (asyncResult: Office.AsyncResult<any>) => void): void;'
+      return:
+        type:
+          - void
+        description: Objet avec `ComposeType` des valeurs `CoercionType` d’énumération et enum pour l’élément de message.
+      parameters:
+        - id: options
+          description: 'Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: Les développeurs peuvent fournir n’importe quel objet auquel ils souhaitent accéder dans la méthode de rappel.'
+          type:
+            - 'outlook!Office.AsyncContextOptions:interface'
+        - id: callback
+          description: "Une fois la méthode exécutée, la fonction transmise `callback` au paramètre est appelée avec un seul paramètre de type`Office.AsyncResult`<!-- -->. En cas de réussite `asyncResult.value` , la propriété contient un objet avec le type de composition et le type de forçage de type.\n\n\\[Ensemble d’API\_: aperçu de boîte aux lettres\\]"
+          type:
+            - 'outlook!Office.MessageCompose#getComposeTypeAsync~0:complex'
+  - uid: 'outlook!Office.MessageCompose#getComposeTypeAsync:member(2)'
+    summary: Spécifie le type de composition de message et son type de forçage de type. Le message peut être nouveau ou répondre ou transférer. Le type de forçage de type peut être au format HTML ou texte brut.
+    remarks: |-
+      **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+
+      **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/#extension-points)**: composition de message
+
+      #### <a name="examples"></a>Exemples
+
+      ```javascript
+      // Get the compose type of the current item (mail only).
+      Office.context.mailbox.item.getComposeTypeAsync(function(asyncResult) {
+        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+          console.log(
+            "getComposeTypeAsync succeeded with composeType: " +
+              asyncResult.value.composeType +
+              " and coercionType: " +
+              asyncResult.value.coercionType
+          );
+        } else {
+          console.error(asyncResult.error);
+        }
+      });
+      ```
+    name: getComposeTypeAsync(callback)
+    fullName: getComposeTypeAsync(callback)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getComposeTypeAsync(callback: (asyncResult: Office.AsyncResult<any>) => void): void;'
+      return:
+        type:
+          - void
+        description: Objet avec `ComposeType` des valeurs `CoercionType` d’énumération et enum pour l’élément de message.
+      parameters:
+        - id: callback
+          description: "Une fois la méthode exécutée, la fonction transmise `callback` au paramètre est appelée avec un seul paramètre de type`Office.AsyncResult`<!-- -->. En cas de réussite `asyncResult.value` , la propriété contient un objet avec le type de composition et le type de forçage de type.\n\n\\[Ensemble d’API\_: aperçu de boîte aux lettres\\]"
+          type:
+            - 'outlook!Office.MessageCompose#getComposeTypeAsync~1:complex'
   - uid: 'outlook!Office.MessageCompose#getInitializationContextAsync:member(1)'
     summary: "Obtient les données d’initialisation transmises lorsque le complément est activé par un message actionnable.\n\n**Remarque**: cette méthode est uniquement prise en charge par Outlook 2016 ou une version ultérieure sur Windows (versions «\_démarrer en un clic\_» supérieures à 16.0.8413.1000) et Outlook sur le Web pour Office 365.\n\n\\[[Ensemble d’API\_: aperçu de boîte aux lettres](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
     remarks: |-
@@ -1325,6 +1451,67 @@ items:
       return:
         type:
           - 'outlook!Office.InternetHeaders:interface'
+  - uid: 'outlook!Office.MessageCompose#isClientSignatureEnabledAsync:member(1)'
+    summary: "Obtient si la signature client est activée.\n\nPour les clients riches Windows et Mac, l’appel de l' `true` API doit renvoyer si la signature par défaut pour les nouveaux messages, les réponses ou les transferts est définie sur un modèle pour le compte Outlook d’envoi. Pour Outlook sur le Web, l’appel de l’API `true` doit renvoyer si la signature est activée pour les types de composition.`newMail`<!-- -->, `reply`<!-- -->, ou`forward`<!-- -->. Si les paramètres sont définis sur «\_(aucun)\_» dans Mac ou les clients Windows Rich, ou s’ils sont désactivés dans Outlook sur le Web, l’appel de l’API doit renvoyer`false`<!-- -->.\n\n\\[[Ensemble d’API\_: aperçu de boîte aux lettres](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
+    remarks: |-
+      **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+
+      **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/#extension-points)**: composition de message
+    name: 'isClientSignatureEnabledAsync(options, callback)'
+    fullName: 'isClientSignatureEnabledAsync(options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'isClientSignatureEnabledAsync(options: Office.AsyncContextOptions, callback: (asyncResult: Office.AsyncResult<boolean>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: options
+          description: 'Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: Les développeurs peuvent fournir n’importe quel objet auquel ils souhaitent accéder dans la méthode de rappel.'
+          type:
+            - 'outlook!Office.AsyncContextOptions:interface'
+        - id: callback
+          description: 'Une fois la méthode exécutée, la fonction transmise `callback` au paramètre est appelée avec un seul paramètre de type`Office.AsyncResult`<!-- -->.'
+          type:
+            - 'outlook!Office.MessageCompose#isClientSignatureEnabledAsync~0:complex'
+  - uid: 'outlook!Office.MessageCompose#isClientSignatureEnabledAsync:member(2)'
+    summary: "Obtient si la signature client est activée.\n\nPour les clients riches Windows et Mac, l’appel de l' `true` API doit renvoyer si la signature par défaut pour les nouveaux messages, les réponses ou les transferts est définie sur un modèle pour le compte Outlook d’envoi. Pour Outlook sur le Web, l’appel de l’API `true` doit renvoyer si la signature est activée pour les types de composition.`newMail`<!-- -->, `reply`<!-- -->, ou`forward`<!-- -->. Si les paramètres sont définis sur «\_(aucun)\_» dans Mac ou les clients Windows Rich, ou s’ils sont désactivés dans Outlook sur le Web, l’appel de l’API doit renvoyer`false`<!-- -->.\n\n\\[[Ensemble d’API\_: aperçu de boîte aux lettres](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
+    remarks: |-
+      **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+
+      **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/#extension-points)**: composition de message
+
+      #### <a name="examples"></a>Exemples
+
+      ```javascript
+      // Check if the client signature is currently enabled.
+      Office.context.mailbox.item.isClientSignatureEnabledAsync(function(asyncResult) {
+        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+          console.log("isClientSignatureEnabledAsync succeeded with result: " + asyncResult.value);
+        } else {
+          console.error(asyncResult.error);
+        }
+      });
+      ```
+    name: isClientSignatureEnabledAsync(callback)
+    fullName: isClientSignatureEnabledAsync(callback)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'isClientSignatureEnabledAsync(callback: (asyncResult: Office.AsyncResult<boolean>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: callback
+          description: 'Une fois la méthode exécutée, la fonction transmise `callback` au paramètre est appelée avec un seul paramètre de type`Office.AsyncResult`<!-- -->.'
+          type:
+            - 'outlook!Office.MessageCompose#isClientSignatureEnabledAsync~1:complex'
   - uid: 'outlook!Office.MessageCompose#itemType:member'
     summary: |-
       Obtient le type d’élément représenté par une instance.
@@ -2069,6 +2256,28 @@ references:
     name: Body
   - uid: 'outlook!Office.Categories:interface'
     name: Categories
+  - uid: 'outlook!Office.MessageCompose#disableClientSignatureAsync~0:complex'
+    name: '(asyncResult: Office.AsyncResult<void>) => void'
+    fullName: '(asyncResult: Office.AsyncResult<void>) => void'
+    spec.typeScript:
+      - name: '(asyncResult: '
+        fullName: '(asyncResult: '
+      - uid: 'outlook!Office.AsyncResult:interface'
+        name: Office.AsyncResult
+        fullName: Office.AsyncResult
+      - name: <void>) => void
+        fullName: <void>) => void
+  - uid: 'outlook!Office.MessageCompose#disableClientSignatureAsync~1:complex'
+    name: '(asyncResult: Office.AsyncResult<void>) => void'
+    fullName: '(asyncResult: Office.AsyncResult<void>) => void'
+    spec.typeScript:
+      - name: '(asyncResult: '
+        fullName: '(asyncResult: '
+      - uid: 'outlook!Office.AsyncResult:interface'
+        name: Office.AsyncResult
+        fullName: Office.AsyncResult
+      - name: <void>) => void
+        fullName: <void>) => void
   - uid: 'outlook!Office.From:interface'
     name: From
   - uid: 'outlook!Office.MessageCompose#getAttachmentContentAsync~0:complex'
@@ -2135,6 +2344,28 @@ references:
         fullName: Office.AttachmentDetails
       - name: '[]>) => void'
         fullName: '[]>) => void'
+  - uid: 'outlook!Office.MessageCompose#getComposeTypeAsync~0:complex'
+    name: '(asyncResult: Office.AsyncResult<any>) => void'
+    fullName: '(asyncResult: Office.AsyncResult<any>) => void'
+    spec.typeScript:
+      - name: '(asyncResult: '
+        fullName: '(asyncResult: '
+      - uid: 'outlook!Office.AsyncResult:interface'
+        name: Office.AsyncResult
+        fullName: Office.AsyncResult
+      - name: <any>) => void
+        fullName: <any>) => void
+  - uid: 'outlook!Office.MessageCompose#getComposeTypeAsync~1:complex'
+    name: '(asyncResult: Office.AsyncResult<any>) => void'
+    fullName: '(asyncResult: Office.AsyncResult<any>) => void'
+    spec.typeScript:
+      - name: '(asyncResult: '
+        fullName: '(asyncResult: '
+      - uid: 'outlook!Office.AsyncResult:interface'
+        name: Office.AsyncResult
+        fullName: Office.AsyncResult
+      - name: <any>) => void
+        fullName: <any>) => void
   - uid: 'outlook!Office.MessageCompose#getInitializationContextAsync~0:complex'
     name: '(asyncResult: Office.AsyncResult<string>) => void'
     fullName: '(asyncResult: Office.AsyncResult<string>) => void'
@@ -2253,6 +2484,28 @@ references:
         fullName: '>) => void'
   - uid: 'outlook!Office.InternetHeaders:interface'
     name: InternetHeaders
+  - uid: 'outlook!Office.MessageCompose#isClientSignatureEnabledAsync~0:complex'
+    name: '(asyncResult: Office.AsyncResult<boolean>) => void'
+    fullName: '(asyncResult: Office.AsyncResult<boolean>) => void'
+    spec.typeScript:
+      - name: '(asyncResult: '
+        fullName: '(asyncResult: '
+      - uid: 'outlook!Office.AsyncResult:interface'
+        name: Office.AsyncResult
+        fullName: Office.AsyncResult
+      - name: <boolean>) => void
+        fullName: <boolean>) => void
+  - uid: 'outlook!Office.MessageCompose#isClientSignatureEnabledAsync~1:complex'
+    name: '(asyncResult: Office.AsyncResult<boolean>) => void'
+    fullName: '(asyncResult: Office.AsyncResult<boolean>) => void'
+    spec.typeScript:
+      - name: '(asyncResult: '
+        fullName: '(asyncResult: '
+      - uid: 'outlook!Office.AsyncResult:interface'
+        name: Office.AsyncResult
+        fullName: Office.AsyncResult
+      - name: <boolean>) => void
+        fullName: <boolean>) => void
   - uid: 'outlook!Office.MessageCompose#itemType~0:complex'
     name: MailboxEnums.ItemType | string
     fullName: Office.MailboxEnums.ItemType | string
