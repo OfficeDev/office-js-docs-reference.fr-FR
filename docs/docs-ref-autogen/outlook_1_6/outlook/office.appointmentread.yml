@@ -246,13 +246,13 @@ items:
         "This is a reply ALL with <b>some bold text</b>."
       );
       ```
-    name: 'displayReplyAllForm(formData, callback)'
-    fullName: 'displayReplyAllForm(formData, callback)'
+    name: displayReplyAllForm(formData)
+    fullName: displayReplyAllForm(formData)
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'displayReplyAllForm(formData: string | ReplyFormData, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      content: 'displayReplyAllForm(formData: string | ReplyFormData): void;'
       return:
         type:
           - void
@@ -262,10 +262,6 @@ items:
           description: 'Chaîne qui contient du texte et des éléments HTML et qui représente le corps du formulaire de réponse. La chaîne est limitée à 32 Ko ou un objet [ReplyFormData](xref:outlook!Office.ReplyFormData:interface) qui contient les données de corps ou de pièces jointes et une fonction de rappel.'
           type:
             - 'outlook!Office.AppointmentRead#displayReplyAllForm~0:complex'
-        - id: callback
-          description: 'Facultatif. Une fois la méthode exécutée, la fonction transmise `callback` au paramètre est appelée avec un seul paramètre,`asyncResult`<!-- -->, qui est un `Office.AsyncResult` objet.'
-          type:
-            - 'outlook!Office.AppointmentRead#displayReplyAllForm~1:complex'
   - uid: 'outlook!Office.AppointmentRead#displayReplyForm:member(1)'
     summary: "Affiche un formulaire de réponse qui comprend uniquement l’expéditeur du message sélectionné ou l’organisateur du rendez-vous sélectionné.\n\nDans Outlook\_sur le web, le formulaire de réponse s’affiche sous forme de formulaire isolé dans l’affichage à 3\_colonnes et sous forme de formulaire contextuel dans l’affichage à 1 ou 2\_colonnes.\n\nSi un des paramètres de chaîne dépasse la limite, `displayReplyForm` génère une exception.\n\nLorsque des pièces jointes sont spécifiées dans le paramètre `formData.attachments`, Outlook et Outlook\_sur le web et clients bureau tentent de télécharger toutes les pièces jointes et de les joindre au formulaire de réponse. Si aucune pièce jointe n’est ajoutée, une erreur s’affiche dans l’interface utilisateur du formulaire. Si ce n’est pas possible, aucun message d’erreur n’est généré.\n\n**Remarque**: cette méthode n’est pas prise en charge dans Outlook sur iOS ou Android."
     remarks: |-
@@ -364,13 +360,13 @@ items:
           }
       });
       ```
-    name: 'displayReplyForm(formData, callback)'
-    fullName: 'displayReplyForm(formData, callback)'
+    name: displayReplyForm(formData)
+    fullName: displayReplyForm(formData)
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'displayReplyForm(formData: string | ReplyFormData, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      content: 'displayReplyForm(formData: string | ReplyFormData): void;'
       return:
         type:
           - void
@@ -380,10 +376,6 @@ items:
           description: 'Chaîne qui contient du texte et des éléments HTML et qui représente le corps du formulaire de réponse. La chaîne est limitée à 32 Ko ou un objet [ReplyFormData](xref:outlook!Office.ReplyFormData:interface) qui contient les données de corps ou de pièces jointes et une fonction de rappel.'
           type:
             - 'outlook!Office.AppointmentRead#displayReplyForm~0:complex'
-        - id: callback
-          description: 'Facultatif. Une fois la méthode exécutée, la fonction transmise `callback` au paramètre est appelée avec un seul paramètre,`asyncResult`<!-- -->, qui est un `Office.AsyncResult` objet.'
-          type:
-            - 'outlook!Office.AppointmentRead#displayReplyForm~1:complex'
   - uid: 'outlook!Office.AppointmentRead#end:member'
     summary: |-
       Obtient la date et l’heure de fin du rendez-vous.
@@ -532,7 +524,7 @@ items:
 
             Tandis que le niveau d’autorisation minimal pour utiliser cette méthode est`Restricted`<!-- -->, certains types d’entité `ReadItem` nécessitent l’accès, comme indiqué dans le tableau suivant.
 
-            <table> <tr> <th>Valeur d’entityType</th> <th>Type des objets du tableau renvoyé</th> <th>Niveau d’autorisation requis</th> </tr> <tr> <td>Adresse</td> <td>Chaîne</td> <td>Restreint</td> </tr> <tr> <td>Contact</td> <td>Contact</td> <td>ReadItem</td> </tr> <tr> <td>EmailAddress</td> <td>Chaîne</td> <td>ReadItem</td> </tr> <tr> <td>MeetingSuggestion</td> <td>MeetingSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>PhoneNumber</td> <td>PhoneNumber</td> <td>Restreint</td> </tr> <tr> <td>TaskSuggestion</td> <td>TaskSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>URL</td> <td>Chaîne</td> <td>Restreint</td> </tr> </table>
+            <table> <tr> <th>Valeur d’entityType</th> <th>Type des objets du tableau renvoyé</th> <th>Niveau d’autorisation requis</th> </tr> <tr> <td>Adresse</td> <td>String</td> <td>Restreint</td> </tr> <tr> <td>Contact</td> <td>Contact</td> <td>ReadItem</td> </tr> <tr> <td>EmailAddress</td> <td>String</td> <td>ReadItem</td> </tr> <tr> <td>MeetingSuggestion</td> <td>MeetingSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>PhoneNumber</td> <td>PhoneNumber</td> <td>Restreint</td> </tr> <tr> <td>TaskSuggestion</td> <td>TaskSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>URL</td> <td>String</td> <td>Restreint</td> </tr> </table>
           type:
             - 'outlook!Office.AppointmentRead#getEntitiesByType~1:complex'
   - uid: 'outlook!Office.AppointmentRead#getFilteredEntitiesByName:member(1)'
@@ -1274,17 +1266,6 @@ references:
       - uid: 'outlook!Office.ReplyFormData:interface'
         name: ReplyFormData
         fullName: Office.ReplyFormData
-  - uid: 'outlook!Office.AppointmentRead#displayReplyAllForm~1:complex'
-    name: '(asyncResult: Office.AsyncResult<void>) => void'
-    fullName: '(asyncResult: Office.AsyncResult<void>) => void'
-    spec.typeScript:
-      - name: '(asyncResult: '
-        fullName: '(asyncResult: '
-      - uid: 'outlook!Office.AsyncResult:interface'
-        name: Office.AsyncResult
-        fullName: Office.AsyncResult
-      - name: <void>) => void
-        fullName: <void>) => void
   - uid: 'outlook!Office.AppointmentRead#displayReplyForm~0:complex'
     name: string | ReplyFormData
     fullName: string | Office.ReplyFormData
@@ -1294,17 +1275,6 @@ references:
       - uid: 'outlook!Office.ReplyFormData:interface'
         name: ReplyFormData
         fullName: Office.ReplyFormData
-  - uid: 'outlook!Office.AppointmentRead#displayReplyForm~1:complex'
-    name: '(asyncResult: Office.AsyncResult<void>) => void'
-    fullName: '(asyncResult: Office.AsyncResult<void>) => void'
-    spec.typeScript:
-      - name: '(asyncResult: '
-        fullName: '(asyncResult: '
-      - uid: 'outlook!Office.AsyncResult:interface'
-        name: Office.AsyncResult
-        fullName: Office.AsyncResult
-      - name: <void>) => void
-        fullName: <void>) => void
   - uid: 'outlook!Office.Entities:interface'
     name: Entities
   - uid: 'outlook!Office.AppointmentRead#getEntitiesByType~0:complex'
