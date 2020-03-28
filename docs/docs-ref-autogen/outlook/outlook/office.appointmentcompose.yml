@@ -39,6 +39,7 @@ items:
       - 'outlook!Office.AppointmentCompose#getSelectedDataAsync:member(2)'
       - 'outlook!Office.AppointmentCompose#getSharedPropertiesAsync:member(1)'
       - 'outlook!Office.AppointmentCompose#getSharedPropertiesAsync:member(2)'
+      - 'outlook!Office.AppointmentCompose#isAllDayEvent:member'
       - 'outlook!Office.AppointmentCompose#isClientSignatureEnabledAsync:member(1)'
       - 'outlook!Office.AppointmentCompose#isClientSignatureEnabledAsync:member(2)'
       - 'outlook!Office.AppointmentCompose#itemType:member'
@@ -55,6 +56,7 @@ items:
       - 'outlook!Office.AppointmentCompose#requiredAttendees:member'
       - 'outlook!Office.AppointmentCompose#saveAsync:member(1)'
       - 'outlook!Office.AppointmentCompose#saveAsync:member(2)'
+      - 'outlook!Office.AppointmentCompose#sensitivity:member'
       - 'outlook!Office.AppointmentCompose#seriesId:member'
       - 'outlook!Office.AppointmentCompose#setSelectedDataAsync:member(1)'
       - 'outlook!Office.AppointmentCompose#setSelectedDataAsync:member(2)'
@@ -1290,6 +1292,48 @@ items:
           description: 'Une fois la méthode terminée, la fonction transmise au paramètre callback est appelée avec un seul paramètre de type`Office.AsyncResult`<!-- -->. La `value` propriété du résultat est les propriétés de l’élément partagé.'
           type:
             - 'outlook!Office.AppointmentCompose#getSharedPropertiesAsync~1:complex'
+  - uid: 'outlook!Office.AppointmentCompose#isAllDayEvent:member'
+    summary: "Obtient ou définit la propriété [Office. IsAllDayEvent](xref:outlook!Office.IsAllDayEvent:interface) d’un rendez-vous.\n\n\\[[Ensemble d’API\_: aperçu de boîte aux lettres](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
+    remarks: |-
+      **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+
+      **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: organisateur de rendez-vous
+
+      #### <a name="examples"></a>Exemples
+
+      ```javascript
+      // Set isAllDayEvent property.
+      Office.context.mailbox.item.isAllDayEvent.setAsync(
+          true,
+          function (asyncResult) {
+              if (asyncResult.status === Office.AsyncResultStatus.Failed) {
+                  console.log("Failed to set all-day event: " + JSON.stringify(asyncResult.error));
+              } else {
+                  console.log("Appointment set to all-day event.");
+              }
+          });
+
+      // Get isAllDayEvent property.
+      console.log(Office.context.mailbox.item.isAllDayEvent.getAsync(
+          function(asyncResult) {
+              if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+                  console.log("Is an all-day event? " + asyncResult.value);
+              } else {
+                  console.log("Failed to get if this is an all-day event. Error: " + JSON.stringify(asyncResult.error));
+              }
+          });
+      ```
+    isPreview: true
+    name: isAllDayEvent
+    fullName: isAllDayEvent
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'isAllDayEvent: IsAllDayEvent;'
+      return:
+        type:
+          - 'outlook!Office.IsAllDayEvent:interface'
   - uid: 'outlook!Office.AppointmentCompose#isClientSignatureEnabledAsync:member(1)'
     summary: "Obtient si la signature client est activée.\n\nPour les clients riches Windows et Mac, l’appel de l' `true` API doit renvoyer si la signature par défaut pour les nouveaux messages, les réponses ou les transferts est définie sur un modèle pour le compte Outlook d’envoi. Pour Outlook sur le Web, l’appel de l’API `true` doit renvoyer si la signature est activée pour les types de composition.`newMail`<!-- -->, `reply`<!-- -->, ou`forward`<!-- -->. Si les paramètres sont définis sur «\_(aucun)\_» dans Mac ou les clients Windows Rich, ou s’ils sont désactivés dans Outlook sur le Web, l’appel de l’API doit renvoyer`false`<!-- -->.\n\n\\[[Ensemble d’API\_: aperçu de boîte aux lettres](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
     remarks: |-
@@ -1992,6 +2036,48 @@ items:
           description: 'Une fois la méthode terminée, la fonction transmise au paramètre callback est appelée avec un seul paramètre de type`Office.AsyncResult`<!-- -->.'
           type:
             - 'outlook!Office.AppointmentCompose#saveAsync~1:complex'
+  - uid: 'outlook!Office.AppointmentCompose#sensitivity:member'
+    summary: "Obtient ou définit le [critère de diffusion](xref:outlook!Office.Sensitivity:interface) d’un rendez-vous.\n\n\\[[Ensemble d’API\_: aperçu de boîte aux lettres](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
+    remarks: |-
+      **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+
+      **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: organisateur de rendez-vous
+
+      #### <a name="examples"></a>Exemples
+
+      ```javascript
+      // Set sensitivity property.
+      Office.context.mailbox.item.sensitivity.setAsync(
+          Office.MailboxEnums.AppointmentSensitivityType.Confidential,
+          function callback(asyncResult) {
+              if (asyncResult.status === Office.AsyncResultStatus.Failed) {
+                  console.log("Failed to set appointment sensitivity: " + JSON.stringify(asyncResult.error));
+              } else {
+                  console.log("Successfully set appointment sensitivity.");
+              }
+          });
+
+      // Get sensitivity property.
+      console.log(Office.context.mailbox.item.sensitivity.getAsync(
+          function(asyncResult) {
+              if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+                  console.log("Sensitivity: " + asyncResult.value);
+              } else {
+                  console.log("Failed to get sensitivity: " + JSON.stringify(asyncResult.error));
+              }
+          });
+      ```
+    isPreview: true
+    name: sensitivity
+    fullName: sensitivity
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'sensitivity: Sensitivity;'
+      return:
+        type:
+          - 'outlook!Office.Sensitivity:interface'
   - uid: 'outlook!Office.AppointmentCompose#seriesId:member'
     summary: "Obtient l’ID de la série à laquelle une instance appartient.\n\nDans Outlook sur le Web et les clients de bureau `seriesId` , la propriété renvoie l’ID des services Web Exchange (EWS) de l’élément parent (série) auquel cet élément appartient. Toutefois, sur iOS et Android, l’seriesId renvoie l’ID REST de l’élément parent.\n\n**Remarque**: l’identificateur renvoyé par la `seriesId` propriété est identique à l’identificateur d’élément des services Web Exchange. La `seriesId` propriété n’est pas identique aux ID Outlook utilisés par l’API REST Outlook. Avant de passer des appels d’API REST à l’aide de cette valeur, elle doit être convertie à l’aide de`Office.context.mailbox.convertToRestId`<!-- -->. Pour plus d’informations, consultez [la rubrique utiliser les API REST Outlook à partir d’un complément Outlook](https://docs.microsoft.com/office/dev/add-ins/outlook/use-rest-api) .<!-- -->.\n\nLa `seriesId` propriété renvoie `null` pour les éléments qui n’ont pas d’éléments parents, tels que les rendez-vous uniques, les `undefined` éléments de série ou les demandes de réunion, et les retours pour tous les autres éléments qui ne sont pas des demandes de réunion.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
     remarks: |-
@@ -2531,6 +2617,8 @@ references:
         fullName: Office.SharedProperties
       - name: '>) => void'
         fullName: '>) => void'
+  - uid: 'outlook!Office.IsAllDayEvent:interface'
+    name: IsAllDayEvent
   - uid: 'outlook!Office.AppointmentCompose#isClientSignatureEnabledAsync~0:complex'
     name: '(asyncResult: Office.AsyncResult<boolean>) => void'
     fullName: '(asyncResult: Office.AsyncResult<boolean>) => void'
@@ -2672,6 +2760,8 @@ references:
         fullName: Office.AsyncResult
       - name: <string>) => void
         fullName: <string>) => void
+  - uid: 'outlook!Office.Sensitivity:interface'
+    name: Sensitivity
   - uid: 'outlook!Office.AppointmentCompose#setSelectedDataAsync~0:complex'
     name: Office.AsyncContextOptions & CoercionTypeOptions
     fullName: Office.AsyncContextOptions & Office.CoercionTypeOptions

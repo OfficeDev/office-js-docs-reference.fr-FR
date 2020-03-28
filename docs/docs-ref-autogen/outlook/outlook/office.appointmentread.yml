@@ -36,6 +36,7 @@ items:
       - 'outlook!Office.AppointmentRead#getSelectedRegExMatches:member(1)'
       - 'outlook!Office.AppointmentRead#getSharedPropertiesAsync:member(1)'
       - 'outlook!Office.AppointmentRead#getSharedPropertiesAsync:member(2)'
+      - 'outlook!Office.AppointmentRead#isAllDayEvent:member'
       - 'outlook!Office.AppointmentRead#itemClass:member'
       - 'outlook!Office.AppointmentRead#itemId:member'
       - 'outlook!Office.AppointmentRead#itemType:member'
@@ -49,6 +50,7 @@ items:
       - 'outlook!Office.AppointmentRead#removeHandlerAsync:member(1)'
       - 'outlook!Office.AppointmentRead#removeHandlerAsync:member(2)'
       - 'outlook!Office.AppointmentRead#requiredAttendees:member'
+      - 'outlook!Office.AppointmentRead#sensitivity:member'
       - 'outlook!Office.AppointmentRead#seriesId:member'
       - 'outlook!Office.AppointmentRead#start:member'
       - 'outlook!Office.AppointmentRead#subject:member'
@@ -834,7 +836,7 @@ items:
 
             Tandis que le niveau d’autorisation minimal pour utiliser cette méthode est`Restricted`<!-- -->, certains types d’entité `ReadItem` nécessitent l’accès, comme indiqué dans le tableau suivant.
 
-            <table> <tr> <th>Valeur d’entityType</th> <th>Type des objets du tableau renvoyé</th> <th>Niveau d’autorisation requis</th> </tr> <tr> <td>Adresse</td> <td>String</td> <td>Restreint</td> </tr> <tr> <td>Contact</td> <td>Contact</td> <td>ReadItem</td> </tr> <tr> <td>EmailAddress</td> <td>String</td> <td>ReadItem</td> </tr> <tr> <td>MeetingSuggestion</td> <td>MeetingSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>PhoneNumber</td> <td>PhoneNumber</td> <td>Restreint</td> </tr> <tr> <td>TaskSuggestion</td> <td>TaskSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>URL</td> <td>String</td> <td>Restreint</td> </tr> </table>
+            <table> <tr> <th>Valeur d’entityType</th> <th>Type des objets du tableau renvoyé</th> <th>Niveau d’autorisation requis</th> </tr> <tr> <td>Adresse</td> <td>Chaîne</td> <td>Restreint</td> </tr> <tr> <td>Contact</td> <td>Contact</td> <td>ReadItem</td> </tr> <tr> <td>EmailAddress</td> <td>Chaîne</td> <td>ReadItem</td> </tr> <tr> <td>MeetingSuggestion</td> <td>MeetingSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>PhoneNumber</td> <td>PhoneNumber</td> <td>Restreint</td> </tr> <tr> <td>TaskSuggestion</td> <td>TaskSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>URL</td> <td>Chaîne</td> <td>Restreint</td> </tr> </table>
           type:
             - 'outlook!Office.AppointmentRead#getEntitiesByType~1:complex'
   - uid: 'outlook!Office.AppointmentRead#getFilteredEntitiesByName:member(1)'
@@ -1274,6 +1276,30 @@ items:
           description: 'Une fois la méthode terminée, la fonction transmise au paramètre callback est appelée avec un seul paramètre de type`Office.AsyncResult`<!-- -->. La `value` propriété du résultat est les propriétés de l’élément partagé.'
           type:
             - 'outlook!Office.AppointmentRead#getSharedPropertiesAsync~1:complex'
+  - uid: 'outlook!Office.AppointmentRead#isAllDayEvent:member'
+    summary: "Renvoie une valeur de type Boolean qui indique si l’événement est une journée entière.\n\n\\[[Ensemble d’API\_: aperçu de boîte aux lettres](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
+    remarks: |-
+      **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+
+      **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: rendez-vous
+
+      #### <a name="examples"></a>Exemples
+
+      ```javascript
+      var isAllDayEvent = Office.context.mailbox.item.isAllDayEvent;
+      console.log("Is this an all-day event? " + isAllDayEvent);
+      ```
+    isPreview: true
+    name: isAllDayEvent
+    fullName: isAllDayEvent
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'isAllDayEvent: boolean;'
+      return:
+        type:
+          - boolean
   - uid: 'outlook!Office.AppointmentRead#itemClass:member'
     summary: |-
       Obtient la classe de l’élément des services web Exchange de l’élément sélectionné.
@@ -1767,6 +1793,30 @@ items:
       return:
         type:
           - 'outlook!Office.AppointmentRead#requiredAttendees~0:complex'
+  - uid: 'outlook!Office.AppointmentRead#sensitivity:member'
+    summary: "Fournit la valeur de la sensibilité du rendez-vous.\n\n\\[[Ensemble d’API\_: aperçu de boîte aux lettres](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
+    remarks: |-
+      **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permission)**:`ReadItem`
+
+      **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: rendez-vous
+
+      #### <a name="examples"></a>Exemples
+
+      ```javascript
+      var sensitivity = Office.context.mailbox.item.sensitivity;
+      console.log("Sensitivity: " + sensitivity);
+      ```
+    isPreview: true
+    name: sensitivity
+    fullName: sensitivity
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'sensitivity: MailboxEnums.AppointmentSensitivityType;'
+      return:
+        type:
+          - 'outlook!Office.MailboxEnums.AppointmentSensitivityType:enum'
   - uid: 'outlook!Office.AppointmentRead#seriesId:member'
     summary: "Obtient l’ID de la série à laquelle une instance appartient.\n\nDans Outlook sur le Web et les clients de bureau `seriesId` , le renvoie l’ID des services Web Exchange (EWS) de l’élément parent (série) auquel cet élément appartient. Toutefois, sur iOS et Android, l’seriesId renvoie l’ID REST de l’élément parent.\n\n**Remarque**: l’identificateur renvoyé par la `seriesId` propriété est identique à l’identificateur d’élément des services Web Exchange. La `seriesId` propriété n’est pas identique aux ID Outlook utilisés par l’API REST Outlook. Avant de passer des appels d’API REST à l’aide de cette valeur, elle doit être convertie à l’aide de`Office.context.mailbox.convertToRestId`<!-- -->. Pour plus d’informations, consultez [la rubrique utiliser les API REST Outlook à partir d’un complément Outlook](https://docs.microsoft.com/office/dev/add-ins/outlook/use-rest-api) .<!-- -->.\n\nLa `seriesId` propriété renvoie `null` pour les éléments qui n’ont pas d’éléments parents, tels que les rendez-vous uniques, les `undefined` éléments de série ou les demandes de réunion, et les retours pour tous les autres éléments qui ne sont pas des demandes de réunion.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
     remarks: |-
@@ -2189,3 +2239,5 @@ references:
         fullName: Office.EmailAddressDetails
       - name: '[]'
         fullName: '[]'
+  - uid: 'outlook!Office.MailboxEnums.AppointmentSensitivityType:enum'
+    name: MailboxEnums.AppointmentSensitivityType
