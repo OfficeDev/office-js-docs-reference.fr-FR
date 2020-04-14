@@ -55,15 +55,13 @@ items:
       #### <a name="examples"></a>Exemples
 
       ```javascript
-      // Get isAllDayEvent property.
-      console.log(Office.context.mailbox.item.isAllDayEvent.getAsync(
-          function(asyncResult) {
-              if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
-                  console.log("Is an all-day event? " + asyncResult.value);
-              } else {
-                  console.log("Failed to get if this is an all-day event. Error: " + JSON.stringify(asyncResult.error));
-              }
-          });
+      Office.context.mailbox.item.isAllDayEvent.getAsync(function(asyncResult) {
+        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+          console.log("Is this an all-day event? " + asyncResult.value);
+        } else {
+          console.log("Failed to get if this is an all-day event. Error: " + JSON.stringify(asyncResult.error));
+        }
+      });
       ```
     isPreview: true
     name: getAsync(callback)
@@ -112,7 +110,7 @@ items:
             - 'outlook!Office.IsAllDayEvent#setAsync~0:complex'
   - uid: 'outlook!Office.IsAllDayEvent#setAsync:member(2)'
     summary: "Définit l’état d’événement sur une journée entière d’un rendez-vous.\n\n\\[[Ensemble d’API\_: aperçu de boîte aux lettres](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
-    remarks: "Si un rendez-vous est marqué comme un événement d’une journée entière\_:-l’heure de début et de fin sera marquée comme suit\_: 12:00 AM (tout comme dans l’interface utilisateur d’Outlook). L’heure de début renverra 12:00 AM et l’heure de fin sera de 12:00 AM le jour suivant.\n\n**<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadWriteItem`\n\n**<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: composition\n\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\n// Set isAllDayEvent property.\nOffice.context.mailbox.item.isAllDayEvent.setAsync(\n    true,\n    function (asyncResult) {\n        if (asyncResult.status === Office.AsyncResultStatus.Failed) {\n            console.log(\"Failed to set all-day event: \" + JSON.stringify(asyncResult.error));\n        } else {\n            console.log(\"Appointment set to all-day event.\");\n        }\n    });\n```"
+    remarks: "Si un rendez-vous est marqué comme un événement d’une journée entière\_:-l’heure de début et de fin sera marquée comme suit\_: 12:00 AM (tout comme dans l’interface utilisateur d’Outlook). L’heure de début renverra 12:00 AM et l’heure de fin sera de 12:00 AM le jour suivant.\n\n**<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadWriteItem`\n\n**<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: composition\n\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nOffice.context.mailbox.item.isAllDayEvent.setAsync(true, function(asyncResult) {\n  if (asyncResult.status === Office.AsyncResultStatus.Failed) {\n    console.log(\"Failed to set all-day event: \" + JSON.stringify(asyncResult.error));\n  } else {\n    console.log(\"Appointment set to all-day event.\");\n  }\n});\n```"
     isPreview: true
     name: 'setAsync(isAllDayEvent, callback)'
     fullName: 'setAsync(isAllDayEvent, callback)'
