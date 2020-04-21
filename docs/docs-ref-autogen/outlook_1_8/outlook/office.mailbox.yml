@@ -64,7 +64,7 @@ items:
         - id: options
           description: 'Facultatif. Fournit une option permettant de conserver les données de contexte de n’importe quel type, inchangées, pour une utilisation dans un rappel.'
           type:
-            - 'outlook!Office.AsyncContextOptions:interface'
+            - 'office!Office.AsyncContextOptions:interface'
         - id: callback
           description: 'Facultatif. Une fois la méthode exécutée, la fonction transmise `callback` au paramètre est appelée avec un seul paramètre de type`Office.AsyncResult`<!-- -->.'
           type:
@@ -76,7 +76,7 @@ items:
 
       **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: composition ou lecture
 
-      #### <a name="examples"></a>Exemples
+      #### <a name="examples"></a>範例
 
       ```javascript
       Office.initialize = function (reason) {
@@ -125,9 +125,10 @@ items:
 
       **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: composition ou lecture
 
-      #### <a name="examples"></a>Exemples
+      #### <a name="examples"></a>範例
 
       ```javascript
+      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/85-tokens-and-service-calls/ids-and-urls.yaml
       console.log("EWS URL: " + Office.context.mailbox.ewsUrl);
       var ewsId = Office.context.mailbox.item.itemId;
       console.log("EWS item ID: " + Office.context.mailbox.item.itemId);
@@ -190,9 +191,10 @@ items:
 
       Les ID d’élément extraits via EWS ou `itemId` via la propriété utilisent un format différent du format utilisé par les API REST (telles que l' [API de messagerie Outlook](https://docs.microsoft.com/previous-versions/office/office-365-api/api/version-2.0/mail-rest-operations) ou [Microsoft Graph](https://graph.microsoft.io/)<!-- -->. La méthode `convertToRestId` convertit un ID mis en forme pour EWS au format approprié pour REST.
 
-      #### <a name="examples"></a>Exemples
+      #### <a name="examples"></a>範例
 
       ```javascript
+      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/85-tokens-and-service-calls/basic-rest-cors.yaml
       Office.context.mailbox.getCallbackTokenAsync({ isRest: true }, function (result) {
           var ewsId = Office.context.mailbox.item.itemId;
           var token = result.value;
@@ -209,6 +211,7 @@ items:
       });
       ```
       ```javascript
+      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/85-tokens-and-service-calls/ids-and-urls.yaml
       console.log("EWS URL: " + Office.context.mailbox.ewsUrl);
       var ewsId = Office.context.mailbox.item.itemId;
       console.log("EWS item ID: " + Office.context.mailbox.item.itemId);
@@ -250,7 +253,7 @@ items:
 
       **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: composition ou lecture
 
-      #### <a name="examples"></a>Exemples
+      #### <a name="examples"></a>範例
 
       ```javascript
       // Represents 3:37 PM PDT on Monday, August 26, 2019.
@@ -310,9 +313,10 @@ items:
 
       **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: composition ou lecture
 
-      #### <a name="examples"></a>Exemples
+      #### <a name="examples"></a>範例
 
       ```javascript
+      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/55-display-items/display-existing-appointment.yaml
       var itemId = $("#itemId").val();
       Office.context.mailbox.displayAppointmentForm(itemId);
       ```
@@ -339,9 +343,10 @@ items:
 
       **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: composition ou lecture
 
-      #### <a name="examples"></a>Exemples
+      #### <a name="examples"></a>範例
 
       ```javascript
+      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/55-display-items/display-existing-message.yaml
       var itemId = $("#itemId").val();
       Office.context.mailbox.displayMessageForm(itemId);
       ```
@@ -379,9 +384,10 @@ items:
 
       **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: lecture
 
-      #### <a name="examples"></a>Exemples
+      #### <a name="examples"></a>範例
 
       ```javascript
+      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/55-display-items/display-new-appointment.yaml
       var start = new Date();
       var end = new Date();
       end.setHours(start.getHours() + 1);
@@ -421,9 +427,10 @@ items:
 
       **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: lecture
 
-      #### <a name="examples"></a>Exemples
+      #### <a name="examples"></a>範例
 
       ```javascript
+      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/55-display-items/display-new-message.yaml
       Office.context.mailbox.displayNewMessageForm(
       {
           toRecipients: Office.context.mailbox.item.to, // Copies the To line from current item
@@ -466,9 +473,10 @@ items:
 
       La valeur `ewsUrl` peut être utilisée par un service distant pour émettre des appels EWS vers la boîte aux lettres de l’utilisateur. Par exemple, vous pouvez créer un service distant pour [obtenir des pièces jointes à partir de l’élément sélectionné](https://docs.microsoft.com/office/dev/add-ins/outlook/get-attachments-of-an-outlook-item) .<!-- -->.
 
-      #### <a name="examples"></a>Exemples
+      #### <a name="examples"></a>範例
 
       ```javascript
+      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/85-tokens-and-service-calls/ids-and-urls.yaml
       console.log("EWS URL: " + Office.context.mailbox.ewsUrl);
       var ewsId = Office.context.mailbox.item.itemId;
       console.log("EWS item ID: " + Office.context.mailbox.item.itemId);
@@ -505,9 +513,10 @@ items:
 
       - `NetworkError`<!-- -->: L’utilisateur n’est plus connecté au réseau. Veuillez vérifier la connexion réseau et réessayer.
 
-      #### <a name="examples"></a>Exemples
+      #### <a name="examples"></a>範例
 
       ```javascript
+      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/85-tokens-and-service-calls/basic-rest-cors.yaml
       Office.context.mailbox.getCallbackTokenAsync({ isRest: true }, function (result) {
           var ewsId = Office.context.mailbox.item.itemId;
           var token = result.value;
@@ -558,9 +567,10 @@ items:
 
       - `NetworkError`<!-- -->: L’utilisateur n’est plus connecté au réseau. Veuillez vérifier la connexion réseau et réessayer.
 
-      #### <a name="examples"></a>Exemples
+      #### <a name="examples"></a>範例
 
       ```javascript
+      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/85-tokens-and-service-calls/user-callback-token.yaml
       Office.context.mailbox.getCallbackTokenAsync(function (result) {
           if (result.status !== Office.AsyncResultStatus.Succeeded) {
               console.error(`Token retrieval failed with message: ${result.error.message}`);
@@ -609,9 +619,10 @@ items:
 
       - `NetworkError`<!-- -->: L’utilisateur n’est plus connecté au réseau. Veuillez vérifier la connexion réseau et réessayer.
 
-      #### <a name="examples"></a>Exemples
+      #### <a name="examples"></a>範例
 
       ```javascript
+      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/85-tokens-and-service-calls/user-identity-token.yaml
       Office.context.mailbox.getUserIdentityTokenAsync(function (result) {
           if (result.status !== Office.AsyncResultStatus.Succeeded) {
               console.error(`Token retrieval failed with message: ${result.error.message}`);
@@ -659,7 +670,7 @@ items:
 
       **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: composition ou lecture
 
-      #### <a name="examples"></a>Exemples
+      #### <a name="examples"></a>範例
 
       ```javascript
       function getSubjectRequest(id) {
@@ -703,6 +714,7 @@ items:
       }
       ```
       ```javascript
+      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/85-tokens-and-service-calls/make-ews-request-async.yaml
       var ewsId = Office.context.mailbox.item.itemId;
       var request = '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:m="http://schemas.microsoft.com/exchange/services/2006/messages" xmlns:t="http://schemas.microsoft.com/exchange/services/2006/types" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">' +
           '  <soap:Header><t:RequestServerVersion Version="Exchange2013" /></soap:Header>' +
@@ -723,6 +735,7 @@ items:
       });
       ```
       ```javascript
+      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/85-tokens-and-service-calls/send-message-using-make-ews-request-async.yaml
       var request = '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:m="http://schemas.microsoft.com/exchange/services/2006/messages" xmlns:t="http://schemas.microsoft.com/exchange/services/2006/types" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">'+
           '  <soap:Header><t:RequestServerVersion Version="Exchange2010" /></soap:Header>'+
           '  <soap:Body>'+
@@ -776,9 +789,10 @@ items:
 
       **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: composition ou lecture
 
-      #### <a name="examples"></a>Exemples
+      #### <a name="examples"></a>範例
 
       ```javascript
+      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/45-categories/work-with-master-categories.yaml
       Office.context.mailbox.masterCategories.getAsync(function(asyncResult) {
         if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
           var categories = asyncResult.value;
@@ -794,6 +808,7 @@ items:
       });
       ```
       ```javascript
+      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/45-categories/work-with-master-categories.yaml
       var masterCategoriesToAdd = [
         {
           displayName: "TestCategory",
@@ -810,6 +825,7 @@ items:
       });
       ```
       ```javascript
+      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/45-categories/work-with-master-categories.yaml
       var masterCategoriesToRemove = ["TestCategory"];
 
       Office.context.mailbox.masterCategories.removeAsync(masterCategoriesToRemove, function(asyncResult) {
@@ -855,7 +871,7 @@ items:
         - id: options
           description: 'Facultatif. Fournit une option permettant de conserver les données de contexte de n’importe quel type, inchangées, pour une utilisation dans un rappel.'
           type:
-            - 'outlook!Office.AsyncContextOptions:interface'
+            - 'office!Office.AsyncContextOptions:interface'
         - id: callback
           description: 'Facultatif. Une fois la méthode exécutée, la fonction transmise `callback` au paramètre est appelée avec un seul paramètre de type`Office.AsyncResult`<!-- -->.'
           type:
@@ -888,7 +904,7 @@ items:
             - 'outlook!Office.Mailbox#removeHandlerAsync~3:complex'
   - uid: 'outlook!Office.Mailbox#restUrl:member'
     summary: "obtient l’URL du point de terminaison\_REST de ce compte de messagerie.\n\nVotre application doit disposer de `ReadItem` l’autorisation spécifiée dans son manifeste pour pouvoir `restUrl` appeler le membre en mode lecture.\n\nEn mode composition, vous devez appeler la méthode `saveAsync` avant de pouvoir utiliser le membre `restUrl`. Votre application doit disposer `ReadWriteItem` d’autorisations pour appeler `saveAsync` la méthode.\n\nToutefois, dans les scénarios de délégué ou partagés, vous devez utiliser `targetRestUrl` à la place `SharedProperties` la propriété de l’objet (introduite dans l’ensemble de conditions requises 1,8). Pour plus d’informations, consultez l’article relatif [à l’accès délégué](https://docs.microsoft.com/office/dev/add-ins/outlook/delegate-access) .\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
-    remarks: "**<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`\n\n**<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: composition ou lecture\n\nLa valeur `restUrl` peut être utilisée pour que l’[API\_REST](https://docs.microsoft.com/outlook/rest/) appelle la boîte aux lettres de l’utilisateur.\n\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nOffice.context.mailbox.getCallbackTokenAsync({ isRest: true }, function (result) {\n    var ewsId = Office.context.mailbox.item.itemId;\n    var token = result.value;\n    var restId = Office.context.mailbox.convertToRestId(ewsId, Office.MailboxEnums.RestVersion.v2_0);\n    var getMessageUrl = Office.context.mailbox.restUrl + '/v2.0/me/messages/' + restId;\n            \n    var xhr = new XMLHttpRequest();\n    xhr.open('GET', getMessageUrl);\n    xhr.setRequestHeader(\"Authorization\", \"Bearer \" + token);\n    xhr.onload = function (e) {\n        console.log(this.response);\n    }\n    xhr.send();\n});\n```\n```javascript\nconsole.log(\"EWS URL: \" + Office.context.mailbox.ewsUrl);\nvar ewsId = Office.context.mailbox.item.itemId;\nconsole.log(\"EWS item ID: \" + Office.context.mailbox.item.itemId);\n\nconsole.log(\"REST URL: \" + Office.context.mailbox.restUrl);\nvar restId = Office.context.mailbox.convertToRestId(ewsId, Office.MailboxEnums.RestVersion.v2_0);\nconsole.log(\"REST item ID: \" + restId);\n\nvar ewsId2 = Office.context.mailbox.convertToEwsId(restId, Office.MailboxEnums.RestVersion.v2_0);\nconsole.log(\"EWS ID (from REST ID): \" + ewsId2);\n```"
+    remarks: "**<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`\n\n**<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: composition ou lecture\n\nLa valeur `restUrl` peut être utilisée pour que l’[API\_REST](https://docs.microsoft.com/outlook/rest/) appelle la boîte aux lettres de l’utilisateur.\n\n#### <a name=\"examples\"></a>範例\n\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/85-tokens-and-service-calls/basic-rest-cors.yaml\nOffice.context.mailbox.getCallbackTokenAsync({ isRest: true }, function (result) {\n    var ewsId = Office.context.mailbox.item.itemId;\n    var token = result.value;\n    var restId = Office.context.mailbox.convertToRestId(ewsId, Office.MailboxEnums.RestVersion.v2_0);\n    var getMessageUrl = Office.context.mailbox.restUrl + '/v2.0/me/messages/' + restId;\n            \n    var xhr = new XMLHttpRequest();\n    xhr.open('GET', getMessageUrl);\n    xhr.setRequestHeader(\"Authorization\", \"Bearer \" + token);\n    xhr.onload = function (e) {\n        console.log(this.response);\n    }\n    xhr.send();\n});\n```\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/85-tokens-and-service-calls/ids-and-urls.yaml\nconsole.log(\"EWS URL: \" + Office.context.mailbox.ewsUrl);\nvar ewsId = Office.context.mailbox.item.itemId;\nconsole.log(\"EWS item ID: \" + Office.context.mailbox.item.itemId);\n\nconsole.log(\"REST URL: \" + Office.context.mailbox.restUrl);\nvar restId = Office.context.mailbox.convertToRestId(ewsId, Office.MailboxEnums.RestVersion.v2_0);\nconsole.log(\"REST item ID: \" + restId);\n\nvar ewsId2 = Office.context.mailbox.convertToEwsId(restId, Office.MailboxEnums.RestVersion.v2_0);\nconsole.log(\"EWS ID (from REST ID): \" + ewsId2);\n```"
     name: restUrl
     fullName: restUrl
     langs:
@@ -919,7 +935,7 @@ references:
     name: Office.EventType | string
     fullName: Office.EventType | string
     spec.typeScript:
-      - uid: 'outlook!Office.EventType:enum'
+      - uid: 'office!Office.EventType:enum'
         name: Office.EventType
         fullName: Office.EventType
       - name: ' | string'
@@ -930,12 +946,12 @@ references:
     spec.typeScript:
       - name: '(type: '
         fullName: '(type: '
-      - uid: 'outlook!Office.EventType:enum'
+      - uid: 'office!Office.EventType:enum'
         name: Office.EventType
         fullName: Office.EventType
       - name: ) => void
         fullName: ) => void
-  - uid: 'outlook!Office.AsyncContextOptions:interface'
+  - uid: 'office!Office.AsyncContextOptions:interface'
     name: Office.AsyncContextOptions
   - uid: 'outlook!Office.Mailbox#addHandlerAsync~2:complex'
     name: '(asyncResult: Office.AsyncResult<void>) => void'
@@ -943,7 +959,7 @@ references:
     spec.typeScript:
       - name: '(asyncResult: '
         fullName: '(asyncResult: '
-      - uid: 'outlook!Office.AsyncResult:interface'
+      - uid: 'office!Office.AsyncResult:interface'
         name: Office.AsyncResult
         fullName: Office.AsyncResult
       - name: <void>) => void
@@ -952,7 +968,7 @@ references:
     name: Office.EventType | string
     fullName: Office.EventType | string
     spec.typeScript:
-      - uid: 'outlook!Office.EventType:enum'
+      - uid: 'office!Office.EventType:enum'
         name: Office.EventType
         fullName: Office.EventType
       - name: ' | string'
@@ -963,7 +979,7 @@ references:
     spec.typeScript:
       - name: '(type: '
         fullName: '(type: '
-      - uid: 'outlook!Office.EventType:enum'
+      - uid: 'office!Office.EventType:enum'
         name: Office.EventType
         fullName: Office.EventType
       - name: ) => void
@@ -974,7 +990,7 @@ references:
     spec.typeScript:
       - name: '(asyncResult: '
         fullName: '(asyncResult: '
-      - uid: 'outlook!Office.AsyncResult:interface'
+      - uid: 'office!Office.AsyncResult:interface'
         name: Office.AsyncResult
         fullName: Office.AsyncResult
       - name: <void>) => void
@@ -1009,7 +1025,7 @@ references:
     name: 'Office.AsyncContextOptions & { isRest?: boolean }'
     fullName: 'Office.AsyncContextOptions & { isRest?: boolean }'
     spec.typeScript:
-      - uid: 'outlook!Office.AsyncContextOptions:interface'
+      - uid: 'office!Office.AsyncContextOptions:interface'
         name: Office.AsyncContextOptions
         fullName: Office.AsyncContextOptions
       - name: ' & { isRest?: boolean }'
@@ -1020,7 +1036,7 @@ references:
     spec.typeScript:
       - name: '(asyncResult: '
         fullName: '(asyncResult: '
-      - uid: 'outlook!Office.AsyncResult:interface'
+      - uid: 'office!Office.AsyncResult:interface'
         name: Office.AsyncResult
         fullName: Office.AsyncResult
       - name: <string>) => void
@@ -1031,7 +1047,7 @@ references:
     spec.typeScript:
       - name: '(asyncResult: '
         fullName: '(asyncResult: '
-      - uid: 'outlook!Office.AsyncResult:interface'
+      - uid: 'office!Office.AsyncResult:interface'
         name: Office.AsyncResult
         fullName: Office.AsyncResult
       - name: <string>) => void
@@ -1042,7 +1058,7 @@ references:
     spec.typeScript:
       - name: '(asyncResult: '
         fullName: '(asyncResult: '
-      - uid: 'outlook!Office.AsyncResult:interface'
+      - uid: 'office!Office.AsyncResult:interface'
         name: Office.AsyncResult
         fullName: Office.AsyncResult
       - name: <string>) => void
@@ -1100,7 +1116,7 @@ references:
     spec.typeScript:
       - name: '(asyncResult: '
         fullName: '(asyncResult: '
-      - uid: 'outlook!Office.AsyncResult:interface'
+      - uid: 'office!Office.AsyncResult:interface'
         name: Office.AsyncResult
         fullName: Office.AsyncResult
       - name: <string>) => void
@@ -1111,7 +1127,7 @@ references:
     name: Office.EventType | string
     fullName: Office.EventType | string
     spec.typeScript:
-      - uid: 'outlook!Office.EventType:enum'
+      - uid: 'office!Office.EventType:enum'
         name: Office.EventType
         fullName: Office.EventType
       - name: ' | string'
@@ -1122,7 +1138,7 @@ references:
     spec.typeScript:
       - name: '(asyncResult: '
         fullName: '(asyncResult: '
-      - uid: 'outlook!Office.AsyncResult:interface'
+      - uid: 'office!Office.AsyncResult:interface'
         name: Office.AsyncResult
         fullName: Office.AsyncResult
       - name: <void>) => void
@@ -1131,7 +1147,7 @@ references:
     name: Office.EventType | string
     fullName: Office.EventType | string
     spec.typeScript:
-      - uid: 'outlook!Office.EventType:enum'
+      - uid: 'office!Office.EventType:enum'
         name: Office.EventType
         fullName: Office.EventType
       - name: ' | string'
@@ -1142,7 +1158,7 @@ references:
     spec.typeScript:
       - name: '(asyncResult: '
         fullName: '(asyncResult: '
-      - uid: 'outlook!Office.AsyncResult:interface'
+      - uid: 'office!Office.AsyncResult:interface'
         name: Office.AsyncResult
         fullName: Office.AsyncResult
       - name: <void>) => void
