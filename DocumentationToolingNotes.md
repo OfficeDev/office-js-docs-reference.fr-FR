@@ -46,7 +46,7 @@ Des extraits de code d’exemple de code sont ajoutés aux pages de référence 
 
 Les extraits de code locaux se trouvent dans des fichiers YAML spécifiques à l’hôte. Leur contenu est organisé par classe et par champ, de sorte qu’il peut être mappé à l’emplacement approprié dans une page de référence. La langue de l’extrait de code (JavaScript ou machine à écrire) est déduite par l’utilisation d’instructions await.
 
-Les extraits de code d’atelier de script sont extraits des exemples de travail. Actuellement, les exemples Excel et Word sont mappés aux sections de document de référence par le biais [d’une paire de fichiers de mappage](https://github.com/OfficeDev/office-js-snippets/tree/master/snippet-extractor-metadata). Ces méthodes correspondent aux propriétés ou méthodes de l’API. Lorsque le référentiel Office-js-snippets est `yarn start` exécuté, [un fichier YAML](https://github.com/OfficeDev/office-js-snippets/blob/master/snippet-extractor-output/snippets.yaml) contenant tous les extraits de code mappés est créé. Ce fichier YAML est l’entrée dans les outils de documentation de référence.
+Les extraits de code d’atelier de script sont extraits des exemples de travail. Actuellement, Excel, Outlook et les exemples Word sont mappés aux sections de document de référence par le biais de [fichiers de mappage](https://github.com/OfficeDev/office-js-snippets/tree/master/snippet-extractor-metadata). Ces méthodes correspondent aux propriétés ou méthodes de l’API. Lorsque le référentiel Office-js-snippets est `yarn start` exécuté, [un fichier YAML](https://github.com/OfficeDev/office-js-snippets/blob/master/snippet-extractor-output/snippets.yaml) contenant tous les extraits de code mappés est créé. Ce fichier YAML est l’entrée dans les outils de documentation de référence.
 
 ## <a name="tooling-pipeline"></a>Pipeline d’outils
 
@@ -64,7 +64,7 @@ Le préprocesseur prend les fichiers d. TS et les divise en sections spécifique
 
 L’extracteur d’API convertit les fichiers d. TS en données JSON. Cela régit toutes les données de type, ce qui facilite l’analyse.
 
-Le midprocessor récupère les extraits de code et les associe aux hôtes appropriés.
+Le midprocessor récupère les extraits de code et les associe aux hôtes appropriés, et nettoie la liaison croisée entre Outlook et les objets d’API courants.
 
 L’API documenter convertit les données JSON en fichiers. yml. Les fichiers. yml sont convertis en démarques par le système de publication ouvert qui publie nos documents sur docs.microsoft.com. L’API documenter contient également une extension spécifique à Office qui insère nos extraits de code.
 

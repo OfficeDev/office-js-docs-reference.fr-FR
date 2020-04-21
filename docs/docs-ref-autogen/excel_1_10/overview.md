@@ -1,13 +1,13 @@
 ---
 title: Référence de l’API JavaScript d’Office
-description: Ensemble de conditions requises pour les API JavaScript pour Office par hôte
-ms.date: 11/19/2019
-ms.openlocfilehash: f4072c23cb0d6e0d5375cf79d92b4f6dd9b35f0f
-ms.sourcegitcommit: d37268ff5254061632a886b196ec28f2f4087377
+description: Les conditions requises de l’API JavaScript pour Office par hôte.
+ms.date: 04/17/2020
+ms.openlocfilehash: 765b2ee6108f6433ffe17d3ca15ba9c68fbd9617
+ms.sourcegitcommit: 6dd770ff4893a67c625e1e4fd06ee197a3992ae0
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/21/2019
-ms.locfileid: "38758616"
+ms.lasthandoff: 04/21/2020
+ms.locfileid: "43595239"
 ---
 # <a name="office-javascript-api-reference"></a>Référence de l’API JavaScript d’Office
 
@@ -62,9 +62,9 @@ La liste suivante répertorie les ensembles de conditions requises propres à l�
 ## <a name="word"></a>Word
 
 - [Aperçu de Word](/javascript/api/word?view=word-js-preview)
-- [WordApi 1.3](/javascript/api/word?view=word-js-1.3)
-- [WordApi 1.2](/javascript/api/word?view=word-js-1.2)
-- [WordApi 1.1](/javascript/api/word?view=word-js-1.1)
+- [WordApi 1.3](/javascript/api/word?view=word-js-1.3)
+- [WordApi 1.2](/javascript/api/word?view=word-js-1.2)
+- [WordApi 1.1](/javascript/api/word?view=word-js-1.1)
 
 ## <a name="common-api"></a>API communes
 
@@ -75,3 +75,4 @@ La liste suivante répertorie les ensembles de conditions requises propres à l�
 - [À propos des compléments Office](/office/dev/add-ins/overview)
 - [Disponibilité des compléments Office sur les plateformes et les hôtes](/office/dev/add-ins/overview/office-add-in-availability)
 - [Versions d’Office et ensembles de conditions requises](/office/dev/add-ins/develop/office-versions-and-requirement-sets)
+- [Explorer l’API JavaScript Office à l’aide de Script Lab](/office/dev/add-ins/overview/explore-with-script-lab)
