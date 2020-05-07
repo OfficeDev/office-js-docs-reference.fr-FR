@@ -8,7 +8,7 @@ items:
       - typeScript
     type: class
     extends:
-      - 'excel!OfficeExtension.ClientObject:class'
+      - 'office!OfficeExtension.ClientObject:class'
     package: excel!
     children:
       - 'excel!Excel.CommentReply#authorEmail:member'
@@ -23,12 +23,9 @@ items:
       - 'excel!Excel.CommentReply#load:member(1)'
       - 'excel!Excel.CommentReply#load:member(2)'
       - 'excel!Excel.CommentReply#load:member(3)'
-      - 'excel!Excel.CommentReply#mentions:member'
-      - 'excel!Excel.CommentReply#richContent:member'
       - 'excel!Excel.CommentReply#set:member(1)'
       - 'excel!Excel.CommentReply#set:member(2)'
       - 'excel!Excel.CommentReply#toJSON:member(1)'
-      - 'excel!Excel.CommentReply#updateMentions:member(1)'
   - uid: 'excel!Excel.CommentReply#authorEmail:member'
     summary: "Obtenir l’adresse email de l’auteur de la réponse au commentaire.\n\n\\[[Ensemble d’API\_: ExcelApi 1,10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: authorEmail
@@ -54,7 +51,7 @@ items:
         type:
           - string
   - uid: 'excel!Excel.CommentReply#content:member'
-    summary: "Obtient ou définit le contenu de la réponse au commentaire. La chaîne est en texte brut.\n\n\\[[Ensemble d’API\_: ExcelApi 1,10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Contenu de la réponse de commentaire. La chaîne est en texte brut.\n\n\\[[Ensemble d’API\_: ExcelApi 1,10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: content
     fullName: content
     langs:
@@ -68,7 +65,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>範例
+          #### <a name="examples"></a>Exemples
 
           ```typescript
           // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/12-comment/comment-replies.yaml
@@ -124,7 +121,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>範例
+          #### <a name="examples"></a>Exemples
 
           ```typescript
           // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/12-comment/comment-replies.yaml
@@ -163,7 +160,7 @@ items:
           - 'excel!Excel.Comment:class'
         description: ''
   - uid: 'excel!Excel.CommentReply#id:member'
-    summary: "Représente l’identificateur de réponse du commentaire. En lecture seule.\n\n\\[[Ensemble d’API\_: ExcelApi 1,10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Spécifie l’identificateur de réponse de commentaire.\n\n\\[[Ensemble d’API\_: ExcelApi 1,10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: id
     fullName: id
     langs:
@@ -236,30 +233,6 @@ items:
                           select?: string;
                           expand?: string;
                       }
-  - uid: 'excel!Excel.CommentReply#mentions:member'
-    summary: "Obtient les entités (par exemple, les personnes) mentionnées dans les commentaires.\n\n\\[[Ensemble d’API\_: ExcelApiOnline 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
-    name: mentions
-    fullName: mentions
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly mentions: Excel.CommentMention[];'
-      return:
-        type:
-          - 'excel!Excel.CommentReply#mentions~0:complex'
-  - uid: 'excel!Excel.CommentReply#richContent:member'
-    summary: "Obtient le contenu de commentaire enrichi (par exemple, les mentions dans les commentaires). Cette chaîne n’est pas destinée à être affichée aux utilisateurs finaux. Votre complément doit uniquement l’utiliser pour analyser le contenu de commentaire enrichi.\n\n\\[[Ensemble d’API\_: ExcelApiOnline 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
-    name: richContent
-    fullName: richContent
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly richContent: string;'
-      return:
-        type:
-          - string
   - uid: 'excel!Excel.CommentReply#set:member(1)'
     summary: 'Définit plusieurs propriétés d’un objet en même temps. Vous pouvez transmettre un objet plain avec les propriétés appropriées, ou un autre objet API du même type.'
     remarks: "Cette méthode est dotée de la signature supplémentaire suivante\_:\n\n`set(properties: Excel.CommentReply): void`"
@@ -282,7 +255,7 @@ items:
         - id: options
           description: Fournit une option permettant de supprimer les erreurs si l’objet Properties tente de définir des propriétés en lecture seule.
           type:
-            - 'excel!OfficeExtension.UpdateOptions:interface'
+            - 'office!OfficeExtension.UpdateOptions:interface'
   - uid: 'excel!Excel.CommentReply#set:member(2)'
     summary: 'Définit plusieurs propriétés de l’objet en même temps, en fonction d’un objet chargé existant.'
     name: set(properties)
@@ -314,26 +287,8 @@ items:
         type:
           - 'excel!Excel.Interfaces.CommentReplyData:interface'
         description: ''
-  - uid: 'excel!Excel.CommentReply#updateMentions:member(1)'
-    summary: "Met à jour le contenu de commentaire avec une chaîne spécialement mise en forme et une liste de mentions.\n\n\\[[Ensemble d’API\_: ExcelApiOnline 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
-    name: updateMentions(contentWithMentions)
-    fullName: updateMentions(contentWithMentions)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'updateMentions(contentWithMentions: Excel.CommentRichContent): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: contentWithMentions
-          description: Contenu du commentaire. Il contient une chaîne spécialement mise en forme et une liste de mentions qui seront analysées dans la chaîne lors de son affichage par Excel.
-          type:
-            - 'excel!Excel.CommentRichContent:interface'
 references:
-  - uid: 'excel!OfficeExtension.ClientObject:class'
+  - uid: 'office!OfficeExtension.ClientObject:class'
     name: OfficeExtension.ClientObject
   - uid: 'excel!Excel.RequestContext:class'
     name: RequestContext
@@ -347,20 +302,9 @@ references:
     name: Excel.CommentReply
   - uid: 'excel!Excel.Interfaces.CommentReplyLoadOptions:interface'
     name: Excel.Interfaces.CommentReplyLoadOptions
-  - uid: 'excel!Excel.CommentReply#mentions~0:complex'
-    name: 'Excel.CommentMention[]'
-    fullName: 'Excel.CommentMention[]'
-    spec.typeScript:
-      - uid: 'excel!Excel.CommentMention:interface'
-        name: Excel.CommentMention
-        fullName: Excel.CommentMention
-      - name: '[]'
-        fullName: '[]'
   - uid: 'excel!Excel.Interfaces.CommentReplyUpdateData:interface'
     name: Interfaces.CommentReplyUpdateData
-  - uid: 'excel!OfficeExtension.UpdateOptions:interface'
+  - uid: 'office!OfficeExtension.UpdateOptions:interface'
     name: OfficeExtension.UpdateOptions
   - uid: 'excel!Excel.Interfaces.CommentReplyData:interface'
     name: Excel.Interfaces.CommentReplyData
-  - uid: 'excel!Excel.CommentRichContent:interface'
-    name: Excel.CommentRichContent
