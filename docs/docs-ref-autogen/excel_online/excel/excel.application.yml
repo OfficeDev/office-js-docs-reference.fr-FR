@@ -8,7 +8,7 @@ items:
       - typeScript
     type: class
     extends:
-      - 'excel!OfficeExtension.ClientObject:class'
+      - 'office!OfficeExtension.ClientObject:class'
     package: excel!
     children:
       - 'excel!Excel.Application#calculate:member(1)'
@@ -17,6 +17,8 @@ items:
       - 'excel!Excel.Application#calculationMode:member'
       - 'excel!Excel.Application#calculationState:member'
       - 'excel!Excel.Application#context:member'
+      - 'excel!Excel.Application#cultureInfo:member'
+      - 'excel!Excel.Application#decimalSeparator:member'
       - 'excel!Excel.Application#iterativeCalculation:member'
       - 'excel!Excel.Application#load:member(1)'
       - 'excel!Excel.Application#load:member(2)'
@@ -25,7 +27,9 @@ items:
       - 'excel!Excel.Application#set:member(2)'
       - 'excel!Excel.Application#suspendApiCalculationUntilNextSync:member(1)'
       - 'excel!Excel.Application#suspendScreenUpdatingUntilNextSync:member(1)'
+      - 'excel!Excel.Application#thousandsSeparator:member'
       - 'excel!Excel.Application#toJSON:member(1)'
+      - 'excel!Excel.Application#useSystemSeparators:member'
   - uid: 'excel!Excel.Application#calculate:member(1)'
     summary: "Recalcule tous les classeurs actuellement ouverts dans Excel.\n\n\\[[Ensemble d’API\_: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: calculate(calculationType)
@@ -59,7 +63,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>範例
+          #### <a name="examples"></a>Exemples
 
           ```javascript
           Excel.run(function (ctx) {
@@ -78,7 +82,7 @@ items:
           type:
             - '"Recalculate" | "Full" | "FullRebuild"'
   - uid: 'excel!Excel.Application#calculationEngineVersion:member'
-    summary: "Renvoie la version du moteur de calcul Excel utilisée pour le dernier recalcul complet. En lecture seule.\n\n\\[[Ensemble d’API\_: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Renvoie la version du moteur de calcul Excel utilisée pour le dernier recalcul complet.\n\n\\[[Ensemble d’API\_: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: calculationEngineVersion
     fullName: calculationEngineVersion
     langs:
@@ -102,7 +106,7 @@ items:
         type:
           - 'excel!Excel.Application#calculationMode~0:complex'
   - uid: 'excel!Excel.Application#calculationState:member'
-    summary: "Renvoie l’état de calcul de l’application. Pour plus d’informations, voir Excel.CalculationState. En lecture seule.\n\n\\[[Ensemble d’API\_: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Renvoie l’état de calcul de l’application. Pour plus d’informations, voir Excel.CalculationState.\n\n\\[[Ensemble d’API\_: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: calculationState
     fullName: calculationState
     langs:
@@ -125,6 +129,61 @@ items:
       return:
         type:
           - 'excel!Excel.RequestContext:class'
+  - uid: 'excel!Excel.Application#cultureInfo:member'
+    summary: "Fournit des informations basées sur les paramètres de culture système actuels. Cela inclut les noms de culture, la mise en forme de numéros et d’autres paramètres dépendants de la culture.\n\n\\[[Ensemble d’API\_: ExcelApi 1,11](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    name: cultureInfo
+    fullName: cultureInfo
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly cultureInfo: Excel.CultureInfo;'
+      return:
+        type:
+          - 'excel!Excel.CultureInfo:class'
+  - uid: 'excel!Excel.Application#decimalSeparator:member'
+    summary: "Obtient la chaîne utilisée comme séparateur décimal pour les valeurs numériques. Cette fonction est basée sur les paramètres locaux d’Excel.\n\n\\[[Ensemble d’API\_: ExcelApi 1,11](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    name: decimalSeparator
+    fullName: decimalSeparator
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly decimalSeparator: string;'
+      return:
+        type:
+          - string
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```typescript
+          // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/50-workbook/culture-info.yaml
+          await Excel.run(async (context) => {
+            context.application.load("decimalSeparator,thousandsSeparator");
+            context.application.cultureInfo.numberFormat.load("numberDecimalSeparator,numberGroupSeparator");
+            await context.sync();
+
+            // Local settings are set under the "Options > Advanced" menu.
+            const localDecimalSeparator = context.application.decimalSeparator;
+            const localThousandsSeparator = context.application.thousandsSeparator;
+
+            const systemDecimalSeparator = context.application.cultureInfo.numberFormat.numberDecimalSeparator;
+            const systemThousandsSeparator = context.application.cultureInfo.numberFormat.numberGroupSeparator;
+
+            console.log("Local character settings: ");
+            console.log(`  Local decimal separator: ${localDecimalSeparator}`);
+            console.log(`  Local thousands separator: ${localThousandsSeparator}`);
+
+            console.log("System culture settings: ");
+            console.log(`  System decimal separator: ${systemDecimalSeparator}`);
+            console.log(`  System thousands separator: ${systemThousandsSeparator}`);
+            console.log(`  `);
+
+            await context.sync();
+          });
+          ```
   - uid: 'excel!Excel.Application#iterativeCalculation:member'
     summary: "Capture d’écran des paramètres de calcul itératif. Dans Excel sous Windows et Mac, les paramètres s’appliquent à l’application Excel. Dans Excel sur le Web et d’autres plateformes, les paramètres s’appliquent au classeur actif.\n\n\\[[Ensemble d’API\_: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: iterativeCalculation
@@ -170,7 +229,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>範例
+          #### <a name="examples"></a>Exemples
 
           ```javascript
           Excel.run(function (ctx) {
@@ -239,7 +298,7 @@ items:
         - id: options
           description: Fournit une option permettant de supprimer les erreurs si l’objet Properties tente de définir des propriétés en lecture seule.
           type:
-            - 'excel!OfficeExtension.UpdateOptions:interface'
+            - 'office!OfficeExtension.UpdateOptions:interface'
   - uid: 'excel!Excel.Application#set:member(2)'
     summary: 'Définit plusieurs propriétés de l’objet en même temps, en fonction d’un objet chargé existant.'
     name: set(properties)
@@ -272,7 +331,7 @@ items:
           - void
         description: ''
   - uid: 'excel!Excel.Application#suspendScreenUpdatingUntilNextSync:member(1)'
-    summary: "Interrompt la mise à jour de l’écran jusqu’au prochain`context.sync()`<!-- -->est appelé.\n\n**Remarque**: ne pas `suspendScreenUpdatingUntilNextSync` appeler de manière répétée (comme dans une boucle). Les appels répétés entraînent le scintillement de la fenêtre Excel.\n\n\\[[Ensemble d’API\_: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Interrompt la mise à jour de l' `context.sync()` écran jusqu’à l’appel de la méthode suivante.\n\n* Remarque * *\_: ne pas `suspendScreenUpdatingUntilNextSync` appeler à plusieurs reprises (par exemple dans une boucle). Les appels répétés entraînent le scintillement de la fenêtre Excel.\n\n\\[[Ensemble d’API\_: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: suspendScreenUpdatingUntilNextSync()
     fullName: suspendScreenUpdatingUntilNextSync()
     langs:
@@ -286,7 +345,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>範例
+          #### <a name="examples"></a>Exemples
 
           ```typescript
           // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/90-scenarios/performance-optimization.yaml
@@ -319,6 +378,18 @@ items:
               console.log(`Ending. Adding ${rowCount * columnCount} cells took ${Date.now() - startTime} milliseconds`);
           });
           ```
+  - uid: 'excel!Excel.Application#thousandsSeparator:member'
+    summary: "Obtient la chaîne utilisée pour séparer les groupes de chiffres à gauche du séparateur décimal pour les valeurs numériques. Cette fonction est basée sur les paramètres locaux d’Excel.\n\n\\[[Ensemble d’API\_: ExcelApi 1,11](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    name: thousandsSeparator
+    fullName: thousandsSeparator
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly thousandsSeparator: string;'
+      return:
+        type:
+          - string
   - uid: 'excel!Excel.Application#toJSON:member(1)'
     summary: 'Remplace la méthode JavaScript `toJSON()` afin de fournir une sortie plus utile lorsqu’un objet d’API est transmis à`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle `toJSON` la méthode de l’objet qui lui est passé.) Tandis que l’objet Excel. application d’origine est un objet `toJSON` API, la méthode renvoie un objet JavaScript simple (tapé comme`Excel.Interfaces.ApplicationData`<!-- -->) qui contient des copies superficielles de toutes les propriétés enfants chargées à partir de l’objet d’origine.'
     name: toJSON()
@@ -332,8 +403,20 @@ items:
         type:
           - 'excel!Excel.Interfaces.ApplicationData:interface'
         description: ''
+  - uid: 'excel!Excel.Application#useSystemSeparators:member'
+    summary: "Indique si les séparateurs système d’Excel sont activés. Les séparateurs système incluent le séparateur décimal et le séparateur des milliers.\n\n\\[[Ensemble d’API\_: ExcelApi 1,11](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    name: useSystemSeparators
+    fullName: useSystemSeparators
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly useSystemSeparators: boolean;'
+      return:
+        type:
+          - boolean
 references:
-  - uid: 'excel!OfficeExtension.ClientObject:class'
+  - uid: 'office!OfficeExtension.ClientObject:class'
     name: OfficeExtension.ClientObject
   - uid: 'excel!Excel.CalculationType:enum'
     name: Excel.CalculationType
@@ -357,6 +440,8 @@ references:
         fullName: ' | "Done" | "Calculating" | "Pending"'
   - uid: 'excel!Excel.RequestContext:class'
     name: RequestContext
+  - uid: 'excel!Excel.CultureInfo:class'
+    name: Excel.CultureInfo
   - uid: 'excel!Excel.IterativeCalculation:class'
     name: Excel.IterativeCalculation
   - uid: 'excel!Excel.Application:class'
@@ -365,7 +450,7 @@ references:
     name: Excel.Interfaces.ApplicationLoadOptions
   - uid: 'excel!Excel.Interfaces.ApplicationUpdateData:interface'
     name: Interfaces.ApplicationUpdateData
-  - uid: 'excel!OfficeExtension.UpdateOptions:interface'
+  - uid: 'office!OfficeExtension.UpdateOptions:interface'
     name: OfficeExtension.UpdateOptions
   - uid: 'excel!Excel.Interfaces.ApplicationData:interface'
     name: Excel.Interfaces.ApplicationData
