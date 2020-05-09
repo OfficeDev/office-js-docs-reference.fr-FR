@@ -8,7 +8,7 @@ items:
       - typeScript
     type: class
     extends:
-      - 'excel!OfficeExtension.ClientObject:class'
+      - 'office!OfficeExtension.ClientObject:class'
     package: excel!
     children:
       - 'excel!Excel.Workbook#application:member'
@@ -50,6 +50,7 @@ items:
       - 'excel!Excel.Workbook#set:member(1)'
       - 'excel!Excel.Workbook#set:member(2)'
       - 'excel!Excel.Workbook#settings:member'
+      - 'excel!Excel.Workbook#showPivotFieldList:member'
       - 'excel!Excel.Workbook#slicers:member'
       - 'excel!Excel.Workbook#slicerStyles:member'
       - 'excel!Excel.Workbook#styles:member'
@@ -61,7 +62,7 @@ items:
       - 'excel!Excel.Workbook#usePrecisionAsDisplayed:member'
       - 'excel!Excel.Workbook#worksheets:member'
   - uid: 'excel!Excel.Workbook#application:member'
-    summary: "Représente l’instance de l’application Excel qui contient ce classeur. En lecture seule.\n\n\\[[Ensemble d’API\_: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Représente l’instance de l’application Excel qui contient ce classeur.\n\n\\[[Ensemble d’API\_: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: application
     fullName: application
     langs:
@@ -73,7 +74,7 @@ items:
         type:
           - 'excel!Excel.Application:class'
   - uid: 'excel!Excel.Workbook#autoSave:member'
-    summary: "Spécifie si le classeur est en mode enregistrement automatique. En lecture seule.\n\n\\[[Ensemble d’API\_: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Indique si le classeur est en mode d’enregistrement automatique.\n\n\\[[Ensemble d’API\_: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: autoSave
     fullName: autoSave
     langs:
@@ -85,7 +86,7 @@ items:
         type:
           - boolean
   - uid: 'excel!Excel.Workbook#bindings:member'
-    summary: "Représente une collection de liaisons appartenant au classeur. En lecture seule.\n\n\\[[Ensemble d’API\_: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Représente une collection de liaisons appartenant au classeur.\n\n\\[[Ensemble d’API\_: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: bindings
     fullName: bindings
     langs:
@@ -97,7 +98,7 @@ items:
         type:
           - 'excel!Excel.BindingCollection:class'
   - uid: 'excel!Excel.Workbook#calculationEngineVersion:member'
-    summary: "Renvoie un nombre sur la version de moteur de calcul Excel. En lecture seule.\n\n\\[[Ensemble d’API\_: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Renvoie un nombre sur la version de moteur de calcul Excel.\n\n\\[[Ensemble d’API\_: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: calculationEngineVersion
     fullName: calculationEngineVersion
     langs:
@@ -121,8 +122,7 @@ items:
         type:
           - boolean
   - uid: 'excel!Excel.Workbook#close:member(1)'
-    summary: "Fermer le classeur actif.\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
-    isPreview: true
+    summary: "Fermer le classeur actif.\n\n\\[[Ensemble d’API\_: ExcelApi 1,11](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: close(closeBehavior)
     fullName: close(closeBehavior)
     langs:
@@ -136,10 +136,10 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>範例
+          #### <a name="examples"></a>Exemples
 
           ```typescript
-          // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/85-preview-apis/workbook-save-and-close.yaml
+          // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/50-workbook/workbook-save-and-close.yaml
           await Excel.run(async (context) => {
               context.workbook.close(Excel.CloseBehavior.save);
           });
@@ -150,7 +150,7 @@ items:
           type:
             - 'excel!Excel.CloseBehavior:enum'
   - uid: 'excel!Excel.Workbook#close:member(2)'
-    summary: "Fermer le classeur actif.\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Fermer le classeur actif.\n\n\\[[Ensemble d’API\_: ExcelApi 1,11](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: close(closeBehaviorString)
     fullName: close(closeBehaviorString)
     langs:
@@ -168,7 +168,7 @@ items:
           type:
             - '"Save" | "SkipSave"'
   - uid: 'excel!Excel.Workbook#comments:member'
-    summary: "Représente une collection de styles associés au classeur. En lecture seule.\n\n\\[[Ensemble d’API\_: ExcelApi 1,10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Représente une collection de styles associés au classeur.\n\n\\[[Ensemble d’API\_: ExcelApi 1,10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: comments
     fullName: comments
     langs:
@@ -192,7 +192,7 @@ items:
         type:
           - 'excel!Excel.RequestContext:class'
   - uid: 'excel!Excel.Workbook#customXmlParts:member'
-    summary: "Représente la collection de parties XML personnalisées contenues dans ce classeur. En lecture seule.\n\n\\[[Ensemble d’API\_: ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Représente la collection de parties XML personnalisées contenues dans ce classeur.\n\n\\[[Ensemble d’API\_: ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: customXmlParts
     fullName: customXmlParts
     langs:
@@ -204,7 +204,7 @@ items:
         type:
           - 'excel!Excel.CustomXmlPartCollection:class'
   - uid: 'excel!Excel.Workbook#dataConnections:member'
-    summary: "Représente toutes les connexions de données du classeur. En lecture seule.\n\n\\[[Ensemble d’API\_: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Représente toutes les connexions de données du classeur.\n\n\\[[Ensemble d’API\_: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: dataConnections
     fullName: dataConnections
     langs:
@@ -216,7 +216,7 @@ items:
         type:
           - 'excel!Excel.DataConnectionCollection:class'
   - uid: 'excel!Excel.Workbook#functions:member'
-    summary: "Représente une collection de fonctions de feuille de calcul qui peuvent être utilisées pour le calcul. En lecture seule.\n\n\\[[Ensemble d’API\_: ExcelApi 1,2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Représente une collection de fonctions de feuille de calcul qui peuvent être utilisées pour le calcul.\n\n\\[[Ensemble d’API\_: ExcelApi 1,2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: functions
     fullName: functions
     langs:
@@ -242,7 +242,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>範例
+          #### <a name="examples"></a>Exemples
 
           ```typescript
           // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/50-workbook/workbook-get-active-cell.yaml
@@ -337,7 +337,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>範例
+          #### <a name="examples"></a>Exemples
 
           ```javascript
           Excel.run(function (ctx) { 
@@ -368,7 +368,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>範例
+          #### <a name="examples"></a>Exemples
 
           ```typescript
           // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/42-range/range-areas.yaml
@@ -381,7 +381,7 @@ items:
           })
           ```
   - uid: 'excel!Excel.Workbook#isDirty:member'
-    summary: "Spécifie ou non les modifications ont été apportées étant donné que le classeur a été enregistré. Vous pouvez définir cette propriété sur true si vous voulez fermer un classeur modifié sans l’enregistrer ou être invité à l’enregistrer.\n\n\\[[Ensemble d’API\_: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Indique si des modifications ont été apportées depuis le dernier enregistrement du classeur. Vous pouvez définir cette propriété sur true si vous voulez fermer un classeur modifié sans l’enregistrer ou être invité à l’enregistrer.\n\n\\[[Ensemble d’API\_: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: isDirty
     fullName: isDirty
     langs:
@@ -455,7 +455,7 @@ items:
                           expand?: string;
                       }
   - uid: 'excel!Excel.Workbook#name:member'
-    summary: "Obtient le nom du classeur. En lecture seule.\n\n\\[[Ensemble d’API\_: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Obtient le nom du classeur.\n\n\\[[Ensemble d’API\_: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: name
     fullName: name
     langs:
@@ -467,7 +467,7 @@ items:
         type:
           - string
   - uid: 'excel!Excel.Workbook#names:member'
-    summary: "Représente une collection d’éléments nommés portant sur le classeur (appelés plages et constantes). En lecture seule.\n\n\\[[Ensemble d’API\_: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Représente une collection d’éléments nommés portant sur le classeur (appelés plages et constantes).\n\n\\[[Ensemble d’API\_: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: names
     fullName: names
     langs:
@@ -503,7 +503,7 @@ items:
         type:
           - 'excel!Excel.Workbook#onSelectionChanged~0:complex'
   - uid: 'excel!Excel.Workbook#pivotTables:member'
-    summary: "Représente une collection de tableaux croisés dynamiques associés au classeur. En lecture seule.\n\n\\[[Ensemble d’API\_: ExcelApi 1,3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Représente une collection de tableaux croisés dynamiques associés au classeur.\n\n\\[[Ensemble d’API\_: ExcelApi 1,3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: pivotTables
     fullName: pivotTables
     langs:
@@ -515,7 +515,7 @@ items:
         type:
           - 'excel!Excel.PivotTableCollection:class'
   - uid: 'excel!Excel.Workbook#pivotTableStyles:member'
-    summary: "Représente une collection de PivotTableStyles associée au classeur. En lecture seule.\n\n\\[[Ensemble d’API\_: ExcelApi 1,10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Représente une collection de PivotTableStyles associée au classeur.\n\n\\[[Ensemble d’API\_: ExcelApi 1,10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: pivotTableStyles
     fullName: pivotTableStyles
     langs:
@@ -527,7 +527,7 @@ items:
         type:
           - 'excel!Excel.PivotTableStyleCollection:class'
   - uid: 'excel!Excel.Workbook#previouslySaved:member'
-    summary: "Spécifie ou non si le classeur a jamais été enregistré localement ou en ligne. En lecture seule.\n\n\\[[Ensemble d’API\_: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Indique si le classeur a déjà été enregistré en local ou en ligne.\n\n\\[[Ensemble d’API\_: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: previouslySaved
     fullName: previouslySaved
     langs:
@@ -539,7 +539,7 @@ items:
         type:
           - boolean
   - uid: 'excel!Excel.Workbook#properties:member'
-    summary: "Obtient les propriétés du classeur. En lecture seule.\n\n\\[[Ensemble d’API\_: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Obtient les propriétés du classeur.\n\n\\[[Ensemble d’API\_: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: properties
     fullName: properties
     langs:
@@ -553,7 +553,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>範例
+          #### <a name="examples"></a>Exemples
 
           ```typescript
           // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/26-document/properties.yaml
@@ -583,7 +583,7 @@ items:
           });
           ```
   - uid: 'excel!Excel.Workbook#protection:member'
-    summary: "Renvoie un objet de protection de classeur pour un classeur. En lecture seule.\n\n\\[[Ensemble d’API\_: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Renvoie un objet de protection de classeur pour un classeur.\n\n\\[[Ensemble d’API\_: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: protection
     fullName: protection
     langs:
@@ -595,7 +595,7 @@ items:
         type:
           - 'excel!Excel.WorkbookProtection:class'
   - uid: 'excel!Excel.Workbook#readOnly:member'
-    summary: "True si le classeur est ouvert en mode lecture seule. En lecture seule.\n\n\\[[Ensemble d’API\_: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "True si le classeur est ouvert en mode lecture seule.\n\n\\[[Ensemble d’API\_: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: readOnly
     fullName: readOnly
     langs:
@@ -607,8 +607,7 @@ items:
         type:
           - boolean
   - uid: 'excel!Excel.Workbook#save:member(1)'
-    summary: "Enregistrer le classeur actif.\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
-    isPreview: true
+    summary: "Enregistrer le classeur actif.\n\n\\[[Ensemble d’API\_: ExcelApi 1,11](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: save(saveBehavior)
     fullName: save(saveBehavior)
     langs:
@@ -622,10 +621,10 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>範例
+          #### <a name="examples"></a>Exemples
 
           ```typescript
-          // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/85-preview-apis/workbook-save-and-close.yaml
+          // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/50-workbook/workbook-save-and-close.yaml
           await Excel.run(async (context) => {
               context.workbook.save(Excel.SaveBehavior.save);
           });
@@ -636,7 +635,7 @@ items:
           type:
             - 'excel!Excel.SaveBehavior:enum'
   - uid: 'excel!Excel.Workbook#save:member(2)'
-    summary: "Enregistrer le classeur actif.\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Enregistrer le classeur actif.\n\n\\[[Ensemble d’API\_: ExcelApi 1,11](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: save(saveBehaviorString)
     fullName: save(saveBehaviorString)
     langs:
@@ -675,7 +674,7 @@ items:
         - id: options
           description: Fournit une option permettant de supprimer les erreurs si l’objet Properties tente de définir des propriétés en lecture seule.
           type:
-            - 'excel!OfficeExtension.UpdateOptions:interface'
+            - 'office!OfficeExtension.UpdateOptions:interface'
   - uid: 'excel!Excel.Workbook#set:member(2)'
     summary: 'Définit plusieurs propriétés de l’objet en même temps, en fonction d’un objet chargé existant.'
     name: set(properties)
@@ -695,7 +694,7 @@ items:
           type:
             - 'excel!Excel.Workbook:class'
   - uid: 'excel!Excel.Workbook#settings:member'
-    summary: "Représente une collection d’objets Settings associés au classeur. En lecture seule.\n\n\\[[Ensemble d’API\_: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Représente une collection d’objets Settings associés au classeur.\n\n\\[[Ensemble d’API\_: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: settings
     fullName: settings
     langs:
@@ -706,8 +705,21 @@ items:
       return:
         type:
           - 'excel!Excel.SettingCollection:class'
+  - uid: 'excel!Excel.Workbook#showPivotFieldList:member'
+    summary: "Indique si le volet de liste de champs du tableau croisé dynamique est affiché au niveau du classeur.\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    isPreview: true
+    name: showPivotFieldList
+    fullName: showPivotFieldList
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'showPivotFieldList: boolean;'
+      return:
+        type:
+          - boolean
   - uid: 'excel!Excel.Workbook#slicers:member'
-    summary: "Représente une collection de styles associés au classeur. En lecture seule.\n\n\\[[Ensemble d’API\_: ExcelApi 1,10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Représente une collection de styles associés au classeur.\n\n\\[[Ensemble d’API\_: ExcelApi 1,10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: slicers
     fullName: slicers
     langs:
@@ -719,7 +731,7 @@ items:
         type:
           - 'excel!Excel.SlicerCollection:class'
   - uid: 'excel!Excel.Workbook#slicerStyles:member'
-    summary: "Représente une collection de styles associés au classeur. En lecture seule.\n\n\\[[Ensemble d’API\_: ExcelApi 1,10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Représente une collection de styles associés au classeur.\n\n\\[[Ensemble d’API\_: ExcelApi 1,10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: slicerStyles
     fullName: slicerStyles
     langs:
@@ -731,7 +743,7 @@ items:
         type:
           - 'excel!Excel.SlicerStyleCollection:class'
   - uid: 'excel!Excel.Workbook#styles:member'
-    summary: "Représente une collection de styles associés au classeur. En lecture seule.\n\n\\[[Ensemble d’API\_: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Représente une collection de styles associés au classeur.\n\n\\[[Ensemble d’API\_: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: styles
     fullName: styles
     langs:
@@ -745,7 +757,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>範例
+          #### <a name="examples"></a>Exemples
 
           ```typescript
           // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/42-range/style.yaml
@@ -771,7 +783,7 @@ items:
           });
           ```
   - uid: 'excel!Excel.Workbook#tables:member'
-    summary: "Représente une collection de tableaux associés au classeur. En lecture seule.\n\n\\[[Ensemble d’API\_: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Représente une collection de tableaux associés au classeur.\n\n\\[[Ensemble d’API\_: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: tables
     fullName: tables
     langs:
@@ -783,7 +795,7 @@ items:
         type:
           - 'excel!Excel.TableCollection:class'
   - uid: 'excel!Excel.Workbook#tableStyles:member'
-    summary: "Représente une collection de TableStyles associés au classeur. En lecture seule.\n\n\\[[Ensemble d’API\_: ExcelApi 1,10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Représente une collection de TableStyles associés au classeur.\n\n\\[[Ensemble d’API\_: ExcelApi 1,10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: tableStyles
     fullName: tableStyles
     langs:
@@ -795,7 +807,7 @@ items:
         type:
           - 'excel!Excel.TableStyleCollection:class'
   - uid: 'excel!Excel.Workbook#timelineStyles:member'
-    summary: "Représente une collection de TimelineStyles associés au classeur. En lecture seule.\n\n\\[[Ensemble d’API\_: ExcelApi 1,10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Représente une collection de TimelineStyles associés au classeur.\n\n\\[[Ensemble d’API\_: ExcelApi 1,10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: timelineStyles
     fullName: timelineStyles
     langs:
@@ -845,7 +857,7 @@ items:
         type:
           - boolean
   - uid: 'excel!Excel.Workbook#worksheets:member'
-    summary: "Représente une collection de feuilles de calcul associées au classeur. En lecture seule.\n\n\\[[Ensemble d’API\_: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Représente une collection de feuilles de calcul associées au classeur.\n\n\\[[Ensemble d’API\_: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: worksheets
     fullName: worksheets
     langs:
@@ -857,7 +869,7 @@ items:
         type:
           - 'excel!Excel.WorksheetCollection:class'
 references:
-  - uid: 'excel!OfficeExtension.ClientObject:class'
+  - uid: 'office!OfficeExtension.ClientObject:class'
     name: OfficeExtension.ClientObject
   - uid: 'excel!Excel.Application:class'
     name: Excel.Application
@@ -885,7 +897,7 @@ references:
     name: OfficeExtension.ClientResult<boolean>
     fullName: OfficeExtension.ClientResult<boolean>
     spec.typeScript:
-      - uid: 'excel!OfficeExtension.ClientResult:class'
+      - uid: 'office!OfficeExtension.ClientResult:class'
         name: OfficeExtension.ClientResult
         fullName: OfficeExtension.ClientResult
       - name: <boolean>
@@ -902,7 +914,7 @@ references:
     name: OfficeExtension.EventHandlers<Excel.WorkbookAutoSaveSettingChangedEventArgs>
     fullName: OfficeExtension.EventHandlers<Excel.WorkbookAutoSaveSettingChangedEventArgs>
     spec.typeScript:
-      - uid: 'excel!OfficeExtension.EventHandlers:class'
+      - uid: 'office!OfficeExtension.EventHandlers:class'
         name: OfficeExtension.EventHandlers
         fullName: OfficeExtension.EventHandlers
       - name: <
@@ -916,7 +928,7 @@ references:
     name: OfficeExtension.EventHandlers<Excel.SelectionChangedEventArgs>
     fullName: OfficeExtension.EventHandlers<Excel.SelectionChangedEventArgs>
     spec.typeScript:
-      - uid: 'excel!OfficeExtension.EventHandlers:class'
+      - uid: 'office!OfficeExtension.EventHandlers:class'
         name: OfficeExtension.EventHandlers
         fullName: OfficeExtension.EventHandlers
       - name: <
@@ -938,7 +950,7 @@ references:
     name: Excel.SaveBehavior
   - uid: 'excel!Excel.Interfaces.WorkbookUpdateData:interface'
     name: Interfaces.WorkbookUpdateData
-  - uid: 'excel!OfficeExtension.UpdateOptions:interface'
+  - uid: 'office!OfficeExtension.UpdateOptions:interface'
     name: OfficeExtension.UpdateOptions
   - uid: 'excel!Excel.SettingCollection:class'
     name: Excel.SettingCollection
