@@ -9,14 +9,17 @@ items:
       - typeScript
     type: class
     extends:
-      - 'excel!OfficeExtension.ClientObject:class'
+      - 'office!OfficeExtension.ClientObject:class'
     package: excel!
     children:
       - 'excel!Excel.WorksheetCustomProperty#context:member'
+      - 'excel!Excel.WorksheetCustomProperty#delete:member(1)'
       - 'excel!Excel.WorksheetCustomProperty#key:member'
       - 'excel!Excel.WorksheetCustomProperty#load:member(1)'
       - 'excel!Excel.WorksheetCustomProperty#load:member(2)'
       - 'excel!Excel.WorksheetCustomProperty#load:member(3)'
+      - 'excel!Excel.WorksheetCustomProperty#set:member(1)'
+      - 'excel!Excel.WorksheetCustomProperty#set:member(2)'
       - 'excel!Excel.WorksheetCustomProperty#toJSON:member(1)'
       - 'excel!Excel.WorksheetCustomProperty#value:member'
   - uid: 'excel!Excel.WorksheetCustomProperty#context:member'
@@ -32,8 +35,22 @@ items:
       return:
         type:
           - 'excel!Excel.RequestContext:class'
+  - uid: 'excel!Excel.WorksheetCustomProperty#delete:member(1)'
+    summary: "Supprime la propriété personnalisée.\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    isPreview: true
+    name: delete()
+    fullName: delete()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'delete(): void;'
+      return:
+        type:
+          - void
+        description: ''
   - uid: 'excel!Excel.WorksheetCustomProperty#key:member'
-    summary: "Obtient la clé de la propriété personnalisée. En lecture seule.\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Obtient la clé de la propriété personnalisée. Les clés de propriété personnalisée ne sont pas sensibles à la casse.\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     isPreview: true
     name: key
     fullName: key
@@ -110,6 +127,49 @@ items:
                           select?: string;
                           expand?: string;
                       }
+  - uid: 'excel!Excel.WorksheetCustomProperty#set:member(1)'
+    summary: 'Définit plusieurs propriétés d’un objet en même temps. Vous pouvez transmettre un objet plain avec les propriétés appropriées, ou un autre objet API du même type.'
+    remarks: "Cette méthode est dotée de la signature supplémentaire suivante\_:\n\n`set(properties: Excel.WorksheetCustomProperty): void`"
+    isPreview: true
+    name: 'set(properties, options)'
+    fullName: 'set(properties, options)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Interfaces.WorksheetCustomPropertyUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: Objet JavaScript avec des propriétés qui sont structurées isomorphically vers les propriétés de l’objet sur lequel la méthode est appelée.
+          type:
+            - 'excel!Excel.Interfaces.WorksheetCustomPropertyUpdateData:interface'
+        - id: options
+          description: Fournit une option permettant de supprimer les erreurs si l’objet Properties tente de définir des propriétés en lecture seule.
+          type:
+            - 'office!OfficeExtension.UpdateOptions:interface'
+  - uid: 'excel!Excel.WorksheetCustomProperty#set:member(2)'
+    summary: 'Définit plusieurs propriétés de l’objet en même temps, en fonction d’un objet chargé existant.'
+    isPreview: true
+    name: set(properties)
+    fullName: set(properties)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Excel.WorksheetCustomProperty): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: ''
+          type:
+            - 'excel!Excel.WorksheetCustomProperty:class'
   - uid: 'excel!Excel.WorksheetCustomProperty#toJSON:member(1)'
     summary: 'Remplace la méthode JavaScript `toJSON()` afin de fournir une sortie plus utile lorsqu’un objet d’API est transmis à`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle `toJSON` la méthode de l’objet qui lui est passé.) Tandis que l’objet Excel. WorksheetCustomProperty d’origine est un objet `toJSON` d’API, la méthode renvoie un objet JavaScript simple (tapé comme`Excel.Interfaces.WorksheetCustomPropertyData`<!-- -->) qui contient des copies superficielles de toutes les propriétés enfants chargées à partir de l’objet d’origine.'
     isPreview: true
@@ -125,7 +185,7 @@ items:
           - 'excel!Excel.Interfaces.WorksheetCustomPropertyData:interface'
         description: ''
   - uid: 'excel!Excel.WorksheetCustomProperty#value:member'
-    summary: "Obtient la valeur de la propriété personnalisée. En lecture seule.\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    summary: "Obtient ou définit la valeur de la propriété personnalisée.\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     isPreview: true
     name: value
     fullName: value
@@ -133,12 +193,12 @@ items:
       - typeScript
     type: property
     syntax:
-      content: 'readonly value: string;'
+      content: 'value: string;'
       return:
         type:
           - string
 references:
-  - uid: 'excel!OfficeExtension.ClientObject:class'
+  - uid: 'office!OfficeExtension.ClientObject:class'
     name: OfficeExtension.ClientObject
   - uid: 'excel!Excel.RequestContext:class'
     name: RequestContext
@@ -146,5 +206,9 @@ references:
     name: Excel.WorksheetCustomProperty
   - uid: 'excel!Excel.Interfaces.WorksheetCustomPropertyLoadOptions:interface'
     name: Excel.Interfaces.WorksheetCustomPropertyLoadOptions
+  - uid: 'excel!Excel.Interfaces.WorksheetCustomPropertyUpdateData:interface'
+    name: Interfaces.WorksheetCustomPropertyUpdateData
+  - uid: 'office!OfficeExtension.UpdateOptions:interface'
+    name: OfficeExtension.UpdateOptions
   - uid: 'excel!Excel.Interfaces.WorksheetCustomPropertyData:interface'
     name: Excel.Interfaces.WorksheetCustomPropertyData
