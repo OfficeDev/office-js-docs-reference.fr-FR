@@ -21,9 +21,13 @@ items:
       - 'outlook!Office.Mailbox#convertToUtcClientTime:member(1)'
       - 'outlook!Office.Mailbox#diagnostics:member'
       - 'outlook!Office.Mailbox#displayAppointmentForm:member(1)'
+      - 'outlook!Office.Mailbox#displayAppointmentFormAsync:member(1)'
       - 'outlook!Office.Mailbox#displayMessageForm:member(1)'
+      - 'outlook!Office.Mailbox#displayMessageFormAsync:member(1)'
       - 'outlook!Office.Mailbox#displayNewAppointmentForm:member(1)'
+      - 'outlook!Office.Mailbox#displayNewAppointmentFormAsync:member(1)'
       - 'outlook!Office.Mailbox#displayNewMessageForm:member(1)'
+      - 'outlook!Office.Mailbox#displayNewMessageFormAsync:member(1)'
       - 'outlook!Office.Mailbox#ewsUrl:member'
       - 'outlook!Office.Mailbox#getCallbackTokenAsync:member(1)'
       - 'outlook!Office.Mailbox#getCallbackTokenAsync:member(2)'
@@ -307,7 +311,18 @@ items:
         type:
           - 'outlook!Office.Diagnostics:interface'
   - uid: 'outlook!Office.Mailbox#displayAppointmentForm:member(1)'
-    summary: "Affiche un rendez-vous de calendrier existant.\n\nLa méthode `displayAppointmentForm` ouvre un rendez-vous du calendrier existant dans une nouvelle fenêtre du Bureau ou dans une boîte de dialogue sur les appareils mobiles.\n\nDans Outlook\_pour\_Mac, vous pouvez utiliser cette méthode pour afficher un seul rendez-vous qui ne fait pas partie d’une série périodique, ou le rendez-vous principal d’une série périodique, mais vous ne pouvez pas afficher une instance de la série. En effet, dans Outlook\_pour\_Mac, vous ne pouvez pas accéder aux propriétés (notamment l’ID d’élément) des instances d’une série périodique.\n\nDans Outlook\_sur le web, cette méthode ouvre le formulaire spécifié uniquement si le corps du formulaire comprend 32\_Ko de caractères maximum.\n\nSi l’identificateur de l’élément spécifié n’identifie aucun rendez-vous existant, un volet vierge s’ouvre sur l’ordinateur ou l’appareil client. Par ailleurs, aucun message d’erreur n’est retourné.\n\n**Remarque**: cette méthode n’est pas prise en charge dans Outlook sur iOS ou Android."
+    summary: |-
+      Affiche un rendez-vous de calendrier existant.
+
+      La méthode `displayAppointmentForm` ouvre un rendez-vous du calendrier existant dans une nouvelle fenêtre du Bureau ou dans une boîte de dialogue sur les appareils mobiles.
+
+      Dans Outlook sur Mac, vous pouvez utiliser cette méthode pour afficher un seul rendez-vous qui ne fait pas partie d’une série périodique ou le rendez-vous principal d’une série périodique. Toutefois, vous ne pouvez pas afficher une instance de la série car vous ne pouvez pas accéder aux propriétés (y compris l’ID d’élément) des instances d’une série périodique.
+
+      Dans Outlook sur le Web, cette méthode ouvre le formulaire spécifié uniquement si le corps du formulaire est inférieur ou égal à 32 Ko de caractères.
+
+      Si l’identificateur d’élément spécifié n’identifie pas un rendez-vous existant, un volet vide s’ouvre sur l’ordinateur ou le périphérique client, et aucun message d’erreur n’est renvoyé.
+
+      **Remarque**: cette méthode n’est pas prise en charge dans Outlook sur iOS ou Android.
     remarks: |-
       ** <!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
 
@@ -336,8 +351,50 @@ items:
           description: Identificateur des services web Exchange pour un rendez-vous du calendrier existant.
           type:
             - string
+  - uid: 'outlook!Office.Mailbox#displayAppointmentFormAsync:member(1)'
+    summary: "Affiche un rendez-vous de calendrier existant.\n\nLa méthode `displayAppointmentFormAsync` ouvre un rendez-vous du calendrier existant dans une nouvelle fenêtre du Bureau ou dans une boîte de dialogue sur les appareils mobiles.\n\nDans Outlook sur Mac, vous pouvez utiliser cette méthode pour afficher un seul rendez-vous qui ne fait pas partie d’une série périodique ou le rendez-vous principal d’une série périodique. Toutefois, vous ne pouvez pas afficher une instance de la série car vous ne pouvez pas accéder aux propriétés (y compris l’ID d’élément) des instances d’une série périodique.\n\nDans Outlook sur le Web, cette méthode ouvre le formulaire spécifié uniquement si le corps du formulaire est inférieur ou égal à 32 Ko de caractères.\n\nSi l’identificateur d’élément spécifié n’identifie pas un rendez-vous existant, un volet vide s’ouvre sur l’ordinateur ou le périphérique client, et aucun message d’erreur n’est renvoyé.\n\n**Remarque**: cette méthode n’est pas prise en charge dans Outlook sur iOS ou Android.\n\n\\[[Ensemble d’API\_: aperçu de boîte aux lettres](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
+    remarks: |-
+      ** <!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+
+      ** <!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: composition ou lecture
+    isPreview: true
+    name: 'displayAppointmentFormAsync(itemId, options, callback)'
+    fullName: 'displayAppointmentFormAsync(itemId, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'displayAppointmentFormAsync(itemId: string, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: itemId
+          description: Identificateur des services web Exchange pour un rendez-vous du calendrier existant.
+          type:
+            - string
+        - id: options
+          description: 'Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: Les développeurs peuvent fournir n’importe quel objet auquel ils souhaitent accéder dans la méthode de rappel.'
+          type:
+            - 'office!Office.AsyncContextOptions:interface'
+        - id: callback
+          description: 'Facultatif. Une fois la méthode exécutée, la fonction transmise au `callback` paramètre est appelée avec un seul paramètre,`asyncResult`<!-- -->, qui est un `Office.AsyncResult` objet.'
+          type:
+            - 'outlook!Office.Mailbox#displayAppointmentFormAsync~0:complex'
   - uid: 'outlook!Office.Mailbox#displayMessageForm:member(1)'
-    summary: "Affiche un message existant.\n\nLa méthode `displayMessageForm` ouvre un message existant dans une nouvelle fenêtre du Bureau ou dans une boîte de dialogue sur les appareils mobiles.\n\nDans Outlook\_sur le web, cette méthode ouvre le formulaire spécifié uniquement si le corps du formulaire comprend 32\_Ko de caractères maximum.\n\nSi l’identificateur de l’élément spécifié n’identifie aucun message existant, aucun message ne s’affiche sur l’ordinateur client. Par ailleurs, aucun message d’erreur n’est retourné.\n\nN’utilisez pas `displayMessageForm` avec un ItemId qui représente un rendez-vous. Utilisez la méthode `displayAppointmentForm` pour afficher un rendez-vous existant, et `displayNewAppointmentForm` pour afficher un formulaire afin de créer un nouveau rendez-vous.\n\n**Remarque**: cette méthode n’est pas prise en charge dans Outlook sur iOS ou Android."
+    summary: |-
+      Affiche un message existant.
+
+      La méthode `displayMessageForm` ouvre un message existant dans une nouvelle fenêtre du Bureau ou dans une boîte de dialogue sur les appareils mobiles.
+
+      Dans Outlook sur le Web, cette méthode ouvre le formulaire spécifié uniquement si le corps du formulaire est inférieur ou égal à 32 Ko de caractères.
+
+      Si l’identificateur d’élément spécifié n’identifie pas un message existant, aucun message ne s’affiche sur l’ordinateur client et aucun message d’erreur n’est renvoyé.
+
+      N’utilisez pas `displayMessageForm` avec un ItemId qui représente un rendez-vous. Utilisez la méthode `displayAppointmentForm` pour afficher un rendez-vous existant, et `displayNewAppointmentForm` pour afficher un formulaire afin de créer un nouveau rendez-vous.
+
+      **Remarque**: cette méthode n’est pas prise en charge dans Outlook sur iOS ou Android.
     remarks: |-
       ** <!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
 
@@ -366,11 +423,42 @@ items:
           description: Identificateur des services web Exchange pour un message existant.
           type:
             - string
+  - uid: 'outlook!Office.Mailbox#displayMessageFormAsync:member(1)'
+    summary: "Affiche un message existant.\n\nLa méthode `displayMessageFormAsync` ouvre un message existant dans une nouvelle fenêtre du Bureau ou dans une boîte de dialogue sur les appareils mobiles.\n\nDans Outlook sur le Web, cette méthode ouvre le formulaire spécifié uniquement si le corps du formulaire est inférieur ou égal à 32 Ko de caractères.\n\nSi l’identificateur d’élément spécifié n’identifie pas un message existant, aucun message ne s’affiche sur l’ordinateur client et aucun message d’erreur n’est renvoyé.\n\nN’utilisez pas la `displayMessageForm` `displayMessageFormAsync` méthode ou avec un ItemId qui représente un rendez-vous. Utilisez la `displayAppointmentForm` `displayAppointmentFormAsync` méthode ou pour afficher un rendez-vous existant, `displayNewAppointmentForm` ou `displayNewAppointmentFormAsync` pour afficher un formulaire permettant de créer un rendez-vous.\n\n**Remarque**: cette méthode n’est pas prise en charge dans Outlook sur iOS ou Android.\n\n\\[[Ensemble d’API\_: aperçu de boîte aux lettres](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
+    remarks: |-
+      ** <!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+
+      ** <!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: composition ou lecture
+    isPreview: true
+    name: 'displayMessageFormAsync(itemId, options, callback)'
+    fullName: 'displayMessageFormAsync(itemId, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'displayMessageFormAsync(itemId: string, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: itemId
+          description: Identificateur des services web Exchange pour un message existant.
+          type:
+            - string
+        - id: options
+          description: 'Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: Les développeurs peuvent fournir n’importe quel objet auquel ils souhaitent accéder dans la méthode de rappel.'
+          type:
+            - 'office!Office.AsyncContextOptions:interface'
+        - id: callback
+          description: 'Facultatif. Une fois la méthode exécutée, la fonction transmise au `callback` paramètre est appelée avec un seul paramètre,`asyncResult`<!-- -->, qui est un `Office.AsyncResult` objet.'
+          type:
+            - 'outlook!Office.Mailbox#displayMessageFormAsync~0:complex'
   - uid: 'outlook!Office.Mailbox#displayNewAppointmentForm:member(1)'
     summary: |-
       Affiche un formulaire permettant de créer un rendez-vous du calendrier.
 
-      La méthode `displayNewAppointmentForm` ouvre un formulaire qui permet à l’utilisateur de créer un rendez-vous ou une réunion. Si des paramètres sont spécifiés, les champs du formulaire de rendez-vous sont remplis automatiquement avec le contenu des paramètres.
+      The `displayNewAppointmentForm` method opens a form that enables the user to create a new appointment or meeting. If parameters are specified, the appointment form fields are automatically populated with the contents of the parameters.
 
       Dans Outlook sur le Web, cette méthode affiche toujours un formulaire avec un champ participants. Si vous ne spécifiez pas de participants comme arguments d’entrée, la méthode affiche un formulaire contenant le bouton **Enregistrer**. Si vous avez spécifié des participants, le formulaire inclut ces derniers, en plus du bouton **Envoyer**.
 
@@ -420,6 +508,37 @@ items:
           description: Une `AppointmentForm` Description du nouveau rendez-vous. Toutes les propriétés sont facultatives.
           type:
             - 'outlook!Office.AppointmentForm:interface'
+  - uid: 'outlook!Office.Mailbox#displayNewAppointmentFormAsync:member(1)'
+    summary: "Affiche un formulaire permettant de créer un rendez-vous du calendrier.\n\nThe `displayNewAppointmentFormAsync` method opens a form that enables the user to create a new appointment or meeting. If parameters are specified, the appointment form fields are automatically populated with the contents of the parameters.\n\nDans Outlook sur le Web, cette méthode affiche toujours un formulaire avec un champ participants. Si vous ne spécifiez pas de participants comme arguments d’entrée, la méthode affiche un formulaire contenant le bouton **Enregistrer**. Si vous avez spécifié des participants, le formulaire inclut ces derniers, en plus du bouton **Envoyer**.\n\nDans le client riche Outlook et Outlook RT, si vous spécifiez des participants ou des ressources dans le`requiredAttendees`<!-- -->, `optionalAttendees`<!-- -->ou `resources` le paramètre, cette méthode affiche un formulaire de réunion avec un bouton **Envoyer** . Si vous ne spécifiez pas de destinataires, cette méthode affiche un formulaire de rendez-vous avec un bouton **Enregistrer &amp; Fermer** .\n\nSi l’un des paramètres dépasse les limites définies en matière de taille ou si un nom de paramètre inconnu est spécifié, une exception est levée.\n\n**Remarque**: cette méthode n’est pas prise en charge dans Outlook sur iOS ou Android.\n\n\\[[Ensemble d’API\_: aperçu de boîte aux lettres](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
+    remarks: |-
+      ** <!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+
+      ** <!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: lecture
+    isPreview: true
+    name: 'displayNewAppointmentFormAsync(parameters, options, callback)'
+    fullName: 'displayNewAppointmentFormAsync(parameters, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'displayNewAppointmentFormAsync(parameters: AppointmentForm, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: parameters
+          description: Une `AppointmentForm` Description du nouveau rendez-vous. Toutes les propriétés sont facultatives.
+          type:
+            - 'outlook!Office.AppointmentForm:interface'
+        - id: options
+          description: 'Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: Les développeurs peuvent fournir n’importe quel objet auquel ils souhaitent accéder dans la méthode de rappel.'
+          type:
+            - 'office!Office.AsyncContextOptions:interface'
+        - id: callback
+          description: 'Facultatif. Une fois la méthode exécutée, la fonction transmise au `callback` paramètre est appelée avec un seul paramètre,`asyncResult`<!-- -->, qui est un `Office.AsyncResult` objet.'
+          type:
+            - 'outlook!Office.Mailbox#displayNewAppointmentFormAsync~0:complex'
   - uid: 'outlook!Office.Mailbox#displayNewMessageForm:member(1)'
     summary: "Affiche un formulaire permettant de créer un message.\n\nLa `displayNewMessageForm` méthode ouvre un formulaire qui permet à l’utilisateur de créer un message. Si les paramètres sont spécifiés, les champs du formulaire de message sont automatiquement renseignés avec le contenu des paramètres.\n\nSi l’un des paramètres dépasse les limites définies en matière de taille ou si un nom de paramètre inconnu est spécifié, une exception est levée.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,6](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
     remarks: |-
@@ -464,6 +583,37 @@ items:
           description: "Dictionnaire contenant toutes les valeurs à remplir pour l’utilisateur dans le nouveau formulaire. Tous les paramètres sont facultatifs.\n\n`toRecipients`<!-- -->: Tableau de chaînes contenant les adresses de messagerie ou tableau contenant un objet [EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface) pour chacun des destinataires de la ligne à. Le tableau est limité à 100\_entrées maximum.\n\n`ccRecipients`<!-- -->: Tableau de chaînes contenant les adresses de messagerie ou tableau contenant un objet [EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface) pour chacun des destinataires de la ligne CC. Le tableau est limité à 100\_entrées maximum.\n\n`bccRecipients`<!-- -->: Tableau de chaînes contenant les adresses de messagerie ou tableau contenant un objet [EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface) pour chacun des destinataires de la ligne CCI. Le tableau est limité à 100\_entrées maximum.\n\n`subject`<!-- -->: Chaîne contenant l’objet du message. La chaîne est limitée à 255\_caractères maximum.\n\n`htmlBody`<!-- -->: Corps HTML du message. La taille du corps du message est limitée à 32\_Ko.\n\n`attachments`<!-- -->: Tableau d’objets JSON qui sont des pièces jointes de fichier ou d’élément.\n\n`attachments.type`<!-- -->: Indique le type de pièce jointe. Doit être un fichier pour une pièce jointe ou un élément pour une pièce jointe d’un élément.\n\n`attachments.name`<!-- -->: Chaîne qui contient le nom de la pièce jointe, jusqu’à 255 caractères de longueur.\n\n`attachments.url`<!-- -->: Utilisé uniquement si type est défini sur file. Il s’agit de l’URI de l’emplacement du fichier.\n\n`attachments.isInline`<!-- -->: Utilisé uniquement si type est défini sur file. Si la valeur est true, indique que la pièce jointe est affichée en ligne dans le corps du message et qu’elle ne doit pas être affichée dans la liste des pièces jointes.\n\n`attachments.itemId`<!-- -->: Utilisé uniquement si type est défini sur Item. ID d’élément EWS du message électronique existant que vous souhaitez joindre au nouveau message. Il s’agit d’une chaîne comportant un maximum de 100\_caractères."
           type:
             - any
+  - uid: 'outlook!Office.Mailbox#displayNewMessageFormAsync:member(1)'
+    summary: "Affiche un formulaire permettant de créer un message.\n\nLa `displayNewMessageFormAsync` méthode ouvre un formulaire qui permet à l’utilisateur de créer un message. Si les paramètres sont spécifiés, les champs du formulaire de message sont automatiquement renseignés avec le contenu des paramètres.\n\nSi l’un des paramètres dépasse les limites définies en matière de taille ou si un nom de paramètre inconnu est spécifié, une exception est levée.\n\n\\[[Ensemble d’API\_: aperçu de boîte aux lettres](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
+    remarks: |-
+      ** <!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+
+      ** <!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: lecture
+    isPreview: true
+    name: 'displayNewMessageFormAsync(parameters, options, callback)'
+    fullName: 'displayNewMessageFormAsync(parameters, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'displayNewMessageFormAsync(parameters: any, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: parameters
+          description: "Dictionnaire contenant toutes les valeurs à remplir pour l’utilisateur dans le nouveau formulaire. Tous les paramètres sont facultatifs.\n\n`toRecipients`<!-- -->: Tableau de chaînes contenant les adresses de messagerie ou tableau contenant un objet [EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface) pour chacun des destinataires de la ligne à. Le tableau est limité à 100\_entrées maximum.\n\n`ccRecipients`<!-- -->: Tableau de chaînes contenant les adresses de messagerie ou tableau contenant un objet [EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface) pour chacun des destinataires de la ligne CC. Le tableau est limité à 100\_entrées maximum.\n\n`bccRecipients`<!-- -->: Tableau de chaînes contenant les adresses de messagerie ou tableau contenant un objet [EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface) pour chacun des destinataires de la ligne CCI. Le tableau est limité à 100\_entrées maximum.\n\n`subject`<!-- -->: Chaîne contenant l’objet du message. La chaîne est limitée à 255\_caractères maximum.\n\n`htmlBody`<!-- -->: Corps HTML du message. La taille du corps du message est limitée à 32\_Ko.\n\n`attachments`<!-- -->: Tableau d’objets JSON qui sont des pièces jointes de fichier ou d’élément.\n\n`attachments.type`<!-- -->: Indique le type de pièce jointe. Doit être un fichier pour une pièce jointe ou un élément pour une pièce jointe d’un élément.\n\n`attachments.name`<!-- -->: Chaîne qui contient le nom de la pièce jointe, jusqu’à 255 caractères de longueur.\n\n`attachments.url`<!-- -->: Utilisé uniquement si type est défini sur file. Il s’agit de l’URI de l’emplacement du fichier.\n\n`attachments.isInline`<!-- -->: Utilisé uniquement si type est défini sur file. Si la valeur est true, indique que la pièce jointe est affichée en ligne dans le corps du message et qu’elle ne doit pas être affichée dans la liste des pièces jointes.\n\n`attachments.itemId`<!-- -->: Utilisé uniquement si type est défini sur Item. ID d’élément EWS du message électronique existant que vous souhaitez joindre au nouveau message. Il s’agit d’une chaîne comportant un maximum de 100\_caractères."
+          type:
+            - any
+        - id: options
+          description: 'Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: Les développeurs peuvent fournir n’importe quel objet auquel ils souhaitent accéder dans la méthode de rappel.'
+          type:
+            - 'office!Office.AsyncContextOptions:interface'
+        - id: callback
+          description: 'Facultatif. Une fois la méthode exécutée, la fonction transmise au `callback` paramètre est appelée avec un seul paramètre,`asyncResult`<!-- -->, qui est un `Office.AsyncResult` objet.'
+          type:
+            - 'outlook!Office.Mailbox#displayNewMessageFormAsync~0:complex'
   - uid: 'outlook!Office.Mailbox#ewsUrl:member'
     summary: "Obtient l’URL du point de terminaison des services\_Web Exchange (EWS) pour ce compte de messagerie. Mode lecture uniquement.\n\nVotre application doit disposer de l' `ReadItem` autorisation spécifiée dans son manifeste pour pouvoir appeler le `ewsUrl` membre en mode lecture.\n\nEn mode composition, vous devez appeler la méthode `saveAsync` avant de pouvoir utiliser le membre `ewsUrl`. Votre application doit disposer `ReadWriteItem` d’autorisations pour appeler la `saveAsync` méthode.\n\n**Remarque**: ce membre n’est pas pris en charge dans Outlook sur iOS ou Android."
     remarks: |-
@@ -499,7 +649,7 @@ items:
         type:
           - string
   - uid: 'outlook!Office.Mailbox#getCallbackTokenAsync:member(1)'
-    summary: "Obtient une chaîne contenant un jeton utilisé pour appeler les API\_REST ou les services web\_Exchange.\n\nLa méthode `getCallbackTokenAsync` émet un appel asynchrone pour obtenir un jeton opaque à partir du serveur Exchange qui héberge la boîte aux lettres de l’utilisateur. La durée de vie du jeton de rappel est de 5\_minutes.\n\nLe jeton est renvoyé sous forme de chaîne dans la `asyncResult.value` propriété.\n\nL’appel de la `getCallbackTokenAsync` méthode en mode lecture requiert un niveau d’autorisation minimal de`ReadItem`<!-- -->.\n\nPour appeler la `getCallbackTokenAsync` méthode en mode composition, vous devez avoir enregistré l’élément. La `saveAsync` méthode requiert un niveau d’autorisation minimum de`ReadWriteItem`<!-- -->.\n\n*Jetons\_REST*\n\nLorsqu’un jeton REST est demandé (`options.isRest` = `true`<!-- -->), le jeton résultant ne fonctionnera pas pour authentifier les appels des services Web Exchange. Le jeton peut uniquement accéder en lecture seule à l’élément actif et à ses pièces jointes, sauf si l’autorisation `ReadWriteMailbox` est spécifiée dans le manifeste du complément. Si l’autorisation `ReadWriteMailbox` est spécifiée, le jeton fourni accorde un accès en lecture/écriture au courrier, au calendrier et aux contacts, ainsi que la possibilité d’envoyer des messages.\n\nLe complément doit utiliser la propriété `restUrl` pour déterminer l’URL à utiliser pendant les appels de l’API\_REST.\n\nCette API fonctionne pour les étendues suivantes\_:\n\n- `Mail.ReadWrite`\n\n- `Mail.Send`\n\n- `Calendars.ReadWrite`\n\n- `Contacts.ReadWrite`\n\n*Jetons\_EWS*\n\nLorsqu’un jeton EWS est demandé (`options.isRest` = `false`<!-- -->), le jeton résultant ne fonctionnera pas pour authentifier les appels d’API REST. Le jeton peut uniquement accéder à l’élément actif.\n\nLe complément doit utiliser la propriété `ewsUrl` pour déterminer l’URL à utiliser pendant les appels\_EWS.\n\nVous pouvez passer à la fois le jeton et un identifiant de pièce jointe ou un identifiant d'élément à un système tiers. Le système tiers utilise le jeton en tant que jeton d’autorisation de support pour appeler l’opération [GetAttachment](https://docs.microsoft.com/exchange/client-developer/web-service-reference/getattachment-operation) ou [GetItem](https://docs.microsoft.com/exchange/client-developer/web-service-reference/getitem-operation) des services web Exchange (EWS) afin de retourner une pièce jointe ou un élément. Par exemple, vous pouvez créer un service distant pour [obtenir des pièces jointes à partir de l’élément sélectionné](https://docs.microsoft.com/office/dev/add-ins/outlook/get-attachments-of-an-outlook-item) .<!-- -->.\n\n**Remarque**: il est recommandé que les compléments utilisent les API REST à la place des services Web Exchange chaque fois que cela est possible.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
+    summary: "Obtient une chaîne contenant un jeton utilisé pour appeler les API\_REST ou les services web\_Exchange.\n\nThe `getCallbackTokenAsync` method makes an asynchronous call to get an opaque token from the Exchange Server that hosts the user's mailbox. The lifetime of the callback token is 5 minutes.\n\nLe jeton est renvoyé sous forme de chaîne dans la `asyncResult.value` propriété.\n\nL’appel de la `getCallbackTokenAsync` méthode en mode lecture requiert un niveau d’autorisation minimal de`ReadItem`<!-- -->.\n\nPour appeler la `getCallbackTokenAsync` méthode en mode composition, vous devez avoir enregistré l’élément. La `saveAsync` méthode requiert un niveau d’autorisation minimum de`ReadWriteItem`<!-- -->.\n\n*Jetons\_REST*\n\nLorsqu’un jeton REST est demandé (`options.isRest` = `true`<!-- -->), le jeton résultant ne fonctionnera pas pour authentifier les appels des services Web Exchange. Le jeton peut uniquement accéder en lecture seule à l’élément actif et à ses pièces jointes, sauf si l’autorisation `ReadWriteMailbox` est spécifiée dans le manifeste du complément. Si l’autorisation `ReadWriteMailbox` est spécifiée, le jeton fourni accorde un accès en lecture/écriture au courrier, au calendrier et aux contacts, ainsi que la possibilité d’envoyer des messages.\n\nLe complément doit utiliser la propriété `restUrl` pour déterminer l’URL à utiliser pendant les appels de l’API\_REST.\n\nCette API fonctionne pour les étendues suivantes\_:\n\n- `Mail.ReadWrite`\n\n- `Mail.Send`\n\n- `Calendars.ReadWrite`\n\n- `Contacts.ReadWrite`\n\n*Jetons\_EWS*\n\nLorsqu’un jeton EWS est demandé (`options.isRest` = `false`<!-- -->), le jeton résultant ne fonctionnera pas pour authentifier les appels d’API REST. Le jeton peut uniquement accéder à l’élément actif.\n\nLe complément doit utiliser la propriété `ewsUrl` pour déterminer l’URL à utiliser pendant les appels\_EWS.\n\nVous pouvez passer à la fois le jeton et un identifiant de pièce jointe ou un identifiant d'élément à un système tiers. Le système tiers utilise le jeton en tant que jeton d’autorisation de support pour appeler l’opération [GetAttachment](https://docs.microsoft.com/exchange/client-developer/web-service-reference/getattachment-operation) ou [GetItem](https://docs.microsoft.com/exchange/client-developer/web-service-reference/getitem-operation) des services web Exchange (EWS) afin de retourner une pièce jointe ou un élément. Par exemple, vous pouvez créer un service distant pour [obtenir des pièces jointes à partir de l’élément sélectionné](https://docs.microsoft.com/office/dev/add-ins/outlook/get-attachments-of-an-outlook-item) .<!-- -->.\n\n**Remarque**: il est recommandé que les compléments utilisent les API REST à la place des services Web Exchange chaque fois que cela est possible.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
     remarks: |-
       ** <!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
 
@@ -553,7 +703,7 @@ items:
           type:
             - 'outlook!Office.Mailbox#getCallbackTokenAsync~1:complex'
   - uid: 'outlook!Office.Mailbox#getCallbackTokenAsync:member(2)'
-    summary: "Obtient une chaîne qui contient un jeton servant à obtenir une pièce jointe ou un élément à partir d’un serveur Exchange.\n\nLa méthode `getCallbackTokenAsync` émet un appel asynchrone pour obtenir un jeton opaque à partir du serveur Exchange qui héberge la boîte aux lettres de l’utilisateur. La durée de vie du jeton de rappel est de 5\_minutes.\n\nLe jeton est renvoyé sous forme de chaîne dans la `asyncResult.value` propriété.\n\nVous pouvez passer à la fois le jeton et un identifiant de pièce jointe ou un identifiant d'élément à un système tiers. Celui-ci utilise le jeton en tant que jeton d’autorisation de support pour appeler l’opération [GetAttachment](https://docs.microsoft.com/exchange/client-developer/web-service-reference/getattachment-operation) ou [GetItem](https://docs.microsoft.com/exchange/client-developer/web-service-reference/getitem-operation) des services web Exchange (EWS) afin de retourner une pièce jointe ou un élément. Par exemple, vous pouvez créer un service distant pour [obtenir des pièces jointes à partir de l’élément sélectionné](https://docs.microsoft.com/office/dev/add-ins/outlook/get-attachments-of-an-outlook-item) .<!-- -->.\n\nL’appel de la `getCallbackTokenAsync` méthode en mode lecture requiert un niveau d’autorisation minimal de`ReadItem`<!-- -->.\n\nPour appeler la `getCallbackTokenAsync` méthode en mode composition, vous devez avoir enregistré l’élément. La `saveAsync` méthode requiert un niveau d’autorisation minimum de`ReadWriteItem`<!-- -->.\n\n\\[[Ensemble d’API\_: tous prennent en charge le mode de lecture\_; La boîte aux lettres 1,3 a introduit la prise en charge du mode composition](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
+    summary: "Obtient une chaîne qui contient un jeton servant à obtenir une pièce jointe ou un élément à partir d’un serveur Exchange.\n\nThe `getCallbackTokenAsync` method makes an asynchronous call to get an opaque token from the Exchange Server that hosts the user's mailbox. The lifetime of the callback token is 5 minutes.\n\nLe jeton est renvoyé sous forme de chaîne dans la `asyncResult.value` propriété.\n\nVous pouvez passer à la fois le jeton et un identifiant de pièce jointe ou un identifiant d'élément à un système tiers. Celui-ci utilise le jeton en tant que jeton d’autorisation de support pour appeler l’opération [GetAttachment](https://docs.microsoft.com/exchange/client-developer/web-service-reference/getattachment-operation) ou [GetItem](https://docs.microsoft.com/exchange/client-developer/web-service-reference/getitem-operation) des services web Exchange (EWS) afin de retourner une pièce jointe ou un élément. Par exemple, vous pouvez créer un service distant pour [obtenir des pièces jointes à partir de l’élément sélectionné](https://docs.microsoft.com/office/dev/add-ins/outlook/get-attachments-of-an-outlook-item) .<!-- -->.\n\nL’appel de la `getCallbackTokenAsync` méthode en mode lecture requiert un niveau d’autorisation minimal de`ReadItem`<!-- -->.\n\nPour appeler la `getCallbackTokenAsync` méthode en mode composition, vous devez avoir enregistré l’élément. La `saveAsync` méthode requiert un niveau d’autorisation minimum de`ReadWriteItem`<!-- -->.\n\n\\[[Ensemble d’API\_: tous prennent en charge le mode de lecture\_; La boîte aux lettres 1,3 a introduit la prise en charge du mode composition](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
     remarks: |-
       ** <!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
 
@@ -1019,8 +1169,52 @@ references:
         fullName: ' | string'
   - uid: 'outlook!Office.Diagnostics:interface'
     name: Diagnostics
+  - uid: 'outlook!Office.Mailbox#displayAppointmentFormAsync~0:complex'
+    name: '(asyncResult: Office.AsyncResult<void>) => void'
+    fullName: '(asyncResult: Office.AsyncResult<void>) => void'
+    spec.typeScript:
+      - name: '(asyncResult: '
+        fullName: '(asyncResult: '
+      - uid: 'office!Office.AsyncResult:interface'
+        name: Office.AsyncResult
+        fullName: Office.AsyncResult
+      - name: <void>) => void
+        fullName: <void>) => void
+  - uid: 'outlook!Office.Mailbox#displayMessageFormAsync~0:complex'
+    name: '(asyncResult: Office.AsyncResult<void>) => void'
+    fullName: '(asyncResult: Office.AsyncResult<void>) => void'
+    spec.typeScript:
+      - name: '(asyncResult: '
+        fullName: '(asyncResult: '
+      - uid: 'office!Office.AsyncResult:interface'
+        name: Office.AsyncResult
+        fullName: Office.AsyncResult
+      - name: <void>) => void
+        fullName: <void>) => void
   - uid: 'outlook!Office.AppointmentForm:interface'
     name: AppointmentForm
+  - uid: 'outlook!Office.Mailbox#displayNewAppointmentFormAsync~0:complex'
+    name: '(asyncResult: Office.AsyncResult<void>) => void'
+    fullName: '(asyncResult: Office.AsyncResult<void>) => void'
+    spec.typeScript:
+      - name: '(asyncResult: '
+        fullName: '(asyncResult: '
+      - uid: 'office!Office.AsyncResult:interface'
+        name: Office.AsyncResult
+        fullName: Office.AsyncResult
+      - name: <void>) => void
+        fullName: <void>) => void
+  - uid: 'outlook!Office.Mailbox#displayNewMessageFormAsync~0:complex'
+    name: '(asyncResult: Office.AsyncResult<void>) => void'
+    fullName: '(asyncResult: Office.AsyncResult<void>) => void'
+    spec.typeScript:
+      - name: '(asyncResult: '
+        fullName: '(asyncResult: '
+      - uid: 'office!Office.AsyncResult:interface'
+        name: Office.AsyncResult
+        fullName: Office.AsyncResult
+      - name: <void>) => void
+        fullName: <void>) => void
   - uid: 'outlook!Office.Mailbox#getCallbackTokenAsync~0:complex'
     name: 'Office.AsyncContextOptions & { isRest?: boolean }'
     fullName: 'Office.AsyncContextOptions & { isRest?: boolean }'
