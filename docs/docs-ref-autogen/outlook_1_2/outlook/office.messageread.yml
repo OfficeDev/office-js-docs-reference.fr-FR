@@ -150,9 +150,9 @@ items:
     summary: |-
       Obtient l’identificateur de la conversation qui contient un message particulier.
 
-      Vous pouvez obtenir un nombre entier de cette propriété si votre application de messagerie est activée dans les formulaires de lecture ou les réponses des formulaires de composition. Si, par la suite, l’utilisateur modifie l’objet du message de réponse, lors de l’envoi de la réponse, l’ID de conversation de ce message va changer et la valeur que vous avez obtenue plus tôt ne sera plus applicable.
+      You can get an integer for this property if your mail app is activated in read forms or responses in compose forms. If subsequently the user changes the subject of the reply message, upon sending the reply, the conversation ID for that message will change and that value you obtained earlier will no longer apply.
 
-      Cette propriété obtient une valeur null lorsqu’un élément est ajouté à un formulaire de composition. Si l’utilisateur définit la ligne Objet et enregistre l’élément, la propriété `conversationId` renvoie une valeur.
+      You get null for this property for a new item in a compose form. If the user sets a subject and saves the item, the `conversationId` property will return a value.
     remarks: |-
       ** <!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
 
@@ -224,7 +224,16 @@ items:
         type:
           - '!Date:interface'
   - uid: 'outlook!Office.MessageRead#displayReplyAllForm:member(1)'
-    summary: "Affiche un formulaire de réponse qui inclut, soit l’expéditeur et tous les destinataires du message sélectionné, soit l’organisateur et tous les participants du rendez-vous sélectionné.\n\nDans Outlook\_sur le web, le formulaire de réponse s’affiche sous forme de formulaire isolé dans l’affichage à 3\_colonnes et sous forme de formulaire contextuel dans l’affichage à 1 ou 2\_colonnes.\n\nSi un des paramètres de chaîne dépasse la limite, `displayReplyAllForm` génère une exception.\n\nLorsque des pièces jointes sont spécifiées dans le paramètre `formData.attachments`, Outlook et Outlook\_sur le web et clients bureau tentent de télécharger toutes les pièces jointes et de les joindre au formulaire de réponse. Si aucune pièce jointe n’est ajoutée, une erreur s’affiche dans l’interface utilisateur du formulaire. Si ce n’est pas possible, aucun message d’erreur n’est généré.\n\n**Remarque**: cette méthode n’est pas prise en charge dans Outlook sur iOS ou Android."
+    summary: |-
+      Affiche un formulaire de réponse qui comprend soit l’expéditeur et tous les destinataires du message sélectionné, soit l’organisateur et tous les participants du rendez-vous sélectionné.
+
+      Dans Outlook sur le Web, le formulaire de réponse s’affiche sous la forme d’un formulaire indépendant dans un affichage à 3 colonnes et sous forme de formulaire contextuel dans un affichage à 2 ou 2 colonnes.
+
+      Si un des paramètres de chaîne dépasse la limite, `displayReplyAllForm` génère une exception.
+
+      Lorsque des pièces jointes sont spécifiées dans le `formData.attachments` paramètre, Outlook tente de télécharger toutes les pièces jointes et de les joindre au formulaire de réponse. Si aucune pièce jointe n’est ajoutée, une erreur s’affiche dans l’interface utilisateur du formulaire. Si ce n’est pas possible, aucun message d’erreur n’est généré.
+
+      **Remarque**: cette méthode n’est pas prise en charge dans Outlook sur iOS ou Android.
     remarks: |-
       ** <!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
 
@@ -320,7 +329,16 @@ items:
           type:
             - 'outlook!Office.MessageRead#displayReplyAllForm~0:complex'
   - uid: 'outlook!Office.MessageRead#displayReplyForm:member(1)'
-    summary: "Affiche un formulaire de réponse qui comprend uniquement l’expéditeur du message sélectionné ou l’organisateur du rendez-vous sélectionné.\n\nDans Outlook\_sur le web, le formulaire de réponse s’affiche sous forme de formulaire isolé dans l’affichage à 3\_colonnes et sous forme de formulaire contextuel dans l’affichage à 1 ou 2\_colonnes.\n\nSi un des paramètres de chaîne dépasse la limite, `displayReplyForm` génère une exception.\n\nLorsque des pièces jointes sont spécifiées dans le paramètre `formData.attachments`, Outlook et Outlook\_sur le web et clients bureau tentent de télécharger toutes les pièces jointes et de les joindre au formulaire de réponse. Si aucune pièce jointe n’est ajoutée, une erreur s’affiche dans l’interface utilisateur du formulaire. Si ce n’est pas possible, aucun message d’erreur n’est généré.\n\n**Remarque**: cette méthode n’est pas prise en charge dans Outlook sur iOS ou Android."
+    summary: |-
+      Affiche un formulaire de réponse qui comprend uniquement l’expéditeur du message sélectionné ou l’organisateur du rendez-vous sélectionné.
+
+      Dans Outlook sur le Web, le formulaire de réponse s’affiche sous la forme d’un formulaire indépendant dans un affichage à 3 colonnes et sous forme de formulaire contextuel dans un affichage à 2 ou 2 colonnes.
+
+      Si un des paramètres de chaîne dépasse la limite, `displayReplyForm` génère une exception.
+
+      Lorsque des pièces jointes sont spécifiées dans le `formData.attachments` paramètre, Outlook tente de télécharger toutes les pièces jointes et de les joindre au formulaire de réponse. Si aucune pièce jointe n’est ajoutée, une erreur s’affiche dans l’interface utilisateur du formulaire. Si ce n’est pas possible, aucun message d’erreur n’est généré.
+
+      **Remarque**: cette méthode n’est pas prise en charge dans Outlook sur iOS ou Android.
     remarks: |-
       ** <!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
 
@@ -595,7 +613,7 @@ items:
 
             Tandis que le niveau d’autorisation minimal pour utiliser cette méthode est`Restricted`<!-- -->, certains types d’entité nécessitent l' `ReadItem` accès, comme indiqué dans le tableau suivant.
 
-            <table> <tr> <th>Valeur d’entityType</th> <th>Type des objets du tableau renvoyé</th> <th>Niveau d’autorisation requis</th> </tr> <tr> <td>Adresse</td> <td>Chaîne</td> <td>Restreint</td> </tr> <tr> <td>Contact</td> <td>Contact</td> <td>ReadItem</td> </tr> <tr> <td>EmailAddress</td> <td>Chaîne</td> <td>ReadItem</td> </tr> <tr> <td>MeetingSuggestion</td> <td>MeetingSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>PhoneNumber</td> <td>PhoneNumber</td> <td>Restreint</td> </tr> <tr> <td>TaskSuggestion</td> <td>TaskSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>URL</td> <td>Chaîne</td> <td>Restreint</td> </tr> </table>
+            <table> <tr> <th>Valeur d’entityType</th> <th>Type des objets du tableau renvoyé</th> <th>Niveau d’autorisation requis</th> </tr> <tr> <td>Adresse</td> <td>String</td> <td>Restreint</td> </tr> <tr> <td>Contact</td> <td>Contact</td> <td>ReadItem</td> </tr> <tr> <td>EmailAddress</td> <td>String</td> <td>ReadItem</td> </tr> <tr> <td>MeetingSuggestion</td> <td>MeetingSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>PhoneNumber</td> <td>PhoneNumber</td> <td>Restreint</td> </tr> <tr> <td>TaskSuggestion</td> <td>TaskSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>URL</td> <td>String</td> <td>Restreint</td> </tr> </table>
           type:
             - 'outlook!Office.MessageRead#getEntitiesByType~1:complex'
   - uid: 'outlook!Office.MessageRead#getFilteredEntitiesByName:member(1)'
@@ -637,7 +655,7 @@ items:
     summary: |-
       Renvoie des valeurs de chaîne dans l’élément sélectionné, qui correspondent aux expressions régulières définies dans le fichier manifeste XML.
 
-      La méthode `getRegExMatches` renvoie les chaînes qui correspondent à l’expression régulière définie dans chaque élément de règle `ItemHasRegularExpressionMatch` ou `ItemHasKnownEntity` du fichier manifeste XML. Pour une règle `ItemHasRegularExpressionMatch`, une chaîne correspondante doit être présente dans la propriété de l’élément spécifié par cette règle. Le type simple `PropertyName` définit les propriétés prises en charge.
+      The `getRegExMatches` method returns the strings that match the regular expression defined in each `ItemHasRegularExpressionMatch` or `ItemHasKnownEntity` rule element in the manifest XML file. For an `ItemHasRegularExpressionMatch` rule, a matching string has to occur in the property of the item that is specified by that rule. The `PropertyName` simple type defines the supported properties.
 
       Si vous spécifiez une `ItemHasRegularExpressionMatch` règle sur la propriété Body d’un élément, l’expression régulière doit ensuite filtrer le corps et ne doit pas essayer de renvoyer l’intégralité du corps de l’élément. L’utilisation d’une expression régulière telle que. * pour obtenir l’intégralité du corps d’un élément ne renvoie pas toujours les résultats attendus. À la place, utilisez la `Body.getAsync` méthode pour récupérer le corps entier.
 
@@ -687,7 +705,7 @@ items:
       return:
         type:
           - any
-        description: Un objet qui contient les tableaux des chaînes correspondant aux expressions régulières définies dans le fichier manifeste XML. Le nom de chaque tableau est égal à la valeur correspondante de l’attribut `RegExName` de la règle `ItemHasRegularExpressionMatch` correspondante ou de l’attribut `FilterName` de la règle `ItemHasKnownEntity` correspondante.
+        description: An object that contains arrays of strings that match the regular expressions defined in the manifest XML file. The name of each array is equal to the corresponding value of the `RegExName` attribute of the matching `ItemHasRegularExpressionMatch` rule or the `FilterName` attribute of the matching `ItemHasKnownEntity` rule.
   - uid: 'outlook!Office.MessageRead#getRegExMatchesByName:member(1)'
     summary: |-
       Renvoie des valeurs de chaîne dans l’élément sélectionné, qui correspondent aux expressions régulières nommées définies dans le fichier manifeste XML.
@@ -777,7 +795,7 @@ items:
 
       ** <!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: lecture de message
 
-      La propriété `itemClass` spécifie la classe de message de l’élément sélectionné. Les éléments suivants sont les classes de message par défaut du message ou de l’élément de rendez-vous.
+      The `itemClass` property specifies the message class of the selected item. The following are the default message classes for the message or appointment item.
 
       <table> <tr> <th>Type</th> <th>Description</th> <th>Classe d’élément</th> </tr> <tr> <td>Éléments de rendez-vous</td> <td>Il s’agit des éléments de calendrier de la classe d’élément IPM. Rendez-vous ou IPM. Appointment. occurrence.</td> <td>Mn. Rendez-vous, IPM. Appointment. occurrence</td> </tr> <tr> <td>Éléments de message</td> <td>Ces éléments incluent les messages électroniques dont la classe de message par défaut est IPM.Note, ainsi que les demandes de réunion, les réponses et les annulations qui utilisent IPM.Schedule.Meeting comme classe de message de base.</td> <td>Mn. Remarque, IPM. La tâche Schedule. Meeting. Request, IPM. Schedule. Meeting. nég, IPM. Schedule. Meeting. POS, IPM. Schedule. Meeting. chevalet, IPM. Schedule. Meeting. Canceled</td> </tr> </table>
 
@@ -865,7 +883,7 @@ items:
     summary: |-
       Charge de manière asynchrone les propriétés personnalisées de ce complément vers l’élément sélectionné.
 
-      Les propriétés personnalisées sont stockées sous la forme de paires clé/valeur qui s’appliquent à une application ou un élément. Cette méthode renvoie un objet `CustomProperties` dans le rappel, qui fournit des méthodes pour accéder aux propriétés personnalisées propres à l’élément et au complément actifs. Les propriétés personnalisées ne sont pas chiffrées dans l’élément, par conséquent elles ne doivent pas servir d’espace de stockage sécurisé.
+      Custom properties are stored as key/value pairs on a per-app, per-item basis. This method returns a `CustomProperties` object in the callback, which provides methods to access the custom properties specific to the current item and the current add-in. Custom properties are not encrypted on the item, so this should not be used as secure storage.
 
       Les propriétés personnalisées sont fournies sous la forme d’un objet `CustomProperties` dans la propriété `asyncResult.value`. Cet objet peut être utilisé pour obtenir, définir et supprimer des propriétés personnalisées à partir de l’élément et réenregistrer les modifications apportées au jeu de propriétés personnalisées sur le serveur.
     remarks: |-
