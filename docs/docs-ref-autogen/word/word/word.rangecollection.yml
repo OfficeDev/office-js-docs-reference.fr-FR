@@ -72,22 +72,21 @@ items:
         type:
           - 'word!Word.RangeCollection#items~0:complex'
   - uid: 'word!Word.RangeCollection#load:member(1)'
-    summary: "Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler «\_context.sync()\_» avant de lire les propriétés."
-    remarks: "En plus de cette signature, cette méthode possède les signatures suivantes\_:\n\n`load(option?: string | string[]): Word.RangeCollection`-WHERE option est une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.\n\n`load(option?: { select?: string; expand?: string; }): Word.RangeCollection`Option-WHERE option. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Word.RangeCollection`-Uniquement disponible sur les types de collection. Elle est similaire à la signature précédente. Option. Top indique le nombre maximal d’éléments de collection qui peuvent être inclus dans le résultat. Option. Skip indique le nombre d’éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat. Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d’éléments."
-    name: load(option)
-    fullName: load(option)
+    summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler `context.sync()` avant de lire les propriétés.
+    name: load(options)
+    fullName: load(options)
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'load(option?: Word.Interfaces.RangeCollectionLoadOptions & Word.Interfaces.CollectionLoadOptions): Word.RangeCollection;'
+      content: 'load(options?: Word.Interfaces.RangeCollectionLoadOptions & Word.Interfaces.CollectionLoadOptions): Word.RangeCollection;'
       return:
         type:
           - 'word!Word.RangeCollection:class'
         description: ''
       parameters:
-        - id: option
-          description: ''
+        - id: options
+          description: Fournit des options pour les propriétés de l’objet à charger.
           type:
             - 'word!Word.RangeCollection#load~0:complex'
   - uid: 'word!Word.RangeCollection#load:member(2)'
@@ -109,24 +108,25 @@ items:
           type:
             - 'string | string[]'
   - uid: 'word!Word.RangeCollection#load:member(3)'
-    name: load(option)
-    fullName: load(option)
+    summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler `context.sync()` avant de lire les propriétés.
+    name: load(propertyNamesAndPaths)
+    fullName: load(propertyNamesAndPaths)
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'load(option?: OfficeExtension.LoadOption): Word.RangeCollection;'
+      content: 'load(propertyNamesAndPaths?: OfficeExtension.LoadOption): Word.RangeCollection;'
       return:
         type:
           - 'word!Word.RangeCollection:class'
         description: ''
       parameters:
-        - id: option
-          description: ''
+        - id: propertyNamesAndPaths
+          description: '`propertyNamesAndPaths.select`est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et `propertyNamesAndPaths.expand` une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.'
           type:
             - 'office!OfficeExtension.LoadOption:interface'
   - uid: 'word!Word.RangeCollection#toJSON:member(1)'
-    summary: "Remplace la méthode JavaScript `toJSON()` afin de fournir une sortie plus utile lorsqu’un objet d’API est transmis à`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle `toJSON` la méthode de l’objet qui lui est passé.) Tandis que `Word.RangeCollection` l’objet d’origine est un objet `toJSON` d’API, la méthode renvoie un objet JavaScript simple (tapé comme`Word.Interfaces.RangeCollectionData`<!-- -->) qui contient un tableau «\_éléments\_» avec des copies superficielles de toutes les propriétés chargées des éléments de la collection."
+    summary: "Remplace la méthode JavaScript afin `toJSON()` de fournir une sortie plus utile lorsqu’un objet d’API est transmis à`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle la `toJSON` méthode de l’objet qui lui est passé.) Tandis que l’objet d’origine `Word.RangeCollection` est un objet d’API, la `toJSON` méthode renvoie un objet JavaScript simple (tapé comme`Word.Interfaces.RangeCollectionData`<!-- -->) qui contient un tableau «\_éléments\_» avec des copies superficielles de toutes les propriétés chargées des éléments de la collection."
     name: toJSON()
     fullName: toJSON()
     langs:
@@ -139,7 +139,7 @@ items:
           - 'word!Word.Interfaces.RangeCollectionData:interface'
         description: ''
   - uid: 'word!Word.RangeCollection#track:member(1)'
-    summary: "Effectuer le suivi de l’objet pour l’ajustement automatique en fonction environnant des modifications dans le document. Cet appel est abréviations context.trackedObjects.add(thisObject). Si vous utilisez cet objet au sein de «\_.sync\_» appels et en dehors de l’exécution séquentielle d’un lot de «\_.run\_» et rencontrez un message d’erreur «\_InvalidObjectPath\_» lors de la définition d’une propriété ou appeler une méthode sur l’objet, vous devez ajouter l’objet à l’objet de suivi collection de sites lors de l’objet a été créé."
+    summary: "Effectuer le suivi de l’objet pour l’ajustement automatique en fonction environnant des modifications dans le document. Cet appel est un raccourci pour`context.trackedObjects.add(thisObject)`<!-- -->. Si vous utilisez cet objet entre `.sync` les appels et en dehors de l’exécution séquentielle d’un lot «\_. Run\_», et si vous obtenez une erreur «\_InvalidObjectPath\_» lors de la définition d’une propriété ou de l’appel d’une méthode sur l’objet, vous deviez avoir ajouté l’objet à la collection d’objets suivi lors de la création initiale de l’objet."
     name: track()
     fullName: track()
     langs:
@@ -152,7 +152,7 @@ items:
           - 'word!Word.RangeCollection:class'
         description: ''
   - uid: 'word!Word.RangeCollection#untrack:member(1)'
-    summary: "Publication mémoire associée à cet objet si elle a été précédemment suivie. Cet appel est abréviations context.trackedObjects.add(thisObject). Vous rencontrez de nombreux objets suivies ralentit l’application hôte, donc n’oubliez pas de libérer les objets que l'on ajoute, une fois que vous avez terminé à les utiliser. Vous devez appeler «\_context.sync()\_» avant la publication de mémoire prend effet."
+    summary: 'Publication mémoire associée à cet objet si elle a été précédemment suivie. Cet appel est un raccourci pour`context.trackedObjects.remove(thisObject)`<!-- -->. Vous rencontrez de nombreux objets suivies ralentit l’application hôte, donc n’oubliez pas de libérer les objets que l''on ajoute, une fois que vous avez terminé à les utiliser. Vous devrez appeler `context.sync()` avant que la version de mémoire ne prenne effet.'
     name: untrack()
     fullName: untrack()
     langs:
