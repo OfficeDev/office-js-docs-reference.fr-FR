@@ -1,7 +1,7 @@
 ### YamlMime:UniversalReference
 items:
   - uid: 'word!Word.Document:class'
-    summary: "L’objet Document est l’objet de niveau supérieur. Un objet Document comporte des sections, des contrôles de contenu et le corps dans lequel se trouve le contenu du document.\n\n\\[[Ensemble d’API\_: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\\]"
+    summary: "The Document object is the top level object. A Document object contains one or more sections, content controls, and the body that contains the contents of the document.\n\n\\[[Ensemble d’API\_: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\\]"
     name: Word.Document
     fullName: Word.Document
     langs:
@@ -109,22 +109,56 @@ items:
           });
           ```
   - uid: 'word!Word.Document#load:member(1)'
-    summary: "Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler «\_context.sync()\_» avant de lire les propriétés."
-    remarks: "En plus de cette signature, cette méthode possède les signatures suivantes\_:\n\n`load(option?: string | string[]): Word.Document`-WHERE option est une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.\n\n`load(option?: { select?: string; expand?: string; }): Word.Document`Option-WHERE option. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Word.Document`-Uniquement disponible sur les types de collection. Elle est similaire à la signature précédente. Option. Top indique le nombre maximal d’éléments de collection qui peuvent être inclus dans le résultat. Option. Skip indique le nombre d’éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat. Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d’éléments.\n\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n    \n    // Create a proxy object for the document.\n    var thisDocument = context.document;\n    \n    // Queue a command to load content control properties.\n    context.load(thisDocument, 'contentControls/id, contentControls/text, contentControls/tag');\n    \n    // Synchronize the document state by executing the queued commands, \n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n        if (thisDocument.contentControls.items.length !== 0) {\n            for (var i = 0; i < thisDocument.contentControls.items.length; i++) {\n                console.log(thisDocument.contentControls.items[i].id);\n                console.log(thisDocument.contentControls.items[i].text);\n                console.log(thisDocument.contentControls.items[i].tag);\n            }\n        } else {\n            console.log('No content controls in this document.');\n        }\n    });  \n})\n.catch(function (error) {\n    console.log('Error: ' + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Debug info: ' + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-    name: load(option)
-    fullName: load(option)
+    summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler `context.sync()` avant de lire les propriétés.
+    name: load(options)
+    fullName: load(options)
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'load(option?: Word.Interfaces.DocumentLoadOptions): Word.Document;'
+      content: 'load(options?: Word.Interfaces.DocumentLoadOptions): Word.Document;'
       return:
         type:
           - 'word!Word.Document:class'
-        description: ''
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+              
+              // Create a proxy object for the document.
+              var thisDocument = context.document;
+              
+              // Queue a command to load content control properties.
+              context.load(thisDocument, 'contentControls/id, contentControls/text, contentControls/tag');
+              
+              // Synchronize the document state by executing the queued commands, 
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+                  if (thisDocument.contentControls.items.length !== 0) {
+                      for (var i = 0; i < thisDocument.contentControls.items.length; i++) {
+                          console.log(thisDocument.contentControls.items[i].id);
+                          console.log(thisDocument.contentControls.items[i].text);
+                          console.log(thisDocument.contentControls.items[i].tag);
+                      }
+                  } else {
+                      console.log('No content controls in this document.');
+                  }
+              });  
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
       parameters:
-        - id: option
-          description: ''
+        - id: options
+          description: Fournit des options pour les propriétés de l’objet à charger.
           type:
             - 'word!Word.Interfaces.DocumentLoadOptions:interface'
   - uid: 'word!Word.Document#load:member(2)'
@@ -153,16 +187,24 @@ items:
       - typeScript
     type: method
     syntax:
-      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Word.Document;'
+      content: |-
+        load(propertyNamesAndPaths?: {
+                    select?: string;
+                    expand?: string;
+                }): Word.Document;
       return:
         type:
           - 'word!Word.Document:class'
         description: ''
       parameters:
         - id: propertyNamesAndPaths
-          description: Où propertyNamesAndPaths. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et propertyNamesAndPaths. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
+          description: '`propertyNamesAndPaths.select`est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et `propertyNamesAndPaths.expand` une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.'
           type:
-            - '{ select?: string; expand?: string; }'
+            - |-
+              {
+                          select?: string;
+                          expand?: string;
+                      }
   - uid: 'word!Word.Document#save:member(1)'
     summary: "Enregistre le document. Cette option utilise la Convention d’affectation de noms de fichier par défaut de Word si le document n’a pas encore été enregistré.\n\n\\[[Ensemble d’API\_: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\\]"
     name: save()
@@ -216,7 +258,7 @@ items:
           });
           ```
   - uid: 'word!Word.Document#saved:member'
-    summary: "Indique si les modifications apportées au document ont été enregistrées. La valeur true indique que le document n’a pas été modifié depuis son enregistrement. En lecture seule.\n\n\\[[Ensemble d’API\_: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\\]"
+    summary: "Indicates whether the changes in the document have been saved. A value of true indicates that the document hasn't changed since it was saved. Read-only.\n\n\\[[Ensemble d’API\_: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\\]"
     name: saved
     fullName: saved
     langs:
@@ -281,7 +323,7 @@ items:
           type:
             - 'word!Word.Document:class'
   - uid: 'word!Word.Document#toJSON:member(1)'
-    summary: 'Remplace la méthode JavaScript `toJSON()` afin de fournir une sortie plus utile lorsqu’un objet d’API est transmis à`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle `toJSON` la méthode de l’objet qui lui est passé.) Tandis que l’objet Word. document d’origine est un objet `toJSON` d’API, la méthode renvoie un objet JavaScript simple (tapé comme`Word.Interfaces.DocumentData`<!-- -->) qui contient des copies superficielles de toutes les propriétés enfants chargées à partir de l’objet d’origine.'
+    summary: 'Remplace la méthode JavaScript afin `toJSON()` de fournir une sortie plus utile lorsqu’un objet d’API est transmis à`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle la `toJSON` méthode de l’objet qui lui est passé.) Tandis que l’objet Word.Document d’origine est un objet d’API, la `toJSON` méthode renvoie un objet JavaScript simple (tapé comme`Word.Interfaces.DocumentData`<!-- -->) qui contient des copies superficielles de toutes les propriétés enfants chargées à partir de l’objet d’origine.'
     name: toJSON()
     fullName: toJSON()
     langs:
@@ -294,7 +336,7 @@ items:
           - 'word!Word.Interfaces.DocumentData:interface'
         description: ''
   - uid: 'word!Word.Document#track:member(1)'
-    summary: "Effectuer le suivi de l’objet pour l’ajustement automatique en fonction environnant des modifications dans le document. Cet appel est abréviations context.trackedObjects.add(thisObject). Si vous utilisez cet objet au sein de «\_.sync\_» appels et en dehors de l’exécution séquentielle d’un lot de «\_.run\_» et rencontrez un message d’erreur «\_InvalidObjectPath\_» lors de la définition d’une propriété ou appeler une méthode sur l’objet, vous devez ajouter l’objet à l’objet de suivi collection de sites lors de l’objet a été créé."
+    summary: "Effectuer le suivi de l’objet pour l’ajustement automatique en fonction environnant des modifications dans le document. Cet appel est un raccourci pour`context.trackedObjects.add(thisObject)`<!-- -->. Si vous utilisez cet objet entre `.sync` les appels et en dehors de l’exécution séquentielle d’un lot «\_. Run\_», et si vous obtenez une erreur «\_InvalidObjectPath\_» lors de la définition d’une propriété ou de l’appel d’une méthode sur l’objet, vous deviez avoir ajouté l’objet à la collection d’objets suivi lors de la création initiale de l’objet."
     name: track()
     fullName: track()
     langs:
@@ -307,7 +349,7 @@ items:
           - 'word!Word.Document:class'
         description: ''
   - uid: 'word!Word.Document#untrack:member(1)'
-    summary: "Publication mémoire associée à cet objet si elle a été précédemment suivie. Cet appel est abréviations context.trackedObjects.add(thisObject). Vous rencontrez de nombreux objets suivies ralentit l’application hôte, donc n’oubliez pas de libérer les objets que l'on ajoute, une fois que vous avez terminé à les utiliser. Vous devez appeler «\_context.sync()\_» avant la publication de mémoire prend effet."
+    summary: 'Publication mémoire associée à cet objet si elle a été précédemment suivie. Cet appel est un raccourci pour`context.trackedObjects.remove(thisObject)`<!-- -->. Vous rencontrez de nombreux objets suivies ralentit l’application hôte, donc n’oubliez pas de libérer les objets que l''on ajoute, une fois que vous avez terminé à les utiliser. Vous devrez appeler `context.sync()` avant que la version de mémoire ne prenne effet.'
     name: untrack()
     fullName: untrack()
     langs:
