@@ -3,9 +3,9 @@ items:
   - uid: 'outlook!Office.NotificationMessageDetails:interface'
     summary: "Un tableau d’objets `NotificationMessageDetails` est renvoyé par la méthode `NotificationMessages.getAllAsync`.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
     remarks: |-
-      **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+      ** <!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
 
-      **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: composition ou lecture
+      ** <!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: composition ou lecture
     name: Office.NotificationMessageDetails
     fullName: Office.NotificationMessageDetails
     langs:
@@ -13,11 +13,26 @@ items:
     type: interface
     package: outlook!
     children:
+      - 'outlook!Office.NotificationMessageDetails#actions:member'
       - 'outlook!Office.NotificationMessageDetails#icon:member'
       - 'outlook!Office.NotificationMessageDetails#key:member'
       - 'outlook!Office.NotificationMessageDetails#message:member'
       - 'outlook!Office.NotificationMessageDetails#persistent:member'
       - 'outlook!Office.NotificationMessageDetails#type:member'
+  - uid: 'outlook!Office.NotificationMessageDetails#actions:member'
+    summary: "Spécifie les actions du message. Limite\_: 2 actions. Cette limite ne compte pas l’action «\_faire disparaître\_» telle qu’elle est incluse par défaut. Applicable uniquement lorsque le type est`InsightMessage`<!-- -->. La spécification de cette propriété pour un type non pris en charge ou l’ajout d’un trop grand nombre d’actions génère une erreur.\n\n\\[[Ensemble d’API\_: aperçu de boîte aux lettres](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
+    remarks: '** <!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: composition'
+    isPreview: true
+    name: actions
+    fullName: actions
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'actions?: NotificationMessageAction[];'
+      return:
+        type:
+          - 'outlook!Office.NotificationMessageDetails#actions~0:complex'
   - uid: 'outlook!Office.NotificationMessageDetails#icon:member'
     summary: |-
       Référence à une icône définie dans le manifeste dans la section `Resources`. Elle apparaît dans la barre d’informations. Il s’applique uniquement si le type est`InformationalMessage`<!-- -->. Le fait de spécifier ce paramètre pour un type non pris en charge génère une exception.
@@ -58,7 +73,7 @@ items:
         type:
           - string
   - uid: 'outlook!Office.NotificationMessageDetails#persistent:member'
-    summary: 'Applicable uniquement lorsque le type est`InformationalMessage`<!-- -->. Si la valeur est true, le message reste jusqu’à ce qu’il soit supprimé par ce complément ou ignoré par l’utilisateur. Si  false, il est supprimé lorsque l''utilisateur navigue vers un autre élément. Pour les notifications d’erreur, le message est conservé jusqu’à ce qu’il soit vu par l’utilisateur. Le fait de spécifier ce paramètre pour un type non pris en charge génère une exception.'
+    summary: 'Indique si le message doit être permanent. Applicable uniquement lorsque le type est`InformationalMessage`<!-- -->. Si la valeur est true, le message reste jusqu’à ce qu’il soit supprimé par ce complément ou ignoré par l’utilisateur. Si  false, il est supprimé lorsque l''utilisateur navigue vers un autre élément. Pour les notifications d’erreur, le message est conservé jusqu’à ce qu’il soit vu par l’utilisateur. Le fait de spécifier ce paramètre pour un type non pris en charge génère une exception.'
     name: persistent
     fullName: persistent
     langs:
@@ -70,7 +85,12 @@ items:
         type:
           - '!Boolean:interface'
   - uid: 'outlook!Office.NotificationMessageDetails#type:member'
-    summary: 'Spécifie `ItemNotificationMessageType` le message. Si le type `ProgressIndicator` est ou`ErrorMessage`<!-- -->, une icône est automatiquement fournie et le message n’est pas persistant. Par conséquent, l’icône et les propriétés permanentes ne sont pas valides pour ces types de messages. Si vous les incluez, une`ArgumentException`<!-- -->. Si le type est`ProgressIndicator`<!-- -->, le développeur doit supprimer ou remplacer l’indicateur de progression une fois l’action terminée.'
+    summary: |-
+      Spécifie le `ItemNotificationMessageType` message.
+
+      Si le type est `ProgressIndicator` ou`ErrorMessage`<!-- -->, une icône est automatiquement fournie et le message n’est pas persistant. Par conséquent, l’icône et les propriétés permanentes ne sont pas valides pour ces types de messages. Si vous les incluez, une`ArgumentException`<!-- -->.
+
+      Si le type est`ProgressIndicator`<!-- -->, le développeur doit supprimer ou remplacer l’indicateur de progression une fois l’action terminée.
     name: type
     fullName: type
     langs:
@@ -82,6 +102,15 @@ items:
         type:
           - 'outlook!Office.NotificationMessageDetails#type~0:complex'
 references:
+  - uid: 'outlook!Office.NotificationMessageDetails#actions~0:complex'
+    name: 'NotificationMessageAction[]'
+    fullName: 'Office.NotificationMessageAction[]'
+    spec.typeScript:
+      - uid: 'outlook!Office.NotificationMessageAction:interface'
+        name: NotificationMessageAction
+        fullName: Office.NotificationMessageAction
+      - name: '[]'
+        fullName: '[]'
   - uid: '!Boolean:interface'
     name: Boolean
   - uid: 'outlook!Office.NotificationMessageDetails#type~0:complex'
