@@ -168,7 +168,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```typescript
           // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/42-range/range-auto-fill.yaml
@@ -253,7 +253,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```javascript
           // Below example clears format and contents of the range. 
@@ -403,7 +403,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```typescript
           // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/42-range/range-copyfrom.yaml
@@ -492,7 +492,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```javascript
           Excel.run(function (ctx) { 
@@ -546,7 +546,7 @@ items:
         description: |-
           Objet Range qui représente la première cellule contenant une valeur correspondant au texte et aux critères de recherche.
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```typescript
           // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/42-range/range-find.yaml
@@ -594,7 +594,7 @@ items:
         description: |-
           Plage correspondant aux critères de recherche.
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```typescript
           // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/42-range/range-find.yaml
@@ -725,7 +725,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```javascript
           Excel.run(function (ctx) { 
@@ -764,7 +764,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```javascript
           Excel.run(function (ctx) { 
@@ -808,7 +808,7 @@ items:
         description: |-
           Tableau 2D où chaque élément représente les propriétés demandées de la cellule correspondante.
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```typescript
           // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/42-range/cell-properties.yaml
@@ -856,7 +856,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```javascript
           Excel.run(function (ctx) { 
@@ -962,7 +962,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```javascript
           // Note: the grid properties of the Range (values, numberFormat, formulas) 
@@ -998,7 +998,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```javascript
           // Gets an object that represents the entire row of the range 
@@ -1048,7 +1048,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```javascript
           Excel.run(function (ctx) { 
@@ -1087,7 +1087,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```typescript
           // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/42-range/range-relationships.yaml
@@ -1166,7 +1166,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```javascript
           Excel.run(function (ctx) { 
@@ -1199,7 +1199,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```javascript
           Excel.run(function (ctx) { 
@@ -1232,7 +1232,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```javascript
           Excel.run(function (ctx) { 
@@ -1279,7 +1279,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```javascript
           Excel.run(function (ctx) { 
@@ -1319,7 +1319,36 @@ items:
       return:
         type:
           - 'excel!Excel.PivotTableScopedCollection:class'
-        description: ''
+        description: |-
+
+
+          #### <a name="examples"></a>範例
+
+          ```typescript
+          // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/85-preview-apis/pivottable-get-pivottables.yaml
+          await Excel.run(async (context) => {
+            const activeRange = context.workbook.getSelectedRange();
+
+            // Get all the PivotTables that intersect with this range.
+            const partiallyContainedPivotTables = activeRange.getPivotTables();
+            // Get all the PivotTables that are completely contained within this range.
+            const fullyContainedPivotTables = activeRange.getPivotTables(true);
+
+            partiallyContainedPivotTables.load("name");
+            fullyContainedPivotTables.load("name");
+            await context.sync();
+
+            // Display the names in the console.
+            console.log("PivotTables in the current range:")
+            partiallyContainedPivotTables.items.forEach((pivotTable) => {
+              console.log(`\t${pivotTable.name}`);
+            });
+            console.log("PivotTables completely contained in the current range:")
+            fullyContainedPivotTables.items.forEach((pivotTable) => {
+              console.log(`\t${pivotTable.name}`);
+            });
+          });
+          ```
       parameters:
         - id: fullyContained
           description: 'Si la valeur est true, renvoie uniquement les tableaux croisés dynamiques contenus dans les limites de la plage. La valeur par défaut est false.'
@@ -1376,7 +1405,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```javascript
           Excel.run(function (ctx) { 
@@ -1468,7 +1497,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```typescript
           // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/42-range/range-areas.yaml
@@ -1572,7 +1601,31 @@ items:
       return:
         type:
           - 'excel!Excel.Range:class'
-        description: ''
+        description: |-
+
+
+          #### <a name="examples"></a>範例
+
+          ```typescript
+          // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/85-preview-apis/dynamic-arrays.yaml
+          await Excel.run(async (context) => {
+            const sheet = context.workbook.worksheets.getItem("Sample");
+
+            // Set G4 to a formula that returns a dynamic array.
+            const targetCell = sheet.getRange("G4");
+            targetCell.formulas = [["=A4:D4"]];
+
+            // Get the address of the cells that the dynamic array spilled into.
+            const spillRange = targetCell.getSpillingToRange();
+            spillRange.load("address");
+
+            // Fit the columns for readability.
+            sheet.getUsedRange().format.autofitColumns();
+            await context.sync();
+
+            console.log(`Copying the table headers spilled into ${spillRange.address}.`);
+          });
+          ```
   - uid: 'excel!Excel.Range#getSpillingToRangeOrNullObject:member(1)'
     summary: "Obtient l’objet de la plage contenant la plage renversé lorsque appelée sur une cellule d’ancrage. Si la plage n’est pas une cellule d’ancrage ou si la plage de renversement est introuvable, un objet null est renvoyé.\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     isPreview: true
@@ -1661,7 +1714,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```typescript
           // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/42-range/range-relationships.yaml
@@ -1740,7 +1793,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```typescript
           // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/42-range/used-range.yaml
@@ -1810,7 +1863,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```typescript
           // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/42-range/outline.yaml
@@ -1939,7 +1992,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```typescript
           // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/42-range/range-hyperlink.yaml
@@ -1983,7 +2036,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```javascript
           Excel.run(function (ctx) { 
@@ -2104,7 +2157,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```javascript
           // Below example uses range address to get the range object.
@@ -2170,7 +2223,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```javascript
           Excel.run(function (ctx) { 
@@ -2206,7 +2259,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```typescript
           // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/42-range/range-copyfrom.yaml
@@ -2240,7 +2293,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```javascript
           // The example below sets number-format, values and formulas on a grid that contains 2x3 grid.
@@ -2305,7 +2358,7 @@ items:
         description: |-
           Objet résultant qui contient le nombre de lignes supprimées et le nombre de lignes uniques restantes.
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```typescript
           // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/42-range/range-remove-duplicates.yaml
@@ -2420,7 +2473,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```javascript
           Excel.run(function (ctx) {
@@ -2438,7 +2491,7 @@ items:
           ```
   - uid: 'excel!Excel.Range#set:member(1)'
     summary: 'Définit plusieurs propriétés d’un objet en même temps. Vous pouvez transmettre un objet plain avec les propriétés appropriées, ou un autre objet API du même type.'
-    remarks: "Cette méthode est dotée de la signature supplémentaire suivante\_:\n\n`set(properties: Excel.Range): void`\n\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/90-scenarios/multiple-property-set.yaml\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n\n    const range = sheet.getRange(\"B2:E2\");\n    range.set({\n        format: {\n            fill: {\n                color: \"#4472C4\"\n            },\n            font: {\n                name: \"Verdana\",\n                color: \"white\"\n            }\n        }\n    })\n    range.format.autofitColumns();\n    await context.sync();\n});\n```\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/90-scenarios/multiple-property-set.yaml\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n\n    const sourceRange = sheet.getRange(\"B2:E2\");\n    sourceRange.load(\"format/fill/color, format/font/name, format/font/color\");\n    await context.sync();\n\n    // Set properties based on the loaded and synced \n    // source range.\n    const targetRange = sheet.getRange(\"B7:E7\");\n    targetRange.set(sourceRange); \n    targetRange.format.autofitColumns();\n    await context.sync();\n});\n```"
+    remarks: "Cette méthode est dotée de la signature supplémentaire suivante\_:\n\n`set(properties: Excel.Range): void`\n\n#### <a name=\"examples\"></a>範例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/90-scenarios/multiple-property-set.yaml\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n\n    const range = sheet.getRange(\"B2:E2\");\n    range.set({\n        format: {\n            fill: {\n                color: \"#4472C4\"\n            },\n            font: {\n                name: \"Verdana\",\n                color: \"white\"\n            }\n        }\n    })\n    range.format.autofitColumns();\n    await context.sync();\n});\n```\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/90-scenarios/multiple-property-set.yaml\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n\n    const sourceRange = sheet.getRange(\"B2:E2\");\n    sourceRange.load(\"format/fill/color, format/font/name, format/font/color\");\n    await context.sync();\n\n    // Set properties based on the loaded and synced \n    // source range.\n    const targetRange = sheet.getRange(\"B7:E7\");\n    targetRange.set(sourceRange); \n    targetRange.format.autofitColumns();\n    await context.sync();\n});\n```"
     name: 'set(properties, options)'
     fullName: 'set(properties, options)'
     langs:
@@ -2492,7 +2545,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```typescript
           // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/42-range/cell-properties.yaml
@@ -2686,7 +2739,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```typescript
           // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/30-events/event-column-and-row-sort.yaml
@@ -2730,7 +2783,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```typescript
           // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/42-range/style.yaml
@@ -2811,7 +2864,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```typescript
           // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/42-range/outline.yaml
@@ -2865,7 +2918,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```javascript
           Excel.run(function (ctx) { 
@@ -2896,7 +2949,7 @@ items:
         description: |-
 
 
-          #### <a name="examples"></a>Exemples
+          #### <a name="examples"></a>範例
 
           ```typescript
           Excel.run(async (context) => {
