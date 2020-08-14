@@ -22,20 +22,20 @@ items:
       - typeScript
     type: method
     syntax:
-      content: 'addEventHandler(eventType: Office.EventType, handler: Function): void;'
+      content: 'addEventHandler(eventType: Office.EventType, handler: (args: {message: string | boolean} | {error: number}) => void): void;'
       return:
         type:
           - void
         description: ''
       parameters:
         - id: eventType
-          description: ''
+          description: Doit être DialogMessageReceived ou DialogEventReceived.
           type:
             - 'office!Office.EventType:enum'
         - id: handler
-          description: ''
+          description: 'Fonction qui accepte un objet avec une `message` propriété, si EventType est DialogMessageReceived, ou un objet avec une `error` propriété, si EventType est DialogEventReceived.'
           type:
-            - '!Function:interface'
+            - '(args: {message: string | boolean} | {error: number}) => void'
   - uid: 'office!Office.Dialog#close:member(1)'
     summary: Appelé à partir d’une page parent pour fermer la boîte de dialogue correspondante.
     name: close()
@@ -90,5 +90,3 @@ items:
 references:
   - uid: 'office!Office.EventType:enum'
     name: Office.EventType
-  - uid: '!Function:interface'
-    name: Function

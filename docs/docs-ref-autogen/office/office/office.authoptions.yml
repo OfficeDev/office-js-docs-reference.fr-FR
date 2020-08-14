@@ -1,7 +1,7 @@
 ### YamlMime:UniversalReference
 items:
   - uid: 'office!Office.AuthOptions:interface'
-    summary: 'Fournit des options pour l’expérience utilisateur lorsqu’Office obtient un jeton d’accès au complément à partir de AAD v. 2,0 avec la méthode getAccessTokenAsync.'
+    summary: Fournit des options pour l’expérience utilisateur lorsqu’Office obtient un jeton d’accès au complément à partir de AAD v. 2.0 avec la méthode`getAccessTokenAsync`.
     name: Office.AuthOptions
     fullName: Office.AuthOptions
     langs:
@@ -9,55 +9,98 @@ items:
     type: interface
     package: office!
     children:
+      - 'office!Office.AuthOptions#allowConsentPrompt:member'
+      - 'office!Office.AuthOptions#allowSignInPrompt:member'
       - 'office!Office.AuthOptions#asyncContext:member'
       - 'office!Office.AuthOptions#authChallenge:member'
       - 'office!Office.AuthOptions#forceAddAccount:member'
       - 'office!Office.AuthOptions#forceConsent:member'
+      - 'office!Office.AuthOptions#forMSGraphAccess:member'
+  - uid: 'office!Office.AuthOptions#allowConsentPrompt:member'
+    summary: 'Permet à Office d’obtenir un jeton d’accès en mode silencieux ou par le biais d’un consentement interactif, le cas échéant. Valeur par défaut est `false`<!-- -->. S’il est défini sur `false`<!-- -->, Office tentera d’obtenir un jeton d’accès sans assistance. S’il ne parvient pas à le faire, Office renverra une erreur descriptive. S’il est défini sur `true`<!-- -->, Office affiche une interface utilisateur de consentement interactif une fois qu’il n’a pas réussi à obtenir un jeton d’accès en mode silencieux. L’invite autorise uniquement l’approbation de l’étendue de profil AAD, pas les étendues Microsoft Graph.'
+    name: allowConsentPrompt
+    fullName: allowConsentPrompt
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'allowConsentPrompt?: boolean;'
+      return:
+        type:
+          - boolean
+  - uid: 'office!Office.AuthOptions#allowSignInPrompt:member'
+    summary: 'Permet à Office d’obtenir un jeton d’accès en silence si le consentement est présent ou affiche l’interface utilisateur interactive pour la connexion de l’utilisateur. Valeur par défaut est `false`<!-- -->. S’il est défini sur `false`<!-- -->, Office tentera d’obtenir un jeton d’accès sans assistance. S’il ne parvient pas à le faire, Office renverra une erreur descriptive. S’il est défini sur `true`<!-- -->, Office affiche une interface utilisateur de connexion interactive après l’échec de l’obtention d’un jeton d’accès en mode silencieux.'
+    name: allowSignInPrompt
+    fullName: allowSignInPrompt
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'allowSignInPrompt?: boolean;'
+      return:
+        type:
+          - boolean
   - uid: 'office!Office.AuthOptions#asyncContext:member'
-    summary: 'Élément défini par l’utilisateur de n’importe quel type qui est renvoyé, inchangé, dans la propriété asyncContext de l’objet AsyncResult transmis à un rappel.'
+    summary: 'Élément défini par l’utilisateur de n’importe quel type qui est renvoyé, inchangé, dans la `asyncContext` propriété de l'' `AsyncResult` objet qui est passé à un rappel.'
     name: asyncContext
     fullName: asyncContext
     langs:
       - typeScript
     type: property
     syntax:
-      content: 'asyncContext?: any'
+      content: 'asyncContext?: any;'
       return:
         type:
           - any
   - uid: 'office!Office.AuthOptions#authChallenge:member'
-    summary: "Fait en sorte qu’Office invite l’utilisateur à fournir le facteur supplémentaire lorsque le client ciblé par Microsoft Graph nécessite une authentification multifacteur. La valeur de chaîne identifie le type de facteur supplémentaire requis. Dans la plupart des cas, vous ne saurez pas, au moment du développement, si le client de l’utilisateur a besoin d’un facteur supplémentaire ou de la chaîne. Cette option doit donc être utilisée dans un appel «\_second essai\_» de getAccessTokenAsync une fois que Microsoft Graph a envoyé une erreur de demande du facteur supplémentaire et contenant la chaîne à utiliser avec l’option authChallenge."
+    summary: "Fait en sorte qu’Office invite l’utilisateur à fournir le facteur supplémentaire lorsque le client ciblé par Microsoft Graph nécessite une authentification multifacteur. La valeur de chaîne identifie le type de facteur supplémentaire requis. Dans la plupart des cas, vous ne saurez pas, au moment du développement, si le client de l’utilisateur a besoin d’un facteur supplémentaire ou de la chaîne. Cette option doit donc être utilisée dans un appel «\_second essai\_» de `getAccessTokenAsync` Microsoft Graph qui a envoyé une erreur de demande de facteur supplémentaire et contenant la chaîne à utiliser avec l' `authChallenge` option."
     name: authChallenge
     fullName: authChallenge
     langs:
       - typeScript
     type: property
     syntax:
-      content: 'authChallenge?: string'
+      content: 'authChallenge?: string;'
       return:
         type:
           - string
   - uid: 'office!Office.AuthOptions#forceAddAccount:member'
-    summary: 'Invite l’utilisateur à ajouter son compte Office (ou à y accéder, s’il est déjà ajouté).'
+    summary: 'Invite l’utilisateur à ajouter son compte Office (ou à y accéder, s’il est déjà ajouté). Valeur par défaut est `false`<!-- -->.'
+    deprecated:
+      content: Use `allowSignInPrompt` instead.
     name: forceAddAccount
     fullName: forceAddAccount
     langs:
       - typeScript
     type: property
     syntax:
-      content: 'forceAddAccount?: boolean,'
+      content: 'forceAddAccount?: boolean;'
       return:
         type:
           - boolean
   - uid: 'office!Office.AuthOptions#forceConsent:member'
-    summary: Oblige Office à afficher l’expérience du consentement pour le complément. Cette option est utile si les autorisations Azure du complément ont été modifiées ou si le consentement de l’utilisateur a été révoqué.
+    summary: Oblige Office à afficher l’expérience du consentement pour le complément. Cette option est utile si les autorisations Azure du complément ont été modifiées ou si le consentement de l’utilisateur a été révoqué. Valeur par défaut est `false`<!-- -->.
+    deprecated:
+      content: Use `allowConsentPrompt` instead.
     name: forceConsent
     fullName: forceConsent
     langs:
       - typeScript
     type: property
     syntax:
-      content: 'forceConsent?: boolean,'
+      content: 'forceConsent?: boolean;'
+      return:
+        type:
+          - boolean
+  - uid: 'office!Office.AuthOptions#forMSGraphAccess:member'
+    summary: 'Fait en sorte qu’Office renvoie une erreur descriptive lorsque le complément souhaite accéder à Microsoft Graph et que l’utilisateur/administrateur n’a pas accordé le consentement aux étendues Graph. Valeur par défaut est `false`<!-- -->. Office ne prend en charge que le consentement des étendues Graph lorsque le complément a été déployé par un administrateur client. Ces informations ne seront pas disponibles pendant le développement. Si vous définissez cette option, `true` Office affichera votre complément à l’avance (en renvoyant une erreur descriptive) si l’accès au graphique échouera.'
+    name: forMSGraphAccess
+    fullName: forMSGraphAccess
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'forMSGraphAccess?: boolean;'
       return:
         type:
           - boolean
