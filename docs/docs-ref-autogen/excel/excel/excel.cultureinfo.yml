@@ -44,6 +44,49 @@ items:
       return:
         type:
           - 'excel!Excel.DatetimeFormatInfo:class'
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```typescript
+          // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/85-preview-apis/culture-info-date-time.yaml
+          await Excel.run(async (context) => {
+            context.application.cultureInfo.datetimeFormat.load([
+              "longDatePattern",
+              "shortDatePattern",
+              "dateSeparator",
+              "longTimePattern",
+              "timeSeparator"
+            ]);
+            await context.sync();
+
+            // Use the cultural settings API to retrieve the user's system date and time settings.
+            const systemLongDatePattern = context.application.cultureInfo.datetimeFormat.longDatePattern;
+            const systemShortDatePattern = context.application.cultureInfo.datetimeFormat.shortDatePattern;
+            const systemDateSeparator = context.application.cultureInfo.datetimeFormat.dateSeparator;
+            const systemLongTimePattern = context.application.cultureInfo.datetimeFormat.longTimePattern;
+            const systemTimeSeparator = context.application.cultureInfo.datetimeFormat.timeSeparator;
+
+            // Write the date and time settings in your table. 
+            const sheet = context.workbook.worksheets.getActiveWorksheet();
+            const dateTimeData = sheet.getRange("A2:B6");
+            dateTimeData.values = [
+              ["Long date", systemLongDatePattern], 
+              ["Short date", systemShortDatePattern], 
+              ["Date separator", systemDateSeparator], 
+              ["Long time format", systemLongTimePattern],
+              ["Time separator", systemTimeSeparator]
+            ];
+
+            sheet.tables
+              .getItemAt(0)
+              .getRange()
+              .format.autofitColumns();
+
+            await context.sync();
+          });
+          ```
   - uid: 'excel!Excel.CultureInfo#load:member(1)'
     summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez contacter `context.sync()` avant de lire les propriétés.
     name: load(options)
@@ -99,7 +142,7 @@ items:
         description: ''
       parameters:
         - id: propertyNamesAndPaths
-          description: '`propertyNamesAndPaths.select`est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et `propertyNamesAndPaths.expand` une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.'
+          description: '`propertyNamesAndPaths.select` est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et `propertyNamesAndPaths.expand` une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.'
           type:
             - |-
               {
@@ -131,7 +174,7 @@ items:
         type:
           - 'excel!Excel.NumberFormatInfo:class'
   - uid: 'excel!Excel.CultureInfo#toJSON:member(1)'
-    summary: 'Remplace la méthode JavaScript afin `toJSON()` de fournir une sortie plus utile lorsqu’un objet d’API est transmis à`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle la `toJSON` méthode de l’objet qui lui est passé.) Tandis que l’objet Excel. CultureInfo d’origine est un objet d’API, la `toJSON` méthode renvoie un objet JavaScript simple (tapé comme`Excel.Interfaces.CultureInfoData`<!-- -->) qui contient des copies superficielles de toutes les propriétés enfants chargées à partir de l’objet d’origine.'
+    summary: 'Remplace la méthode JavaScript afin `toJSON()` de fournir une sortie plus utile lorsqu’un objet d’API est transmis à `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle la `toJSON` méthode de l’objet qui lui est passé.) Tandis que l’objet Excel. CultureInfo d’origine est un objet d’API, la `toJSON` méthode renvoie un objet JavaScript simple (tapé comme `Excel.Interfaces.CultureInfoData`<!-- -->) qui contient des copies superficielles de toutes les propriétés enfants chargées à partir de l’objet d’origine.'
     name: toJSON()
     fullName: toJSON()
     langs:
