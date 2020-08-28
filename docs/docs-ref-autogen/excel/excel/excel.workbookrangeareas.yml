@@ -50,6 +50,32 @@ items:
       return:
         type:
           - 'excel!Excel.RangeAreasCollection:class'
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```typescript
+          // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/85-preview-apis/direct-precedents.yaml
+          await Excel.run(async (context) => {
+            // Precedents are cells referenced by the formula in a cell.
+            let range = context.workbook.getActiveCell();
+            let directPrecedents = range.getDirectPrecedents();
+            range.load("address");
+            directPrecedents.areas.load("address");
+            await context.sync();
+
+            console.log(`Direct precedent cells of ${range.address}:`);
+
+            // Use the direct precedents API to loop through precedents of the active cell. 
+            for (var i = 0; i < directPrecedents.areas.items.length; i++) {
+              // Highlight and console the address of each precedent cell.
+              directPrecedents.areas.items[i].format.fill.color = "Yellow";
+              console.log(`  ${directPrecedents.areas.items[i].address}`);
+            }
+            await context.sync();
+          });
+          ```
   - uid: 'excel!Excel.WorkbookRangeAreas#context:member'
     summary: Contexte de demande associé à l’objet. Cette opération connecte le processus du complément au processus de l’application hôte Office.
     isPreview: true
@@ -159,7 +185,7 @@ items:
         description: ''
       parameters:
         - id: propertyNamesAndPaths
-          description: '`propertyNamesAndPaths.select`est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et `propertyNamesAndPaths.expand` une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.'
+          description: '`propertyNamesAndPaths.select` est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et `propertyNamesAndPaths.expand` une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.'
           type:
             - |-
               {
@@ -180,7 +206,7 @@ items:
         type:
           - 'excel!Excel.RangeCollection:class'
   - uid: 'excel!Excel.WorkbookRangeAreas#toJSON:member(1)'
-    summary: 'Remplace la méthode JavaScript afin `toJSON()` de fournir une sortie plus utile lorsqu’un objet d’API est transmis à`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle la `toJSON` méthode de l’objet qui lui est passé.) Tandis que l’objet Excel. WorkbookRangeAreas d’origine est un objet d’API, la `toJSON` méthode renvoie un objet JavaScript simple (tapé comme`Excel.Interfaces.WorkbookRangeAreasData`<!-- -->) qui contient des copies superficielles de toutes les propriétés enfants chargées à partir de l’objet d’origine.'
+    summary: 'Remplace la méthode JavaScript afin `toJSON()` de fournir une sortie plus utile lorsqu’un objet d’API est transmis à `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle la `toJSON` méthode de l’objet qui lui est passé.) Tandis que l’objet Excel. WorkbookRangeAreas d’origine est un objet d’API, la `toJSON` méthode renvoie un objet JavaScript simple (tapé comme `Excel.Interfaces.WorkbookRangeAreasData`<!-- -->) qui contient des copies superficielles de toutes les propriétés enfants chargées à partir de l’objet d’origine.'
     isPreview: true
     name: toJSON()
     fullName: toJSON()
@@ -194,7 +220,7 @@ items:
           - 'excel!Excel.Interfaces.WorkbookRangeAreasData:interface'
         description: ''
   - uid: 'excel!Excel.WorkbookRangeAreas#track:member(1)'
-    summary: "Effectuer le suivi de l’objet pour l’ajustement automatique en fonction environnant des modifications dans le document. Cet appel est un raccourci pour`context.trackedObjects.add(thisObject)`<!-- -->. Si vous utilisez cet objet entre `.sync` les appels et en dehors de l’exécution séquentielle d’un lot «\_. Run\_», et si vous obtenez une erreur «\_InvalidObjectPath\_» lors de la définition d’une propriété ou de l’appel d’une méthode sur l’objet, vous deviez avoir ajouté l’objet à la collection d’objets suivi lors de la création initiale de l’objet."
+    summary: "Effectuer le suivi de l’objet pour l’ajustement automatique en fonction environnant des modifications dans le document. Cet appel est un raccourci pour `context.trackedObjects.add(thisObject)`<!-- -->. Si vous utilisez cet objet entre `.sync` les appels et en dehors de l’exécution séquentielle d’un lot «\_. Run\_», et si vous obtenez une erreur «\_InvalidObjectPath\_» lors de la définition d’une propriété ou de l’appel d’une méthode sur l’objet, vous deviez avoir ajouté l’objet à la collection d’objets suivi lors de la création initiale de l’objet."
     isPreview: true
     name: track()
     fullName: track()
@@ -208,7 +234,7 @@ items:
           - 'excel!Excel.WorkbookRangeAreas:class'
         description: ''
   - uid: 'excel!Excel.WorkbookRangeAreas#untrack:member(1)'
-    summary: 'Publication mémoire associée à cet objet si elle a été précédemment suivie. Cet appel est un raccourci pour`context.trackedObjects.remove(thisObject)`<!-- -->. Vous rencontrez de nombreux objets suivies ralentit l’application hôte, donc n’oubliez pas de libérer les objets que l''on ajoute, une fois que vous avez terminé à les utiliser. Vous devrez appeler `context.sync()` avant que la version de mémoire ne prenne effet.'
+    summary: 'Publication mémoire associée à cet objet si elle a été précédemment suivie. Cet appel est un raccourci pour `context.trackedObjects.remove(thisObject)`<!-- -->. Vous rencontrez de nombreux objets suivies ralentit l’application hôte, donc n’oubliez pas de libérer les objets que l''on ajoute, une fois que vous avez terminé à les utiliser. Vous devrez appeler `context.sync()` avant que la version de mémoire ne prenne effet.'
     isPreview: true
     name: untrack()
     fullName: untrack()
