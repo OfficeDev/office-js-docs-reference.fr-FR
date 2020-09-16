@@ -11,9 +11,14 @@ items:
       - 'office!OfficeExtension.ClientObject:class'
     package: excel!
     children:
+      - 'excel!Excel.PivotLayout#altTextDescription:member'
+      - 'excel!Excel.PivotLayout#altTextTitle:member'
       - 'excel!Excel.PivotLayout#autoFormat:member'
       - 'excel!Excel.PivotLayout#context:member'
+      - 'excel!Excel.PivotLayout#displayBlankLineAfterEachItem:member(1)'
+      - 'excel!Excel.PivotLayout#emptyCellText:member'
       - 'excel!Excel.PivotLayout#enableFieldList:member'
+      - 'excel!Excel.PivotLayout#fillEmptyCells:member'
       - 'excel!Excel.PivotLayout#getCell:member(1)'
       - 'excel!Excel.PivotLayout#getColumnLabelRange:member(1)'
       - 'excel!Excel.PivotLayout#getDataBodyRange:member(1)'
@@ -29,15 +34,43 @@ items:
       - 'excel!Excel.PivotLayout#load:member(3)'
       - 'excel!Excel.PivotLayout#pivotStyle:member'
       - 'excel!Excel.PivotLayout#preserveFormatting:member'
+      - 'excel!Excel.PivotLayout#repeatAllItemLabels:member(1)'
       - 'excel!Excel.PivotLayout#set:member(1)'
       - 'excel!Excel.PivotLayout#set:member(2)'
       - 'excel!Excel.PivotLayout#setAutoSortOnCell:member(1)'
       - 'excel!Excel.PivotLayout#setAutoSortOnCell:member(2)'
       - 'excel!Excel.PivotLayout#setStyle:member(1)'
       - 'excel!Excel.PivotLayout#showColumnGrandTotals:member'
+      - 'excel!Excel.PivotLayout#showFieldHeaders:member'
       - 'excel!Excel.PivotLayout#showRowGrandTotals:member'
       - 'excel!Excel.PivotLayout#subtotalLocation:member'
       - 'excel!Excel.PivotLayout#toJSON:member(1)'
+  - uid: 'excel!Excel.PivotLayout#altTextDescription:member'
+    summary: "Description du texte de remplacement du tableau croisé dynamique.\n\nLe texte de remplacement fournit d’autres représentations textuelles des informations contenues dans le tableau croisé dynamique. Ces informations sont utiles pour les personnes souffrant de troubles cognitifs ou malvoyants qui ne peuvent pas voir ou comprendre le tableau. Un titre peut être lu à une personne handicapée et utilisé pour déterminer s’il souhaite écouter la description du contenu.\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    isPreview: true
+    name: altTextDescription
+    fullName: altTextDescription
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'altTextDescription: string;'
+      return:
+        type:
+          - string
+  - uid: 'excel!Excel.PivotLayout#altTextTitle:member'
+    summary: "Titre de texte de remplacement du tableau croisé dynamique.\n\nLe texte de remplacement fournit d’autres représentations textuelles des informations contenues dans le tableau croisé dynamique. Ces informations sont utiles pour les personnes souffrant de troubles cognitifs ou malvoyants qui ne peuvent pas voir ou comprendre le tableau. Un titre peut être lu à une personne handicapée et utilisé pour déterminer s’il souhaite écouter la description du contenu.\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    isPreview: true
+    name: altTextTitle
+    fullName: altTextTitle
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'altTextTitle: string;'
+      return:
+        type:
+          - string
   - uid: 'excel!Excel.PivotLayout#autoFormat:member'
     summary: "Indique si la mise en forme est automatiquement mise en forme lorsqu’elle est actualisée ou lorsque les champs sont déplacés.\n\n\\[[Ensemble d’API\_: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: autoFormat
@@ -62,6 +95,38 @@ items:
       return:
         type:
           - 'excel!Excel.RequestContext:class'
+  - uid: 'excel!Excel.PivotLayout#displayBlankLineAfterEachItem:member(1)'
+    summary: "Définit si une ligne vide doit être affichée après chaque élément. Cette valeur est définie au niveau global pour le tableau croisé dynamique et appliquée à des champs PivotFields individuels. Cette fonction remplace le paramètre de tous les champs du tableau croisé dynamique par la valeur de `display` paramètre.\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    isPreview: true
+    name: displayBlankLineAfterEachItem(display)
+    fullName: displayBlankLineAfterEachItem(display)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'displayBlankLineAfterEachItem(display: boolean): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: display
+          description: True active le paramètre d’affichage de ligne vide. La valeur false le désactive.
+          type:
+            - boolean
+  - uid: 'excel!Excel.PivotLayout#emptyCellText:member'
+    summary: "Texte qui est rempli automatiquement dans n’importe quelle cellule vide du tableau croisé dynamique si `fillEmptyCells == true`<!-- -->. Notez que cette valeur persiste si elle `fillEmptyCells` est définie sur false et que la définition de cette valeur n’affecte pas la valeur true à cette propriété. Par défaut, il s’agit d’une chaîne vide.\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    isPreview: true
+    name: emptyCellText
+    fullName: emptyCellText
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'emptyCellText: string;'
+      return:
+        type:
+          - string
   - uid: 'excel!Excel.PivotLayout#enableFieldList:member'
     summary: "Indique si la liste de champs peut être affichée dans l’interface utilisateur.\n\n\\[[Ensemble d’API\_: ExcelApi 1,10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: enableFieldList
@@ -71,6 +136,19 @@ items:
     type: property
     syntax:
       content: 'enableFieldList: boolean;'
+      return:
+        type:
+          - boolean
+  - uid: 'excel!Excel.PivotLayout#fillEmptyCells:member'
+    summary: "Indique si les cellules vides dans le tableau croisé dynamique doivent être renseignées avec le `emptyCellText`<!-- -->. Elle a la valeur False par défaut. Notez que la valeur de `emptyCellText` persiste lorsque cette propriété est définie sur false.\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    isPreview: true
+    name: fillEmptyCells
+    fullName: fillEmptyCells
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'fillEmptyCells: boolean;'
       return:
         type:
           - boolean
@@ -318,7 +396,7 @@ items:
         description: ''
       parameters:
         - id: propertyNamesAndPaths
-          description: '`propertyNamesAndPaths.select`est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et `propertyNamesAndPaths.expand` une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.'
+          description: '`propertyNamesAndPaths.select` est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et `propertyNamesAndPaths.expand` une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.'
           type:
             - |-
               {
@@ -327,7 +405,6 @@ items:
                       }
   - uid: 'excel!Excel.PivotLayout#pivotStyle:member'
     summary: "Style appliqué au tableau croisé dynamique.\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
-    isPreview: true
     name: pivotStyle
     fullName: pivotStyle
     langs:
@@ -350,6 +427,25 @@ items:
       return:
         type:
           - boolean
+  - uid: 'excel!Excel.PivotLayout#repeatAllItemLabels:member(1)'
+    summary: "Définit le paramètre «\_répéter toutes les étiquettes d’éléments\_» sur tous les champs du tableau croisé dynamique.\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    isPreview: true
+    name: repeatAllItemLabels(repeatLabels)
+    fullName: repeatAllItemLabels(repeatLabels)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'repeatAllItemLabels(repeatLabels: boolean): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: repeatLabels
+          description: True active le paramètre d’affichage d’étiquette. La valeur false le désactive.
+          type:
+            - boolean
   - uid: 'excel!Excel.PivotLayout#set:member(1)'
     summary: 'Définit plusieurs propriétés d’un objet en même temps. Vous pouvez transmettre un objet plain avec les propriétés appropriées, ou un autre objet API du même type.'
     remarks: "Cette méthode est dotée de la signature supplémentaire suivante\_:\n\n`set(properties: Excel.PivotLayout): void`"
@@ -466,6 +562,19 @@ items:
       return:
         type:
           - boolean
+  - uid: 'excel!Excel.PivotLayout#showFieldHeaders:member'
+    summary: "Indique si le tableau croisé dynamique affiche les en-têtes de champ (légendes de champ et listes déroulantes de filtre).\n\n\\[[Ensemble d’API\_: EXCELAPI Beta (aperçu uniquement)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    isPreview: true
+    name: showFieldHeaders
+    fullName: showFieldHeaders
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'showFieldHeaders: boolean;'
+      return:
+        type:
+          - boolean
   - uid: 'excel!Excel.PivotLayout#showRowGrandTotals:member'
     summary: "Indique si le rapport de tableau croisé dynamique affiche des totaux généraux de lignes.\n\n\\[[Ensemble d’API\_: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: showRowGrandTotals
@@ -491,7 +600,7 @@ items:
         type:
           - 'excel!Excel.PivotLayout#subtotalLocation~0:complex'
   - uid: 'excel!Excel.PivotLayout#toJSON:member(1)'
-    summary: 'Remplace la méthode JavaScript afin `toJSON()` de fournir une sortie plus utile lorsqu’un objet d’API est transmis à`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle la `toJSON` méthode de l’objet qui lui est passé.) Tandis que l’objet Excel. PivotLayout d’origine est un objet d’API, la `toJSON` méthode renvoie un objet JavaScript simple (tapé comme`Excel.Interfaces.PivotLayoutData`<!-- -->) qui contient des copies superficielles de toutes les propriétés enfants chargées à partir de l’objet d’origine.'
+    summary: 'Remplace la méthode JavaScript afin `toJSON()` de fournir une sortie plus utile lorsqu’un objet d’API est transmis à `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle la `toJSON` méthode de l’objet qui lui est passé.) Tandis que l’objet Excel. PivotLayout d’origine est un objet d’API, la `toJSON` méthode renvoie un objet JavaScript simple (tapé comme `Excel.Interfaces.PivotLayoutData`<!-- -->) qui contient des copies superficielles de toutes les propriétés enfants chargées à partir de l’objet d’origine.'
     name: toJSON()
     fullName: toJSON()
     langs:
