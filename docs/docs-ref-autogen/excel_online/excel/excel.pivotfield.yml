@@ -11,8 +11,15 @@ items:
       - 'office!OfficeExtension.ClientObject:class'
     package: excel!
     children:
+      - 'excel!Excel.PivotField#applyFilter:member(1)'
+      - 'excel!Excel.PivotField#clearAllFilters:member(1)'
+      - 'excel!Excel.PivotField#clearFilter:member(1)'
+      - 'excel!Excel.PivotField#clearFilter:member(2)'
       - 'excel!Excel.PivotField#context:member'
+      - 'excel!Excel.PivotField#getFilters:member(1)'
       - 'excel!Excel.PivotField#id:member'
+      - 'excel!Excel.PivotField#isFiltered:member(1)'
+      - 'excel!Excel.PivotField#isFiltered:member(2)'
       - 'excel!Excel.PivotField#items:member'
       - 'excel!Excel.PivotField#load:member(1)'
       - 'excel!Excel.PivotField#load:member(2)'
@@ -26,6 +33,73 @@ items:
       - 'excel!Excel.PivotField#sortByValues:member(2)'
       - 'excel!Excel.PivotField#subtotals:member'
       - 'excel!Excel.PivotField#toJSON:member(1)'
+  - uid: 'excel!Excel.PivotField#applyFilter:member(1)'
+    summary: "Définit une ou plusieurs des informations de la valeur de champ en vigueur du champ et les applique au champ. Si les filtres fournis ne sont pas valides ou ne peuvent pas être appliqués, une exception est générée.\n\n\\[[Ensemble d’API\_: ExcelApi 1,12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    name: applyFilter(filter)
+    fullName: applyFilter(filter)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'applyFilter(filter: Excel.PivotFilters): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: filter
+          description: Une interface spécifique PivotFilter ou une interface PivotFilters contenant plusieurs filtres configurés.
+          type:
+            - 'excel!Excel.PivotFilters:interface'
+  - uid: 'excel!Excel.PivotField#clearAllFilters:member(1)'
+    summary: "Efface tous les critères de tous les filtres du champ. Cela supprime tout filtrage actif sur le champ.\n\n\\[[Ensemble d’API\_: ExcelApi 1,12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    name: clearAllFilters()
+    fullName: clearAllFilters()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'clearAllFilters(): void;'
+      return:
+        type:
+          - void
+        description: ''
+  - uid: 'excel!Excel.PivotField#clearFilter:member(1)'
+    summary: "Efface tous les critères existants du filtre du champ du type donné (s’il est déjà appliqué).\n\n\\[[Ensemble d’API\_: ExcelApi 1,12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    name: clearFilter(filterType)
+    fullName: clearFilter(filterType)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'clearFilter(filterType: Excel.PivotFilterType): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: filterType
+          description: Type de filtre sur le champ dont tous les critères doivent être effacés.
+          type:
+            - 'excel!Excel.PivotFilterType:enum'
+  - uid: 'excel!Excel.PivotField#clearFilter:member(2)'
+    summary: "Efface tous les critères existants du filtre du champ du type donné (s’il est déjà appliqué).\n\n\\[[Ensemble d’API\_: ExcelApi 1,12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    name: clearFilter(filterTypeString)
+    fullName: clearFilter(filterTypeString)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'clearFilter(filterTypeString: "Unknown" | "Value" | "Manual" | "Label" | "Date"): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: filterTypeString
+          description: Type de filtre sur le champ dont tous les critères doivent être effacés.
+          type:
+            - '"Unknown" | "Value" | "Manual" | "Label" | "Date"'
   - uid: 'excel!Excel.PivotField#context:member'
     summary: Contexte de demande associé à l’objet. Cette opération connecte le processus du complément au processus de l’application hôte Office.
     name: context
@@ -38,6 +112,19 @@ items:
       return:
         type:
           - 'excel!Excel.RequestContext:class'
+  - uid: 'excel!Excel.PivotField#getFilters:member(1)'
+    summary: "Obtient tous les filtres actuellement appliqués sur le champ.\n\n\\[[Ensemble d’API\_: ExcelApi 1,12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    name: getFilters()
+    fullName: getFilters()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getFilters(): OfficeExtension.ClientResult<Excel.PivotFilters>;'
+      return:
+        type:
+          - 'excel!Excel.PivotField#getFilters~0:complex'
+        description: Une interface PivotFilters avec tous les filtres actifs.
   - uid: 'excel!Excel.PivotField#id:member'
     summary: "ID du champ PivotField.\n\n\\[[Ensemble d’API\_: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: id
@@ -50,6 +137,42 @@ items:
       return:
         type:
           - string
+  - uid: 'excel!Excel.PivotField#isFiltered:member(1)'
+    summary: "Vérifie s’il existe des filtres appliqués sur le champ.\n\n\\[[Ensemble d’API\_: ExcelApi 1,12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    name: isFiltered(filterType)
+    fullName: isFiltered(filterType)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'isFiltered(filterType?: Excel.PivotFilterType): OfficeExtension.ClientResult<boolean>;'
+      return:
+        type:
+          - 'excel!Excel.PivotField#isFiltered~0:complex'
+        description: 'True si le champ a un filtre de type `filterType` appliqué. Si filterType n’est pas spécifié, la valeur true est renvoyée si le champ possède des filtres appliqués.'
+      parameters:
+        - id: filterType
+          description: 'Type de filtre à vérifier. Si aucun type n’est fourni, cette méthode vérifie si un filtre est appliqué.'
+          type:
+            - 'excel!Excel.PivotFilterType:enum'
+  - uid: 'excel!Excel.PivotField#isFiltered:member(2)'
+    summary: "Vérifie s’il existe des filtres appliqués sur le champ.\n\n\\[[Ensemble d’API\_: ExcelApi 1,12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    name: isFiltered(filterTypeString)
+    fullName: isFiltered(filterTypeString)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'isFiltered(filterTypeString?: "Unknown" | "Value" | "Manual" | "Label" | "Date"): OfficeExtension.ClientResult<boolean>;'
+      return:
+        type:
+          - 'excel!Excel.PivotField#isFiltered~1:complex'
+        description: 'True si le champ a un filtre de type `filterType` appliqué. Si filterType n’est pas spécifié, la valeur true est renvoyée si le champ possède des filtres appliqués.'
+      parameters:
+        - id: filterTypeString
+          description: 'Type de filtre à vérifier. Si aucun type n’est fourni, cette méthode vérifie si un filtre est appliqué.'
+          type:
+            - '"Unknown" | "Value" | "Manual" | "Label" | "Date"'
   - uid: 'excel!Excel.PivotField#items:member'
     summary: "Renvoie les PivotFields associés à PivotField.\n\n\\[[Ensemble d’API\_: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: items
@@ -117,7 +240,7 @@ items:
         description: ''
       parameters:
         - id: propertyNamesAndPaths
-          description: '`propertyNamesAndPaths.select`est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et `propertyNamesAndPaths.expand` une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.'
+          description: '`propertyNamesAndPaths.select` est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et `propertyNamesAndPaths.expand` une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.'
           type:
             - |-
               {
@@ -272,7 +395,7 @@ items:
         type:
           - 'excel!Excel.Subtotals:interface'
   - uid: 'excel!Excel.PivotField#toJSON:member(1)'
-    summary: 'Remplace la méthode JavaScript afin `toJSON()` de fournir une sortie plus utile lorsqu’un objet d’API est transmis à`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle la `toJSON` méthode de l’objet qui lui est passé.) Tandis que l’objet Excel. PivotField d’origine est un objet d’API, la `toJSON` méthode renvoie un objet JavaScript simple (tapé comme`Excel.Interfaces.PivotFieldData`<!-- -->) qui contient des copies superficielles de toutes les propriétés enfants chargées à partir de l’objet d’origine.'
+    summary: 'Remplace la méthode JavaScript afin `toJSON()` de fournir une sortie plus utile lorsqu’un objet d’API est transmis à `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle la `toJSON` méthode de l’objet qui lui est passé.) Tandis que l’objet Excel. PivotField d’origine est un objet d’API, la `toJSON` méthode renvoie un objet JavaScript simple (tapé comme `Excel.Interfaces.PivotFieldData`<!-- -->) qui contient des copies superficielles de toutes les propriétés enfants chargées à partir de l’objet d’origine.'
     name: toJSON()
     fullName: toJSON()
     langs:
@@ -287,8 +410,44 @@ items:
 references:
   - uid: 'office!OfficeExtension.ClientObject:class'
     name: OfficeExtension.ClientObject
+  - uid: 'excel!Excel.PivotFilters:interface'
+    name: Excel.PivotFilters
+  - uid: 'excel!Excel.PivotFilterType:enum'
+    name: Excel.PivotFilterType
   - uid: 'excel!Excel.RequestContext:class'
     name: RequestContext
+  - uid: 'excel!Excel.PivotField#getFilters~0:complex'
+    name: OfficeExtension.ClientResult<Excel.PivotFilters>
+    fullName: OfficeExtension.ClientResult<Excel.PivotFilters>
+    spec.typeScript:
+      - uid: 'office!OfficeExtension.ClientResult:class'
+        name: OfficeExtension.ClientResult
+        fullName: OfficeExtension.ClientResult
+      - name: <
+        fullName: <
+      - uid: 'excel!Excel.PivotFilters:interface'
+        name: Excel.PivotFilters
+        fullName: Excel.PivotFilters
+      - name: '>'
+        fullName: '>'
+  - uid: 'excel!Excel.PivotField#isFiltered~0:complex'
+    name: OfficeExtension.ClientResult<boolean>
+    fullName: OfficeExtension.ClientResult<boolean>
+    spec.typeScript:
+      - uid: 'office!OfficeExtension.ClientResult:class'
+        name: OfficeExtension.ClientResult
+        fullName: OfficeExtension.ClientResult
+      - name: <boolean>
+        fullName: <boolean>
+  - uid: 'excel!Excel.PivotField#isFiltered~1:complex'
+    name: OfficeExtension.ClientResult<boolean>
+    fullName: OfficeExtension.ClientResult<boolean>
+    spec.typeScript:
+      - uid: 'office!OfficeExtension.ClientResult:class'
+        name: OfficeExtension.ClientResult
+        fullName: OfficeExtension.ClientResult
+      - name: <boolean>
+        fullName: <boolean>
   - uid: 'excel!Excel.PivotItemCollection:class'
     name: Excel.PivotItemCollection
   - uid: 'excel!Excel.PivotField:class'
