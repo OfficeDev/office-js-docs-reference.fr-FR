@@ -1,0 +1,275 @@
+### YamlMime:UniversalReference
+items:
+  - uid: 'excel!Excel.TableRow:class'
+    summary: "Représente une ligne dans un tableau.\n\nNotez que, à la différence des plages ou colonnes, qui s’ajusteront si de nouvelles lignes/colonnes sont ajoutées avant celles-ci, un objet TableRow représente l’emplacement physique de la ligne de table, mais pas les données. Autrement dit, si les données sont triées ou si de nouvelles lignes sont ajoutées, une ligne de tableau continue de pointer vers l’index pour lequel elle a été créée.\n\n\\[[Ensemble d’API\_: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    name: Excel.TableRow
+    fullName: Excel.TableRow
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - 'office!OfficeExtension.ClientObject:class'
+    package: excel!
+    children:
+      - 'excel!Excel.TableRow#context:member'
+      - 'excel!Excel.TableRow#delete:member(1)'
+      - 'excel!Excel.TableRow#getRange:member(1)'
+      - 'excel!Excel.TableRow#index:member'
+      - 'excel!Excel.TableRow#load:member(1)'
+      - 'excel!Excel.TableRow#load:member(2)'
+      - 'excel!Excel.TableRow#load:member(3)'
+      - 'excel!Excel.TableRow#set:member(1)'
+      - 'excel!Excel.TableRow#set:member(2)'
+      - 'excel!Excel.TableRow#toJSON:member(1)'
+      - 'excel!Excel.TableRow#values:member'
+  - uid: 'excel!Excel.TableRow#context:member'
+    summary: Contexte de demande associé à l’objet. Cette opération connecte le processus du complément au processus de l’application hôte Office.
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - 'excel!Excel.RequestContext:class'
+  - uid: 'excel!Excel.TableRow#delete:member(1)'
+    summary: "Supprime la ligne du tableau.\n\n\\[[Ensemble d’API\_: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    name: delete()
+    fullName: delete()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'delete(): void;'
+      return:
+        type:
+          - void
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var tableName = 'Table1';
+              var row = ctx.workbook.tables.getItem(tableName).rows.getItemAt(2);
+              row.delete();
+              return ctx.sync(); 
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: 'excel!Excel.TableRow#getRange:member(1)'
+    summary: "Renvoie l’objet de plage associé à la ligne entière.\n\n\\[[Ensemble d’API\_: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    name: getRange()
+    fullName: getRange()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getRange(): Excel.Range;'
+      return:
+        type:
+          - 'excel!Excel.Range:class'
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var tableName = 'Table1';
+              var row = ctx.workbook.tables.getItem(tableName).rows.getItemAt(0);
+              var rowRange = row.getRange();
+              rowRange.load('address');
+              return ctx.sync().then(function() {
+                  console.log(rowRange.address);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: 'excel!Excel.TableRow#index:member'
+    summary: "Renvoie le numéro d’indice de la ligne dans la collection de lignes du tableau. Avec indice zéro.\n\n\\[[Ensemble d’API\_: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    name: index
+    fullName: index
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly index: number;'
+      return:
+        type:
+          - number
+  - uid: 'excel!Excel.TableRow#load:member(1)'
+    summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez contacter `context.sync()` avant de lire les propriétés.
+    name: load(options)
+    fullName: load(options)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(options?: Excel.Interfaces.TableRowLoadOptions): Excel.TableRow;'
+      return:
+        type:
+          - 'excel!Excel.TableRow:class'
+        description: ''
+      parameters:
+        - id: options
+          description: Fournit des options pour les propriétés de l’objet à charger.
+          type:
+            - 'excel!Excel.Interfaces.TableRowLoadOptions:interface'
+  - uid: 'excel!Excel.TableRow#load:member(2)'
+    summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez contacter `context.sync()` avant de lire les propriétés.
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Excel.TableRow;'
+      return:
+        type:
+          - 'excel!Excel.TableRow:class'
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var tableName = 'Table1';
+              var row = ctx.workbook.tables.getItem(tableName).rows.getItem(0);
+              row.load('index');
+              return ctx.sync().then(function() {
+                  console.log(row.index);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: propertyNames
+          description: Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+          type:
+            - 'string | string[]'
+  - uid: 'excel!Excel.TableRow#load:member(3)'
+    summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez contacter `context.sync()` avant de lire les propriétés.
+    name: load(propertyNamesAndPaths)
+    fullName: load(propertyNamesAndPaths)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: |-
+        load(propertyNamesAndPaths?: {
+                    select?: string;
+                    expand?: string;
+                }): Excel.TableRow;
+      return:
+        type:
+          - 'excel!Excel.TableRow:class'
+        description: ''
+      parameters:
+        - id: propertyNamesAndPaths
+          description: '`propertyNamesAndPaths.select` est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et `propertyNamesAndPaths.expand` une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.'
+          type:
+            - |-
+              {
+                          select?: string;
+                          expand?: string;
+                      }
+  - uid: 'excel!Excel.TableRow#set:member(1)'
+    summary: 'Définit plusieurs propriétés d’un objet en même temps. Vous pouvez transmettre un objet plain avec les propriétés appropriées, ou un autre objet API du même type.'
+    remarks: "Cette méthode est dotée de la signature supplémentaire suivante\_:\n\n`set(properties: Excel.TableRow): void`"
+    name: 'set(properties, options)'
+    fullName: 'set(properties, options)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Interfaces.TableRowUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: Objet JavaScript avec des propriétés qui sont structurées isomorphically vers les propriétés de l’objet sur lequel la méthode est appelée.
+          type:
+            - 'excel!Excel.Interfaces.TableRowUpdateData:interface'
+        - id: options
+          description: Fournit une option permettant de supprimer les erreurs si l’objet Properties tente de définir des propriétés en lecture seule.
+          type:
+            - 'office!OfficeExtension.UpdateOptions:interface'
+  - uid: 'excel!Excel.TableRow#set:member(2)'
+    summary: 'Définit plusieurs propriétés de l’objet en même temps, en fonction d’un objet chargé existant.'
+    name: set(properties)
+    fullName: set(properties)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Excel.TableRow): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: ''
+          type:
+            - 'excel!Excel.TableRow:class'
+  - uid: 'excel!Excel.TableRow#toJSON:member(1)'
+    summary: 'Remplace la méthode JavaScript afin `toJSON()` de fournir une sortie plus utile lorsqu’un objet d’API est transmis à `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle la `toJSON` méthode de l’objet qui lui est passé.) Tandis que l’objet Excel. TableRow d’origine est un objet d’API, la `toJSON` méthode renvoie un objet JavaScript simple (tapé comme `Excel.Interfaces.TableRowData`<!-- -->) qui contient des copies superficielles de toutes les propriétés enfants chargées à partir de l’objet d’origine.'
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Excel.Interfaces.TableRowData;'
+      return:
+        type:
+          - 'excel!Excel.Interfaces.TableRowData:interface'
+        description: ''
+  - uid: 'excel!Excel.TableRow#values:member'
+    summary: "Représente les valeurs brutes de la plage spécifiée. Les données renvoyées peuvent être des chaînes, des valeurs numériques ou des valeurs booléennes. Les cellules contenant une erreur renvoie la chaîne d’erreur.\n\n\\[[Ensemble d’API\_: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    name: values
+    fullName: values
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'values: any[][];'
+      return:
+        type:
+          - 'any[][]'
+references:
+  - uid: 'office!OfficeExtension.ClientObject:class'
+    name: OfficeExtension.ClientObject
+  - uid: 'excel!Excel.RequestContext:class'
+    name: RequestContext
+  - uid: 'excel!Excel.Range:class'
+    name: Excel.Range
+  - uid: 'excel!Excel.TableRow:class'
+    name: Excel.TableRow
+  - uid: 'excel!Excel.Interfaces.TableRowLoadOptions:interface'
+    name: Excel.Interfaces.TableRowLoadOptions
+  - uid: 'excel!Excel.Interfaces.TableRowUpdateData:interface'
+    name: Interfaces.TableRowUpdateData
+  - uid: 'office!OfficeExtension.UpdateOptions:interface'
+    name: OfficeExtension.UpdateOptions
+  - uid: 'excel!Excel.Interfaces.TableRowData:interface'
+    name: Excel.Interfaces.TableRowData
