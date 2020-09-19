@@ -46,6 +46,7 @@ items:
       - 'excel!Excel.Range#getColumnProperties:member(1)'
       - 'excel!Excel.Range#getColumnsAfter:member(1)'
       - 'excel!Excel.Range#getColumnsBefore:member(1)'
+      - 'excel!Excel.Range#getDirectPrecedents:member(1)'
       - 'excel!Excel.Range#getEntireColumn:member(1)'
       - 'excel!Excel.Range#getEntireRow:member(1)'
       - 'excel!Excel.Range#getImage:member(1)'
@@ -55,6 +56,7 @@ items:
       - 'excel!Excel.Range#getLastColumn:member(1)'
       - 'excel!Excel.Range#getLastRow:member(1)'
       - 'excel!Excel.Range#getOffsetRange:member(1)'
+      - 'excel!Excel.Range#getPivotTables:member(1)'
       - 'excel!Excel.Range#getResizedRange:member(1)'
       - 'excel!Excel.Range#getRow:member(1)'
       - 'excel!Excel.Range#getRowProperties:member(1)'
@@ -64,6 +66,10 @@ items:
       - 'excel!Excel.Range#getSpecialCells:member(2)'
       - 'excel!Excel.Range#getSpecialCellsOrNullObject:member(1)'
       - 'excel!Excel.Range#getSpecialCellsOrNullObject:member(2)'
+      - 'excel!Excel.Range#getSpillingToRange:member(1)'
+      - 'excel!Excel.Range#getSpillingToRangeOrNullObject:member(1)'
+      - 'excel!Excel.Range#getSpillParent:member(1)'
+      - 'excel!Excel.Range#getSpillParentOrNullObject:member(1)'
       - 'excel!Excel.Range#getSurroundingRegion:member(1)'
       - 'excel!Excel.Range#getTables:member(1)'
       - 'excel!Excel.Range#getUsedRange:member(1)'
@@ -71,6 +77,7 @@ items:
       - 'excel!Excel.Range#getVisibleView:member(1)'
       - 'excel!Excel.Range#group:member(1)'
       - 'excel!Excel.Range#group:member(2)'
+      - 'excel!Excel.Range#hasSpill:member'
       - 'excel!Excel.Range#height:member'
       - 'excel!Excel.Range#hidden:member'
       - 'excel!Excel.Range#hideGroupDetails:member(1)'
@@ -88,12 +95,14 @@ items:
       - 'excel!Excel.Range#merge:member(1)'
       - 'excel!Excel.Range#moveTo:member(1)'
       - 'excel!Excel.Range#numberFormat:member'
+      - 'excel!Excel.Range#numberFormatCategories:member'
       - 'excel!Excel.Range#numberFormatLocal:member'
       - 'excel!Excel.Range#removeDuplicates:member(1)'
       - 'excel!Excel.Range#replaceAll:member(1)'
       - 'excel!Excel.Range#rowCount:member'
       - 'excel!Excel.Range#rowHidden:member'
       - 'excel!Excel.Range#rowIndex:member'
+      - 'excel!Excel.Range#savedAsArray:member'
       - 'excel!Excel.Range#select:member(1)'
       - 'excel!Excel.Range#set:member(1)'
       - 'excel!Excel.Range#set:member(2)'
@@ -922,6 +931,44 @@ items:
           description: 'Facultatif. Nombre de colonnes à inclure dans la plage obtenue. En règle générale, utilisez un nombre positif pour créer une plage en dehors de la plage actuelle. Vous pouvez également utiliser un nombre négatif pour créer une plage à l’intérieur de la plage actuelle. La valeur par défaut est 1.'
           type:
             - number
+  - uid: 'excel!Excel.Range#getDirectPrecedents:member(1)'
+    summary: "Renvoie un objet WorkbookRangeAreas qui représente la plage contenant tous les antécédents directs d’une cellule dans une même feuille de calcul ou dans plusieurs feuilles de calcul.\n\n\\[[Ensemble d’API\_: ExcelApi 1,12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    name: getDirectPrecedents()
+    fullName: getDirectPrecedents()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getDirectPrecedents(): Excel.WorkbookRangeAreas;'
+      return:
+        type:
+          - 'excel!Excel.WorkbookRangeAreas:class'
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```typescript
+          // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/85-preview-apis/direct-precedents.yaml
+          await Excel.run(async (context) => {
+            // Precedents are cells referenced by the formula in a cell.
+            let range = context.workbook.getActiveCell();
+            let directPrecedents = range.getDirectPrecedents();
+            range.load("address");
+            directPrecedents.areas.load("address");
+            await context.sync();
+
+            console.log(`Direct precedent cells of ${range.address}:`);
+
+            // Use the direct precedents API to loop through precedents of the active cell. 
+            for (var i = 0; i < directPrecedents.areas.items.length; i++) {
+              // Highlight and console the address of each precedent cell.
+              directPrecedents.areas.items[i].format.fill.color = "Yellow";
+              console.log(`  ${directPrecedents.areas.items[i].address}`);
+            }
+            await context.sync();
+          });
+          ```
   - uid: 'excel!Excel.Range#getEntireColumn:member(1)'
     summary: "Obtient un objet qui représente la colonne entière de la plage (par exemple, si la plage actuelle représente les cellules «\_B4\_: E11\_», `getEntireColumn` qu’il s’agit d’une plage qui représente les colonnes «\_B\_:E\_»).\n\n\\[[Ensemble d’API\_: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: getEntireColumn()
@@ -1268,6 +1315,53 @@ items:
           description: 'Nombre de colonnes (positif, négatif ou nul) duquel décaler la plage. Les valeurs positives représentent un décalage vers la droite et les valeurs négatives un décalage vers la gauche.'
           type:
             - number
+  - uid: 'excel!Excel.Range#getPivotTables:member(1)'
+    summary: "Obtient une collection d’étendues de tableaux croisés dynamiques qui se chevauchent avec la plage.\n\n\\[[Ensemble d’API\_: ExcelApi 1,12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    name: getPivotTables(fullyContained)
+    fullName: getPivotTables(fullyContained)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getPivotTables(fullyContained?: boolean): Excel.PivotTableScopedCollection;'
+      return:
+        type:
+          - 'excel!Excel.PivotTableScopedCollection:class'
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```typescript
+          // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/85-preview-apis/pivottable-get-pivottables.yaml
+          await Excel.run(async (context) => {
+            const activeRange = context.workbook.getSelectedRange();
+
+            // Get all the PivotTables that intersect with this range.
+            const partiallyContainedPivotTables = activeRange.getPivotTables();
+            // Get all the PivotTables that are completely contained within this range.
+            const fullyContainedPivotTables = activeRange.getPivotTables(true);
+
+            partiallyContainedPivotTables.load("name");
+            fullyContainedPivotTables.load("name");
+            await context.sync();
+
+            // Display the names in the console.
+            console.log("PivotTables in the current range:")
+            partiallyContainedPivotTables.items.forEach((pivotTable) => {
+              console.log(`\t${pivotTable.name}`);
+            });
+            console.log("PivotTables completely contained in the current range:")
+            fullyContainedPivotTables.items.forEach((pivotTable) => {
+              console.log(`\t${pivotTable.name}`);
+            });
+          });
+          ```
+      parameters:
+        - id: fullyContained
+          description: 'Si la valeur est true, renvoie uniquement les tableaux croisés dynamiques contenus dans les limites de la plage. La valeur par défaut est false.'
+          type:
+            - boolean
   - uid: 'excel!Excel.Range#getResizedRange:member(1)'
     summary: "Obtient un objet de plage semblable à l’objet de plage actuel, mais avec le coin inférieur droit développé (ou contracté) selon un certain nombre de lignes et de colonnes.\n\n\\[[Ensemble d’API\_: ExcelApi 1,2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: 'getResizedRange(deltaRows, deltaColumns)'
@@ -1488,6 +1582,82 @@ items:
           description: 'Si cellType est une constante ou une formule, cet argument est utilisé pour déterminer les types de cellules à inclure dans le résultat. Ces valeurs peuvent être combinées pour renvoyer plusieurs types. Par défaut, toutes les constantes ou formules sont sélectionnées, quel qu''en soit le type.'
           type:
             - '"All" | "Errors" | "ErrorsLogical" | "ErrorsNumbers" | "ErrorsText" | "ErrorsLogicalNumber" | "ErrorsLogicalText" | "ErrorsNumberText" | "Logical" | "LogicalNumbers" | "LogicalText" | "LogicalNumbersText" | "Numbers" | "NumbersText" | "Text"'
+  - uid: 'excel!Excel.Range#getSpillingToRange:member(1)'
+    summary: "Obtient l’objet de la plage contenant la plage renversé lorsque appelée sur une cellule d’ancrage. Échoue si appliqué à une plage comportant plusieurs cellules.\n\n\\[[Ensemble d’API\_: ExcelApi 1,12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    name: getSpillingToRange()
+    fullName: getSpillingToRange()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getSpillingToRange(): Excel.Range;'
+      return:
+        type:
+          - 'excel!Excel.Range:class'
+        description: |-
+
+
+          #### <a name="examples"></a>Exemples
+
+          ```typescript
+          // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/85-preview-apis/dynamic-arrays.yaml
+          await Excel.run(async (context) => {
+            const sheet = context.workbook.worksheets.getItem("Sample");
+
+            // Set G4 to a formula that returns a dynamic array.
+            const targetCell = sheet.getRange("G4");
+            targetCell.formulas = [["=A4:D4"]];
+
+            // Get the address of the cells that the dynamic array spilled into.
+            const spillRange = targetCell.getSpillingToRange();
+            spillRange.load("address");
+
+            // Fit the columns for readability.
+            sheet.getUsedRange().format.autofitColumns();
+            await context.sync();
+
+            console.log(`Copying the table headers spilled into ${spillRange.address}.`);
+          });
+          ```
+  - uid: 'excel!Excel.Range#getSpillingToRangeOrNullObject:member(1)'
+    summary: "Obtient l’objet de la plage contenant la plage renversé lorsque appelée sur une cellule d’ancrage. Si la plage n’est pas une cellule d’ancrage ou si la plage de renversement est introuvable, un objet null est renvoyé.\n\n\\[[Ensemble d’API\_: ExcelApi 1,12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    name: getSpillingToRangeOrNullObject()
+    fullName: getSpillingToRangeOrNullObject()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getSpillingToRangeOrNullObject(): Excel.Range;'
+      return:
+        type:
+          - 'excel!Excel.Range:class'
+        description: ''
+  - uid: 'excel!Excel.Range#getSpillParent:member(1)'
+    summary: "Obtient l’objet de la plage contenant la cellule d’ancrage d’une cellule prise renversée dans. Échoue si appliqué à une plage comportant plusieurs cellules.\n\n\\[[Ensemble d’API\_: ExcelApi 1,12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    name: getSpillParent()
+    fullName: getSpillParent()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getSpillParent(): Excel.Range;'
+      return:
+        type:
+          - 'excel!Excel.Range:class'
+        description: ''
+  - uid: 'excel!Excel.Range#getSpillParentOrNullObject:member(1)'
+    summary: "Obtient l’objet de la plage contenant la cellule d’ancrage d’une cellule prise renversée dans. S’il ne s’agit pas d’une cellule de renversement ou si plusieurs cellules sont attribuées, un objet null est renvoyé.\n\n\\[[Ensemble d’API\_: ExcelApi 1,12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    name: getSpillParentOrNullObject()
+    fullName: getSpillParentOrNullObject()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getSpillParentOrNullObject(): Excel.Range;'
+      return:
+        type:
+          - 'excel!Excel.Range:class'
+        description: ''
   - uid: 'excel!Excel.Range#getSurroundingRegion:member(1)'
     summary: "Renvoie un objet PLage qui représente la région environnante pour la cellule en haut à gauche de cette plage. Une région environnante est une plage délimitée par une combinaison de lignes et de colonnes vides par rapport à cette plage.\n\n\\[[Ensemble d’API\_: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: getSurroundingRegion()
@@ -1724,6 +1894,18 @@ items:
           description: "Indique comment la plage peut être regroupée par ligne ou par colonne. Une `InvalidArgument` erreur est générée lorsque l’option de groupe diffère de la propriété ou de la plage `isEntireRow` `isEntireColumn` ( `range.isEntireRow` elle a la valeur true et `groupOption` est «\_ByColumns\_» ou `range.isEntireColumn` est true et `groupOption` est «\_ByRows\_»)."
           type:
             - '"ByRows" | "ByColumns"'
+  - uid: 'excel!Excel.Range#hasSpill:member'
+    summary: "Représente si toutes les cellules ont une bordure renversée. Renvoie la valeur true si toutes les cellules ont une bordure de renversement ou la valeur false si toutes les cellules n’ont pas de bordure de renversement. Renvoie la valeur null s’il y a des cellules à la fois avec et sans bordure de renversement dans la plage.\n\n\\[[Ensemble d’API\_: ExcelApi 1,12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    name: hasSpill
+    fullName: hasSpill
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly hasSpill: boolean;'
+      return:
+        type:
+          - boolean
   - uid: 'excel!Excel.Range#height:member'
     summary: "Renvoie la distance en points pour zoom 100 %, à partir du bord supérieur de la plage au bord inférieur de la plage.\n\n\\[[Ensemble d’API\_: ExcelApi 1,10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: height
@@ -2125,6 +2307,18 @@ items:
               }
           });
           ```
+  - uid: 'excel!Excel.Range#numberFormatCategories:member'
+    summary: "Représente la catégorie de format numérique de chaque cellule.\n\n\\[[Ensemble d’API\_: ExcelApi 1,12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    name: numberFormatCategories
+    fullName: numberFormatCategories
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly numberFormatCategories: Excel.NumberFormatCategory[][];'
+      return:
+        type:
+          - 'excel!Excel.Range#numberFormatCategories~0:complex'
   - uid: 'excel!Excel.Range#numberFormatLocal:member'
     summary: "Représente le code de format de nombre d’Excel pour la plage donnée, en fonction des paramètres de langue de l’utilisateur. Excel n’effectue aucune langue ou contrainte de format lors de l’obtention ou de la définition de la `numberFormatLocal` propriété. Tout texte renvoyé utilise les chaînes mises en forme localement en fonction de la langue spécifiée dans les paramètres système.\n\n\\[[Ensemble d’API\_: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: numberFormatLocal
@@ -2239,6 +2433,18 @@ items:
       return:
         type:
           - number
+  - uid: 'excel!Excel.Range#savedAsArray:member'
+    summary: "Représente si toutes les cellules sont enregistrées sous la forme d’une formule matricielle. Renvoie la valeur true si toutes les cellules doivent être enregistrées sous forme de formule matricielle ou la valeur false si toutes les cellules ne sont pas enregistrées sous forme de formule matricielle. Renvoie la valeur null si certaines cellules sont enregistrées sous la forme d’une formule matricielle et d’autres non.\n\n\\[[Ensemble d’API\_: ExcelApi 1,12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+    name: savedAsArray
+    fullName: savedAsArray
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly savedAsArray: boolean;'
+      return:
+        type:
+          - boolean
   - uid: 'excel!Excel.Range#select:member(1)'
     summary: "Sélectionne la plage spécifiée dans l’interface utilisateur d’Excel.\n\n\\[[Ensemble d’API\_: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: select()
@@ -2909,6 +3115,8 @@ references:
         fullName: '[]>'
   - uid: 'excel!Excel.ColumnPropertiesLoadOptions:interface'
     name: ColumnPropertiesLoadOptions
+  - uid: 'excel!Excel.WorkbookRangeAreas:class'
+    name: Excel.WorkbookRangeAreas
   - uid: 'excel!Excel.Range#getImage~0:complex'
     name: OfficeExtension.ClientResult<string>
     fullName: OfficeExtension.ClientResult<string>
@@ -2936,6 +3144,8 @@ references:
         fullName: Excel.Range
       - name: ' | string'
         fullName: ' | string'
+  - uid: 'excel!Excel.PivotTableScopedCollection:class'
+    name: Excel.PivotTableScopedCollection
   - uid: 'excel!Excel.Range#getRowProperties~0:complex'
     name: 'OfficeExtension.ClientResult<RowProperties[]>'
     fullName: 'OfficeExtension.ClientResult<Excel.RowProperties[]>'
@@ -2988,6 +3198,15 @@ references:
         fullName: Excel.Range
       - name: ' | string'
         fullName: ' | string'
+  - uid: 'excel!Excel.Range#numberFormatCategories~0:complex'
+    name: 'Excel.NumberFormatCategory[][]'
+    fullName: 'Excel.NumberFormatCategory[][]'
+    spec.typeScript:
+      - uid: 'excel!Excel.NumberFormatCategory:enum'
+        name: Excel.NumberFormatCategory
+        fullName: Excel.NumberFormatCategory
+      - name: '[][]'
+        fullName: '[][]'
   - uid: 'excel!Excel.RemoveDuplicatesResult:class'
     name: Excel.RemoveDuplicatesResult
   - uid: 'excel!Excel.Range#replaceAll~0:complex'
