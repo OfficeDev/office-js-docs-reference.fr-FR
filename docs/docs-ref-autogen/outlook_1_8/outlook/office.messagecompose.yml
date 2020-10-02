@@ -1133,7 +1133,7 @@ items:
           type:
             - 'outlook!Office.MessageCompose#getSelectedDataAsync~3:complex'
   - uid: 'outlook!Office.MessageCompose#getSharedPropertiesAsync:member(1)'
-    summary: "Obtient les propriétés d’un rendez-vous ou d’un message dans un dossier partagé, un calendrier ou une boîte aux lettres.\n\nPour plus d’informations sur l’utilisation de cette API, consultez l’article relatif [à l’accès délégué](https://docs.microsoft.com/office/dev/add-ins/outlook/delegate-access) .\n\n**Remarque**: cette méthode n’est pas prise en charge dans Outlook sur iOS ou Android.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
+    summary: "Obtient les propriétés d’un rendez-vous ou d’un message dans un dossier partagé, un calendrier ou une boîte aux lettres.\n\n**Important**: en mode de composition de message, cette API n’est pas prise en charge dans Outlook sur le Web ou Windows, sauf si les conditions suivantes sont remplies.\n\n1. Le propriétaire partage au moins un dossier de boîte aux lettres avec le délégué.\n\n2. Le délégué ébauche un message dans le dossier partagé.\n\nUne fois que le message a été envoyé, il se trouve généralement dans le dossier **éléments envoyés** du délégué.\n\nPour plus d’informations sur l’utilisation de cette API, consultez l’article relatif [à l’accès délégué](https://docs.microsoft.com/office/dev/add-ins/outlook/delegate-access) .\n\n**Remarque**: cette méthode n’est pas prise en charge dans Outlook sur iOS ou Android.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
     remarks: |-
       ** <!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
 
@@ -1159,7 +1159,7 @@ items:
               let sharedProperties = result2.value;
               let delegatePermissions = sharedProperties.delegatePermissions;
 
-              // Determine if user can do the expected operation, e.g., do they have Write permission?
+              // Determine if user has the appropriate permission to do the operation.
               if ((delegatePermissions & Office.MailboxEnums.DelegatePermissions.Read) != 0) {
                 var ewsId = Office.context.mailbox.item.itemId;
                 var restId = Office.context.mailbox.convertToRestId(ewsId, Office.MailboxEnums.RestVersion.v2_0);
@@ -1204,7 +1204,7 @@ items:
           type:
             - 'outlook!Office.MessageCompose#getSharedPropertiesAsync~0:complex'
   - uid: 'outlook!Office.MessageCompose#getSharedPropertiesAsync:member(2)'
-    summary: "Obtient les propriétés d’un rendez-vous ou d’un message dans un dossier partagé, un calendrier ou une boîte aux lettres.\n\nPour plus d’informations sur l’utilisation de cette API, consultez l’article relatif [à l’accès délégué](https://docs.microsoft.com/office/dev/add-ins/outlook/delegate-access) .\n\n**Remarque**: cette méthode n’est pas prise en charge dans Outlook sur iOS ou Android.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
+    summary: "Obtient les propriétés d’un rendez-vous ou d’un message dans un dossier partagé, un calendrier ou une boîte aux lettres.\n\n**Important**: en mode de composition de message, cette API n’est pas prise en charge dans Outlook sur le Web ou Windows, sauf si les conditions suivantes sont remplies.\n\n1. Le propriétaire partage au moins un dossier de boîte aux lettres avec le délégué.\n\n2. Le délégué ébauche un message dans le dossier partagé.\n\nUne fois que le message a été envoyé, il se trouve généralement dans le dossier **éléments envoyés** du délégué.\n\nPour plus d’informations sur l’utilisation de cette API, consultez l’article relatif [à l’accès délégué](https://docs.microsoft.com/office/dev/add-ins/outlook/delegate-access) .\n\n**Remarque**: cette méthode n’est pas prise en charge dans Outlook sur iOS ou Android.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
     remarks: |-
       ** <!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
 
@@ -1215,7 +1215,7 @@ items:
       ```javascript
       // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/65-delegates-and-shared-folders/get-shared-properties.yaml
       if (!Office.context.mailbox.item.getSharedPropertiesAsync) {
-        console.error("Try this sample on a message from a shared folder.");
+        console.error("Try this sample on an item from a shared folder.");
         return;
       }
 
