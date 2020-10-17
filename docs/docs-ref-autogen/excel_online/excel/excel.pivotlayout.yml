@@ -26,7 +26,6 @@ items:
       - 'excel!Excel.PivotLayout#load:member(1)'
       - 'excel!Excel.PivotLayout#load:member(2)'
       - 'excel!Excel.PivotLayout#load:member(3)'
-      - 'excel!Excel.PivotLayout#pivotStyle:member'
       - 'excel!Excel.PivotLayout#preserveFormatting:member'
       - 'excel!Excel.PivotLayout#set:member(1)'
       - 'excel!Excel.PivotLayout#set:member(2)'
@@ -160,11 +159,11 @@ items:
       - typeScript
     type: method
     syntax:
-      content: 'getPivotItems(axis: Excel.PivotAxis, cell: Range | string): OfficeExtension.ClientResult<Excel.PivotItem[]>;'
+      content: 'getPivotItems(axis: Excel.PivotAxis, cell: Range | string): Excel.PivotItemCollection;'
       return:
         type:
-          - 'excel!Excel.PivotLayout#getPivotItems~0:complex'
-        description: Collection de PivotItems qui sont utilisées pour calculer les valeurs de la ligne spécifiée.
+          - 'excel!Excel.PivotItemCollection:class'
+        description: PivotItemCollection du PivotItems utilisé pour calculer les valeurs de la ligne spécifiée.
       parameters:
         - id: axis
           description: "L’axe à partir duquel obtenir le PivotItems. Doit être «\_ligne\_» ou «\_colonne\_»."
@@ -173,7 +172,7 @@ items:
         - id: cell
           description: Cellule unique dans le corps des données du tableau croisé dynamique.
           type:
-            - 'excel!Excel.PivotLayout#getPivotItems~1:complex'
+            - 'excel!Excel.PivotLayout#getPivotItems~0:complex'
   - uid: 'excel!Excel.PivotLayout#getPivotItems:member(2)'
     summary: "Obtient le PivotItems à partir d’un axe qui composent la valeur dans une plage spécifiée dans le tableau croisé dynamique.\n\n\\[[Ensemble d’API\_: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: 'getPivotItems(axisString, cell)'
@@ -182,11 +181,11 @@ items:
       - typeScript
     type: method
     syntax:
-      content: 'getPivotItems(axisString: "Unknown" | "Row" | "Column" | "Data" | "Filter", cell: Range | string): OfficeExtension.ClientResult<Excel.PivotItem[]>;'
+      content: 'getPivotItems(axisString: "Unknown" | "Row" | "Column" | "Data" | "Filter", cell: Range | string): Excel.PivotItemCollection;'
       return:
         type:
-          - 'excel!Excel.PivotLayout#getPivotItems~2:complex'
-        description: Collection de PivotItems qui sont utilisées pour calculer les valeurs de la ligne spécifiée.
+          - 'excel!Excel.PivotItemCollection:class'
+        description: PivotItemCollection du PivotItems utilisé pour calculer les valeurs de la ligne spécifiée.
       parameters:
         - id: axisString
           description: "L’axe à partir duquel obtenir le PivotItems. Doit être «\_ligne\_» ou «\_colonne\_»."
@@ -195,7 +194,7 @@ items:
         - id: cell
           description: Cellule unique dans le corps des données du tableau croisé dynamique.
           type:
-            - 'excel!Excel.PivotLayout#getPivotItems~3:complex'
+            - 'excel!Excel.PivotLayout#getPivotItems~1:complex'
   - uid: 'excel!Excel.PivotLayout#getRange:member(1)'
     summary: "Renvoie la plage sur laquelle le tableau croisé dynamique existe, à l’exception de la zone de filtre.\n\n\\[[Ensemble d’API\_: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: getRange()
@@ -296,18 +295,6 @@ items:
                           select?: string;
                           expand?: string;
                       }
-  - uid: 'excel!Excel.PivotLayout#pivotStyle:member'
-    summary: "Style appliqué au tableau croisé dynamique.\n\n\\[[Ensemble d’API\_: ExcelApi 1,12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
-    name: pivotStyle
-    fullName: pivotStyle
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly pivotStyle: Excel.PivotTableStyle;'
-      return:
-        type:
-          - 'excel!Excel.PivotTableStyle:class'
   - uid: 'excel!Excel.PivotLayout#preserveFormatting:member'
     summary: "Indique si la mise en forme est conservée lorsque le rapport est actualisé ou recalcule par des opérations telles que le pivotement, le tri ou la modification des éléments de champ de page.\n\n\\[[Ensemble d’API\_: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: preserveFormatting
@@ -472,23 +459,11 @@ references:
         fullName: Excel.Range
       - name: ' | string'
         fullName: ' | string'
-  - uid: 'excel!Excel.PivotLayout#getPivotItems~0:complex'
-    name: 'OfficeExtension.ClientResult<Excel.PivotItem[]>'
-    fullName: 'OfficeExtension.ClientResult<Excel.PivotItem[]>'
-    spec.typeScript:
-      - uid: 'office!OfficeExtension.ClientResult:class'
-        name: OfficeExtension.ClientResult
-        fullName: OfficeExtension.ClientResult
-      - name: <
-        fullName: <
-      - uid: 'excel!Excel.PivotItem:class'
-        name: Excel.PivotItem
-        fullName: Excel.PivotItem
-      - name: '[]>'
-        fullName: '[]>'
+  - uid: 'excel!Excel.PivotItemCollection:class'
+    name: Excel.PivotItemCollection
   - uid: 'excel!Excel.PivotAxis:enum'
     name: Excel.PivotAxis
-  - uid: 'excel!Excel.PivotLayout#getPivotItems~1:complex'
+  - uid: 'excel!Excel.PivotLayout#getPivotItems~0:complex'
     name: Range | string
     fullName: Excel.Range | string
     spec.typeScript:
@@ -497,21 +472,7 @@ references:
         fullName: Excel.Range
       - name: ' | string'
         fullName: ' | string'
-  - uid: 'excel!Excel.PivotLayout#getPivotItems~2:complex'
-    name: 'OfficeExtension.ClientResult<Excel.PivotItem[]>'
-    fullName: 'OfficeExtension.ClientResult<Excel.PivotItem[]>'
-    spec.typeScript:
-      - uid: 'office!OfficeExtension.ClientResult:class'
-        name: OfficeExtension.ClientResult
-        fullName: OfficeExtension.ClientResult
-      - name: <
-        fullName: <
-      - uid: 'excel!Excel.PivotItem:class'
-        name: Excel.PivotItem
-        fullName: Excel.PivotItem
-      - name: '[]>'
-        fullName: '[]>'
-  - uid: 'excel!Excel.PivotLayout#getPivotItems~3:complex'
+  - uid: 'excel!Excel.PivotLayout#getPivotItems~1:complex'
     name: Range | string
     fullName: Excel.Range | string
     spec.typeScript:
@@ -533,8 +494,6 @@ references:
     name: Excel.PivotLayout
   - uid: 'excel!Excel.Interfaces.PivotLayoutLoadOptions:interface'
     name: Excel.Interfaces.PivotLayoutLoadOptions
-  - uid: 'excel!Excel.PivotTableStyle:class'
-    name: Excel.PivotTableStyle
   - uid: 'excel!Excel.Interfaces.PivotLayoutUpdateData:interface'
     name: Interfaces.PivotLayoutUpdateData
   - uid: 'office!OfficeExtension.UpdateOptions:interface'
