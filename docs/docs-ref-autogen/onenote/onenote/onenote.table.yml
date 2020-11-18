@@ -1,658 +1,425 @@
-### YamlMime:UniversalReference
-items:
-  - uid: 'onenote!OneNote.Table:class'
-    summary: "Représente une table dans une page OneNote.\n\n\\[[Ensemble d’API\_: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\\]"
-    name: OneNote.Table
-    fullName: OneNote.Table
-    langs:
-      - typeScript
-    type: class
-    extends:
-      - 'office!OfficeExtension.ClientObject:class'
-    package: onenote!
-    children:
-      - 'onenote!OneNote.Table#appendColumn:member(1)'
-      - 'onenote!OneNote.Table#appendRow:member(1)'
-      - 'onenote!OneNote.Table#borderVisible:member'
-      - 'onenote!OneNote.Table#clear:member(1)'
-      - 'onenote!OneNote.Table#columnCount:member'
-      - 'onenote!OneNote.Table#context:member'
-      - 'onenote!OneNote.Table#getCell:member(1)'
-      - 'onenote!OneNote.Table#id:member'
-      - 'onenote!OneNote.Table#insertColumn:member(1)'
-      - 'onenote!OneNote.Table#insertRow:member(1)'
-      - 'onenote!OneNote.Table#load:member(1)'
-      - 'onenote!OneNote.Table#load:member(2)'
-      - 'onenote!OneNote.Table#load:member(3)'
-      - 'onenote!OneNote.Table#paragraph:member'
-      - 'onenote!OneNote.Table#rowCount:member'
-      - 'onenote!OneNote.Table#rows:member'
-      - 'onenote!OneNote.Table#set:member(1)'
-      - 'onenote!OneNote.Table#set:member(2)'
-      - 'onenote!OneNote.Table#setShadingColor:member(1)'
-      - 'onenote!OneNote.Table#toJSON:member(1)'
-      - 'onenote!OneNote.Table#track:member(1)'
-      - 'onenote!OneNote.Table#untrack:member(1)'
-  - uid: 'onenote!OneNote.Table#appendColumn:member(1)'
-    summary: "Ajoute une colonne à la fin du tableau. Si elles sont spécifiées, les valeurs sont définies dans la nouvelle colonne. Dans le cas contraire, la colonne est vide.\n\n\\[[Ensemble d’API\_: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\\]"
-    name: appendColumn(values)
-    fullName: appendColumn(values)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'appendColumn(values?: string[]): void;'
-      return:
-        type:
-          - void
-        description: |-
+### YamlMime:TSType
+name: OneNote.Table
+uid: onenote!OneNote.Table:class
+package: onenote!
+fullName: OneNote.Table
+summary: >-
+  Représente une table dans une page OneNote.
 
 
-          #### <a name="examples"></a>Exemples
-
-          ```javascript
-          OneNote.run(function(ctx) {
-              var app = ctx.application;
-              var outline = app.getActiveOutline();
-              
-              // Queue a command to load outline.paragraphs and their types.
-              ctx.load(outline, "paragraphs, paragraphs/type");
-              
-              // Run the queued commands, and return a promise to indicate task completion.
-              return ctx.sync().then(function () {
-                  var paragraphs = outline.paragraphs;
-                  
-                  // for each table, append a column.
-                  for (var i = 0; i < paragraphs.items.length; i++) {
-                      var paragraph = paragraphs.items[i];
-                      if (paragraph.type == "Table") {
-                          var table = paragraph.table;
-                          table.appendColumn(["cell0", "cell1"]);
-                      }
-                  }
-                  return ctx.sync();
-              })
-          })
-          .catch(function(error) {
-              console.log("Error: " + error);
-              if (error instanceof OfficeExtension.Error) {
-                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
-              }
-          });
-          ```
-      parameters:
-        - id: values
-          description: 'Facultatif. Chaînes à insérer dans la nouvelle colonne, spécifiées sous forme de tableau. Elles ne doivent pas contenir plus de valeurs que de lignes dans le tableau.'
-          type:
-            - 'string[]'
-  - uid: 'onenote!OneNote.Table#appendRow:member(1)'
-    summary: "Ajoute une ligne à la fin du tableau. Si elles sont spécifiées, les valeurs sont définies dans la nouvelle ligne. Dans le cas contraire, la ligne est vide.\n\n\\[[Ensemble d’API\_: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\\]"
-    name: appendRow(values)
-    fullName: appendRow(values)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'appendRow(values?: string[]): OneNote.TableRow;'
-      return:
-        type:
-          - 'onenote!OneNote.TableRow:class'
-        description: |-
+  \[[Ensemble d’API : OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: class
+properties:
+- name: borderVisible
+  uid: onenote!OneNote.Table#borderVisible:member
+  package: onenote!
+  fullName: borderVisible
+  summary: >-
+    Obtient ou définit si les bordures sont visibles ou non. True si elles sont visibles, false si elles sont masquées.
 
 
-          #### <a name="examples"></a>Exemples
-
-          ```javascript
-          OneNote.run(function(ctx) {
-              var app = ctx.application;
-              var outline = app.getActiveOutline();
-              
-              // Queue a command to load outline.paragraphs and their types.
-              ctx.load(outline, "paragraphs, paragraphs/type");
-              
-              // Run the queued commands, and return a promise to indicate task completion.
-              return ctx.sync().then(function () {
-                  var paragraphs = outline.paragraphs;
-                  
-                  // for each table, append a column.
-                  for (var i = 0; i < paragraphs.items.length; i++) {
-                      var paragraph = paragraphs.items[i];
-                      if (paragraph.type == "Table") {
-                          var table = paragraph.table;
-                          var row = table.appendRow(["cell0", "cell1"]);
-                      }
-                  }
-                  return ctx.sync();
-              })
-          })
-          .catch(function(error) {
-              console.log("Error: " + error);
-              if (error instanceof OfficeExtension.Error) {
-                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
-              }
-          });
-          ```
-      parameters:
-        - id: values
-          description: 'Facultatif. Chaînes à insérer dans la nouvelle ligne, spécifiées sous forme de tableau. Elles ne doivent pas contenir plus de valeurs que de colonnes dans le tableau.'
-          type:
-            - 'string[]'
-  - uid: 'onenote!OneNote.Table#borderVisible:member'
-    summary: "Obtient ou définit si les bordures sont visibles ou non. True si elles sont visibles, false si elles sont masquées.\n\n\\[[Ensemble d’API\_: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\\]"
-    name: borderVisible
-    fullName: borderVisible
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'borderVisible: boolean;'
-      return:
-        type:
-          - boolean
-  - uid: 'onenote!OneNote.Table#clear:member(1)'
-    summary: "Efface le contenu du tableau.\n\n\\[[Ensemble d’API\_: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\\]"
-    name: clear()
-    fullName: clear()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'clear(): void;'
-      return:
-        type:
-          - void
-        description: ''
-  - uid: 'onenote!OneNote.Table#columnCount:member'
-    summary: "Obtient le nombre de colonnes dans le tableau.\n\n\\[[Ensemble d’API\_: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\\]"
-    name: columnCount
-    fullName: columnCount
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly columnCount: number;'
-      return:
-        type:
-          - number
-  - uid: 'onenote!OneNote.Table#context:member'
-    summary: Contexte de demande associé à l’objet. Cette opération connecte le processus du complément au processus de l’application hôte Office.
-    name: context
-    fullName: context
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'context: RequestContext;'
-      return:
-        type:
-          - 'onenote!OneNote.RequestContext:class'
-  - uid: 'onenote!OneNote.Table#getCell:member(1)'
-    summary: "Obtient la cellule du tableau à une ligne et une colonne spécifiées.\n\n\\[[Ensemble d’API\_: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\\]"
-    name: 'getCell(rowIndex, cellIndex)'
-    fullName: 'getCell(rowIndex, cellIndex)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'getCell(rowIndex: number, cellIndex: number): OneNote.TableCell;'
-      return:
-        type:
-          - 'onenote!OneNote.TableCell:class'
-        description: |-
+    \[[Ensemble d’API : OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'borderVisible: boolean;'
+    return:
+      type: boolean
+- name: columnCount
+  uid: onenote!OneNote.Table#columnCount:member
+  package: onenote!
+  fullName: columnCount
+  summary: >-
+    Obtient le nombre de colonnes dans le tableau.
 
 
-          #### <a name="examples"></a>Exemples
-
-          ```javascript
-          OneNote.run(function(ctx) {
-              var app = ctx.application;
-              var outline = app.getActiveOutline();
-              
-              // Queue a command to load outline.paragraphs and their types.
-              ctx.load(outline, "paragraphs, paragraphs/type");
-              
-              // Run the queued commands, and return a promise to indicate task completion.
-              return ctx.sync().then(function () {
-                  var paragraphs = outline.paragraphs;
-                  
-                  // for each table, get a cell in the second row and third column.
-                  for (var i = 0; i < paragraphs.items.length; i++) {
-                      var paragraph = paragraphs.items[i];
-                      if (paragraph.type == "Table") {
-                          var table = paragraph.table;
-                          var cell = table.getCell(2 /*Row Index*/, 3 /*Column Index*/);
-                      }
-                  }
-                  return ctx.sync();
-              })
-          })
-          .catch(function(error) {
-              console.log("Error: " + error);
-              if (error instanceof OfficeExtension.Error) {
-                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
-              }
-          });
-          ```
-      parameters:
-        - id: rowIndex
-          description: Index de la ligne.
-          type:
-            - number
-        - id: cellIndex
-          description: Index de la cellule dans la ligne.
-          type:
-            - number
-  - uid: 'onenote!OneNote.Table#id:member'
-    summary: "Obtient l’ID du tableau. En lecture seule.\n\n\\[[Ensemble d’API\_: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\\]"
-    name: id
-    fullName: id
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly id: string;'
-      return:
-        type:
-          - string
-  - uid: 'onenote!OneNote.Table#insertColumn:member(1)'
-    summary: "Insère une colonne au niveau de l’index donné dans le tableau. Si elles sont spécifiées, les valeurs sont définies dans la nouvelle colonne. Dans le cas contraire, la colonne est vide.\n\n\\[[Ensemble d’API\_: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\\]"
-    name: 'insertColumn(index, values)'
-    fullName: 'insertColumn(index, values)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'insertColumn(index: number, values?: string[]): void;'
-      return:
-        type:
-          - void
-        description: |-
+    \[[Ensemble d’API : OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly columnCount: number;'
+    return:
+      type: number
+- name: context
+  uid: onenote!OneNote.Table#context:member
+  package: onenote!
+  fullName: context
+  summary: Contexte de demande associé à l’objet. Cette opération connecte le processus du complément au processus de l’application hôte Office.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type: <xref uid="onenote!OneNote.RequestContext:class" />
+- name: id
+  uid: onenote!OneNote.Table#id:member
+  package: onenote!
+  fullName: id
+  summary: >-
+    Obtient l’ID du tableau. En lecture seule.
 
 
-          #### <a name="examples"></a>Exemples
-
-          ```javascript
-          OneNote.run(function(ctx) {
-              var app = ctx.application;
-              var outline = app.getActiveOutline();
-              
-              // Queue a command to load outline.paragraphs and their types.
-              ctx.load(outline, "paragraphs, paragraphs/type");
-              
-              // Run the queued commands, and return a promise to indicate task completion.
-              return ctx.sync().then(function () {
-                  var paragraphs = outline.paragraphs;
-                  
-                  // for each table, insert a column at index two.
-                  for (var i = 0; i < paragraphs.items.length; i++) {
-                      var paragraph = paragraphs.items[i];
-                      if (paragraph.type == "Table") {
-                          var table = paragraph.table;
-                          table.insertColumn(2, ["cell0", "cell1"]);
-                      }
-                  }
-                  return ctx.sync();
-              })
-          })
-          .catch(function(error) {
-              console.log("Error: " + error);
-              if (error instanceof OfficeExtension.Error) {
-                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
-              }
-          });
-          ```
-      parameters:
-        - id: index
-          description: Index au niveau duquel la colonne est insérée dans le tableau.
-          type:
-            - number
-        - id: values
-          description: 'Facultatif. Chaînes à insérer dans la nouvelle colonne, spécifiées sous forme de tableau. Elles ne doivent pas contenir plus de valeurs que de lignes dans le tableau.'
-          type:
-            - 'string[]'
-  - uid: 'onenote!OneNote.Table#insertRow:member(1)'
-    summary: "Insère une ligne à l’index donné dans le tableau. Si elles sont spécifiées, les valeurs sont définies dans la nouvelle ligne. Dans le cas contraire, la ligne est vide.\n\n\\[[Ensemble d’API\_: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\\]"
-    name: 'insertRow(index, values)'
-    fullName: 'insertRow(index, values)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'insertRow(index: number, values?: string[]): OneNote.TableRow;'
-      return:
-        type:
-          - 'onenote!OneNote.TableRow:class'
-        description: |-
+    \[[Ensemble d’API : OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly id: string;'
+    return:
+      type: string
+- name: paragraph
+  uid: onenote!OneNote.Table#paragraph:member
+  package: onenote!
+  fullName: paragraph
+  summary: >-
+    Obtient l’objet Paragraph qui contient l’objet Table. En lecture seule.
 
 
-          #### <a name="examples"></a>Exemples
-
-          ```javascript
-          OneNote.run(function(ctx) {
-              var app = ctx.application;
-              var outline = app.getActiveOutline();
-              
-              // Queue a command to load outline.paragraphs and their types.
-              ctx.load(outline, "paragraphs, paragraphs/type");
-              
-              // Run the queued commands, and return a promise to indicate task completion.
-              return ctx.sync().then(function () {
-                  var paragraphs = outline.paragraphs;
-                  
-                  // for each table, insert a row at index two.
-                  for (var i = 0; i < paragraphs.items.length; i++) {
-                      var paragraph = paragraphs.items[i];
-                      if (paragraph.type == "Table") {
-                          var table = paragraph.table;
-                          var row = table.insertRow(2, ["cell0", "cell1"]);
-                      }
-                  }
-                  return ctx.sync();
-              })
-          })
-          .catch(function(error) {
-              console.log("Error: " + error);
-              if (error instanceof OfficeExtension.Error) {
-                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
-              }
-          });
-          ```
-      parameters:
-        - id: index
-          description: Index au niveau duquel la ligne est insérée dans le tableau.
-          type:
-            - number
-        - id: values
-          description: 'Facultatif. Chaînes à insérer dans la nouvelle ligne, spécifiées sous forme de tableau. Elles ne doivent pas contenir plus de valeurs que de colonnes dans le tableau.'
-          type:
-            - 'string[]'
-  - uid: 'onenote!OneNote.Table#load:member(1)'
-    summary: "Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler «\_context.sync()\_» avant de lire les propriétés."
-    remarks: "En plus de cette signature, cette méthode possède les signatures suivantes\_:\n\n`load(option?: string | string[]): OneNote.Table`-WHERE option est une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.\n\n`load(option?: { select?: string; expand?: string; }): OneNote.Table`Option-WHERE option. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.Table`-Uniquement disponible sur les types de collection. Elle est similaire à la signature précédente. Option. Top indique le nombre maximal d’éléments de collection qui peuvent être inclus dans le résultat. Option. Skip indique le nombre d’éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat. Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d’éléments."
-    name: load(option)
-    fullName: load(option)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(option?: OneNote.Interfaces.TableLoadOptions): OneNote.Table;'
-      return:
-        type:
-          - 'onenote!OneNote.Table:class'
-        description: ''
-      parameters:
-        - id: option
-          description: ''
-          type:
-            - 'onenote!OneNote.Interfaces.TableLoadOptions:interface'
-  - uid: 'onenote!OneNote.Table#load:member(2)'
-    summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez contacter `context.sync()` avant de lire les propriétés.
-    name: load(propertyNames)
-    fullName: load(propertyNames)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(propertyNames?: string | string[]): OneNote.Table;'
-      return:
-        type:
-          - 'onenote!OneNote.Table:class'
-        description: |-
+    \[[Ensemble d’API : OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly paragraph: OneNote.Paragraph;'
+    return:
+      type: <xref uid="onenote!OneNote.Paragraph:class" />
+- name: rowCount
+  uid: onenote!OneNote.Table#rowCount:member
+  package: onenote!
+  fullName: rowCount
+  summary: >-
+    Obtient le nombre de lignes dans le tableau.
 
 
-          #### <a name="examples"></a>Exemples
+    \[[Ensemble d’API : OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly rowCount: number;'
+    return:
+      type: number
+- name: rows
+  uid: onenote!OneNote.Table#rows:member
+  package: onenote!
+  fullName: rows
+  summary: >-
+    Obtient toutes les lignes du tableau. En lecture seule.
 
-          ```javascript
-          OneNote.run(function(ctx) {
-              var app = ctx.application;
-              var outline = app.getActiveOutline();
-              
-              // Queue a command to load outline.paragraphs and their types.
-              ctx.load(outline, "paragraphs/type");
-              
-              // Run the queued commands, and return a promise to indicate task completion.
-              return ctx.sync().then(function () {
-                  var paragraphs = outline.paragraphs;
-                  
-                  // For each table, log properties.
-                  for (var i = 0; i < paragraphs.items.length; i++) {
-                      var paragraph = paragraphs.items[i];
-                      if (paragraph.type == "Table") {
-                          var table = paragraph.table;
-                          ctx.load(table);
-                          return ctx.sync().then(function() {
-                              console.log("Table Id: " + table.id);
-                              console.log("Row Count: " + table.rowCount);
-                              console.log("Column Count: " + table.columnCount);
-                              return ctx.sync();
-                          });
-                      }
-                  }
-              });
-          })
-          .catch(function(error) {
-              console.log("Error: " + error);
-              if (error instanceof OfficeExtension.Error) {
-                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
-              }
-          });
-          ```
-          ```javascript
-          OneNote.run(function(ctx) {
-              var app = ctx.application;
-              var outline = app.getActiveOutline();
-              
-              // Queue a command to load outline.paragraphs and their types.
-              ctx.load(outline, "paragraphs, paragraphs/type");
-              
-              // Run the queued commands, and return a promise to indicate task completion.
-              return ctx.sync().then(function () {
-                  var paragraphs = outline.paragraphs;
-                  
-                  // for each table, log its paragraph id.
-                  for (var i = 0; i < paragraphs.items.length; i++) {
-                      var paragraph = paragraphs.items[i];
-                      if (paragraph.type == "Table") {
-                          var table = paragraph.table;
-                          ctx.load(table, "paragraph/id, rows/id");
-                          return ctx.sync().then(function() {
-                              console.log("Paragraph Id: " + table.paragraph.id);
-                              var rows = table.rows;
-                              
-                              // for each rows in the table, log row index and id.
-                              for (var i = 0; i < rows.items.length; i++) {
-                                  console.log("Row " + i + " Id: " + rows.items[i].id);
-                              }
-                              return ctx.sync();
-                          });
-                      }
-                  }
-              })
-          })
-          .catch(function(error) {
-              console.log("Error: " + error);
-              if (error instanceof OfficeExtension.Error) {
-                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
-              }
-          });
-          ```
-      parameters:
-        - id: propertyNames
-          description: Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
-          type:
-            - 'string | string[]'
-  - uid: 'onenote!OneNote.Table#load:member(3)'
-    summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez contacter `context.sync()` avant de lire les propriétés.
-    name: load(propertyNamesAndPaths)
-    fullName: load(propertyNamesAndPaths)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): OneNote.Table;'
-      return:
-        type:
-          - 'onenote!OneNote.Table:class'
-        description: ''
-      parameters:
-        - id: propertyNamesAndPaths
-          description: Où propertyNamesAndPaths. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et propertyNamesAndPaths. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
-          type:
-            - '{ select?: string; expand?: string; }'
-  - uid: 'onenote!OneNote.Table#paragraph:member'
-    summary: "Obtient l’objet Paragraph qui contient l’objet Table. En lecture seule.\n\n\\[[Ensemble d’API\_: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\\]"
-    name: paragraph
-    fullName: paragraph
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly paragraph: OneNote.Paragraph;'
-      return:
-        type:
-          - 'onenote!OneNote.Paragraph:class'
-  - uid: 'onenote!OneNote.Table#rowCount:member'
-    summary: "Obtient le nombre de lignes dans le tableau.\n\n\\[[Ensemble d’API\_: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\\]"
-    name: rowCount
-    fullName: rowCount
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly rowCount: number;'
-      return:
-        type:
-          - number
-  - uid: 'onenote!OneNote.Table#rows:member'
-    summary: "Obtient toutes les lignes du tableau. En lecture seule.\n\n\\[[Ensemble d’API\_: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\\]"
-    name: rows
-    fullName: rows
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly rows: OneNote.TableRowCollection;'
-      return:
-        type:
-          - 'onenote!OneNote.TableRowCollection:class'
-  - uid: 'onenote!OneNote.Table#set:member(1)'
-    summary: 'Définit plusieurs propriétés d’un objet en même temps. Vous pouvez transmettre un objet plain avec les propriétés appropriées, ou un autre objet API du même type.'
-    remarks: "Cette méthode est dotée de la signature supplémentaire suivante\_:\n\n`set(properties: OneNote.Table): void`"
-    name: 'set(properties, options)'
-    fullName: 'set(properties, options)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'set(properties: Interfaces.TableUpdateData, options?: OfficeExtension.UpdateOptions): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: properties
-          description: Objet JavaScript avec des propriétés qui sont structurées isomorphically vers les propriétés de l’objet sur lequel la méthode est appelée.
-          type:
-            - 'onenote!OneNote.Interfaces.TableUpdateData:interface'
-        - id: options
-          description: Fournit une option permettant de supprimer les erreurs si l’objet Properties tente de définir des propriétés en lecture seule.
-          type:
-            - 'office!OfficeExtension.UpdateOptions:interface'
-  - uid: 'onenote!OneNote.Table#set:member(2)'
-    summary: 'Définit plusieurs propriétés de l’objet en même temps, en fonction d’un objet chargé existant.'
-    name: set(properties)
-    fullName: set(properties)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'set(properties: OneNote.Table): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: properties
-          description: ''
-          type:
-            - 'onenote!OneNote.Table:class'
-  - uid: 'onenote!OneNote.Table#setShadingColor:member(1)'
-    summary: "Définit la couleur d’ombrage de toutes les cellules du tableau. Code couleur appliqué aux cellules.\n\n\\[[Ensemble d’API\_: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\\]"
-    name: setShadingColor(colorCode)
-    fullName: setShadingColor(colorCode)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'setShadingColor(colorCode: string): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: colorCode
-          description: ''
-          type:
-            - string
-  - uid: 'onenote!OneNote.Table#toJSON:member(1)'
-    summary: 'Remplace la méthode JavaScript afin `toJSON()` de fournir une sortie plus utile lorsqu’un objet d’API est transmis à`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle la `toJSON` méthode de l’objet qui lui est passé.) Tandis que l’objet OneNote. table d’origine est un objet d’API, la `toJSON` méthode renvoie un objet JavaScript simple (tapé comme`OneNote.Interfaces.TableData`<!-- -->) qui contient des copies superficielles de toutes les propriétés enfants chargées à partir de l’objet d’origine.'
-    name: toJSON()
-    fullName: toJSON()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'toJSON(): OneNote.Interfaces.TableData;'
-      return:
-        type:
-          - 'onenote!OneNote.Interfaces.TableData:interface'
-        description: ''
-  - uid: 'onenote!OneNote.Table#track:member(1)'
-    summary: "Effectuer le suivi de l’objet pour l’ajustement automatique en fonction environnant des modifications dans le document. Cet appel est abréviations context.trackedObjects.add(thisObject). Si vous utilisez cet objet au sein de «\_.sync\_» appels et en dehors de l’exécution séquentielle d’un lot de «\_.run\_» et rencontrez un message d’erreur «\_InvalidObjectPath\_» lors de la définition d’une propriété ou appeler une méthode sur l’objet, vous devez ajouter l’objet à l’objet de suivi collection de sites lors de l’objet a été créé."
-    name: track()
-    fullName: track()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'track(): OneNote.Table;'
-      return:
-        type:
-          - 'onenote!OneNote.Table:class'
-        description: ''
-  - uid: 'onenote!OneNote.Table#untrack:member(1)'
-    summary: "Publication mémoire associée à cet objet si elle a été précédemment suivie. Cet appel est abréviations context.trackedObjects.add(thisObject). Vous rencontrez de nombreux objets suivies ralentit l’application hôte, donc n’oubliez pas de libérer les objets que l'on ajoute, une fois que vous avez terminé à les utiliser. Vous devez appeler «\_context.sync()\_» avant la publication de mémoire prend effet."
-    name: untrack()
-    fullName: untrack()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'untrack(): OneNote.Table;'
-      return:
-        type:
-          - 'onenote!OneNote.Table:class'
-        description: ''
-references:
-  - uid: 'office!OfficeExtension.ClientObject:class'
-    name: OfficeExtension.ClientObject
-  - uid: 'onenote!OneNote.TableRow:class'
-    name: OneNote.TableRow
-  - uid: 'onenote!OneNote.RequestContext:class'
-    name: RequestContext
-  - uid: 'onenote!OneNote.TableCell:class'
-    name: OneNote.TableCell
-  - uid: 'onenote!OneNote.Table:class'
-    name: OneNote.Table
-  - uid: 'onenote!OneNote.Interfaces.TableLoadOptions:interface'
-    name: OneNote.Interfaces.TableLoadOptions
-  - uid: 'onenote!OneNote.Paragraph:class'
-    name: OneNote.Paragraph
-  - uid: 'onenote!OneNote.TableRowCollection:class'
-    name: OneNote.TableRowCollection
-  - uid: 'onenote!OneNote.Interfaces.TableUpdateData:interface'
-    name: Interfaces.TableUpdateData
-  - uid: 'office!OfficeExtension.UpdateOptions:interface'
-    name: OfficeExtension.UpdateOptions
-  - uid: 'onenote!OneNote.Interfaces.TableData:interface'
-    name: OneNote.Interfaces.TableData
+
+    \[[Ensemble d’API : OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly rows: OneNote.TableRowCollection;'
+    return:
+      type: <xref uid="onenote!OneNote.TableRowCollection:class" />
+methods:
+- name: appendColumn(values)
+  uid: onenote!OneNote.Table#appendColumn:member(1)
+  package: onenote!
+  fullName: appendColumn(values)
+  summary: >-
+    Ajoute une colonne à la fin du tableau. Si elles sont spécifiées, les valeurs sont définies dans la nouvelle colonne. Dans le cas contraire, la colonne est vide.
+
+
+    \[[Ensemble d’API : OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'appendColumn(values?: string[]): void;'
+    parameters:
+    - id: values
+      description: Facultatif. Chaînes à insérer dans la nouvelle colonne, spécifiées sous forme de tableau. Elles ne doivent pas contenir plus de valeurs que de lignes dans le tableau.
+      type: string[]
+    return:
+      type: void
+      description: "\n\n#### <a name=\"examples\"></a>範例\n\n```javascript\nOneNote.run(function(ctx) {\n    var app = ctx.application;\n    var outline = app.getActiveOutline();\n    \n    // Queue a command to load outline.paragraphs and their types.\n    ctx.load(outline, \"paragraphs, paragraphs/type\");\n    \n    // Run the queued commands, and return a promise to indicate task completion.\n    return ctx.sync().then(function () {\n        var paragraphs = outline.paragraphs;\n        \n        // for each table, append a column.\n        for (var i = 0; i < paragraphs.items.length; i++) {\n            var paragraph = paragraphs.items[i];\n            if (paragraph.type == \"Table\") {\n                var table = paragraph.table;\n                table.appendColumn([\"cell0\", \"cell1\"]);\n            }\n        }\n        return ctx.sync();\n    })\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: appendRow(values)
+  uid: onenote!OneNote.Table#appendRow:member(1)
+  package: onenote!
+  fullName: appendRow(values)
+  summary: >-
+    Ajoute une ligne à la fin du tableau. Si elles sont spécifiées, les valeurs sont définies dans la nouvelle ligne. Dans le cas contraire, la ligne est vide.
+
+
+    \[[Ensemble d’API : OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'appendRow(values?: string[]): OneNote.TableRow;'
+    parameters:
+    - id: values
+      description: Facultatif. Chaînes à insérer dans la nouvelle ligne, spécifiées sous forme de tableau. Elles ne doivent pas contenir plus de valeurs que de colonnes dans le tableau.
+      type: string[]
+    return:
+      type: <xref uid="onenote!OneNote.TableRow:class" />
+      description: "\n\n#### <a name=\"examples\"></a>範例\n\n```javascript\nOneNote.run(function(ctx) {\n    var app = ctx.application;\n    var outline = app.getActiveOutline();\n    \n    // Queue a command to load outline.paragraphs and their types.\n    ctx.load(outline, \"paragraphs, paragraphs/type\");\n    \n    // Run the queued commands, and return a promise to indicate task completion.\n    return ctx.sync().then(function () {\n        var paragraphs = outline.paragraphs;\n        \n        // for each table, append a column.\n        for (var i = 0; i < paragraphs.items.length; i++) {\n            var paragraph = paragraphs.items[i];\n            if (paragraph.type == \"Table\") {\n                var table = paragraph.table;\n                var row = table.appendRow([\"cell0\", \"cell1\"]);\n            }\n        }\n        return ctx.sync();\n    })\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: clear()
+  uid: onenote!OneNote.Table#clear:member(1)
+  package: onenote!
+  fullName: clear()
+  summary: >-
+    Efface le contenu du tableau.
+
+
+    \[[Ensemble d’API : OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'clear(): void;'
+    return:
+      type: void
+      description: ''
+- name: getCell(rowIndex, cellIndex)
+  uid: onenote!OneNote.Table#getCell:member(1)
+  package: onenote!
+  fullName: getCell(rowIndex, cellIndex)
+  summary: >-
+    Obtient la cellule du tableau à une ligne et une colonne spécifiées.
+
+
+    \[[Ensemble d’API : OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getCell(rowIndex: number, cellIndex: number): OneNote.TableCell;'
+    parameters:
+    - id: rowIndex
+      description: Index de la ligne.
+      type: number
+    - id: cellIndex
+      description: Index de la cellule dans la ligne.
+      type: number
+    return:
+      type: <xref uid="onenote!OneNote.TableCell:class" />
+      description: "\n\n#### <a name=\"examples\"></a>範例\n\n```javascript\nOneNote.run(function(ctx) {\n    var app = ctx.application;\n    var outline = app.getActiveOutline();\n    \n    // Queue a command to load outline.paragraphs and their types.\n    ctx.load(outline, \"paragraphs, paragraphs/type\");\n    \n    // Run the queued commands, and return a promise to indicate task completion.\n    return ctx.sync().then(function () {\n        var paragraphs = outline.paragraphs;\n        \n        // for each table, get a cell in the second row and third column.\n        for (var i = 0; i < paragraphs.items.length; i++) {\n            var paragraph = paragraphs.items[i];\n            if (paragraph.type == \"Table\") {\n                var table = paragraph.table;\n                var cell = table.getCell(2 /*Row Index*/, 3 /*Column Index*/);\n            }\n        }\n        return ctx.sync();\n    })\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: insertColumn(index, values)
+  uid: onenote!OneNote.Table#insertColumn:member(1)
+  package: onenote!
+  fullName: insertColumn(index, values)
+  summary: >-
+    Insère une colonne au niveau de l’index donné dans le tableau. Si elles sont spécifiées, les valeurs sont définies dans la nouvelle colonne. Dans le cas contraire, la colonne est vide.
+
+
+    \[[Ensemble d’API : OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'insertColumn(index: number, values?: string[]): void;'
+    parameters:
+    - id: index
+      description: Index au niveau duquel la colonne est insérée dans le tableau.
+      type: number
+    - id: values
+      description: Facultatif. Chaînes à insérer dans la nouvelle colonne, spécifiées sous forme de tableau. Elles ne doivent pas contenir plus de valeurs que de lignes dans le tableau.
+      type: string[]
+    return:
+      type: void
+      description: "\n\n#### <a name=\"examples\"></a>範例\n\n```javascript\nOneNote.run(function(ctx) {\n    var app = ctx.application;\n    var outline = app.getActiveOutline();\n    \n    // Queue a command to load outline.paragraphs and their types.\n    ctx.load(outline, \"paragraphs, paragraphs/type\");\n    \n    // Run the queued commands, and return a promise to indicate task completion.\n    return ctx.sync().then(function () {\n        var paragraphs = outline.paragraphs;\n        \n        // for each table, insert a column at index two.\n        for (var i = 0; i < paragraphs.items.length; i++) {\n            var paragraph = paragraphs.items[i];\n            if (paragraph.type == \"Table\") {\n                var table = paragraph.table;\n                table.insertColumn(2, [\"cell0\", \"cell1\"]);\n            }\n        }\n        return ctx.sync();\n    })\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: insertRow(index, values)
+  uid: onenote!OneNote.Table#insertRow:member(1)
+  package: onenote!
+  fullName: insertRow(index, values)
+  summary: >-
+    Insère une ligne à l’index donné dans le tableau. Si elles sont spécifiées, les valeurs sont définies dans la nouvelle ligne. Dans le cas contraire, la ligne est vide.
+
+
+    \[[Ensemble d’API : OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'insertRow(index: number, values?: string[]): OneNote.TableRow;'
+    parameters:
+    - id: index
+      description: Index au niveau duquel la ligne est insérée dans le tableau.
+      type: number
+    - id: values
+      description: Facultatif. Chaînes à insérer dans la nouvelle ligne, spécifiées sous forme de tableau. Elles ne doivent pas contenir plus de valeurs que de colonnes dans le tableau.
+      type: string[]
+    return:
+      type: <xref uid="onenote!OneNote.TableRow:class" />
+      description: "\n\n#### <a name=\"examples\"></a>範例\n\n```javascript\nOneNote.run(function(ctx) {\n    var app = ctx.application;\n    var outline = app.getActiveOutline();\n    \n    // Queue a command to load outline.paragraphs and their types.\n    ctx.load(outline, \"paragraphs, paragraphs/type\");\n    \n    // Run the queued commands, and return a promise to indicate task completion.\n    return ctx.sync().then(function () {\n        var paragraphs = outline.paragraphs;\n        \n        // for each table, insert a row at index two.\n        for (var i = 0; i < paragraphs.items.length; i++) {\n            var paragraph = paragraphs.items[i];\n            if (paragraph.type == \"Table\") {\n                var table = paragraph.table;\n                var row = table.insertRow(2, [\"cell0\", \"cell1\"]);\n            }\n        }\n        return ctx.sync();\n    })\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: load(option)
+  uid: onenote!OneNote.Table#load:member(1)
+  package: onenote!
+  fullName: load(option)
+  summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler « context.sync() » avant de lire les propriétés.
+  remarks: >-
+    En plus de cette signature, cette méthode possède les signatures suivantes :
+
+
+    `load(option?: string | string[]): OneNote.Table` -WHERE option est une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+
+
+    `load(option?: { select?: string; expand?: string; }): OneNote.Table` Option-WHERE option. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
+
+
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.Table` -Uniquement disponible sur les types de collection. Elle est similaire à la signature précédente. Option. Top indique le nombre maximal d’éléments de collection qui peuvent être inclus dans le résultat. Option. Skip indique le nombre d’éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat. Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d’éléments.
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(option?: OneNote.Interfaces.TableLoadOptions): OneNote.Table;'
+    parameters:
+    - id: option
+      description: ''
+      type: <xref uid="onenote!OneNote.Interfaces.TableLoadOptions:interface" />
+    return:
+      type: <xref uid="onenote!OneNote.Table:class" />
+      description: ''
+- name: load(propertyNames)
+  uid: onenote!OneNote.Table#load:member(2)
+  package: onenote!
+  fullName: load(propertyNames)
+  summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez contacter `context.sync()` avant de lire les propriétés.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNames?: string | string[]): OneNote.Table;'
+    parameters:
+    - id: propertyNames
+      description: Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+      type: string | string[]
+    return:
+      type: <xref uid="onenote!OneNote.Table:class" />
+      description: "\n\n#### <a name=\"examples\"></a>範例\n\n```javascript\nOneNote.run(function(ctx) {\n    var app = ctx.application;\n    var outline = app.getActiveOutline();\n    \n    // Queue a command to load outline.paragraphs and their types.\n    ctx.load(outline, \"paragraphs/type\");\n    \n    // Run the queued commands, and return a promise to indicate task completion.\n    return ctx.sync().then(function () {\n        var paragraphs = outline.paragraphs;\n        \n        // For each table, log properties.\n        for (var i = 0; i < paragraphs.items.length; i++) {\n            var paragraph = paragraphs.items[i];\n            if (paragraph.type == \"Table\") {\n                var table = paragraph.table;\n                ctx.load(table);\n                return ctx.sync().then(function() {\n                    console.log(\"Table Id: \" + table.id);\n                    console.log(\"Row Count: \" + table.rowCount);\n                    console.log(\"Column Count: \" + table.columnCount);\n                    return ctx.sync();\n                });\n            }\n        }\n    });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\nOneNote.run(function(ctx) {\n    var app = ctx.application;\n    var outline = app.getActiveOutline();\n    \n    // Queue a command to load outline.paragraphs and their types.\n    ctx.load(outline, \"paragraphs, paragraphs/type\");\n    \n    // Run the queued commands, and return a promise to indicate task completion.\n    return ctx.sync().then(function () {\n        var paragraphs = outline.paragraphs;\n        \n        // for each table, log its paragraph id.\n        for (var i = 0; i < paragraphs.items.length; i++) {\n            var paragraph = paragraphs.items[i];\n            if (paragraph.type == \"Table\") {\n                var table = paragraph.table;\n                ctx.load(table, \"paragraph/id, rows/id\");\n                return ctx.sync().then(function() {\n                    console.log(\"Paragraph Id: \" + table.paragraph.id);\n                    var rows = table.rows;\n                    \n                    // for each rows in the table, log row index and id.\n                    for (var i = 0; i < rows.items.length; i++) {\n                        console.log(\"Row \" + i + \" Id: \" + rows.items[i].id);\n                    }\n                    return ctx.sync();\n                });\n            }\n        }\n    })\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: load(propertyNamesAndPaths)
+  uid: onenote!OneNote.Table#load:member(3)
+  package: onenote!
+  fullName: load(propertyNamesAndPaths)
+  summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez contacter `context.sync()` avant de lire les propriétés.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): OneNote.Table;'
+    parameters:
+    - id: propertyNamesAndPaths
+      description: Où propertyNamesAndPaths. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et propertyNamesAndPaths. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
+      type: '{ select?: string; expand?: string; }'
+    return:
+      type: <xref uid="onenote!OneNote.Table:class" />
+      description: ''
+- name: set(properties, options)
+  uid: onenote!OneNote.Table#set:member(1)
+  package: onenote!
+  fullName: set(properties, options)
+  summary: Définit plusieurs propriétés d’un objet en même temps. Vous pouvez transmettre un objet plain avec les propriétés appropriées, ou un autre objet API du même type.
+  remarks: >-
+    Cette méthode est dotée de la signature supplémentaire suivante :
+
+
+    `set(properties: OneNote.Table): void`
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'set(properties: Interfaces.TableUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+    parameters:
+    - id: properties
+      description: Objet JavaScript avec des propriétés qui sont structurées isomorphically vers les propriétés de l’objet sur lequel la méthode est appelée.
+      type: <xref uid="onenote!OneNote.Interfaces.TableUpdateData:interface" />
+    - id: options
+      description: Fournit une option permettant de supprimer les erreurs si l’objet Properties tente de définir des propriétés en lecture seule.
+      type: <xref uid="office!OfficeExtension.UpdateOptions:interface" />
+    return:
+      type: void
+      description: ''
+- name: set(properties)
+  uid: onenote!OneNote.Table#set:member(2)
+  package: onenote!
+  fullName: set(properties)
+  summary: Définit plusieurs propriétés de l’objet en même temps, en fonction d’un objet chargé existant.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'set(properties: OneNote.Table): void;'
+    parameters:
+    - id: properties
+      description: ''
+      type: <xref uid="onenote!OneNote.Table:class" />
+    return:
+      type: void
+      description: ''
+- name: setShadingColor(colorCode)
+  uid: onenote!OneNote.Table#setShadingColor:member(1)
+  package: onenote!
+  fullName: setShadingColor(colorCode)
+  summary: >-
+    Définit la couleur d’ombrage de toutes les cellules du tableau. Code couleur appliqué aux cellules.
+
+
+    \[[Ensemble d’API : OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'setShadingColor(colorCode: string): void;'
+    parameters:
+    - id: colorCode
+      description: ''
+      type: string
+    return:
+      type: void
+      description: ''
+- name: toJSON()
+  uid: onenote!OneNote.Table#toJSON:member(1)
+  package: onenote!
+  fullName: toJSON()
+  summary: Remplace la méthode JavaScript afin `toJSON()` de fournir une sortie plus utile lorsqu’un objet d’API est transmis à `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle la `toJSON` méthode de l’objet qui lui est passé.) Tandis que l’objet OneNote. table d’origine est un objet d’API, la `toJSON` méthode renvoie un objet JavaScript simple (tapé comme `OneNote.Interfaces.TableData`<!-- -->) qui contient des copies superficielles de toutes les propriétés enfants chargées à partir de l’objet d’origine.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'toJSON(): OneNote.Interfaces.TableData;'
+    return:
+      type: <xref uid="onenote!OneNote.Interfaces.TableData:interface" />
+      description: ''
+- name: track()
+  uid: onenote!OneNote.Table#track:member(1)
+  package: onenote!
+  fullName: track()
+  summary: Effectuer le suivi de l’objet pour l’ajustement automatique en fonction environnant des modifications dans le document. Cet appel est abréviations context.trackedObjects.add(thisObject). Si vous utilisez cet objet au sein de « .sync » appels et en dehors de l’exécution séquentielle d’un lot de « .run » et rencontrez un message d’erreur « InvalidObjectPath » lors de la définition d’une propriété ou appeler une méthode sur l’objet, vous devez ajouter l’objet à l’objet de suivi collection de sites lors de l’objet a été créé.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'track(): OneNote.Table;'
+    return:
+      type: <xref uid="onenote!OneNote.Table:class" />
+      description: ''
+- name: untrack()
+  uid: onenote!OneNote.Table#untrack:member(1)
+  package: onenote!
+  fullName: untrack()
+  summary: Publication mémoire associée à cet objet si elle a été précédemment suivie. Cet appel est abréviations context.trackedObjects.add(thisObject). Vous rencontrez de nombreux objets suivies ralentit l’application hôte, donc n’oubliez pas de libérer les objets que l'on ajoute, une fois que vous avez terminé à les utiliser. Vous devez appeler « context.sync() » avant la publication de mémoire prend effet.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'untrack(): OneNote.Table;'
+    return:
+      type: <xref uid="onenote!OneNote.Table:class" />
+      description: ''
+extends: <xref uid="office!OfficeExtension.ClientObject:class" />
+metadata:
+  ms.openlocfilehash: f59cc55578239d1da14e771214690c8b8a6a7696
+  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.translationtype: MT
+  ms.contentlocale: fr-FR
+  ms.lasthandoff: 11/18/2020
+  ms.locfileid: "49136525"

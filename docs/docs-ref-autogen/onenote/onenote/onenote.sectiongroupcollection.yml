@@ -1,313 +1,227 @@
-### YamlMime:UniversalReference
-items:
-  - uid: 'onenote!OneNote.SectionGroupCollection:class'
-    summary: "Représente une collection de groupes de sections.\n\n\\[[Ensemble d’API\_: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\\]"
-    name: OneNote.SectionGroupCollection
-    fullName: OneNote.SectionGroupCollection
-    langs:
-      - typeScript
-    type: class
-    extends:
-      - 'office!OfficeExtension.ClientObject:class'
-    package: onenote!
-    children:
-      - 'onenote!OneNote.SectionGroupCollection#context:member'
-      - 'onenote!OneNote.SectionGroupCollection#count:member'
-      - 'onenote!OneNote.SectionGroupCollection#getByName:member(1)'
-      - 'onenote!OneNote.SectionGroupCollection#getItem:member(1)'
-      - 'onenote!OneNote.SectionGroupCollection#getItemAt:member(1)'
-      - 'onenote!OneNote.SectionGroupCollection#items:member'
-      - 'onenote!OneNote.SectionGroupCollection#load:member(1)'
-      - 'onenote!OneNote.SectionGroupCollection#load:member(2)'
-      - 'onenote!OneNote.SectionGroupCollection#load:member(3)'
-      - 'onenote!OneNote.SectionGroupCollection#toJSON:member(1)'
-      - 'onenote!OneNote.SectionGroupCollection#track:member(1)'
-      - 'onenote!OneNote.SectionGroupCollection#untrack:member(1)'
-  - uid: 'onenote!OneNote.SectionGroupCollection#context:member'
-    summary: Contexte de demande associé à l’objet. Cette opération connecte le processus du complément au processus de l’application hôte Office.
-    name: context
-    fullName: context
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'context: RequestContext;'
-      return:
-        type:
-          - 'onenote!OneNote.RequestContext:class'
-  - uid: 'onenote!OneNote.SectionGroupCollection#count:member'
-    summary: "Renvoie le nombre de groupes de sections de la collection. En lecture seule.\n\n\\[[Ensemble d’API\_: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\\]"
-    name: count
-    fullName: count
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly count: number;'
-      return:
-        type:
-          - number
-  - uid: 'onenote!OneNote.SectionGroupCollection#getByName:member(1)'
-    summary: "Obtient la collection de groupes de sections portant le nom spécifié.\n\n\\[[Ensemble d’API\_: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\\]"
-    name: getByName(name)
-    fullName: getByName(name)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'getByName(name: string): OneNote.SectionGroupCollection;'
-      return:
-        type:
-          - 'onenote!OneNote.SectionGroupCollection:class'
-        description: |-
+### YamlMime:TSType
+name: OneNote.SectionGroupCollection
+uid: onenote!OneNote.SectionGroupCollection:class
+package: onenote!
+fullName: OneNote.SectionGroupCollection
+summary: >-
+  Représente une collection de groupes de sections.
 
 
-          #### <a name="examples"></a>Exemples
-
-          ```javascript
-          OneNote.run(function (context) {
-
-              // Get the section groups that are direct children of the current notebook.
-              var sectionGroups = context.application.getActiveNotebook().sectionGroups;
-
-              // Queue a command to load the section groups. 
-              // For best performance, request specific properties.
-              sectionGroups.load("id"); 
-
-              // Get the section groups with the specified name.
-              var labsSectionGroups = sectionGroups.getByName("Labs");
-
-              // Queue a command to load the section groups with the specified properties.
-              labsSectionGroups.load("id,name"); 
-                      
-              // Run the queued commands, and return a promise to indicate task completion.
-              return context.sync()
-                  .then(function () {
-
-                      // Iterate through the collection or access items individually by index.
-                      if (labsSectionGroups.items.length > 0) {
-                          console.log("Section group name: " + labsSectionGroups.items[0].name);
-                          console.log("Section group ID: " + labsSectionGroups.items[0].id);
-                      }
-                  });
-          })
-          .catch(function(error) {
-              console.log("Error: " + error);
-              if (error instanceof OfficeExtension.Error) {
-                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
-              }
-          });
-          ```
-      parameters:
-        - id: name
-          description: Nom du groupe de sections.
-          type:
-            - string
-  - uid: 'onenote!OneNote.SectionGroupCollection#getItem:member(1)'
-    summary: "Obtient un groupe de sections en fonction de son ID ou de son index dans la collection. En lecture seule.\n\n\\[[Ensemble d’API\_: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\\]"
-    name: getItem(index)
-    fullName: getItem(index)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'getItem(index: number | string): OneNote.SectionGroup;'
-      return:
-        type:
-          - 'onenote!OneNote.SectionGroup:class'
-        description: ''
-      parameters:
-        - id: index
-          description: ID ou emplacement d’index du groupe de sections dans la collection.
-          type:
-            - number | string
-  - uid: 'onenote!OneNote.SectionGroupCollection#getItemAt:member(1)'
-    summary: "Obtient un groupe de sections en fonction de sa position dans la collection.\n\n\\[[Ensemble d’API\_: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\\]"
-    name: getItemAt(index)
-    fullName: getItemAt(index)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'getItemAt(index: number): OneNote.SectionGroup;'
-      return:
-        type:
-          - 'onenote!OneNote.SectionGroup:class'
-        description: ''
-      parameters:
-        - id: index
-          description: Valeur d’indice de l’objet à récupérer. Avec indice zéro.
-          type:
-            - number
-  - uid: 'onenote!OneNote.SectionGroupCollection#items:member'
-    summary: Obtient l’élément enfant chargé dans cette collection de sites.
-    name: items
-    fullName: items
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly items: OneNote.SectionGroup[];'
-      return:
-        type:
-          - 'onenote!OneNote.SectionGroupCollection#items~0:complex'
-  - uid: 'onenote!OneNote.SectionGroupCollection#load:member(1)'
-    summary: "Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler «\_context.sync()\_» avant de lire les propriétés."
-    remarks: "En plus de cette signature, cette méthode possède les signatures suivantes\_:\n\n`load(option?: string | string[]): OneNote.SectionGroupCollection`-WHERE option est une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.\n\n`load(option?: { select?: string; expand?: string; }): OneNote.SectionGroupCollection`Option-WHERE option. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.SectionGroupCollection`-Uniquement disponible sur les types de collection. Elle est similaire à la signature précédente. Option. Top indique le nombre maximal d’éléments de collection qui peuvent être inclus dans le résultat. Option. Skip indique le nombre d’éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat. Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d’éléments."
-    name: load(option)
-    fullName: load(option)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(option?: OneNote.Interfaces.SectionGroupCollectionLoadOptions & OneNote.Interfaces.CollectionLoadOptions): OneNote.SectionGroupCollection;'
-      return:
-        type:
-          - 'onenote!OneNote.SectionGroupCollection:class'
-        description: ''
-      parameters:
-        - id: option
-          description: ''
-          type:
-            - 'onenote!OneNote.SectionGroupCollection#load~0:complex'
-  - uid: 'onenote!OneNote.SectionGroupCollection#load:member(2)'
-    summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez contacter `context.sync()` avant de lire les propriétés.
-    name: load(propertyNames)
-    fullName: load(propertyNames)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(propertyNames?: string | string[]): OneNote.SectionGroupCollection;'
-      return:
-        type:
-          - 'onenote!OneNote.SectionGroupCollection:class'
-        description: |-
+  \[[Ensemble d’API : OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: class
+properties:
+- name: context
+  uid: onenote!OneNote.SectionGroupCollection#context:member
+  package: onenote!
+  fullName: context
+  summary: Contexte de demande associé à l’objet. Cette opération connecte le processus du complément au processus de l’application hôte Office.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type: <xref uid="onenote!OneNote.RequestContext:class" />
+- name: count
+  uid: onenote!OneNote.SectionGroupCollection#count:member
+  package: onenote!
+  fullName: count
+  summary: >-
+    Renvoie le nombre de groupes de sections de la collection. En lecture seule.
 
 
-          #### <a name="examples"></a>Exemples
+    \[[Ensemble d’API : OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly count: number;'
+    return:
+      type: number
+- name: items
+  uid: onenote!OneNote.SectionGroupCollection#items:member
+  package: onenote!
+  fullName: items
+  summary: Obtient l’élément enfant chargé dans cette collection de sites.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly items: OneNote.SectionGroup[];'
+    return:
+      type: <xref uid="onenote!OneNote.SectionGroup:class" />[]
+methods:
+- name: getByName(name)
+  uid: onenote!OneNote.SectionGroupCollection#getByName:member(1)
+  package: onenote!
+  fullName: getByName(name)
+  summary: >-
+    Obtient la collection de groupes de sections portant le nom spécifié.
 
-          ```javascript
-          OneNote.run(function (context) {
 
-              // Get the section groups that are direct children of the current notebook.
-              var sectionGroups = context.application.getActiveNotebook().sectionGroups;
+    \[[Ensemble d’API : OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getByName(name: string): OneNote.SectionGroupCollection;'
+    parameters:
+    - id: name
+      description: Nom du groupe de sections.
+      type: string
+    return:
+      type: <xref uid="onenote!OneNote.SectionGroupCollection:class" />
+      description: "\n\n#### <a name=\"examples\"></a>範例\n\n```javascript\nOneNote.run(function (context) {\n\n    // Get the section groups that are direct children of the current notebook.\n    var sectionGroups = context.application.getActiveNotebook().sectionGroups;\n\n    // Queue a command to load the section groups. \n    // For best performance, request specific properties.\n    sectionGroups.load(\"id\"); \n\n    // Get the section groups with the specified name.\n    var labsSectionGroups = sectionGroups.getByName(\"Labs\");\n\n    // Queue a command to load the section groups with the specified properties.\n    labsSectionGroups.load(\"id,name\"); \n            \n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n\n            // Iterate through the collection or access items individually by index.\n            if (labsSectionGroups.items.length > 0) {\n                console.log(\"Section group name: \" + labsSectionGroups.items[0].name);\n                console.log(\"Section group ID: \" + labsSectionGroups.items[0].id);\n            }\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: getItem(index)
+  uid: onenote!OneNote.SectionGroupCollection#getItem:member(1)
+  package: onenote!
+  fullName: getItem(index)
+  summary: >-
+    Obtient un groupe de sections en fonction de son ID ou de son index dans la collection. En lecture seule.
 
-              // Queue a command to load the section groups. 
-              // For best performance, request specific properties.
-              sectionGroups.load("name"); 
 
-              // Run the queued commands, and return a promise to indicate task completion.
-              return context.sync()
-                  .then(function () {
-                      
-                      // Iterate through the collection or access items individually by index, 
-                      // for example: sectionGroups.items[0]
-                      $.each(sectionGroups.items, function(index, sectionGroup) {
-                          console.log("Section group name: " + sectionGroup.name);  
-                          console.log("Section group ID: " + sectionGroup.id);  
-                      });
-                  });
-          })
-          .catch(function(error) {
-              console.log("Error: " + error);
-              if (error instanceof OfficeExtension.Error) {
-                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
-              }
-          });
-          ```
-      parameters:
-        - id: propertyNames
-          description: Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
-          type:
-            - 'string | string[]'
-  - uid: 'onenote!OneNote.SectionGroupCollection#load:member(3)'
-    name: load(option)
-    fullName: load(option)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(option?: OfficeExtension.LoadOption): OneNote.SectionGroupCollection;'
-      return:
-        type:
-          - 'onenote!OneNote.SectionGroupCollection:class'
-        description: ''
-      parameters:
-        - id: option
-          description: ''
-          type:
-            - 'office!OfficeExtension.LoadOption:interface'
-  - uid: 'onenote!OneNote.SectionGroupCollection#toJSON:member(1)'
-    summary: "Remplace la méthode JavaScript afin `toJSON()` de fournir une sortie plus utile lorsqu’un objet d’API est transmis à`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle la `toJSON` méthode de l’objet qui lui est passé.) Tandis que l’objet d’origine `OneNote.SectionGroupCollection` est un objet d’API, la `toJSON` méthode renvoie un objet JavaScript simple (tapé comme`OneNote.Interfaces.SectionGroupCollectionData`<!-- -->) qui contient un tableau «\_éléments\_» avec des copies superficielles de toutes les propriétés chargées des éléments de la collection."
-    name: toJSON()
-    fullName: toJSON()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'toJSON(): OneNote.Interfaces.SectionGroupCollectionData;'
-      return:
-        type:
-          - 'onenote!OneNote.Interfaces.SectionGroupCollectionData:interface'
-        description: ''
-  - uid: 'onenote!OneNote.SectionGroupCollection#track:member(1)'
-    summary: "Effectuer le suivi de l’objet pour l’ajustement automatique en fonction environnant des modifications dans le document. Cet appel est abréviations context.trackedObjects.add(thisObject). Si vous utilisez cet objet au sein de «\_.sync\_» appels et en dehors de l’exécution séquentielle d’un lot de «\_.run\_» et rencontrez un message d’erreur «\_InvalidObjectPath\_» lors de la définition d’une propriété ou appeler une méthode sur l’objet, vous devez ajouter l’objet à l’objet de suivi collection de sites lors de l’objet a été créé."
-    name: track()
-    fullName: track()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'track(): OneNote.SectionGroupCollection;'
-      return:
-        type:
-          - 'onenote!OneNote.SectionGroupCollection:class'
-        description: ''
-  - uid: 'onenote!OneNote.SectionGroupCollection#untrack:member(1)'
-    summary: "Publication mémoire associée à cet objet si elle a été précédemment suivie. Cet appel est abréviations context.trackedObjects.add(thisObject). Vous rencontrez de nombreux objets suivies ralentit l’application hôte, donc n’oubliez pas de libérer les objets que l'on ajoute, une fois que vous avez terminé à les utiliser. Vous devez appeler «\_context.sync()\_» avant la publication de mémoire prend effet."
-    name: untrack()
-    fullName: untrack()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'untrack(): OneNote.SectionGroupCollection;'
-      return:
-        type:
-          - 'onenote!OneNote.SectionGroupCollection:class'
-        description: ''
-references:
-  - uid: 'office!OfficeExtension.ClientObject:class'
-    name: OfficeExtension.ClientObject
-  - uid: 'onenote!OneNote.RequestContext:class'
-    name: RequestContext
-  - uid: 'onenote!OneNote.SectionGroupCollection:class'
-    name: OneNote.SectionGroupCollection
-  - uid: 'onenote!OneNote.SectionGroup:class'
-    name: OneNote.SectionGroup
-  - uid: 'onenote!OneNote.SectionGroupCollection#items~0:complex'
-    name: 'OneNote.SectionGroup[]'
-    fullName: 'OneNote.SectionGroup[]'
-    spec.typeScript:
-      - uid: 'onenote!OneNote.SectionGroup:class'
-        name: OneNote.SectionGroup
-        fullName: OneNote.SectionGroup
-      - name: '[]'
-        fullName: '[]'
-  - uid: 'onenote!OneNote.SectionGroupCollection#load~0:complex'
-    name: OneNote.Interfaces.SectionGroupCollectionLoadOptions & OneNote.Interfaces.CollectionLoadOptions
-    fullName: OneNote.Interfaces.SectionGroupCollectionLoadOptions & OneNote.Interfaces.CollectionLoadOptions
-    spec.typeScript:
-      - uid: 'onenote!OneNote.Interfaces.SectionGroupCollectionLoadOptions:interface'
-        name: OneNote.Interfaces.SectionGroupCollectionLoadOptions
-        fullName: OneNote.Interfaces.SectionGroupCollectionLoadOptions
-      - name: ' & '
-        fullName: ' & '
-      - uid: 'onenote!OneNote.Interfaces.CollectionLoadOptions:interface'
-        name: OneNote.Interfaces.CollectionLoadOptions
-        fullName: OneNote.Interfaces.CollectionLoadOptions
-  - uid: 'office!OfficeExtension.LoadOption:interface'
-    name: OfficeExtension.LoadOption
-  - uid: 'onenote!OneNote.Interfaces.SectionGroupCollectionData:interface'
-    name: OneNote.Interfaces.SectionGroupCollectionData
+    \[[Ensemble d’API : OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getItem(index: number | string): OneNote.SectionGroup;'
+    parameters:
+    - id: index
+      description: ID ou emplacement d’index du groupe de sections dans la collection.
+      type: number | string
+    return:
+      type: <xref uid="onenote!OneNote.SectionGroup:class" />
+      description: ''
+- name: getItemAt(index)
+  uid: onenote!OneNote.SectionGroupCollection#getItemAt:member(1)
+  package: onenote!
+  fullName: getItemAt(index)
+  summary: >-
+    Obtient un groupe de sections en fonction de sa position dans la collection.
+
+
+    \[[Ensemble d’API : OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getItemAt(index: number): OneNote.SectionGroup;'
+    parameters:
+    - id: index
+      description: Valeur d’indice de l’objet à récupérer. Avec indice zéro.
+      type: number
+    return:
+      type: <xref uid="onenote!OneNote.SectionGroup:class" />
+      description: ''
+- name: load(option)
+  uid: onenote!OneNote.SectionGroupCollection#load:member(1)
+  package: onenote!
+  fullName: load(option)
+  summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez appeler « context.sync() » avant de lire les propriétés.
+  remarks: >-
+    En plus de cette signature, cette méthode possède les signatures suivantes :
+
+
+    `load(option?: string | string[]): OneNote.SectionGroupCollection` -WHERE option est une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+
+
+    `load(option?: { select?: string; expand?: string; }): OneNote.SectionGroupCollection` Option-WHERE option. Select est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et options. Expand est une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.
+
+
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.SectionGroupCollection` -Uniquement disponible sur les types de collection. Elle est similaire à la signature précédente. Option. Top indique le nombre maximal d’éléments de collection qui peuvent être inclus dans le résultat. Option. Skip indique le nombre d’éléments qui doivent être ignorés et qui ne sont pas inclus dans le résultat. Si option. Top est spécifié, le jeu de résultats démarre après avoir ignoré le nombre spécifié d’éléments.
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(option?: OneNote.Interfaces.SectionGroupCollectionLoadOptions & OneNote.Interfaces.CollectionLoadOptions): OneNote.SectionGroupCollection;'
+    parameters:
+    - id: option
+      description: ''
+      type: <xref uid="onenote!OneNote.Interfaces.SectionGroupCollectionLoadOptions:interface" /> & <xref uid="onenote!OneNote.Interfaces.CollectionLoadOptions:interface" />
+    return:
+      type: <xref uid="onenote!OneNote.SectionGroupCollection:class" />
+      description: ''
+- name: load(propertyNames)
+  uid: onenote!OneNote.SectionGroupCollection#load:member(2)
+  package: onenote!
+  fullName: load(propertyNames)
+  summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez contacter `context.sync()` avant de lire les propriétés.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNames?: string | string[]): OneNote.SectionGroupCollection;'
+    parameters:
+    - id: propertyNames
+      description: Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+      type: string | string[]
+    return:
+      type: <xref uid="onenote!OneNote.SectionGroupCollection:class" />
+      description: "\n\n#### <a name=\"examples\"></a>範例\n\n```javascript\nOneNote.run(function (context) {\n\n    // Get the section groups that are direct children of the current notebook.\n    var sectionGroups = context.application.getActiveNotebook().sectionGroups;\n\n    // Queue a command to load the section groups. \n    // For best performance, request specific properties.\n    sectionGroups.load(\"name\"); \n\n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n            \n            // Iterate through the collection or access items individually by index, \n            // for example: sectionGroups.items[0]\n            $.each(sectionGroups.items, function(index, sectionGroup) {\n                console.log(\"Section group name: \" + sectionGroup.name);  \n                console.log(\"Section group ID: \" + sectionGroup.id);  \n            });\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: load(option)
+  uid: onenote!OneNote.SectionGroupCollection#load:member(3)
+  package: onenote!
+  fullName: load(option)
+  summary: ''
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(option?: OfficeExtension.LoadOption): OneNote.SectionGroupCollection;'
+    parameters:
+    - id: option
+      description: ''
+      type: <xref uid="office!OfficeExtension.LoadOption:interface" />
+    return:
+      type: <xref uid="onenote!OneNote.SectionGroupCollection:class" />
+      description: ''
+- name: toJSON()
+  uid: onenote!OneNote.SectionGroupCollection#toJSON:member(1)
+  package: onenote!
+  fullName: toJSON()
+  summary: Remplace la méthode JavaScript afin `toJSON()` de fournir une sortie plus utile lorsqu’un objet d’API est transmis à `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle la `toJSON` méthode de l’objet qui lui est passé.) Tandis que l’objet d’origine `OneNote.SectionGroupCollection` est un objet d’API, la `toJSON` méthode renvoie un objet JavaScript simple (tapé comme `OneNote.Interfaces.SectionGroupCollectionData`<!-- -->) qui contient un tableau « éléments » avec des copies superficielles de toutes les propriétés chargées des éléments de la collection.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'toJSON(): OneNote.Interfaces.SectionGroupCollectionData;'
+    return:
+      type: <xref uid="onenote!OneNote.Interfaces.SectionGroupCollectionData:interface" />
+      description: ''
+- name: track()
+  uid: onenote!OneNote.SectionGroupCollection#track:member(1)
+  package: onenote!
+  fullName: track()
+  summary: Effectuer le suivi de l’objet pour l’ajustement automatique en fonction environnant des modifications dans le document. Cet appel est abréviations context.trackedObjects.add(thisObject). Si vous utilisez cet objet au sein de « .sync » appels et en dehors de l’exécution séquentielle d’un lot de « .run » et rencontrez un message d’erreur « InvalidObjectPath » lors de la définition d’une propriété ou appeler une méthode sur l’objet, vous devez ajouter l’objet à l’objet de suivi collection de sites lors de l’objet a été créé.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'track(): OneNote.SectionGroupCollection;'
+    return:
+      type: <xref uid="onenote!OneNote.SectionGroupCollection:class" />
+      description: ''
+- name: untrack()
+  uid: onenote!OneNote.SectionGroupCollection#untrack:member(1)
+  package: onenote!
+  fullName: untrack()
+  summary: Publication mémoire associée à cet objet si elle a été précédemment suivie. Cet appel est abréviations context.trackedObjects.add(thisObject). Vous rencontrez de nombreux objets suivies ralentit l’application hôte, donc n’oubliez pas de libérer les objets que l'on ajoute, une fois que vous avez terminé à les utiliser. Vous devez appeler « context.sync() » avant la publication de mémoire prend effet.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'untrack(): OneNote.SectionGroupCollection;'
+    return:
+      type: <xref uid="onenote!OneNote.SectionGroupCollection:class" />
+      description: ''
+extends: <xref uid="office!OfficeExtension.ClientObject:class" />
+metadata:
+  ms.openlocfilehash: 020cab60dcbbea6844c7f5fb8da57e481ce55447
+  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.translationtype: MT
+  ms.contentlocale: fr-FR
+  ms.lasthandoff: 11/18/2020
+  ms.locfileid: "49136532"
