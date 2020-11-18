@@ -1,289 +1,268 @@
-### YamlMime:UniversalReference
-items:
-  - uid: 'excel!Excel.AutoFilter:class'
-    summary: "Représente l’objet AutoFilter. Filtre automatique transforme les valeurs d’une colonne Excel en filtres spécifiques en fonction du contenu de la cellule.\n\n\\[[Ensemble d’API\_: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
-    name: Excel.AutoFilter
-    fullName: Excel.AutoFilter
-    langs:
-      - typeScript
-    type: class
-    extends:
-      - 'office!OfficeExtension.ClientObject:class'
-    package: excel!
-    children:
-      - 'excel!Excel.AutoFilter#apply:member(1)'
-      - 'excel!Excel.AutoFilter#clearCriteria:member(1)'
-      - 'excel!Excel.AutoFilter#context:member'
-      - 'excel!Excel.AutoFilter#criteria:member'
-      - 'excel!Excel.AutoFilter#enabled:member'
-      - 'excel!Excel.AutoFilter#getRange:member(1)'
-      - 'excel!Excel.AutoFilter#getRangeOrNullObject:member(1)'
-      - 'excel!Excel.AutoFilter#isDataFiltered:member'
-      - 'excel!Excel.AutoFilter#load:member(1)'
-      - 'excel!Excel.AutoFilter#load:member(2)'
-      - 'excel!Excel.AutoFilter#load:member(3)'
-      - 'excel!Excel.AutoFilter#reapply:member(1)'
-      - 'excel!Excel.AutoFilter#remove:member(1)'
-      - 'excel!Excel.AutoFilter#toJSON:member(1)'
-  - uid: 'excel!Excel.AutoFilter#apply:member(1)'
-    summary: "Applique le filtre automatique à une plage. Ceci permet de filtrer la colonne si les critères de filtre de colonne et index sont spécifiés.\n\n\\[[Ensemble d’API\_: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
-    name: 'apply(range, columnIndex, criteria)'
-    fullName: 'apply(range, columnIndex, criteria)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'apply(range: Range | string, columnIndex?: number, criteria?: Excel.FilterCriteria): void;'
-      return:
-        type:
-          - void
-        description: |-
+### YamlMime:TSType
+name: Excel.AutoFilter
+uid: excel!Excel.AutoFilter:class
+package: excel!
+fullName: Excel.AutoFilter
+summary: >-
+  Représente l’objet AutoFilter. Filtre automatique transforme les valeurs d’une colonne Excel en filtres spécifiques en fonction du contenu de la cellule.
 
 
-          #### <a name="examples"></a>Exemples
+  \[[Ensemble d’API : ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: class
+properties:
+- name: context
+  uid: excel!Excel.AutoFilter#context:member
+  package: excel!
+  fullName: context
+  summary: Contexte de demande associé à l’objet. Cette opération connecte le processus du complément au processus de l’application hôte Office.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type: <xref uid="excel!Excel.RequestContext:class" />
+- name: criteria
+  uid: excel!Excel.AutoFilter#criteria:member
+  package: excel!
+  fullName: criteria
+  summary: >-
+    Tableau qui conserve tous les critères de filtre dans une plage filtrée.
 
-          ```typescript
-          // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/54-worksheet/worksheet-auto-filter.yaml
-          await Excel.run(async (context) => {
-              const sheet = context.workbook.worksheets.getActiveWorksheet();
-              const farmData = sheet.getUsedRange();
 
-              // This filter will only show the rows with the top 25% of values in column 3.
-              sheet.autoFilter.apply(farmData, 3, { criterion1: "25", filterOn: Excel.FilterOn.topPercent });
-              await context.sync();
-          });
-          ```
-      parameters:
-        - id: range
-          description: Plage sur laquelle s’appliquera le filtre automatique.
-          type:
-            - 'excel!Excel.AutoFilter#apply~0:complex'
-        - id: columnIndex
-          description: Index de colonne de base zéro auquel le filtre automatique est appliqué.
-          type:
-            - number
-        - id: criteria
-          description: Critères de filtre.
-          type:
-            - 'excel!Excel.FilterCriteria:interface'
-  - uid: 'excel!Excel.AutoFilter#clearCriteria:member(1)'
-    summary: "Efface les critères de filtre du filtre automatique.\n\n\\[[Ensemble d’API\_: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
-    name: clearCriteria()
-    fullName: clearCriteria()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'clearCriteria(): void;'
-      return:
-        type:
-          - void
-        description: ''
-  - uid: 'excel!Excel.AutoFilter#context:member'
-    summary: Contexte de demande associé à l’objet. Cette opération connecte le processus du complément au processus de l’application hôte Office.
-    name: context
-    fullName: context
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'context: RequestContext;'
-      return:
-        type:
-          - 'excel!Excel.RequestContext:class'
-  - uid: 'excel!Excel.AutoFilter#criteria:member'
-    summary: "Tableau qui conserve tous les critères de filtre dans une plage filtrée.\n\n\\[[Ensemble d’API\_: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
-    name: criteria
-    fullName: criteria
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly criteria: Excel.FilterCriteria[];'
-      return:
-        type:
-          - 'excel!Excel.AutoFilter#criteria~0:complex'
-  - uid: 'excel!Excel.AutoFilter#enabled:member'
-    summary: "Indique si le filtre automatique est activé.\n\n\\[[Ensemble d’API\_: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
-    name: enabled
-    fullName: enabled
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly enabled: boolean;'
-      return:
-        type:
-          - boolean
-  - uid: 'excel!Excel.AutoFilter#getRange:member(1)'
-    summary: "Cette propriété renvoie un objet Plage qui représente la plage sur laquelle s'applique le filtre automatique spécifié.\n\n\\[[Ensemble d’API\_: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
-    name: getRange()
-    fullName: getRange()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'getRange(): Excel.Range;'
-      return:
-        type:
-          - 'excel!Excel.Range:class'
-        description: ''
-  - uid: 'excel!Excel.AutoFilter#getRangeOrNullObject:member(1)'
-    summary: "Cette propriété renvoie un objet Plage qui représente la plage sur laquelle s'applique le filtre automatique spécifié. S’il n’existe aucun objet Range associé au filtre automatique, cette méthode renvoie un objet null.\n\n\\[[Ensemble d’API\_: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
-    name: getRangeOrNullObject()
-    fullName: getRangeOrNullObject()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'getRangeOrNullObject(): Excel.Range;'
-      return:
-        type:
-          - 'excel!Excel.Range:class'
-        description: ''
-  - uid: 'excel!Excel.AutoFilter#isDataFiltered:member'
-    summary: "Indique si le filtre automatique a des critères de filtre.\n\n\\[[Ensemble d’API\_: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
-    name: isDataFiltered
-    fullName: isDataFiltered
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly isDataFiltered: boolean;'
-      return:
-        type:
-          - boolean
-  - uid: 'excel!Excel.AutoFilter#load:member(1)'
-    summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez contacter `context.sync()` avant de lire les propriétés.
-    name: load(options)
-    fullName: load(options)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(options?: Excel.Interfaces.AutoFilterLoadOptions): Excel.AutoFilter;'
-      return:
-        type:
-          - 'excel!Excel.AutoFilter:class'
-        description: ''
-      parameters:
-        - id: options
-          description: Fournit des options pour les propriétés de l’objet à charger.
-          type:
-            - 'excel!Excel.Interfaces.AutoFilterLoadOptions:interface'
-  - uid: 'excel!Excel.AutoFilter#load:member(2)'
-    summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez contacter `context.sync()` avant de lire les propriétés.
-    name: load(propertyNames)
-    fullName: load(propertyNames)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(propertyNames?: string | string[]): Excel.AutoFilter;'
-      return:
-        type:
-          - 'excel!Excel.AutoFilter:class'
-        description: ''
-      parameters:
-        - id: propertyNames
-          description: Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
-          type:
-            - 'string | string[]'
-  - uid: 'excel!Excel.AutoFilter#load:member(3)'
-    summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez contacter `context.sync()` avant de lire les propriétés.
-    name: load(propertyNamesAndPaths)
-    fullName: load(propertyNamesAndPaths)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: |-
-        load(propertyNamesAndPaths?: {
+    \[[Ensemble d’API : ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly criteria: Excel.FilterCriteria[];'
+    return:
+      type: <xref uid="excel!Excel.FilterCriteria:interface" />[]
+- name: enabled
+  uid: excel!Excel.AutoFilter#enabled:member
+  package: excel!
+  fullName: enabled
+  summary: >-
+    Indique si le filtre automatique est activé.
+
+
+    \[[Ensemble d’API : ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly enabled: boolean;'
+    return:
+      type: boolean
+- name: isDataFiltered
+  uid: excel!Excel.AutoFilter#isDataFiltered:member
+  package: excel!
+  fullName: isDataFiltered
+  summary: >-
+    Indique si le filtre automatique a des critères de filtre.
+
+
+    \[[Ensemble d’API : ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly isDataFiltered: boolean;'
+    return:
+      type: boolean
+methods:
+- name: apply(range, columnIndex, criteria)
+  uid: excel!Excel.AutoFilter#apply:member(1)
+  package: excel!
+  fullName: apply(range, columnIndex, criteria)
+  summary: >-
+    Applique le filtre automatique à une plage. Ceci permet de filtrer la colonne si les critères de filtre de colonne et index sont spécifiés.
+
+
+    \[[Ensemble d’API : ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'apply(range: Range | string, columnIndex?: number, criteria?: Excel.FilterCriteria): void;'
+    parameters:
+    - id: range
+      description: Plage sur laquelle s’appliquera le filtre automatique.
+      type: <xref uid="excel!Excel.Range:class" /> | string
+    - id: columnIndex
+      description: Index de colonne de base zéro auquel le filtre automatique est appliqué.
+      type: number
+    - id: criteria
+      description: Critères de filtre.
+      type: <xref uid="excel!Excel.FilterCriteria:interface" />
+    return:
+      type: void
+      description: "\n\n#### <a name=\"examples\"></a>範例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/54-worksheet/worksheet-auto-filter.yaml\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getActiveWorksheet();\n    const farmData = sheet.getUsedRange();\n\n    // This filter will only show the rows with the top 25% of values in column 3.\n    sheet.autoFilter.apply(farmData, 3, { criterion1: \"25\", filterOn: Excel.FilterOn.topPercent });\n    await context.sync();\n});\n```"
+- name: clearCriteria()
+  uid: excel!Excel.AutoFilter#clearCriteria:member(1)
+  package: excel!
+  fullName: clearCriteria()
+  summary: >-
+    Efface les critères de filtre du filtre automatique.
+
+
+    \[[Ensemble d’API : ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'clearCriteria(): void;'
+    return:
+      type: void
+      description: ''
+- name: getRange()
+  uid: excel!Excel.AutoFilter#getRange:member(1)
+  package: excel!
+  fullName: getRange()
+  summary: >-
+    Cette propriété renvoie un objet Plage qui représente la plage sur laquelle s'applique le filtre automatique spécifié.
+
+
+    \[[Ensemble d’API : ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getRange(): Excel.Range;'
+    return:
+      type: <xref uid="excel!Excel.Range:class" />
+      description: ''
+- name: getRangeOrNullObject()
+  uid: excel!Excel.AutoFilter#getRangeOrNullObject:member(1)
+  package: excel!
+  fullName: getRangeOrNullObject()
+  summary: >-
+    Cette propriété renvoie un objet Plage qui représente la plage sur laquelle s'applique le filtre automatique spécifié. S’il n’existe aucun objet Range associé au filtre automatique, cette méthode renvoie un objet null.
+
+
+    \[[Ensemble d’API : ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getRangeOrNullObject(): Excel.Range;'
+    return:
+      type: <xref uid="excel!Excel.Range:class" />
+      description: ''
+- name: load(options)
+  uid: excel!Excel.AutoFilter#load:member(1)
+  package: excel!
+  fullName: load(options)
+  summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez contacter `context.sync()` avant de lire les propriétés.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(options?: Excel.Interfaces.AutoFilterLoadOptions): Excel.AutoFilter;'
+    parameters:
+    - id: options
+      description: Fournit des options pour les propriétés de l’objet à charger.
+      type: <xref uid="excel!Excel.Interfaces.AutoFilterLoadOptions:interface" />
+    return:
+      type: <xref uid="excel!Excel.AutoFilter:class" />
+      description: ''
+- name: load(propertyNames)
+  uid: excel!Excel.AutoFilter#load:member(2)
+  package: excel!
+  fullName: load(propertyNames)
+  summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez contacter `context.sync()` avant de lire les propriétés.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.AutoFilter;'
+    parameters:
+    - id: propertyNames
+      description: Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+      type: string | string[]
+    return:
+      type: <xref uid="excel!Excel.AutoFilter:class" />
+      description: ''
+- name: load(propertyNamesAndPaths)
+  uid: excel!Excel.AutoFilter#load:member(3)
+  package: excel!
+  fullName: load(propertyNamesAndPaths)
+  summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez contacter `context.sync()` avant de lire les propriétés.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: >-
+      load(propertyNamesAndPaths?: {
+                  select?: string;
+                  expand?: string;
+              }): Excel.AutoFilter;
+    parameters:
+    - id: propertyNamesAndPaths
+      description: '`propertyNamesAndPaths.select` est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et `propertyNamesAndPaths.expand` une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.'
+      type: >-
+        {
                     select?: string;
                     expand?: string;
-                }): Excel.AutoFilter;
-      return:
-        type:
-          - 'excel!Excel.AutoFilter:class'
-        description: ''
-      parameters:
-        - id: propertyNamesAndPaths
-          description: '`propertyNamesAndPaths.select`est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et `propertyNamesAndPaths.expand` une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.'
-          type:
-            - |-
-              {
-                          select?: string;
-                          expand?: string;
-                      }
-  - uid: 'excel!Excel.AutoFilter#reapply:member(1)'
-    summary: "Applique l’objet Autofilter spécifié actuellement sur la plage.\n\n\\[[Ensemble d’API\_: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
-    name: reapply()
-    fullName: reapply()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'reapply(): void;'
-      return:
-        type:
-          - void
-        description: ''
-  - uid: 'excel!Excel.AutoFilter#remove:member(1)'
-    summary: "Supprime le filtre automatique pour la plage.\n\n\\[[Ensemble d’API\_: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
-    name: remove()
-    fullName: remove()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'remove(): void;'
-      return:
-        type:
-          - void
-        description: ''
-  - uid: 'excel!Excel.AutoFilter#toJSON:member(1)'
-    summary: 'Remplace la méthode JavaScript afin `toJSON()` de fournir une sortie plus utile lorsqu’un objet d’API est transmis à`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle la `toJSON` méthode de l’objet qui lui est passé.) Tandis que l’objet Excel. AutoFilter est un objet d’API, la `toJSON` méthode renvoie un objet JavaScript simple (tapé comme`Excel.Interfaces.AutoFilterData`<!-- -->) qui contient des copies superficielles de toutes les propriétés enfants chargées à partir de l’objet d’origine.'
-    name: toJSON()
-    fullName: toJSON()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'toJSON(): Excel.Interfaces.AutoFilterData;'
-      return:
-        type:
-          - 'excel!Excel.Interfaces.AutoFilterData:interface'
-        description: ''
-references:
-  - uid: 'office!OfficeExtension.ClientObject:class'
-    name: OfficeExtension.ClientObject
-  - uid: 'excel!Excel.AutoFilter#apply~0:complex'
-    name: Range | string
-    fullName: Excel.Range | string
-    spec.typeScript:
-      - uid: 'excel!Excel.Range:class'
-        name: Range
-        fullName: Excel.Range
-      - name: ' | string'
-        fullName: ' | string'
-  - uid: 'excel!Excel.FilterCriteria:interface'
-    name: Excel.FilterCriteria
-  - uid: 'excel!Excel.RequestContext:class'
-    name: RequestContext
-  - uid: 'excel!Excel.AutoFilter#criteria~0:complex'
-    name: 'Excel.FilterCriteria[]'
-    fullName: 'Excel.FilterCriteria[]'
-    spec.typeScript:
-      - uid: 'excel!Excel.FilterCriteria:interface'
-        name: Excel.FilterCriteria
-        fullName: Excel.FilterCriteria
-      - name: '[]'
-        fullName: '[]'
-  - uid: 'excel!Excel.Range:class'
-    name: Excel.Range
-  - uid: 'excel!Excel.AutoFilter:class'
-    name: Excel.AutoFilter
-  - uid: 'excel!Excel.Interfaces.AutoFilterLoadOptions:interface'
-    name: Excel.Interfaces.AutoFilterLoadOptions
-  - uid: 'excel!Excel.Interfaces.AutoFilterData:interface'
-    name: Excel.Interfaces.AutoFilterData
+                }
+    return:
+      type: <xref uid="excel!Excel.AutoFilter:class" />
+      description: ''
+- name: reapply()
+  uid: excel!Excel.AutoFilter#reapply:member(1)
+  package: excel!
+  fullName: reapply()
+  summary: >-
+    Applique l’objet Autofilter spécifié actuellement sur la plage.
+
+
+    \[[Ensemble d’API : ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'reapply(): void;'
+    return:
+      type: void
+      description: ''
+- name: remove()
+  uid: excel!Excel.AutoFilter#remove:member(1)
+  package: excel!
+  fullName: remove()
+  summary: >-
+    Supprime le filtre automatique pour la plage.
+
+
+    \[[Ensemble d’API : ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'remove(): void;'
+    return:
+      type: void
+      description: ''
+- name: toJSON()
+  uid: excel!Excel.AutoFilter#toJSON:member(1)
+  package: excel!
+  fullName: toJSON()
+  summary: Remplace la méthode JavaScript afin `toJSON()` de fournir une sortie plus utile lorsqu’un objet d’API est transmis à `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle la `toJSON` méthode de l’objet qui lui est passé.) Tandis que l’objet Excel. AutoFilter est un objet d’API, la `toJSON` méthode renvoie un objet JavaScript simple (tapé comme `Excel.Interfaces.AutoFilterData`<!-- -->) qui contient des copies superficielles de toutes les propriétés enfants chargées à partir de l’objet d’origine.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'toJSON(): Excel.Interfaces.AutoFilterData;'
+    return:
+      type: <xref uid="excel!Excel.Interfaces.AutoFilterData:interface" />
+      description: ''
+extends: <xref uid="office!OfficeExtension.ClientObject:class" />
+metadata:
+  ms.openlocfilehash: 9f78aebd9073c7c41ae6b34ed6a0aa31fdc2579c
+  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.translationtype: MT
+  ms.contentlocale: fr-FR
+  ms.lasthandoff: 11/18/2020
+  ms.locfileid: "49153157"
