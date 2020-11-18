@@ -2,8 +2,8 @@
 |:---|:---|:---|
 |[Binding](/javascript/api/excel/excel.binding)|[onDataChanged](/javascript/api/excel/excel.binding#ondatachanged)|Se produit lors de la modification des données ou de la mise en forme dans la liaison.|
 ||[onSelectionChanged](/javascript/api/excel/excel.binding#onselectionchanged)|Se produit lorsque le contenu sélectionné dans la liaison est modifié.|
-|[BindingDataChangedEventArgs](/javascript/api/excel/excel.bindingdatachangedeventargs)|[binding](/javascript/api/excel/excel.bindingdatachangedeventargs#binding)|Obtient un `Binding` objet temporaire qui contient l’ID de l' `Binding` objet qui a déclenché l’événement.|
-|[BindingSelectionChangedEventArgs](/javascript/api/excel/excel.bindingselectionchangedeventargs)|[binding](/javascript/api/excel/excel.bindingselectionchangedeventargs#binding)|Obtient un `Binding` objet temporaire qui contient l’ID de l' `Binding` objet qui a déclenché l’événement.|
+|[BindingDataChangedEventArgs](/javascript/api/excel/excel.bindingdatachangedeventargs)|[binding](/javascript/api/excel/excel.bindingdatachangedeventargs#binding)|Obtient un  `Binding`   objet temporaire qui contient l’ID de l'  `Binding`   objet qui a déclenché l’événement.Utilisez cet ID avec `BindingCollection.getItem(id)`   pour obtenir la liaison.|
+|[BindingSelectionChangedEventArgs](/javascript/api/excel/excel.bindingselectionchangedeventargs)|[binding](/javascript/api/excel/excel.bindingselectionchangedeventargs#binding)|Obtient un  `Binding`   objet temporaire qui contient l’ID de l'  `Binding`   objet qui a déclenché l’événement.Utilisez cet ID avec `BindingCollection.getItem(id)`   pour obtenir la liaison.|
 ||[NbreColonnes](/javascript/api/excel/excel.bindingselectionchangedeventargs#columncount)|Obtient le nombre de colonnes sélectionnées.|
 ||[Stopp](/javascript/api/excel/excel.bindingselectionchangedeventargs#rowcount)|Obtient le nombre de lignes sélectionnées.|
 ||[startColumn](/javascript/api/excel/excel.bindingselectionchangedeventargs#startcolumn)|Obtient l’index de la première colonne de la sélection (de base zéro).|
