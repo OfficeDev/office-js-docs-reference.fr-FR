@@ -1,91 +1,102 @@
-### YamlMime:UniversalReference
-items:
-  - uid: 'office!Office.Dialog:interface'
-    summary: Objet renvoyé lors de l' `UI.displayDialogAsync` appel. Il expose les méthodes permettant d’inscrire des gestionnaires d’événements et de fermer la boîte de dialogue.
-    remarks: '**Ensemble de conditions requises**: [DialogAPI](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/dialog-api-requirement-sets)'
-    name: Office.Dialog
-    fullName: Office.Dialog
-    langs:
-      - typeScript
-    type: interface
-    package: office!
-    children:
-      - 'office!Office.Dialog#addEventHandler:member(1)'
-      - 'office!Office.Dialog#close:member(1)'
-      - 'office!Office.Dialog#messageChild:member(1)'
-      - 'office!Office.Dialog#sendMessage:member(1)'
-  - uid: 'office!Office.Dialog#addEventHandler:member(1)'
-    summary: "Enregistre un gestionnaire d’événements. Les deux événements suivants sont pris en charge\_:\n\n- DialogMessageReceived. Déclenché lorsque la boîte de dialogue envoie un message à son parent.\n\n- DialogEventReceived. Déclenché lorsque la boîte de dialogue a été fermée ou lorsque son chargement a été annulé."
-    name: 'addEventHandler(eventType, handler)'
-    fullName: 'addEventHandler(eventType, handler)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'addEventHandler(eventType: Office.EventType, handler: (args: {message: string | boolean} | {error: number}) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: eventType
-          description: Doit être DialogMessageReceived ou DialogEventReceived.
-          type:
-            - 'office!Office.EventType:enum'
-        - id: handler
-          description: 'Fonction qui accepte un objet avec une `message` propriété, si EventType est DialogMessageReceived, ou un objet avec une `error` propriété, si EventType est DialogEventReceived.'
-          type:
-            - '(args: {message: string | boolean} | {error: number}) => void'
-  - uid: 'office!Office.Dialog#close:member(1)'
-    summary: Appelé à partir d’une page parent pour fermer la boîte de dialogue correspondante.
-    name: close()
-    fullName: close()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'close(): void;'
-      return:
-        type:
-          - void
-        description: ''
-  - uid: 'office!Office.Dialog#messageChild:member(1)'
-    summary: 'Remet un message à partir de la page hôte, telle qu’un volet de tâches ou un fichier de fonction sans interface utilisateur, à une boîte de dialogue ouverte à partir de la page.'
-    remarks: "**Hôtes**: Excel, Outlook (configuration minimale requise\_: boîte aux lettres 1,9), PowerPoint, Word\n\n**Ensembles de conditions requises**:\n\n- [DialogAPI 1,2](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/dialog-api-requirement-sets)\n\n- [Mailbox 1.9](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)"
-    name: messageChild(message)
-    fullName: messageChild(message)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'messageChild(message: string): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: message
-          description: 'Accepte un message de la page hôte à envoyer à la boîte de dialogue. Tout ce qui peut être sérialisé en chaîne, y compris JSON et XML, peut être envoyé.'
-          type:
-            - string
-  - uid: 'office!Office.Dialog#sendMessage:member(1)'
-    summary: RÉSERVÉ À UN USAGE INTERNE. N’APPELEZ PAS DANS VOTRE CODE.
-    name: sendMessage(name)
-    fullName: sendMessage(name)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'sendMessage(name: string): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: name
-          description: ''
-          type:
-            - string
-references:
-  - uid: 'office!Office.EventType:enum'
-    name: Office.EventType
+### YamlMime:TSType
+name: Office.Dialog
+uid: office!Office.Dialog:interface
+package: office!
+fullName: Office.Dialog
+summary: Objet renvoyé lors de l' `UI.displayDialogAsync` appel. Il expose les méthodes permettant d’inscrire des gestionnaires d’événements et de fermer la boîte de dialogue.
+remarks: '**Ensemble de conditions requises**: [DialogAPI](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/dialog-api-requirement-sets)'
+isPreview: false
+isDeprecated: false
+type: interface
+methods:
+- name: addEventHandler(eventType, handler)
+  uid: office!Office.Dialog#addEventHandler:member(1)
+  package: office!
+  fullName: addEventHandler(eventType, handler)
+  summary: >-
+    Enregistre un gestionnaire d’événements. Les deux événements suivants sont pris en charge :
+
+
+    - DialogMessageReceived. Déclenché lorsque la boîte de dialogue envoie un message à son parent.
+
+
+    - DialogEventReceived. Déclenché lorsque la boîte de dialogue a été fermée ou lorsque son chargement a été annulé.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'addEventHandler(eventType: Office.EventType, handler: (args: {message: string | boolean} | {error: number}) => void): void;'
+    parameters:
+    - id: eventType
+      description: Doit être DialogMessageReceived ou DialogEventReceived.
+      type: <xref uid="office!Office.EventType:enum" />
+    - id: handler
+      description: Fonction qui accepte un objet avec une `message` propriété, si EventType est DialogMessageReceived, ou un objet avec une `error` propriété, si EventType est DialogEventReceived.
+      type: '(args: {message: string | boolean} | {error: number}) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: close()
+  uid: office!Office.Dialog#close:member(1)
+  package: office!
+  fullName: close()
+  summary: Appelé à partir d’une page parent pour fermer la boîte de dialogue correspondante.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'close(): void;'
+    return:
+      type: void
+      description: ''
+- name: messageChild(message)
+  uid: office!Office.Dialog#messageChild:member(1)
+  package: office!
+  fullName: messageChild(message)
+  summary: Remet un message à partir de la page hôte, telle qu’un volet de tâches ou un fichier de fonction sans interface utilisateur, à une boîte de dialogue ouverte à partir de la page.
+  remarks: >-
+    **Hôtes**: Excel, Outlook (configuration minimale requise : boîte aux lettres 1,9), PowerPoint, Word
+
+
+    **Ensembles de conditions requises**:
+
+
+    - [DialogAPI 1,2](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/dialog-api-requirement-sets)
+
+
+    - [Mailbox 1.9](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'messageChild(message: string): void;'
+    parameters:
+    - id: message
+      description: Accepte un message de la page hôte à envoyer à la boîte de dialogue. Tout ce qui peut être sérialisé en chaîne, y compris JSON et XML, peut être envoyé.
+      type: string
+    return:
+      type: void
+      description: ''
+- name: sendMessage(name)
+  uid: office!Office.Dialog#sendMessage:member(1)
+  package: office!
+  fullName: sendMessage(name)
+  summary: RÉSERVÉ À UN USAGE INTERNE. N’APPELEZ PAS DANS VOTRE CODE.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'sendMessage(name: string): void;'
+    parameters:
+    - id: name
+      description: ''
+      type: string
+    return:
+      type: void
+      description: ''
+metadata:
+  ms.openlocfilehash: c007533112e45e4ffec29b45883add8161532d6c
+  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.translationtype: MT
+  ms.contentlocale: fr-FR
+  ms.lasthandoff: 11/18/2020
+  ms.locfileid: "49183362"
