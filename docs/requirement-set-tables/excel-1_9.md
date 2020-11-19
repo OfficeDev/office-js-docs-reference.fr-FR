@@ -280,7 +280,7 @@
 |[RangeFill](/javascript/api/excel/excel.rangefill)|[pattern](/javascript/api/excel/excel.rangefill#pattern)|Motif d’une plage.|
 ||[patternColor](/javascript/api/excel/excel.rangefill#patterncolor)|Code couleur HTML représentant la couleur du modèle de plage, de la #RRGGBB de formulaire (par exemple, « FFA500 ») ou sous forme de couleur HTML nommée (par exemple, « orange »).|
 ||[patternTintAndShade](/javascript/api/excel/excel.rangefill#patterntintandshade)|Spécifie un double qui éclaircit ou assombrit une couleur de motif pour le remplissage de la plage, la valeur est comprise entre-1 (sombre) et 1 (le plus clair), 0 pour la couleur d’origine.|
-||[tintAndShade](/javascript/api/excel/excel.rangefill#tintandshade)|Spécifie un double qui éclaircit ou assombrit une couleur pour la plage de remplissage, la valeur est comprise entre-1 (le plus foncé) et 1 (le plus clair), avec 0 pour la couleur d’origine.|
+||[tintAndShade](/javascript/api/excel/excel.rangefill#tintandshade)|Spécifie un double qui éclaircit ou assombrit une couleur pour le remplissage de la plage.|
 |[RangeFont](/javascript/api/excel/excel.rangefont)|[strikethrough](/javascript/api/excel/excel.rangefont#strikethrough)|Spécifie l’État barré de la police.|
 ||[Subscript](/javascript/api/excel/excel.rangefont#subscript)|Spécifie l’état d’indice de la police.|
 ||[superscript](/javascript/api/excel/excel.rangefont#superscript)|Spécifie l’état de la police exposant.|

@@ -1,420 +1,281 @@
-### YamlMime:UniversalReference
-items:
-  - uid: 'word!Word.SearchOptions:class'
-    summary: "Spécifie les options à inclure dans une opération de recherche.\n\nPour en savoir plus sur l’utilisation des options de recherche dans les API JavaScript pour Word, consultez la rubrique [utiliser des options de recherche pour rechercher du texte dans votre complément Word](https://docs.microsoft.com/office/dev/add-ins/word/search-option-guidance)<!-- -->.\n\n\\[[Ensemble d’API\_: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\\]"
-    name: Word.SearchOptions
-    fullName: Word.SearchOptions
-    langs:
-      - typeScript
-    type: class
-    extends:
-      - 'office!OfficeExtension.ClientObject:class'
-    package: word!
-    children:
-      - 'word!Word.SearchOptions#context:member'
-      - 'word!Word.SearchOptions#ignorePunct:member'
-      - 'word!Word.SearchOptions#ignoreSpace:member'
-      - 'word!Word.SearchOptions#load:member(1)'
-      - 'word!Word.SearchOptions#load:member(2)'
-      - 'word!Word.SearchOptions#load:member(3)'
-      - 'word!Word.SearchOptions#matchCase:member'
-      - 'word!Word.SearchOptions#matchPrefix:member'
-      - 'word!Word.SearchOptions#matchSuffix:member'
-      - 'word!Word.SearchOptions#matchWholeWord:member'
-      - 'word!Word.SearchOptions#matchWildcards:member'
-      - 'word!Word.SearchOptions.newObject:member(1)'
-      - 'word!Word.SearchOptions#set:member(1)'
-      - 'word!Word.SearchOptions#set:member(2)'
-      - 'word!Word.SearchOptions#toJSON:member(1)'
-  - uid: 'word!Word.SearchOptions#context:member'
-    summary: Contexte de demande associé à l’objet. Cette opération connecte le processus du complément au processus de l’application hôte Office.
-    name: context
-    fullName: context
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'context: RequestContext;'
-      return:
-        type:
-          - 'word!Word.RequestContext:class'
-  - uid: 'word!Word.SearchOptions#ignorePunct:member'
-    summary: "Obtient ou définit une valeur indiquant si toutes les marques de ponctuation entre les mots doivent être ignorées. Correspond à la case à cocher Ignorer les marques de ponctuation de la boîte de dialogue Rechercher et remplacer.\n\n\\[[Ensemble d’API\_: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\\]"
-    name: ignorePunct
-    fullName: ignorePunct
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'ignorePunct: boolean;'
-      return:
-        type:
-          - boolean
-  - uid: 'word!Word.SearchOptions#ignoreSpace:member'
-    summary: "Obtient ou définit une valeur qui indique s’il faut ignorer tous les espaces entre les mots. Correspond à la case à cocher Ignorer les caractères d’espacement dans la boîte de dialogue Rechercher et remplacer.\n\n\\[[Ensemble d’API\_: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\\]"
-    name: ignoreSpace
-    fullName: ignoreSpace
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'ignoreSpace: boolean;'
-      return:
-        type:
-          - boolean
-  - uid: 'word!Word.SearchOptions#load:member(1)'
-    summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez contacter `context.sync()` avant de lire les propriétés.
-    name: load(options)
-    fullName: load(options)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(options?: Word.Interfaces.SearchOptionsLoadOptions): Word.SearchOptions;'
-      return:
-        type:
-          - 'word!Word.SearchOptions:class'
-        description: |-
+### YamlMime:TSType
+name: Word.SearchOptions
+uid: word!Word.SearchOptions:class
+package: word!
+fullName: Word.SearchOptions
+summary: >-
+  Spécifie les options à inclure dans une opération de recherche.
 
 
-          #### <a name="examples"></a>Exemples
+  Pour en savoir plus sur l’utilisation des options de recherche dans les API JavaScript pour Word, consultez la rubrique [utiliser des options de recherche pour rechercher du texte dans votre complément Word](https://docs.microsoft.com/office/dev/add-ins/word/search-option-guidance)<!-- -->.
 
-          ```javascript
-          // Ignore punctuation search
-          // Run a batch operation against the Word object model.
-          Word.run(function (context) {
-              
-              // Queue a command to search the document and ignore punctuation.
-              var searchResults = context.document.body.search('video you', {ignorePunct: true});
 
-              // Queue a command to load the search results and get the font property values.
-              context.load(searchResults, 'font');
-              
-              // Synchronize the document state by executing the queued commands, 
-              // and return a promise to indicate task completion.
-              return context.sync().then(function () {
-                  console.log('Found count: ' + searchResults.items.length);
+  \[[Ensemble d’API : WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: class
+properties:
+- name: context
+  uid: word!Word.SearchOptions#context:member
+  package: word!
+  fullName: context
+  summary: Contexte de demande associé à l’objet. Cette opération connecte le processus du complément au processus de l’application hôte Office.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type: <xref uid="word!Word.RequestContext:class" />
+- name: ignorePunct
+  uid: word!Word.SearchOptions#ignorePunct:member
+  package: word!
+  fullName: ignorePunct
+  summary: >-
+    Obtient ou définit une valeur indiquant si toutes les marques de ponctuation entre les mots doivent être ignorées. Correspond à la case à cocher Ignorer les marques de ponctuation de la boîte de dialogue Rechercher et remplacer.
 
-                  // Queue a set of commands to change the font for each found item.
-                  for (var i = 0; i < searchResults.items.length; i++) {
-                      searchResults.items[i].font.color = 'purple';
-                      searchResults.items[i].font.highlightColor = '#FFFF00'; //Yellow
-                      searchResults.items[i].font.bold = true;
-                  }
-                  
-                  // Synchronize the document state by executing the queued commands, 
-                  // and return a promise to indicate task completion.
-                  return context.sync();
-              });  
-          })
-          .catch(function (error) {
-              console.log('Error: ' + JSON.stringify(error));
-              if (error instanceof OfficeExtension.Error) {
-                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
-              }
-          });
-          ```
-          ```javascript
-          // Search based on a prefix
-          // Run a batch operation against the Word object model.
-          Word.run(function (context) {
-              
-              // Queue a command to search the document based on a prefix.
-              var searchResults = context.document.body.search('vid', {matchPrefix: true});
 
-              // Queue a command to load the search results and get the font property values.
-              context.load(searchResults, 'font');
-              
-              // Synchronize the document state by executing the queued commands, 
-              // and return a promise to indicate task completion.
-              return context.sync().then(function () {
-                  console.log('Found count: ' + searchResults.items.length);
+    \[[Ensemble d’API : WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'ignorePunct: boolean;'
+    return:
+      type: boolean
+- name: ignoreSpace
+  uid: word!Word.SearchOptions#ignoreSpace:member
+  package: word!
+  fullName: ignoreSpace
+  summary: >-
+    Obtient ou définit une valeur qui indique s’il faut ignorer tous les espaces entre les mots. Correspond à la case à cocher Ignorer les caractères d’espacement dans la boîte de dialogue Rechercher et remplacer.
 
-                  // Queue a set of commands to change the font for each found item.
-                  for (var i = 0; i < searchResults.items.length; i++) {
-                      searchResults.items[i].font.color = 'purple';
-                      searchResults.items[i].font.highlightColor = '#FFFF00'; //Yellow
-                      searchResults.items[i].font.bold = true;
-                  }
-                  
-                  // Synchronize the document state by executing the queued commands, 
-                  // and return a promise to indicate task completion.
-                  return context.sync();
-              });  
-          })
-          .catch(function (error) {
-              console.log('Error: ' + JSON.stringify(error));
-              if (error instanceof OfficeExtension.Error) {
-                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
-              }
-          });
-          ```
-          ```javascript
-          // Search based on a suffix
-          // Run a batch operation against the Word object model.
-          Word.run(function (context) {
 
-              // Queue a command to search the document for any string of characters after 'ly'.
-              var searchResults = context.document.body.search('ly', {matchSuffix: true});
+    \[[Ensemble d’API : WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'ignoreSpace: boolean;'
+    return:
+      type: boolean
+- name: matchCase
+  uid: word!Word.SearchOptions#matchCase:member
+  package: word!
+  fullName: matchCase
+  summary: >-
+    Obtient ou définit une valeur indiquant si la recherche respecte la casse. Correspond à la case à cocher respecter la casse dans la boîte de dialogue Rechercher et remplacer.
 
-              // Queue a command to load the search results and get the font property values.
-              context.load(searchResults, 'font');
-              
-              // Synchronize the document state by executing the queued commands, 
-              // and return a promise to indicate task completion.
-              return context.sync().then(function () {
-                  console.log('Found count: ' + searchResults.items.length);
 
-                  // Queue a set of commands to change the font for each found item.
-                  for (var i = 0; i < searchResults.items.length; i++) {
-                      searchResults.items[i].font.color = 'orange';
-                      searchResults.items[i].font.highlightColor = 'black';
-                      searchResults.items[i].font.bold = true;
-                  }
-                  
-                  // Synchronize the document state by executing the queued commands, 
-                  // and return a promise to indicate task completion.
-                  return context.sync();
-              });  
-          })
-          .catch(function (error) {
-              console.log('Error: ' + JSON.stringify(error));
-              if (error instanceof OfficeExtension.Error) {
-                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
-              }
-          });
-          ```
-          ```javascript
-          // Search using a wildcard
-          // Run a batch operation against the Word object model.
-          Word.run(function (context) {
-              
-              // Queue a command to search the document with a wildcard
-              // for any string of characters that starts with 'to' and ends with 'n'.
-              var searchResults = context.document.body.search('to*n', {matchWildCards: true});
+    \[[Ensemble d’API : WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'matchCase: boolean;'
+    return:
+      type: boolean
+- name: matchPrefix
+  uid: word!Word.SearchOptions#matchPrefix:member
+  package: word!
+  fullName: matchPrefix
+  summary: >-
+    Obtient ou définit une valeur indiquant si la recherche doit porter sur les mots qui commencent par la chaîne entrée. Correspond à la case à cocher Préfixe de la boîte de dialogue Rechercher et remplacer.
 
-              // Queue a command to load the search results and get the font property values.
-              context.load(searchResults, 'font');
-              
-              // Synchronize the document state by executing the queued commands, 
-              // and return a promise to indicate task completion.
-              return context.sync().then(function () {
-                  console.log('Found count: ' + searchResults.items.length);
 
-                  // Queue a set of commands to change the font for each found item.
-                  for (var i = 0; i < searchResults.items.length; i++) {
-                      searchResults.items[i].font.color = 'purple';
-                      searchResults.items[i].font.highlightColor = 'pink';
-                      searchResults.items[i].font.bold = true;
-                  }
-                  
-                  // Synchronize the document state by executing the queued commands, 
-                  // and return a promise to indicate task completion.
-                  return context.sync();
-              });  
-          })
-          .catch(function (error) {
-              console.log('Error: ' + JSON.stringify(error));
-              if (error instanceof OfficeExtension.Error) {
-                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
-              }
-          });
-          ```
-      parameters:
-        - id: options
-          description: Fournit des options pour les propriétés de l’objet à charger.
-          type:
-            - 'word!Word.Interfaces.SearchOptionsLoadOptions:interface'
-  - uid: 'word!Word.SearchOptions#load:member(2)'
-    summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez contacter `context.sync()` avant de lire les propriétés.
-    name: load(propertyNames)
-    fullName: load(propertyNames)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(propertyNames?: string | string[]): Word.SearchOptions;'
-      return:
-        type:
-          - 'word!Word.SearchOptions:class'
-        description: ''
-      parameters:
-        - id: propertyNames
-          description: Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
-          type:
-            - 'string | string[]'
-  - uid: 'word!Word.SearchOptions#load:member(3)'
-    summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez contacter `context.sync()` avant de lire les propriétés.
-    name: load(propertyNamesAndPaths)
-    fullName: load(propertyNamesAndPaths)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: |-
-        load(propertyNamesAndPaths?: {
+    \[[Ensemble d’API : WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'matchPrefix: boolean;'
+    return:
+      type: boolean
+- name: matchSuffix
+  uid: word!Word.SearchOptions#matchSuffix:member
+  package: word!
+  fullName: matchSuffix
+  summary: >-
+    Obtient ou définit une valeur indiquant si la recherche doit porter sur les mots qui se terminent par la chaîne entrée. Correspond à la case à cocher Suffixe de la boîte de dialogue Rechercher et remplacer.
+
+
+    \[[Ensemble d’API : WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'matchSuffix: boolean;'
+    return:
+      type: boolean
+- name: matchWholeWord
+  uid: word!Word.SearchOptions#matchWholeWord:member
+  package: word!
+  fullName: matchWholeWord
+  summary: >-
+    Obtient ou définit une valeur indiquant si la recherche doit uniquement porter sur des mots entiers et exclure le texte s’il est inclus dans un mot plus long. Correspond à la case à cocher Mot entier de la boîte de dialogue Rechercher et remplacer.
+
+
+    \[[Ensemble d’API : WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'matchWholeWord: boolean;'
+    return:
+      type: boolean
+- name: matchWildcards
+  uid: word!Word.SearchOptions#matchWildcards:member
+  package: word!
+  fullName: matchWildcards
+  summary: >-
+    Obtient ou définit une valeur indiquant si la recherche est effectuée à l’aide d’opérateurs de recherche spéciaux. Correspond à la case Caractères génériques de la boîte de dialogue Rechercher et remplacer.
+
+
+    \[[Ensemble d’API : WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'matchWildcards: boolean;'
+    return:
+      type: boolean
+methods:
+- name: load(options)
+  uid: word!Word.SearchOptions#load:member(1)
+  package: word!
+  fullName: load(options)
+  summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez contacter `context.sync()` avant de lire les propriétés.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(options?: Word.Interfaces.SearchOptionsLoadOptions): Word.SearchOptions;'
+    parameters:
+    - id: options
+      description: Fournit des options pour les propriétés de l’objet à charger.
+      type: <xref uid="word!Word.Interfaces.SearchOptionsLoadOptions:interface" />
+    return:
+      type: <xref uid="word!Word.SearchOptions:class" />
+      description: "\n\n#### <a name=\"examples\"></a>範例\n\n```javascript\n// Ignore punctuation search\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n    \n    // Queue a command to search the document and ignore punctuation.\n    var searchResults = context.document.body.search('video you', {ignorePunct: true});\n\n    // Queue a command to load the search results and get the font property values.\n    context.load(searchResults, 'font');\n    \n    // Synchronize the document state by executing the queued commands, \n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n        console.log('Found count: ' + searchResults.items.length);\n\n        // Queue a set of commands to change the font for each found item.\n        for (var i = 0; i < searchResults.items.length; i++) {\n            searchResults.items[i].font.color = 'purple';\n            searchResults.items[i].font.highlightColor = '#FFFF00'; //Yellow\n            searchResults.items[i].font.bold = true;\n        }\n        \n        // Synchronize the document state by executing the queued commands, \n        // and return a promise to indicate task completion.\n        return context.sync();\n    });  \n})\n.catch(function (error) {\n    console.log('Error: ' + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Debug info: ' + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\n// Search based on a prefix\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n    \n    // Queue a command to search the document based on a prefix.\n    var searchResults = context.document.body.search('vid', {matchPrefix: true});\n\n    // Queue a command to load the search results and get the font property values.\n    context.load(searchResults, 'font');\n    \n    // Synchronize the document state by executing the queued commands, \n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n        console.log('Found count: ' + searchResults.items.length);\n\n        // Queue a set of commands to change the font for each found item.\n        for (var i = 0; i < searchResults.items.length; i++) {\n            searchResults.items[i].font.color = 'purple';\n            searchResults.items[i].font.highlightColor = '#FFFF00'; //Yellow\n            searchResults.items[i].font.bold = true;\n        }\n        \n        // Synchronize the document state by executing the queued commands, \n        // and return a promise to indicate task completion.\n        return context.sync();\n    });  \n})\n.catch(function (error) {\n    console.log('Error: ' + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Debug info: ' + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\n// Search based on a suffix\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n\n    // Queue a command to search the document for any string of characters after 'ly'.\n    var searchResults = context.document.body.search('ly', {matchSuffix: true});\n\n    // Queue a command to load the search results and get the font property values.\n    context.load(searchResults, 'font');\n    \n    // Synchronize the document state by executing the queued commands, \n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n        console.log('Found count: ' + searchResults.items.length);\n\n        // Queue a set of commands to change the font for each found item.\n        for (var i = 0; i < searchResults.items.length; i++) {\n            searchResults.items[i].font.color = 'orange';\n            searchResults.items[i].font.highlightColor = 'black';\n            searchResults.items[i].font.bold = true;\n        }\n        \n        // Synchronize the document state by executing the queued commands, \n        // and return a promise to indicate task completion.\n        return context.sync();\n    });  \n})\n.catch(function (error) {\n    console.log('Error: ' + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Debug info: ' + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\n// Search using a wildcard\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n    \n    // Queue a command to search the document with a wildcard\n    // for any string of characters that starts with 'to' and ends with 'n'.\n    var searchResults = context.document.body.search('to*n', {matchWildCards: true});\n\n    // Queue a command to load the search results and get the font property values.\n    context.load(searchResults, 'font');\n    \n    // Synchronize the document state by executing the queued commands, \n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n        console.log('Found count: ' + searchResults.items.length);\n\n        // Queue a set of commands to change the font for each found item.\n        for (var i = 0; i < searchResults.items.length; i++) {\n            searchResults.items[i].font.color = 'purple';\n            searchResults.items[i].font.highlightColor = 'pink';\n            searchResults.items[i].font.bold = true;\n        }\n        \n        // Synchronize the document state by executing the queued commands, \n        // and return a promise to indicate task completion.\n        return context.sync();\n    });  \n})\n.catch(function (error) {\n    console.log('Error: ' + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Debug info: ' + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: load(propertyNames)
+  uid: word!Word.SearchOptions#load:member(2)
+  package: word!
+  fullName: load(propertyNames)
+  summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez contacter `context.sync()` avant de lire les propriétés.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Word.SearchOptions;'
+    parameters:
+    - id: propertyNames
+      description: Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+      type: string | string[]
+    return:
+      type: <xref uid="word!Word.SearchOptions:class" />
+      description: ''
+- name: load(propertyNamesAndPaths)
+  uid: word!Word.SearchOptions#load:member(3)
+  package: word!
+  fullName: load(propertyNamesAndPaths)
+  summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez contacter `context.sync()` avant de lire les propriétés.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: >-
+      load(propertyNamesAndPaths?: {
+                  select?: string;
+                  expand?: string;
+              }): Word.SearchOptions;
+    parameters:
+    - id: propertyNamesAndPaths
+      description: '`propertyNamesAndPaths.select` est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et `propertyNamesAndPaths.expand` une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.'
+      type: >-
+        {
                     select?: string;
                     expand?: string;
-                }): Word.SearchOptions;
-      return:
-        type:
-          - 'word!Word.SearchOptions:class'
-        description: ''
-      parameters:
-        - id: propertyNamesAndPaths
-          description: '`propertyNamesAndPaths.select`est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et `propertyNamesAndPaths.expand` une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.'
-          type:
-            - |-
-              {
-                          select?: string;
-                          expand?: string;
-                      }
-  - uid: 'word!Word.SearchOptions#matchCase:member'
-    summary: "Obtient ou définit une valeur indiquant si la recherche respecte la casse. Correspond à la case à cocher respecter la casse dans la boîte de dialogue Rechercher et remplacer.\n\n\\[[Ensemble d’API\_: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\\]"
-    name: matchCase
-    fullName: matchCase
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'matchCase: boolean;'
-      return:
-        type:
-          - boolean
-  - uid: 'word!Word.SearchOptions#matchPrefix:member'
-    summary: "Obtient ou définit une valeur indiquant si la recherche doit porter sur les mots qui commencent par la chaîne entrée. Correspond à la case à cocher Préfixe de la boîte de dialogue Rechercher et remplacer.\n\n\\[[Ensemble d’API\_: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\\]"
-    name: matchPrefix
-    fullName: matchPrefix
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'matchPrefix: boolean;'
-      return:
-        type:
-          - boolean
-  - uid: 'word!Word.SearchOptions#matchSuffix:member'
-    summary: "Obtient ou définit une valeur indiquant si la recherche doit porter sur les mots qui se terminent par la chaîne entrée. Correspond à la case à cocher Suffixe de la boîte de dialogue Rechercher et remplacer.\n\n\\[[Ensemble d’API\_: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\\]"
-    name: matchSuffix
-    fullName: matchSuffix
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'matchSuffix: boolean;'
-      return:
-        type:
-          - boolean
-  - uid: 'word!Word.SearchOptions#matchWholeWord:member'
-    summary: "Obtient ou définit une valeur indiquant si la recherche doit uniquement porter sur des mots entiers et exclure le texte s’il est inclus dans un mot plus long. Correspond à la case à cocher Mot entier de la boîte de dialogue Rechercher et remplacer.\n\n\\[[Ensemble d’API\_: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\\]"
-    name: matchWholeWord
-    fullName: matchWholeWord
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'matchWholeWord: boolean;'
-      return:
-        type:
-          - boolean
-  - uid: 'word!Word.SearchOptions#matchWildcards:member'
-    summary: "Obtient ou définit une valeur indiquant si la recherche est effectuée à l’aide d’opérateurs de recherche spéciaux. Correspond à la case Caractères génériques de la boîte de dialogue Rechercher et remplacer.\n\n\\[[Ensemble d’API\_: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\\]"
-    name: matchWildcards
-    fullName: matchWildcards
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'matchWildcards: boolean;'
-      return:
-        type:
-          - boolean
-  - uid: 'word!Word.SearchOptions.newObject:member(1)'
-    summary: Créer une nouvelle instance de l’objet Word. SearchOptions
-    name: newObject(context)
-    fullName: newObject(context)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'static newObject(context: OfficeExtension.ClientRequestContext): Word.SearchOptions;'
-      return:
-        type:
-          - 'word!Word.SearchOptions:class'
-        description: ''
-      parameters:
-        - id: context
-          description: ''
-          type:
-            - 'office!OfficeExtension.ClientRequestContext:class'
-  - uid: 'word!Word.SearchOptions#set:member(1)'
-    summary: 'Définit plusieurs propriétés d’un objet en même temps. Vous pouvez transmettre un objet plain avec les propriétés appropriées, ou un autre objet API du même type.'
-    remarks: "Cette méthode est dotée de la signature supplémentaire suivante\_:\n\n`set(properties: Word.SearchOptions): void`"
-    name: 'set(properties, options)'
-    fullName: 'set(properties, options)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'set(properties: Interfaces.SearchOptionsUpdateData, options?: OfficeExtension.UpdateOptions): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: properties
-          description: Objet JavaScript avec des propriétés qui sont structurées isomorphically vers les propriétés de l’objet sur lequel la méthode est appelée.
-          type:
-            - 'word!Word.Interfaces.SearchOptionsUpdateData:interface'
-        - id: options
-          description: Fournit une option permettant de supprimer les erreurs si l’objet Properties tente de définir des propriétés en lecture seule.
-          type:
-            - 'office!OfficeExtension.UpdateOptions:interface'
-  - uid: 'word!Word.SearchOptions#set:member(2)'
-    summary: 'Définit plusieurs propriétés de l’objet en même temps, en fonction d’un objet chargé existant.'
-    name: set(properties)
-    fullName: set(properties)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'set(properties: Word.SearchOptions): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: properties
-          description: ''
-          type:
-            - 'word!Word.SearchOptions:class'
-  - uid: 'word!Word.SearchOptions#toJSON:member(1)'
-    summary: 'Remplace la méthode JavaScript afin `toJSON()` de fournir une sortie plus utile lorsqu’un objet d’API est transmis à`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle la `toJSON` méthode de l’objet qui lui est passé.) Tandis que l’objet Word. SearchOptions d’origine est un objet d’API, la `toJSON` méthode renvoie un objet JavaScript simple (tapé comme`Word.Interfaces.SearchOptionsData`<!-- -->) qui contient des copies superficielles de toutes les propriétés enfants chargées à partir de l’objet d’origine.'
-    name: toJSON()
-    fullName: toJSON()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'toJSON(): Word.Interfaces.SearchOptionsData;'
-      return:
-        type:
-          - 'word!Word.Interfaces.SearchOptionsData:interface'
-        description: ''
-references:
-  - uid: 'office!OfficeExtension.ClientObject:class'
-    name: OfficeExtension.ClientObject
-  - uid: 'word!Word.RequestContext:class'
-    name: RequestContext
-  - uid: 'word!Word.SearchOptions:class'
-    name: Word.SearchOptions
-  - uid: 'word!Word.Interfaces.SearchOptionsLoadOptions:interface'
-    name: Word.Interfaces.SearchOptionsLoadOptions
-  - uid: 'office!OfficeExtension.ClientRequestContext:class'
-    name: OfficeExtension.ClientRequestContext
-  - uid: 'word!Word.Interfaces.SearchOptionsUpdateData:interface'
-    name: Interfaces.SearchOptionsUpdateData
-  - uid: 'office!OfficeExtension.UpdateOptions:interface'
-    name: OfficeExtension.UpdateOptions
-  - uid: 'word!Word.Interfaces.SearchOptionsData:interface'
-    name: Word.Interfaces.SearchOptionsData
+                }
+    return:
+      type: <xref uid="word!Word.SearchOptions:class" />
+      description: ''
+- name: newObject(context)
+  uid: word!Word.SearchOptions.newObject:member(1)
+  package: word!
+  fullName: newObject(context)
+  summary: Créer une nouvelle instance de l’objet Word. SearchOptions
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'static newObject(context: OfficeExtension.ClientRequestContext): Word.SearchOptions;'
+    parameters:
+    - id: context
+      description: ''
+      type: <xref uid="office!OfficeExtension.ClientRequestContext:class" />
+    return:
+      type: <xref uid="word!Word.SearchOptions:class" />
+      description: ''
+- name: set(properties, options)
+  uid: word!Word.SearchOptions#set:member(1)
+  package: word!
+  fullName: set(properties, options)
+  summary: Définit plusieurs propriétés d’un objet en même temps. Vous pouvez transmettre un objet plain avec les propriétés appropriées, ou un autre objet API du même type.
+  remarks: >-
+    Cette méthode est dotée de la signature supplémentaire suivante :
+
+
+    `set(properties: Word.SearchOptions): void`
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'set(properties: Interfaces.SearchOptionsUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+    parameters:
+    - id: properties
+      description: Objet JavaScript avec des propriétés qui sont structurées isomorphically vers les propriétés de l’objet sur lequel la méthode est appelée.
+      type: <xref uid="word!Word.Interfaces.SearchOptionsUpdateData:interface" />
+    - id: options
+      description: Fournit une option permettant de supprimer les erreurs si l’objet Properties tente de définir des propriétés en lecture seule.
+      type: <xref uid="office!OfficeExtension.UpdateOptions:interface" />
+    return:
+      type: void
+      description: ''
+- name: set(properties)
+  uid: word!Word.SearchOptions#set:member(2)
+  package: word!
+  fullName: set(properties)
+  summary: Définit plusieurs propriétés de l’objet en même temps, en fonction d’un objet chargé existant.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'set(properties: Word.SearchOptions): void;'
+    parameters:
+    - id: properties
+      description: ''
+      type: <xref uid="word!Word.SearchOptions:class" />
+    return:
+      type: void
+      description: ''
+- name: toJSON()
+  uid: word!Word.SearchOptions#toJSON:member(1)
+  package: word!
+  fullName: toJSON()
+  summary: Remplace la méthode JavaScript afin `toJSON()` de fournir une sortie plus utile lorsqu’un objet d’API est transmis à `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle la `toJSON` méthode de l’objet qui lui est passé.) Tandis que l’objet Word. SearchOptions d’origine est un objet d’API, la `toJSON` méthode renvoie un objet JavaScript simple (tapé comme `Word.Interfaces.SearchOptionsData`<!-- -->) qui contient des copies superficielles de toutes les propriétés enfants chargées à partir de l’objet d’origine.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'toJSON(): Word.Interfaces.SearchOptionsData;'
+    return:
+      type: <xref uid="word!Word.Interfaces.SearchOptionsData:interface" />
+      description: ''
+extends: <xref uid="office!OfficeExtension.ClientObject:class" />
+metadata:
+  ms.openlocfilehash: d27e3e081f46d7bbc06e8d04c3b7bd2f610665df
+  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.translationtype: MT
+  ms.contentlocale: fr-FR
+  ms.lasthandoff: 11/18/2020
+  ms.locfileid: "49207961"
