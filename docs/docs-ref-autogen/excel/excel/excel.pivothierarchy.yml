@@ -1,233 +1,198 @@
-### YamlMime:UniversalReference
-items:
-  - uid: 'excel!Excel.PivotHierarchy:class'
-    summary: "Représente l’PivotHierarchy Excel.\n\n\\[[Ensemble d’API\_: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
-    name: Excel.PivotHierarchy
-    fullName: Excel.PivotHierarchy
-    langs:
-      - typeScript
-    type: class
-    extends:
-      - 'office!OfficeExtension.ClientObject:class'
-    package: excel!
-    children:
-      - 'excel!Excel.PivotHierarchy#context:member'
-      - 'excel!Excel.PivotHierarchy#fields:member'
-      - 'excel!Excel.PivotHierarchy#id:member'
-      - 'excel!Excel.PivotHierarchy#load:member(1)'
-      - 'excel!Excel.PivotHierarchy#load:member(2)'
-      - 'excel!Excel.PivotHierarchy#load:member(3)'
-      - 'excel!Excel.PivotHierarchy#name:member'
-      - 'excel!Excel.PivotHierarchy#set:member(1)'
-      - 'excel!Excel.PivotHierarchy#set:member(2)'
-      - 'excel!Excel.PivotHierarchy#toJSON:member(1)'
-  - uid: 'excel!Excel.PivotHierarchy#context:member'
-    summary: Contexte de demande associé à l’objet. Cette opération connecte le processus du complément au processus de l’application hôte Office.
-    name: context
-    fullName: context
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'context: RequestContext;'
-      return:
-        type:
-          - 'excel!Excel.RequestContext:class'
-  - uid: 'excel!Excel.PivotHierarchy#fields:member'
-    summary: "Renvoie les PivotFields associés à la PivotHierarchy.\n\n\\[[Ensemble d’API\_: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
-    name: fields
-    fullName: fields
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly fields: Excel.PivotFieldCollection;'
-      return:
-        type:
-          - 'excel!Excel.PivotFieldCollection:class'
-        description: |-
+### YamlMime:TSType
+name: Excel.PivotHierarchy
+uid: excel!Excel.PivotHierarchy:class
+package: excel!
+fullName: Excel.PivotHierarchy
+summary: >-
+  Représente l’PivotHierarchy Excel.
 
 
-          #### <a name="examples"></a>Exemples
+  \[[Ensemble d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: class
+properties:
+- name: context
+  uid: excel!Excel.PivotHierarchy#context:member
+  package: excel!
+  fullName: context
+  summary: Contexte de demande associé à l’objet. Cette opération connecte le processus du complément au processus de l’application hôte Office.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type: <xref uid="excel!Excel.RequestContext:class" />
+- name: fields
+  uid: excel!Excel.PivotHierarchy#fields:member
+  package: excel!
+  fullName: fields
+  summary: >-
+    Renvoie les PivotFields associés à la PivotHierarchy.
 
-          ```typescript
-          // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/38-pivottable/pivottable-pivotfilters.yaml
-          await Excel.run(async (context) => {
-            // Add a PivotFilter to filter on the values correlated with a row.
 
-            // Get the PivotTable.
-            const pivotTable = context.workbook.worksheets.getActiveWorksheet().pivotTables.getItem("Farm Sales");
+    \[[Ensemble d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly fields: Excel.PivotFieldCollection;'
+    return:
+      type: <xref uid="excel!Excel.PivotFieldCollection:class" />
+      description: "\n\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/38-pivottable/pivottable-pivotfilters.yaml\nawait Excel.run(async (context) => {\n  // Add a PivotFilter to filter on the values correlated with a row.\n\n  // Get the PivotTable.\n  const pivotTable = context.workbook.worksheets.getActiveWorksheet().pivotTables.getItem(\"Farm Sales\");\n\n  // Get the \"Farm\" field.\n  const field = pivotTable.hierarchies.getItem(\"Farm\").fields.getItem(\"Farm\");\n\n  // Filter to only include rows with more than 500 wholesale crates sold.\n  const filter: Excel.PivotValueFilter = {\n    condition: Excel.ValueFilterCondition.greaterThan,\n    comparator: 500,\n    value: \"Sum of Crates Sold Wholesale\"\n  };\n\n  // Apply the value filter to the field.\n  field.applyFilter({ valueFilter: filter });\n\n  await context.sync();\n});\n```"
+- name: id
+  uid: excel!Excel.PivotHierarchy#id:member
+  package: excel!
+  fullName: id
+  summary: >-
+    ID de la PivotHierarchy.
 
-            // Get the "Farm" field.
-            const field = pivotTable.hierarchies.getItem("Farm").fields.getItem("Farm");
 
-            // Filter to only include rows with more than 500 wholesale crates sold.
-            const filter: Excel.PivotValueFilter = {
-              condition: Excel.ValueFilterCondition.greaterThan,
-              comparator: 500,
-              value: "Sum of Crates Sold Wholesale"
-            };
+    \[[Ensemble d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly id: string;'
+    return:
+      type: string
+- name: name
+  uid: excel!Excel.PivotHierarchy#name:member
+  package: excel!
+  fullName: name
+  summary: >-
+    Nom de la PivotHierarchy.
 
-            // Apply the value filter to the field.
-            field.applyFilter({ valueFilter: filter });
 
-            await context.sync();
-          });
-          ```
-  - uid: 'excel!Excel.PivotHierarchy#id:member'
-    summary: "ID de la PivotHierarchy.\n\n\\[[Ensemble d’API\_: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
-    name: id
-    fullName: id
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly id: string;'
-      return:
-        type:
-          - string
-  - uid: 'excel!Excel.PivotHierarchy#load:member(1)'
-    summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez contacter `context.sync()` avant de lire les propriétés.
-    name: load(options)
-    fullName: load(options)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(options?: Excel.Interfaces.PivotHierarchyLoadOptions): Excel.PivotHierarchy;'
-      return:
-        type:
-          - 'excel!Excel.PivotHierarchy:class'
-        description: ''
-      parameters:
-        - id: options
-          description: Fournit des options pour les propriétés de l’objet à charger.
-          type:
-            - 'excel!Excel.Interfaces.PivotHierarchyLoadOptions:interface'
-  - uid: 'excel!Excel.PivotHierarchy#load:member(2)'
-    summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez contacter `context.sync()` avant de lire les propriétés.
-    name: load(propertyNames)
-    fullName: load(propertyNames)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(propertyNames?: string | string[]): Excel.PivotHierarchy;'
-      return:
-        type:
-          - 'excel!Excel.PivotHierarchy:class'
-        description: ''
-      parameters:
-        - id: propertyNames
-          description: Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
-          type:
-            - 'string | string[]'
-  - uid: 'excel!Excel.PivotHierarchy#load:member(3)'
-    summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez contacter `context.sync()` avant de lire les propriétés.
-    name: load(propertyNamesAndPaths)
-    fullName: load(propertyNamesAndPaths)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: |-
-        load(propertyNamesAndPaths?: {
+    \[[Ensemble d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'name: string;'
+    return:
+      type: string
+methods:
+- name: load(options)
+  uid: excel!Excel.PivotHierarchy#load:member(1)
+  package: excel!
+  fullName: load(options)
+  summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez contacter `context.sync()` avant de lire les propriétés.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(options?: Excel.Interfaces.PivotHierarchyLoadOptions): Excel.PivotHierarchy;'
+    parameters:
+    - id: options
+      description: Fournit des options pour les propriétés de l’objet à charger.
+      type: <xref uid="excel!Excel.Interfaces.PivotHierarchyLoadOptions:interface" />
+    return:
+      type: <xref uid="excel!Excel.PivotHierarchy:class" />
+      description: ''
+- name: load(propertyNames)
+  uid: excel!Excel.PivotHierarchy#load:member(2)
+  package: excel!
+  fullName: load(propertyNames)
+  summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez contacter `context.sync()` avant de lire les propriétés.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.PivotHierarchy;'
+    parameters:
+    - id: propertyNames
+      description: Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+      type: string | string[]
+    return:
+      type: <xref uid="excel!Excel.PivotHierarchy:class" />
+      description: ''
+- name: load(propertyNamesAndPaths)
+  uid: excel!Excel.PivotHierarchy#load:member(3)
+  package: excel!
+  fullName: load(propertyNamesAndPaths)
+  summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez contacter `context.sync()` avant de lire les propriétés.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: >-
+      load(propertyNamesAndPaths?: {
+                  select?: string;
+                  expand?: string;
+              }): Excel.PivotHierarchy;
+    parameters:
+    - id: propertyNamesAndPaths
+      description: '`propertyNamesAndPaths.select` est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et `propertyNamesAndPaths.expand` une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.'
+      type: >-
+        {
                     select?: string;
                     expand?: string;
-                }): Excel.PivotHierarchy;
-      return:
-        type:
-          - 'excel!Excel.PivotHierarchy:class'
-        description: ''
-      parameters:
-        - id: propertyNamesAndPaths
-          description: '`propertyNamesAndPaths.select` est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et `propertyNamesAndPaths.expand` une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.'
-          type:
-            - |-
-              {
-                          select?: string;
-                          expand?: string;
-                      }
-  - uid: 'excel!Excel.PivotHierarchy#name:member'
-    summary: "Nom de la PivotHierarchy.\n\n\\[[Ensemble d’API\_: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
-    name: name
-    fullName: name
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'name: string;'
-      return:
-        type:
-          - string
-  - uid: 'excel!Excel.PivotHierarchy#set:member(1)'
-    summary: 'Définit plusieurs propriétés d’un objet en même temps. Vous pouvez transmettre un objet plain avec les propriétés appropriées, ou un autre objet API du même type.'
-    remarks: "Cette méthode est dotée de la signature supplémentaire suivante\_:\n\n`set(properties: Excel.PivotHierarchy): void`"
-    name: 'set(properties, options)'
-    fullName: 'set(properties, options)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'set(properties: Interfaces.PivotHierarchyUpdateData, options?: OfficeExtension.UpdateOptions): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: properties
-          description: Objet JavaScript avec des propriétés qui sont structurées isomorphically vers les propriétés de l’objet sur lequel la méthode est appelée.
-          type:
-            - 'excel!Excel.Interfaces.PivotHierarchyUpdateData:interface'
-        - id: options
-          description: Fournit une option permettant de supprimer les erreurs si l’objet Properties tente de définir des propriétés en lecture seule.
-          type:
-            - 'office!OfficeExtension.UpdateOptions:interface'
-  - uid: 'excel!Excel.PivotHierarchy#set:member(2)'
-    summary: 'Définit plusieurs propriétés de l’objet en même temps, en fonction d’un objet chargé existant.'
-    name: set(properties)
-    fullName: set(properties)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'set(properties: Excel.PivotHierarchy): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: properties
-          description: ''
-          type:
-            - 'excel!Excel.PivotHierarchy:class'
-  - uid: 'excel!Excel.PivotHierarchy#toJSON:member(1)'
-    summary: 'Remplace la méthode JavaScript afin `toJSON()` de fournir une sortie plus utile lorsqu’un objet d’API est transmis à `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle la `toJSON` méthode de l’objet qui lui est passé.) Tandis que l’objet Excel. PivotHierarchy d’origine est un objet d’API, la `toJSON` méthode renvoie un objet JavaScript simple (tapé comme `Excel.Interfaces.PivotHierarchyData`<!-- -->) qui contient des copies superficielles de toutes les propriétés enfants chargées à partir de l’objet d’origine.'
-    name: toJSON()
-    fullName: toJSON()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'toJSON(): Excel.Interfaces.PivotHierarchyData;'
-      return:
-        type:
-          - 'excel!Excel.Interfaces.PivotHierarchyData:interface'
-        description: ''
-references:
-  - uid: 'office!OfficeExtension.ClientObject:class'
-    name: OfficeExtension.ClientObject
-  - uid: 'excel!Excel.RequestContext:class'
-    name: RequestContext
-  - uid: 'excel!Excel.PivotFieldCollection:class'
-    name: Excel.PivotFieldCollection
-  - uid: 'excel!Excel.PivotHierarchy:class'
-    name: Excel.PivotHierarchy
-  - uid: 'excel!Excel.Interfaces.PivotHierarchyLoadOptions:interface'
-    name: Excel.Interfaces.PivotHierarchyLoadOptions
-  - uid: 'excel!Excel.Interfaces.PivotHierarchyUpdateData:interface'
-    name: Interfaces.PivotHierarchyUpdateData
-  - uid: 'office!OfficeExtension.UpdateOptions:interface'
-    name: OfficeExtension.UpdateOptions
-  - uid: 'excel!Excel.Interfaces.PivotHierarchyData:interface'
-    name: Excel.Interfaces.PivotHierarchyData
+                }
+    return:
+      type: <xref uid="excel!Excel.PivotHierarchy:class" />
+      description: ''
+- name: set(properties, options)
+  uid: excel!Excel.PivotHierarchy#set:member(1)
+  package: excel!
+  fullName: set(properties, options)
+  summary: Définit plusieurs propriétés d’un objet en même temps. Vous pouvez transmettre un objet plain avec les propriétés appropriées, ou un autre objet API du même type.
+  remarks: >-
+    Cette méthode est dotée de la signature supplémentaire suivante :
+
+
+    `set(properties: Excel.PivotHierarchy): void`
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'set(properties: Interfaces.PivotHierarchyUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+    parameters:
+    - id: properties
+      description: Objet JavaScript avec des propriétés qui sont structurées isomorphically vers les propriétés de l’objet sur lequel la méthode est appelée.
+      type: <xref uid="excel!Excel.Interfaces.PivotHierarchyUpdateData:interface" />
+    - id: options
+      description: Fournit une option permettant de supprimer les erreurs si l’objet Properties tente de définir des propriétés en lecture seule.
+      type: <xref uid="office!OfficeExtension.UpdateOptions:interface" />
+    return:
+      type: void
+      description: ''
+- name: set(properties)
+  uid: excel!Excel.PivotHierarchy#set:member(2)
+  package: excel!
+  fullName: set(properties)
+  summary: Définit plusieurs propriétés de l’objet en même temps, en fonction d’un objet chargé existant.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'set(properties: Excel.PivotHierarchy): void;'
+    parameters:
+    - id: properties
+      description: ''
+      type: <xref uid="excel!Excel.PivotHierarchy:class" />
+    return:
+      type: void
+      description: ''
+- name: toJSON()
+  uid: excel!Excel.PivotHierarchy#toJSON:member(1)
+  package: excel!
+  fullName: toJSON()
+  summary: Remplace la méthode JavaScript afin `toJSON()` de fournir une sortie plus utile lorsqu’un objet d’API est transmis à `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle la `toJSON` méthode de l’objet qui lui est passé.) Tandis que l’objet Excel. PivotHierarchy d’origine est un objet d’API, la `toJSON` méthode renvoie un objet JavaScript simple (tapé comme `Excel.Interfaces.PivotHierarchyData`<!-- -->) qui contient des copies superficielles de toutes les propriétés enfants chargées à partir de l’objet d’origine.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'toJSON(): Excel.Interfaces.PivotHierarchyData;'
+    return:
+      type: <xref uid="excel!Excel.Interfaces.PivotHierarchyData:interface" />
+      description: ''
+extends: <xref uid="office!OfficeExtension.ClientObject:class" />
+metadata:
+  ms.openlocfilehash: 3da3dfc041d7c2fa09dcaf7c3e50734d1f50f51e
+  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.translationtype: MT
+  ms.contentlocale: fr-FR
+  ms.lasthandoff: 11/18/2020
+  ms.locfileid: "49294829"
