@@ -223,8 +223,8 @@
 ||[type](/javascript/api/excel/excel.worksheetdeletedeventargs#type)|Obtient le type de l’événement.|
 ||[worksheetId](/javascript/api/excel/excel.worksheetdeletedeventargs#worksheetid)|Obtient l’id de la feuille de calcul qui est supprimée du classeur.|
 |[WorksheetFreezePanes](/javascript/api/excel/excel.worksheetfreezepanes)|[freezeAt (frozenRange : chaîne de plage \| )](/javascript/api/excel/excel.worksheetfreezepanes#freezeat-frozenrange-)|Définit les cellules figées dans l’affichage de la feuille de calcul active.|
-||[freezeColumns (Count ?: nombre)](/javascript/api/excel/excel.worksheetfreezepanes#freezecolumns-count-)|Figer la/les première(s) colonne(s) de la feuille de calcul en place.|
-||[freezeRows (Count ?: nombre)](/javascript/api/excel/excel.worksheetfreezepanes#freezerows-count-)|Figer la/les première(s) ligne(s) de la feuille de calcul en place.|
+||[freezeColumns (Count ?: nombre)](/javascript/api/excel/excel.worksheetfreezepanes#freezecolumns-count-)|Figer la première colonne ou les colonnes de la feuille de calcul sur place.|
+||[freezeRows (Count ?: nombre)](/javascript/api/excel/excel.worksheetfreezepanes#freezerows-count-)|Figer la ou les lignes du haut de la feuille de calcul sur place.|
 ||[getLocation()](/javascript/api/excel/excel.worksheetfreezepanes#getlocation--)|Obtient une plage qui définit les cellules figées dans l’affichage de la feuille de calcul active.|
 ||[getLocationOrNullObject()](/javascript/api/excel/excel.worksheetfreezepanes#getlocationornullobject--)|Obtient une plage qui définit les cellules figées dans l’affichage de la feuille de calcul active.|
 ||[Unfreeze ()](/javascript/api/excel/excel.worksheetfreezepanes#unfreeze--)|Supprime tous les volets figés dans la feuille de calcul.|

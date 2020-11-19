@@ -1,154 +1,181 @@
-### YamlMime:UniversalReference
-items:
-  - uid: 'outlook!Office.Location:interface'
-    summary: "Fournit des méthodes pour obtenir et définir le lieu d’une réunion dans un complément Outlook.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
-    remarks: |-
-      **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)** :`ReadItem`
+### YamlMime:TSType
+name: Office.Location
+uid: outlook!Office.Location:interface
+package: outlook!
+fullName: Office.Location
+summary: >-
+  Fournit des méthodes pour obtenir et définir le lieu d’une réunion dans un complément Outlook.
 
-      **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)** : composition
-    name: Office.Location
-    fullName: Office.Location
-    langs:
-      - typeScript
-    type: interface
-    package: outlook!
-    children:
-      - 'outlook!Office.Location#getAsync:member(1)'
-      - 'outlook!Office.Location#getAsync:member(2)'
-      - 'outlook!Office.Location#setAsync:member(1)'
-  - uid: 'outlook!Office.Location#getAsync:member(1)'
-    summary: "Obtient l’emplacement d’un rendez-vous.\n\nLa méthode `getAsync` lance un appel asynchrone vers le serveur Exchange pour obtenir le lieu d’un rendez-vous. L’emplacement du rendez-vous est fourni sous forme de chaîne dans la `asyncResult.value` propriété.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
-    remarks: |-
-      **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)** :`ReadItem`
 
-      **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)** : composition
+  \[[Ensemble d’API : boîte aux lettres 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+remarks: >-
+  **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
 
-      #### <a name="examples"></a>Exemples
 
-      ```javascript
-      var userContext = { value : 1 };
-      Office.context.mailbox.item.location.getAsync( { context: userContext}, callback);
+  **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: composition
+isPreview: false
+isDeprecated: false
+type: interface
+methods:
+- name: getAsync(options, callback)
+  uid: outlook!Office.Location#getAsync:member(1)
+  package: outlook!
+  fullName: getAsync(options, callback)
+  summary: >-
+    Obtient l’emplacement d’un rendez-vous.
 
-      function callback(asyncResult) {
-          var context = asyncResult.context;
-          var location = asyncResult.value;
+
+    La méthode `getAsync` lance un appel asynchrone vers le serveur Exchange pour obtenir le lieu d’un rendez-vous. L’emplacement du rendez-vous est fourni sous forme de chaîne dans la `asyncResult.value` propriété.
+
+
+    \[[Ensemble d’API : boîte aux lettres 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+
+
+    **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: composition
+
+
+    #### <a name="examples"></a>Exemples
+
+
+    ```javascript
+
+    var userContext = { value : 1 };
+
+    Office.context.mailbox.item.location.getAsync( { context: userContext}, callback);
+
+
+    function callback(asyncResult) {
+        var context = asyncResult.context;
+        var location = asyncResult.value;
+    }
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getAsync(options: Office.AsyncContextOptions, callback: (asyncResult: Office.AsyncResult<string>) => void): void;'
+    parameters:
+    - id: options
+      description: 'Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: Les développeurs peuvent fournir n’importe quel objet auquel ils souhaitent accéder dans la méthode de rappel.'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: Une fois la méthode exécutée, la fonction transmise au `callback` paramètre est appelée avec un seul paramètre de type `Office.AsyncResult`<!-- -->.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: getAsync(callback)
+  uid: outlook!Office.Location#getAsync:member(2)
+  package: outlook!
+  fullName: getAsync(callback)
+  summary: >-
+    Obtient l’emplacement d’un rendez-vous.
+
+
+    La méthode `getAsync` lance un appel asynchrone vers le serveur Exchange pour obtenir le lieu d’un rendez-vous. L’emplacement du rendez-vous est fourni sous forme de chaîne dans la `asyncResult.value` propriété.
+
+
+    \[[Ensemble d’API : boîte aux lettres 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+
+
+    **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: composition
+
+
+    #### <a name="examples"></a>Exemples
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/90-other-item-apis/get-set-location-appointment-organizer.yaml
+
+    Office.context.mailbox.item.location.getAsync((result) => {
+      if (result.status !== Office.AsyncResultStatus.Succeeded) {
+        console.error(`Action failed with message ${result.error.message}`);
+        return;
       }
-      ```
-    name: 'getAsync(options, callback)'
-    fullName: 'getAsync(options, callback)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'getAsync(options: Office.AsyncContextOptions, callback: (asyncResult: Office.AsyncResult<string>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: options
-          description: 'Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: Les développeurs peuvent fournir n’importe quel objet auquel ils souhaitent accéder dans la méthode de rappel.'
-          type:
-            - 'office!Office.AsyncContextOptions:interface'
-        - id: callback
-          description: 'Une fois la méthode exécutée, la fonction transmise au `callback` paramètre est appelée avec un seul paramètre de type `Office.AsyncResult`<!-- -->.'
-          type:
-            - 'outlook!Office.Location#getAsync~0:complex'
-  - uid: 'outlook!Office.Location#getAsync:member(2)'
-    summary: "Obtient l’emplacement d’un rendez-vous.\n\nLa méthode `getAsync` lance un appel asynchrone vers le serveur Exchange pour obtenir le lieu d’un rendez-vous. L’emplacement du rendez-vous est fourni sous forme de chaîne dans la `asyncResult.value` propriété.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
-    remarks: |-
-      **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)** :`ReadItem`
+      console.log(`Appointment location: ${result.value}`);
+    });
 
-      **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)** : composition
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getAsync(callback: (asyncResult: Office.AsyncResult<string>) => void): void;'
+    parameters:
+    - id: callback
+      description: Une fois la méthode exécutée, la fonction transmise au `callback` paramètre est appelée avec un seul paramètre de type `Office.AsyncResult`<!-- -->.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: setAsync(location, options, callback)
+  uid: outlook!Office.Location#setAsync:member(1)
+  package: outlook!
+  fullName: setAsync(location, options, callback)
+  summary: >-
+    Définit l’emplacement d’un rendez-vous.
 
-      #### <a name="examples"></a>Exemples
 
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/90-other-item-apis/get-set-location-appointment-organizer.yaml
-      Office.context.mailbox.item.location.getAsync((result) => {
-        if (result.status !== Office.AsyncResultStatus.Succeeded) {
-          console.error(`Action failed with message ${result.error.message}`);
-          return;
-        }
-        console.log(`Appointment location: ${result.value}`);
-      });
-      ```
-    name: getAsync(callback)
-    fullName: getAsync(callback)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'getAsync(callback: (asyncResult: Office.AsyncResult<string>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: callback
-          description: 'Une fois la méthode exécutée, la fonction transmise au `callback` paramètre est appelée avec un seul paramètre de type `Office.AsyncResult`<!-- -->.'
-          type:
-            - 'outlook!Office.Location#getAsync~1:complex'
-  - uid: 'outlook!Office.Location#setAsync:member(1)'
-    summary: "Définit l’emplacement d’un rendez-vous.\n\nLa méthode `setAsync` lance un appel asynchrone vers le serveur Exchange pour définir le lieu d’un rendez-vous. La définition du lieu d’un rendez-vous remplace le lieu existant.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
-    remarks: "**<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)** :`ReadItem`\n\n**<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)** : composition\n\n**Erreurs** :\n\n- DataExceedsMaximumSize\_: le paramètre location est plus long que 255 caractères.\n\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/90-other-item-apis/get-set-location-appointment-organizer.yaml\nvar location = \"my office\";\nOffice.context.mailbox.item.location.setAsync(location, (result) => {\n  if (result.status !== Office.AsyncResultStatus.Succeeded) {\n    console.error(`Action failed with message ${result.error.message}`);\n    return;\n  }\n  console.log(`Successfully set location to ${location}`);\n});\n```"
-    name: 'setAsync(location, options, callback)'
-    fullName: 'setAsync(location, options, callback)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'setAsync(location: string, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: location
-          description: "Emplacement du rendez-vous. La chaîne est limitée à 255\_caractères."
-          type:
-            - string
-        - id: options
-          description: 'Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: Les développeurs peuvent fournir n’importe quel objet auquel ils souhaitent accéder dans la méthode de rappel.'
-          type:
-            - 'office!Office.AsyncContextOptions:interface'
-        - id: callback
-          description: 'Facultatif. Une fois la méthode exécutée, la fonction transmise au `callback` paramètre est appelée avec un seul paramètre de type `Office.AsyncResult`<!-- -->. Si la définition du lieu échoue, la propriété `asyncResult.error` contient un code d’erreur.'
-          type:
-            - 'outlook!Office.Location#setAsync~0:complex'
-references:
-  - uid: 'office!Office.AsyncContextOptions:interface'
-    name: Office.AsyncContextOptions
-  - uid: 'outlook!Office.Location#getAsync~0:complex'
-    name: '(asyncResult: Office.AsyncResult<string>) => void'
-    fullName: '(asyncResult: Office.AsyncResult<string>) => void'
-    spec.typeScript:
-      - name: '(asyncResult: '
-        fullName: '(asyncResult: '
-      - uid: 'office!Office.AsyncResult:interface'
-        name: Office.AsyncResult
-        fullName: Office.AsyncResult
-      - name: <string>) => void
-        fullName: <string>) => void
-  - uid: 'outlook!Office.Location#getAsync~1:complex'
-    name: '(asyncResult: Office.AsyncResult<string>) => void'
-    fullName: '(asyncResult: Office.AsyncResult<string>) => void'
-    spec.typeScript:
-      - name: '(asyncResult: '
-        fullName: '(asyncResult: '
-      - uid: 'office!Office.AsyncResult:interface'
-        name: Office.AsyncResult
-        fullName: Office.AsyncResult
-      - name: <string>) => void
-        fullName: <string>) => void
-  - uid: 'outlook!Office.Location#setAsync~0:complex'
-    name: '(asyncResult: Office.AsyncResult<void>) => void'
-    fullName: '(asyncResult: Office.AsyncResult<void>) => void'
-    spec.typeScript:
-      - name: '(asyncResult: '
-        fullName: '(asyncResult: '
-      - uid: 'office!Office.AsyncResult:interface'
-        name: Office.AsyncResult
-        fullName: Office.AsyncResult
-      - name: <void>) => void
-        fullName: <void>) => void
+    La méthode `setAsync` lance un appel asynchrone vers le serveur Exchange pour définir le lieu d’un rendez-vous. La définition du lieu d’un rendez-vous remplace le lieu existant.
+
+
+    \[[Ensemble d’API : boîte aux lettres 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+
+
+    **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: composition
+
+
+    **Erreurs**:
+
+
+    - DataExceedsMaximumSize : le paramètre location est plus long que 255 caractères.
+
+
+    #### <a name="examples"></a>Exemples
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/90-other-item-apis/get-set-location-appointment-organizer.yaml
+
+    var location = "my office";
+
+    Office.context.mailbox.item.location.setAsync(location, (result) => {
+      if (result.status !== Office.AsyncResultStatus.Succeeded) {
+        console.error(`Action failed with message ${result.error.message}`);
+        return;
+      }
+      console.log(`Successfully set location to ${location}`);
+    });
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'setAsync(location: string, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: location
+      description: Emplacement du rendez-vous. La chaîne est limitée à 255 caractères.
+      type: string
+    - id: options
+      description: 'Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: Les développeurs peuvent fournir n’importe quel objet auquel ils souhaitent accéder dans la méthode de rappel.'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: Facultatif. Une fois la méthode exécutée, la fonction transmise au `callback` paramètre est appelée avec un seul paramètre de type `Office.AsyncResult`<!-- -->. Si la définition du lieu échoue, la propriété `asyncResult.error` contient un code d’erreur.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+metadata:
+  ms.openlocfilehash: dd16cad0b41bdbcdfdc05dee967d7d52d5faf589
+  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.translationtype: MT
+  ms.contentlocale: fr-FR
+  ms.lasthandoff: 11/18/2020
+  ms.locfileid: "49340182"
