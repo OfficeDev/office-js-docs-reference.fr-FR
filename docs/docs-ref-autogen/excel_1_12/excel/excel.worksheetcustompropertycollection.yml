@@ -1,248 +1,195 @@
-### YamlMime:UniversalReference
-items:
-  - uid: 'excel!Excel.WorksheetCustomPropertyCollection:class'
-    summary: "Contient la collection de propriétés personnalisées au niveau de la feuille de calcul.\n\n\\[[Ensemble d’API\_: ExcelApi 1,12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
-    name: Excel.WorksheetCustomPropertyCollection
-    fullName: Excel.WorksheetCustomPropertyCollection
-    langs:
-      - typeScript
-    type: class
-    extends:
-      - 'office!OfficeExtension.ClientObject:class'
-    package: excel!
-    children:
-      - 'excel!Excel.WorksheetCustomPropertyCollection#add:member(1)'
-      - 'excel!Excel.WorksheetCustomPropertyCollection#context:member'
-      - 'excel!Excel.WorksheetCustomPropertyCollection#getCount:member(1)'
-      - 'excel!Excel.WorksheetCustomPropertyCollection#getItem:member(1)'
-      - 'excel!Excel.WorksheetCustomPropertyCollection#getItemOrNullObject:member(1)'
-      - 'excel!Excel.WorksheetCustomPropertyCollection#items:member'
-      - 'excel!Excel.WorksheetCustomPropertyCollection#load:member(1)'
-      - 'excel!Excel.WorksheetCustomPropertyCollection#load:member(2)'
-      - 'excel!Excel.WorksheetCustomPropertyCollection#load:member(3)'
-      - 'excel!Excel.WorksheetCustomPropertyCollection#toJSON:member(1)'
-  - uid: 'excel!Excel.WorksheetCustomPropertyCollection#add:member(1)'
-    summary: "Ajoute une nouvelle propriété personnalisée qui est mappée à la clé fournie. Cette opération remplace les propriétés personnalisées existantes par cette clé.\n\n\\[[Ensemble d’API\_: ExcelApi 1,12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
-    name: 'add(key, value)'
-    fullName: 'add(key, value)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'add(key: string, value: string): Excel.WorksheetCustomProperty;'
-      return:
-        type:
-          - 'excel!Excel.WorksheetCustomProperty:class'
-        description: |-
+### YamlMime:TSType
+name: Excel.WorksheetCustomPropertyCollection
+uid: excel!Excel.WorksheetCustomPropertyCollection:class
+package: excel!
+fullName: Excel.WorksheetCustomPropertyCollection
+summary: >-
+  Contient la collection de propriétés personnalisées au niveau de la feuille de calcul.
 
 
-          #### <a name="examples"></a>Exemples
+  \[[Ensemble d’API : ExcelApi 1,12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: class
+properties:
+- name: context
+  uid: excel!Excel.WorksheetCustomPropertyCollection#context:member
+  package: excel!
+  fullName: context
+  summary: Contexte de demande associé à l’objet. Cette opération connecte le processus du complément au processus de l’application hôte Office.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type: <xref uid="excel!Excel.RequestContext:class" />
+- name: items
+  uid: excel!Excel.WorksheetCustomPropertyCollection#items:member
+  package: excel!
+  fullName: items
+  summary: Obtient l’élément enfant chargé dans cette collection de sites.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly items: Excel.WorksheetCustomProperty[];'
+    return:
+      type: <xref uid="excel!Excel.WorksheetCustomProperty:class" />[]
+methods:
+- name: add(key, value)
+  uid: excel!Excel.WorksheetCustomPropertyCollection#add:member(1)
+  package: excel!
+  fullName: add(key, value)
+  summary: >-
+    Ajoute une nouvelle propriété personnalisée qui est mappée à la clé fournie. Cette opération remplace les propriétés personnalisées existantes par cette clé.
 
-          ```typescript
-          // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/26-document/custom-properties.yaml
-          await Excel.run(async (context) => {
-            // Get the key/value pair from the task pane.
-            const userKey = $("#key").text();
-            const userValue = $("#value").text();
 
-            // Add the custom property.
-            const customWorksheetProperties = context.workbook.worksheets.getActiveWorksheet().customProperties;
-            customWorksheetProperties.add(userKey, userValue);
+    \[[Ensemble d’API : ExcelApi 1,12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'add(key: string, value: string): Excel.WorksheetCustomProperty;'
+    parameters:
+    - id: key
+      description: Clé qui identifie l’objet de propriété personnalisée. Elle ne respecte pas la casse. La clé est limitée à 255 caractères (les plus grandes valeurs entraînent la levée d’une erreur « InvalidArgument »).
+      type: string
+    - id: value
+      description: Valeur de cette propriété personnalisée.
+      type: string
+    return:
+      type: <xref uid="excel!Excel.WorksheetCustomProperty:class" />
+      description: "\n\n#### <a name=\"examples\"></a>範例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/26-document/custom-properties.yaml\nawait Excel.run(async (context) => {\n  // Get the key/value pair from the task pane.\n  const userKey = $(\"#key\").text();\n  const userValue = $(\"#value\").text();\n\n  // Add the custom property.\n  const customWorksheetProperties = context.workbook.worksheets.getActiveWorksheet().customProperties;\n  customWorksheetProperties.add(userKey, userValue);\n\n  await context.sync();\n\n  console.log(`Successfully set custom worksheet property ${userKey}:${userValue}.`);\n});\n```"
+- name: getCount()
+  uid: excel!Excel.WorksheetCustomPropertyCollection#getCount:member(1)
+  package: excel!
+  fullName: getCount()
+  summary: >-
+    Obtient le nombre de propriétés personnalisées sur cette feuille de calcul.
 
-            await context.sync();
 
-            console.log(`Successfully set custom worksheet property ${userKey}:${userValue}.`);
-          });
-          ```
-      parameters:
-        - id: key
-          description: "Clé qui identifie l’objet de propriété personnalisée. Elle ne respecte pas la casse. La clé est limitée à 255 caractères (les plus grandes valeurs entraînent la levée d’une erreur «\_InvalidArgument\_»)."
-          type:
-            - string
-        - id: value
-          description: Valeur de cette propriété personnalisée.
-          type:
-            - string
-  - uid: 'excel!Excel.WorksheetCustomPropertyCollection#context:member'
-    summary: Contexte de demande associé à l’objet. Cette opération connecte le processus du complément au processus de l’application hôte Office.
-    name: context
-    fullName: context
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'context: RequestContext;'
-      return:
-        type:
-          - 'excel!Excel.RequestContext:class'
-  - uid: 'excel!Excel.WorksheetCustomPropertyCollection#getCount:member(1)'
-    summary: "Obtient le nombre de propriétés personnalisées sur cette feuille de calcul.\n\n\\[[Ensemble d’API\_: ExcelApi 1,12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
-    name: getCount()
-    fullName: getCount()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'getCount(): OfficeExtension.ClientResult<number>;'
-      return:
-        type:
-          - 'excel!Excel.WorksheetCustomPropertyCollection#getCount~0:complex'
-        description: ''
-  - uid: 'excel!Excel.WorksheetCustomPropertyCollection#getItem:member(1)'
-    summary: "Obtient un objet de propriété personnalisé par sa clé, qui ne tient pas compte de la casse. Lève une exception si la propriété personnalisée n’existe pas.\n\n\\[[Ensemble d’API\_: ExcelApi 1,12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
-    name: getItem(key)
-    fullName: getItem(key)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'getItem(key: string): Excel.WorksheetCustomProperty;'
-      return:
-        type:
-          - 'excel!Excel.WorksheetCustomProperty:class'
-        description: ''
-      parameters:
-        - id: key
-          description: Clé qui identifie l’objet de propriété personnalisée. Elle ne respecte pas la casse.
-          type:
-            - string
-  - uid: 'excel!Excel.WorksheetCustomPropertyCollection#getItemOrNullObject:member(1)'
-    summary: "Obtient un objet de propriété personnalisé par sa clé, qui ne tient pas compte de la casse. Renvoie un objet null si la propriété personnalisée n’existe pas.\n\n\\[[Ensemble d’API\_: ExcelApi 1,12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
-    name: getItemOrNullObject(key)
-    fullName: getItemOrNullObject(key)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'getItemOrNullObject(key: string): Excel.WorksheetCustomProperty;'
-      return:
-        type:
-          - 'excel!Excel.WorksheetCustomProperty:class'
-        description: ''
-      parameters:
-        - id: key
-          description: Clé qui identifie l’objet de propriété personnalisée. Elle ne respecte pas la casse.
-          type:
-            - string
-  - uid: 'excel!Excel.WorksheetCustomPropertyCollection#items:member'
-    summary: Obtient l’élément enfant chargé dans cette collection de sites.
-    name: items
-    fullName: items
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly items: Excel.WorksheetCustomProperty[];'
-      return:
-        type:
-          - 'excel!Excel.WorksheetCustomPropertyCollection#items~0:complex'
-  - uid: 'excel!Excel.WorksheetCustomPropertyCollection#load:member(1)'
-    summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez contacter `context.sync()` avant de lire les propriétés.
-    name: load(options)
-    fullName: load(options)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(options?: Excel.Interfaces.WorksheetCustomPropertyCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.WorksheetCustomPropertyCollection;'
-      return:
-        type:
-          - 'excel!Excel.WorksheetCustomPropertyCollection:class'
-        description: ''
-      parameters:
-        - id: options
-          description: Fournit des options pour les propriétés de l’objet à charger.
-          type:
-            - 'excel!Excel.WorksheetCustomPropertyCollection#load~0:complex'
-  - uid: 'excel!Excel.WorksheetCustomPropertyCollection#load:member(2)'
-    summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez contacter `context.sync()` avant de lire les propriétés.
-    name: load(propertyNames)
-    fullName: load(propertyNames)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(propertyNames?: string | string[]): Excel.WorksheetCustomPropertyCollection;'
-      return:
-        type:
-          - 'excel!Excel.WorksheetCustomPropertyCollection:class'
-        description: ''
-      parameters:
-        - id: propertyNames
-          description: Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
-          type:
-            - 'string | string[]'
-  - uid: 'excel!Excel.WorksheetCustomPropertyCollection#load:member(3)'
-    summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez contacter `context.sync()` avant de lire les propriétés.
-    name: load(propertyNamesAndPaths)
-    fullName: load(propertyNamesAndPaths)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(propertyNamesAndPaths?: OfficeExtension.LoadOption): Excel.WorksheetCustomPropertyCollection;'
-      return:
-        type:
-          - 'excel!Excel.WorksheetCustomPropertyCollection:class'
-        description: ''
-      parameters:
-        - id: propertyNamesAndPaths
-          description: '`propertyNamesAndPaths.select` est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et `propertyNamesAndPaths.expand` une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.'
-          type:
-            - 'office!OfficeExtension.LoadOption:interface'
-  - uid: 'excel!Excel.WorksheetCustomPropertyCollection#toJSON:member(1)'
-    summary: "Remplace la méthode JavaScript afin `toJSON()` de fournir une sortie plus utile lorsqu’un objet d’API est transmis à `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle la `toJSON` méthode de l’objet qui lui est passé.) Tandis que l’objet d’origine `Excel.WorksheetCustomPropertyCollection` est un objet d’API, la `toJSON` méthode renvoie un objet JavaScript simple (tapé comme `Excel.Interfaces.WorksheetCustomPropertyCollectionData`<!-- -->) qui contient un tableau «\_éléments\_» avec des copies superficielles de toutes les propriétés chargées des éléments de la collection."
-    name: toJSON()
-    fullName: toJSON()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'toJSON(): Excel.Interfaces.WorksheetCustomPropertyCollectionData;'
-      return:
-        type:
-          - 'excel!Excel.Interfaces.WorksheetCustomPropertyCollectionData:interface'
-        description: ''
-references:
-  - uid: 'office!OfficeExtension.ClientObject:class'
-    name: OfficeExtension.ClientObject
-  - uid: 'excel!Excel.WorksheetCustomProperty:class'
-    name: Excel.WorksheetCustomProperty
-  - uid: 'excel!Excel.RequestContext:class'
-    name: RequestContext
-  - uid: 'excel!Excel.WorksheetCustomPropertyCollection#getCount~0:complex'
-    name: OfficeExtension.ClientResult<number>
-    fullName: OfficeExtension.ClientResult<number>
-    spec.typeScript:
-      - uid: 'office!OfficeExtension.ClientResult:class'
-        name: OfficeExtension.ClientResult
-        fullName: OfficeExtension.ClientResult
-      - name: <number>
-        fullName: <number>
-  - uid: 'excel!Excel.WorksheetCustomPropertyCollection#items~0:complex'
-    name: 'Excel.WorksheetCustomProperty[]'
-    fullName: 'Excel.WorksheetCustomProperty[]'
-    spec.typeScript:
-      - uid: 'excel!Excel.WorksheetCustomProperty:class'
-        name: Excel.WorksheetCustomProperty
-        fullName: Excel.WorksheetCustomProperty
-      - name: '[]'
-        fullName: '[]'
-  - uid: 'excel!Excel.WorksheetCustomPropertyCollection:class'
-    name: Excel.WorksheetCustomPropertyCollection
-  - uid: 'excel!Excel.WorksheetCustomPropertyCollection#load~0:complex'
-    name: Excel.Interfaces.WorksheetCustomPropertyCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
-    fullName: Excel.Interfaces.WorksheetCustomPropertyCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
-    spec.typeScript:
-      - uid: 'excel!Excel.Interfaces.WorksheetCustomPropertyCollectionLoadOptions:interface'
-        name: Excel.Interfaces.WorksheetCustomPropertyCollectionLoadOptions
-        fullName: Excel.Interfaces.WorksheetCustomPropertyCollectionLoadOptions
-      - name: ' & '
-        fullName: ' & '
-      - uid: 'excel!Excel.Interfaces.CollectionLoadOptions:interface'
-        name: Excel.Interfaces.CollectionLoadOptions
-        fullName: Excel.Interfaces.CollectionLoadOptions
-  - uid: 'office!OfficeExtension.LoadOption:interface'
-    name: OfficeExtension.LoadOption
-  - uid: 'excel!Excel.Interfaces.WorksheetCustomPropertyCollectionData:interface'
-    name: Excel.Interfaces.WorksheetCustomPropertyCollectionData
+    \[[Ensemble d’API : ExcelApi 1,12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getCount(): OfficeExtension.ClientResult<number>;'
+    return:
+      type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;number&gt;
+      description: ''
+- name: getItem(key)
+  uid: excel!Excel.WorksheetCustomPropertyCollection#getItem:member(1)
+  package: excel!
+  fullName: getItem(key)
+  summary: >-
+    Obtient un objet de propriété personnalisé par sa clé, qui ne tient pas compte de la casse. Lève une exception si la propriété personnalisée n’existe pas.
+
+
+    \[[Ensemble d’API : ExcelApi 1,12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getItem(key: string): Excel.WorksheetCustomProperty;'
+    parameters:
+    - id: key
+      description: Clé qui identifie l’objet de propriété personnalisée. Elle ne respecte pas la casse.
+      type: string
+    return:
+      type: <xref uid="excel!Excel.WorksheetCustomProperty:class" />
+      description: ''
+- name: getItemOrNullObject(key)
+  uid: excel!Excel.WorksheetCustomPropertyCollection#getItemOrNullObject:member(1)
+  package: excel!
+  fullName: getItemOrNullObject(key)
+  summary: >-
+    Obtient un objet de propriété personnalisé par sa clé, qui ne tient pas compte de la casse. Renvoie un objet null si la propriété personnalisée n’existe pas.
+
+
+    \[[Ensemble d’API : ExcelApi 1,12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getItemOrNullObject(key: string): Excel.WorksheetCustomProperty;'
+    parameters:
+    - id: key
+      description: Clé qui identifie l’objet de propriété personnalisée. Elle ne respecte pas la casse.
+      type: string
+    return:
+      type: <xref uid="excel!Excel.WorksheetCustomProperty:class" />
+      description: ''
+- name: load(options)
+  uid: excel!Excel.WorksheetCustomPropertyCollection#load:member(1)
+  package: excel!
+  fullName: load(options)
+  summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez contacter `context.sync()` avant de lire les propriétés.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(options?: Excel.Interfaces.WorksheetCustomPropertyCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.WorksheetCustomPropertyCollection;'
+    parameters:
+    - id: options
+      description: Fournit des options pour les propriétés de l’objet à charger.
+      type: <xref uid="excel!Excel.Interfaces.WorksheetCustomPropertyCollectionLoadOptions:interface" /> & <xref uid="excel!Excel.Interfaces.CollectionLoadOptions:interface" />
+    return:
+      type: <xref uid="excel!Excel.WorksheetCustomPropertyCollection:class" />
+      description: ''
+- name: load(propertyNames)
+  uid: excel!Excel.WorksheetCustomPropertyCollection#load:member(2)
+  package: excel!
+  fullName: load(propertyNames)
+  summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez contacter `context.sync()` avant de lire les propriétés.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.WorksheetCustomPropertyCollection;'
+    parameters:
+    - id: propertyNames
+      description: Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+      type: string | string[]
+    return:
+      type: <xref uid="excel!Excel.WorksheetCustomPropertyCollection:class" />
+      description: ''
+- name: load(propertyNamesAndPaths)
+  uid: excel!Excel.WorksheetCustomPropertyCollection#load:member(3)
+  package: excel!
+  fullName: load(propertyNamesAndPaths)
+  summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez contacter `context.sync()` avant de lire les propriétés.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNamesAndPaths?: OfficeExtension.LoadOption): Excel.WorksheetCustomPropertyCollection;'
+    parameters:
+    - id: propertyNamesAndPaths
+      description: '`propertyNamesAndPaths.select` est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et `propertyNamesAndPaths.expand` une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.'
+      type: <xref uid="office!OfficeExtension.LoadOption:interface" />
+    return:
+      type: <xref uid="excel!Excel.WorksheetCustomPropertyCollection:class" />
+      description: ''
+- name: toJSON()
+  uid: excel!Excel.WorksheetCustomPropertyCollection#toJSON:member(1)
+  package: excel!
+  fullName: toJSON()
+  summary: Remplace la méthode JavaScript afin `toJSON()` de fournir une sortie plus utile lorsqu’un objet d’API est transmis à `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle la `toJSON` méthode de l’objet qui lui est passé.) Tandis que l’objet d’origine `Excel.WorksheetCustomPropertyCollection` est un objet d’API, la `toJSON` méthode renvoie un objet JavaScript simple (tapé comme `Excel.Interfaces.WorksheetCustomPropertyCollectionData`<!-- -->) qui contient un tableau « éléments » avec des copies superficielles de toutes les propriétés chargées des éléments de la collection.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'toJSON(): Excel.Interfaces.WorksheetCustomPropertyCollectionData;'
+    return:
+      type: <xref uid="excel!Excel.Interfaces.WorksheetCustomPropertyCollectionData:interface" />
+      description: ''
+extends: <xref uid="office!OfficeExtension.ClientObject:class" />
+metadata:
+  ms.openlocfilehash: a3c8091f9df9a55a62920105efe6a346ea9f94f4
+  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.translationtype: MT
+  ms.contentlocale: fr-FR
+  ms.lasthandoff: 11/18/2020
+  ms.locfileid: "49190088"
