@@ -1,80 +1,90 @@
-### YamlMime:UniversalReference
-items:
-  - uid: 'outlook!Office.RecurrenceTimeZone:interface'
-    summary: "Représente le fuseau horaire de la récurrence.\n\n\\[[Ensemble d’API\_: boîte aux lettres 1,7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
-    remarks: |-
-      ** <!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+### YamlMime:TSType
+name: Office.RecurrenceTimeZone
+uid: outlook!Office.RecurrenceTimeZone:interface
+package: outlook!
+fullName: Office.RecurrenceTimeZone
+summary: >-
+  Représente le fuseau horaire de la récurrence.
 
-      ** <!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: composition ou lecture
 
-      #### <a name="examples"></a>Exemples
+  \[[Ensemble d’API : boîte aux lettres 1,7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+remarks: >-
+  **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
 
-      ```javascript
-      // This example gets the Recurrence object of an appointment item.
-      Office.context.mailbox.item.recurrence.getAsync(callback);
 
-      function callback(asyncResult) {
-          var context = asyncResult.context;
-          var recurrence = asyncResult.value;
-          if (!recurrence) {
-          //if (recurrence == null) {
-              console.log("One-time appointment or meeting");
-          } else {
-              console.log(JSON.stringify(recurrence));
-          }
+  **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: composition ou lecture
+
+
+  #### <a name="examples"></a>Exemples
+
+
+  ```javascript
+
+  // This example gets the Recurrence object of an appointment item.
+
+  Office.context.mailbox.item.recurrence.getAsync(callback);
+
+
+  function callback(asyncResult) {
+      var context = asyncResult.context;
+      var recurrence = asyncResult.value;
+      if (!recurrence) {
+      //if (recurrence == null) {
+          console.log("One-time appointment or meeting");
+      } else {
+          console.log(JSON.stringify(recurrence));
       }
+  }
 
-      // The following example shows the results of the getAsync call that retrieves the recurrence for a series.
-      // NOTE: In this example, seriesTimeObject is a placeholder for the JSON representing the
-      // recurrence.seriesTime property. You should use the SeriesTime object's methods to get the
-      // recurrence date and time properties.
-      Recurrence = {
-          "recurrenceType": "weekly",
-          "recurrenceProperties": {"interval": 2, "days": ["mon","thu","fri"], "firstDayOfWeek": "sun"},
-          "seriesTime": {seriesTimeObject},
-          "recurrenceTimeZone": {"name": "Pacific Standard Time", "offset": -480}
-      }
-      ```
-    name: Office.RecurrenceTimeZone
-    fullName: Office.RecurrenceTimeZone
-    langs:
-      - typeScript
-    type: interface
-    package: outlook!
-    children:
-      - 'outlook!Office.RecurrenceTimeZone#name:member'
-      - 'outlook!Office.RecurrenceTimeZone#offset:member'
-  - uid: 'outlook!Office.RecurrenceTimeZone#name:member'
-    summary: Représente le nom du fuseau horaire de périodicité.
-    name: name
-    fullName: name
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'name: MailboxEnums.RecurrenceTimeZone | string;'
-      return:
-        type:
-          - 'outlook!Office.RecurrenceTimeZone#name~0:complex'
-  - uid: 'outlook!Office.RecurrenceTimeZone#offset:member'
-    summary: 'Valeur entière représentant la différence, en minutes, entre le fuseau horaire local et l’heure UTC à la date de début de la série de réunions.'
-    name: offset
-    fullName: offset
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'offset?: number;'
-      return:
-        type:
-          - number
-references:
-  - uid: 'outlook!Office.RecurrenceTimeZone#name~0:complex'
-    name: MailboxEnums.RecurrenceTimeZone | string
-    fullName: Office.MailboxEnums.RecurrenceTimeZone | string
-    spec.typeScript:
-      - uid: 'outlook!Office.MailboxEnums.RecurrenceTimeZone:enum'
-        name: MailboxEnums.RecurrenceTimeZone
-        fullName: Office.MailboxEnums.RecurrenceTimeZone
-      - name: ' | string'
-        fullName: ' | string'
+
+  // The following example shows the results of the getAsync call that retrieves the recurrence for a series.
+
+  // NOTE: In this example, seriesTimeObject is a placeholder for the JSON representing the
+
+  // recurrence.seriesTime property. You should use the SeriesTime object's methods to get the
+
+  // recurrence date and time properties.
+
+  Recurrence = {
+      "recurrenceType": "weekly",
+      "recurrenceProperties": {"interval": 2, "days": ["mon","thu","fri"], "firstDayOfWeek": "sun"},
+      "seriesTime": {seriesTimeObject},
+      "recurrenceTimeZone": {"name": "Pacific Standard Time", "offset": -480}
+  }
+
+  ```
+isPreview: false
+isDeprecated: false
+type: interface
+properties:
+- name: name
+  uid: outlook!Office.RecurrenceTimeZone#name:member
+  package: outlook!
+  fullName: name
+  summary: Représente le nom du fuseau horaire de périodicité.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'name: MailboxEnums.RecurrenceTimeZone | string;'
+    return:
+      type: <xref uid="outlook!Office.MailboxEnums.RecurrenceTimeZone:enum" /> | string
+- name: offset
+  uid: outlook!Office.RecurrenceTimeZone#offset:member
+  package: outlook!
+  fullName: offset
+  summary: Valeur entière représentant la différence, en minutes, entre le fuseau horaire local et l’heure UTC à la date de début de la série de réunions.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'offset?: number;'
+    return:
+      type: number
+metadata:
+  ms.openlocfilehash: fcbb06aa59c63f8f7d84c4c9c5e83e792e8acd3c
+  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.translationtype: MT
+  ms.contentlocale: fr-FR
+  ms.lasthandoff: 11/18/2020
+  ms.locfileid: "49339769"
