@@ -4,10 +4,10 @@ uid: excel!Excel.SlicerCollection:class
 package: excel!
 fullName: Excel.SlicerCollection
 summary: >-
-  Représente une collection de tous les objets Slicer du classeur ou d’une feuille de calcul.
+  Représente une collection de tous les objets slicer sur le workbook ou une feuille de calcul.
 
 
-  \[[Ensemble d’API : ExcelApi 1,10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  \[[Ensemble d’API : ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
 remarks: ''
 isPreview: false
 isDeprecated: false
@@ -17,7 +17,7 @@ properties:
   uid: excel!Excel.SlicerCollection#context:member
   package: excel!
   fullName: context
-  summary: Contexte de demande associé à l’objet. Cette opération connecte le processus du complément au processus de l’application hôte Office.
+  summary: Contexte de demande associé à l’objet. Cela connecte le processus du add-in au processus de l’application hôte Office.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -46,7 +46,7 @@ methods:
     Ajoute un nouveau segment au classeur.
 
 
-    \[[Ensemble d’API : ExcelApi 1,10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d’API : ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -54,18 +54,18 @@ methods:
     content: 'add(slicerSource: string | PivotTable | Table, sourceField: string | PivotField | number | TableColumn, slicerDestination?: string | Worksheet): Excel.Slicer;'
     parameters:
     - id: slicerSource
-      description: Source de données sur laquelle le nouveau segment sera basé. Il peut s’agir d’un objet PivotTable, d’un objet table ou d’une chaîne. Lorsqu’un objet PivotTable est transmis, la source de données est la source de l’objet PivotTable. Lorsqu’un objet table est transmis, la source de données est l’objet table. Lorsqu’une chaîne est transmise, elle est interprétée comme le nom/l’ID d’un tableau croisé dynamique/tableau.
+      description: Source de données sur qui le nouveau slicer sera basé. Il peut s’agit d’un objet pivottable, d’un objet Table ou d’une chaîne. Lorsqu’un objet de tableau croisé dynamique est transmis, la source de données est la source de l’objet de tableau croisé dynamique. Lorsqu’un objet Table est transmis, la source de données est l’objet Table. Lorsqu’une chaîne est passée, elle est interprétée comme le nom/id d’un tableau croisé dynamique/tableau.
       type: string | <xref uid="excel!Excel.PivotTable:class" /> | <xref uid="excel!Excel.Table:class" />
     - id: sourceField
-      description: Champ de la source de données à filtrer. Il peut s’agir d’un objet PivotField, d’un objet TableColumn, de l’ID d’un champ de tableau croisé dynamique ou de l’ID/nom de TableColumn.
+      description: Champ de la source de données par le filtre. Il peut s’agit d’un objet PivotField, d’un objet TableColumn, de l’ID d’un champ de tableau croisé dynamique ou de l’ID/nom de TableColumn.
       type: string | <xref uid="excel!Excel.PivotField:class" /> | number | <xref uid="excel!Excel.TableColumn:class" />
     - id: slicerDestination
-      description: Facultatif. Feuille de calcul dans laquelle le nouveau segment sera créé. Il peut s’agir d’un objet Worksheet ou du nom/ID d’une feuille de calcul. Ce paramètre peut être omis si la collection de segments est extraite de la feuille de calcul.
+      description: Facultatif. Feuille de calcul dans laquelle le nouveau slicer sera créé. Il peut s’agit d’un objet Worksheet ou du nom/id d’une feuille de calcul. Ce paramètre peut être omis si la collection de slicers est récupérée à partir d’une feuille de calcul.
       type: string | <xref uid="excel!Excel.Worksheet:class" />
     return:
       type: <xref uid="excel!Excel.Slicer:class" />
       description: >-
-        Le nouveau segment.
+        Nouveau slicer.
 
 
         #### <a name="examples"></a>Exemples
@@ -73,7 +73,7 @@ methods:
 
         ```typescript
 
-        // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/38-pivottable/pivottable-slicer.yaml
+        // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/38-pivottable/pivottable-slicer.yaml
 
         await Excel.run(async (context) => {
             const sheet = context.workbook.worksheets.getItem("Pivot");
@@ -94,7 +94,7 @@ methods:
     Renvoie le nombre de séries de la collection.
 
 
-    \[[Ensemble d’API : ExcelApi 1,10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d’API : ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -111,7 +111,7 @@ methods:
     Obtient un objet de feuille de calcul à l’aide de son nom ou de son ID.
 
 
-    \[[Ensemble d’API : ExcelApi 1,10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d’API : ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -119,11 +119,11 @@ methods:
     content: 'getItem(key: string): Excel.Slicer;'
     parameters:
     - id: key
-      description: Nom ou ID du segment.
+      description: Nom ou ID du slicer.
       type: string
     return:
       type: <xref uid="excel!Excel.Slicer:class" />
-      description: "\n\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/38-pivottable/pivottable-slicer.yaml\nawait Excel.run(async (context) => {\n    const slicer = context.workbook.slicers.getItem(\"Fruit Slicer\");\n    slicer.caption = \"Fruit Types\";\n    slicer.left = 395;\n    slicer.top = 15;\n    slicer.height = 135;\n    slicer.width = 150;\n    await context.sync();\n});\n```"
+      description: "\n\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/38-pivottable/pivottable-slicer.yaml\nawait Excel.run(async (context) => {\n    const slicer = context.workbook.slicers.getItem(\"Fruit Slicer\");\n    slicer.caption = \"Fruit Types\";\n    slicer.left = 395;\n    slicer.top = 15;\n    slicer.height = 135;\n    slicer.width = 150;\n    await context.sync();\n});\n```"
 - name: getItemAt(index)
   uid: excel!Excel.SlicerCollection#getItemAt:member(1)
   package: excel!
@@ -132,7 +132,7 @@ methods:
     Obtient une forme en fonction de sa position dans la collection.
 
 
-    \[[Ensemble d’API : ExcelApi 1,10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d’API : ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -153,7 +153,7 @@ methods:
     Obtient un objet de feuille de calcul à l’aide de son nom ou de son ID. Si la feuille de calcul n’existe pas, renvoie un objet null.
 
 
-    \[[Ensemble d’API : ExcelApi 1,10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d’API : ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -161,7 +161,7 @@ methods:
     content: 'getItemOrNullObject(key: string): Excel.Slicer;'
     parameters:
     - id: key
-      description: Nom ou ID du segment à récupérer.
+      description: Nom ou ID du slicer à récupérer.
       type: string
     return:
       type: <xref uid="excel!Excel.Slicer:class" />
@@ -178,7 +178,7 @@ methods:
     content: 'load(options?: Excel.Interfaces.SlicerCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.SlicerCollection;'
     parameters:
     - id: options
-      description: Fournit des options pour les propriétés de l’objet à charger.
+      description: Fournit des options pour lesquelles les propriétés de l’objet à charger.
       type: <xref uid="excel!Excel.Interfaces.SlicerCollectionLoadOptions:interface" /> & <xref uid="excel!Excel.Interfaces.CollectionLoadOptions:interface" />
     return:
       type: <xref uid="excel!Excel.SlicerCollection:class" />
@@ -195,7 +195,7 @@ methods:
     content: 'load(propertyNames?: string | string[]): Excel.SlicerCollection;'
     parameters:
     - id: propertyNames
-      description: Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+      description: Chaîne délimitée par des virgules ou tableau de chaînes spécifiant les propriétés à charger.
       type: string | string[]
     return:
       type: <xref uid="excel!Excel.SlicerCollection:class" />
@@ -212,7 +212,7 @@ methods:
     content: 'load(propertyNamesAndPaths?: OfficeExtension.LoadOption): Excel.SlicerCollection;'
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et `propertyNamesAndPaths.expand` une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.'
+      description: '`propertyNamesAndPaths.select` est une chaîne délimitée par des virgules qui spécifie les propriétés à charger, et est une chaîne délimitée par des virgules qui spécifie les propriétés de `propertyNamesAndPaths.expand` navigation à charger.'
       type: <xref uid="office!OfficeExtension.LoadOption:interface" />
     return:
       type: <xref uid="excel!Excel.SlicerCollection:class" />
@@ -221,7 +221,7 @@ methods:
   uid: excel!Excel.SlicerCollection#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Remplace la méthode JavaScript afin `toJSON()` de fournir une sortie plus utile lorsqu’un objet d’API est transmis à `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle la `toJSON` méthode de l’objet qui lui est passé.) Tandis que l’objet d’origine `Excel.SlicerCollection` est un objet d’API, la `toJSON` méthode renvoie un objet JavaScript simple (tapé comme `Excel.Interfaces.SlicerCollectionData`<!-- -->) qui contient un tableau « éléments » avec des copies superficielles de toutes les propriétés chargées des éléments de la collection.
+  summary: Remplace la méthode JavaScript afin de fournir une sortie plus utile lorsqu’un objet `toJSON()` API est transmis à `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle `toJSON` la méthode de l’objet qui lui est transmis.) Alors que `Excel.SlicerCollection` l’objet d’origine est un objet API, la méthode renvoie un objet `toJSON` JavaScript simple (tapé sous la forme `Excel.Interfaces.SlicerCollectionData`<!-- -->) qui contient un tableau « éléments » avec des copies peu profondes de toutes les propriétés chargées à partir des éléments de la collection.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -232,9 +232,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 9119eb38ebccc2d0304766eafabe4b9ecf6325ab
-  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.openlocfilehash: 5140673a1a46bff8000d2e75339dfd7f88a3bc81
+  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
   ms.translationtype: MT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 11/18/2020
-  ms.locfileid: "49316340"
+  ms.lasthandoff: 01/13/2021
+  ms.locfileid: "49852564"
