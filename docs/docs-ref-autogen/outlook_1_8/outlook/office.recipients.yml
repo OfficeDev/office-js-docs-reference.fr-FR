@@ -7,12 +7,12 @@ summary: >-
   Représente les destinataires d’un élément. Mode composition uniquement.
 
 
-  \[[Ensemble d’API : boîte aux lettres 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  \[[Ensemble d’API : Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
 remarks: >-
-  **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+  **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
 
-  **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: composition
+  **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: Composer
 isPreview: false
 isDeprecated: false
 type: interface
@@ -25,45 +25,45 @@ methods:
     Ajoute une liste de destinataires aux destinataires existants d’un rendez-vous ou d’un message.
 
 
-    Le paramètre Recipients peut être un tableau d’un des éléments suivants :
+    Le paramètre recipients peut être un tableau de l’un des paramètres suivants :
 
 
     - Chaînes contenant des adresses de messagerie SMTP
 
 
-    - Objets [EmailUser](xref:outlook!Office.EmailUser:interface)
+    - [Objets EmailUser](xref:outlook!Office.EmailUser:interface)
 
 
-    - Objets [EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface)
+    - [Objets EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface)
 
 
-    Nombre maximal pouvant être ajouté :
+    Nombre maximal qui peut être ajouté :
 
 
-    - Windows : 100 destinataires. **Remarque**: l’API peut être appelée plusieurs fois, mais le nombre maximal de destinataires dans le champ cible de l’élément est de 500 destinataires.
+    - Windows : 100 destinataires. **Remarque**: peut appeler l’API à plusieurs reprises, mais le nombre maximal de destinataires dans le champ cible sur l’élément est de 500 destinataires.
 
 
-    - Mac, navigateur Web : 100 destinataires
+    - Mac, navigateur web : 100 destinataires
 
 
-    - Autres : illimité
+    - Autre : aucune limite
 
 
-    \[[Ensemble d’API : boîte aux lettres 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Ensemble d’API : Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadWriteItem`
+    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteItem`
 
 
-    **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: composition
+    **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: Composer
 
 
     **Erreurs**:
 
 
-    - `NumberOfRecipientsExceeded`<!-- -->: Le nombre de destinataires est supérieur à 100 entrées.
+    - `NumberOfRecipientsExceeded`<!-- -->: le nombre de destinataires a dépassé 100 entrées.
 
 
-    #### <a name="examples"></a>範例
+    #### <a name="examples"></a>Exemples
 
 
     ```javascript
@@ -102,10 +102,10 @@ methods:
       description: Destinataires à ajouter à la liste des destinataires.
       type: (string | <xref uid="outlook!Office.EmailUser:interface" /> | <xref uid="outlook!Office.EmailAddressDetails:interface" />)[]
     - id: options
-      description: 'Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: Les développeurs peuvent fournir n’importe quel objet auquel ils souhaitent accéder dans la méthode de rappel.'
+      description: 'Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Facultatif. Une fois la méthode exécutée, la fonction transmise au `callback` paramètre est appelée avec un seul paramètre de type `Office.AsyncResult`<!-- -->. En cas d’échec de l’ajout des destinataires, la propriété `asyncResult.error` contient un code d’erreur.
+      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->. En cas d’échec de l’ajout des destinataires, la propriété `asyncResult.error` contient un code d’erreur.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -118,31 +118,31 @@ methods:
     Obtient une liste de destinataires pour un rendez-vous ou un message.
 
 
-    Une fois l’appel terminé, la `asyncResult.value` propriété contient un tableau d’objets [EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface) . Limites de taille des collections :
+    Une fois l’appel terminé, la `asyncResult.value` propriété contient un tableau d’objets [EmailAddressDetails.](xref:outlook!Office.EmailAddressDetails:interface) Limites de taille de collection :
 
 
-    - Windows, Mac, navigateur Web : 500 membres
+    - Windows, Mac, navigateur web : 500 membres
 
 
-    - Autres : illimité
+    - Autre : aucune limite
 
 
-    \[[Ensemble d’API : boîte aux lettres 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Ensemble d’API : Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
 
-    **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: composition
+    **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: Composer
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'getAsync(options: Office.AsyncContextOptions, callback: (asyncResult: Office.AsyncResult<EmailAddressDetails[]>) => void): void;'
     parameters:
     - id: options
-      description: 'Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: Les développeurs peuvent fournir n’importe quel objet auquel ils souhaitent accéder dans la méthode de rappel.'
+      description: 'Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Une fois la méthode exécutée, la fonction transmise au `callback` paramètre est appelée avec un seul paramètre de type `Office.AsyncResult`<!-- -->. La `value` propriété du résultat est un tableau d' `EmailAddressDetails` objets.
+      description: Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->. La `value` propriété du résultat est un tableau `EmailAddressDetails` d’objets.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="outlook!Office.EmailAddressDetails:interface" />[]&gt;) =&gt; void'
     return:
       type: void
@@ -155,29 +155,29 @@ methods:
     Obtient une liste de destinataires pour un rendez-vous ou un message.
 
 
-    Une fois l’appel terminé, la `asyncResult.value` propriété contient un tableau d’objets [EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface) . Limites de taille des collections :
+    Une fois l’appel terminé, la `asyncResult.value` propriété contient un tableau d’objets [EmailAddressDetails.](xref:outlook!Office.EmailAddressDetails:interface) Limites de taille de collection :
 
 
-    - Windows, Mac, navigateur Web : 500 membres
+    - Windows, Mac, navigateur web : 500 membres
 
 
-    - Autres : illimité
+    - Autre : aucune limite
 
 
-    \[[Ensemble d’API : boîte aux lettres 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Ensemble d’API : Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
 
-    **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: composition
+    **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: Composer
 
 
-    #### <a name="examples"></a>範例
+    #### <a name="examples"></a>Exemples
 
 
     ```javascript
 
-    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/30-recipients-and-attendees/get-set-bcc-message-compose.yaml
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/30-recipients-and-attendees/get-set-bcc-message-compose.yaml
 
     Office.context.mailbox.item.bcc.getAsync(function(asyncResult) {
       if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
@@ -195,7 +195,7 @@ methods:
 
     ```javascript
 
-    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/30-recipients-and-attendees/get-set-cc-message-compose.yaml
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/30-recipients-and-attendees/get-set-cc-message-compose.yaml
 
     Office.context.mailbox.item.cc.getAsync(function(asyncResult) {
       if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
@@ -213,7 +213,7 @@ methods:
 
     ```javascript
 
-    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/30-recipients-and-attendees/get-set-optional-attendees-appointment-organizer.yaml
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/30-recipients-and-attendees/get-set-optional-attendees-appointment-organizer.yaml
 
     Office.context.mailbox.item.optionalAttendees.getAsync(function(asyncResult) {
       if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
@@ -237,7 +237,7 @@ methods:
 
     ```javascript
 
-    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/30-recipients-and-attendees/get-set-required-attendees-appointment-organizer.yaml
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/30-recipients-and-attendees/get-set-required-attendees-appointment-organizer.yaml
 
     Office.context.mailbox.item.requiredAttendees.getAsync(function(asyncResult) {
       if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
@@ -261,7 +261,7 @@ methods:
 
     ```javascript
 
-    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/30-recipients-and-attendees/get-set-to-message-compose.yaml
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/30-recipients-and-attendees/get-set-to-message-compose.yaml
 
     Office.context.mailbox.item.to.getAsync(function(asyncResult) {
       if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
@@ -282,7 +282,7 @@ methods:
     content: 'getAsync(callback: (asyncResult: Office.AsyncResult<EmailAddressDetails[]>) => void): void;'
     parameters:
     - id: callback
-      description: Une fois la méthode exécutée, la fonction transmise au `callback` paramètre est appelée avec un seul paramètre de type `Office.AsyncResult`<!-- -->. La `value` propriété du résultat est un tableau d' `EmailAddressDetails` objets.
+      description: Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->. La `value` propriété du résultat est un tableau `EmailAddressDetails` d’objets.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="outlook!Office.EmailAddressDetails:interface" />[]&gt;) =&gt; void'
     return:
       type: void
@@ -298,39 +298,39 @@ methods:
     La méthode `setAsync` remplace la liste des destinataires active.
 
 
-    Le paramètre Recipients peut être un tableau d’un des éléments suivants :
+    Le paramètre recipients peut être un tableau de l’un des paramètres suivants :
 
 
     - Chaînes contenant des adresses de messagerie SMTP
 
 
-    - Objets [EmailUser](xref:outlook!Office.EmailUser:interface)
+    - [Objets EmailUser](xref:outlook!Office.EmailUser:interface)
 
 
-    - Objets [EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface)
+    - [Objets EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface)
 
 
-    Nombre maximal pouvant être défini :
+    Nombre maximal qui peut être définie :
 
 
-    - Windows, Mac, navigateur Web : 100 destinataires
+    - Windows, Mac, navigateur web : 100 destinataires
 
 
-    - Autres : illimité
+    - Autre : aucune limite
 
 
-    \[[Ensemble d’API : boîte aux lettres 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Ensemble d’API : Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadWriteItem`
+    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteItem`
 
 
-    **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: composition
+    **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: Composer
 
 
     **Erreurs**:
 
 
-    - `NumberOfRecipientsExceeded`<!-- -->: Le nombre de destinataires est supérieur à 100 entrées.
+    - `NumberOfRecipientsExceeded`<!-- -->: le nombre de destinataires a dépassé 100 entrées.
   isPreview: false
   isDeprecated: false
   syntax:
@@ -340,10 +340,10 @@ methods:
       description: Destinataires à ajouter à la liste des destinataires.
       type: (string | <xref uid="outlook!Office.EmailUser:interface" /> | <xref uid="outlook!Office.EmailAddressDetails:interface" />)[]
     - id: options
-      description: 'Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: Les développeurs peuvent fournir n’importe quel objet auquel ils souhaitent accéder dans la méthode de rappel.'
+      description: 'Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Une fois la méthode exécutée, la fonction transmise au `callback` paramètre est appelée avec un seul paramètre de type `Office.AsyncResult`<!-- -->. En cas d’échec de la définition des destinataires, la propriété `asyncResult.error` contient un code indiquant toute erreur survenue lors de l’ajout des données.
+      description: Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->. En cas d’échec de la définition des destinataires, la propriété `asyncResult.error` contient un code indiquant toute erreur survenue lors de l’ajout des données.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -359,42 +359,42 @@ methods:
     La méthode `setAsync` remplace la liste des destinataires active.
 
 
-    Le paramètre Recipients peut être un tableau d’un des éléments suivants :
+    Le paramètre recipients peut être un tableau de l’un des paramètres suivants :
 
 
     - Chaînes contenant des adresses de messagerie SMTP
 
 
-    - Objets [EmailUser](xref:outlook!Office.EmailUser:interface)
+    - [Objets EmailUser](xref:outlook!Office.EmailUser:interface)
 
 
-    - Objets [EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface)
+    - [Objets EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface)
 
 
-    Nombre maximal pouvant être défini :
+    Nombre maximal qui peut être définie :
 
 
-    - Windows, Mac, navigateur Web : 100 destinataires
+    - Windows, Mac, navigateur web : 100 destinataires
 
 
-    - Autres : illimité
+    - Autre : aucune limite
 
 
-    \[[Ensemble d’API : boîte aux lettres 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Ensemble d’API : Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadWriteItem`
+    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteItem`
 
 
-    **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: composition
+    **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: Composer
 
 
     **Erreurs**:
 
 
-    - `NumberOfRecipientsExceeded`<!-- -->: Le nombre de destinataires est supérieur à 100 entrées.
+    - `NumberOfRecipientsExceeded`<!-- -->: le nombre de destinataires a dépassé 100 entrées.
 
 
-    #### <a name="examples"></a>範例
+    #### <a name="examples"></a>Exemples
 
 
     ```javascript
@@ -427,7 +427,7 @@ methods:
 
     ```javascript
 
-    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/30-recipients-and-attendees/get-set-bcc-message-compose.yaml
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/30-recipients-and-attendees/get-set-bcc-message-compose.yaml
 
     var email = $("#emailBcc")
       .val()
@@ -446,7 +446,7 @@ methods:
 
     ```javascript
 
-    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/30-recipients-and-attendees/get-set-cc-message-compose.yaml
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/30-recipients-and-attendees/get-set-cc-message-compose.yaml
 
     var email = $("#emailCc")
       .val()
@@ -465,7 +465,7 @@ methods:
 
     ```javascript
 
-    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/30-recipients-and-attendees/get-set-optional-attendees-appointment-organizer.yaml
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/30-recipients-and-attendees/get-set-optional-attendees-appointment-organizer.yaml
 
     var email = $("#emailOptional")
       .val()
@@ -484,7 +484,7 @@ methods:
 
     ```javascript
 
-    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/30-recipients-and-attendees/get-set-required-attendees-appointment-organizer.yaml
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/30-recipients-and-attendees/get-set-required-attendees-appointment-organizer.yaml
 
     var email = $("#emailRequired")
       .val()
@@ -503,7 +503,7 @@ methods:
 
     ```javascript
 
-    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/30-recipients-and-attendees/get-set-to-message-compose.yaml
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/30-recipients-and-attendees/get-set-to-message-compose.yaml
 
     var email = $("#emailTo")
       .val()
@@ -528,15 +528,15 @@ methods:
       description: Destinataires à ajouter à la liste des destinataires.
       type: (string | <xref uid="outlook!Office.EmailUser:interface" /> | <xref uid="outlook!Office.EmailAddressDetails:interface" />)[]
     - id: callback
-      description: Une fois la méthode exécutée, la fonction transmise au `callback` paramètre est appelée avec un seul paramètre de type `Office.AsyncResult`<!-- -->. En cas d’échec de la définition des destinataires, la propriété `asyncResult.error` contient un code indiquant toute erreur survenue lors de l’ajout des données.
+      description: Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->. En cas d’échec de la définition des destinataires, la propriété `asyncResult.error` contient un code indiquant toute erreur survenue lors de l’ajout des données.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
       description: ''
 metadata:
-  ms.openlocfilehash: e71255ade8b68ceabccf5383204a500feb0a87ba
-  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.openlocfilehash: 64d2d140d07a166308c37722b2d165adbe77e225
+  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
   ms.translationtype: MT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 11/18/2020
-  ms.locfileid: "49143091"
+  ms.lasthandoff: 01/13/2021
+  ms.locfileid: "49849813"
