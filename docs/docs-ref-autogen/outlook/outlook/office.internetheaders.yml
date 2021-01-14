@@ -4,36 +4,36 @@ uid: outlook!Office.InternetHeaders:interface
 package: outlook!
 fullName: Office.InternetHeaders
 summary: >-
-  L' `InternetHeaders` objet représente les en-têtes Internet personnalisés qui sont conservés après que l’élément de message quitte Exchange et qu’il est converti en message MIME. Ces en-têtes sont stockés sous forme d’en-têtes x dans le message MIME.
+  L’objet représente des en-têtes Internet personnalisés qui sont conservés après que l’élément de message quitte Exchange et est converti `InternetHeaders` en message MIME. Ces en-têtes sont stockés en tant qu’en-têtes x dans le message MIME.
 
 
-  Les en-têtes Internet sont stockés en tant que paires clé/valeur au niveau de chaque élément.
+  Les en-têtes Internet sont stockés en tant que paires clé/valeur par élément.
 
 
-  **Remarque**: cet objet vous permet de définir et d’obtenir des en-têtes personnalisés sur un élément de message.
+  **Remarque**: cet objet est destiné à vous permettre de définir et d’obtenir vos en-têtes personnalisés sur un élément de message. Pour plus d’informations, voir Obtenir et définir des en-têtes [Internet sur un message dans un add-in Outlook](https://docs.microsoft.com/office/dev/add-ins/outlook/internet-headers)<!-- -->.
 
 
-  \[[Ensemble d’API : boîte aux lettres 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  \[[Ensemble d’API : Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
 remarks: >-
   **Pratiques recommandées**
 
 
-  Actuellement, les en-têtes Internet sont une ressource finie sur la boîte aux lettres d’un utilisateur. Lorsque le quota est épuisé, vous ne pouvez plus créer d’en-têtes Internet supplémentaires sur cette boîte aux lettres, ce qui peut entraîner un comportement inattendu de la part des clients qui dépendent de cette fonctionnalité.
+  Actuellement, les en-têtes Internet sont une ressource finie sur la boîte aux lettres d’un utilisateur. Lorsque le quota est épuisé, vous ne pouvez plus créer d’en-têtes Internet sur cette boîte aux lettres, ce qui peut entraîner un comportement inattendu de la part des clients qui s’en appuient pour fonctionner.
 
 
-  Appliquez les instructions suivantes lorsque vous créez des en-têtes Internet dans votre complément.
+  Appliquez les instructions suivantes lorsque vous créez des en-têtes Internet dans votre application.
 
 
   - Créez le nombre minimal d’en-têtes requis.
 
 
-  - Les en-têtes de nom afin que vous puissiez réutiliser et mettre à jour leurs valeurs ultérieurement. En tant que telle, évitez les en-têtes de nom de manière variable (par exemple, en fonction de l’entrée utilisateur, de l’horodatage, etc.).
+  - Nommez les en-têtes afin de pouvoir réutiliser et mettre à jour leurs valeurs ultérieurement. En tant que tel, évitez d’nommer les en-têtes de manière variable (par exemple, en fonction de l’entrée utilisateur, de l’timestamp, etc.).
 
 
-  **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+  **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
 
-  **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: composition
+  **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: Composer
 isPreview: false
 isDeprecated: false
 type: interface
@@ -43,32 +43,37 @@ methods:
   package: outlook!
   fullName: getAsync(names, options, callback)
   summary: >-
-    Étant donné un tableau des noms d’en-tête Internet, cette méthode renvoie un dictionnaire contenant ces en-têtes Internet et leurs valeurs. Si le complément demande un en-tête x qui n’est pas disponible, cet en-tête x ne sera pas renvoyé dans les résultats.
+    Étant donné un tableau de noms d’en-têtes Internet, cette méthode renvoie un dictionnaire contenant ces en-têtes Internet et leurs valeurs. Si le add-in demande un en-tête x qui n’est pas disponible, cet en-tête x ne sera pas renvoyé dans les résultats.
 
 
-    **Remarque**: cette méthode est destinée à renvoyer les valeurs des en-têtes personnalisés que vous avez définis à l’aide de la `setAsync` méthode.
+    **Remarque**: cette méthode est destinée à renvoyer les valeurs des en-têtes personnalisés que vous définissez à l’aide de la `setAsync` méthode.
 
 
-    \[[Ensemble d’API : boîte aux lettres 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Ensemble d’API : Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
 
-    **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: composition
+    **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: Composer
 
 
-    #### <a name="examples"></a>範例
+    #### <a name="examples"></a>Exemples
 
 
     ```javascript
 
-    Office.context.mailbox.item.internetHeaders.getAsync(["header1", "header2"], callback);
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/70-mime-headers/manage-custom-internet-headers-message-compose.yaml
 
-
-    function callback(asyncResult) {
-        var dictionary = asyncResult.value;
-        var header1_value = dictionary["header1"];
-    }
+    Office.context.mailbox.item.internetHeaders.getAsync(
+      ["x-preferred-fruit", "x-preferred-vegetable", "x-best-vegetable", "x-nonexistent-header"],
+      function (asyncResult) {
+        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+          console.log("Selected headers: " + JSON.stringify(asyncResult.value));
+        } else {
+          console.log("Error getting selected headers: " + JSON.stringify(asyncResult.error));
+        }
+      }
+    );
 
     ```
   isPreview: false
@@ -77,13 +82,13 @@ methods:
     content: 'getAsync(names: string[], options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<InternetHeaders>) => void): void;'
     parameters:
     - id: names
-      description: Noms des en-têtes Internet à renvoyer.
+      description: Noms des en-têtes Internet à retourner.
       type: string[]
     - id: options
-      description: 'Facultatif. Littéral d’objet qui contient une ou plusieurs des propriétés suivantes : `asyncContext`<!-- -->: Les développeurs peuvent fournir n’importe quel objet auquel ils souhaitent accéder dans la méthode de rappel.'
+      description: 'Facultatif. Littéral d’objet qui contient une ou plusieurs des propriétés suivantes : `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Facultatif. Une fois la méthode exécutée, la fonction transmise au `callback` paramètre est appelée avec un seul paramètre, `asyncResult`<!-- -->, qui est un `Office.AsyncResult` objet.
+      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre `callback` est appelée avec un seul paramètre, `asyncResult`<!-- -->, qui est un `Office.AsyncResult` objet.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="outlook!Office.InternetHeaders:interface" />&gt;) =&gt; void'
     return:
       type: void
@@ -93,26 +98,37 @@ methods:
   package: outlook!
   fullName: removeAsync(names, options, callback)
   summary: >-
-    Étant donné un tableau des noms d’en-tête Internet, cette méthode supprime les en-têtes spécifiés de la collection d’en-têtes Internet.
+    Étant donné un tableau de noms d’en-têtes Internet, cette méthode supprime les en-têtes spécifiés de la collection d’en-têtes Internet.
 
 
-    **Remarque**: cette méthode est destinée à supprimer les en-têtes personnalisés que vous avez définis à l’aide de la `setAsync` méthode.
+    **Remarque**: cette méthode est destinée à supprimer les en-têtes personnalisés que vous définissez à l’aide de `setAsync` la méthode.
 
 
-    \[[Ensemble d’API : boîte aux lettres 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Ensemble d’API : Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadWriteItem`
+    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteItem`
 
 
-    **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: composition
+    **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: Composer
 
 
-    #### <a name="examples"></a>範例
+    #### <a name="examples"></a>Exemples
 
 
     ```javascript
 
-    Office.context.mailbox.item.internetHeaders.removeAsync(["header1", "header2"]);
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/70-mime-headers/manage-custom-internet-headers-message-compose.yaml
+
+    Office.context.mailbox.item.internetHeaders.removeAsync(
+      ["x-best-vegetable", "x-nonexistent-header"],
+      function (asyncResult) {
+        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+          console.log("Successfully removed selected headers");
+        } else {
+          console.log("Error removing selected headers: " + JSON.stringify(asyncResult.error));
+        }
+      }
+    );
 
     ```
   isPreview: false
@@ -124,10 +140,10 @@ methods:
       description: Noms des en-têtes Internet à supprimer.
       type: string[]
     - id: options
-      description: 'Facultatif. Littéral d’objet qui contient une ou plusieurs des propriétés suivantes : `asyncContext`<!-- -->: Les développeurs peuvent fournir n’importe quel objet auquel ils souhaitent accéder dans la méthode de rappel.'
+      description: 'Facultatif. Littéral d’objet qui contient une ou plusieurs des propriétés suivantes : `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Facultatif. Une fois la méthode exécutée, la fonction transmise au `callback` paramètre est appelée avec un seul paramètre, `asyncResult`<!-- -->, qui est un `Office.AsyncResult` objet.
+      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre `callback` est appelée avec un seul paramètre, `asyncResult`<!-- -->, qui est un `Office.AsyncResult` objet.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="outlook!Office.InternetHeaders:interface" />&gt;) =&gt; void'
     return:
       type: void
@@ -140,26 +156,38 @@ methods:
     Définit les en-têtes Internet spécifiés sur les valeurs spécifiées.
 
 
-    La `setAsync` méthode crée un nouvel en-tête si l’en-tête spécifié n’existe pas déjà ; sinon, la valeur existante est remplacée par la nouvelle valeur.
+    La méthode crée un en-tête si l’en-tête spécifié n’existe pas déjà ; sinon, la valeur existante est remplacée par `setAsync` la nouvelle valeur.
 
 
-    **Remarque**: cette méthode est destinée à définir les valeurs de vos en-têtes personnalisés.
+    **Remarque**: cette méthode est conçue pour définir les valeurs de vos en-têtes personnalisés.
 
 
-    \[[Ensemble d’API : boîte aux lettres 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Ensemble d’API : Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **<!-- --> [Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadWriteItem`
+    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteItem`
 
 
-    **<!-- --> [Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: composition
+    **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: Composer
 
 
-    #### <a name="examples"></a>範例
+    #### <a name="examples"></a>Exemples
 
 
     ```javascript
 
-    Office.context.mailbox.item.internetHeaders.setAsync({"header1": "value1", "header2": "value2"});
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/70-mime-headers/manage-custom-internet-headers-message-compose.yaml
+
+    Office.context.mailbox.item.internetHeaders.setAsync(
+      { "x-preferred-fruit": "orange", "x-preferred-vegetable": "broccoli", "x-best-vegetable": "spinach" },
+      function (asyncResult) {
+        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+          console.log("Successfully set headers");
+        } else {
+          console.log("Error setting headers: " + JSON.stringify(asyncResult.error));
+        }
+      }
+
+    );
 
     ```
   isPreview: false
@@ -168,21 +196,21 @@ methods:
     content: 'setAsync(headers: Object, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: headers
-      description: Les noms et les valeurs correspondantes des en-têtes à définir. Doit être un objet Dictionary dont les clés sont les noms des en-têtes et valeurs Internet correspondant aux valeurs des en-têtes Internet.
+      description: Noms et valeurs correspondantes des en-têtes à définir. Il doit s’agit d’un objet de dictionnaire dont les clés sont les noms des en-têtes Internet et les valeurs des en-têtes Internet.
       type: Object
     - id: options
-      description: 'Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: Les développeurs peuvent fournir n’importe quel objet auquel ils souhaitent accéder dans la méthode de rappel.'
+      description: 'Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Facultatif. Une fois la méthode exécutée, la fonction transmise au `callback` paramètre est appelée avec un seul paramètre de type Office. AsyncResult. Les erreurs rencontrées seront indiquées dans la propriété `asyncResult.error`.
+      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec un seul paramètre de `callback` type Office.AsyncResult. Les erreurs rencontrées seront indiquées dans la propriété `asyncResult.error`.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
       description: ''
 metadata:
-  ms.openlocfilehash: c26c15caa645c162148936a6906c64a22903a0b7
-  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.openlocfilehash: e666b64587a4509d9d2d850231902c4d8b9ebca4
+  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
   ms.translationtype: MT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 11/18/2020
-  ms.locfileid: "49210990"
+  ms.lasthandoff: 01/13/2021
+  ms.locfileid: "49861293"
