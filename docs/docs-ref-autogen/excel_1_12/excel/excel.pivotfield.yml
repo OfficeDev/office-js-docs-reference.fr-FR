@@ -7,7 +7,7 @@ summary: >-
   Représente le champ de tableau croisé dynamique Excel.
 
 
-  \[[Ensemble d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  \[[Ensemble d’API : ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
 remarks: ''
 isPreview: false
 isDeprecated: false
@@ -17,7 +17,7 @@ properties:
   uid: excel!Excel.PivotField#context:member
   package: excel!
   fullName: context
-  summary: Contexte de demande associé à l’objet. Cette opération connecte le processus du complément au processus de l’application hôte Office.
+  summary: Contexte de demande associé à l’objet. Cela connecte le processus du add-in au processus de l’application hôte Office.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -33,7 +33,7 @@ properties:
     ID du champ PivotField.
 
 
-    \[[Ensemble d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d’API : ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -49,7 +49,7 @@ properties:
     Renvoie les PivotFields associés à PivotField.
 
 
-    \[[Ensemble d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d’API : ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -65,7 +65,7 @@ properties:
     Nom du champ PivotField.
 
 
-    \[[Ensemble d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d’API : ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -81,7 +81,7 @@ properties:
     Détermine si vous voulez afficher tous les éléments de PivotField.
 
 
-    \[[Ensemble d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d’API : ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -97,7 +97,7 @@ properties:
     Sous-totaux du champ PivotField.
 
 
-    \[[Ensemble d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d’API : ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -111,10 +111,10 @@ methods:
   package: excel!
   fullName: applyFilter(filter)
   summary: >-
-    Définit une ou plusieurs des informations de la valeur de champ en vigueur du champ et les applique au champ. Si les filtres fournis ne sont pas valides ou ne peuvent pas être appliqués, une exception est générée.
+    Définit un ou plusieurs des filtres de tableau croisé dynamique actuels du champ et les applique au champ. Si les filtres fournis ne sont pas valides ou ne peuvent pas être appliqués, une exception est lancée.
 
 
-    \[[Ensemble d’API : ExcelApi 1,12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d’API : ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -122,7 +122,7 @@ methods:
     content: 'applyFilter(filter: Excel.PivotFilters): void;'
     parameters:
     - id: filter
-      description: Une interface spécifique PivotFilter ou une interface PivotFilters contenant plusieurs filtres configurés.
+      description: Un filtre de tableau croisé dynamique spécifique configuré ou une interface de filtres croisés dynamiques contenant plusieurs filtres configurés.
       type: <xref uid="excel!Excel.PivotFilters:interface" />
     return:
       type: void
@@ -132,10 +132,10 @@ methods:
   package: excel!
   fullName: clearAllFilters()
   summary: >-
-    Efface tous les critères de tous les filtres du champ. Cela supprime tout filtrage actif sur le champ.
+    Permet d’effacer tous les critères de tous les filtres du champ. Cela supprime tout filtrage actif sur le champ.
 
 
-    \[[Ensemble d’API : ExcelApi 1,12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d’API : ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -143,16 +143,16 @@ methods:
     content: 'clearAllFilters(): void;'
     return:
       type: void
-      description: "\n\n#### <a name=\"examples\"></a>範例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/38-pivottable/pivottable-pivotfilters.yaml\nawait Excel.run(async (context) => {\n  // Clear all the PivotFilters.\n\n  // Get the PivotTable.\n  const pivotTable = context.workbook.worksheets.getActiveWorksheet().pivotTables.getItem(\"Farm Sales\");\n  pivotTable.hierarchies.load(\"name\");\n  await context.sync();\n\n  // Clear the filters on each PivotField.\n  pivotTable.hierarchies.items.forEach((hierarchy) => {\n    hierarchy.fields.getItem(hierarchy.name).clearAllFilters();\n  });\n  await context.sync();\n});\n```"
+      description: "\n\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/38-pivottable/pivottable-pivotfilters.yaml\nawait Excel.run(async (context) => {\n  // Clear all the PivotFilters.\n\n  // Get the PivotTable.\n  const pivotTable = context.workbook.worksheets.getActiveWorksheet().pivotTables.getItem(\"Farm Sales\");\n  pivotTable.hierarchies.load(\"name\");\n  await context.sync();\n\n  // Clear the filters on each PivotField.\n  pivotTable.hierarchies.items.forEach((hierarchy) => {\n    hierarchy.fields.getItem(hierarchy.name).clearAllFilters();\n  });\n  await context.sync();\n});\n```"
 - name: clearFilter(filterType)
   uid: excel!Excel.PivotField#clearFilter:member(1)
   package: excel!
   fullName: clearFilter(filterType)
   summary: >-
-    Efface tous les critères existants du filtre du champ du type donné (s’il est déjà appliqué).
+    Permet d’effacer tous les critères existants du filtre du champ du type donné (s’il en existe un actuellement appliqué).
 
 
-    \[[Ensemble d’API : ExcelApi 1,12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d’API : ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -160,7 +160,7 @@ methods:
     content: 'clearFilter(filterType: Excel.PivotFilterType): void;'
     parameters:
     - id: filterType
-      description: Type de filtre sur le champ dont tous les critères doivent être effacés.
+      description: Type de filtre sur le champ pour lequel effacer tous les critères.
       type: <xref uid="excel!Excel.PivotFilterType:enum" />
     return:
       type: void
@@ -170,10 +170,10 @@ methods:
   package: excel!
   fullName: clearFilter(filterTypeString)
   summary: >-
-    Efface tous les critères existants du filtre du champ du type donné (s’il est déjà appliqué).
+    Permet d’effacer tous les critères existants du filtre du champ du type donné (s’il en existe un actuellement appliqué).
 
 
-    \[[Ensemble d’API : ExcelApi 1,12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d’API : ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -181,7 +181,7 @@ methods:
     content: 'clearFilter(filterTypeString: "Unknown" | "Value" | "Manual" | "Label" | "Date"): void;'
     parameters:
     - id: filterTypeString
-      description: Type de filtre sur le champ dont tous les critères doivent être effacés.
+      description: Type de filtre sur le champ pour lequel effacer tous les critères.
       type: "\"Unknown\" | \"Value\" | \"Manual\" | \"Label\" | \"Date\""
     return:
       type: void
@@ -194,7 +194,7 @@ methods:
     Obtient tous les filtres actuellement appliqués sur le champ.
 
 
-    \[[Ensemble d’API : ExcelApi 1,12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d’API : ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -202,7 +202,7 @@ methods:
     content: 'getFilters(): OfficeExtension.ClientResult<Excel.PivotFilters>;'
     return:
       type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;<xref uid="excel!Excel.PivotFilters:interface" />&gt;
-      description: Une interface PivotFilters avec tous les filtres actifs.
+      description: Interface pivotFilters avec tous les filtres actifs.
 - name: isFiltered(filterType)
   uid: excel!Excel.PivotField#isFiltered:member(1)
   package: excel!
@@ -211,7 +211,7 @@ methods:
     Vérifie s’il existe des filtres appliqués sur le champ.
 
 
-    \[[Ensemble d’API : ExcelApi 1,12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d’API : ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -223,7 +223,7 @@ methods:
       type: <xref uid="excel!Excel.PivotFilterType:enum" />
     return:
       type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;boolean&gt;
-      description: True si le champ a un filtre de type `filterType` appliqué. Si filterType n’est pas spécifié, la valeur true est renvoyée si le champ possède des filtres appliqués.
+      description: True si un filtre de type est appliqué au `filterType` champ. Si filterType n’est pas spécifié, true est renvoyé si le champ a des filtres appliqués.
 - name: isFiltered(filterTypeString)
   uid: excel!Excel.PivotField#isFiltered:member(2)
   package: excel!
@@ -232,7 +232,7 @@ methods:
     Vérifie s’il existe des filtres appliqués sur le champ.
 
 
-    \[[Ensemble d’API : ExcelApi 1,12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d’API : ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -244,7 +244,7 @@ methods:
       type: "\"Unknown\" | \"Value\" | \"Manual\" | \"Label\" | \"Date\""
     return:
       type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;boolean&gt;
-      description: True si le champ a un filtre de type `filterType` appliqué. Si filterType n’est pas spécifié, la valeur true est renvoyée si le champ possède des filtres appliqués.
+      description: True si un filtre de type est appliqué au `filterType` champ. Si filterType n’est pas spécifié, true est renvoyé si le champ a des filtres appliqués.
 - name: load(options)
   uid: excel!Excel.PivotField#load:member(1)
   package: excel!
@@ -257,7 +257,7 @@ methods:
     content: 'load(options?: Excel.Interfaces.PivotFieldLoadOptions): Excel.PivotField;'
     parameters:
     - id: options
-      description: Fournit des options pour les propriétés de l’objet à charger.
+      description: Fournit des options pour lesquelles les propriétés de l’objet à charger.
       type: <xref uid="excel!Excel.Interfaces.PivotFieldLoadOptions:interface" />
     return:
       type: <xref uid="excel!Excel.PivotField:class" />
@@ -274,7 +274,7 @@ methods:
     content: 'load(propertyNames?: string | string[]): Excel.PivotField;'
     parameters:
     - id: propertyNames
-      description: Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+      description: Chaîne délimitée par des virgules ou tableau de chaînes spécifiant les propriétés à charger.
       type: string | string[]
     return:
       type: <xref uid="excel!Excel.PivotField:class" />
@@ -295,7 +295,7 @@ methods:
               }): Excel.PivotField;
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et `propertyNamesAndPaths.expand` une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.'
+      description: '`propertyNamesAndPaths.select` est une chaîne délimitée par des virgules qui spécifie les propriétés à charger, et est une chaîne délimitée par des virgules qui spécifie les propriétés de `propertyNamesAndPaths.expand` navigation à charger.'
       type: >-
         {
                     select?: string;
@@ -308,9 +308,9 @@ methods:
   uid: excel!Excel.PivotField#set:member(1)
   package: excel!
   fullName: set(properties, options)
-  summary: Définit plusieurs propriétés d’un objet en même temps. Vous pouvez transmettre un objet plain avec les propriétés appropriées, ou un autre objet API du même type.
+  summary: Définit plusieurs propriétés d’un objet en même temps. Vous pouvez transmettre un objet simple avec les propriétés appropriées ou un autre objet API du même type.
   remarks: >-
-    Cette méthode est dotée de la signature supplémentaire suivante :
+    Cette méthode possède la signature supplémentaire suivante :
 
 
     `set(properties: Excel.PivotField): void`
@@ -320,10 +320,10 @@ methods:
     content: 'set(properties: Interfaces.PivotFieldUpdateData, options?: OfficeExtension.UpdateOptions): void;'
     parameters:
     - id: properties
-      description: Objet JavaScript avec des propriétés qui sont structurées isomorphically vers les propriétés de l’objet sur lequel la méthode est appelée.
+      description: Objet JavaScript avec des propriétés structurées de manière isomorphe aux propriétés de l’objet sur lequel la méthode est appelée.
       type: <xref uid="excel!Excel.Interfaces.PivotFieldUpdateData:interface" />
     - id: options
-      description: Fournit une option permettant de supprimer les erreurs si l’objet Properties tente de définir des propriétés en lecture seule.
+      description: Fournit une option pour supprimer les erreurs si l’objet propriétés tente de définir des propriétés en lecture seule.
       type: <xref uid="office!OfficeExtension.UpdateOptions:interface" />
     return:
       type: void
@@ -353,7 +353,7 @@ methods:
     Trie le PivotField. Si une DataPivotHierarchy est spécifiée, le tri sera appliqué en fonction de celle-ci, sinon le tri sera basé sur le PivotField lui-même.
 
 
-    \[[Ensemble d’API : ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d’API : ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -361,7 +361,7 @@ methods:
     content: 'sortByLabels(sortBy: SortBy): void;'
     parameters:
     - id: sortBy
-      description: Indique si le tri est réalisé dans l’ordre croissant ou décroissant.
+      description: Spécifie si le tri est effectué par ordre croissant ou décroit.
       type: <xref uid="excel!Excel.SortBy:enum" />
     return:
       type: void
@@ -371,10 +371,10 @@ methods:
   package: excel!
   fullName: sortByValues(sortBy, valuesHierarchy, pivotItemScope)
   summary: >-
-    Trie le PivotField par valeurs spécifiées dans une étendue donnée. L’étendue définit les valeurs spécifiques qui seront utilisées pour le tri lorsqu’il existe plusieurs valeurs à partir du même DataPivotHierarchy.
+    Trie le PivotField par valeurs spécifiées dans une étendue donnée. L’étendue définit les valeurs spécifiques qui seront utilisées pour le tri lorsqu’il existe plusieurs valeurs de la même DataPivotHierarchy.
 
 
-    \[[Ensemble d’API : ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d’API : ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -382,13 +382,13 @@ methods:
     content: 'sortByValues(sortBy: Excel.SortBy, valuesHierarchy: Excel.DataPivotHierarchy, pivotItemScope?: Array<PivotItem | string>): void;'
     parameters:
     - id: sortBy
-      description: Indique si le tri est réalisé dans l’ordre croissant ou décroissant.
+      description: Spécifie si le tri est effectué par ordre croissant ou décroit.
       type: <xref uid="excel!Excel.SortBy:enum" />
     - id: valuesHierarchy
-      description: Spécifie la hiérarchie des valeurs sur l’axe des données à utiliser pour le tri.
+      description: Spécifie la hiérarchie de valeurs sur l’axe des données à utiliser pour le tri.
       type: <xref uid="excel!Excel.DataPivotHierarchy:class" />
     - id: pivotItemScope
-      description: Les éléments qui doivent être utilisés pour l’étendue du tri. Il s’agit des éléments qui composent la ligne ou la colonne que vous souhaitez trier. Si une chaîne est utilisée à la place d’un PivotItem, la chaîne représente l’ID de PivotItem. S’il n’y a pas d’éléments autres que la hiérarchie de données sur l’axe sur lequel vous souhaitez effectuer le tri, il peut être vide.
+      description: Éléments à utiliser pour l’étendue du tri. Ce sont les éléments qui formeront la ligne ou la colonne sur qui vous souhaitez trier. Si une chaîne est utilisée à la place d’un pivotItem, la chaîne représente l’ID de l’pivotItem. S’il n’y a pas d’autres éléments que la hiérarchie de données sur l’axe sur quoi vous souhaitez trier, cela peut être vide.
       type: Array&lt;<xref uid="excel!Excel.PivotItem:class" /> | string&gt;
     return:
       type: void
@@ -398,10 +398,10 @@ methods:
   package: excel!
   fullName: sortByValues(sortByString, valuesHierarchy, pivotItemScope)
   summary: >-
-    Trie le PivotField par valeurs spécifiées dans une étendue donnée. L’étendue définit les valeurs spécifiques qui seront utilisées pour le tri lorsqu’il existe plusieurs valeurs à partir du même DataPivotHierarchy.
+    Trie le PivotField par valeurs spécifiées dans une étendue donnée. L’étendue définit les valeurs spécifiques qui seront utilisées pour le tri lorsqu’il existe plusieurs valeurs de la même DataPivotHierarchy.
 
 
-    \[[Ensemble d’API : ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d’API : ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -409,13 +409,13 @@ methods:
     content: 'sortByValues(sortByString: "Ascending" | "Descending", valuesHierarchy: Excel.DataPivotHierarchy, pivotItemScope?: Array<PivotItem | string>): void;'
     parameters:
     - id: sortByString
-      description: Indique si le tri est réalisé dans l’ordre croissant ou décroissant.
+      description: Spécifie si le tri est effectué par ordre croissant ou décroit.
       type: "\"Ascending\" | \"Descending\""
     - id: valuesHierarchy
-      description: Spécifie la hiérarchie des valeurs sur l’axe des données à utiliser pour le tri.
+      description: Spécifie la hiérarchie de valeurs sur l’axe des données à utiliser pour le tri.
       type: <xref uid="excel!Excel.DataPivotHierarchy:class" />
     - id: pivotItemScope
-      description: Les éléments qui doivent être utilisés pour l’étendue du tri. Il s’agit des éléments qui composent la ligne ou la colonne que vous souhaitez trier. Si une chaîne est utilisée à la place d’un PivotItem, la chaîne représente l’ID de PivotItem. S’il n’y a pas d’éléments autres que la hiérarchie de données sur l’axe sur lequel vous souhaitez effectuer le tri, il peut être vide.
+      description: Éléments à utiliser pour l’étendue du tri. Ce sont les éléments qui formeront la ligne ou la colonne sur qui vous souhaitez trier. Si une chaîne est utilisée à la place d’un pivotItem, la chaîne représente l’ID de l’pivotItem. S’il n’y a pas d’autres éléments que la hiérarchie de données sur l’axe sur quoi vous souhaitez trier, cela peut être vide.
       type: Array&lt;<xref uid="excel!Excel.PivotItem:class" /> | string&gt;
     return:
       type: void
@@ -424,7 +424,7 @@ methods:
   uid: excel!Excel.PivotField#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Remplace la méthode JavaScript afin `toJSON()` de fournir une sortie plus utile lorsqu’un objet d’API est transmis à `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle la `toJSON` méthode de l’objet qui lui est passé.) Tandis que l’objet Excel. PivotField d’origine est un objet d’API, la `toJSON` méthode renvoie un objet JavaScript simple (tapé comme `Excel.Interfaces.PivotFieldData`<!-- -->) qui contient des copies superficielles de toutes les propriétés enfants chargées à partir de l’objet d’origine.
+  summary: Remplace la méthode JavaScript afin de fournir une sortie plus utile lorsqu’un objet `toJSON()` API est transmis à `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle `toJSON` la méthode de l’objet qui lui est transmis.) Alors que l’objet Excel.PivotField d’origine est un objet API, la méthode renvoie un objet `toJSON` JavaScript simple (tapé sous la forme `Excel.Interfaces.PivotFieldData`<!-- -->) qui contient des copies superficiels de toutes les propriétés enfants chargées à partir de l’objet d’origine.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -435,9 +435,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: c036ad589e3e5a62a85f57ce0a127620a62666d9
-  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.openlocfilehash: 659673355b5ea9111e963b2ab0cebaca900840b2
+  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
   ms.translationtype: MT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 11/18/2020
-  ms.locfileid: "49226243"
+  ms.lasthandoff: 01/13/2021
+  ms.locfileid: "49855686"
