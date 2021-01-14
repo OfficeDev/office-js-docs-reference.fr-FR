@@ -4,10 +4,10 @@ uid: excel!Excel.NumberFormatInfo:class
 package: excel!
 fullName: Excel.NumberFormatInfo
 summary: >-
-  Définit le format d’affichage des nombres approprié pour la culture. Cette fonction est basée sur les paramètres de culture actuelle du système.
+  Définit le format adapté à la culture de l’affichage des nombres. Il est basé sur les paramètres de culture système actuels.
 
 
-  \[[Ensemble d’API : ExcelApi 1,11](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  \[[Ensemble d’API : ExcelApi 1.11](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
 remarks: ''
 isPreview: false
 isDeprecated: false
@@ -17,7 +17,7 @@ properties:
   uid: excel!Excel.NumberFormatInfo#context:member
   package: excel!
   fullName: context
-  summary: Contexte de demande associé à l’objet. Cette opération connecte le processus du complément au processus de l’application hôte Office.
+  summary: Contexte de demande associé à l’objet. Cela connecte le processus du add-in au processus de l’application hôte Office.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -30,10 +30,10 @@ properties:
   package: excel!
   fullName: numberDecimalSeparator
   summary: >-
-    Obtient la chaîne utilisée comme séparateur décimal pour les valeurs numériques. Cette fonction est basée sur les paramètres système actuels.
+    Obtient la chaîne utilisée comme séparateur décimal pour les valeurs numériques. Il est basé sur les paramètres système actuels.
 
 
-    \[[Ensemble d’API : ExcelApi 1,11](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d’API : ExcelApi 1.11](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -41,16 +41,16 @@ properties:
     content: 'readonly numberDecimalSeparator: string;'
     return:
       type: string
-      description: "\n\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/50-workbook/culture-info.yaml\n// This will convert a number like \"14,37\" to \"14.37\"\n// (assuming the system decimal separator is \".\").\n  await Excel.run(async (context) => {\nconst sheet = context.workbook.worksheets.getItem(\"Sample\");\nconst decimalSource = sheet.getRange(\"B2\");\ndecimalSource.load(\"values\");\ncontext.application.cultureInfo.numberFormat.load(\"numberDecimalSeparator\");\nawait context.sync();\n\nconst systemDecimalSeparator = context.application.cultureInfo.numberFormat.numberDecimalSeparator;\nconst oldDecimalString: string = decimalSource.values[0][0];\n\n// This assumes the input column is standardized to use \",\" as the decimal separator. \nconst newDecimalString = oldDecimalString.replace(\",\", systemDecimalSeparator);\n\nconst resultRange = sheet.getRange(\"C2\");\nresultRange.values = [[newDecimalString]];\nresultRange.format.autofitColumns();\nawait context.sync();\n  });\n```"
+      description: "\n\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/50-workbook/culture-info.yaml\n// This will convert a number like \"14,37\" to \"14.37\"\n// (assuming the system decimal separator is \".\").\n  await Excel.run(async (context) => {\nconst sheet = context.workbook.worksheets.getItem(\"Sample\");\nconst decimalSource = sheet.getRange(\"B2\");\ndecimalSource.load(\"values\");\ncontext.application.cultureInfo.numberFormat.load(\"numberDecimalSeparator\");\nawait context.sync();\n\nconst systemDecimalSeparator = context.application.cultureInfo.numberFormat.numberDecimalSeparator;\nconst oldDecimalString: string = decimalSource.values[0][0];\n\n// This assumes the input column is standardized to use \",\" as the decimal separator. \nconst newDecimalString = oldDecimalString.replace(\",\", systemDecimalSeparator);\n\nconst resultRange = sheet.getRange(\"C2\");\nresultRange.values = [[newDecimalString]];\nresultRange.format.autofitColumns();\nawait context.sync();\n  });\n```"
 - name: numberGroupSeparator
   uid: excel!Excel.NumberFormatInfo#numberGroupSeparator:member
   package: excel!
   fullName: numberGroupSeparator
   summary: >-
-    Obtient la chaîne utilisée pour séparer les groupes de chiffres à gauche du séparateur décimal pour les valeurs numériques. Cette fonction est basée sur les paramètres système actuels.
+    Obtient la chaîne utilisée pour séparer les groupes de chiffres à gauche de la virgule pour les valeurs numériques. Il est basé sur les paramètres système actuels.
 
 
-    \[[Ensemble d’API : ExcelApi 1,11](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d’API : ExcelApi 1.11](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -58,7 +58,7 @@ properties:
     content: 'readonly numberGroupSeparator: string;'
     return:
       type: string
-      description: "\n\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/50-workbook/culture-info.yaml\nawait Excel.run(async (context) => {\n  // This will convert a number like \"123-456-789\" to \"123,456,789\"\n  // (assuming the system thousands separator is \",\").\n  const sheet = context.workbook.worksheets.getItem(\"Sample\");\n  const bigNumberSource = sheet.getRange(\"B3\");\n  bigNumberSource.load(\"values\");\n  context.application.cultureInfo.numberFormat.load(\"numberGroupSeparator\");\n  await context.sync();\n\n  const systemThousandsSeparator = context.application.cultureInfo.numberFormat.numberGroupSeparator;\n  const oldBigNumberString: string = bigNumberSource.values[0][0];\n  \n  // This assumes the input column is standardized to use \"-\" as the number group separator. \n  const newBigNumberString = oldBigNumberString.replace(/-/g, systemThousandsSeparator);\n\n  const resultRange = sheet.getRange(\"C3\");\n  resultRange.values = [[newBigNumberString]];\n  resultRange.format.autofitColumns();\n  await context.sync();\n});\n```"
+      description: "\n\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/50-workbook/culture-info.yaml\nawait Excel.run(async (context) => {\n  // This will convert a number like \"123-456-789\" to \"123,456,789\"\n  // (assuming the system thousands separator is \",\").\n  const sheet = context.workbook.worksheets.getItem(\"Sample\");\n  const bigNumberSource = sheet.getRange(\"B3\");\n  bigNumberSource.load(\"values\");\n  context.application.cultureInfo.numberFormat.load(\"numberGroupSeparator\");\n  await context.sync();\n\n  const systemThousandsSeparator = context.application.cultureInfo.numberFormat.numberGroupSeparator;\n  const oldBigNumberString: string = bigNumberSource.values[0][0];\n  \n  // This assumes the input column is standardized to use \"-\" as the number group separator. \n  const newBigNumberString = oldBigNumberString.replace(/-/g, systemThousandsSeparator);\n\n  const resultRange = sheet.getRange(\"C3\");\n  resultRange.values = [[newBigNumberString]];\n  resultRange.format.autofitColumns();\n  await context.sync();\n});\n```"
 methods:
 - name: load(options)
   uid: excel!Excel.NumberFormatInfo#load:member(1)
@@ -72,7 +72,7 @@ methods:
     content: 'load(options?: Excel.Interfaces.NumberFormatInfoLoadOptions): Excel.NumberFormatInfo;'
     parameters:
     - id: options
-      description: Fournit des options pour les propriétés de l’objet à charger.
+      description: Fournit des options pour lesquelles les propriétés de l’objet à charger.
       type: <xref uid="excel!Excel.Interfaces.NumberFormatInfoLoadOptions:interface" />
     return:
       type: <xref uid="excel!Excel.NumberFormatInfo:class" />
@@ -89,7 +89,7 @@ methods:
     content: 'load(propertyNames?: string | string[]): Excel.NumberFormatInfo;'
     parameters:
     - id: propertyNames
-      description: Une chaîne délimitée par des virgules ou un tableau de chaînes qui spécifient les propriétés à charger.
+      description: Chaîne délimitée par des virgules ou tableau de chaînes spécifiant les propriétés à charger.
       type: string | string[]
     return:
       type: <xref uid="excel!Excel.NumberFormatInfo:class" />
@@ -110,7 +110,7 @@ methods:
               }): Excel.NumberFormatInfo;
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` est une chaîne délimitée par des virgules qui spécifie les propriétés à charger et `propertyNamesAndPaths.expand` une chaîne délimitée par des virgules qui spécifie les propriétés de navigation à charger.'
+      description: '`propertyNamesAndPaths.select` est une chaîne délimitée par des virgules qui spécifie les propriétés à charger, et est une chaîne délimitée par des virgules qui spécifie les propriétés de `propertyNamesAndPaths.expand` navigation à charger.'
       type: >-
         {
                     select?: string;
@@ -123,7 +123,7 @@ methods:
   uid: excel!Excel.NumberFormatInfo#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Remplace la méthode JavaScript afin `toJSON()` de fournir une sortie plus utile lorsqu’un objet d’API est transmis à `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle la `toJSON` méthode de l’objet qui lui est passé.) Tandis que l’objet Excel. NumberFormatInfo d’origine est un objet d’API, la `toJSON` méthode renvoie un objet JavaScript simple (tapé comme `Excel.Interfaces.NumberFormatInfoData`<!-- -->) qui contient des copies superficielles de toutes les propriétés enfants chargées à partir de l’objet d’origine.
+  summary: Remplace la méthode JavaScript afin de fournir une sortie plus utile lorsqu’un objet `toJSON()` API est transmis à `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle `toJSON` la méthode de l’objet qui lui est transmis.) Alors que l’objet Excel.NumberFormatInfo d’origine est un objet API, la méthode renvoie un objet `toJSON` JavaScript simple (tapé sous la forme `Excel.Interfaces.NumberFormatInfoData`<!-- -->) qui contient des copies superficiels de toutes les propriétés enfants chargées à partir de l’objet d’origine.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -134,9 +134,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: b2f2315269ad82311d4cfdd62b42ec73c3886ca2
-  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.openlocfilehash: b25120f0e3b4bfc62c5f30c49ae3a20d44f8565f
+  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
   ms.translationtype: MT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 11/18/2020
-  ms.locfileid: "49295091"
+  ms.lasthandoff: 01/13/2021
+  ms.locfileid: "49851248"
