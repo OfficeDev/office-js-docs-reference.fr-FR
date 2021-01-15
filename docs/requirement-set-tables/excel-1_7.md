@@ -1,9 +1,9 @@
-| Class | Champs | Description |
+| Classe | Champs | Description |
 |:---|:---|:---|
 |[Chart](/javascript/api/excel/excel.chart)|[chartType](/javascript/api/excel/excel.chart#charttype)|Cette énumération spécifie le type de graphique.|
 ||[id](/javascript/api/excel/excel.chart#id)|ID unique du graphique.|
 ||[ShowAllFieldButtons,](/javascript/api/excel/excel.chart#showallfieldbuttons)|Indique si tous les boutons de champ d’un graphique croisé dynamique doivent être affichés.|
-|[ChartAreaFormat](/javascript/api/excel/excel.chartareaformat)|[bordure](/javascript/api/excel/excel.chartareaformat#border)|Représente le format de bordure de la zone de graphique, qui inclut couleur, style de style et épaisseur.|
+|[ChartAreaFormat](/javascript/api/excel/excel.chartareaformat)|[route](/javascript/api/excel/excel.chartareaformat#border)|Représente le format de bordure de la zone de graphique, qui inclut couleur, style de style et épaisseur.|
 |[ChartAxes](/javascript/api/excel/excel.chartaxes)|[getItem (type : Excel. ChartAxisType, Group ?: Excel. ChartAxisGroup)](/javascript/api/excel/excel.chartaxes#getitem-type--group-)|Renvoie l’axe spécifique identifié par type et par groupe.|
 |[ChartAxis](/javascript/api/excel/excel.chartaxis)|[baseTimeUnit](/javascript/api/excel/excel.chartaxis#basetimeunit)|Spécifie l’unité de base pour l’axe des abscisses spécifié.|
 ||[categoryType](/javascript/api/excel/excel.chartaxis#categorytype)|Spécifie le type d’axe de catégorie.|
@@ -59,7 +59,7 @@
 ||[MarkerSize,](/javascript/api/excel/excel.chartpoint#markersize)|Représente la taille du marqueur du point de données.|
 ||[MarkerStyle,](/javascript/api/excel/excel.chartpoint#markerstyle)|Représente le style du marqueur du point de données de graphique.|
 ||[dataLabel](/javascript/api/excel/excel.chartpoint#datalabel)|Renvoie l’étiquette de données d’un point du graphique.|
-|[ChartPointFormat](/javascript/api/excel/excel.chartpointformat)|[bordure](/javascript/api/excel/excel.chartpointformat#border)|Représente le format de bordure d’un point de données de graphique, qui inclut les informations de couleur, de style et de poids.|
+|[ChartPointFormat](/javascript/api/excel/excel.chartpointformat)|[route](/javascript/api/excel/excel.chartpointformat#border)|Représente le format de bordure d’un point de données de graphique, qui inclut les informations de couleur, de style et de poids.|
 |[ChartSeries](/javascript/api/excel/excel.chartseries)|[chartType](/javascript/api/excel/excel.chartseries#charttype)|Représente le type de graphique d’une série.|
 ||[delete()](/javascript/api/excel/excel.chartseries#delete--)|Supprime la série graphique.|
 ||[doughnutHoleSize](/javascript/api/excel/excel.chartseries#doughnutholesize)|Représente la taille du centre d’une série de graphiques en anneaux.|
@@ -89,7 +89,7 @@
 ||[textOrientation](/javascript/api/excel/excel.charttitle#textorientation)|Spécifie l’angle auquel le texte est orienté pour le titre du graphique.|
 ||[top](/javascript/api/excel/excel.charttitle#top)|Indique la distance, en points, entre le bord supérieur du titre du graphique et le haut de la zone de graphique.|
 ||[verticalAlignment](/javascript/api/excel/excel.charttitle#verticalalignment)|Indique l’alignement vertical du titre du graphique.|
-|[ChartTitleFormat](/javascript/api/excel/excel.charttitleformat)|[bordure](/javascript/api/excel/excel.charttitleformat#border)|Représente le format de bordure du titre du graphique, qui inclut la couleur, le style de style et le poids.|
+|[ChartTitleFormat](/javascript/api/excel/excel.charttitleformat)|[route](/javascript/api/excel/excel.charttitleformat#border)|Représente le format de bordure du titre du graphique, qui inclut la couleur, le style de style et le poids.|
 |[ChartTrendline](/javascript/api/excel/excel.charttrendline)|[delete()](/javascript/api/excel/excel.charttrendline#delete--)|Supprime l’objet courbe de tendance.|
 ||[ordonn](/javascript/api/excel/excel.charttrendline#intercept)|Représente la valeur intercept de la courbe de tendance.|
 ||[movingAveragePeriod](/javascript/api/excel/excel.charttrendline#movingaverageperiod)|Représente la période d’une courbe de tendance de graphique.|
@@ -139,8 +139,8 @@
 ||[showCard ()](/javascript/api/excel/excel.range#showcard--)|Affiche la carte pour une cellule active si son contenu est riche en valeur.|
 ||[style](/javascript/api/excel/excel.range#style)|Représente le style de la plage actuelle.|
 |[RangeFormat](/javascript/api/excel/excel.rangeformat)|[textOrientation](/javascript/api/excel/excel.rangeformat#textorientation)|Orientation du texte de toutes les cellules dans la plage.|
-||[useStandardHeight](/javascript/api/excel/excel.rangeformat#usestandardheight)|Détermine si la hauteur de ligne de l’objet de plage est égale à la hauteur standard de la feuille.|
-||[useStandardWidth](/javascript/api/excel/excel.rangeformat#usestandardwidth)|Indique si la largeur de la colonne de l’objet Range est égale à la largeur standard de la feuille.|
+||[useStandardHeight](/javascript/api/excel/excel.rangeformat#usestandardheight)|Détermine si la hauteur de ligne de l' `Range` objet est égale à la hauteur standard de la feuille.|
+||[useStandardWidth](/javascript/api/excel/excel.rangeformat#usestandardwidth)|Indique si la largeur de la colonne de l' `Range` objet est égale à la largeur standard de la feuille.|
 |[RangeHyperlink](/javascript/api/excel/excel.rangehyperlink)|[adresse](/javascript/api/excel/excel.rangehyperlink#address)|Représente l’url cible du lien hypertexte.|
 ||[documentReference](/javascript/api/excel/excel.rangehyperlink#documentreference)|Représente la cible de référence de document pour le lien hypertexte.|
 ||[Info](/javascript/api/excel/excel.rangehyperlink#screentip)|Représente la chaîne affichée lorsque vous pointez sur le lien hypertexte.|
@@ -190,7 +190,7 @@
 ||[properties](/javascript/api/excel/excel.workbook#properties)|Obtient les propriétés du classeur.|
 ||[protection](/javascript/api/excel/excel.workbook#protection)|Renvoie l’objet protection pour un classeur.|
 ||[proposés](/javascript/api/excel/excel.workbook#styles)|Représente une collection de styles associés au classeur.|
-|[WorkbookProtection](/javascript/api/excel/excel.workbookprotection)|[Protect (Password ?: String)](/javascript/api/excel/excel.workbookprotection#protect-password-)|Protège un classeur.|
+|[Objetworkbookprotection](/javascript/api/excel/excel.workbookprotection)|[Protect (Password ?: String)](/javascript/api/excel/excel.workbookprotection#protect-password-)|Protège un classeur.|
 ||[sécurisé](/javascript/api/excel/excel.workbookprotection#protected)|Indique si le classeur est protégé.|
 ||[Unprotect (Password ?: String)](/javascript/api/excel/excel.workbookprotection#unprotect-password-)|Annule la protection un classeur.|
 |[Worksheet](/javascript/api/excel/excel.worksheet)|[Copy (positionType ?: Excel. WorksheetPositionType, relativeTo ?: Excel. Worksheet)](/javascript/api/excel/excel.worksheet#copy-positiontype--relativeto-)|Copie une feuille de calcul et la place à la position spécifiée.|
