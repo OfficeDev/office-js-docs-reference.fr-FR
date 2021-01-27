@@ -18,7 +18,7 @@ properties:
   package: excel!
   fullName: address
   summary: >-
-    Spécifie la référence de plage en style A1. La valeur d’adresse contient la référence de feuille (par exemple, « Feuille1 ! A1:B4 »).
+    Spécifie la référence de plage dans le style A1. La valeur d’adresse contient la référence de feuille (par exemple, « Feuille1 ! A1:B4 »).
 
 
     \[[Ensemble d’API : ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -524,7 +524,7 @@ methods:
     content: 'autoFill(destinationRange?: Range | string, autoFillTypeString?: "FillDefault" | "FillCopy" | "FillSeries" | "FillFormats" | "FillValues" | "FillDays" | "FillWeekdays" | "FillMonths" | "FillYears" | "LinearTrend" | "GrowthTrend" | "FlashFill"): void;'
     parameters:
     - id: destinationRange
-      description: Plage de destination à remplir automatiquement. Si la plage de destination est null, les données sont remplies en fonction des cellules qui l’entourent (comportement du double-clic sur la poignée de remplissage de plage de l’interface utilisateur).
+      description: Plage de destination à remplir automatiquement. Si la plage de destination est null, les données sont remplies en fonction des cellules qui l’entourent (ce qui est le comportement lorsque vous double-cliquez sur la poignée de remplissage de plage de l’interface utilisateur).
       type: <xref uid="excel!Excel.Range:class" /> | string
     - id: autoFillTypeString
       description: Type de remplissage automatique. Spécifie la façon dont la plage de destination doit être remplie, en fonction du contenu de la plage actuelle. La valeur par défaut est « FillDefault ».
@@ -1047,7 +1047,7 @@ methods:
   package: excel!
   fullName: getImage()
   summary: >-
-    Restituer la plage en tant qu’image png codée en base 64. *Important**: cette API n’est actuellement pas pris en compte dans Excel pour Mac. Visitez [OfficeDev/office-js Issue \# 235](https://github.com/OfficeDev/office-js/issues/235) pour obtenir l’état actuel.
+    Restituer la plage en tant qu’image png codée en base 64. **Important**: cette API n’est actuellement pas pris en compte dans Excel pour Mac. Visitez [OfficeDev/office-js Issue \# 235](https://github.com/OfficeDev/office-js/issues/235) pour obtenir l’état actuel.
 
 
     \[[Ensemble d’API : ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1351,7 +1351,7 @@ methods:
       description: Type de cellules à inclure.
       type: <xref uid="excel!Excel.SpecialCellType:enum" />
     - id: cellValueType
-      description: S’il s’agit de constantes ou de formules, cet argument permet de déterminer les types de cellules à inclure dans le résultat. Ces valeurs peuvent être combinées pour renvoyer plusieurs types. Par défaut, toutes les constantes ou formules sont sélectionnées, quel qu'en soit le type.
+      description: Si cellType est une constante ou une formule, cet argument est utilisé pour déterminer les types de cellules à inclure dans le résultat. Ces valeurs peuvent être combinées pour renvoyer plusieurs types. Par défaut, toutes les constantes ou formules sont sélectionnées, quel qu'en soit le type.
       type: <xref uid="excel!Excel.SpecialCellValueType:enum" />
     return:
       type: <xref uid="excel!Excel.RangeAreas:class" />
@@ -1859,9 +1859,9 @@ methods:
       description: "\n\n#### <a name=\"examples\"></a>範例\n\n```typescript\nExcel.run(async (context) => {\n    const largeRange = context.workbook.getSelectedRange();\n    largeRange.load([\"rowCount\", \"columnCount\"]);\n    await context.sync();\n\n    for (let i = 0; i < largeRange.rowCount; i++) {\n        for (let j = 0; j < largeRange.columnCount; j++) {\n            let cell = largeRange.getCell(i, j);\n            cell.values = [[i *j]];\n\n            // call untrack() to release the range from memory\n            cell.untrack();\n        }\n    }\n\n    await context.sync();\n});\n```"
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: fb5e71e1ae810723ee57c532e93cb455d8752e53
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: 8f9efda43b277428fe0cd7431f2f4edd5e071813
+  ms.sourcegitcommit: f229afdd4c2bc820ac799394a77b637fc66e87b4
   ms.translationtype: MT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49857877"
+  ms.lasthandoff: 01/27/2021
+  ms.locfileid: "49992134"

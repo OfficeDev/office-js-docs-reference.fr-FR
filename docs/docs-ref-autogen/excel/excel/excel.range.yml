@@ -4,7 +4,7 @@ uid: excel!Excel.Range:class
 package: excel!
 fullName: Excel.Range
 summary: >-
-  La plage représente un ensemble d’une ou plusieurs cellules contiguës telles qu’une cellule, une ligne, une colonne, un bloc de cellules, etc. Pour en savoir plus sur la façon dont les plages sont utilisées dans l’ensemble de l’API, lisez Utiliser des plages à l’aide de [l’API JavaScript excel](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-ranges) et Utiliser des plages à l’aide de l’API [JavaScript excel (avancé)](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-ranges-advanced)<!-- -->.
+  La plage représente un ensemble d’une ou plusieurs cellules contiguës telles qu’une cellule, une ligne, une colonne, un bloc de cellules, etc. Pour en savoir plus sur l’utilisation des plages dans l’ensemble de l’API, lisez Utiliser des plages à l’aide de [l’API JavaScript pour Excel](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-ranges) et Utiliser des plages à l’aide de l’API [JavaScript pour Excel (avancé)](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-ranges-advanced)<!-- -->.
 
 
   \[[Ensemble d’API : ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -18,7 +18,7 @@ properties:
   package: excel!
   fullName: address
   summary: >-
-    Spécifie la référence de plage en style A1. La valeur d’adresse contient la référence de feuille (par exemple, « Feuille1 ! A1:B4 »).
+    Spécifie la référence de plage dans le style A1. La valeur d’adresse contient la référence de feuille (par exemple, « Feuille1 ! A1:B4 »).
 
 
     \[[Ensemble d’API : ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -622,7 +622,7 @@ methods:
   package: excel!
   fullName: autoFill(destinationRange, autoFillTypeString)
   summary: >-
-    Remplit les plages de la plage actuelle à la plage de destination à l’aide de la logique de remplissage automatique spécifiée. La plage de destination peut être null ou étendre la source horizontalement ou verticalement. Les plages nonigues ne sont pas pris en charge.
+    Remplit la plage actuelle à la plage de destination à l’aide de la logique de remplissage automatique spécifiée. La plage de destination peut être null ou étendre la source horizontalement ou verticalement. Les plages nonigues ne sont pas pris en charge.
 
 
     Pour plus d’informations, voir [Utiliser le remplissage automatique et le remplissage flash](https://support.office.com/article/video-use-autofill-and-flash-fill-2e79a709-c814-4b27-8bc2-c4dc84d49464)<!-- -->.
@@ -636,7 +636,7 @@ methods:
     content: 'autoFill(destinationRange?: Range | string, autoFillTypeString?: "FillDefault" | "FillCopy" | "FillSeries" | "FillFormats" | "FillValues" | "FillDays" | "FillWeekdays" | "FillMonths" | "FillYears" | "LinearTrend" | "GrowthTrend" | "FlashFill"): void;'
     parameters:
     - id: destinationRange
-      description: Plage de destination à remplir automatiquement. Si la plage de destination est null, les données sont remplies en fonction des cellules qui l’entourent (comportement du double-clic sur la poignée de remplissage de plage de l’interface utilisateur).
+      description: Plage de destination à remplir automatiquement. Si la plage de destination est null, les données sont remplies en fonction des cellules qui l’entourent (ce qui est le comportement lorsque vous double-cliquez sur la poignée de remplissage de plage de l’interface utilisateur).
       type: <xref uid="excel!Excel.Range:class" /> | string
     - id: autoFillTypeString
       description: Type de remplissage automatique. Spécifie la façon dont la plage de destination doit être remplie, en fonction du contenu de la plage actuelle. La valeur par défaut est « FillDefault ».
@@ -875,7 +875,7 @@ methods:
   package: excel!
   fullName: findOrNullObject(text, criteria)
   summary: >-
-    Recherche la chaîne donnée basée sur les critères spécifiés. Si la plage actuelle est plus grande qu’une seule cellule, la recherche sera limitée à cette plage, sinon la recherche couvrira la feuille entière en commençant après cette cellule. S’il n’existe aucune correspondance, cette fonction retourne un objet null.
+    Recherche la chaîne donnée basée sur les critères spécifiés. Si la plage actuelle est plus grande qu’une seule cellule, la recherche sera limitée à cette plage, sinon la recherche couvrira la feuille entière en commençant après cette cellule. S’il n’existe aucune correspondance, cette fonction retourne un objet dont `isNullObject` la propriété est définie sur `true`<!-- -->. Pour plus d’informations, [voir *OrNullObject methods and properties](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Ensemble d’API : ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1214,7 +1214,7 @@ methods:
   package: excel!
   fullName: getIntersectionOrNullObject(anotherRange)
   summary: >-
-    Obtient l’objet de plage qui représente l’intersection rectangulaire des plages données. Si aucune intersection n’est trouvée, renvoie un objet Null.
+    Obtient l’objet de plage qui représente l’intersection rectangulaire des plages données. Si aucune intersection n’est trouvée, cette fonction retourne un objet dont la `isNullObject` propriété est définie sur `true`<!-- -->. Pour plus d’informations, [voir *OrNullObject methods and properties](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Ensemble d’API : ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1487,7 +1487,7 @@ methods:
       description: Type de cellules à inclure.
       type: <xref uid="excel!Excel.SpecialCellType:enum" />
     - id: cellValueType
-      description: S’il s’agit de constantes ou de formules, cet argument permet de déterminer les types de cellules à inclure dans le résultat. Ces valeurs peuvent être combinées pour renvoyer plusieurs types. Par défaut, toutes les constantes ou formules sont sélectionnées, quel qu'en soit le type.
+      description: Si cellType est une constante ou une formule, cet argument est utilisé pour déterminer les types de cellules à inclure dans le résultat. Ces valeurs peuvent être combinées pour renvoyer plusieurs types. Par défaut, toutes les constantes ou formules sont sélectionnées, quel qu'en soit le type.
       type: <xref uid="excel!Excel.SpecialCellValueType:enum" />
     return:
       type: <xref uid="excel!Excel.RangeAreas:class" />
@@ -1521,7 +1521,7 @@ methods:
   package: excel!
   fullName: getSpecialCellsOrNullObject(cellType, cellValueType)
   summary: >-
-    Obtient l’objet RangeAreas, comprenant une ou plusieurs plages qui représente les cellules qui correspondent au type et à la valeur spécifiés. Si aucune cellule spéciale n’est trouvée, un objet null est renvoyé.
+    Obtient l’objet RangeAreas, comprenant une ou plusieurs plages qui représente les cellules qui correspondent au type et à la valeur spécifiés. Si aucune cellule spéciale n’est trouvée, cette fonction retourne un objet dont `isNullObject` la propriété est définie sur `true`<!-- -->. Pour plus d’informations, [voir *OrNullObject methods and properties](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Ensemble d’API : ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1545,7 +1545,7 @@ methods:
   package: excel!
   fullName: getSpecialCellsOrNullObject(cellTypeString, cellValueType)
   summary: >-
-    Obtient l’objet RangeAreas, comprenant une ou plusieurs plages qui représente les cellules qui correspondent au type et à la valeur spécifiés. Si aucune cellule spéciale n’est trouvée, un objet null est renvoyé.
+    Obtient l’objet RangeAreas, comprenant une ou plusieurs plages qui représente les cellules qui correspondent au type et à la valeur spécifiés. Si aucune cellule spéciale n’est trouvée, cette fonction retourne un objet dont `isNullObject` la propriété est définie sur `true`<!-- -->. Pour plus d’informations, [voir *OrNullObject methods and properties](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Ensemble d’API : ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1586,7 +1586,7 @@ methods:
   package: excel!
   fullName: getSpillingToRangeOrNullObject()
   summary: >-
-    Obtient l’objet de la plage contenant la plage renversé lorsque appelée sur une cellule d’ancrage. Si la plage n’est pas une cellule d’ancrage ou si la plage de débordement n’est pas trouvée, un objet null est renvoyé.
+    Obtient l’objet de la plage contenant la plage renversé lorsque appelée sur une cellule d’ancrage. Si la plage n’est pas une cellule d’ancrage ou si la plage de débordement est in trouvée, cette fonction retourne un objet dont la propriété est `isNullObject` définie sur `true`<!-- -->. Pour plus d’informations, [voir *OrNullObject methods and properties](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Ensemble d’API : ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1620,7 +1620,7 @@ methods:
   package: excel!
   fullName: getSpillParentOrNullObject()
   summary: >-
-    Obtient l’objet de la plage contenant la cellule d’ancrage d’une cellule prise renversée dans. S’il ne s’agit pas d’une cellule de débordement ou de plusieurs fois que des cellules sont donner, un objet null est renvoyé.
+    Obtient l’objet de plage contenant la cellule d’ancrage de la cellule dans laquelle la cellule est étendue. S’il ne s’agit pas d’une cellule en débordement ou si plusieurs cellules sont données, cette fonction retourne un objet dont la propriété `isNullObject` est définie sur `true`<!-- -->. Pour plus d’informations, [voir *OrNullObject methods and properties](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Ensemble d’API : ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1696,7 +1696,7 @@ methods:
   package: excel!
   fullName: getUsedRangeOrNullObject(valuesOnly)
   summary: >-
-    Renvoie la plage utilisée d’un objet de plage donné. Si aucune cellule n’est utilisée dans la plage, cette fonction renvoie un objet null.
+    Renvoie la plage utilisée d’un objet de plage donné. S’il n’existe aucune cellule utilisée dans la plage, cette fonction retourne un objet dont la `isNullObject` propriété est définie sur `true`<!-- -->. Pour plus d’informations, [voir *OrNullObject methods and properties](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Ensemble d’API : ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -2300,9 +2300,9 @@ methods:
       description: "\n\n#### <a name=\"examples\"></a>範例\n\n```typescript\nExcel.run(async (context) => {\n    const largeRange = context.workbook.getSelectedRange();\n    largeRange.load([\"rowCount\", \"columnCount\"]);\n    await context.sync();\n\n    for (let i = 0; i < largeRange.rowCount; i++) {\n        for (let j = 0; j < largeRange.columnCount; j++) {\n            let cell = largeRange.getCell(i, j);\n            cell.values = [[i *j]];\n\n            // call untrack() to release the range from memory\n            cell.untrack();\n        }\n    }\n\n    await context.sync();\n});\n```"
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: c818bbad52319cb4bdc2c25504763ebf6f21707a
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: a0f95db6649eb00a46f3d7ce692c6e895c0c3e28
+  ms.sourcegitcommit: f229afdd4c2bc820ac799394a77b637fc66e87b4
   ms.translationtype: MT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49851171"
+  ms.lasthandoff: 01/27/2021
+  ms.locfileid: "49991988"

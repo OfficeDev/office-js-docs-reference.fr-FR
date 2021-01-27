@@ -320,6 +320,22 @@ properties:
     content: 'readonly onFormatChanged: OfficeExtension.EventHandlers<Excel.WorksheetFormatChangedEventArgs>;'
     return:
       type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorksheetFormatChangedEventArgs:interface" />&gt;
+- name: onFormulaChanged
+  uid: excel!Excel.Worksheet#onFormulaChanged:member
+  package: excel!
+  fullName: onFormulaChanged
+  summary: >-
+    Se produit lorsqu’une ou plusieurs formules sont modifiées dans cette feuille de calcul. Cet événement est le cas lorsque la formule elle-même change, et non la valeur de données résultant du calcul de la formule.
+
+
+    \[[Ensemble d’API : ExcelApi BÊTA (PRÉVISUALISATION UNIQUEMENT)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'readonly onFormulaChanged: OfficeExtension.EventHandlers<Excel.WorksheetFormulaChangedEventArgs>;'
+    return:
+      type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorksheetFormulaChangedEventArgs:interface" />&gt;
 - name: onRowHiddenChanged
   uid: excel!Excel.Worksheet#onRowHiddenChanged:member
   package: excel!
@@ -379,7 +395,7 @@ properties:
     Se produit lorsqu’une action clic gauche/clic se produit dans la feuille de calcul. Cet événement ne sera pas déclenché lorsque vous cliquerez dans les cas suivants :
 
 
-    - L’utilisateur fait glisser la souris pour la sélection multiple.
+    - L’utilisateur fait glisser la souris pour une sélection multiple.
 
 
     - L’utilisateur sélectionne une cellule dans le mode lorsque des arguments de cellule sont sélectionnés pour les références de formule.
@@ -695,7 +711,7 @@ methods:
     content: 'copy(positionType?: Excel.WorksheetPositionType, relativeTo?: Excel.Worksheet): Excel.Worksheet;'
     parameters:
     - id: positionType
-      description: Emplacement dans le workbook où placer la feuille de calcul nouvellement créée. La valeur par défaut est « None », qui insère la feuille de calcul au début de la feuille de calcul.
+      description: Emplacement dans le manuel où placer la feuille de calcul nouvellement créée. La valeur par défaut est « None », qui insère la feuille de calcul au début de la feuille de calcul.
       type: <xref uid="excel!Excel.WorksheetPositionType:enum" />
     - id: relativeTo
       description: Feuille de calcul existante qui détermine la position de la feuille de calcul nouvellement créée. Cette demande est nécessaire uniquement `positionType` si « Before » (avant) ou « After » (après).
@@ -757,7 +773,7 @@ methods:
   package: excel!
   fullName: delete()
   summary: >-
-    Supprime la feuille de calcul du classeur. Notez que si la visibilité de la feuille de calcul est définie sur « VeryHidden », l’opération de suppression échouera avec une `InvalidOperation` exception. Vous devez d’abord modifier sa visibilité pour la rendre masquée ou visible avant de la supprimer.
+    Supprime la feuille de calcul du classeur. Notez que si la visibilité de la feuille de calcul est définie sur « VeryHidden », l’opération de suppression échouera avec une `InvalidOperation` exception. Vous devez d’abord modifier sa visibilité pour qu’elle soit masquée ou visible avant de la supprimer.
 
 
     \[[Ensemble d’API : ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -817,7 +833,7 @@ methods:
     return:
       type: <xref uid="excel!Excel.RangeAreas:class" />
       description: >-
-        Objet RangeArea, comprenant une ou plusieurs plages rectangulaires, qui correspond aux critères de recherche. S’il n’existe aucune correspondance, cette fonction retourne un objet null.
+        Objet RangeArea, comprenant une ou plusieurs plages rectangulaires, qui correspond aux critères de recherche. S’il n’existe aucune correspondance, cette fonction retourne un objet dont `isNullObject` la propriété est définie sur `true`<!-- -->. Pour plus d’informations, [ \* voir méthodes et propriétés OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
         #### <a name="examples"></a>Exemples
@@ -894,7 +910,7 @@ methods:
   package: excel!
   fullName: getNextOrNullObject(visibleOnly)
   summary: >-
-    Obtient la feuille de calcul qui suit celle-ci. Si aucune feuille de calcul ne suit celle-ci, cette méthode retourne un objet null.
+    Obtient la feuille de calcul qui suit celle-ci. Si aucune feuille de calcul ne suit celle-ci, cette méthode retourne un objet dont la propriété `isNullObject` est définie sur `true`<!-- -->. Pour plus d’informations, [voir *OrNullObject methods and properties](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Ensemble d’API : ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1040,7 +1056,7 @@ methods:
     content: 'getUsedRange(valuesOnly?: boolean): Excel.Range;'
     parameters:
     - id: valuesOnly
-      description: 'Facultatif. Si la valeur est True, ne tient compte que des cellules avec des valeurs utilisées (en ignorant la mise en forme). \[Ensemble d’api : ExcelApi 1.2\]'
+      description: 'Facultatif. Si la valeur est true, ne tient compte que des cellules avec des valeurs en tant que cellules utilisées (en ignorant la mise en forme). \[Ensemble d’api : ExcelApi 1.2\]'
       type: boolean
     return:
       type: <xref uid="excel!Excel.Range:class" />
@@ -1050,7 +1066,7 @@ methods:
   package: excel!
   fullName: getUsedRangeOrNullObject(valuesOnly)
   summary: >-
-    La plage utilisée est la plus petite plage qui englobe toutes les cellules auxquelles une valeur ou un format est affecté. Si la feuille de calcul entière est vide, cette fonction renvoie un objet null.
+    La plage utilisée est la plus petite plage qui englobe toutes les cellules auxquelles une valeur ou un format est affecté. Si la feuille de calcul entière est vide, cette fonction retourne un objet dont la `isNullObject` propriété est définie sur `true`<!-- -->. Pour plus d’informations, [voir *OrNullObject methods and properties](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Ensemble d’API : ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1232,9 +1248,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: a97fdcf6e4247d09689f105aec02889963a125f9
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: b7f3b4e06e50b3a7d27b2010a07cc6b888de7506
+  ms.sourcegitcommit: f229afdd4c2bc820ac799394a77b637fc66e87b4
   ms.translationtype: MT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49852207"
+  ms.lasthandoff: 01/27/2021
+  ms.locfileid: "49991673"
