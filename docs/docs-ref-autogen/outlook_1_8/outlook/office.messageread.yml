@@ -132,7 +132,7 @@ properties:
   package: outlook!
   fullName: categories
   summary: >-
-    Obtient un objet qui fournit des méthodes de gestion des catégories de l’élément.
+    Obtient un objet qui fournit des méthodes pour gérer les catégories de l’élément.
 
 
     \[[Ensemble d’API : Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -688,7 +688,7 @@ properties:
   package: outlook!
   fullName: recurrence
   summary: >-
-    Obtient la récurrence d’un rendez-vous. Obtient la récurrence d’une demande de réunion. Modes de lecture et de composition pour les éléments de rendez-vous. Mode lecture des éléments de demande de réunion.
+    Obtient la récurrence d’un rendez-vous. Obtient la récurrence d’une demande de réunion. Modes lecture et composition pour les éléments de rendez-vous. Mode lecture des éléments de demande de réunion.
 
 
     La propriété renvoie un objet pour les rendez-vous périodiques ou les demandes de réunion si un élément est une série ou une `recurrence` `Recurrence` instance d’une série. `null` est renvoyée pour les rendez-vous et les demandes de réunion d’un seul rendez-vous. `undefined` est renvoyé pour les messages qui ne sont pas des demandes de réunion.
@@ -778,13 +778,13 @@ properties:
     Obtient l’id de la série à qui appartient une instance.
 
 
-    Dans les clients Outlook sur le web et de bureau, l’ID des services web Exchange (EWS) de l’élément parent (série) appartient à cet `seriesId` élément. Toutefois, sur iOS et Android, renvoie `seriesId` l’ID REST de l’élément parent.
+    Dans les clients Outlook sur le web et de bureau, la propriété renvoie `seriesId` l’ID des services web Exchange (EWS) de l’élément parent (série) à qui cet élément appartient. Toutefois, sur iOS et Android, renvoie `seriesId` l’ID REST de l’élément parent.
 
 
     **Remarque**: l’identificateur renvoyé par la propriété est identique à l’identificateur d’élément des `seriesId` services web Exchange. La `seriesId` propriété n’est pas identique aux ID Outlook utilisés par l’API REST Outlook. Avant d’effectuer des appels d’API REST à l’aide de cette valeur, elle doit être convertie à l’aide de `Office.context.mailbox.convertToRestId`<!-- -->. Pour plus d’informations, voir [Utiliser les API REST Outlook à partir d’un add-in Outlook](https://docs.microsoft.com/office/dev/add-ins/outlook/use-rest-api)<!-- -->.
 
 
-    La propriété renvoie les éléments qui n’ont pas d’éléments parents tels que les rendez-vous, les éléments de série ou les demandes de réunion, et renvoie les autres éléments qui ne sont pas des demandes `seriesId` `null` de `undefined` réunion.
+    La propriété renvoie les éléments qui n’ont pas d’éléments parents tels que les rendez-vous, les éléments de série ou les demandes de réunion et renvoie les autres éléments qui ne sont pas des demandes `seriesId` `null` de `undefined` réunion.
 
 
     \[[Ensemble d’API : Mailbox 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -1345,7 +1345,7 @@ methods:
     Obtient une pièce jointe d’un message ou d’un rendez-vous et la renvoie en tant `AttachmentContent` qu’objet.
 
 
-    La `getAttachmentContentAsync` méthode obtient la pièce jointe avec l’identificateur spécifié de l’élément. En tant que meilleure pratique, vous devez utiliser l’identificateur pour récupérer une pièce jointe dans la même session que les attachmentIds ont été récupérés avec le `getAttachmentsAsync` ou `item.attachments` l’appel. Dans Outlook sur le web et sur les appareils mobiles, l’identificateur de pièce jointe n’est valable que dans la même session. Une session est terminée lorsque l’utilisateur ferme l’application, ou si l’utilisateur commence à composer un formulaire en ligne, il le fait ensuite apparaître pour continuer dans une fenêtre distincte.
+    La `getAttachmentContentAsync` méthode obtient la pièce jointe avec l’identificateur spécifié de l’élément. En tant que meilleure pratique, vous devez utiliser l’identificateur pour récupérer une pièce jointe dans la même session que les attachmentIds ont été récupérés avec le `getAttachmentsAsync` ou `item.attachments` l’appel. Dans Outlook sur le web et sur les appareils mobiles, l’identificateur de pièce jointe n’est valable que dans la même session. Une session est terminée lorsque l’utilisateur ferme l’application, ou si l’utilisateur commence à composer un formulaire en ligne, puis ouvre ensuite le formulaire pour continuer dans une fenêtre distincte.
 
 
     \[[Ensemble d’API : Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -1610,7 +1610,7 @@ methods:
     La méthode `getRegExMatches` renvoie les chaînes qui correspondent à l’expression régulière définie dans chaque élément de règle `ItemHasRegularExpressionMatch` ou `ItemHasKnownEntity` du fichier manifeste XML. Pour une règle `ItemHasRegularExpressionMatch`, une chaîne correspondante doit être présente dans la propriété de l’élément spécifié par cette règle. Le type simple `PropertyName` définit les propriétés prises en charge.
 
 
-    Si vous spécifiez une règle sur la propriété body d’un élément, l’expression régulière doit filtrer davantage le corps et ne doit pas tenter de renvoyer l’intégralité du corps `ItemHasRegularExpressionMatch` de l’élément. L’utilisation d’une expression régulière telle que .* pour obtenir l’intégralité du corps d’un élément ne retourne pas toujours les résultats attendus. Utilisez plutôt la méthode `Body.getAsync` pour récupérer l’intégralité du corps.
+    Si vous spécifiez une règle sur la propriété body d’un élément, l’expression régulière doit filtrer davantage le corps et ne doit pas tenter de renvoyer l’intégralité du corps `ItemHasRegularExpressionMatch` de l’élément. L’utilisation d’une expression régulière telle que .* pour obtenir l’intégralité du corps d’un élément ne retourne pas toujours les résultats attendus. Utilisez plutôt la `Body.getAsync` méthode pour récupérer l’intégralité du corps.
 
 
     **Remarque**: cette méthode n’est pas prise en charge dans Outlook sur iOS ou Android.
@@ -1862,7 +1862,7 @@ methods:
     La méthode `getSelectedRegExMatches` renvoie les chaînes qui correspondent à l’expression régulière définie dans chaque élément de règle `ItemHasRegularExpressionMatch` ou `ItemHasKnownEntity` du fichier manifeste XML. Pour une règle `ItemHasRegularExpressionMatch`, une chaîne correspondante doit être présente dans la propriété de l’élément spécifié par cette règle. Le type simple `PropertyName` définit les propriétés prises en charge.
 
 
-    Si vous spécifiez une règle sur la propriété body d’un élément, l’expression régulière doit filtrer davantage le corps et ne doit pas tenter de renvoyer l’intégralité du corps `ItemHasRegularExpressionMatch` de l’élément. L’utilisation d’une expression régulière telle que .* pour obtenir l’intégralité du corps d’un élément ne retourne pas toujours les résultats attendus. Utilisez plutôt la méthode `Body.getAsync` pour récupérer l’intégralité du corps.
+    Si vous spécifiez une règle sur la propriété body d’un élément, l’expression régulière doit filtrer davantage le corps et ne doit pas tenter de renvoyer l’intégralité du corps `ItemHasRegularExpressionMatch` de l’élément. L’utilisation d’une expression régulière telle que .* pour obtenir l’intégralité du corps d’un élément ne retourne pas toujours les résultats attendus. Utilisez plutôt la `Body.getAsync` méthode pour récupérer l’intégralité du corps.
 
 
     **Remarque**: cette méthode n’est pas prise en charge dans Outlook sur iOS ou Android.
@@ -1950,7 +1950,7 @@ methods:
   package: outlook!
   fullName: getSharedPropertiesAsync(options, callback)
   summary: >-
-    Obtient les propriétés d’un rendez-vous ou d’un message dans un dossier partagé, un calendrier ou une boîte aux lettres.
+    Obtient les propriétés d’un rendez-vous ou d’un message dans un dossier partagé.
 
 
     Pour plus d’informations sur l’utilisation de cette API, consultez [l’article d’accès délégué.](https://docs.microsoft.com/office/dev/add-ins/outlook/delegate-access)
@@ -2035,7 +2035,7 @@ methods:
   package: outlook!
   fullName: getSharedPropertiesAsync(callback)
   summary: >-
-    Obtient les propriétés d’un rendez-vous ou d’un message dans un dossier partagé, un calendrier ou une boîte aux lettres.
+    Obtient les propriétés d’un rendez-vous ou d’un message dans un dossier partagé.
 
 
     Pour plus d’informations sur l’utilisation de cette API, consultez [l’article d’accès délégué.](https://docs.microsoft.com/office/dev/add-ins/outlook/delegate-access)
@@ -2144,9 +2144,9 @@ methods:
       description: ''
 extends: <xref uid="outlook!Office.Message:interface" />
 metadata:
-  ms.openlocfilehash: e7b54dd09be79733cd026c17a5f03a8b7193b0f5
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: 69f6164a8ba153f500463c5f37556034b7cd4f94
+  ms.sourcegitcommit: f55d2bbeba2a20abb522cbf742e727b82bcf73ee
   ms.translationtype: MT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49857086"
+  ms.lasthandoff: 03/05/2021
+  ms.locfileid: "50463445"

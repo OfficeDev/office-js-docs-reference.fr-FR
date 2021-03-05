@@ -3,8 +3,8 @@ name: Office.Dialog
 uid: office!Office.Dialog:interface
 package: office!
 fullName: Office.Dialog
-summary: Objet renvoyé lors de l' `UI.displayDialogAsync` appel. Il expose les méthodes permettant d’inscrire des gestionnaires d’événements et de fermer la boîte de dialogue.
-remarks: '**Ensemble de conditions requises**: [DialogAPI](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/dialog-api-requirement-sets)'
+summary: Objet renvoyé `UI.displayDialogAsync` lorsqu’il est appelé. Il expose les méthodes d’inscription des handlers d’événements et de fermeture de la boîte de dialogue.
+remarks: '**Ensemble de conditions requises** [: DialogAPI](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/dialog-api-requirement-sets)'
 isPreview: false
 isDeprecated: false
 type: interface
@@ -31,7 +31,7 @@ methods:
       description: Doit être DialogMessageReceived ou DialogEventReceived.
       type: <xref uid="office!Office.EventType:enum" />
     - id: handler
-      description: Fonction qui accepte un objet avec une `message` propriété, si EventType est DialogMessageReceived, ou un objet avec une `error` propriété, si EventType est DialogEventReceived.
+      description: Fonction qui accepte un objet avec une propriété, si eventType est DialogMessageReceived, ou un objet avec une propriété, si eventType est `message` `error` DialogEventReceived.
       type: '(args: {message: string | boolean} | {error: number}) =&gt; void'
     return:
       type: void
@@ -40,7 +40,11 @@ methods:
   uid: office!Office.Dialog#close:member(1)
   package: office!
   fullName: close()
-  summary: Appelé à partir d’une page parent pour fermer la boîte de dialogue correspondante.
+  summary: >-
+    Appelé à partir d’une page parent pour fermer la boîte de dialogue correspondante.
+
+
+    Cette méthode est asynchrone. Il ne prend pas de paramètre de rappel et ne retourne pas d’objet Promise, il ne peut donc pas être attendu avec le mot clé ou `await` la `then` fonction. Consultez cette meilleure pratique pour plus d’informations : [ouverture d’une autre boîte de dialogue immédiatement après la fermeture d’une boîte de dialogue](https://docs.microsoft.com/office/dev/add-ins/develop/dialog-best-practices#opening-another-dialog-immediately-after-closing-one)
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -53,15 +57,15 @@ methods:
   uid: office!Office.Dialog#messageChild:member(1)
   package: office!
   fullName: messageChild(message)
-  summary: Remet un message à partir de la page hôte, telle qu’un volet de tâches ou un fichier de fonction sans interface utilisateur, à une boîte de dialogue ouverte à partir de la page.
+  summary: Envoie un message de la page hôte, tel qu’un volet Des tâches ou un fichier de fonction sans interface utilisateur, à une boîte de dialogue qui a été ouverte à partir de la page.
   remarks: >-
-    **Hôtes**: Excel, Outlook (configuration minimale requise : boîte aux lettres 1,9), PowerPoint, Word
+    **Hôtes**: Excel, Outlook (ensemble minimal de conditions requises : Mailbox 1.9), PowerPoint, Word
 
 
     **Ensembles de conditions requises**:
 
 
-    - [DialogAPI 1,2](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/dialog-api-requirement-sets)
+    - [DialogAPI 1.2](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/dialog-api-requirement-sets)
 
 
     - [Mailbox 1.9](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)
@@ -71,7 +75,7 @@ methods:
     content: 'messageChild(message: string): void;'
     parameters:
     - id: message
-      description: Accepte un message de la page hôte à envoyer à la boîte de dialogue. Tout ce qui peut être sérialisé en chaîne, y compris JSON et XML, peut être envoyé.
+      description: Accepte un message de la page hôte à remettre à la boîte de dialogue. Tout ce qui peut être sérialisé en chaîne, y compris JSON et XML, peut être envoyé.
       type: string
     return:
       type: void
@@ -80,7 +84,7 @@ methods:
   uid: office!Office.Dialog#sendMessage:member(1)
   package: office!
   fullName: sendMessage(name)
-  summary: RÉSERVÉ À UN USAGE INTERNE. N’APPELEZ PAS DANS VOTRE CODE.
+  summary: POUR UN USAGE INTERNE UNIQUEMENT. N’APPELEZ PAS VOTRE CODE.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -94,9 +98,9 @@ methods:
       type: void
       description: ''
 metadata:
-  ms.openlocfilehash: c007533112e45e4ffec29b45883add8161532d6c
-  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.openlocfilehash: f328302115888d80b8d95f5b7d97d4331e0cc2b1
+  ms.sourcegitcommit: f55d2bbeba2a20abb522cbf742e727b82bcf73ee
   ms.translationtype: MT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 11/18/2020
-  ms.locfileid: "49183362"
+  ms.lasthandoff: 03/05/2021
+  ms.locfileid: "50463384"

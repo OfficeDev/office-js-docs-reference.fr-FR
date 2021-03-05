@@ -120,15 +120,18 @@ properties:
   package: outlook!
   fullName: item
   summary: >-
-    Élément de boîte aux lettres. Selon le contexte dans lequel le add-in s’est ouvert, le type d’élément peut varier. Si vous souhaitez voir IntelliSense uniquement pour un type ou un mode spécifique, castez cet élément sur l’un des éléments suivants :
+    Élément de boîte aux lettres. Selon le contexte dans lequel le add-in s’est ouvert, le type d’élément peut varier. Si vous souhaitez voir IntelliSense pour un type ou un mode spécifique, castez cet élément sur l’un des éléments suivants :
 
 
     [MessageCompose](xref:outlook!Office.MessageCompose:interface)<!-- -->, [MessageRead](xref:outlook!Office.MessageRead:interface)<!-- -->, [AppointmentCompose](xref:outlook!Office.AppointmentCompose:interface)<!-- -->, [AppointmentRead](xref:outlook!Office.AppointmentRead:interface)
+
+
+    **Important**: `item` peut être null si votre add-in prend en charge l’épinglage du volet Des tâches. Pour plus d’informations sur la façon de gérer, voir Implémenter un volet Des tâches [épinglable dans Outlook](https://docs.microsoft.com/office/dev/add-ins/outlook/pinnable-taskpane#implement-the-event-handler)<!-- -->.
   remarks: ''
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'item: Item & ItemCompose & ItemRead & Message & MessageCompose & MessageRead & Appointment & AppointmentCompose & AppointmentRead;'
+    content: 'item?: Item & ItemCompose & ItemRead & Message & MessageCompose & MessageRead & Appointment & AppointmentCompose & AppointmentRead;'
     return:
       type: <xref uid="outlook!Office.Item:interface" /> & <xref uid="outlook!Office.ItemCompose:interface" /> & <xref uid="outlook!Office.ItemRead:interface" /> & <xref uid="outlook!Office.Message:interface" /> & <xref uid="outlook!Office.MessageCompose:interface" /> & <xref uid="outlook!Office.MessageRead:interface" /> & <xref uid="outlook!Office.Appointment:interface" /> & <xref uid="outlook!Office.AppointmentCompose:interface" /> & <xref uid="outlook!Office.AppointmentRead:interface" />
 - name: masterCategories
@@ -264,7 +267,7 @@ methods:
     ajoute un gestionnaire d’événements pour un événement pris en charge. **Remarque**: les événements sont disponibles uniquement avec le volet Des tâches.
 
 
-    Reportez-vous à la section Événements du modèle objet de boîte [aux](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/preview-requirement-set/office.context.mailbox#events) lettres pour les événements pris en charge.
+    Reportez-vous à la section Événements du modèle objet [de](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/preview-requirement-set/office.context.mailbox#events) boîte aux lettres pour les événements pris en charge.
 
 
     \[[Ensemble d’API : Mailbox 1.5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -315,7 +318,7 @@ methods:
       description: Événement qui doit appeler le gestionnaire.
       type: <xref uid="office!Office.EventType:enum" /> | string
     - id: handler
-      description: Fonction qui gère l’événement. Cette fonction doit accepter un seul paramètre, qui est un littéral d’objet. La propriété type sur le paramètre correspond au `eventType` paramètre passé à `addHandlerAsync`<!-- -->.
+      description: Fonction qui gère l’événement. Cette fonction doit accepter un seul paramètre, qui est un littéral d’objet. La propriété de type sur le paramètre correspondra au `eventType` paramètre passé à `addHandlerAsync`<!-- -->.
       type: '(type: <xref uid="office!Office.EventType:enum" />) =&gt; void'
     - id: options
       description: Facultatif. Fournit une option de conservation des données de contexte de n’importe quel type, sans modification, à utiliser dans un rappel.
@@ -399,7 +402,7 @@ methods:
     Les dates et heures utilisées par une application de messagerie pour les clients Outlook sur le web ou de bureau peuvent utiliser différents fuseaux horaires. Outlook utilise le fuseau horaire de l’ordinateur client ; Outlook sur le web utilise le fuseau horaire du Centre d’administration Exchange (EAC). Vous devez gérer les valeurs de date et d’heure afin que les valeurs que vous affichez sur l’interface utilisateur soient toujours cohérentes avec le fuseau horaire attendu par l’utilisateur.
 
 
-    Si l’application de messagerie s’exécute dans les clients Outlook sur ordinateur de bureau, la méthode retourne un objet de dictionnaire avec les valeurs définies sur le fuseau horaire de `convertToLocalClientTime` l’ordinateur client. Si l’application de messagerie s’exécute dans Outlook sur le web, la méthode retourne un objet dictionnaire avec les valeurs définies sur le fuseau horaire spécifié dans `convertToLocalClientTime` leAC.
+    Si l’application de messagerie est en cours d’exécution dans les clients Outlook sur ordinateur de bureau, la méthode retourne un objet de dictionnaire avec les valeurs définies sur le fuseau horaire de `convertToLocalClientTime` l’ordinateur client. Si l’application de messagerie s’exécute dans Outlook sur le web, la méthode retourne un objet de dictionnaire dont les valeurs sont définies sur le fuseau horaire spécifié dans `convertToLocalClientTime` leAC.
   remarks: >-
     **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
@@ -448,7 +451,7 @@ methods:
   package: outlook!
   fullName: convertToUtcClientTime(input)
   summary: >-
-    Obtient un `Date` objet d’un dictionnaire contenant des informations d’heure.
+    Obtient un `Date` objet à partir d’un dictionnaire contenant des informations d’heure.
 
 
     La méthode convertit un dictionnaire contenant une date et une heure locales en un objet avec les valeurs correctes pour la `convertToUtcClientTime` date et l’heure `Date` locales.
@@ -965,7 +968,7 @@ methods:
         `attachments.url`<!-- -->: utilisé uniquement si le type est définie sur fichier. Il s’agit de l’URI de l’emplacement du fichier.
 
 
-        `attachments.isInline`<!-- -->: utilisé uniquement si le type est définie sur fichier. Si la valeur est true, indique que la pièce jointe sera affichée en ligne dans le corps du message et ne doit pas être affichée dans la liste des pièces jointes.
+        `attachments.isInline`<!-- -->: utilisé uniquement si le type est définie sur fichier. Si la valeur est true, indique que la pièce jointe s’affiche en ligne dans le corps du message et qu’elle ne doit pas être affichée dans la liste des pièces jointes.
 
 
         `attachments.itemId`<!-- -->: utilisé uniquement si le type est définie sur l’élément. ID d’élément EWS du message électronique existant que vous souhaitez joindre au nouveau message. Il s’agit d’une chaîne comportant un maximum de 100 caractères.
@@ -1064,7 +1067,7 @@ methods:
         `attachments.url`<!-- -->: utilisé uniquement si le type est définie sur fichier. Il s’agit de l’URI de l’emplacement du fichier.
 
 
-        `attachments.isInline`<!-- -->: utilisé uniquement si le type est définie sur fichier. Si la valeur est true, indique que la pièce jointe sera affichée en ligne dans le corps du message et ne doit pas être affichée dans la liste des pièces jointes.
+        `attachments.isInline`<!-- -->: utilisé uniquement si le type est définie sur fichier. Si la valeur est true, indique que la pièce jointe s’affiche en ligne dans le corps du message et qu’elle ne doit pas être affichée dans la liste des pièces jointes.
 
 
         `attachments.itemId`<!-- -->: utilisé uniquement si le type est définie sur l’élément. ID d’élément EWS du message électronique existant que vous souhaitez joindre au nouveau message. Il s’agit d’une chaîne comportant un maximum de 100 caractères.
@@ -1248,7 +1251,7 @@ methods:
     **[Mode Outlook applicable :](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** composition ou lecture
 
 
-    La `getUserIdentityTokenAsync` méthode renvoie un jeton que vous pouvez utiliser pour identifier et authentifier le module et l’utilisateur avec [un système tiers](https://docs.microsoft.com/office/dev/add-ins/outlook/authentication)<!-- -->.
+    La méthode renvoie un jeton que vous pouvez utiliser pour identifier et authentifier le module et l’utilisateur auprès `getUserIdentityTokenAsync` [d’un système tiers](https://docs.microsoft.com/office/dev/add-ins/outlook/authentication)<!-- -->.
 
 
     **Erreurs**:
@@ -1475,7 +1478,7 @@ methods:
     Supprime les gestionnaires d’événements pour un type d’événement pris en charge. **Remarque**: les événements sont disponibles uniquement avec le volet Des tâches.
 
 
-    Reportez-vous à la section Événements du modèle objet de boîte [aux](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/preview-requirement-set/office.context.mailbox#events) lettres pour les événements pris en charge.
+    Reportez-vous à la section Événements du modèle objet [de](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/preview-requirement-set/office.context.mailbox#events) boîte aux lettres pour les événements pris en charge.
 
 
     \[[Ensemble d’API : Mailbox 1.5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -1502,9 +1505,9 @@ methods:
       type: void
       description: ''
 metadata:
-  ms.openlocfilehash: e05dfbd5bab1a5cc24aad121159d10735b5f2546
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: 0a7bbecf5a628d442d098cfdd7bb0d7547c8eac9
+  ms.sourcegitcommit: f55d2bbeba2a20abb522cbf742e727b82bcf73ee
   ms.translationtype: MT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49850940"
+  ms.lasthandoff: 03/05/2021
+  ms.locfileid: "50462832"
