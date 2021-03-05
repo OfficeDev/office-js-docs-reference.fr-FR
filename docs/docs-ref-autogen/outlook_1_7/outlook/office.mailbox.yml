@@ -37,13 +37,13 @@ properties:
     Contient les membres suivants :
 
 
-    - `hostName` (chaîne) : chaîne qui représente le nom de l’application hôte. Il doit être l’une des valeurs suivantes : `Outlook`<!-- -->, `OutlookWebApp`<!-- -->, `OutlookIOS`<!-- -->ou `OutlookAndroid`<!-- -->. **Remarque**: la valeur « Outlook » est renvoyée pour les clients Outlook sur ordinateur de bureau (c’est-à-dire, Windows et Mac).
+    - `hostName` (chaîne) : chaîne qui représente le nom de l’application hôte. Il doit avoir l’une des valeurs suivantes : `Outlook`<!-- -->, `OutlookWebApp`<!-- -->, `OutlookIOS`<!-- -->ou `OutlookAndroid`<!-- -->. **Remarque**: la valeur « Outlook » est renvoyée pour les clients Outlook sur ordinateur de bureau (c’est-à-dire, Windows et Mac).
 
 
     - `hostVersion` (chaîne) : chaîne qui représente la version de l’application hôte ou du Exchange Server (par exemple, « 15.0.468.0 »). Si le add-in de messagerie est en cours d’exécution dans Outlook sur les clients de bureau ou mobiles, la propriété renvoie la version de `hostVersion` l’application hôte, Outlook. Dans Outlook sur le web, la propriété renvoie la version du Exchange Server.
 
 
-    - `OWAView` ( ou chaîne) : une enum (ou littéral de chaîne) qui représente l’affichage actuel `MailboxEnums.OWAView` d’Outlook sur le web. Si l’application hôte n’est pas Outlook sur le web, l’accès à cette propriété entraîne la non-recherche. Outlook sur le web dispose de trois vues (affichées lorsque l’écran est étroit, affichées lorsque l’écran est plus large et - affichées lorsque l’écran est large) qui correspondent à la largeur de l’écran et de la fenêtre, ainsi qu’au nombre de colonnes qui peuvent être `OneColumn` `TwoColumns` `ThreeColumns` affichées.
+    - `OWAView` ( ou chaîne) : une enum (ou littéral de chaîne) qui représente l’affichage actuel `MailboxEnums.OWAView` d’Outlook sur le web. Si l’application hôte n’est pas Outlook sur le web, l’accès à cette propriété entraîne l’indéfinies. Outlook sur le web dispose de trois vues (affichées lorsque l’écran est étroit, affichées lorsque l’écran est plus large et - affichées lorsque l’écran est large) qui correspondent à la largeur de l’écran et de la fenêtre, ainsi qu’au nombre de colonnes qui peuvent être `OneColumn` `TwoColumns` `ThreeColumns` affichées.
 
 
     Plus d’informations se trouve [sous Office.Diagnostics](xref:outlook!Office.Diagnostics:interface)<!-- -->.
@@ -120,15 +120,18 @@ properties:
   package: outlook!
   fullName: item
   summary: >-
-    Élément de boîte aux lettres. Selon le contexte dans lequel le add-in s’est ouvert, le type d’élément peut varier. Si vous souhaitez voir IntelliSense uniquement pour un type ou un mode spécifique, castez cet élément sur l’un des éléments suivants :
+    Élément de boîte aux lettres. Selon le contexte dans lequel le add-in s’est ouvert, le type d’élément peut varier. Si vous souhaitez voir IntelliSense pour un type ou un mode spécifique, castez cet élément sur l’un des éléments suivants :
 
 
     [MessageCompose](xref:outlook!Office.MessageCompose:interface)<!-- -->, [MessageRead](xref:outlook!Office.MessageRead:interface)<!-- -->, [AppointmentCompose](xref:outlook!Office.AppointmentCompose:interface)<!-- -->, [AppointmentRead](xref:outlook!Office.AppointmentRead:interface)
+
+
+    **Important**: `item` peut être null si votre add-in prend en charge l’épinglage du volet Des tâches. Pour plus d’informations sur la façon de gérer, voir Implémenter un volet [De tâches épinglable dans Outlook](https://docs.microsoft.com/office/dev/add-ins/outlook/pinnable-taskpane#implement-the-event-handler)<!-- -->.
   remarks: ''
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'item: Item & ItemCompose & ItemRead & Message & MessageCompose & MessageRead & Appointment & AppointmentCompose & AppointmentRead;'
+    content: 'item?: Item & ItemCompose & ItemRead & Message & MessageCompose & MessageRead & Appointment & AppointmentCompose & AppointmentRead;'
     return:
       type: <xref uid="outlook!Office.Item:interface" /> & <xref uid="outlook!Office.ItemCompose:interface" /> & <xref uid="outlook!Office.ItemRead:interface" /> & <xref uid="outlook!Office.Message:interface" /> & <xref uid="outlook!Office.MessageCompose:interface" /> & <xref uid="outlook!Office.MessageRead:interface" /> & <xref uid="outlook!Office.Appointment:interface" /> & <xref uid="outlook!Office.AppointmentCompose:interface" /> & <xref uid="outlook!Office.AppointmentRead:interface" />
 - name: restUrl
@@ -181,7 +184,7 @@ methods:
     ajoute un gestionnaire d’événements pour un événement pris en charge. **Remarque**: les événements sont disponibles uniquement avec le volet Des tâches.
 
 
-    Reportez-vous à la section Événements du modèle objet de boîte [aux](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.7/office.context.mailbox#events) lettres pour les événements pris en charge.
+    Reportez-vous à la section Événements du modèle objet [de](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.7/office.context.mailbox#events) boîte aux lettres pour les événements pris en charge.
 
 
     \[[Ensemble d’API : Mailbox 1.5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -232,7 +235,7 @@ methods:
       description: Événement qui doit appeler le gestionnaire.
       type: <xref uid="office!Office.EventType:enum" /> | string
     - id: handler
-      description: Fonction qui gère l’événement. Cette fonction doit accepter un seul paramètre, qui est un littéral d’objet. La propriété type sur le paramètre correspond au `eventType` paramètre passé à `addHandlerAsync`<!-- -->.
+      description: Fonction qui gère l’événement. Cette fonction doit accepter un seul paramètre, qui est un littéral d’objet. La propriété de type sur le paramètre correspondra au `eventType` paramètre passé à `addHandlerAsync`<!-- -->.
       type: '(type: <xref uid="office!Office.EventType:enum" />) =&gt; void'
     - id: options
       description: Facultatif. Fournit une option de conservation des données de contexte de n’importe quel type, sans modification, à utiliser dans un rappel.
@@ -316,7 +319,7 @@ methods:
     Les dates et heures utilisées par une application de messagerie pour les clients Outlook sur le web ou de bureau peuvent utiliser différents fuseaux horaires. Outlook utilise le fuseau horaire de l’ordinateur client ; Outlook sur le web utilise le fuseau horaire du Centre d’administration Exchange (EAC). Vous devez gérer les valeurs de date et d’heure afin que les valeurs que vous affichez sur l’interface utilisateur soient toujours cohérentes avec le fuseau horaire attendu par l’utilisateur.
 
 
-    Si l’application de messagerie s’exécute dans les clients Outlook sur ordinateur de bureau, la méthode retourne un objet de dictionnaire avec les valeurs définies sur le fuseau horaire de `convertToLocalClientTime` l’ordinateur client. Si l’application de messagerie s’exécute dans Outlook sur le web, la méthode retourne un objet dictionnaire avec les valeurs définies sur le fuseau horaire spécifié dans `convertToLocalClientTime` leAC.
+    Si l’application de messagerie est en cours d’exécution dans les clients Outlook sur ordinateur de bureau, la méthode retourne un objet de dictionnaire avec les valeurs définies sur le fuseau horaire de `convertToLocalClientTime` l’ordinateur client. Si l’application de messagerie s’exécute dans Outlook sur le web, la méthode retourne un objet de dictionnaire dont les valeurs sont définies sur le fuseau horaire spécifié dans `convertToLocalClientTime` leAC.
   remarks: >-
     **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
@@ -345,7 +348,7 @@ methods:
 
 
     \[[Ensemble d’API : Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: "**[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`Restricted`\n\n**[Mode Outlook applicable :](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** composition ou lecture\n\nLes ID d’élément récupérés via EWS ou via la propriété utilisent un format différent de celui utilisé par les API REST (par exemple, l’API de messagerie Outlook ou `itemId` [Microsoft Graph).](https://graph.microsoft.io/) [](https://docs.microsoft.com/previous-versions/office/office-365-api/api/version-2.0/mail-rest-operations)<!-- -->. La méthode `convertToRestId` convertit un ID mis en forme pour EWS au format approprié pour REST.\n\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/85-tokens-and-service-calls/basic-rest-cors.yaml\nOffice.context.mailbox.getCallbackTokenAsync({ isRest: true }, function (result) {\n    var ewsId = Office.context.mailbox.item.itemId;\n    var token = result.value;\n    var restId = Office.context.mailbox.convertToRestId(ewsId, Office.MailboxEnums.RestVersion.v2_0);\n    var getMessageUrl = Office.context.mailbox.restUrl + '/v2.0/me/messages/' + restId;\n            \n    var xhr = new XMLHttpRequest();\n    xhr.open('GET', getMessageUrl);\n    xhr.setRequestHeader(\"Authorization\", \"Bearer \" + token);\n    xhr.onload = function (e) {\n        console.log(this.response);\n    }\n    xhr.send();\n});\n```\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/85-tokens-and-service-calls/ids-and-urls.yaml\nconsole.log(\"EWS URL: \" + Office.context.mailbox.ewsUrl);\nvar ewsId = Office.context.mailbox.item.itemId;\nconsole.log(\"EWS item ID: \" + Office.context.mailbox.item.itemId);\n\nconsole.log(\"REST URL: \" + Office.context.mailbox.restUrl);\nvar restId = Office.context.mailbox.convertToRestId(ewsId, Office.MailboxEnums.RestVersion.v2_0);\nconsole.log(\"REST item ID: \" + restId);\n\nvar ewsId2 = Office.context.mailbox.convertToEwsId(restId, Office.MailboxEnums.RestVersion.v2_0);\nconsole.log(\"EWS ID (from REST ID): \" + ewsId2);\n```"
+  remarks: "**[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`Restricted`\n\n**[Mode Outlook applicable :](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** composition ou lecture\n\nLes ID d’élément récupérés via EWS ou via la propriété utilisent un format différent de celui utilisé par les API REST (telles que l’API de messagerie Outlook ou `itemId` [Microsoft Graph).](https://graph.microsoft.io/) [](https://docs.microsoft.com/previous-versions/office/office-365-api/api/version-2.0/mail-rest-operations)<!-- -->. La méthode `convertToRestId` convertit un ID mis en forme pour EWS au format approprié pour REST.\n\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/85-tokens-and-service-calls/basic-rest-cors.yaml\nOffice.context.mailbox.getCallbackTokenAsync({ isRest: true }, function (result) {\n    var ewsId = Office.context.mailbox.item.itemId;\n    var token = result.value;\n    var restId = Office.context.mailbox.convertToRestId(ewsId, Office.MailboxEnums.RestVersion.v2_0);\n    var getMessageUrl = Office.context.mailbox.restUrl + '/v2.0/me/messages/' + restId;\n            \n    var xhr = new XMLHttpRequest();\n    xhr.open('GET', getMessageUrl);\n    xhr.setRequestHeader(\"Authorization\", \"Bearer \" + token);\n    xhr.onload = function (e) {\n        console.log(this.response);\n    }\n    xhr.send();\n});\n```\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/85-tokens-and-service-calls/ids-and-urls.yaml\nconsole.log(\"EWS URL: \" + Office.context.mailbox.ewsUrl);\nvar ewsId = Office.context.mailbox.item.itemId;\nconsole.log(\"EWS item ID: \" + Office.context.mailbox.item.itemId);\n\nconsole.log(\"REST URL: \" + Office.context.mailbox.restUrl);\nvar restId = Office.context.mailbox.convertToRestId(ewsId, Office.MailboxEnums.RestVersion.v2_0);\nconsole.log(\"REST item ID: \" + restId);\n\nvar ewsId2 = Office.context.mailbox.convertToEwsId(restId, Office.MailboxEnums.RestVersion.v2_0);\nconsole.log(\"EWS ID (from REST ID): \" + ewsId2);\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -481,7 +484,7 @@ methods:
     Dans Outlook sur le web, cette méthode ouvre le formulaire spécifié uniquement si le corps du formulaire est inférieur ou égal à 32 000 caractères.
 
 
-    Si l’identificateur d’élément spécifié n’identifie pas un message existant, aucun message n’est affiché sur l’ordinateur client et aucun message d’erreur n’est renvoyé.
+    Si l’identificateur d’élément spécifié n’identifie pas un message existant, aucun message ne s’affiche sur l’ordinateur client et aucun message d’erreur n’est renvoyé.
 
 
     N’utilisez pas `displayMessageForm` l’élément itemId qui représente un rendez-vous. Utilisez la méthode `displayAppointmentForm` pour afficher un rendez-vous existant, et `displayNewAppointmentForm` pour afficher un formulaire afin de créer un nouveau rendez-vous.
@@ -665,7 +668,7 @@ methods:
         `attachments.url`<!-- -->: utilisé uniquement si le type est définie sur fichier. Il s’agit de l’URI de l’emplacement du fichier.
 
 
-        `attachments.isInline`<!-- -->: utilisé uniquement si le type est définie sur fichier. Si la valeur est true, indique que la pièce jointe sera affichée en ligne dans le corps du message et ne doit pas être affichée dans la liste des pièces jointes.
+        `attachments.isInline`<!-- -->: utilisé uniquement si le type est définie sur fichier. Si la valeur est true, indique que la pièce jointe s’affiche en ligne dans le corps du message et qu’elle ne doit pas être affichée dans la liste des pièces jointes.
 
 
         `attachments.itemId`<!-- -->: utilisé uniquement si le type est définie sur l’élément. ID d’élément EWS du message électronique existant que vous souhaitez joindre au nouveau message. Il s’agit d’une chaîne comportant un maximum de 100 caractères.
@@ -843,7 +846,7 @@ methods:
     **[Mode Outlook applicable :](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** composition ou lecture
 
 
-    La `getUserIdentityTokenAsync` méthode renvoie un jeton que vous pouvez utiliser pour identifier et authentifier le module et l’utilisateur avec [un système tiers](https://docs.microsoft.com/office/dev/add-ins/outlook/authentication)<!-- -->.
+    La méthode renvoie un jeton que vous pouvez utiliser pour identifier et authentifier le module et l’utilisateur auprès `getUserIdentityTokenAsync` [d’un système tiers](https://docs.microsoft.com/office/dev/add-ins/outlook/authentication)<!-- -->.
 
 
     **Erreurs**:
@@ -1070,7 +1073,7 @@ methods:
     Supprime les gestionnaires d’événements pour un type d’événement pris en charge. **Remarque**: les événements sont disponibles uniquement avec le volet Des tâches.
 
 
-    Reportez-vous à la section Événements du modèle objet de boîte [aux](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.7/office.context.mailbox#events) lettres pour les événements pris en charge.
+    Reportez-vous à la section Événements du modèle objet [de](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.7/office.context.mailbox#events) boîte aux lettres pour les événements pris en charge.
 
 
     \[[Ensemble d’API : Mailbox 1.5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -1097,9 +1100,9 @@ methods:
       type: void
       description: ''
 metadata:
-  ms.openlocfilehash: d0a8ee98e49ec6a06e04ed4b51d4d5f7b62c1fec
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: dfd43fd2ec0c30a881251c9ff22f8e58716febaa
+  ms.sourcegitcommit: f55d2bbeba2a20abb522cbf742e727b82bcf73ee
   ms.translationtype: MT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49855378"
+  ms.lasthandoff: 03/05/2021
+  ms.locfileid: "50463370"
