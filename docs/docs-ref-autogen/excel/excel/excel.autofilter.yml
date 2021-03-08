@@ -4,7 +4,7 @@ uid: excel!Excel.AutoFilter:class
 package: excel!
 fullName: Excel.AutoFilter
 summary: >-
-  Représente l’objet AutoFilter. Le filtre automatique transforme les valeurs de la colonne Excel en filtres spécifiques basés sur le contenu de la cellule.
+  Représente `AutoFilter` l’objet. Le filtre automatique transforme les valeurs de la colonne Excel en filtres spécifiques basés sur le contenu de la cellule.
 
 
   \[[Ensemble d’API : ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -90,7 +90,7 @@ methods:
     content: 'apply(range: Range | string, columnIndex?: number, criteria?: Excel.FilterCriteria): void;'
     parameters:
     - id: range
-      description: Plage sur laquelle le filtre automatique s’appliquera.
+      description: Plage à laquelle le filtre automatique s’appliquera.
       type: <xref uid="excel!Excel.Range:class" /> | string
     - id: columnIndex
       description: Index de colonne de base 0 auquel le filtre automatique est appliqué.
@@ -101,6 +101,27 @@ methods:
     return:
       type: void
       description: "\n\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/54-worksheet/worksheet-auto-filter.yaml\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getActiveWorksheet();\n    const farmData = sheet.getUsedRange();\n\n    // This filter will only show the rows with the top 25% of values in column 3.\n    sheet.autoFilter.apply(farmData, 3, { criterion1: \"25\", filterOn: Excel.FilterOn.topPercent });\n    await context.sync();\n});\n```"
+- name: clearColumnCriteria(columnIndex)
+  uid: excel!Excel.AutoFilter#clearColumnCriteria:member(1)
+  package: excel!
+  fullName: clearColumnCriteria(columnIndex)
+  summary: >-
+    Efface les critères de filtre du filtre automatique.
+
+
+    \[[Ensemble d’API : ExcelApi BÊTA (PRÉVISUALISATION UNIQUEMENT)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'clearColumnCriteria(columnIndex: number): void;'
+    parameters:
+    - id: columnIndex
+      description: Index de colonne de base 0, qui représente le filtre de colonne à effacé. Si la valeur d’index n’est pas prise en charge (par exemple, si la valeur est un nombre négatif ou si la valeur est supérieure au nombre de colonnes disponibles dans la plage), une exception est `InvalidArgument` lancée.
+      type: number
+    return:
+      type: void
+      description: ''
 - name: clearCriteria()
   uid: excel!Excel.AutoFilter#clearCriteria:member(1)
   package: excel!
@@ -123,7 +144,7 @@ methods:
   package: excel!
   fullName: getRange()
   summary: >-
-    Cette propriété renvoie un objet Plage qui représente la plage sur laquelle s'applique le filtre automatique spécifié.
+    Renvoie `Range` l’objet qui représente la plage à laquelle le filtre automatique s’applique.
 
 
     \[[Ensemble d’API : ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -140,7 +161,7 @@ methods:
   package: excel!
   fullName: getRangeOrNullObject()
   summary: >-
-    Renvoie `Range` l’objet qui représente la plage à laquelle `AutoFilter` s’applique la plage. Si aucun objet `Range` n’est associé à l’objet `AutoFilter`<!-- -->, puis cette méthode renvoie un objet dont la `isNullObject` propriété est définie sur `true`<!-- -->. Pour plus d’informations, [voir *OrNullObject methods and properties](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
+    Renvoie `Range` l’objet qui représente la plage à laquelle le filtre automatique s’applique. Si aucun objet n’est associé au filtre automatique, cette méthode renvoie un objet dont la propriété `Range` `isNullObject` est définie sur `true`<!-- -->. Pour plus d’informations, [voir *OrNullObject methods and properties](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Ensemble d’API : ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -260,9 +281,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 0007599fa27b2247c73798735f0d34b67192811a
-  ms.sourcegitcommit: f229afdd4c2bc820ac799394a77b637fc66e87b4
+  ms.openlocfilehash: ce09c071d21c03ad8c48d68beb3ef0f5d22f4e58
+  ms.sourcegitcommit: 276e655472f82435a4b1227fbbb2feb687b659c0
   ms.translationtype: MT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 01/27/2021
-  ms.locfileid: "49991841"
+  ms.lasthandoff: 03/08/2021
+  ms.locfileid: "50537987"

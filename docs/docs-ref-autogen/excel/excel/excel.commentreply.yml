@@ -4,7 +4,7 @@ uid: excel!Excel.CommentReply:class
 package: excel!
 fullName: Excel.CommentReply
 summary: >-
-  Représente une réponse de commentaire dans le workbook.
+  Représente une réponse de commentaire dans le manuel.
 
 
   \[[Ensemble d’API : ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -143,7 +143,7 @@ properties:
   package: excel!
   fullName: resolved
   summary: >-
-    État de réponse du commentaire. La valeur « true » signifie que la réponse est dans l’état résolu.
+    État de réponse du commentaire. Valeur de signifie `true` que la réponse est dans l’état résolu.
 
 
     \[[Ensemble d’API : ExcelApi 1.11](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -159,7 +159,7 @@ properties:
   package: excel!
   fullName: richContent
   summary: >-
-    Contenu de commentaire enrichi (par exemple, mentions dans les commentaires). Cette chaîne n’est pas destinée à être affichée aux utilisateurs finaux. Votre add-in ne doit l’utiliser que pour l’utilisation du contenu de commentaires enrichis.
+    Contenu de commentaire enrichi (par exemple, mentions dans les commentaires). Cette chaîne n’est pas destinée à être affichée aux utilisateurs finaux. Votre add-in ne doit l’utiliser que pour l’utilisation de commentaires enrichis.
 
 
     \[[Ensemble d’API : ExcelApi 1.11](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -171,10 +171,10 @@ properties:
     return:
       type: string
 methods:
-- name: assignTask(email)
+- name: assignTask(assignee)
   uid: excel!Excel.CommentReply#assignTask:member(1)
   package: excel!
-  fullName: assignTask(email)
+  fullName: assignTask(assignee)
   summary: >-
     Affecte la tâche liée au commentaire à l’utilisateur donné en tant que seule personne assignée. S’il n’existe aucune tâche, une tâche est créée.
 
@@ -184,13 +184,13 @@ methods:
   isPreview: true
   isDeprecated: false
   syntax:
-    content: 'assignTask(email: string): Excel.Task;'
+    content: 'assignTask(assignee: Identity): Excel.DocumentTask;'
     parameters:
-    - id: email
-      description: Adresse de messagerie de l’utilisateur à affecter à la tâche.
-      type: string
+    - id: assignee
+      description: Informations d’identité de l’utilisateur de la personne assignée.
+      type: <xref uid="excel!Excel.Identity:interface" />
     return:
-      type: <xref uid="excel!Excel.Task:class" />
+      type: <xref uid="excel!Excel.DocumentTask:class" />
       description: ''
 - name: delete()
   uid: excel!Excel.CommentReply#delete:member(1)
@@ -248,7 +248,7 @@ methods:
   package: excel!
   fullName: getTask()
   summary: >-
-    Obtient la tâche associée à ce commentaire. S’il n’existe aucune tâche pour le thread de commentaire, une exception ItemNotFound est lancée.
+    Obtient la tâche associée au fil de discussion de cette réponse de commentaire. S’il n’existe aucune tâche pour le thread de commentaires, `ItemNotFound` une exception est lancée.
 
 
     \[[Ensemble d’API : ExcelApi BÊTA (PRÉVISUALISATION UNIQUEMENT)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -256,16 +256,16 @@ methods:
   isPreview: true
   isDeprecated: false
   syntax:
-    content: 'getTask(): Excel.Task;'
+    content: 'getTask(): Excel.DocumentTask;'
     return:
-      type: <xref uid="excel!Excel.Task:class" />
+      type: <xref uid="excel!Excel.DocumentTask:class" />
       description: ''
 - name: getTaskOrNullObject()
   uid: excel!Excel.CommentReply#getTaskOrNullObject:member(1)
   package: excel!
   fullName: getTaskOrNullObject()
   summary: >-
-    Obtient la tâche associée à ce commentaire. S’il n’existe aucune tâche pour le thread de commentaire, cette fonction retourne un objet dont la `isNullObject` propriété est définie sur `true`<!-- -->. Pour plus d’informations, [voir *OrNullObject methods and properties](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
+    Obtient la tâche associée au fil de discussion de cette réponse de commentaire. S’il n’existe aucune tâche pour le thread de commentaire, cette fonction retourne un objet dont la `isNullObject` propriété est définie sur `true`<!-- -->. Pour plus d’informations, [voir *OrNullObject methods and properties](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Ensemble d’API : ExcelApi BÊTA (PRÉVISUALISATION UNIQUEMENT)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -273,9 +273,9 @@ methods:
   isPreview: true
   isDeprecated: false
   syntax:
-    content: 'getTaskOrNullObject(): Excel.Task;'
+    content: 'getTaskOrNullObject(): Excel.DocumentTask;'
     return:
-      type: <xref uid="excel!Excel.Task:class" />
+      type: <xref uid="excel!Excel.DocumentTask:class" />
       description: ''
 - name: load(options)
   uid: excel!Excel.CommentReply#load:member(1)
@@ -413,9 +413,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 35fb3c136ed527f3f44a3ae8a35297201967db05
-  ms.sourcegitcommit: f229afdd4c2bc820ac799394a77b637fc66e87b4
+  ms.openlocfilehash: ff5ba44251a06565527f37b89feb2ea543574f46
+  ms.sourcegitcommit: 276e655472f82435a4b1227fbbb2feb687b659c0
   ms.translationtype: MT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 01/27/2021
-  ms.locfileid: "49991792"
+  ms.lasthandoff: 03/08/2021
+  ms.locfileid: "50538813"
