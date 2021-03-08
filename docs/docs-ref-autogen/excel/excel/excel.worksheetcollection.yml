@@ -173,7 +173,7 @@ properties:
   package: excel!
   fullName: onFormatChanged
   summary: >-
-    Se produit lorsqu’une feuille de calcul dans le classeur a un format modifié.
+    Se produit lorsqu’une feuille de calcul du manuel a un format modifié.
 
 
     \[[Ensemble d’API : ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -270,7 +270,7 @@ methods:
   package: excel!
   fullName: add(name)
   summary: >-
-    Ajoute une nouvelle feuille de calcul au classeur. La feuille de calcul est ajoutée à la fin des feuilles de calcul existantes. Si vous souhaitez activer la feuille de calcul nouvellement ajoutée, appelez la méthode .activate() pour cette feuille.
+    Ajoute une nouvelle feuille de calcul au classeur. La feuille de calcul est ajoutée à la fin des feuilles de calcul existantes. Si vous souhaitez activer la feuille de calcul nouvellement ajoutée, `.activate()` appelez-la.
 
 
     \[[Ensemble d’API : ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -281,7 +281,7 @@ methods:
     content: 'add(name?: string): Excel.Worksheet;'
     parameters:
     - id: name
-      description: Facultatif. Nom de la feuille de calcul à ajouter. Si cette propriété est définie, le nom doit être unique. Si cette propriété n’est pas définie, Excel détermine le nom de la nouvelle feuille de calcul.
+      description: Facultatif. Nom de la feuille de calcul à ajouter. S’il est spécifié, le nom doit être unique. Si cette propriété n’est pas définie, Excel détermine le nom de la nouvelle feuille de calcul.
       type: string
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -294,10 +294,10 @@ methods:
     Insère les feuilles de calcul spécifiées d’un classeur dans le classeur actif.
 
 
-    *Remarque**: cette API est actuellement uniquement prise en charge pour Office sur Windows et Mac.
+    *Remarque**: cette API est actuellement uniquement prise en charge pour Office sur Windows et Mac. Et il a été supprimé, veuillez `Workbook.insertWorksheetFromBase64` l’utiliser à la place.
 
 
-    \[[Ensemble d’API : ExcelApiAddFromBase64String 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d’API : ExcelApi BÊTA (PRÉVISUALISATION UNIQUEMENT)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: true
   isDeprecated: false
@@ -311,10 +311,10 @@ methods:
       description: Facultatif. Noms des feuilles de calcul individuelles à insérer. Par défaut, toutes les feuilles de calcul du manuel source sont insérées.
       type: string[]
     - id: positionType
-      description: Facultatif. Où sont insérées les nouvelles feuilles de calcul dans le manuel en cours. Pour plus d’informations, voir Excel.WorksheetPositionType. La valeur par défaut est « Start ».
+      description: Facultatif. Où sont insérées les nouvelles feuilles de calcul dans le manuel en cours. Pour `Excel.WorksheetPositionType` plus d’informations, voir. La valeur par défaut est « Start ».
       type: <xref uid="excel!Excel.WorksheetPositionType:enum" />
     - id: relativeTo
-      description: Facultatif. Feuille de calcul du manuel actuel référencé pour le paramètre positionType. La valeur par défaut est null et, en fonction de positionType, il insère des feuilles de calcul au début ou à la fin du manuel en cours.
+      description: Facultatif. Feuille de calcul du manuel actuel référencé pour le `positionType` paramètre. La valeur par `null` défaut est et, en fonction de `positionType`<!-- -->, il insère des feuilles de calcul au début ou à la fin du manuel en cours.
       type: <xref uid="excel!Excel.Worksheet:class" /> | string
     return:
       type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;string[]&gt;
@@ -327,10 +327,10 @@ methods:
     Insère les feuilles de calcul spécifiées d’un classeur dans le classeur actif.
 
 
-    *Remarque**: cette API est actuellement uniquement prise en charge pour Office sur Windows et Mac.
+    *Remarque**: cette API est actuellement uniquement prise en charge pour Office sur Windows et Mac. Et il a été supprimé, veuillez `Workbook.insertWorksheetFromBase64` l’utiliser à la place.
 
 
-    \[[Ensemble d’API : ExcelApiAddFromBase64String 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d’API : ExcelApi BÊTA (PRÉVISUALISATION UNIQUEMENT)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -344,10 +344,10 @@ methods:
       description: Facultatif. Noms des feuilles de calcul individuelles à insérer. Par défaut, toutes les feuilles de calcul du manuel source sont insérées.
       type: string[]
     - id: positionTypeString
-      description: Facultatif. Où sont insérées les nouvelles feuilles de calcul dans le manuel en cours. Pour plus d’informations, voir Excel.WorksheetPositionType. La valeur par défaut est « Start ».
+      description: Facultatif. Où sont insérées les nouvelles feuilles de calcul dans le manuel en cours. Pour `Excel.WorksheetPositionType` plus d’informations, voir. La valeur par défaut est « Start ».
       type: "\"None\" | \"Before\" | \"After\" | \"Beginning\" | \"End\""
     - id: relativeTo
-      description: Facultatif. Feuille de calcul du manuel actuel référencé pour le paramètre positionType. La valeur par défaut est null et, en fonction de positionType, elle insère des feuilles de calcul au début ou à la fin du manuel en cours.
+      description: Facultatif. Feuille de calcul du manuel actuel référencé pour le `positionType` paramètre. La valeur par `null` défaut est et, en fonction de `positionType`<!-- -->, il insère des feuilles de calcul au début ou à la fin du manuel en cours.
       type: <xref uid="excel!Excel.Worksheet:class" /> | string
     return:
       type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;string[]&gt;
@@ -385,7 +385,7 @@ methods:
     content: 'getCount(visibleOnly?: boolean): OfficeExtension.ClientResult<number>;'
     parameters:
     - id: visibleOnly
-      description: Facultatif. Si la valeur est true, ne considère que les feuilles de calcul visibles, en ignorer les feuilles masquées.
+      description: Facultatif. If `true`<!-- -->, ne considère que les feuilles de calcul visibles, en ignorer les feuilles masquées.
       type: boolean
     return:
       type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;number&gt;
@@ -406,7 +406,7 @@ methods:
     content: 'getFirst(visibleOnly?: boolean): Excel.Worksheet;'
     parameters:
     - id: visibleOnly
-      description: Facultatif. Si la valeur est true, ne considère que les feuilles de calcul visibles, en ignorer les feuilles masquées.
+      description: Facultatif. If `true`<!-- -->, considère uniquement les feuilles de calcul visibles, en ignorer les feuilles masquées.
       type: boolean
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -469,7 +469,7 @@ methods:
     content: 'getLast(visibleOnly?: boolean): Excel.Worksheet;'
     parameters:
     - id: visibleOnly
-      description: Facultatif. Si la valeur est true, ne considère que les feuilles de calcul visibles, en ignorer les feuilles masquées.
+      description: Facultatif. If `true`<!-- -->, considère uniquement les feuilles de calcul visibles, en ignorer les feuilles masquées.
       type: boolean
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -540,9 +540,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 217115c6457c6b3150849309c2eff8be4d1cfe79
-  ms.sourcegitcommit: f229afdd4c2bc820ac799394a77b637fc66e87b4
+  ms.openlocfilehash: 4faa340672a3607f9720f352711f6bff729b1d5d
+  ms.sourcegitcommit: 276e655472f82435a4b1227fbbb2feb687b659c0
   ms.translationtype: MT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 01/27/2021
-  ms.locfileid: "49991645"
+  ms.lasthandoff: 03/08/2021
+  ms.locfileid: "50540402"
