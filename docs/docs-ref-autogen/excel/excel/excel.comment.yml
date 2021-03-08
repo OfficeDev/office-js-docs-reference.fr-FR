@@ -4,7 +4,7 @@ uid: excel!Excel.Comment:class
 package: excel!
 fullName: Excel.Comment
 summary: >-
-  Représente un commentaire dans le livre de travail.
+  Représente un commentaire dans le manuel.
 
 
   \[[Ensemble d’API : ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -95,7 +95,7 @@ properties:
   package: excel!
   fullName: creationDate
   summary: >-
-    Obtenir l’heure de création du commentaire. Renvoie la valeur null si le commentaire a été converti d’une note, étant donné que le commentaire ne dispose pas d’une date de création.
+    Obtenir l’heure de création du commentaire. Renvoie `null` si le commentaire a été converti à partir d’une note, car le commentaire n’a pas de date de création.
 
 
     \[[Ensemble d’API : ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -159,7 +159,7 @@ properties:
   package: excel!
   fullName: resolved
   summary: >-
-    État du thread de commentaire. La valeur « true » signifie que le thread de commentaire est résolu.
+    État du thread de commentaire. Une valeur de `true` signifie que le thread de commentaire est résolu.
 
 
     \[[Ensemble d’API : ExcelApi 1.11](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -176,7 +176,7 @@ properties:
   package: excel!
   fullName: richContent
   summary: >-
-    Obtient le contenu des commentaires enrichis (par exemple, les mentions dans les commentaires). Cette chaîne n’est pas destinée à être affichée aux utilisateurs finaux. Votre add-in ne doit l’utiliser que pour l’utilisation du contenu de commentaires enrichis.
+    Obtient le contenu des commentaires enrichis (par exemple, les mentions dans les commentaires). Cette chaîne n’est pas destinée à être affichée aux utilisateurs finaux. Votre add-in ne doit l’utiliser que pour l’utilisation de commentaires enrichis.
 
 
     \[[Ensemble d’API : ExcelApi 1.11](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -188,12 +188,12 @@ properties:
     return:
       type: string
 methods:
-- name: assignTask(email)
+- name: assignTask(assignee)
   uid: excel!Excel.Comment#assignTask:member(1)
   package: excel!
-  fullName: assignTask(email)
+  fullName: assignTask(assignee)
   summary: >-
-    Affecte la tâche liée au commentaire à l’utilisateur donné en tant que seule personne assignée. S’il n’existe aucune tâche, une tâche est créée.
+    Affecte la tâche liée au commentaire à l’utilisateur donné en tant que personne assignée. S’il n’existe aucune tâche, une tâche est créée.
 
 
     \[[Ensemble d’API : ExcelApi BÊTA (PRÉVISUALISATION UNIQUEMENT)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -201,13 +201,13 @@ methods:
   isPreview: true
   isDeprecated: false
   syntax:
-    content: 'assignTask(email: string): Excel.Task;'
+    content: 'assignTask(assignee: Identity): Excel.DocumentTask;'
     parameters:
-    - id: email
-      description: Adresse de messagerie de l’utilisateur à affecter à la tâche.
-      type: string
+    - id: assignee
+      description: Informations d’identité de l’utilisateur de la personne assignée.
+      type: <xref uid="excel!Excel.Identity:interface" />
     return:
-      type: <xref uid="excel!Excel.Task:class" />
+      type: <xref uid="excel!Excel.DocumentTask:class" />
       description: ''
 - name: delete()
   uid: excel!Excel.Comment#delete:member(1)
@@ -248,7 +248,7 @@ methods:
   package: excel!
   fullName: getTask()
   summary: >-
-    Obtient la tâche associée à ce commentaire. S’il n’existe aucune tâche pour le thread de commentaire, une exception ItemNotFound est lancée.
+    Obtient la tâche associée à ce commentaire. S’il n’existe aucune tâche pour le thread de commentaires, `ItemNotFound` une exception est lancée.
 
 
     \[[Ensemble d’API : ExcelApi BÊTA (PRÉVISUALISATION UNIQUEMENT)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -256,9 +256,9 @@ methods:
   isPreview: true
   isDeprecated: false
   syntax:
-    content: 'getTask(): Excel.Task;'
+    content: 'getTask(): Excel.DocumentTask;'
     return:
-      type: <xref uid="excel!Excel.Task:class" />
+      type: <xref uid="excel!Excel.DocumentTask:class" />
       description: ''
 - name: getTaskOrNullObject()
   uid: excel!Excel.Comment#getTaskOrNullObject:member(1)
@@ -273,9 +273,9 @@ methods:
   isPreview: true
   isDeprecated: false
   syntax:
-    content: 'getTaskOrNullObject(): Excel.Task;'
+    content: 'getTaskOrNullObject(): Excel.DocumentTask;'
     return:
-      type: <xref uid="excel!Excel.Task:class" />
+      type: <xref uid="excel!Excel.DocumentTask:class" />
       description: ''
 - name: load(options)
   uid: excel!Excel.Comment#load:member(1)
@@ -413,9 +413,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 10ca1f834a9a7e242f6f567fc5831f566848f4e8
-  ms.sourcegitcommit: f229afdd4c2bc820ac799394a77b637fc66e87b4
+  ms.openlocfilehash: bfb3ea3d0a5fa76b0d9812092af4ef957f35391a
+  ms.sourcegitcommit: 276e655472f82435a4b1227fbbb2feb687b659c0
   ms.translationtype: MT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 01/27/2021
-  ms.locfileid: "49991799"
+  ms.lasthandoff: 03/08/2021
+  ms.locfileid: "50539289"
