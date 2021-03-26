@@ -7,13 +7,13 @@ author: o365devx
 ms.author: o365devx
 ms.prod: non-product-specific
 localization_priority: Priority
-ms.date: 12/01/2020
-ms.openlocfilehash: 6f3b8b51283953cf2e8174085e814e76c666ed8d
-ms.sourcegitcommit: ea1cebaadbb80867d3532be384e412fd13868190
+ms.date: 03/17/2021
+ms.openlocfilehash: 63d2efa4d4b9406208f3227ec96df467ea0d8877
+ms.sourcegitcommit: a5c179dc927ce89d1ada071d388d582191d3fa1e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/13/2021
-ms.locfileid: "49840138"
+ms.lasthandoff: 03/24/2021
+ms.locfileid: "51183539"
 ---
 # <a name="office-add-ins-javascript-api-reference"></a>Référence de l’API JavaScript pour les compléments Office
 
@@ -99,6 +99,22 @@ La liste suivante répertorie les API pour les [applications hôtes Office prise
     <li>
         <div class="cardImageOuter">
             <div class="cardImage">
+                <img src="https://docs.microsoft.com/javascript/api/overview/images/logo-powerpoint.svg" alt="PowerPoint add-ins" height="140" />
+            </div>
+        </div>
+        <div class="cardText">
+            <h3>API PowerPoint</h3>
+            <ul>
+                <li><a style="font-size: 1rem;" href="/javascript/api/powerpoint?view=powerpoint-js-preview">PowerPointApi Preview</a></li>
+                <li><a style="font-size: 1rem;" href="/javascript/api/powerpoint?view=powerpoint-js-1.2">PowerPointApi 1.2</a></li>
+                <li><a style="font-size: 1rem;" href="/javascript/api/powerpoint?view=powerpoint-js-1.1">PowerPointApi 1.1</a></li>
+                <li><a style="font-size: 1rem;" href="/javascript/api/office?view=powerpoint-js-preview">API communes</a></li>
+            </ul>
+        </div>
+    </li>
+    <li>
+        <div class="cardImageOuter">
+            <div class="cardImage">
                 <img src="https://docs.microsoft.com/javascript/api/overview/images/logo-onenote.svg" alt="OneNote add-ins" height="140" />
             </div>
         </div>
@@ -120,22 +136,6 @@ La liste suivante répertorie les API pour les [applications hôtes Office prise
             <h3>API Visio</h3>
             <ul>
                 <li><a style="font-size: 1rem;" href="/javascript/api/visio?view=visio-js-1.1">VisioApi 1.1</a></li>
-            </ul>
-        </div>
-    </li>
-    <li>
-        <div class="cardImageOuter">
-            <div class="cardImage">
-                <img src="https://docs.microsoft.com/javascript/api/overview/images/logo-powerpoint.svg" alt="PowerPoint add-ins" height="140" />
-            </div>
-        </div>
-        <div class="cardText">
-            <h3>API PowerPoint</h3>
-            <ul>
-                <li><a style="font-size: 1rem;" href="/javascript/api/powerpoint?view=powerpoint-js-preview">PowerPointApi Preview</a></li>
-                <li><a style="font-size: 1rem;" href="/javascript/api/powerpoint?view=powerpoint-js-1.1">PowerPointApi 1.1</a></li>
-                <li><a style="font-size: 1rem;" href="/javascript/api/powerpoint?view=powerpoint-js-1.2">PowerPointApi 1.2</a></li>
-                <li><a style="font-size: 1rem;" href="/javascript/api/office?view=powerpoint-js-preview">API communes</a></li>
             </ul>
         </div>
     </li>
