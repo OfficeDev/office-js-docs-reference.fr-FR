@@ -7,8 +7,8 @@ summary: >-
   Objet qui encapsule le résultat d’une requête asynchrone, y compris les informations d’état et d’erreur quand la demande a échoué.
 
 
-  Lorsque la fonction que vous transmettez au `callback` paramètre d’une méthode « Async » s’exécute, elle reçoit un objet AsyncResult accessible à partir du `callback` seul paramètre de la fonction.
-remarks: "\n\n#### <a name=\"examples\"></a>範例\n\n```javascript\n// The following is an example applicable to content and task pane add-ins.\n// The example shows a call to the getSelectedDataAsync method of the Document object.\nOffice.context.document.getSelectedDataAsync(\"text\", {\n        valueFormat: \"unformatted\",\n        filterType: \"all\"\n    },\n    function (result) {\n        if (result.status === Office.AsyncResultStatus.Succeeded) {\n            var dataValue = result.value; // Get selected data.\n            console.log('Selected data is ' + dataValue);\n        } else {\n            var err = result.error;\n            console.log(err.name + \": \" + err.message);\n        }\n    });\n// The anonymous function passed as the callback argument ( function (result){...}) has a single \n// parameter named result that provides access to an AsyncResult object when the function executes.\n// When the call to the getSelectedDataAsync method completes, the callback function executes, \n// and the following line of code accesses the value property of the AsyncResult object to \n// return the data selected in the document:\nvar dataValue = result.value;\n// Note that other lines of code in the function use the result parameter of the callback function \n// to access the status and error properties of the AsyncResult object.\n```"
+  Lorsque la fonction que vous passez au paramètre d’une méthode « Async » s’exécute, elle reçoit un objet AsyncResult accessible à partir du seul paramètre de la `callback` `callback` fonction.
+remarks: "\n\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\n// The following is an example applicable to content and task pane add-ins.\n// The example shows a call to the getSelectedDataAsync method of the Document object.\nOffice.context.document.getSelectedDataAsync(\"text\", {\n        valueFormat: \"unformatted\",\n        filterType: \"all\"\n    },\n    function (result) {\n        if (result.status === Office.AsyncResultStatus.Succeeded) {\n            var dataValue = result.value; // Get selected data.\n            console.log('Selected data is ' + dataValue);\n        } else {\n            var err = result.error;\n            console.log(err.name + \": \" + err.message);\n        }\n    });\n// The anonymous function passed as the callback argument ( function (result){...}) has a single \n// parameter named result that provides access to an AsyncResult object when the function executes.\n// When the call to the getSelectedDataAsync method completes, the callback function executes, \n// and the following line of code accesses the value property of the AsyncResult object to \n// return the data selected in the document:\nvar dataValue = result.value;\n// Note that other lines of code in the function use the result parameter of the callback function \n// to access the status and error properties of the AsyncResult object.\n```"
 isPreview: false
 isDeprecated: false
 type: interface
@@ -17,7 +17,7 @@ properties:
   uid: office!Office.AsyncResult#asyncContext:member
   package: office!
   fullName: asyncContext
-  summary: 'Obtient l’élément défini par l’utilisateur transmis au `asyncContext` paramètre facultatif de la méthode appelée dans le même État que celui dans lequel il a été passé. Cela renvoie l’élément défini par l’utilisateur (qui peut être de n’importe quel type JavaScript : String, Number, Boolean, Object, Array, null ou undefined) passé au `asyncContext` paramètre facultatif de la méthode appelée. Renvoie Undefined si vous n’avez rien transmis au paramètre asyncContext.'
+  summary: 'Obtient l’élément défini par l’utilisateur transmis au paramètre facultatif de la méthode invoquée dans le même état `asyncContext` qu’il a été transmis. Cette méthode renvoie l’élément défini par l’utilisateur (qui peut être de n’importe quel type JavaScript : Chaîne, Nombre, Boolean, Objet, Tableau, Null ou Non défini) transmis au paramètre facultatif de la méthode `asyncContext` invoquée. Renvoie Undefined si vous n’avez rien transmis au paramètre asyncContext.'
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -25,23 +25,23 @@ properties:
     content: 'asyncContext: any;'
     return:
       type: any
-      description: "\n\n#### <a name=\"examples\"></a>範例\n\n```javascript\nfunction getDataWithContext() {\n    var format = \"Your data: \";\n    Office.context.document.getSelectedDataAsync(\n        Office.CoercionType.Text, \n        { asyncContext: format }, \n        showDataWithContext);\n}\n\nfunction showDataWithContext(asyncResult) {\n    write(asyncResult.asyncContext + asyncResult.value);\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+      description: "\n\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nfunction getDataWithContext() {\n    var format = \"Your data: \";\n    Office.context.document.getSelectedDataAsync(\n        Office.CoercionType.Text, \n        { asyncContext: format }, \n        showDataWithContext);\n}\n\nfunction showDataWithContext(asyncResult) {\n    write(asyncResult.asyncContext + asyncResult.value);\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
 - name: diagnostics
   uid: office!Office.AsyncResult#diagnostics:member
   package: office!
   fullName: diagnostics
-  summary: Obtient un objet qui peut fournir des informations supplémentaires si une [erreur](xref:office!Office.Error:interface) s’est produite.
+  summary: Obtient un objet qui peut fournir des informations supplémentaires en cas [d’erreur.](xref:office!Office.Error:interface)
   remarks: >-
-    Cette propriété renvoie des informations supplémentaires si les erreurs suivantes se produisent avec ces API prises en charge.
+    Cette propriété renvoie des informations supplémentaires si les erreurs suivantes se produisent avec ces API pris en charge.
 
 
-    *API prises en charge*
+    *API prise en charge*
 
 
     `Office.context.mailbox.item.getCallbackTokenAsync`<!-- -->, `Office.context.mailbox.item.getUserIdentityTokenAsync`
 
 
-    *Erreurs prises en charge* <table> <tr><th>`AsyncResult.error.name` </th><th>`AsyncResult.error.message` </th><th>Description de l’objet Diagnostics renvoyé </th></tr> <tr><td><strong>HTTPRequestFailure</strong> </td><td>La demande a échoué. Veuillez rechercher le code d’erreur HTTP dans l’objet de diagnostics. </td><td>Le code d’erreur HTTP dans un objet JSON, par exemple, `{"HTTPCode":"401"}` </td></tr> <tr><td><strong>InternalServerError</strong></td><td>Le serveur Exchange a renvoyé une erreur. Pour plus d’informations, veuillez consulter l’objet de diagnostics.</td><td>Message d’erreur du serveur Exchange dans un objet JSON, par exemple, `{"ErrorText": "The mailbox database is temporarily unavailable"}`</td></tr> </table>
+    *Erreurs prise en charge* <table> <tr><th>`AsyncResult.error.name` </th><th>`AsyncResult.error.message` </th><th>Description de l’objet de diagnostic renvoyé </th></tr> <tr><td><strong>HTTPRequestFailure</strong> </td><td>La demande a échoué. Veuillez rechercher le code d’erreur HTTP dans l’objet de diagnostics. </td><td>Le code d’erreur HTTP dans un objet JSON, par exemple, `{"HTTPCode":"401"}` </td></tr> <tr><td><strong>InternalServerError</strong></td><td>Le serveur Exchange a renvoyé une erreur. Pour plus d’informations, veuillez consulter l’objet de diagnostics.</td><td>Message d’erreur provenant du serveur Exchange dans un objet JSON, par exemple, `{"ErrorText": "The mailbox database is temporarily unavailable"}`</td></tr> </table>
   isPreview: false
   isDeprecated: false
   syntax:
@@ -52,7 +52,7 @@ properties:
   uid: office!Office.AsyncResult#error:member
   package: office!
   fullName: error
-  summary: Obtient un objet [Office. Error](xref:office!Office.Error:interface) qui fournit une description de l’erreur, si une erreur s’est produite.
+  summary: Obtient [un objet Office.Error](xref:office!Office.Error:interface) qui fournit une description de l’erreur, si une erreur s’est produite.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -60,12 +60,12 @@ properties:
     content: 'error: Office.Error;'
     return:
       type: <xref uid="office!Office.Error:interface" />
-      description: "\n\n#### <a name=\"examples\"></a>範例\n\n```javascript\nfunction getData() {\n    Office.context.document.getSelectedDataAsync(Office.CoercionType.Table, function(asyncResult) {\n        if (asyncResult.status == Office.AsyncResultStatus.Failed) {\n            write(asyncResult.error.message);\n        }\n        else {\n            write(asyncResult.value);\n        }\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+      description: "\n\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nfunction getData() {\n    Office.context.document.getSelectedDataAsync(Office.CoercionType.Table, function(asyncResult) {\n        if (asyncResult.status == Office.AsyncResultStatus.Failed) {\n            write(asyncResult.error.message);\n        }\n        else {\n            write(asyncResult.value);\n        }\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
 - name: status
   uid: office!Office.AsyncResult#status:member
   package: office!
   fullName: status
-  summary: Obtient l' [Office. AsyncResultStatus](xref:office!Office.AsyncResultStatus:enum) de l’opération asynchrone.
+  summary: Obtient [l’Office.AsyncResultStatus de](xref:office!Office.AsyncResultStatus:enum) l’opération asynchrone.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -73,13 +73,13 @@ properties:
     content: 'status: AsyncResultStatus;'
     return:
       type: <xref uid="office!Office.AsyncResultStatus:enum" />
-      description: "\n\n#### <a name=\"examples\"></a>範例\n\n```javascript\nfunction getData() {\n    Office.context.document.getSelectedDataAsync(Office.CoercionType.Table, function(asyncResult) {\n        if (asyncResult.status == Office.AsyncResultStatus.Failed) {\n            write(asyncResult.error.message);\n        }\n        else {\n            write(asyncResult.value);\n        }\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+      description: "\n\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nfunction getData() {\n    Office.context.document.getSelectedDataAsync(Office.CoercionType.Table, function(asyncResult) {\n        if (asyncResult.status == Office.AsyncResultStatus.Failed) {\n            write(asyncResult.error.message);\n        }\n        else {\n            write(asyncResult.value);\n        }\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
 - name: value
   uid: office!Office.AsyncResult#value:member
   package: office!
   fullName: value
   summary: Obtient la charge utile ou le contenu de l’opération asynchrone, le cas échéant.
-  remarks: "Vous accédez à l’objet AsyncResult dans la fonction transmise en tant qu’argument au paramètre callback d’une méthode « Async », telle que les `getSelectedDataAsync` `setSelectedDataAsync` méthodes et de l’objet [document](xref:office!Office.Document:interface) .\n\n**Remarque**: ce que la propriété Value renvoie pour une méthode « Async » particulière varie en fonction de l’objectif et du contexte de cette méthode. To determine what is returned by the value property for an \"Async\" method, refer to the \"Callback value\" section of the method's topic.\n\n#### <a name=\"examples\"></a>範例\n\n```javascript\nfunction getData() {\n    Office.context.document.getSelectedDataAsync(Office.CoercionType.Table, function(asyncResult) {\n        if (asyncResult.status == Office.AsyncResultStatus.Failed) {\n            write(asyncResult.error.message);\n        }\n        else {\n            write(asyncResult.value);\n        }\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+  remarks: "Vous accédez à l’objet AsyncResult dans la fonction transmise en tant qu’argument au paramètre de rappel d’une méthode « Async », telle que les méthodes de l’objet `getSelectedDataAsync` `setSelectedDataAsync` [Document.](xref:office!Office.Document:interface)\n\n**Remarque**: ce que la propriété value renvoie pour une méthode « Async » particulière varie en fonction de l’objectif et du contexte de cette méthode. To determine what is returned by the value property for an \"Async\" method, refer to the \"Callback value\" section of the method's topic.\n\n#### <a name=\"examples\"></a>範例\n\n```javascript\nfunction getData() {\n    Office.context.document.getSelectedDataAsync(Office.CoercionType.Table, function(asyncResult) {\n        if (asyncResult.status == Office.AsyncResultStatus.Failed) {\n            write(asyncResult.error.message);\n        }\n        else {\n            write(asyncResult.value);\n        }\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -87,9 +87,9 @@ properties:
     return:
       type: T
 metadata:
-  ms.openlocfilehash: 61b33f43f91124b85b395617cbb540fc0a7d63f8
-  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.openlocfilehash: 2351284547de7b421126d566639d4b076ae7c78d
+  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
   ms.translationtype: MT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 11/18/2020
-  ms.locfileid: "49265898"
+  ms.lasthandoff: 03/26/2021
+  ms.locfileid: "51329490"

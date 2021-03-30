@@ -5,10 +5,10 @@ package: office!
 fullName: Office.TableBinding
 summary: Représente une liaison à deux dimensions de lignes et de colonnes, avec éventuellement des en-têtes.
 remarks: >-
-  L’objet TableBinding hérite `id` de la propriété, `type` de la propriété, de `getDataAsync` la méthode et `setDataAsync` de la méthode de l’objet [Office. Binding](xref:office!Office.Binding:interface) .
+  L’objet TableBinding hérite de la propriété, de la propriété, de la méthode et de la méthode de `id` `type` `getDataAsync` `setDataAsync` [l’objet Office.Binding.](xref:office!Office.Binding:interface)
 
 
-  Pour Excel, Notez qu’une fois que vous avez établi une liaison de tableau, chaque nouvelle ligne ajoutée à la table par un utilisateur est automatiquement incluse dans la liaison et le rowCount augmente.
+  Pour Excel, notez qu’après avoir établi une liaison de tableau, chaque nouvelle ligne qu’un utilisateur ajoute au tableau est automatiquement incluse dans la liaison et rowCount augmente.
 isPreview: false
 isDeprecated: false
 type: interface
@@ -17,7 +17,7 @@ properties:
   uid: office!Office.TableBinding#columnCount:member
   package: office!
   fullName: columnCount
-  summary: Obtient le nombre de colonnes dans TableBinding, sous la forme d’une valeur entière.
+  summary: Obtient le nombre de colonnes dans TableBinding, sous la mesure d’une valeur d’un nombre total.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -30,7 +30,7 @@ properties:
   uid: office!Office.TableBinding#hasHeaders:member
   package: office!
   fullName: hasHeaders
-  summary: True si le tableau comporte des en-têtes ; Sinon, false.
+  summary: True, si le tableau possède des en-têtes ; sinon false.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -43,8 +43,8 @@ properties:
   uid: office!Office.TableBinding#rowCount:member
   package: office!
   fullName: rowCount
-  summary: Obtient le nombre de lignes dans TableBinding, sous la forme d’une valeur entière.
-  remarks: "Lorsque vous insérez un tableau vide en sélectionnant une seule ligne dans Excel 2013 et Excel sur le Web (à l’aide du tableau sous l’onglet Insertion), les deux applications hôtes Office créent une seule ligne d’en-têtes suivie d’une seule ligne vide. Toutefois, si le script de votre complément crée une liaison pour ce tableau nouvellement inséré (par exemple, à l’aide des [liaisons Office.](xref:office!Office.Bindings:interface)<!-- -->méthode. addFromSelectionAsync), puis vérifie la valeur de la propriété rowCount, la valeur renvoyée varie en fonction de l’ouverture de la feuille de calcul dans Excel 2013 ou Excel sur le Web.\n\n- Dans Excel, rowCount renvoie 0 (la ligne vide qui suit les en-têtes n’est pas comptabilisée).\n\n- Dans Excel sur le Web, rowCount renvoie 1 (la ligne vide qui suit les en-têtes est comptabilisée).\n\nVous pouvez contourner cette différence dans votre script en vérifiant si rowCount == 1 et, si tel est le cas, en vérifiant si la ligne contient toutes les chaînes vides.\n\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nfunction showBindingRowCount() {\n    Office.context.document.bindings.getByIdAsync(\"myBinding\", function (asyncResult) {\n        write(\"Rows: \" + asyncResult.value.rowCount);\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+  summary: Obtient le nombre de lignes dans TableBinding, sous la la mesure d’une valeur d’un nombre total.
+  remarks: "Lorsque vous insérez un tableau vide en sélectionnant une seule ligne dans Excel 2013 et Excel sur le web (à l’aide du tableau sous l’onglet Insertion), les deux applications hôtes Office créent une seule ligne d’en-têtes suivie d’une seule ligne vide. Toutefois, si le script de votre add-in crée une liaison pour ce tableau nouvellement inséré (par exemple, à l’aide [d’Office.Bindings](xref:office!Office.Bindings:interface)<!-- -->Méthode .addFromSelectionAsync), puis vérifie la valeur de la propriété rowCount, la valeur renvoyée varie selon que la feuille de calcul est ouverte dans Excel 2013 ou Excel sur le web.\n\n- Dans Excel sur le bureau, rowCount retourne 0 (la ligne vide qui suit les en-têtes n’est pas comptabilisée).\n\n- Dans Excel sur le web, rowCount retourne 1 (la ligne vide qui suit les en-têtes est comptée).\n\nVous pouvez contourner cette différence dans votre script en vérifiant si rowCount == 1 et, si tel est le cas, en vérifiant si la ligne contient toutes les chaînes vides.\n\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nfunction showBindingRowCount() {\n    Office.context.document.bindings.getByIdAsync(\"myBinding\", function (asyncResult) {\n        write(\"Rows: \" + asyncResult.value.rowCount);\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -56,24 +56,24 @@ methods:
   uid: office!Office.TableBinding#addColumnsAsync:member(1)
   package: office!
   fullName: addColumnsAsync(tableData, options, callback)
-  summary: Ajoute les données spécifiées à la table en tant que colonnes supplémentaires.
+  summary: Ajoute les données spécifiées au tableau en tant que colonnes supplémentaires.
   remarks: >-
-    Pour ajouter une ou plusieurs colonnes spécifiant les valeurs des données et des en-têtes, transmettez un objet TableData en tant que paramètre Data. Pour ajouter une ou plusieurs colonnes en spécifiant uniquement les données, transmettez un tableau de tableaux (matrice, « matrix ») pour le paramètre data.
+    Pour ajouter une ou plusieurs colonnes spécifiant les valeurs des données et des en-têtes, passez un objet TableData comme paramètre de données. Pour ajouter une ou plusieurs colonnes en spécifiant uniquement les données, transmettez un tableau de tableaux (matrice, « matrix ») pour le paramètre data.
 
 
     La réussite ou l’échec d’une opération addColumnsAsync est atomique. En d’autres termes, l’ensemble de l’opération d’ajout de colonnes doit réussir ; sinon, l’opération est complètement restaurée (en outre, la propriété AsyncResult.status qui est renvoyée au rappel signale un échec) :
 
 
-    - Chaque ligne du tableau que vous transmettez en tant qu’argument de données doit avoir le même nombre de lignes que la table en cours de mise à jour. Sinon, toute l’opération échoue.
+    - Chaque ligne du tableau que vous passez en tant qu’argument de données doit avoir le même nombre de lignes que le tableau mis à jour. Sinon, toute l’opération échoue.
 
 
     - Chaque ligne et chaque cellule du tableau doit ajouter correctement cette ligne ou cette cellule au tableau dans la ou les nouvelles colonnes ajoutées. S’il est impossible de définir une ligne ou une cellule pour une raison quelconque, toute l’opération échoue.
 
 
-    - Si vous transmettez un objet TableData en tant qu’argument de données, le nombre de lignes d’en-tête doit correspondre à celui de la table en cours de mise à jour.
+    - Si vous passez un objet TableData en tant qu’argument de données, le nombre de lignes d’en-tête doit correspondre à celui du tableau mis à jour.
 
 
-    Remarque supplémentaire pour Excel sur le Web : le nombre total de cellules dans l’objet TableData transmis au paramètre Data ne peut pas dépasser 20 000 dans un appel unique à cette méthode.
+    Remarque supplémentaire pour Excel sur le web : le nombre total de cellules dans l’objet TableData transmis au paramètre de données ne peut pas dépasser 20 000 en un seul appel à cette méthode.
 
 
     #### <a name="examples"></a>Exemples
@@ -125,13 +125,13 @@ methods:
     content: 'addColumnsAsync(tableData: TableData | any[][], options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<void>) => void): void;'
     parameters:
     - id: tableData
-      description: Tableau de tableaux (« matrice ») ou objet TableData qui contient une ou plusieurs colonnes de données à ajouter au tableau. Obligatoire.
+      description: Tableau de tableaux (« matrice ») ou objet TableData qui contient une ou plusieurs colonnes de données à ajouter au tableau. Obligatoire.
       type: <xref uid="office!Office.TableData:class" /> | any[][]
     - id: options
-      description: Fournit une option permettant de conserver les données de contexte de n’importe quel type, inchangées, pour une utilisation dans un rappel.
+      description: Fournit une option de conservation des données de contexte de n’importe quel type, sans modification, à utiliser dans un rappel.
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Facultatif. Fonction appelée lorsque le rappel est renvoyé, dont le seul paramètre est de type [Office. AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
+      description: Facultatif. Fonction qui est invoquée lors du retour du rappel, dont le seul paramètre est de type [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -140,34 +140,34 @@ methods:
   uid: office!Office.TableBinding#addColumnsAsync:member(2)
   package: office!
   fullName: addColumnsAsync(tableData, callback)
-  summary: Ajoute les données spécifiées à la table en tant que colonnes supplémentaires.
+  summary: Ajoute les données spécifiées au tableau en tant que colonnes supplémentaires.
   remarks: >-
-    Pour ajouter une ou plusieurs colonnes spécifiant les valeurs des données et des en-têtes, transmettez un objet TableData en tant que paramètre Data. Pour ajouter une ou plusieurs colonnes en spécifiant uniquement les données, transmettez un tableau de tableaux (matrice, « matrix ») pour le paramètre data.
+    Pour ajouter une ou plusieurs colonnes spécifiant les valeurs des données et des en-têtes, passez un objet TableData comme paramètre de données. Pour ajouter une ou plusieurs colonnes en spécifiant uniquement les données, transmettez un tableau de tableaux (matrice, « matrix ») pour le paramètre data.
 
 
     La réussite ou l’échec d’une opération addColumnsAsync est atomique. En d’autres termes, l’ensemble de l’opération d’ajout de colonnes doit réussir ; sinon, l’opération est complètement restaurée (en outre, la propriété AsyncResult.status qui est renvoyée au rappel signale un échec) :
 
 
-    - Chaque ligne du tableau que vous transmettez en tant qu’argument de données doit avoir le même nombre de lignes que la table en cours de mise à jour. Sinon, toute l’opération échoue.
+    - Chaque ligne du tableau que vous passez en tant qu’argument de données doit avoir le même nombre de lignes que le tableau mis à jour. Sinon, toute l’opération échoue.
 
 
     - Chaque ligne et chaque cellule du tableau doit ajouter correctement cette ligne ou cette cellule au tableau dans la ou les nouvelles colonnes ajoutées. S’il est impossible de définir une ligne ou une cellule pour une raison quelconque, toute l’opération échoue.
 
 
-    - Si vous transmettez un objet TableData en tant qu’argument de données, le nombre de lignes d’en-tête doit correspondre à celui de la table en cours de mise à jour.
+    - Si vous passez un objet TableData en tant qu’argument de données, le nombre de lignes d’en-tête doit correspondre à celui du tableau mis à jour.
 
 
-    Remarque supplémentaire pour Excel sur le Web : le nombre total de cellules dans l’objet TableData transmis au paramètre Data ne peut pas dépasser 20 000 dans un appel unique à cette méthode.
+    Remarque supplémentaire pour Excel sur le web : le nombre total de cellules dans l’objet TableData transmis au paramètre de données ne peut pas dépasser 20 000 en un seul appel à cette méthode.
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'addColumnsAsync(tableData: TableData | any[][], callback?: (result: AsyncResult<void>) => void): void;'
     parameters:
     - id: tableData
-      description: Tableau de tableaux (« matrice ») ou objet TableData qui contient une ou plusieurs colonnes de données à ajouter au tableau. Obligatoire.
+      description: Tableau de tableaux (« matrice ») ou objet TableData qui contient une ou plusieurs colonnes de données à ajouter au tableau. Obligatoire.
       type: <xref uid="office!Office.TableData:class" /> | any[][]
     - id: callback
-      description: Facultatif. Fonction appelée lorsque le rappel est renvoyé, dont le seul paramètre est de type [Office. AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
+      description: Facultatif. Fonction qui est invoquée lors du retour du rappel, dont le seul paramètre est de type [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -176,21 +176,21 @@ methods:
   uid: office!Office.TableBinding#addRowsAsync:member(1)
   package: office!
   fullName: addRowsAsync(rows, options, callback)
-  summary: Ajoute les données spécifiées à la table en tant que lignes supplémentaires.
+  summary: Ajoute les données spécifiées au tableau en tant que lignes supplémentaires.
   remarks: >-
     La réussite ou l’échec d’une opération addRowsAsync est atomique. En d’autres termes, l’ensemble de l’opération d’ajout de colonnes doit réussir ; sinon, l’opération est complètement restaurée (en outre, la propriété AsyncResult.status qui est renvoyée au rappel signale un échec) :
 
 
-    - Chaque ligne du tableau que vous transmettez en tant qu’argument de données doit avoir le même nombre de colonnes que la table en cours de mise à jour. Sinon, toute l’opération échoue.
+    - Chaque ligne du tableau que vous passez en tant qu’argument de données doit avoir le même nombre de colonnes que le tableau mis à jour. Sinon, toute l’opération échoue.
 
 
-    - Chaque colonne et cellule du tableau doit ajouter avec succès cette colonne ou cette cellule au tableau dans les lignes nouvellement ajoutées. Si une colonne ou une cellule ne peut pas être définie pour une raison quelconque, l’opération entière échoue.
+    - Chaque colonne et cellule du tableau doit ajouter correctement cette colonne ou cette cellule au tableau dans les nouvelles lignes ajoutées. Si une colonne ou une cellule ne parvient pas à être définie pour une raison quelconque, toute l’opération échoue.
 
 
-    - Si vous transmettez un objet TableData en tant qu’argument de données, le nombre de lignes d’en-tête doit correspondre à celui de la table en cours de mise à jour.
+    - Si vous passez un objet TableData en tant qu’argument de données, le nombre de lignes d’en-tête doit correspondre à celui du tableau mis à jour.
 
 
-    Remarque supplémentaire pour Excel sur le Web : le nombre total de cellules dans l’objet TableData transmis au paramètre Data ne peut pas dépasser 20 000 dans un appel unique à cette méthode.
+    Remarque supplémentaire pour Excel sur le web : le nombre total de cellules dans l’objet TableData transmis au paramètre de données ne peut pas dépasser 20 000 en un seul appel à cette méthode.
 
 
     #### <a name="examples"></a>Exemples
@@ -212,13 +212,13 @@ methods:
     content: 'addRowsAsync(rows: TableData | any[][], options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<void>) => void): void;'
     parameters:
     - id: rows
-      description: Tableau de tableaux (« matrice ») ou objet TableData qui contient une ou plusieurs lignes de données à ajouter au tableau. Obligatoire.
+      description: Tableau de tableaux (« matrice ») ou objet TableData qui contient une ou plusieurs lignes de données à ajouter au tableau. Obligatoire.
       type: <xref uid="office!Office.TableData:class" /> | any[][]
     - id: options
-      description: Fournit une option permettant de conserver les données de contexte de n’importe quel type, inchangées, pour une utilisation dans un rappel.
+      description: Fournit une option de conservation des données de contexte de n’importe quel type, sans modification, à utiliser dans un rappel.
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Facultatif. Fonction appelée lorsque le rappel est renvoyé, dont le seul paramètre est de type [Office. AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
+      description: Facultatif. Fonction qui est invoquée lors du retour du rappel, dont le seul paramètre est de type [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -227,31 +227,31 @@ methods:
   uid: office!Office.TableBinding#addRowsAsync:member(2)
   package: office!
   fullName: addRowsAsync(rows, callback)
-  summary: Ajoute les données spécifiées à la table en tant que lignes supplémentaires.
+  summary: Ajoute les données spécifiées au tableau en tant que lignes supplémentaires.
   remarks: >-
     La réussite ou l’échec d’une opération addRowsAsync est atomique. En d’autres termes, l’ensemble de l’opération d’ajout de colonnes doit réussir ; sinon, l’opération est complètement restaurée (en outre, la propriété AsyncResult.status qui est renvoyée au rappel signale un échec) :
 
 
-    - Chaque ligne du tableau que vous transmettez en tant qu’argument de données doit avoir le même nombre de colonnes que la table en cours de mise à jour. Sinon, toute l’opération échoue.
+    - Chaque ligne du tableau que vous passez en tant qu’argument de données doit avoir le même nombre de colonnes que le tableau mis à jour. Sinon, toute l’opération échoue.
 
 
-    - Chaque colonne et cellule du tableau doit ajouter avec succès cette colonne ou cette cellule au tableau dans les lignes nouvellement ajoutées. Si une colonne ou une cellule ne peut pas être définie pour une raison quelconque, l’opération entière échoue.
+    - Chaque colonne et cellule du tableau doit ajouter correctement cette colonne ou cette cellule au tableau dans les nouvelles lignes ajoutées. Si une colonne ou une cellule ne parvient pas à être définie pour une raison quelconque, toute l’opération échoue.
 
 
-    - Si vous transmettez un objet TableData en tant qu’argument de données, le nombre de lignes d’en-tête doit correspondre à celui de la table en cours de mise à jour.
+    - Si vous passez un objet TableData en tant qu’argument de données, le nombre de lignes d’en-tête doit correspondre à celui du tableau mis à jour.
 
 
-    Remarque supplémentaire pour Excel sur le Web : le nombre total de cellules dans l’objet TableData transmis au paramètre Data ne peut pas dépasser 20 000 dans un appel unique à cette méthode.
+    Remarque supplémentaire pour Excel sur le web : le nombre total de cellules dans l’objet TableData transmis au paramètre de données ne peut pas dépasser 20 000 en un seul appel à cette méthode.
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'addRowsAsync(rows: TableData | any[][], callback?: (result: AsyncResult<void>) => void): void;'
     parameters:
     - id: rows
-      description: Tableau de tableaux (« matrice ») ou objet TableData qui contient une ou plusieurs lignes de données à ajouter au tableau. Obligatoire.
+      description: Tableau de tableaux (« matrice ») ou objet TableData qui contient une ou plusieurs lignes de données à ajouter au tableau. Obligatoire.
       type: <xref uid="office!Office.TableData:class" /> | any[][]
     - id: callback
-      description: Facultatif. Fonction appelée lorsque le rappel est renvoyé, dont le seul paramètre est de type [Office. AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
+      description: Facultatif. Fonction qui est invoquée lors du retour du rappel, dont le seul paramètre est de type [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -262,7 +262,7 @@ methods:
   fullName: clearFormatsAsync(options, callback)
   summary: Efface la mise en forme du tableau lié.
   remarks: >-
-    Pour plus d’informations, voir [format de tableaux dans les compléments pour Excel](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-tables#format-a-table) .
+    Pour plus d’informations, voir Tableaux de format [dans les modules complémentaires pour Excel.](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-tables#format-a-table)
 
 
     #### <a name="examples"></a>Exemples
@@ -281,10 +281,10 @@ methods:
     content: 'clearFormatsAsync(options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<void>) => void): void;'
     parameters:
     - id: options
-      description: Fournit une option permettant de conserver les données de contexte de n’importe quel type, inchangées, pour une utilisation dans un rappel.
+      description: Fournit une option de conservation des données de contexte de n’importe quel type, sans modification, à utiliser dans un rappel.
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Facultatif. Fonction appelée lorsque le rappel est renvoyé, dont le seul paramètre est de type [Office. AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
+      description: Facultatif. Fonction qui est invoquée lors du retour du rappel, dont le seul paramètre est de type [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -294,14 +294,14 @@ methods:
   package: office!
   fullName: clearFormatsAsync(callback)
   summary: Efface la mise en forme du tableau lié.
-  remarks: Pour plus d’informations, voir [format de tableaux dans les compléments pour Excel](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-tables#format-a-table) .
+  remarks: Pour plus d’informations, voir Tableaux de format [dans les modules complémentaires pour Excel.](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-tables#format-a-table)
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'clearFormatsAsync(callback?: (result: AsyncResult<void>) => void): void;'
     parameters:
     - id: callback
-      description: Facultatif. Fonction appelée lorsque le rappel est renvoyé, dont le seul paramètre est de type [Office. AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
+      description: Facultatif. Fonction qui est invoquée lors du retour du rappel, dont le seul paramètre est de type [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -334,10 +334,10 @@ methods:
     content: 'deleteAllDataValuesAsync(options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<void>) => void): void;'
     parameters:
     - id: options
-      description: Fournit une option permettant de conserver les données de contexte de n’importe quel type, inchangées, pour une utilisation dans un rappel.
+      description: Fournit une option de conservation des données de contexte de n’importe quel type, sans modification, à utiliser dans un rappel.
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Facultatif. Fonction appelée lorsque le rappel est renvoyé, dont le seul paramètre est de type [Office. AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
+      description: Facultatif. Fonction qui est invoquée lors du retour du rappel, dont le seul paramètre est de type [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -354,7 +354,7 @@ methods:
     content: 'deleteAllDataValuesAsync(callback?: (result: AsyncResult<void>) => void): void;'
     parameters:
     - id: callback
-      description: Facultatif. Fonction appelée lorsque le rappel est renvoyé, dont le seul paramètre est de type [Office. AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
+      description: Facultatif. Fonction qui est invoquée lors du retour du rappel, dont le seul paramètre est de type [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -368,19 +368,19 @@ methods:
     **Structure de format renvoyée**
 
 
-    Chaque objet JavaScript dans le tableau des valeurs de retour a la forme suivante : `{cells:{ cell_range }, format:{ format_definition }}`
+    Chaque objet JavaScript dans le tableau des valeurs de retour a la forme ci-après : `{cells:{ cell_range }, format:{ format_definition }}`
 
 
-    La `cells:` propriété spécifie la plage que vous souhaitez mettre en forme à l’aide de l’une des valeurs suivantes :
+    La `cells:` propriété spécifie la plage que vous souhaitez formater à l’aide de l’une des valeurs suivantes :
 
 
     **Plages prises en charge dans la propriété cells**
 
 
-    <table> <tr> <th>Paramètres de la plage de cellules</th> <th>Description</th> </tr> <tr> <td>`{row: n}`</td> <td>Spécifie la plage correspondant à la ligne de données de base zéro dans le tableau.</td> </tr> <tr> <td>`{column: n}`</td> <td>Spécifie la plage qui est la nième colonne de données de base zéro dans le tableau.</td> </tr> <tr> <td>`{row: i, column: j}`</td> <td>Spécifie la cellule unique qui est la énième ligne et la colonne je de la table.</td> </tr> <tr> <td>`Office.Table.All`</td> <td>Spécifie le tableau entier, y compris les totaux, les données et les en-têtes de colonne (le cas échéant).</td> </tr> <tr> <td>`Office.Table.Data`</td> <td>Spécifie uniquement les données du tableau (sans les en-têtes ni les totaux).</td> </tr> <tr> <td>`Office.Table.Headers`</td> <td>Spécifie uniquement la ligne d’en-tête.</td> </tr> </table>
+    <table> <tr> <th>Paramètres de la plage de cellules</th> <th>Description</th> </tr> <tr> <td>`{row: n}`</td> <td>Spécifie la plage qui est la nième ligne de données de base 0 du tableau.</td> </tr> <tr> <td>`{column: n}`</td> <td>Spécifie la plage qui est la nième colonne de données basée sur zéro dans le tableau.</td> </tr> <tr> <td>`{row: i, column: j}`</td> <td>Spécifie la cellule unique qui est la ième ligne et la colonne jth du tableau.</td> </tr> <tr> <td>`Office.Table.All`</td> <td>Spécifie le tableau entier, y compris les totaux, les données et les en-têtes de colonne (le cas échéant).</td> </tr> <tr> <td>`Office.Table.Data`</td> <td>Spécifie uniquement les données du tableau (sans les en-têtes ni les totaux).</td> </tr> <tr> <td>`Office.Table.Headers`</td> <td>Spécifie uniquement la ligne d’en-tête.</td> </tr> </table>
 
 
-    La `format:` propriété spécifie les valeurs qui correspondent à un sous-ensemble des paramètres disponibles dans la boîte de dialogue Format de cellule dans Excel (cliquez avec le bouton droit sur format de cellule ou de format de cellule &gt; &gt; &gt; ).
+    La propriété spécifie des valeurs qui correspondent à un sous-ensemble des paramètres disponibles dans la boîte de dialogue Format de cellule dans Excel (cliquez avec le bouton droit sur Format de cellule ou Cellules de `format:` format d’accueil). &gt; &gt; &gt;
   isPreview: false
   isDeprecated: false
   syntax:
@@ -393,10 +393,10 @@ methods:
       description: Tableau spécifiant les propriétés de format à obtenir.
       type: any[]
     - id: options
-      description: Fournit une option permettant de conserver les données de contexte de n’importe quel type, inchangées, pour une utilisation dans un rappel.
+      description: Fournit une option de conservation des données de contexte de n’importe quel type, sans modification, à utiliser dans un rappel.
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Facultatif. Fonction appelée lorsque le rappel est renvoyé, dont le seul paramètre est de type [Office. AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propriété du résultat est un tableau contenant un ou plusieurs objets JavaScript spécifiant la mise en forme de leurs cellules correspondantes.
+      description: Facultatif. Fonction qui est invoquée lors du retour du rappel, dont le seul paramètre est de type [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La propriété du résultat est un tableau contenant un ou plusieurs objets JavaScript spécifiant la mise en forme `value` de leurs cellules correspondantes.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt; ({ cells: any, format: any})[]&gt;) =&gt; void'
     return:
       type: void
@@ -410,19 +410,19 @@ methods:
     **Structure de format renvoyée**
 
 
-    Chaque objet JavaScript dans le tableau des valeurs de retour a la forme suivante : `{cells:{ cell_range }, format:{ format_definition }}`
+    Chaque objet JavaScript dans le tableau des valeurs de retour a la forme ci-après : `{cells:{ cell_range }, format:{ format_definition }}`
 
 
-    La `cells:` propriété spécifie la plage que vous souhaitez mettre en forme à l’aide de l’une des valeurs suivantes :
+    La `cells:` propriété spécifie la plage que vous souhaitez formater à l’aide de l’une des valeurs suivantes :
 
 
     **Plages prises en charge dans la propriété cells**
 
 
-    <table> <tr> <th>Paramètres de la plage de cellules</th> <th>Description</th> </tr> <tr> <td>`{row: n}`</td> <td>Spécifie la plage correspondant à la ligne de données de base zéro dans le tableau.</td> </tr> <tr> <td>`{column: n}`</td> <td>Spécifie la plage qui est la nième colonne de données de base zéro dans le tableau.</td> </tr> <tr> <td>`{row: i, column: j}`</td> <td>Spécifie la cellule unique qui est la énième ligne et la colonne je de la table.</td> </tr> <tr> <td>`Office.Table.All`</td> <td>Spécifie le tableau entier, y compris les totaux, les données et les en-têtes de colonne (le cas échéant).</td> </tr> <tr> <td>`Office.Table.Data`</td> <td>Spécifie uniquement les données du tableau (sans les en-têtes ni les totaux).</td> </tr> <tr> <td>`Office.Table.Headers`</td> <td>Spécifie uniquement la ligne d’en-tête.</td> </tr> </table>
+    <table> <tr> <th>Paramètres de la plage de cellules</th> <th>Description</th> </tr> <tr> <td>`{row: n}`</td> <td>Spécifie la plage qui est la nième ligne de données de base 0 du tableau.</td> </tr> <tr> <td>`{column: n}`</td> <td>Spécifie la plage qui est la nième colonne de données basée sur zéro dans le tableau.</td> </tr> <tr> <td>`{row: i, column: j}`</td> <td>Spécifie la cellule unique qui est la ième ligne et la colonne jth du tableau.</td> </tr> <tr> <td>`Office.Table.All`</td> <td>Spécifie le tableau entier, y compris les totaux, les données et les en-têtes de colonne (le cas échéant).</td> </tr> <tr> <td>`Office.Table.Data`</td> <td>Spécifie uniquement les données du tableau (sans les en-têtes ni les totaux).</td> </tr> <tr> <td>`Office.Table.Headers`</td> <td>Spécifie uniquement la ligne d’en-tête.</td> </tr> </table>
 
 
-    La `format:` propriété spécifie les valeurs qui correspondent à un sous-ensemble des paramètres disponibles dans la boîte de dialogue Format de cellule dans Excel (cliquez avec le bouton droit sur format de cellule ou de format de cellule &gt; &gt; &gt; ).
+    La propriété spécifie des valeurs qui correspondent à un sous-ensemble des paramètres disponibles dans la boîte de dialogue Format de cellule dans Excel (cliquez avec le bouton droit sur Format de cellule ou Cellules de `format:` format d’accueil). &gt; &gt; &gt;
   isPreview: false
   isDeprecated: false
   syntax:
@@ -435,7 +435,7 @@ methods:
       description: Tableau spécifiant les propriétés de format à obtenir.
       type: any[]
     - id: callback
-      description: Facultatif. Fonction appelée lorsque le rappel est renvoyé, dont le seul paramètre est de type [Office. AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propriété du résultat est un tableau contenant un ou plusieurs objets JavaScript spécifiant la mise en forme de leurs cellules correspondantes.
+      description: Facultatif. Fonction qui est invoquée lors du retour du rappel, dont le seul paramètre est de type [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La propriété du résultat est un tableau contenant un ou plusieurs objets JavaScript spécifiant la mise en forme `value` de leurs cellules correspondantes.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt; ({ cells: any, format: any})[]&gt;) =&gt; void'
     return:
       type: void
@@ -445,7 +445,7 @@ methods:
   package: office!
   fullName: setFormatsAsync(cellFormat, options, callback)
   summary: Définit la mise en forme des éléments et données spécifiés dans le tableau.
-  remarks: "**Spécification du paramètre cellFormat**\n\nUtilisez le paramètre cellFormat pour définir ou modifier les valeurs de mise en forme de cellule, telles que width, Height, font, Background, Alignment, etc. La valeur que vous transmettez en tant que paramètre cellFormat est un tableau qui contient une liste d’un ou plusieurs objets JavaScript qui spécifient les cellules à cibler (`cells:`<!-- -->) et les formats (`format:`<!-- -->) à leur appliquer.\n\nChaque objet JavaScript dans le tableau cellFormat a la forme suivante : `{cells:{ cell_range }, format:{ format_definition }}`\n\nLa `cells:` propriété spécifie la plage que vous souhaitez mettre en forme à l’aide de l’une des valeurs suivantes :\n\n**Plages prises en charge dans la propriété cells**\n\n<table> <tr> <th>Paramètres de la plage de cellules</th> <th>Description</th> </tr> <tr> <td>`{row: n}`</td> <td>Spécifie la plage correspondant à la ligne de données de base zéro dans le tableau.</td> </tr> <tr> <td>`{column: n}`</td> <td>Spécifie la plage qui est la nième colonne de données de base zéro dans le tableau.</td> </tr> <tr> <td>`{row: i, column: j}`</td> <td>Spécifie la cellule unique qui est la énième ligne et la colonne je de la table.</td> </tr> <tr> <td>`Office.Table.All`</td> <td>Spécifie le tableau entier, y compris les totaux, les données et les en-têtes de colonne (le cas échéant).</td> </tr> <tr> <td>`Office.Table.Data`</td> <td>Spécifie uniquement les données du tableau (sans les en-têtes ni les totaux).</td> </tr> <tr> <td>`Office.Table.Headers`</td> <td>Spécifie uniquement la ligne d’en-tête.</td> </tr> </table>\n\nLa `format:` propriété spécifie les valeurs qui correspondent à un sous-ensemble des paramètres disponibles dans la boîte de dialogue Format de cellule dans Excel (cliquez avec le bouton droit sur format de cellule ou de format de cellule &gt; &gt; &gt; ).\n\nVous spécifiez la valeur de la `format:` propriété sous la forme d’une liste d’une ou de plusieurs paires nom-valeur de propriété dans un littéral d’objet JavaScript. Le nom de propriété indique le nom de la propriété de mise en forme à définir, tandis que la valeur spécifie la valeur de la propriété. Vous pouvez spécifier plusieurs valeurs pour un format donné, comme la couleur et la taille de la police.\n\nVoici trois exemples de valeurs de la propriété `format:` :\n\n`//Set cells: font color to green and size to 15 points.`\n\n`format: {fontColor : \"green\", fontSize : 15}`\n\n`//Set cells: border to dotted blue.`\n\n`format: {borderStyle: \"dotted\", borderColor: \"blue\"}`\n\n`//Set cells: background to red and alignment to centered.`\n\n`format: {backgroundColor: \"red\", alignHorizontal: \"center\"}`\n\nVous pouvez spécifier des formats de nombre en spécifiant la chaîne « code » de mise en forme des nombres dans la `numberFormat:` propriété. Les chaînes de format numérique que vous pouvez spécifier correspondent à celles que vous pouvez définir dans Excel à l’aide de la catégorie Personnalisée sous l’onglet Nombre de la boîte de dialogue Format de cellule. L’exemple suivant montre comment mettre en forme un nombre en tant que pourcentage à deux décimales :\n\n`format: {numberFormat:\"0.00%\"}`\n\nPour plus d’informations, reportez-vous à la rubrique How to [Create a Custom number format](https://support.office.com/article/create-or-delete-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4)<!-- -->.\n\nPour définir la mise en forme des tables lors de l’écriture de données, utilisez les paramètres facultatifs tableOptions et cellFormat des `Document.setSelectedDataAsync` `TableBinding.setDataAsync` méthodes ou.\n\nLa définition de la mise en forme avec les paramètres facultatifs des `Document.setSelectedDataAsync` `TableBinding.setDataAsync` méthodes et permet uniquement de définir la mise en forme lors de la première écriture de données. Pour apporter des modifications de mise en forme après l’écriture de données, appliquez les méthodes suivantes :\n\n- Pour mettre à jour la mise en forme des cellules, comme la couleur et le style de police, utilisez la `TableBinding.setFormatsAsync` méthode (cette méthode).\n\n- Pour mettre à jour les options de table, comme les lignes à bandes et les boutons de filtre, utilisez la `TableBinding.setTableOptions` méthode.\n\n- Pour effacer la mise en forme, utilisez la `TableBinding.clearFormats` méthode.\n\nPour plus d’informations et d’exemples, voir [la rubrique relative à la mise en forme des tableaux dans les compléments pour Excel](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-tables#format-a-table) .<!-- -->.\n\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\n// Specifying a single target\n// The following example shows a cellFormat value that sets the font color of the header row to red.\nOffice.select(\"bindings#myBinding\").setFormatsAsync(\n    [{cells: Office.Table.Headers, format: {fontColor: \"red\"}}], \n    function (asyncResult){});\n\n// Specifying multiple targets\n// The setFormatsAsync method can support formatting multiple targets within the bound table in a \n// single function call. To do that, you pass a list of objects in the cellFormat array \n// for each target that you want to format.\n// For example, the following line of code will set the font color of the first row yellow, \n// and the fourth cell in the third row to have a white border and bold text.\nOffice.select(\"bindings#myBinding\").setFormatsAsync(\n    [{cells: {row: 1}, format: {fontColor: \"yellow\"}}, \n        {cells: {row: 3, column: 4}, format: {borderColor: \"white\", fontStyle: \"bold\"}}], \n    function (asyncResult){});\n\n// Additional remarks for Excel Online\n// The number of formatting groups passed to the cellFormat parameter can't exceed 100. \n// A single formatting group consists of a set of formatting applied to a specified range of cells. \n// For example, the following call passes two formatting groups to cellFormat.\nOffice.select(\"bindings#myBinding\").setFormatsAsync(\n    [{cells: {row: 1}, format: {fontColor: \"yellow\"}}, \n        {cells: {row: 3, column: 4}, format: {borderColor: \"white\", fontStyle: \"bold\"}}], \n    function (asyncResult){});\n```"
+  remarks: "**Spécification du paramètre cellFormat**\n\nUtilisez le paramètre cellFormat pour définir ou modifier les valeurs de mise en forme des cellules, telles que la largeur, la hauteur, la police, l’arrière-plan, l’alignement, etc. La valeur que vous passez en tant que paramètre cellFormat est un tableau qui contient une liste d’un ou plusieurs objets JavaScript qui spécifient les cellules à cibler (`cells:`<!-- -->) et les formats (`format:`<!-- -->) à leur appliquer.\n\nChaque objet JavaScript dans le tableau cellFormat a la forme ci-après : `{cells:{ cell_range }, format:{ format_definition }}`\n\nLa `cells:` propriété spécifie la plage que vous souhaitez formater à l’aide de l’une des valeurs suivantes :\n\n**Plages prises en charge dans la propriété cells**\n\n<table> <tr> <th>Paramètres de la plage de cellules</th> <th>Description</th> </tr> <tr> <td>`{row: n}`</td> <td>Spécifie la plage qui est la nième ligne de données de base 0 du tableau.</td> </tr> <tr> <td>`{column: n}`</td> <td>Spécifie la plage qui est la nième colonne de données basée sur zéro dans le tableau.</td> </tr> <tr> <td>`{row: i, column: j}`</td> <td>Spécifie la cellule unique qui est la ième ligne et la colonne jth du tableau.</td> </tr> <tr> <td>`Office.Table.All`</td> <td>Spécifie le tableau entier, y compris les totaux, les données et les en-têtes de colonne (le cas échéant).</td> </tr> <tr> <td>`Office.Table.Data`</td> <td>Spécifie uniquement les données du tableau (sans les en-têtes ni les totaux).</td> </tr> <tr> <td>`Office.Table.Headers`</td> <td>Spécifie uniquement la ligne d’en-tête.</td> </tr> </table>\n\nLa propriété spécifie des valeurs qui correspondent à un sous-ensemble des paramètres disponibles dans la boîte de dialogue Format de cellule dans Excel (cliquez avec le bouton droit sur Format de cellule ou Cellules de `format:` format d’accueil). &gt; &gt; &gt;\n\nVous spécifiez la valeur de la propriété sous la forme d’une liste d’un ou plusieurs noms de propriété - paires de valeurs dans un littéral `format:` d’objet JavaScript. Le nom de propriété indique le nom de la propriété de mise en forme à définir, tandis que la valeur spécifie la valeur de la propriété. Vous pouvez spécifier plusieurs valeurs pour un format donné, comme la couleur et la taille de la police.\n\nVoici trois exemples de valeurs de la propriété `format:` :\n\n`//Set cells: font color to green and size to 15 points.`\n\n`format: {fontColor : \"green\", fontSize : 15}`\n\n`//Set cells: border to dotted blue.`\n\n`format: {borderStyle: \"dotted\", borderColor: \"blue\"}`\n\n`//Set cells: background to red and alignment to centered.`\n\n`format: {backgroundColor: \"red\", alignHorizontal: \"center\"}`\n\nVous pouvez spécifier des formats numériques en spécifiant la chaîne « code » de mise en forme numérique dans la `numberFormat:` propriété. Les chaînes de format numérique que vous pouvez spécifier correspondent à celles que vous pouvez définir dans Excel à l’aide de la catégorie Personnalisée sous l’onglet Nombre de la boîte de dialogue Format de cellule. L’exemple suivant montre comment mettre en forme un nombre en tant que pourcentage à deux décimales :\n\n`format: {numberFormat:\"0.00%\"}`\n\nPour plus d’informations, voir comment [créer un format numérique personnalisé](https://support.office.com/article/create-or-delete-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4)<!-- -->.\n\nPour définir la mise en forme sur les tables lors de l’écriture de données, utilisez les paramètres facultatifs tableOptions et cellFormat de la `Document.setSelectedDataAsync` ou `TableBinding.setDataAsync` des méthodes.\n\nLa définition de la mise en forme avec les paramètres facultatifs des méthodes et des méthodes fonctionne uniquement pour définir la mise en forme lors de l’écriture des `Document.setSelectedDataAsync` `TableBinding.setDataAsync` données la première fois. Pour apporter des modifications de mise en forme après l’écriture de données, appliquez les méthodes suivantes :\n\n- Pour mettre à jour la mise en forme des cellules, telle que la couleur de police et le style, utilisez `TableBinding.setFormatsAsync` la méthode (cette méthode).\n\n- Pour mettre à jour les options de tableau, telles que les lignes à bandes et les boutons de filtre, utilisez la `TableBinding.setTableOptions` méthode.\n\n- Pour effacer la mise en forme, utilisez la `TableBinding.clearFormats` méthode.\n\nPour plus d’informations et d’exemples, voir Comment mettre en forme des tableaux dans [des add-ins pour Excel](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-tables#format-a-table)<!-- -->.\n\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\n// Specifying a single target\n// The following example shows a cellFormat value that sets the font color of the header row to red.\nOffice.select(\"bindings#myBinding\").setFormatsAsync(\n    [{cells: Office.Table.Headers, format: {fontColor: \"red\"}}], \n    function (asyncResult){});\n\n// Specifying multiple targets\n// The setFormatsAsync method can support formatting multiple targets within the bound table in a \n// single function call. To do that, you pass a list of objects in the cellFormat array \n// for each target that you want to format.\n// For example, the following line of code will set the font color of the first row yellow, \n// and the fourth cell in the third row to have a white border and bold text.\nOffice.select(\"bindings#myBinding\").setFormatsAsync(\n    [{cells: {row: 1}, format: {fontColor: \"yellow\"}}, \n        {cells: {row: 3, column: 4}, format: {borderColor: \"white\", fontStyle: \"bold\"}}], \n    function (asyncResult){});\n\n// Additional remarks for Excel Online\n// The number of formatting groups passed to the cellFormat parameter can't exceed 100. \n// A single formatting group consists of a set of formatting applied to a specified range of cells. \n// For example, the following call passes two formatting groups to cellFormat.\nOffice.select(\"bindings#myBinding\").setFormatsAsync(\n    [{cells: {row: 1}, format: {fontColor: \"yellow\"}}, \n        {cells: {row: 3, column: 4}, format: {borderColor: \"white\", fontStyle: \"bold\"}}], \n    function (asyncResult){});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -455,10 +455,10 @@ methods:
       description: Tableau contenant des objets JavaScript indiquant les cellules à cibler et la mise en forme à leur appliquer.
       type: any[]
     - id: options
-      description: Fournit une option permettant de conserver les données de contexte de n’importe quel type, inchangées, pour une utilisation dans un rappel.
+      description: Fournit une option de conservation des données de contexte de n’importe quel type, sans modification, à utiliser dans un rappel.
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Facultatif. Fonction appelée lorsque le rappel est renvoyé, dont le seul paramètre est de type [Office. AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
+      description: Facultatif. Fonction qui est invoquée lors du retour du rappel, dont le seul paramètre est de type [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -472,25 +472,25 @@ methods:
     **Spécification du paramètre cellFormat**
 
 
-    Utilisez le paramètre cellFormat pour définir ou modifier les valeurs de mise en forme de cellule, telles que width, Height, font, Background, Alignment, etc. La valeur que vous transmettez en tant que paramètre cellFormat est un tableau qui contient une liste d’un ou plusieurs objets JavaScript qui spécifient les cellules à cibler (`cells:`<!-- -->) et les formats (`format:`<!-- -->) à leur appliquer.
+    Utilisez le paramètre cellFormat pour définir ou modifier les valeurs de mise en forme des cellules, telles que la largeur, la hauteur, la police, l’arrière-plan, l’alignement, etc. La valeur que vous passez en tant que paramètre cellFormat est un tableau qui contient une liste d’un ou plusieurs objets JavaScript qui spécifient les cellules à cibler (`cells:`<!-- -->) et les formats (`format:`<!-- -->) à leur appliquer.
 
 
-    Chaque objet JavaScript dans le tableau cellFormat a la forme suivante : `{cells:{ cell_range }, format:{ format_definition }}`
+    Chaque objet JavaScript dans le tableau cellFormat a la forme ci-après : `{cells:{ cell_range }, format:{ format_definition }}`
 
 
-    La `cells:` propriété spécifie la plage que vous souhaitez mettre en forme à l’aide de l’une des valeurs suivantes :
+    La `cells:` propriété spécifie la plage que vous souhaitez formater à l’aide de l’une des valeurs suivantes :
 
 
     **Plages prises en charge dans la propriété cells**
 
 
-    <table> <tr> <th>Paramètres de la plage de cellules</th> <th>Description</th> </tr> <tr> <td>`{row: n}`</td> <td>Spécifie la plage correspondant à la ligne de données de base zéro dans le tableau.</td> </tr> <tr> <td>`{column: n}`</td> <td>Spécifie la plage qui est la nième colonne de données de base zéro dans le tableau.</td> </tr> <tr> <td>`{row: i, column: j}`</td> <td>Spécifie la cellule unique qui est la énième ligne et la colonne je de la table.</td> </tr> <tr> <td>`Office.Table.All`</td> <td>Spécifie le tableau entier, y compris les totaux, les données et les en-têtes de colonne (le cas échéant).</td> </tr> <tr> <td>`Office.Table.Data`</td> <td>Spécifie uniquement les données du tableau (sans les en-têtes ni les totaux).</td> </tr> <tr> <td>`Office.Table.Headers`</td> <td>Spécifie uniquement la ligne d’en-tête.</td> </tr> </table>
+    <table> <tr> <th>Paramètres de la plage de cellules</th> <th>Description</th> </tr> <tr> <td>`{row: n}`</td> <td>Spécifie la plage qui est la nième ligne de données de base 0 du tableau.</td> </tr> <tr> <td>`{column: n}`</td> <td>Spécifie la plage qui est la nième colonne de données basée sur zéro dans le tableau.</td> </tr> <tr> <td>`{row: i, column: j}`</td> <td>Spécifie la cellule unique qui est la ième ligne et la colonne jth du tableau.</td> </tr> <tr> <td>`Office.Table.All`</td> <td>Spécifie le tableau entier, y compris les totaux, les données et les en-têtes de colonne (le cas échéant).</td> </tr> <tr> <td>`Office.Table.Data`</td> <td>Spécifie uniquement les données du tableau (sans les en-têtes ni les totaux).</td> </tr> <tr> <td>`Office.Table.Headers`</td> <td>Spécifie uniquement la ligne d’en-tête.</td> </tr> </table>
 
 
-    La `format:` propriété spécifie les valeurs qui correspondent à un sous-ensemble des paramètres disponibles dans la boîte de dialogue Format de cellule dans Excel (cliquez avec le bouton droit sur format de cellule ou de format de cellule &gt; &gt; &gt; ).
+    La propriété spécifie des valeurs qui correspondent à un sous-ensemble des paramètres disponibles dans la boîte de dialogue Format de cellule dans Excel (cliquez avec le bouton droit sur Format de cellule ou Cellules de `format:` format d’accueil). &gt; &gt; &gt;
 
 
-    Vous spécifiez la valeur de la `format:` propriété sous la forme d’une liste d’une ou de plusieurs paires nom-valeur de propriété dans un littéral d’objet JavaScript. Le nom de propriété indique le nom de la propriété de mise en forme à définir, tandis que la valeur spécifie la valeur de la propriété. Vous pouvez spécifier plusieurs valeurs pour un format donné, comme la couleur et la taille de la police.
+    Vous spécifiez la valeur de la propriété sous la forme d’une liste d’un ou plusieurs noms de propriété - paires de valeurs dans un littéral `format:` d’objet JavaScript. Le nom de propriété indique le nom de la propriété de mise en forme à définir, tandis que la valeur spécifie la valeur de la propriété. Vous pouvez spécifier plusieurs valeurs pour un format donné, comme la couleur et la taille de la police.
 
 
     Voici trois exemples de valeurs de la propriété `format:` :
@@ -514,31 +514,31 @@ methods:
     `format: {backgroundColor: "red", alignHorizontal: "center"}`
 
 
-    Vous pouvez spécifier des formats de nombre en spécifiant la chaîne « code » de mise en forme des nombres dans la `numberFormat:` propriété. Les chaînes de format numérique que vous pouvez spécifier correspondent à celles que vous pouvez définir dans Excel à l’aide de la catégorie Personnalisée sous l’onglet Nombre de la boîte de dialogue Format de cellule. L’exemple suivant montre comment mettre en forme un nombre en tant que pourcentage à deux décimales :
+    Vous pouvez spécifier des formats numériques en spécifiant la chaîne « code » de mise en forme numérique dans la `numberFormat:` propriété. Les chaînes de format numérique que vous pouvez spécifier correspondent à celles que vous pouvez définir dans Excel à l’aide de la catégorie Personnalisée sous l’onglet Nombre de la boîte de dialogue Format de cellule. L’exemple suivant montre comment mettre en forme un nombre en tant que pourcentage à deux décimales :
 
 
     `format: {numberFormat:"0.00%"}`
 
 
-    Pour plus d’informations, reportez-vous à la rubrique How to [Create a Custom number format](https://support.office.com/article/create-or-delete-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4)<!-- -->.
+    Pour plus d’informations, voir comment [créer un format numérique personnalisé](https://support.office.com/article/create-or-delete-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4)<!-- -->.
 
 
-    Pour définir la mise en forme des tables lors de l’écriture de données, utilisez les paramètres facultatifs tableOptions et cellFormat des `Document.setSelectedDataAsync` `TableBinding.setDataAsync` méthodes ou.
+    Pour définir la mise en forme sur les tables lors de l’écriture de données, utilisez les paramètres facultatifs tableOptions et cellFormat de la `Document.setSelectedDataAsync` ou `TableBinding.setDataAsync` des méthodes.
 
 
-    La définition de la mise en forme avec les paramètres facultatifs des `Document.setSelectedDataAsync` `TableBinding.setDataAsync` méthodes et permet uniquement de définir la mise en forme lors de la première écriture de données. Pour apporter des modifications de mise en forme après l’écriture de données, appliquez les méthodes suivantes :
+    La définition de la mise en forme avec les paramètres facultatifs des méthodes et des méthodes fonctionne uniquement pour définir la mise en forme lors de l’écriture des `Document.setSelectedDataAsync` `TableBinding.setDataAsync` données la première fois. Pour apporter des modifications de mise en forme après l’écriture de données, appliquez les méthodes suivantes :
 
 
-    - Pour mettre à jour la mise en forme des cellules, comme la couleur et le style de police, utilisez la `TableBinding.setFormatsAsync` méthode (cette méthode).
+    - Pour mettre à jour la mise en forme des cellules, telle que la couleur de police et le style, utilisez `TableBinding.setFormatsAsync` la méthode (cette méthode).
 
 
-    - Pour mettre à jour les options de table, comme les lignes à bandes et les boutons de filtre, utilisez la `TableBinding.setTableOptions` méthode.
+    - Pour mettre à jour les options de tableau, telles que les lignes à bandes et les boutons de filtre, utilisez la `TableBinding.setTableOptions` méthode.
 
 
     - Pour effacer la mise en forme, utilisez la `TableBinding.clearFormats` méthode.
 
 
-    Pour plus d’informations et d’exemples, voir [la rubrique relative à la mise en forme des tableaux dans les compléments pour Excel](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-tables#format-a-table) .<!-- -->.
+    Pour plus d’informations et d’exemples, voir Comment mettre en forme des tableaux dans [des add-ins pour Excel](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-tables#format-a-table)<!-- -->.
   isPreview: false
   isDeprecated: false
   syntax:
@@ -548,7 +548,7 @@ methods:
       description: Tableau contenant des objets JavaScript indiquant les cellules à cibler et la mise en forme à leur appliquer.
       type: any[]
     - id: callback
-      description: Facultatif. Fonction appelée lorsque le rappel est renvoyé, dont le seul paramètre est de type [Office. AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
+      description: Facultatif. Fonction qui est invoquée lors du retour du rappel, dont le seul paramètre est de type [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -558,7 +558,7 @@ methods:
   package: office!
   fullName: setTableOptionsAsync(tableOptions, options, callback)
   summary: Met à jour les options de mise en forme de tableau sur le tableau lié.
-  remarks: "**Ensemble de conditions requises**: [pas dans un ensemble](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#methods-that-arent-part-of-a-requirement-set)\n\nDans la fonction de rappel transmise à la méthode goToByIdAsync, vous pouvez utiliser les propriétés de l’objet AsyncResult pour renvoyer les informations suivantes.\n\n<table> <tr> <th>Propriété</th> <th>Utiliser pour...</th> </tr> <tr> <td>AsyncResult.value</td> <td>Renvoie toujours undefined, car il n’existe aucun objet ni aucune donnée à récupérer lors de la définition des formats.</td> </tr> <tr> <td>AsyncResult. Status</td> <td>Déterminer si l’opération a réussi ou échoué.</td> </tr> <tr> <td>AsyncResult.error</td> <td>Accéder à un objet Error fournissant des informations sur l’erreur en cas d’échec de l’opération.</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>Élément de tout type défini par l’utilisateur qui est renvoyé dans l’objet AsyncResult sans être modifié.</td> </tr> </table>\n\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\n// The following example shows how to:\n// 1. Create an object literal that specifies the table formatting options to update on the bound table.\n// 2. Call setTableOptions on a previously bound table (with an id of myBinding) passing the object\n//    with formatting setting as the tableOptions parameter.\nfunction updateTableFormatting(){\n    var tableOptions = {bandedRows: true, filterButton: false, style: \"TableStyleMedium3\"}; \n\n    Office.select(\"bindings#myBinding\").setTableOptionsAsync(tableOptions, function(asyncResult){});\n}\n```"
+  remarks: "**Ensemble de conditions requises** [: non dans un ensemble](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#methods-that-arent-part-of-a-requirement-set)\n\nDans la fonction de rappel transmise à la méthode goToByIdAsync, vous pouvez utiliser les propriétés de l’objet AsyncResult pour renvoyer les informations suivantes.\n\n<table> <tr> <th>Propriété</th> <th>Utiliser pour...</th> </tr> <tr> <td>AsyncResult.value</td> <td>Renvoie toujours undefined, car il n’y a pas de données ou d’objet à récupérer lors de la définition de formats.</td> </tr> <tr> <td>AsyncResult.status</td> <td>Déterminer si l’opération a réussi ou échoué.</td> </tr> <tr> <td>AsyncResult.error</td> <td>Accéder à un objet Error fournissant des informations sur l’erreur en cas d’échec de l’opération.</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>Élément de tout type défini par l’utilisateur qui est renvoyé dans l’objet AsyncResult sans être modifié.</td> </tr> </table>\n\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\n// The following example shows how to:\n// 1. Create an object literal that specifies the table formatting options to update on the bound table.\n// 2. Call setTableOptions on a previously bound table (with an id of myBinding) passing the object\n//    with formatting setting as the tableOptions parameter.\nfunction updateTableFormatting(){\n    var tableOptions = {bandedRows: true, filterButton: false, style: \"TableStyleMedium3\"}; \n\n    Office.select(\"bindings#myBinding\").setTableOptionsAsync(tableOptions, function(asyncResult){});\n}\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -568,10 +568,10 @@ methods:
       description: Littéral d’objet contenant une liste de paires nom-valeur de propriété qui définissent les options de tableau à appliquer.
       type: any
     - id: options
-      description: Fournit une option permettant de conserver les données de contexte de n’importe quel type, inchangées, pour une utilisation dans un rappel.
+      description: Fournit une option de conservation des données de contexte de n’importe quel type, sans modification, à utiliser dans un rappel.
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Facultatif. Fonction appelée lorsque le rappel est renvoyé, dont le seul paramètre est de type [Office. AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
+      description: Facultatif. Fonction qui est invoquée lors du retour du rappel, dont le seul paramètre est de type [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -582,13 +582,13 @@ methods:
   fullName: setTableOptionsAsync(tableOptions, callback)
   summary: Met à jour les options de mise en forme de tableau sur le tableau lié.
   remarks: >-
-    **Ensemble de conditions requises**: [pas dans un ensemble](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#methods-that-arent-part-of-a-requirement-set)
+    **Ensemble de conditions requises** [: non dans un ensemble](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#methods-that-arent-part-of-a-requirement-set)
 
 
     Dans la fonction de rappel transmise à la méthode goToByIdAsync, vous pouvez utiliser les propriétés de l’objet AsyncResult pour renvoyer les informations suivantes.
 
 
-    <table> <tr> <th>Propriété</th> <th>Utiliser pour...</th> </tr> <tr> <td>AsyncResult.value</td> <td>Renvoie toujours undefined, car il n’existe aucun objet ni aucune donnée à récupérer lors de la définition des formats.</td> </tr> <tr> <td>AsyncResult. Status</td> <td>Déterminer si l’opération a réussi ou échoué.</td> </tr> <tr> <td>AsyncResult.error</td> <td>Accéder à un objet Error fournissant des informations sur l’erreur en cas d’échec de l’opération.</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>Élément de tout type défini par l’utilisateur qui est renvoyé dans l’objet AsyncResult sans être modifié.</td> </tr> </table>
+    <table> <tr> <th>Propriété</th> <th>Utiliser pour...</th> </tr> <tr> <td>AsyncResult.value</td> <td>Renvoie toujours undefined, car il n’y a pas de données ou d’objet à récupérer lors de la définition de formats.</td> </tr> <tr> <td>AsyncResult.status</td> <td>Déterminer si l’opération a réussi ou échoué.</td> </tr> <tr> <td>AsyncResult.error</td> <td>Accéder à un objet Error fournissant des informations sur l’erreur en cas d’échec de l’opération.</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>Élément de tout type défini par l’utilisateur qui est renvoyé dans l’objet AsyncResult sans être modifié.</td> </tr> </table>
   isPreview: false
   isDeprecated: false
   syntax:
@@ -598,16 +598,16 @@ methods:
       description: Littéral d’objet contenant une liste de paires nom-valeur de propriété qui définissent les options de tableau à appliquer.
       type: any
     - id: callback
-      description: Facultatif. Fonction appelée lorsque le rappel est renvoyé, dont le seul paramètre est de type [Office. AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
+      description: Facultatif. Fonction qui est invoquée lors du retour du rappel, dont le seul paramètre est de type [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
       description: ''
 extends: <xref uid="office!Office.Binding:interface" />
 metadata:
-  ms.openlocfilehash: 765e05bdfad630e48da061b7ceb80ad7135fe5ce
-  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.openlocfilehash: eba42decba936cb9ed58e860528e54426a18d879
+  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
   ms.translationtype: MT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 11/18/2020
-  ms.locfileid: "49329452"
+  ms.lasthandoff: 03/26/2021
+  ms.locfileid: "51329378"
