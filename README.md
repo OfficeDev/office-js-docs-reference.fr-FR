@@ -12,16 +12,18 @@ Votre avis compte beaucoup pour nous.
 
 * Vos contributions à cette documentation sont également les bienvenues. Pour contribuer, bifurcation de ce référentiel, mettez à jour les fichiers selon vos besoins et envoyez une requête de pull avec vos modifications proposées. Pour plus de détails, consultez la rubrique [Contribuer à cette documentation](Contributing.md).
 
-    > **IMPORTANT**: ne modifiez pas les fichiers dans le [dossier /docs/docs-ref-autogen](https://github.com/OfficeDev/office-js-docs-reference/tree/master/docs/docs-ref-autogen) de ce référentiel. Tous les fichiers de ce dossier sont créés automatiquement, il n’est donc pas possible de les mettre à jour via une demande de pull. Pour demander une modification à l’un des fichiers du [dossier /docs/docs-ref-autogen,](https://github.com/OfficeDev/office-js-docs-reference/tree/master/docs/docs-ref-autogen) envoyez un [problème](https://github.com/OfficeDev/office-js-docs-reference/issues) dans ce référentiel. Vous pouvez en savoir plus sur la façon dont les outils dans ce référentiel [sont ici](https://github.com/OfficeDev/office-js-docs-reference/blob/master/DocumentationToolingNotes.md).
+    > **IMPORTANT**: ne modifiez pas les fichiers dans le [dossier /docs/docs-ref-autogen](https://github.com/OfficeDev/office-js-docs-reference/tree/master/docs/docs-ref-autogen) de ce référentiel. Tous les fichiers de ce dossier sont créés automatiquement, il n’est donc pas possible de les mettre à jour via une demande de pull. Pour demander une modification de l’un des fichiers dans le [dossier /docs/docs-ref-autogen,](https://github.com/OfficeDev/office-js-docs-reference/tree/master/docs/docs-ref-autogen) envoyez un [problème](https://github.com/OfficeDev/office-js-docs-reference/issues) dans ce référentiel. Vous pouvez en savoir plus sur la façon dont les outils dans ce référentiel [sont ici.](https://github.com/OfficeDev/office-js-docs-reference/blob/master/DocumentationToolingNotes.md)
 
-* Pour nous faire part de vos expériences de programmation, de ce que vous souhaiteriez voir dans les futures versions, de vos questions sur les exemples de code, etc., soumettez vos suggestions et vos idées sur la [plateforme Office Developer UserVoice](https://officespdev.uservoice.com/).
+* Pour nous faire connaître votre expérience de programmation, ce que vous souhaitez voir dans les versions futures, des exemples de code, etc., entrez vos suggestions et idées sur [Microsoft 365](https://docs.microsoft.com/answers/products/m365)sur Q&R.
 
 ## <a name="join-the-microsoft-365-developer-program"></a>Rejoignez le programme Développeur de Microsoft 365
+
 Obtenez un bac à sable, des outils et d’autres ressources gratuits dont vous avez besoin pour créer des solutions pour la plateforme Microsoft 365.
-- [Bac à sable développeur gratuit](https://developer.microsoft.com/microsoft-365/dev-program#Subscription) Obtenez un abonnement microsoft 365 E5 développeur gratuit et renouvelable de 90 jours.
-- [Packs d’exemples de données](https://developer.microsoft.com/microsoft-365/dev-program#Sample) Configurez automatiquement votre bac à sable en installant les données utilisateur et le contenu pour vous aider à créer vos solutions.
-- [Accès aux experts](https://developer.microsoft.com/microsoft-365/dev-program#Experts) Accédez aux événements de la communauté pour en savoir plus auprès d’experts Microsoft 365.
-- [Recommandations personnalisées](https://developer.microsoft.com/microsoft-365/dev-program#Recommendations) Recherchez rapidement des ressources pour les développeurs à partir de votre tableau de bord personnalisé.
+
+* [Bac à sable développeur gratuit](https://developer.microsoft.com/microsoft-365/dev-program#Subscription) Obtenez un abonnement microsoft 365 E5 développeur gratuit et renouvelable de 90 jours.
+* [Packs d’exemples de données](https://developer.microsoft.com/microsoft-365/dev-program#Sample) Configurez automatiquement votre bac à sable en installant les données utilisateur et le contenu pour vous aider à créer vos solutions.
+* [Accès aux experts](https://developer.microsoft.com/microsoft-365/dev-program#Experts) Accédez aux événements de la communauté pour en savoir plus sur les experts Microsoft 365.
+* [Recommandations personnalisées](https://developer.microsoft.com/microsoft-365/dev-program#Recommendations) Recherchez rapidement des ressources pour les développeurs à partir de votre tableau de bord personnalisé.
 
 
 ## <a name="microsoft-open-source-code-of-conduct"></a>Code de conduite Open Source de Microsoft
