@@ -9,13 +9,13 @@ If your issue is not related to the Office Add-ins documentation, please post it
 
 - To report an issue with the Office.js API or platform, create the issue in the OfficeDev/office-js repository (https://github.com/OfficeDev/office-js), which members of the product team monitor for customer-reported issues.
 
-- To submit a feature request for the Office.js API or platform, post your idea to our User Voice page (https://officespdev.uservoice.com/), or if the feature request already exists there, add your vote for it.
+- To submit a feature request for the Office.js API or platform, post your idea to Microsoft 365 on Q&A (https://docs.microsoft.com/answers/products/m365), or if the feature request already exists there, add your vote for it.
 -->
 
 <!--- Provide a general summary of the documentation issue in the Title above -->
 
-## <a name="article-url"></a><span data-ttu-id="c2e2b-101">URL de l'article</span><span class="sxs-lookup"><span data-stu-id="c2e2b-101">Article URL</span></span>
+## <a name="article-url"></a><span data-ttu-id="f23bd-101">URL de l'article</span><span class="sxs-lookup"><span data-stu-id="f23bd-101">Article URL</span></span>
 <!-- Provide the URL of the article that this documentation issue relates to -->
 
-## <a name="issue"></a><span data-ttu-id="c2e2b-102">Problème</span><span class="sxs-lookup"><span data-stu-id="c2e2b-102">Issue</span></span>
+## <a name="issue"></a><span data-ttu-id="f23bd-102">Problème</span><span class="sxs-lookup"><span data-stu-id="f23bd-102">Issue</span></span>
 <!-- Provide a thorough description of the documentation issue -->
