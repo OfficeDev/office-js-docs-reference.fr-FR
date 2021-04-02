@@ -4,7 +4,7 @@ uid: excel!Excel.Workbook:class
 package: excel!
 fullName: Excel.Workbook
 summary: >-
-  Le workbook est l’objet de niveau supérieur qui contient des objets connexes tels que des feuilles de calcul, des tableaux, des plages, etc. Pour en savoir plus sur le modèle objet de workbook, lisez [Work with workbooks using the Excel JavaScript API](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-workbooks)<!-- -->.
+  Le workbook est l’objet de niveau supérieur qui contient des objets connexes tels que des feuilles de calcul, des tableaux et des plages. Pour en savoir plus sur le modèle objet de workbook, lisez [Work with workbooks using the Excel JavaScript API](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-workbooks)<!-- -->.
 
 
   \[[Ensemble d’API : ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -18,7 +18,7 @@ properties:
   package: excel!
   fullName: application
   summary: >-
-    Représente l’instance d’application Excel qui contient ce manuel.
+    Représente l’instance de l’application Excel qui contient ce manuel.
 
 
     \[[Ensemble d’API : ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -158,7 +158,7 @@ properties:
   package: excel!
   fullName: isDirty
   summary: >-
-    Indique si des modifications ont été apportées depuis le dernier enregistré du manuel. Vous pouvez définir cette propriété sur true si vous souhaitez fermer un livre de travail modifié sans l’enregistrer ou être invité à l’enregistrer.
+    Spécifie si des modifications ont été apportées depuis le dernier enregistré du manuel. Vous pouvez définir cette propriété si vous souhaitez fermer un livre de travail modifié sans l’enregistrer ou être invité `true` à l’enregistrer.
 
 
     \[[Ensemble d’API : ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -190,7 +190,7 @@ properties:
   package: excel!
   fullName: names
   summary: >-
-    Représente une collection d’éléments nommés portant sur le classeur (appelés plages et constantes).
+    Représente une collection d’éléments nommés d’étendue de workbook (plages et constantes nommées).
 
 
     \[[Ensemble d’API : ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -206,7 +206,7 @@ properties:
   package: excel!
   fullName: onAutoSaveSettingChanged
   summary: >-
-    Se produit lorsque le paramètre de l’enregistrement automatique est modifié dans le classeur.
+    Se produit lorsque le paramètre AutoSave est modifié sur le workbook.
 
 
     \[[Ensemble d’API : ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -304,7 +304,7 @@ properties:
   package: excel!
   fullName: readOnly
   summary: >-
-    True si le classeur est ouvert en mode lecture seule.
+    Renvoie `true` si le workbook est ouvert en mode lecture seule.
 
 
     \[[Ensemble d’API : ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -320,7 +320,7 @@ properties:
   package: excel!
   fullName: settings
   summary: >-
-    Représente une collection d’objets Settings associés au classeur.
+    Représente une collection de paramètres associés au workbook.
 
 
     \[[Ensemble d’API : ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -369,7 +369,7 @@ properties:
   package: excel!
   fullName: usePrecisionAsDisplayed
   summary: >-
-    True si les calculs réalisés dans ce classeur utiliseront uniquement la précision des nombres tels qu’ils sont affichés.  Les données perdent définitivement leur précision lors du basculement de cette propriété de false à true.
+    True si les calculs réalisés dans ce classeur utiliseront uniquement la précision des nombres tels qu’ils sont affichés.  Les données perdent définitivement leur précision lors du basculement de cette propriété vers `false``true`<!-- -->.
 
 
     \[[Ensemble d’API : ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -436,7 +436,7 @@ methods:
   package: excel!
   fullName: getActiveChartOrNullObject()
   summary: >-
-    Obtient la feuille de calcul active du classeur. S’il n’existe aucun graphique actif, un objet null est renvoyé.
+    Obtient la feuille de calcul active du classeur. S’il n’existe aucun graphique actif, cette fonction retourne un objet dont `isNullObject` la propriété est définie sur `true`<!-- -->. Pour plus d’informations, [voir *OrNullObject methods and properties](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Ensemble d’API : ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -453,7 +453,7 @@ methods:
   package: excel!
   fullName: getIsActiveCollabSession()
   summary: >-
-    True si le classeur est modifié par plusieurs utilisateurs (co-création). Sachez qu’il peut y avoir un certain délai entre le changement d’état du workbook et le moment où les modifications sont reflétées sur le résultat de la méthode.
+    Renvoie si le workbook est modifié par plusieurs `true` utilisateurs (via la co-édition). Sachez qu’il peut y avoir un certain délai entre le changement d’état du workbook et le moment où les modifications sont reflétées sur le résultat de la méthode.
 
 
     \[[Ensemble d’API : ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -487,7 +487,7 @@ methods:
   package: excel!
   fullName: getSelectedRanges()
   summary: >-
-    Obtient la ou les plage(s) sélectionnée(s) actuelle(s) dans le classeur. Contrairement aux getSelectedRange(), cette méthode renvoie un objet RangeAreas qui représente toutes les plages sélectionnées.
+    Obtient la ou les plage(s) sélectionnée(s) actuelle(s) dans le classeur. Contrairement à `getSelectedRange()`<!-- -->, cette méthode renvoie un `RangeAreas` objet qui représente toutes les plages sélectionnées.
 
 
     \[[Ensemble d’API : ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -614,9 +614,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: c9372a82220f08334ce027d3c025befb51930bd0
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: ee6e211dad39dfec4407edb80e07fea3fe0165bd
+  ms.sourcegitcommit: ce09743deb2fc2a879cd63f96c8ff11ec84a42b2
   ms.translationtype: MT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51235848"
+  ms.lasthandoff: 04/02/2021
+  ms.locfileid: "51509609"
