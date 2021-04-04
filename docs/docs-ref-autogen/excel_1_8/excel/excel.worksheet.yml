@@ -229,7 +229,7 @@ properties:
   package: excel!
   fullName: protection
   summary: >-
-    Renvoie un objet de protection de feuille pour une feuille de calcul.
+    Renvoie l’objet de protection de feuille d’une feuille de calcul.
 
 
     \[[Ensemble d’API : ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -311,7 +311,7 @@ properties:
   package: excel!
   fullName: tabColor
   summary: >-
-    Couleur de l’onglet de la feuille de calcul. Lors de la récupération de la couleur d’onglet, si la feuille de calcul est invisible, la valeur est null. Si la feuille de calcul est visible mais que la couleur de l’onglet est définie sur auto, une chaîne vide est renvoyée. Dans le cas contraire, la propriété sera définie sur une couleur, sous la forme « 123456 » lors de la définition de la couleur, utilisez une chaîne vide pour définir une couleur « automatique » ou une couleur réelle dans le cas \# contraire.
+    Couleur de l’onglet de la feuille de calcul. Lors de la récupération de la couleur de l’onglet, si la feuille de calcul est invisible, la valeur sera `null`<!-- -->. Si la feuille de calcul est visible mais que la couleur de l’onglet est définie sur auto, une chaîne vide est renvoyée. Dans le cas contraire, la propriété sera définie sur une couleur, sous la forme \# RRGGBB (par exemple, « FFA500 »). Lorsque vous définissez la couleur, utilisez une chaîne vide pour définir une couleur « automatique » ou une couleur réelle dans le cas contraire.
 
 
     \[[Ensemble d’API : ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -489,7 +489,7 @@ methods:
   package: excel!
   fullName: getCell(row, column)
   summary: >-
-    Renvoie l’objet de plage qui contient une cellule donnée sur la base des numéros de ligne et de colonne. La cellule peut se trouver en dehors des limites de sa plage parente, tant qu’elle reste dans la grille de la feuille de calcul.
+    Obtient `Range` l’objet contenant la cellule unique en fonction des numéros de ligne et de colonne. La cellule peut se trouver en dehors des limites de sa plage parente, tant qu’elle reste dans la grille de la feuille de calcul.
 
 
     \[[Ensemble d’API : ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -524,7 +524,7 @@ methods:
     content: 'getNext(visibleOnly?: boolean): Excel.Worksheet;'
     parameters:
     - id: visibleOnly
-      description: Facultatif. Si la valeur est true, ne considère que les feuilles de calcul visibles, en ignorer les feuilles masquées.
+      description: Facultatif. If `true`<!-- -->, considère uniquement les feuilles de calcul visibles, en ignorer les feuilles masquées.
       type: boolean
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -534,7 +534,7 @@ methods:
   package: excel!
   fullName: getNextOrNullObject(visibleOnly)
   summary: >-
-    Obtient la feuille de calcul qui suit celle-ci. Si aucune feuille de calcul ne suit celle-ci, cette méthode retourne un objet null.
+    Obtient la feuille de calcul qui suit celle-ci. Si aucune feuille de calcul ne suit celle-ci, cette méthode retourne un objet dont la `isNullObject` propriété est définie sur `true`<!-- -->. Pour plus d’informations, [voir *OrNullObject methods and properties](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Ensemble d’API : ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -545,7 +545,7 @@ methods:
     content: 'getNextOrNullObject(visibleOnly?: boolean): Excel.Worksheet;'
     parameters:
     - id: visibleOnly
-      description: Facultatif. Si la valeur est true, ne considère que les feuilles de calcul visibles, en ignorer les feuilles masquées.
+      description: Facultatif. If `true`<!-- -->, considère uniquement les feuilles de calcul visibles, en ignorer les feuilles masquées.
       type: boolean
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -566,7 +566,7 @@ methods:
     content: 'getPrevious(visibleOnly?: boolean): Excel.Worksheet;'
     parameters:
     - id: visibleOnly
-      description: Facultatif. Si la valeur est true, ne considère que les feuilles de calcul visibles, en ignorer les feuilles masquées.
+      description: Facultatif. If `true`<!-- -->, considère uniquement les feuilles de calcul visibles, en ignorer les feuilles masquées.
       type: boolean
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -576,7 +576,7 @@ methods:
   package: excel!
   fullName: getPreviousOrNullObject(visibleOnly)
   summary: >-
-    Obtient la feuille de calcul qui précède celle-ci. S’il n’existe aucune feuille de calcul précédente, cette méthode retourne un objet null.
+    Obtient la feuille de calcul qui précède celle-ci. S’il n’existe aucune feuille de calcul précédente, cette méthode retourne un objet dont `isNullObject` la propriété est définie sur `true`<!-- -->. Pour plus d’informations, [voir *OrNullObject methods and properties](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Ensemble d’API : ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -587,7 +587,7 @@ methods:
     content: 'getPreviousOrNullObject(visibleOnly?: boolean): Excel.Worksheet;'
     parameters:
     - id: visibleOnly
-      description: Facultatif. Si la valeur est true, ne considère que les feuilles de calcul visibles, en ignorer les feuilles masquées.
+      description: Facultatif. If `true`<!-- -->, considère uniquement les feuilles de calcul visibles, en ignorer les feuilles masquées.
       type: boolean
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -597,7 +597,7 @@ methods:
   package: excel!
   fullName: getRange(address)
   summary: >-
-    Obtient l’objet de plage, qui représente un seul bloc rectangulaire de cellules, spécifié par l’adresse ou le nom.
+    Obtient `Range` l’objet, qui représente un seul bloc rectangulaire de cellules, spécifié par l’adresse ou le nom.
 
 
     \[[Ensemble d’API : ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -618,7 +618,7 @@ methods:
   package: excel!
   fullName: getRangeByIndexes(startRow, startColumn, rowCount, columnCount)
   summary: >-
-    Obtient l’objet plage commençant à un index de ligne et de colonne particulier et couvrant un certain nombre de lignes et de colonnes.
+    Obtient l’objet qui commence à un index de ligne et un index de colonne particuliers et s’étend sur un certain nombre de lignes `Range` et de colonnes.
 
 
     \[[Ensemble d’API : ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -659,7 +659,7 @@ methods:
     content: 'getUsedRange(valuesOnly?: boolean): Excel.Range;'
     parameters:
     - id: valuesOnly
-      description: 'Facultatif. Si la valeur est True, ne tient compte que des cellules avec des valeurs utilisées (en ignorant la mise en forme). \[Ensemble d’api : ExcelApi 1.2\]'
+      description: 'Facultatif. If `true`<!-- -->, ne tient compte que des cellules avec des valeurs en tant que cellules utilisées (en ignorant la mise en forme). \[Ensemble d’api : ExcelApi 1.2\]'
       type: boolean
     return:
       type: <xref uid="excel!Excel.Range:class" />
@@ -669,7 +669,7 @@ methods:
   package: excel!
   fullName: getUsedRangeOrNullObject(valuesOnly)
   summary: >-
-    La plage utilisée est la plus petite plage qui englobe toutes les cellules auxquelles une valeur ou un format est affecté. Si la feuille de calcul entière est vide, cette fonction renvoie un objet null.
+    La plage utilisée est la plus petite plage qui englobe toutes les cellules auxquelles une valeur ou un format est affecté. Si la feuille de calcul entière est vide, cette fonction retourne un objet dont la `isNullObject` propriété est définie sur `true`<!-- -->. Pour plus d’informations, [voir *OrNullObject methods and properties](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Ensemble d’API : ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -800,9 +800,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: d7a3721f8ffd9c5d504598b215ae0c778459c95b
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: 2e97e3acb6a2b01dcc342eaae7d8bef6c0bb3815
+  ms.sourcegitcommit: ce09743deb2fc2a879cd63f96c8ff11ec84a42b2
   ms.translationtype: MT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51342729"
+  ms.lasthandoff: 04/02/2021
+  ms.locfileid: "51553772"
