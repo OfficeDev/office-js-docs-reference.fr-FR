@@ -11,7 +11,7 @@
 |[CommentReplyCollection](/javascript/api/excel/excel.commentreplycollection)|[getItemOrNullObject(commentReplyId: string)](/javascript/api/excel/excel.commentreplycollection#getitemornullobject-commentreplyid-)|Renvoie une réponse de commentaire identifié via son ID.|
 |[ConditionalFormatCollection](/javascript/api/excel/excel.conditionalformatcollection)|[getItemOrNullObject(id: string)](/javascript/api/excel/excel.conditionalformatcollection#getitemornullobject-id-)|Renvoie un format conditionnel identifié par son ID.|
 |[DocumentTask](/javascript/api/excel/excel.documenttask)|[percentComplete](/javascript/api/excel/excel.documenttask#percentcomplete)|Spécifie le pourcentage d’achèvement de la tâche.|
-||[priorité](/javascript/api/excel/excel.documenttask#priority)|Spécifie la priorité de la tâche.|
+||[priority](/javascript/api/excel/excel.documenttask#priority)|Spécifie la priorité de la tâche.|
 ||[assignees](/javascript/api/excel/excel.documenttask#assignees)|Renvoie une collection de personnes assignées à la tâche.|
 ||[modifications](/javascript/api/excel/excel.documenttask#changes)|Obtient les enregistrements de modification de la tâche.|
 ||[comment](/javascript/api/excel/excel.documenttask#comment)|Obtient le commentaire associé à la tâche.|
@@ -30,7 +30,7 @@
 ||[dueDateTime](/javascript/api/excel/excel.documenttaskchange#duedatetime)|Représente la date et l’heure d’échéance de la tâche, dans le fuseau horaire UTC.|
 ||[id](/javascript/api/excel/excel.documenttaskchange#id)|ID de l’enregistrement de modification de tâche.|
 ||[percentComplete](/javascript/api/excel/excel.documenttaskchange#percentcomplete)|Représente le pourcentage d’achèvement de la tâche.|
-||[priorité](/javascript/api/excel/excel.documenttaskchange#priority)|Représente la priorité de la tâche.|
+||[priority](/javascript/api/excel/excel.documenttaskchange#priority)|Représente la priorité de la tâche.|
 ||[startDateTime](/javascript/api/excel/excel.documenttaskchange#startdatetime)|Représente la date et l’heure de début de la tâche, dans le fuseau horaire UTC.|
 ||[title](/javascript/api/excel/excel.documenttaskchange#title)|Représente le titre de la tâche.|
 ||[type](/javascript/api/excel/excel.documenttaskchange#type)|Représente le type d’action de l’enregistrement de modification de tâche.|
@@ -72,24 +72,12 @@
 ||[source](/javascript/api/excel/excel.linkeddatatypeaddedeventargs#source)|Obtient la source de l’événement.|
 ||[type](/javascript/api/excel/excel.linkeddatatypeaddedeventargs#type)|Obtient le type de l’événement.|
 |[LinkedDataTypeCollection](/javascript/api/excel/excel.linkeddatatypecollection)|[getCount()](/javascript/api/excel/excel.linkeddatatypecollection#getcount--)|Obtient le nombre de types de données liées dans la collection.|
-||[getItem(key: number)](/javascript/api/excel/excel.linkeddatatypecollection#getitem-key-)|Obtient un type de données lié par ID de service.|
+||[getItem(key: number)](/javascript/api/excel/excel.linkeddatatypecollection#getitem-key-)|Obtient un type de données liées par ID de service.|
 ||[getItemAt(index: number)](/javascript/api/excel/excel.linkeddatatypecollection#getitemat-index-)|Obtient un type de données liées par son index dans la collection.|
 ||[getItemOrNullObject(key: number)](/javascript/api/excel/excel.linkeddatatypecollection#getitemornullobject-key-)|Obtient un type de données liées par ID.|
 ||[items](/javascript/api/excel/excel.linkeddatatypecollection#items)|Obtient l’élément enfant chargé dans cette collection de sites.|
 ||[requestRefreshAll()](/javascript/api/excel/excel.linkeddatatypecollection#requestrefreshall--)|Effectue une demande d’actualisation de tous les types de données liées dans la collection.|
-|[NamedSheetView](/javascript/api/excel/excel.namedsheetview)|[activate()](/javascript/api/excel/excel.namedsheetview#activate--)|Active cette vue de feuille.|
-||[delete()](/javascript/api/excel/excel.namedsheetview#delete--)|Supprime l’affichage Feuille de la feuille de calcul.|
-||[duplicate(name?: string)](/javascript/api/excel/excel.namedsheetview#duplicate-name-)|Crée une copie de cette vue de feuille.|
-||[name](/javascript/api/excel/excel.namedsheetview#name)|Obtient ou définit le nom de l’affichage Feuille.|
-|[NamedSheetViewCollection](/javascript/api/excel/excel.namedsheetviewcollection)|[add(name: string)](/javascript/api/excel/excel.namedsheetviewcollection#add-name-)|Crée un affichage feuille avec le nom donné.|
-||[enterTemporary()](/javascript/api/excel/excel.namedsheetviewcollection#entertemporary--)|Crée et active un nouvel affichage de feuille temporaire.|
-||[exit()](/javascript/api/excel/excel.namedsheetviewcollection#exit--)|Quitte l’affichage feuille actif.|
-||[getActive()](/javascript/api/excel/excel.namedsheetviewcollection#getactive--)|Obtient la vue de feuille de calcul active.|
-||[getCount()](/javascript/api/excel/excel.namedsheetviewcollection#getcount--)|Obtient le nombre d’affichages de feuille dans cette feuille de calcul.|
-||[getItem(key: string)](/javascript/api/excel/excel.namedsheetviewcollection#getitem-key-)|Obtient une vue de feuille à l’aide de son nom.|
-||[getItemAt(index: number)](/javascript/api/excel/excel.namedsheetviewcollection#getitemat-index-)|Obtient une vue de feuille par son index dans la collection.|
-||[getItemOrNullObject(key: string)](/javascript/api/excel/excel.namedsheetviewcollection#getitemornullobject-key-)|Obtient une vue de feuille à l’aide de son nom.|
-||[items](/javascript/api/excel/excel.namedsheetviewcollection#items)|Obtient l’élément enfant chargé dans cette collection de sites.|
+|[NamedSheetViewCollection](/javascript/api/excel/excel.namedsheetviewcollection)|[getItemOrNullObject(key: string)](/javascript/api/excel/excel.namedsheetviewcollection#getitemornullobject-key-)|Obtient une vue de feuille à l’aide de son nom.|
 |[PivotLayout](/javascript/api/excel/excel.pivotlayout)|[altTextDescription](/javascript/api/excel/excel.pivotlayout#alttextdescription)|Description de texte de alt du tableau croisé dynamique.|
 ||[altTextTitle](/javascript/api/excel/excel.pivotlayout#alttexttitle)|Titre de texte de alt du tableau croisé dynamique.|
 ||[displayBlankLineAfterEachItem(display: boolean)](/javascript/api/excel/excel.pivotlayout#displayblanklineaftereachitem-display-)|Définit si une ligne vide doit être affichée après chaque élément.|
@@ -104,10 +92,8 @@
 |[PivotTableScopedCollection](/javascript/api/excel/excel.pivottablescopedcollection)|[getFirstOrNullObject()](/javascript/api/excel/excel.pivottablescopedcollection#getfirstornullobject--)|Obtient le premier tableau croisé dynamique de la collection.|
 |[Range](/javascript/api/excel/excel.range)|[getDependents()](/javascript/api/excel/excel.range#getdependents--)|Renvoie un objet qui représente la plage contenant tous les dépendants d’une cellule dans la même feuille de calcul ou `WorkbookRangeAreas` dans plusieurs feuilles de calcul.|
 ||[getDirectDependents()](/javascript/api/excel/excel.range#getdirectdependents--)|Renvoie un objet qui représente la plage contenant tous les dépendants directs d’une cellule dans la même feuille de calcul ou `WorkbookRangeAreas` dans plusieurs feuilles de calcul.|
-||[getExtendedRange(direction: Excel.KeyboardDirection, activeCell?: Range \| string)](/javascript/api/excel/excel.range#getextendedrange-direction--activecell-)|Renvoie un objet de plage qui inclut la plage actuelle et jusqu’au bord de la plage, en fonction de la direction fournie.|
 ||[getMergedAreasOrNullObject()](/javascript/api/excel/excel.range#getmergedareasornullobject--)|Renvoie un objet RangeAreas qui représente les zones fusionnées dans cette plage.|
 ||[getPrecedents()](/javascript/api/excel/excel.range#getprecedents--)|Renvoie un objet qui représente la plage contenant tous les antécédents d’une cellule dans la même feuille de calcul ou `WorkbookRangeAreas` dans plusieurs feuilles de calcul.|
-||[getRangeEdge(direction: Excel.KeyboardDirection, activeCell?: Range \| string)](/javascript/api/excel/excel.range#getrangeedge-direction--activecell-)|Renvoie un objet de plage qui est la cellule edge de la zone de données qui correspond à la direction fournie.|
 |[RefreshModeChangedEventArgs](/javascript/api/excel/excel.refreshmodechangedeventargs)|[refreshMode](/javascript/api/excel/excel.refreshmodechangedeventargs#refreshmode)|Mode d’actualisation du type de données liées.|
 ||[serviceId](/javascript/api/excel/excel.refreshmodechangedeventargs#serviceid)|ID unique de l’objet dont le mode d’actualisation a été modifié.|
 ||[source](/javascript/api/excel/excel.refreshmodechangedeventargs#source)|Obtient la source de l’événement.|
@@ -126,7 +112,6 @@
 |[Tableau](/javascript/api/excel/excel.table)|[clearStyle()](/javascript/api/excel/excel.table#clearstyle--)|Modifie le tableau pour utiliser le style de tableau par défaut.|
 ||[onFiltered](/javascript/api/excel/excel.table#onfiltered)|Se produit lorsqu’un filtre est appliqué à une table spécifique.|
 ||[tableStyle](/javascript/api/excel/excel.table#tablestyle)|Style appliqué au tableau.|
-||[resize(newRange: Range \| string)](/javascript/api/excel/excel.table#resize-newrange-)|Resize the table to the new range.|
 ||[setStyle(style: string \| TableStyle \| BuiltInTableStyle)](/javascript/api/excel/excel.table#setstyle-style-)|Définit le style appliqué au tableau.|
 |[TableCollection](/javascript/api/excel/excel.tablecollection)|[onFiltered](/javascript/api/excel/excel.tablecollection#onfiltered)|Se produit lorsqu’un filtre est appliqué à une table d’un workbook ou d’une feuille de calcul.|
 |[TableFilteredEventArgs](/javascript/api/excel/excel.tablefilteredeventargs)|[tableId](/javascript/api/excel/excel.tablefilteredeventargs#tableid)|Obtient l’ID du tableau dans lequel le filtre est appliqué.|
@@ -136,13 +121,13 @@
 |[Classeur](/javascript/api/excel/excel.workbook)|[insertWorksheetsFromBase64(base64File: string, options?: Excel.InsertWorksheetOptions)](/javascript/api/excel/excel.workbook#insertworksheetsfrombase64-base64file--options-)|Insère les feuilles de calcul spécifiées à partir d’un workbook source dans le workbook actuel.|
 ||[linkedDataTypes](/javascript/api/excel/excel.workbook#linkeddatatypes)|Renvoie une collection de types de données liées qui font partie du manuel.|
 ||[onActivated](/javascript/api/excel/excel.workbook#onactivated)|Se produit lorsque le workbook est activé.|
-||[tasks](/javascript/api/excel/excel.workbook#tasks)|Renvoie une collection de tâches présentes dans le manuel.|
+||[tasks](/javascript/api/excel/excel.workbook#tasks)|Renvoie une collection de tâches qui sont présentes dans le workbook.|
 ||[showPivotFieldList](/javascript/api/excel/excel.workbook#showpivotfieldlist)|Spécifie si le volet liste des champs du tableau croisé dynamique est affiché au niveau du workbook.|
 ||[use1904DateSystem](/javascript/api/excel/excel.workbook#use1904datesystem)|True si le classeur utilise le calendrier depuis 1904.|
 |[WorkbookActivatedEventArgs](/javascript/api/excel/excel.workbookactivatedeventargs)|[type](/javascript/api/excel/excel.workbookactivatedeventargs#type)|Obtient le type de l’événement.|
-|[Feuille de calcul](/javascript/api/excel/excel.worksheet)|[namedSheetViews](/javascript/api/excel/excel.worksheet#namedsheetviews)|Renvoie une collection d’affichages de feuille présents dans la feuille de calcul.|
-||[onFiltered](/javascript/api/excel/excel.worksheet#onfiltered)|Se produit lorsqu’un filtre est appliqué à une feuille de calcul spécifique.|
+|[Feuille de calcul](/javascript/api/excel/excel.worksheet)|[onFiltered](/javascript/api/excel/excel.worksheet#onfiltered)|Se produit lorsqu’un filtre est appliqué sur une feuille de calcul spécifique.|
 ||[onFormulaChanged](/javascript/api/excel/excel.worksheet#onformulachanged)|Se produit lorsqu’une ou plusieurs formules sont modifiées dans cette feuille de calcul.|
+||[tabId](/javascript/api/excel/excel.worksheet#tabid)|Renvoie une valeur représentant cette feuille de calcul qui peut être lue par Open Office XML.|
 ||[tasks](/javascript/api/excel/excel.worksheet#tasks)|Renvoie une collection de tâches présentes dans la feuille de calcul.|
 |[WorksheetCollection](/javascript/api/excel/excel.worksheetcollection)|[addFromBase64(base64File: string, sheetNamesToInsert?: string[], positionType?: Excel.WorksheetPositionType, relativeTo?: Worksheet \| string)](/javascript/api/excel/excel.worksheetcollection#addfrombase64-base64file--sheetnamestoinsert--positiontype--relativeto-)|Insère les feuilles de calcul spécifiées d’un classeur dans le classeur actif.|
 ||[onFiltered](/javascript/api/excel/excel.worksheetcollection#onfiltered)|Se produit lorsqu’un filtre de la feuille de calcul est appliqué dans le classeur.|
