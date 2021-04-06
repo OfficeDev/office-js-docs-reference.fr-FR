@@ -58,7 +58,7 @@ properties:
   package: excel!
   fullName: onAdded
   summary: >-
-    Se produit lorsque la nouvelle table est ajoutée dans un classeur.
+    Se produit lorsqu’une nouvelle table est ajoutée dans un workbook.
 
 
     \[[Ensemble d’API : ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -74,7 +74,7 @@ properties:
   package: excel!
   fullName: onChanged
   summary: >-
-    Se produit lorsque des données changent dans une table d’un workbook ou d’une feuille de calcul.
+    Se produit lorsque des données changent dans un tableau d’un workbook ou d’une feuille de calcul.
 
 
     \[[Ensemble d’API : ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -108,7 +108,7 @@ methods:
   package: excel!
   fullName: add(address, hasHeaders)
   summary: >-
-    Crée un tableau L’adresse de la source ou de l’objet de la plage détermine la feuille de calcul dans laquelle le tableau sera ajouté. Si l’ajout ne peut être effectué (par exemple, parce que l’adresse n’est pas valide, ou parce que le tableau empiéterait sur un autre tableau), un message d’erreur apparaît.
+    Crée une table. L’objet de plage ou l’adresse source détermine la feuille de calcul sous laquelle le tableau sera ajouté. Si la table ne peut pas être ajoutée (par exemple, parce que l’adresse n’est pas valide ou que la table chevaucherait une autre table), une erreur est lancée.
 
 
     \[[Ensemble d’API : ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -119,10 +119,10 @@ methods:
     content: 'add(address: Range | string, hasHeaders: boolean): Excel.Table;'
     parameters:
     - id: address
-      description: 'Objet de plage ou nom/adresse (string) de la plage représentant la source de données. Si l’adresse ne contient pas de nom de feuille, la feuille ouverte est utilisée. \[Ensemble d’api : ExcelApi 1.1 / 1.3. Avant ExcelApi 1.3, ce paramètre doit être une chaîne. À partir de l’api Excel 1.3, ce paramètre peut être un objet Range ou une chaîne.\]'
+      description: 'Objet, `Range` ou adresse de chaîne ou nom de la plage représentant la source de données. Si l’adresse ne contient pas de nom de feuille, la feuille ouverte est utilisée. \[Ensemble d’api : ExcelApi 1.1 / 1.3. Avant ExcelApi 1.3, ce paramètre doit être une chaîne. À partir de l’api Excel 1.3, ce paramètre peut être un objet Range ou une chaîne.\]'
       type: <xref uid="excel!Excel.Range:class" /> | string
     - id: hasHeaders
-      description: Valeur booléenne qui indique si les données importées disposent d’étiquettes de colonne. Si la source ne contient pas d’en-têtes (autrement dit, lorsque cette propriété est définie sur false), Excel génère automatiquement un en-tête et décale les données d’une ligne vers le bas.
+      description: Valeur booléle qui indique si les données importées ont des étiquettes de colonne. Si la source ne contient pas d’en-têtes (c’est-à-dire, lorsque cette propriété est définie sur `false`<!-- -->), Excel génère automatiquement un en-tête et décale les données d’une ligne vers le bas.
       type: boolean
     return:
       type: <xref uid="excel!Excel.Table:class" />
@@ -191,7 +191,7 @@ methods:
   package: excel!
   fullName: getItemOrNullObject(key)
   summary: >-
-    Obtient un tableau à l’aide de son nom ou de son ID. Si le tableau n’existe pas, renvoie un objet null.
+    Obtient un tableau à l’aide de son nom ou de son ID. Si le tableau n’existe pas, cette fonction retourne un objet dont la `isNullObject` propriété est définie sur `true`<!-- -->. Pour plus d’informations, [voir *OrNullObject methods and properties](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Ensemble d’API : ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -273,9 +273,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 0935906afa40f61224d9d27bcefb23bdee207213
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: 8d20211a103641c6e54e5e4e1a3b580fc7f4ba71
+  ms.sourcegitcommit: ce09743deb2fc2a879cd63f96c8ff11ec84a42b2
   ms.translationtype: MT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51301467"
+  ms.lasthandoff: 04/02/2021
+  ms.locfileid: "51569115"
