@@ -114,7 +114,7 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'addAsync(key: string, JSONmessage: NotificationMessageDetails, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'addAsync(key: string, JSONmessage: NotificationMessageDetails, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: key
       description: Clé spécifiée par un développeur pour référencer ce message de notification. Les développeurs peuvent l’utiliser pour modifier ce message ultérieurement. Sa longueur ne peut pas être supérieure à 32 caractères.
@@ -123,8 +123,51 @@ methods:
       description: Objet JSON qui contient le message de notification à ajouter à l’élément. Il contient un `NotificationMessageDetails` objet.
       type: <xref uid="outlook!Office.NotificationMessageDetails:interface" />
     - id: options
-      description: 'Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
+      description: 'Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: addAsync(key, JSONmessage, callback)
+  uid: outlook!Office.NotificationMessages#addAsync:member(2)
+  package: outlook!
+  fullName: addAsync(key, JSONmessage, callback)
+  summary: >-
+    Ajoute une notification à un élément.
+
+
+    Chaque message est limité à 5 notifications. Si vous en définissez plus, une erreur `NumberOfNotificationMessagesExceeded` est renvoyée.
+
+
+    **Important**:
+
+
+    - Une seule notification de type `InsightMessage` est autorisée par add-in. (Le `InsightMessage` type est actuellement en prévisualisation.) Si vous essayez d’en ajouter d’autres, une erreur se sera produite.
+
+
+    - Dans Outlook sur le web moderne, vous pouvez ajouter une `InsightMessage` notification uniquement en mode Composition.
+
+
+    \[[Ensemble d’API : Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+    **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**  : Rédiger ou Lire
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'addAsync(key: string, JSONmessage: NotificationMessageDetails, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: key
+      description: Clé spécifiée par un développeur pour référencer ce message de notification. Les développeurs peuvent l’utiliser pour modifier ce message ultérieurement. Sa longueur ne peut pas être supérieure à 32 caractères.
+      type: string
+    - id: JSONmessage
+      description: Objet JSON qui contient le message de notification à ajouter à l’élément. Il contient un `NotificationMessageDetails` objet.
+      type: <xref uid="outlook!Office.NotificationMessageDetails:interface" />
     - id: callback
       description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
@@ -144,11 +187,36 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'getAllAsync(options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<NotificationMessageDetails[]>) => void): void;'
+    content: 'getAllAsync(options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<NotificationMessageDetails[]>) => void): void;'
     parameters:
     - id: options
-      description: 'Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
+      description: 'Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->. La `value` propriété du résultat est un tableau `NotificationMessageDetails` d’objets.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="outlook!Office.NotificationMessageDetails:interface" />[]&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: getAllAsync(callback)
+  uid: outlook!Office.NotificationMessages#getAllAsync:member(2)
+  package: outlook!
+  fullName: getAllAsync(callback)
+  summary: >-
+    Renvoie l’ensemble des clés et messages pour un élément.
+
+
+    \[[Ensemble d’API : Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+    **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**  : Rédiger ou Lire
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getAllAsync(callback?: (asyncResult: Office.AsyncResult<NotificationMessageDetails[]>) => void): void;'
+    parameters:
     - id: callback
       description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->. La `value` propriété du résultat est un tableau `NotificationMessageDetails` d’objets.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="outlook!Office.NotificationMessageDetails:interface" />[]&gt;) =&gt; void'
@@ -186,14 +254,42 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'removeAsync(key: string, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'removeAsync(key: string, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: key
       description: Clé pour le message de notification à supprimer.
       type: string
     - id: options
-      description: 'Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
+      description: 'Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: removeAsync(key, callback)
+  uid: outlook!Office.NotificationMessages#removeAsync:member(2)
+  package: outlook!
+  fullName: removeAsync(key, callback)
+  summary: >-
+    Supprime un message de notification pour un élément.
+
+
+    \[[Ensemble d’API : Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+    **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**  : Rédiger ou Lire
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'removeAsync(key: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: key
+      description: Clé pour le message de notification à supprimer.
+      type: string
     - id: callback
       description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
@@ -254,7 +350,7 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'replaceAsync(key: string, JSONmessage: NotificationMessageDetails, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'replaceAsync(key: string, JSONmessage: NotificationMessageDetails, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: key
       description: Clé pour le message de notification à remplacer. Elle peut contenir jusqu’à 32 caractères.
@@ -263,7 +359,7 @@ methods:
       description: Objet JSON qui contient le nouveau message de notification qui va remplacer le message existant. Il contient un `NotificationMessageDetails` objet.
       type: <xref uid="outlook!Office.NotificationMessageDetails:interface" />
     - id: options
-      description: 'Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
+      description: 'Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
       description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->.
@@ -271,10 +367,44 @@ methods:
     return:
       type: void
       description: ''
+- name: replaceAsync(key, JSONmessage, callback)
+  uid: outlook!Office.NotificationMessages#replaceAsync:member(2)
+  package: outlook!
+  fullName: replaceAsync(key, JSONmessage, callback)
+  summary: >-
+    Remplace un message de notification disposant d’une clé donnée par un autre message.
+
+
+    Si un message de notification avec la clé spécifiée n’existe pas, `replaceAsync` ajoute la notification.
+
+
+    \[[Ensemble d’API : Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+    **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**  : Rédiger ou Lire
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'replaceAsync(key: string, JSONmessage: NotificationMessageDetails, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: key
+      description: Clé pour le message de notification à remplacer. Elle peut contenir jusqu’à 32 caractères.
+      type: string
+    - id: JSONmessage
+      description: Objet JSON qui contient le nouveau message de notification qui va remplacer le message existant. Il contient un `NotificationMessageDetails` objet.
+      type: <xref uid="outlook!Office.NotificationMessageDetails:interface" />
+    - id: callback
+      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
 metadata:
-  ms.openlocfilehash: 09a7dd44682b898524786978cc4d6af6da6fb366
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: fb45a7cdedb9f77eb7aeaad812a4c5f59eec1ae4
+  ms.sourcegitcommit: d0f7e3d564e90cdff464157440c36ad19fa526f0
   ms.translationtype: MT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51358395"
+  ms.lasthandoff: 04/09/2021
+  ms.locfileid: "51660308"
