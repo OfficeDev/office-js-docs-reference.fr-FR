@@ -384,7 +384,7 @@ properties:
     Renvoie une valeur boolé nationale indiquant si l’événement se trouve toute la journée.
 
 
-    \[[Ensemble d’API : aperçu de boîte aux lettres](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Ensemble d’API : Aperçu de boîte aux lettres](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
     **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
@@ -416,7 +416,7 @@ properties:
     Obtient la classe de l’élément des services web Exchange de l’élément sélectionné.
 
 
-    Vous pouvez créer des classes de message personnalisées qui étendent une classe de message par défaut, par exemple, une classe de message de rendez-vous personnalisée `IPM.Appointment.Contoso`<!-- -->.
+    Vous pouvez créer des classes de message personnalisées qui étendent une classe de message par défaut, par exemple, une classe de message de rendez-vous personnalisé `IPM.Appointment.Contoso`<!-- -->.
   remarks: >-
     **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
@@ -811,7 +811,7 @@ properties:
     Fournit la valeur de sensibilité du rendez-vous.
 
 
-    \[[Ensemble d’API : aperçu de boîte aux lettres](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Ensemble d’API : Aperçu de boîte aux lettres](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
     **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
@@ -843,7 +843,7 @@ properties:
     Obtient l’ID de la série à qui appartient une instance.
 
 
-    Dans les clients Outlook sur le web et de bureau, la propriété renvoie `seriesId` l’ID des services web Exchange (EWS) de l’élément parent (série) à qui cet élément appartient. Toutefois, sur iOS et Android, la seriesId renvoie l’ID REST de l’élément parent.
+    Dans les clients Outlook sur le web et de bureau, l’ID des services web Exchange (EWS) de l’élément parent (série) appartient à cet `seriesId` élément. Toutefois, sur iOS et Android, la seriesId renvoie l’ID REST de l’élément parent.
 
 
     **Remarque**: l’identificateur renvoyé par la propriété est identique à l’identificateur d’élément des `seriesId` services web Exchange. La `seriesId` propriété n’est pas identique aux ID Outlook utilisés par l’API REST Outlook. Avant d’effectuer des appels d’API REST à l’aide de cette valeur, elle doit être convertie à l’aide de `Office.context.mailbox.convertToRestId`<!-- -->. Pour plus d’informations, voir [Utiliser les API REST Outlook à partir d’un add-in Outlook](https://docs.microsoft.com/office/dev/add-ins/outlook/use-rest-api)<!-- -->.
@@ -992,7 +992,7 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'addHandlerAsync(eventType: Office.EventType | string, handler: any, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'addHandlerAsync(eventType: Office.EventType | string, handler: any, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: eventType
       description: Événement qui doit appeler le gestionnaire.
@@ -1001,8 +1001,42 @@ methods:
       description: Fonction qui gère l’événement. Cette fonction doit accepter un seul paramètre, qui est un littéral d’objet. La propriété de type sur le paramètre correspondra au `eventType` paramètre passé à `addHandlerAsync`<!-- -->.
       type: any
     - id: options
-      description: 'Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
+      description: 'Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre `callback` est appelée avec un seul paramètre, `asyncResult`<!-- -->, qui est un `Office.AsyncResult` objet.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: addHandlerAsync(eventType, handler, callback)
+  uid: outlook!Office.AppointmentRead#addHandlerAsync:member(2)
+  package: outlook!
+  fullName: addHandlerAsync(eventType, handler, callback)
+  summary: >-
+    ajoute un gestionnaire d’événements pour un événement pris en charge. **Remarque**: les événements sont disponibles uniquement avec le volet Des tâches.
+
+
+    Reportez-vous à la section Événements du modèle objet [Item](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/preview-requirement-set/office.context.mailbox.item#events) pour les événements pris en charge.
+
+
+    \[ [Jeu d’API : Mailbox 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]
+  remarks: >-
+    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+    **[Mode Outlook applicable :](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** participant au rendez-vous
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'addHandlerAsync(eventType: Office.EventType | string, handler: any, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: eventType
+      description: Événement qui doit appeler le gestionnaire.
+      type: <xref uid="office!Office.EventType:enum" /> | string
+    - id: handler
+      description: Fonction qui gère l’événement. Cette fonction doit accepter un seul paramètre, qui est un littéral d’objet. La propriété de type sur le paramètre correspondra au `eventType` paramètre passé à `addHandlerAsync`<!-- -->.
+      type: any
     - id: callback
       description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre `callback` est appelée avec un seul paramètre, `asyncResult`<!-- -->, qui est un `Office.AsyncResult` objet.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
@@ -1014,7 +1048,7 @@ methods:
   package: outlook!
   fullName: displayReplyAllForm(formData)
   summary: >-
-    Affiche un formulaire de réponse qui inclut l’expéditeur et tous les destinataires du message sélectionné ou l’organisateur et tous les participants du rendez-vous sélectionné.
+    Affiche un formulaire de réponse qui inclut l’expéditeur et tous les destinataires du message sélectionné, ou l’organisateur et tous les participants du rendez-vous sélectionné.
 
 
     Dans Outlook sur le web, le formulaire de réponse s’affiche sous la forme d’un formulaire de réponse dans l’affichage à 3 colonnes et d’un formulaire à 2 colonnes ou 1 colonne.
@@ -1186,14 +1220,54 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'displayReplyAllFormAsync(formData: string | ReplyFormData, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'displayReplyAllFormAsync(formData: string | ReplyFormData, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: formData
       description: Chaîne qui contient du texte et des éléments HTML et qui représente le corps du formulaire de réponse. La chaîne est limitée à 32 Ko OU un objet [ReplyFormData](xref:outlook!Office.ReplyFormData:interface) qui contient des données de corps ou de pièce jointe et une fonction de rappel.
       type: string | <xref uid="outlook!Office.ReplyFormData:interface" />
     - id: options
-      description: 'Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
+      description: 'Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre `callback` est appelée avec un seul paramètre, `asyncResult`<!-- -->, qui est un `Office.AsyncResult` objet.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: displayReplyAllFormAsync(formData, callback)
+  uid: outlook!Office.AppointmentRead#displayReplyAllFormAsync:member(2)
+  package: outlook!
+  fullName: displayReplyAllFormAsync(formData, callback)
+  summary: >-
+    Affiche un formulaire de réponse qui inclut l’expéditeur et tous les destinataires du message sélectionné, ou l’organisateur et tous les participants du rendez-vous sélectionné.
+
+
+    Dans Outlook sur le web, le formulaire de réponse s’affiche sous la forme d’un formulaire de réponse dans l’affichage à 3 colonnes et d’un formulaire à 2 colonnes ou 1 colonne.
+
+
+    Si un des paramètres de chaîne dépasse la limite, `displayReplyAllFormAsync` génère une exception.
+
+
+    Lorsque des pièces jointes sont spécifiées dans le paramètre, Outlook tente de télécharger toutes les pièces jointes et de les joindre `formData.attachments` au formulaire de réponse. Si aucune pièce jointe n’est ajoutée, une erreur s’affiche dans l’interface utilisateur du formulaire. Si ce n’est pas possible, aucun message d’erreur n’est généré.
+
+
+    **Remarque**: cette méthode n’est pas prise en charge dans Outlook sur iOS ou Android.
+
+
+    \[[Ensemble d’API : Mailbox 1.9](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+    **[Mode Outlook applicable :](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** participant au rendez-vous
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'displayReplyAllFormAsync(formData: string | ReplyFormData, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: formData
+      description: Chaîne qui contient du texte et des éléments HTML et qui représente le corps du formulaire de réponse. La chaîne est limitée à 32 Ko OU un objet [ReplyFormData](xref:outlook!Office.ReplyFormData:interface) qui contient des données de corps ou de pièce jointe et une fonction de rappel.
+      type: string | <xref uid="outlook!Office.ReplyFormData:interface" />
     - id: callback
       description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre `callback` est appelée avec un seul paramètre, `asyncResult`<!-- -->, qui est un `Office.AsyncResult` objet.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
@@ -1418,14 +1492,54 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'displayReplyFormAsync(formData: string | ReplyFormData, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'displayReplyFormAsync(formData: string | ReplyFormData, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: formData
       description: Chaîne qui contient du texte et des éléments HTML et qui représente le corps du formulaire de réponse. La chaîne est limitée à 32 Ko OU un objet [ReplyFormData](xref:outlook!Office.ReplyFormData:interface) qui contient des données de corps ou de pièce jointe et une fonction de rappel.
       type: string | <xref uid="outlook!Office.ReplyFormData:interface" />
     - id: options
-      description: 'Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
+      description: 'Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre `callback` est appelée avec un seul paramètre, `asyncResult`<!-- -->, qui est un `Office.AsyncResult` objet.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: displayReplyFormAsync(formData, callback)
+  uid: outlook!Office.AppointmentRead#displayReplyFormAsync:member(2)
+  package: outlook!
+  fullName: displayReplyFormAsync(formData, callback)
+  summary: >-
+    Affiche un formulaire de réponse qui comprend uniquement l’expéditeur du message sélectionné ou l’organisateur du rendez-vous sélectionné.
+
+
+    Dans Outlook sur le web, le formulaire de réponse s’affiche sous la forme d’un formulaire de réponse dans l’affichage à 3 colonnes et d’un formulaire à 2 colonnes ou 1 colonne.
+
+
+    Si un des paramètres de chaîne dépasse la limite, `displayReplyFormAsync` génère une exception.
+
+
+    Lorsque des pièces jointes sont spécifiées dans le paramètre, Outlook tente de télécharger toutes les pièces jointes et de les joindre `formData.attachments` au formulaire de réponse. Si aucune pièce jointe n’est ajoutée, une erreur s’affiche dans l’interface utilisateur du formulaire. Si ce n’est pas possible, aucun message d’erreur n’est généré.
+
+
+    **Remarque**: cette méthode n’est pas prise en charge dans Outlook sur iOS ou Android.
+
+
+    \[[Ensemble d’API : Mailbox 1.9](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+    **[Mode Outlook applicable :](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** participant au rendez-vous
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'displayReplyFormAsync(formData: string | ReplyFormData, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: formData
+      description: Chaîne qui contient du texte et des éléments HTML et qui représente le corps du formulaire de réponse. La chaîne est limitée à 32 Ko OU un objet [ReplyFormData](xref:outlook!Office.ReplyFormData:interface) qui contient des données de corps ou de pièce jointe et une fonction de rappel.
+      type: string | <xref uid="outlook!Office.ReplyFormData:interface" />
     - id: callback
       description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre `callback` est appelée avec un seul paramètre, `asyncResult`<!-- -->, qui est un `Office.AsyncResult` objet.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
@@ -1457,7 +1571,7 @@ methods:
     - `AttachmentTypeNotSupported`<!-- -->: le type de pièce jointe n’est pas pris en charge. Les types non pris en charge incluent les images incorporées au format Texte enrichi ou les types de pièces jointes d’élément autres que les éléments de courrier électronique ou de calendrier (par exemple, un contact ou un élément de tâche).
 
 
-    - `InvalidAttachmentId`<!-- -->: l’identificateur de pièce jointe n’existe pas.
+    - `InvalidAttachmentId`<!-- -->: L’identificateur de pièce jointe n’existe pas.
 
 
     #### <a name="examples"></a>Exemples
@@ -1511,14 +1625,54 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'getAttachmentContentAsync(attachmentId: string, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<AttachmentContent>) => void): void;'
+    content: 'getAttachmentContentAsync(attachmentId: string, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<AttachmentContent>) => void): void;'
     parameters:
     - id: attachmentId
       description: Identificateur de la pièce jointe que vous souhaitez obtenir.
       type: string
     - id: options
-      description: 'Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
+      description: 'Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre `callback` est appelée avec un seul paramètre, `asyncResult`<!-- -->, qui est un `Office.AsyncResult` objet. Si l’appel échoue, la propriété contient un code d’erreur `asyncResult.error` avec la raison de l’échec.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="outlook!Office.AttachmentContent:interface" />&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: getAttachmentContentAsync(attachmentId, callback)
+  uid: outlook!Office.AppointmentRead#getAttachmentContentAsync:member(2)
+  package: outlook!
+  fullName: getAttachmentContentAsync(attachmentId, callback)
+  summary: >-
+    Obtient une pièce jointe d’un message ou d’un rendez-vous et la renvoie en tant `AttachmentContent` qu’objet.
+
+
+    La `getAttachmentContentAsync` méthode obtient la pièce jointe avec l’identificateur spécifié de l’élément. En tant que meilleure pratique, vous devez utiliser l’identificateur pour récupérer une pièce jointe dans la même session que les attachmentIds ont été récupérés avec le `getAttachmentsAsync` ou `item.attachments` l’appel. Dans Outlook sur le web et sur les appareils mobiles, l’identificateur de pièce jointe n’est valable que dans la même session. Une session est terminée lorsque l’utilisateur ferme l’application, ou si l’utilisateur commence à composer un formulaire en ligne, il le fait ensuite apparaître pour continuer dans une fenêtre distincte.
+
+
+    \[[Ensemble d’API : Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+    **[Mode Outlook applicable :](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** participant au rendez-vous
+
+
+    **Erreurs**:
+
+
+    - `AttachmentTypeNotSupported`<!-- -->: le type de pièce jointe n’est pas pris en charge. Les types non pris en charge incluent les images incorporées au format Texte enrichi ou les types de pièces jointes d’élément autres que les éléments de courrier électronique ou de calendrier (par exemple, un contact ou un élément de tâche).
+
+
+    - `InvalidAttachmentId`<!-- -->: L’identificateur de pièce jointe n’existe pas.
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getAttachmentContentAsync(attachmentId: string, callback?: (asyncResult: Office.AsyncResult<AttachmentContent>) => void): void;'
+    parameters:
+    - id: attachmentId
+      description: Identificateur de la pièce jointe que vous souhaitez obtenir.
+      type: string
     - id: callback
       description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre `callback` est appelée avec un seul paramètre, `asyncResult`<!-- -->, qui est un `Office.AsyncResult` objet. Si l’appel échoue, la propriété contient un code d’erreur `asyncResult.error` avec la raison de l’échec.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="outlook!Office.AttachmentContent:interface" />&gt;) =&gt; void'
@@ -1647,7 +1801,7 @@ methods:
         Alors que le niveau d’autorisation minimal pour utiliser cette méthode est `Restricted`<!-- -->, certains types d’entités `ReadItem` doivent être accessibles, comme indiqué dans le tableau suivant.
 
 
-        <table> <tr> <th>Valeur de entityType</th> <th>Type des objets du tableau renvoyé</th> <th>Niveau d’autorisation requis</th> </tr> <tr> <td>Adresse</td> <td>String</td> <td>Restreint</td> </tr> <tr> <td>Contact</td> <td>Contact</td> <td>ReadItem</td> </tr> <tr> <td>EmailAddress</td> <td>String</td> <td>ReadItem</td> </tr> <tr> <td>MeetingSuggestion</td> <td>MeetingSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>PhoneNumber</td> <td>PhoneNumber</td> <td>Restreint</td> </tr> <tr> <td>TaskSuggestion</td> <td>TaskSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>URL</td> <td>String</td> <td>Restreint</td> </tr> </table>
+        <table> <tr> <th>Valeur de entityType</th> <th>Type des objets du tableau renvoyé</th> <th>Niveau d’autorisation requis</th> </tr> <tr> <td>Adresse</td> <td>Chaîne</td> <td>Restreint</td> </tr> <tr> <td>Contact</td> <td>Contact</td> <td>ReadItem</td> </tr> <tr> <td>EmailAddress</td> <td>Chaîne</td> <td>ReadItem</td> </tr> <tr> <td>MeetingSuggestion</td> <td>MeetingSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>PhoneNumber</td> <td>PhoneNumber</td> <td>Restreint</td> </tr> <tr> <td>TaskSuggestion</td> <td>TaskSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>URL</td> <td>Chaîne</td> <td>Restreint</td> </tr> </table>
       type: <xref uid="outlook!Office.MailboxEnums.EntityType:enum" /> | string
     return:
       type: (string | <xref uid="outlook!Office.Contact:interface" /> | <xref uid="outlook!Office.MeetingSuggestion:interface" /> | <xref uid="outlook!Office.PhoneNumber:interface" /> | <xref uid="outlook!Office.TaskSuggestion:interface" />)[]
@@ -1693,7 +1847,7 @@ methods:
       type: string
     return:
       type: (string | <xref uid="outlook!Office.Contact:interface" /> | <xref uid="outlook!Office.MeetingSuggestion:interface" /> | <xref uid="outlook!Office.PhoneNumber:interface" /> | <xref uid="outlook!Office.TaskSuggestion:interface" />)[]
-      description: S’il n’existe aucun élément dans le manifeste avec une valeur d’élément qui `ItemHasKnownEntity` `FilterName` correspond au `name` paramètre, la méthode renvoie `null`<!-- -->. Si le paramètre correspond à un élément dans le manifeste, mais qu’aucune entité dans l’élément actuel ne correspond, la méthode retourne `name` `ItemHasKnownEntity` un tableau vide.
+      description: S’il n’existe aucun élément dans le manifeste avec une valeur d’élément qui correspond au `ItemHasKnownEntity` `FilterName` `name` paramètre, la méthode renvoie `null`<!-- -->. Si le paramètre correspond à un élément dans le manifeste, mais qu’aucune entité dans l’élément actuel ne correspond, la méthode retourne `name` `ItemHasKnownEntity` un tableau vide.
 - name: getInitializationContextAsync(options, callback)
   uid: outlook!Office.AppointmentRead#getInitializationContextAsync:member(1)
   package: outlook!
@@ -1745,13 +1899,41 @@ methods:
   isPreview: true
   isDeprecated: false
   syntax:
-    content: 'getInitializationContextAsync(options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
+    content: 'getInitializationContextAsync(options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
     parameters:
     - id: options
-      description: 'Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
+      description: 'Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->. En cas de réussite, les données de contexte d’initialisation sont fournies dans la `asyncResult.value` propriété sous la mesure d’une chaîne. S’il n’existe aucun contexte d’initialisation, l’objet contient un objet dont la propriété est définie sur `asyncResult` `Error` `code` 9020 et sa propriété `name` est définie sur `GenericResponseError`<!-- -->.
+      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->. En cas de réussite, les données de contexte d’initialisation sont fournies dans la `asyncResult.value` propriété sous la mesure d’une chaîne. S’il n’existe aucun contexte d’initialisation, l’objet contient un objet dont la propriété est définie sur `asyncResult` `Error` `code` 9020 et sa propriété `name` définie sur `GenericResponseError`<!-- -->.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: getInitializationContextAsync(callback)
+  uid: outlook!Office.AppointmentRead#getInitializationContextAsync:member(2)
+  package: outlook!
+  fullName: getInitializationContextAsync(callback)
+  summary: >-
+    Obtient les données d’initialisation transmises lorsque le module est [activé par un message actionnable](https://docs.microsoft.com/outlook/actionable-messages/invoke-add-in-from-actionable-message)<!-- -->.
+
+
+    **Remarque**: cette méthode est uniquement prise en charge par Outlook 2016 ou une version ultérieure sur Windows (versions « Click-to-Run » supérieure à 16.0.8413.1000) et Outlook sur le web pour Microsoft 365.
+
+
+    \[[Ensemble d’API : Aperçu de boîte aux lettres](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+    **[Mode Outlook applicable :](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** participant au rendez-vous
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'getInitializationContextAsync(callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
+    parameters:
+    - id: callback
+      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->. En cas de réussite, les données de contexte d’initialisation sont fournies dans la `asyncResult.value` propriété sous la mesure d’une chaîne. S’il n’existe aucun contexte d’initialisation, l’objet contient un objet dont la propriété est définie sur `asyncResult` `Error` `code` 9020 et sa propriété `name` définie sur `GenericResponseError`<!-- -->.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
     return:
       type: void
@@ -2285,14 +2467,45 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'removeHandlerAsync(eventType: Office.EventType | string, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'removeHandlerAsync(eventType: Office.EventType | string, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: eventType
       description: Événement qui doit révoquer le gestionnaire.
       type: <xref uid="office!Office.EventType:enum" /> | string
     - id: options
-      description: 'Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
+      description: 'Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre `callback` est appelée avec un seul paramètre, `asyncResult`<!-- -->, qui est un `Office.AsyncResult` objet.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: removeHandlerAsync(eventType, callback)
+  uid: outlook!Office.AppointmentRead#removeHandlerAsync:member(2)
+  package: outlook!
+  fullName: removeHandlerAsync(eventType, callback)
+  summary: >-
+    Supprime les gestionnaires d’événements pour un type d’événement pris en charge. **Remarque**: les événements sont disponibles uniquement avec le volet Des tâches.
+
+
+    Reportez-vous à la section Événements du modèle objet [Item](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/preview-requirement-set/office.context.mailbox.item#events) pour les événements pris en charge.
+
+
+    \[ [Jeu d’API : Mailbox 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]
+  remarks: >-
+    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+    **[Mode Outlook applicable :](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** participant au rendez-vous
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'removeHandlerAsync(eventType: Office.EventType | string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: eventType
+      description: Événement qui doit révoquer le gestionnaire.
+      type: <xref uid="office!Office.EventType:enum" /> | string
     - id: callback
       description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre `callback` est appelée avec un seul paramètre, `asyncResult`<!-- -->, qui est un `Office.AsyncResult` objet.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
@@ -2301,9 +2514,9 @@ methods:
       description: ''
 extends: <xref uid="outlook!Office.Appointment:interface" />
 metadata:
-  ms.openlocfilehash: c9b989507d4331468c24e3239b735840a3d72273
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: ca9a339e570d146b17dcdef429110ebc5685d2e1
+  ms.sourcegitcommit: d0f7e3d564e90cdff464157440c36ad19fa526f0
   ms.translationtype: MT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51358486"
+  ms.lasthandoff: 04/09/2021
+  ms.locfileid: "51660343"

@@ -229,7 +229,7 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'addHandlerAsync(eventType: Office.EventType | string, handler: (type: Office.EventType) => void, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'addHandlerAsync(eventType: Office.EventType | string, handler: (type: Office.EventType) => void, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: eventType
       description: Événement qui doit appeler le gestionnaire.
@@ -238,8 +238,42 @@ methods:
       description: Fonction qui gère l’événement. Cette fonction doit accepter un seul paramètre, qui est un littéral d’objet. La propriété de type sur le paramètre correspondra au `eventType` paramètre passé à `addHandlerAsync`<!-- -->.
       type: '(type: <xref uid="office!Office.EventType:enum" />) =&gt; void'
     - id: options
-      description: Facultatif. Fournit une option de conservation des données de contexte de n’importe quel type, sans modification, à utiliser dans un rappel.
+      description: Fournit une option de conservation des données de contexte de n’importe quel type, sans modification, à utiliser dans un rappel.
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: addHandlerAsync(eventType, handler, callback)
+  uid: outlook!Office.Mailbox#addHandlerAsync:member(2)
+  package: outlook!
+  fullName: addHandlerAsync(eventType, handler, callback)
+  summary: >-
+    ajoute un gestionnaire d’événements pour un événement pris en charge. **Remarque**: les événements sont disponibles uniquement avec le volet Des tâches.
+
+
+    Reportez-vous à la section Événements du modèle objet de boîte [aux](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.5/office.context.mailbox#events) lettres pour les événements pris en charge.
+
+
+    \[[Ensemble d’API : Mailbox 1.5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+    **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**  : Rédiger ou Lire
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'addHandlerAsync(eventType: Office.EventType | string, handler: (type: Office.EventType) => void, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: eventType
+      description: Événement qui doit appeler le gestionnaire.
+      type: <xref uid="office!Office.EventType:enum" /> | string
+    - id: handler
+      description: Fonction qui gère l’événement. Cette fonction doit accepter un seul paramètre, qui est un littéral d’objet. La propriété de type sur le paramètre correspondra au `eventType` paramètre passé à `addHandlerAsync`<!-- -->.
+      type: '(type: <xref uid="office!Office.EventType:enum" />) =&gt; void'
     - id: callback
       description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
@@ -995,13 +1029,13 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'removeHandlerAsync(eventType: Office.EventType | string, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'removeHandlerAsync(eventType: Office.EventType | string, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: eventType
       description: Événement qui doit révoquer le gestionnaire.
       type: <xref uid="office!Office.EventType:enum" /> | string
     - id: options
-      description: Facultatif. Fournit une option de conservation des données de contexte de n’importe quel type, sans modification, à utiliser dans un rappel.
+      description: Fournit une option de conservation des données de contexte de n’importe quel type, sans modification, à utiliser dans un rappel.
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
       description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->.
@@ -1009,10 +1043,41 @@ methods:
     return:
       type: void
       description: ''
+- name: removeHandlerAsync(eventType, callback)
+  uid: outlook!Office.Mailbox#removeHandlerAsync:member(2)
+  package: outlook!
+  fullName: removeHandlerAsync(eventType, callback)
+  summary: >-
+    Supprime les gestionnaires d’événements pour un type d’événement pris en charge. **Remarque**: les événements sont disponibles uniquement avec le volet Des tâches.
+
+
+    Reportez-vous à la section Événements du modèle objet de boîte [aux](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.5/office.context.mailbox#events) lettres pour les événements pris en charge.
+
+
+    \[[Ensemble d’API : Mailbox 1.5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+    **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**  : Rédiger ou Lire
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'removeHandlerAsync(eventType: Office.EventType | string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: eventType
+      description: Événement qui doit révoquer le gestionnaire.
+      type: <xref uid="office!Office.EventType:enum" /> | string
+    - id: callback
+      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
 metadata:
-  ms.openlocfilehash: 58845f6569640d5d89a7313c784a7e0b88243f3d
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: 132aea2bf8428977638f3944a51d7a3b75cf68a1
+  ms.sourcegitcommit: d0f7e3d564e90cdff464157440c36ad19fa526f0
   ms.translationtype: MT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51328818"
+  ms.lasthandoff: 04/09/2021
+  ms.locfileid: "51660161"

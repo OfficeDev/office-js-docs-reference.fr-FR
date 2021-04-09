@@ -75,14 +75,51 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'addAsync(categories: CategoryDetails[], options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'addAsync(categories: CategoryDetails[], options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: categories
       description: Catégories à ajouter à la liste principale de la boîte aux lettres.
       type: <xref uid="outlook!Office.CategoryDetails:interface" />[]
     - id: options
-      description: 'Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
+      description: 'Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: addAsync(categories, callback)
+  uid: outlook!Office.MasterCategories#addAsync:member(2)
+  package: outlook!
+  fullName: addAsync(categories, callback)
+  summary: >-
+    Ajoute des catégories à la liste principale sur une boîte aux lettres. Chaque catégorie doit avoir un nom unique, mais plusieurs catégories peuvent utiliser la même couleur.
+
+
+    \[[Ensemble d’API : Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteMailbox`
+
+
+    **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**  : Rédiger ou Lire
+
+
+    **Erreurs**:
+
+
+    - `DuplicateCategory`<!-- -->: l’une des catégories fournies figure déjà dans la liste principale des catégories.
+
+
+    - `PermissionDenied`<!-- -->: l’utilisateur n’est pas autorisé à effectuer cette action.
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'addAsync(categories: CategoryDetails[], callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: categories
+      description: Catégories à ajouter à la liste principale de la boîte aux lettres.
+      type: <xref uid="outlook!Office.CategoryDetails:interface" />[]
     - id: callback
       description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
@@ -171,7 +208,7 @@ methods:
   package: outlook!
   fullName: removeAsync(categories, options, callback)
   summary: >-
-    Supprime les catégories de la liste principale d’une boîte aux lettres.
+    Supprime des catégories de la liste principale d’une boîte aux lettres.
 
 
     \[[Ensemble d’API : Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -210,13 +247,13 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'removeAsync(categories: string[], options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'removeAsync(categories: string[], options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: categories
       description: Catégories à supprimer de la liste principale de la boîte aux lettres.
       type: string[]
     - id: options
-      description: 'Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
+      description: 'Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
       description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->. Si la suppression des catégories échoue, `asyncResult.error` la propriété contient un code d’erreur.
@@ -224,10 +261,44 @@ methods:
     return:
       type: void
       description: ''
+- name: removeAsync(categories, callback)
+  uid: outlook!Office.MasterCategories#removeAsync:member(2)
+  package: outlook!
+  fullName: removeAsync(categories, callback)
+  summary: >-
+    Supprime des catégories de la liste principale d’une boîte aux lettres.
+
+
+    \[[Ensemble d’API : Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteMailbox`
+
+
+    **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**  : Rédiger ou Lire
+
+
+    **Erreurs**:
+
+
+    - `PermissionDenied`<!-- -->: l’utilisateur n’est pas autorisé à effectuer cette action.
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'removeAsync(categories: string[], callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: categories
+      description: Catégories à supprimer de la liste principale de la boîte aux lettres.
+      type: string[]
+    - id: callback
+      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->. Si la suppression des catégories échoue, `asyncResult.error` la propriété contient un code d’erreur.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
 metadata:
-  ms.openlocfilehash: 5b0fdf5ae6b4360f39ca2a006c1464a6d6353ae6
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: ef45e52d63886ca6cc0ae170262969832fae7d72
+  ms.sourcegitcommit: d0f7e3d564e90cdff464157440c36ad19fa526f0
   ms.translationtype: MT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51253355"
+  ms.lasthandoff: 04/09/2021
+  ms.locfileid: "51660329"
