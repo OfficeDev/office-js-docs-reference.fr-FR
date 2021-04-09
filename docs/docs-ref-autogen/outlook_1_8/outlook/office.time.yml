@@ -191,13 +191,13 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'setAsync(dateTime: Date, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'setAsync(dateTime: Date, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: dateTime
       description: Objet date-heure en temps universel coordonné (UTC).
       type: Date
     - id: options
-      description: 'Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
+      description: 'Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
       description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->. Si la définition de la date et de l’heure échoue, la propriété `asyncResult.error` contient un code d’erreur.
@@ -205,10 +205,53 @@ methods:
     return:
       type: void
       description: ''
+- name: setAsync(dateTime, callback)
+  uid: outlook!Office.Time#setAsync:member(2)
+  package: outlook!
+  fullName: setAsync(dateTime, callback)
+  summary: >-
+    Définit l’heure de début ou de fin d’un rendez-vous.
+
+
+    Si la méthode est appelée sur la propriété de début, la propriété est ajustée pour maintenir la durée du `setAsync` `end` rendez-vous comme précédemment définie. Si la méthode `setAsync` est appelée dans la propriété `end`, la durée du rendez-vous est étendue jusqu’à la nouvelle heure de fin.
+
+
+    La durée doit être exprimée au format UTC. Vous pouvez obtenir l’heure UTC correcte à l’aide de la méthode `convertToUtcClientTime`.
+
+
+    **Important**: dans le client Windows, vous ne pouvez pas utiliser cette fonction pour mettre à jour le début ou la fin d’une récurrence.
+
+
+    \[[Ensemble d’API : Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteItem`
+
+
+    **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: Composer
+
+
+    **Erreurs**:
+
+
+    - `InvalidEndTime`<!-- -->: l’heure de fin du rendez-vous se trouve avant l’heure de début du rendez-vous.
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'setAsync(dateTime: Date, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: dateTime
+      description: Objet date-heure en temps universel coordonné (UTC).
+      type: Date
+    - id: callback
+      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->. Si la définition de la date et de l’heure échoue, la propriété `asyncResult.error` contient un code d’erreur.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
 metadata:
-  ms.openlocfilehash: 5a3d71ca79bd9357f073d4175430343eadc697d1
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: 5e283e8dabe220dacaeebb63e68fe9ecc627f27a
+  ms.sourcegitcommit: d0f7e3d564e90cdff464157440c36ad19fa526f0
   ms.translationtype: MT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51352424"
+  ms.lasthandoff: 04/09/2021
+  ms.locfileid: "51659373"

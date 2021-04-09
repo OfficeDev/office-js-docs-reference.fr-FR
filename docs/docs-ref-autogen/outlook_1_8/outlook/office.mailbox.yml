@@ -37,13 +37,13 @@ properties:
     Contient les membres suivants :
 
 
-    - `hostName` (chaîne) : chaîne qui représente le nom de l’application hôte. Il doit avoir l’une des valeurs suivantes : `Outlook`<!-- -->, `OutlookWebApp`<!-- -->, `OutlookIOS`<!-- -->ou `OutlookAndroid`<!-- -->. **Remarque**: la valeur « Outlook » est renvoyée pour les clients Outlook sur ordinateur de bureau (c’est-à-dire, Windows et Mac).
+    - `hostName` (chaîne) : chaîne qui représente le nom de l’application hôte. Il doit être l’une des valeurs suivantes : `Outlook`<!-- -->, `OutlookWebApp`<!-- -->, `OutlookIOS`<!-- -->ou `OutlookAndroid`<!-- -->. **Remarque**: la valeur « Outlook » est renvoyée pour les clients Outlook sur ordinateur de bureau (c’est-à-dire, Windows et Mac).
 
 
     - `hostVersion` (chaîne) : chaîne qui représente la version de l’application hôte ou du Exchange Server (par exemple, « 15.0.468.0 »). Si le add-in de messagerie est en cours d’exécution dans Outlook sur les clients de bureau ou mobiles, la propriété renvoie la version de `hostVersion` l’application hôte, Outlook. Dans Outlook sur le web, la propriété renvoie la version du Exchange Server.
 
 
-    - `OWAView` ( ou chaîne) : une enum (ou littéral de chaîne) qui représente l’affichage actuel `MailboxEnums.OWAView` d’Outlook sur le web. Si l’application hôte n’est pas Outlook sur le web, l’accès à cette propriété entraîne l’indéfinies. Outlook sur le web dispose de trois vues (affichées lorsque l’écran est étroit, affichées lorsque l’écran est plus large et - affichées lorsque l’écran est large) qui correspondent à la largeur de l’écran et de la fenêtre, ainsi qu’au nombre de colonnes qui peuvent être `OneColumn` `TwoColumns` `ThreeColumns` affichées.
+    - `OWAView` ( ou chaîne) : une enum (ou littéral de chaîne) qui représente l’affichage actuel `MailboxEnums.OWAView` d’Outlook sur le web. Si l’application hôte n’est pas Outlook sur le web, l’accès à cette propriété entraîne la non-recherche. Outlook sur le web dispose de trois vues (affichées lorsque l’écran est étroit, affichées lorsque l’écran est plus large et - affichées lorsque l’écran est large) qui correspondent à la largeur de l’écran et de la fenêtre, ainsi qu’au nombre de colonnes qui peuvent être `OneColumn` `TwoColumns` `ThreeColumns` affichées.
 
 
     Plus d’informations se trouve [sous Office.Diagnostics](xref:outlook!Office.Diagnostics:interface)<!-- -->.
@@ -312,7 +312,7 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'addHandlerAsync(eventType: Office.EventType | string, handler: (type: Office.EventType) => void, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'addHandlerAsync(eventType: Office.EventType | string, handler: (type: Office.EventType) => void, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: eventType
       description: Événement qui doit appeler le gestionnaire.
@@ -321,8 +321,42 @@ methods:
       description: Fonction qui gère l’événement. Cette fonction doit accepter un seul paramètre, qui est un littéral d’objet. La propriété de type sur le paramètre correspondra au `eventType` paramètre passé à `addHandlerAsync`<!-- -->.
       type: '(type: <xref uid="office!Office.EventType:enum" />) =&gt; void'
     - id: options
-      description: Facultatif. Fournit une option de conservation des données de contexte de n’importe quel type, sans modification, à utiliser dans un rappel.
+      description: Fournit une option de conservation des données de contexte de n’importe quel type, sans modification, à utiliser dans un rappel.
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: addHandlerAsync(eventType, handler, callback)
+  uid: outlook!Office.Mailbox#addHandlerAsync:member(2)
+  package: outlook!
+  fullName: addHandlerAsync(eventType, handler, callback)
+  summary: >-
+    ajoute un gestionnaire d’événements pour un événement pris en charge. **Remarque**: les événements sont disponibles uniquement avec le volet Des tâches.
+
+
+    Reportez-vous à la section Événements du modèle objet de boîte [aux](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.8/office.context.mailbox#events) lettres pour les événements pris en charge.
+
+
+    \[[Ensemble d’API : Mailbox 1.5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+    **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**  : Rédiger ou Lire
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'addHandlerAsync(eventType: Office.EventType | string, handler: (type: Office.EventType) => void, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: eventType
+      description: Événement qui doit appeler le gestionnaire.
+      type: <xref uid="office!Office.EventType:enum" /> | string
+    - id: handler
+      description: Fonction qui gère l’événement. Cette fonction doit accepter un seul paramètre, qui est un littéral d’objet. La propriété de type sur le paramètre correspondra au `eventType` paramètre passé à `addHandlerAsync`<!-- -->.
+      type: '(type: <xref uid="office!Office.EventType:enum" />) =&gt; void'
     - id: callback
       description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
@@ -402,7 +436,7 @@ methods:
     Les dates et heures utilisées par une application de messagerie pour les clients Outlook sur le web ou de bureau peuvent utiliser différents fuseaux horaires. Outlook utilise le fuseau horaire de l’ordinateur client ; Outlook sur le web utilise le fuseau horaire du Centre d’administration Exchange (EAC). Vous devez gérer les valeurs de date et d’heure afin que les valeurs que vous affichez sur l’interface utilisateur soient toujours cohérentes avec le fuseau horaire attendu par l’utilisateur.
 
 
-    Si l’application de messagerie s’exécute dans les clients Outlook sur ordinateur de bureau, la méthode retourne un objet de dictionnaire avec les valeurs définies sur le fuseau horaire de `convertToLocalClientTime` l’ordinateur client. Si l’application de messagerie est en cours d’exécution dans Outlook sur le web, la méthode retourne un objet de dictionnaire avec les valeurs définies sur le fuseau horaire spécifié dans `convertToLocalClientTime` leAC.
+    Si l’application de messagerie s’exécute dans les clients Outlook sur ordinateur de bureau, la méthode retourne un objet de dictionnaire avec les valeurs définies sur le fuseau horaire de `convertToLocalClientTime` l’ordinateur client. Si l’application de messagerie s’exécute dans Outlook sur le web, la méthode retourne un objet de dictionnaire dont les valeurs sont définies sur le fuseau horaire spécifié dans `convertToLocalClientTime` leAC.
   remarks: >-
     **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
@@ -751,7 +785,7 @@ methods:
         `attachments.url`<!-- -->: utilisé uniquement si le type est définie sur fichier. Il s’agit de l’URI de l’emplacement du fichier.
 
 
-        `attachments.isInline`<!-- -->: utilisé uniquement si le type est définie sur fichier. Si la valeur est true, indique que la pièce jointe s’affiche en ligne dans le corps du message et qu’elle ne doit pas être affichée dans la liste des pièces jointes.
+        `attachments.isInline`<!-- -->: utilisé uniquement si le type est définie sur fichier. Si la valeur est true, indique que la pièce jointe sera affichée en ligne dans le corps du message et ne doit pas être affichée dans la liste des pièces jointes.
 
 
         `attachments.itemId`<!-- -->: utilisé uniquement si le type est définie sur l’élément. ID d’élément EWS du message électronique existant que vous souhaitez joindre au nouveau message. Il s’agit d’une chaîne comportant un maximum de 100 caractères.
@@ -929,7 +963,7 @@ methods:
     **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**  : Rédiger ou Lire
 
 
-    La méthode renvoie un jeton que vous pouvez utiliser pour identifier et authentifier le module et l’utilisateur auprès `getUserIdentityTokenAsync` [d’un système tiers](https://docs.microsoft.com/office/dev/add-ins/outlook/authentication)<!-- -->.
+    La `getUserIdentityTokenAsync` méthode renvoie un jeton que vous pouvez utiliser pour identifier et authentifier le module et l’utilisateur avec [un système tiers](https://docs.microsoft.com/office/dev/add-ins/outlook/authentication)<!-- -->.
 
 
     **Erreurs**:
@@ -1156,7 +1190,7 @@ methods:
     Supprime les gestionnaires d’événements pour un type d’événement pris en charge. **Remarque**: les événements sont disponibles uniquement avec le volet Des tâches.
 
 
-    Reportez-vous à la section Événements du modèle objet [de](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.8/office.context.mailbox#events) boîte aux lettres pour les événements pris en charge.
+    Reportez-vous à la section Événements du modèle objet de boîte [aux](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.8/office.context.mailbox#events) lettres pour les événements pris en charge.
 
 
     \[[Ensemble d’API : Mailbox 1.5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -1168,13 +1202,13 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'removeHandlerAsync(eventType: Office.EventType | string, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'removeHandlerAsync(eventType: Office.EventType | string, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: eventType
       description: Événement qui doit révoquer le gestionnaire.
       type: <xref uid="office!Office.EventType:enum" /> | string
     - id: options
-      description: Facultatif. Fournit une option pour conserver les données de contexte de n’importe quel type, inchangées, à utiliser dans un rappel.
+      description: Fournit une option de conservation des données de contexte de n’importe quel type, sans modification, à utiliser dans un rappel.
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
       description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->.
@@ -1182,10 +1216,41 @@ methods:
     return:
       type: void
       description: ''
+- name: removeHandlerAsync(eventType, callback)
+  uid: outlook!Office.Mailbox#removeHandlerAsync:member(2)
+  package: outlook!
+  fullName: removeHandlerAsync(eventType, callback)
+  summary: >-
+    Supprime les gestionnaires d’événements pour un type d’événement pris en charge. **Remarque**: les événements sont disponibles uniquement avec le volet Des tâches.
+
+
+    Reportez-vous à la section Événements du modèle objet de boîte [aux](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.8/office.context.mailbox#events) lettres pour les événements pris en charge.
+
+
+    \[[Ensemble d’API : Mailbox 1.5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+    **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**  : Rédiger ou Lire
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'removeHandlerAsync(eventType: Office.EventType | string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: eventType
+      description: Événement qui doit révoquer le gestionnaire.
+      type: <xref uid="office!Office.EventType:enum" /> | string
+    - id: callback
+      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
 metadata:
-  ms.openlocfilehash: 9188c0dc304a02343e4af7d4b12da2728320557f
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: 09caca77a16f7945a481687320338468b271b169
+  ms.sourcegitcommit: d0f7e3d564e90cdff464157440c36ad19fa526f0
   ms.translationtype: MT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51291686"
+  ms.lasthandoff: 04/09/2021
+  ms.locfileid: "51659753"
