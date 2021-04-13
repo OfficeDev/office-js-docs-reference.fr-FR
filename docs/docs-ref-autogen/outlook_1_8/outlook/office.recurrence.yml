@@ -147,11 +147,39 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'getAsync(options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<Recurrence>) => void): void;'
+    content: 'getAsync(options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<Recurrence>) => void): void;'
     parameters:
     - id: options
-      description: 'Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
+      description: 'Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre `callback` est appelée avec un seul paramètre, `asyncResult`<!-- -->, qui est un `Office.AsyncResult` objet. La `value` propriété du résultat est un `Recurrence` objet.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="outlook!Office.Recurrence:interface" />&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: getAsync(callback)
+  uid: outlook!Office.Recurrence#getAsync:member(2)
+  package: outlook!
+  fullName: getAsync(callback)
+  summary: >-
+    Renvoie l’objet de récurrence actuel d’une série de rendez-vous.
+
+
+    Cette méthode renvoie l’objet `Recurrence` entier de la série de rendez-vous.
+
+
+    \[ [Jeu d’API : Mailbox 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]
+  remarks: >-
+    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+    **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**  : Rédiger ou Lire
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getAsync(callback?: (asyncResult: Office.AsyncResult<Recurrence>) => void): void;'
+    parameters:
     - id: callback
       description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre `callback` est appelée avec un seul paramètre, `asyncResult`<!-- -->, qui est un `Office.AsyncResult` objet. La `value` propriété du résultat est un `Recurrence` objet.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="outlook!Office.Recurrence:interface" />&gt;) =&gt; void'
@@ -242,13 +270,13 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'setAsync(recurrencePattern: Recurrence, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'setAsync(recurrencePattern: Recurrence, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: recurrencePattern
       description: Objet de récurrence.
       type: <xref uid="outlook!Office.Recurrence:interface" />
     - id: options
-      description: 'Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
+      description: 'Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
       description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre `callback` est appelée avec un seul paramètre, `asyncResult`<!-- -->, qui est un `Office.AsyncResult` objet.
@@ -256,10 +284,47 @@ methods:
     return:
       type: void
       description: ''
+- name: setAsync(recurrencePattern, callback)
+  uid: outlook!Office.Recurrence#setAsync:member(2)
+  package: outlook!
+  fullName: setAsync(recurrencePattern, callback)
+  summary: >-
+    Définit la modèle de récurrence d’une série de rendez-vous.
+
+
+    **Remarque**: `setAsync` ne doit être disponible que pour les éléments de série et non pour les éléments d’instance.
+
+
+    \[ [Jeu d’API : Mailbox 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]
+  remarks: >-
+    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteItem`
+
+
+    **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: Composer
+
+
+    **Erreurs**:
+
+
+    - `InvalidEndTime`<!-- -->: l’heure de fin du rendez-vous est avant son heure de début.
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'setAsync(recurrencePattern: Recurrence, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: recurrencePattern
+      description: Objet de récurrence.
+      type: <xref uid="outlook!Office.Recurrence:interface" />
+    - id: callback
+      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre `callback` est appelée avec un seul paramètre, `asyncResult`<!-- -->, qui est un `Office.AsyncResult` objet.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
 metadata:
-  ms.openlocfilehash: 057e373f3bd2b5d83dfcec24de0cb548ac6c1fc7
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: 5664a1b416a2bdd23f95864cae287f5ec69d7d07
+  ms.sourcegitcommit: d0f7e3d564e90cdff464157440c36ad19fa526f0
   ms.translationtype: MT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51319630"
+  ms.lasthandoff: 04/09/2021
+  ms.locfileid: "51658825"

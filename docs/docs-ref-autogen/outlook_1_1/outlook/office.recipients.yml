@@ -96,14 +96,72 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'addAsync(recipients: (string | EmailUser | EmailAddressDetails)[], options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'addAsync(recipients: (string | EmailUser | EmailAddressDetails)[], options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: recipients
       description: Destinataires à ajouter à la liste des destinataires.
       type: (string | <xref uid="outlook!Office.EmailUser:interface" /> | <xref uid="outlook!Office.EmailAddressDetails:interface" />)[]
     - id: options
-      description: 'Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
+      description: 'Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->. En cas d’échec de l’ajout des destinataires, la propriété `asyncResult.error` contient un code d’erreur.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: addAsync(recipients, callback)
+  uid: outlook!Office.Recipients#addAsync:member(2)
+  package: outlook!
+  fullName: addAsync(recipients, callback)
+  summary: >-
+    Ajoute une liste de destinataires aux destinataires existants d’un rendez-vous ou d’un message.
+
+
+    Le paramètre recipients peut être un tableau de l’un des paramètres suivants :
+
+
+    - Chaînes contenant des adresses de messagerie SMTP
+
+
+    - [Objets EmailUser](xref:outlook!Office.EmailUser:interface)
+
+
+    - [Objets EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface)
+
+
+    Nombre maximal qui peut être ajouté :
+
+
+    - Windows : 100 destinataires. **Remarque**: peut appeler l’API à plusieurs reprises, mais le nombre maximal de destinataires dans le champ cible sur l’élément est de 500 destinataires.
+
+
+    - Mac, navigateur web : 100 destinataires
+
+
+    - Autre : aucune limite
+
+
+    \[[Ensemble d’API : Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteItem`
+
+
+    **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: Composer
+
+
+    **Erreurs**:
+
+
+    - `NumberOfRecipientsExceeded`<!-- -->: le nombre de destinataires a dépassé 100 entrées.
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'addAsync(recipients: (string | EmailUser | EmailAddressDetails)[], callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: recipients
+      description: Destinataires à ajouter à la liste des destinataires.
+      type: (string | <xref uid="outlook!Office.EmailUser:interface" /> | <xref uid="outlook!Office.EmailAddressDetails:interface" />)[]
     - id: callback
       description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->. En cas d’échec de l’ajout des destinataires, la propriété `asyncResult.error` contient un code d’erreur.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
@@ -534,9 +592,9 @@ methods:
       type: void
       description: ''
 metadata:
-  ms.openlocfilehash: 6c556fbfaee8862a8db41b08606f9b82ffdf9a86
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: 4603e7c31afe0a9a0ca208068e379a64fb5af4b0
+  ms.sourcegitcommit: d0f7e3d564e90cdff464157440c36ad19fa526f0
   ms.translationtype: MT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51292309"
+  ms.lasthandoff: 04/09/2021
+  ms.locfileid: "51660497"
