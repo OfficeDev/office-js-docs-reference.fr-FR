@@ -69,14 +69,48 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'addAsync(locationIdentifiers: LocationIdentifier[], options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'addAsync(locationIdentifiers: LocationIdentifier[], options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: locationIdentifiers
       description: Emplacements à ajouter à la liste actuelle des emplacements.
       type: <xref uid="outlook!Office.LocationIdentifier:interface" />[]
     - id: options
-      description: 'Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
+      description: 'Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre `callback` est appelée avec un seul paramètre, `asyncResult`<!-- -->, qui est un `Office.AsyncResult` objet. Vérifiez la `status` propriété pour déterminer si `asyncResult` l’appel a réussi.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: addAsync(locationIdentifiers, callback)
+  uid: outlook!Office.EnhancedLocation#addAsync:member(2)
+  package: outlook!
+  fullName: addAsync(locationIdentifiers, callback)
+  summary: >-
+    S’ajoute à l’ensemble des emplacements associés au rendez-vous.
+
+
+    \[[Ensemble d’API : Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteItem`
+
+
+    **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: Composer
+
+
+    **Erreurs**:
+
+
+    - `InvalidFormatError`<!-- -->: le format de l’objet de données spécifié n’est pas valide.
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'addAsync(locationIdentifiers: LocationIdentifier[], callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: locationIdentifiers
+      description: Emplacements à ajouter à la liste actuelle des emplacements.
+      type: <xref uid="outlook!Office.LocationIdentifier:interface" />[]
     - id: callback
       description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre `callback` est appelée avec un seul paramètre, `asyncResult`<!-- -->, qui est un `Office.AsyncResult` objet. Vérifiez la `status` propriété pour déterminer si `asyncResult` l’appel a réussi.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
@@ -128,11 +162,36 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'getAsync(options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<LocationDetails[]>) => void): void;'
+    content: 'getAsync(options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<LocationDetails[]>) => void): void;'
     parameters:
     - id: options
-      description: 'Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
+      description: 'Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre `callback` est appelée avec un seul paramètre, `asyncResult`<!-- -->, qui est un `Office.AsyncResult` objet.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="outlook!Office.LocationDetails:interface" />[]&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: getAsync(callback)
+  uid: outlook!Office.EnhancedLocation#getAsync:member(2)
+  package: outlook!
+  fullName: getAsync(callback)
+  summary: >-
+    Obtient l’ensemble des emplacements associés au rendez-vous.
+
+
+    \[[Ensemble d’API : Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+    **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**  : Rédiger ou Lire
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getAsync(callback?: (asyncResult: Office.AsyncResult<LocationDetails[]>) => void): void;'
+    parameters:
     - id: callback
       description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre `callback` est appelée avec un seul paramètre, `asyncResult`<!-- -->, qui est un `Office.AsyncResult` objet.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="outlook!Office.LocationDetails:interface" />[]&gt;) =&gt; void'
@@ -188,13 +247,13 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'removeAsync(locationIdentifiers: LocationIdentifier[], options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'removeAsync(locationIdentifiers: LocationIdentifier[], options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: locationIdentifiers
       description: Emplacements à supprimer de la liste actuelle des emplacements.
       type: <xref uid="outlook!Office.LocationIdentifier:interface" />[]
     - id: options
-      description: 'Facultatif. Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
+      description: 'Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
       description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre `callback` est appelée avec un seul paramètre, `asyncResult`<!-- -->, qui est un `Office.AsyncResult` objet. Vérifiez la `status` propriété pour déterminer si `asyncResult` l’appel a réussi.
@@ -202,10 +261,41 @@ methods:
     return:
       type: void
       description: ''
+- name: removeAsync(locationIdentifiers, callback)
+  uid: outlook!Office.EnhancedLocation#removeAsync:member(2)
+  package: outlook!
+  fullName: removeAsync(locationIdentifiers, callback)
+  summary: >-
+    Supprime l’ensemble des emplacements associés au rendez-vous.
+
+
+    S’il existe plusieurs emplacements du même nom, tous les emplacements correspondants seront supprimés même si un seul emplacement a été spécifié dans `locationIdentifiers`<!-- -->.
+
+
+    \[[Ensemble d’API : Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteItem`
+
+
+    **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: Composer
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'removeAsync(locationIdentifiers: LocationIdentifier[], callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: locationIdentifiers
+      description: Emplacements à supprimer de la liste actuelle des emplacements.
+      type: <xref uid="outlook!Office.LocationIdentifier:interface" />[]
+    - id: callback
+      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre `callback` est appelée avec un seul paramètre, `asyncResult`<!-- -->, qui est un `Office.AsyncResult` objet. Vérifiez la `status` propriété pour déterminer si `asyncResult` l’appel a réussi.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
 metadata:
-  ms.openlocfilehash: 7e3f39341eefa5d35b23aa503d41bab76a1c58fa
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: 4e00bd0375955a9a15641c8e008f1e1eac81d1ae
+  ms.sourcegitcommit: d0f7e3d564e90cdff464157440c36ad19fa526f0
   ms.translationtype: MT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51234819"
+  ms.lasthandoff: 04/09/2021
+  ms.locfileid: "51659542"
