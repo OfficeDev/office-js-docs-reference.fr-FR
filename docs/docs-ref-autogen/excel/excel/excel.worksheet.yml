@@ -112,7 +112,7 @@ properties:
   package: excel!
   fullName: freezePanes
   summary: >-
-    Obtient un objet qui peut être utilisé pour manipuler des volets figés dans la feuille de calcul.
+    Obtient un objet qui peut être utilisé pour manipuler des volets figés sur la feuille de calcul.
 
 
     \[[Ensemble d'API : ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -523,7 +523,7 @@ methods:
       description: Emplacement dans le manuel où placer la feuille de calcul nouvellement créée. La valeur par défaut est « None », qui insère la feuille de calcul au début de la feuille de calcul.
       type: <xref uid="excel!Excel.WorksheetPositionType:enum" />
     - id: relativeTo
-      description: Feuille de calcul existante qui détermine la position de la feuille de calcul nouvellement créée. Cette demande est nécessaire uniquement `positionType` si la demande est « Before » (avant) ou « After » (après).
+      description: Feuille de calcul existante qui détermine la position de la feuille de calcul nouvellement créée. Cette demande est nécessaire uniquement `positionType` si « Before » (avant) ou « After » (après).
       type: <xref uid="excel!Excel.Worksheet:class" />
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -582,7 +582,7 @@ methods:
   package: excel!
   fullName: delete()
   summary: >-
-    Supprime la feuille de calcul du classeur. Notez que si la visibilité de la feuille de calcul est définie sur « VeryHidden », l'opération de suppression échoue avec une `InvalidOperation` exception. Vous devez d'abord modifier sa visibilité pour la rendre masquée ou visible avant de la supprimer.
+    Supprime la feuille de calcul du classeur. Notez que si la visibilité de la feuille de calcul est définie sur « VeryHidden », l'opération de suppression échoue avec une `InvalidOperation` exception. Vous devez d'abord modifier sa visibilité pour qu'elle soit masquée ou visible avant de la supprimer.
 
 
     \[[Ensemble d'API : ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -617,7 +617,7 @@ methods:
       type: <xref uid="excel!Excel.WorksheetSearchCriteria:interface" />
     return:
       type: <xref uid="excel!Excel.RangeAreas:class" />
-      description: Objet, `RangeAreas` comprenant une ou plusieurs plages rectangulaires, qui correspond aux critères de recherche. Si aucune cellule ne répond à ce critère, une erreur `ItemNotFound` est lancée.
+      description: Objet, comprenant une ou `RangeAreas` plusieurs plages rectangulaires, qui correspond aux critères de recherche. Si aucune cellule ne répond à ce critère, une erreur `ItemNotFound` est lancée.
 - name: findAllOrNullObject(text, criteria)
   uid: excel!Excel.Worksheet#findAllOrNullObject:member(1)
   package: excel!
@@ -642,7 +642,7 @@ methods:
     return:
       type: <xref uid="excel!Excel.RangeAreas:class" />
       description: >-
-        Objet, `RangeAreas` comprenant une ou plusieurs plages rectangulaires, qui correspond aux critères de recherche. S'il n'existe aucune correspondance, cette fonction retourne un objet dont `isNullObject` la propriété est définie sur `true`<!-- -->. Pour plus d'informations, [ \* voir méthodes et propriétés OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
+        Objet, comprenant une ou `RangeAreas` plusieurs plages rectangulaires, qui correspond aux critères de recherche. S'il n'existe aucune correspondance, cette fonction retourne un objet dont `isNullObject` la propriété est définie sur `true`<!-- -->. Pour plus d'informations, [ \* voir méthodes et propriétés OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
         #### <a name="examples"></a>Exemples
@@ -1189,6 +1189,7 @@ events:
     content: 'readonly onFormulaChanged: OfficeExtension.EventHandlers<Excel.WorksheetFormulaChangedEventArgs>;'
     return:
       type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorksheetFormulaChangedEventArgs:interface" />&gt;
+      description: "\n\n#### <a name=\"examples\"></a>Exemples\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/85-preview-apis/events-formula-changed.yaml\nawait Excel.run(async (context) => {\n  // Retrieve the worksheet named \"Sample\".\n  let sheet = context.workbook.worksheets.getItem(\"Sample\");\n  \n  // Register the formula changed event handler for this worksheet.\n  sheet.onFormulaChanged.add(formulaChangeHandler);\n  await context.sync();\n  \n  console.log(\"Registered a formula changed event handler for this worksheet.\");\n});\n```\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/85-preview-apis/events-formula-changed.yaml\nasync function formulaChangeHandler(event: Excel.WorksheetFormulaChangedEventArgs) {\n  await Excel.run(async (context) => {\n    // Retrieve details about the formula change event.\n    const cellAddress = event.formulaDetails[0].cellAddress;\n    const previousFormula = event.formulaDetails[0].previousFormula;\n    const source = event.source;\n    \n    // Print out the change event details.\n    console.log(\n      `The formula in cell ${cellAddress} changed. \n      The previous formula was: ${previousFormula}. \n      The source of the change was: ${source}.`\n    );\n  });\n}\n```"
 - name: onRowHiddenChanged
   uid: excel!Excel.Worksheet#onRowHiddenChanged:member
   package: excel!
@@ -1248,7 +1249,7 @@ events:
     Se produit lorsqu'une action clic gauche/clic se produit dans la feuille de calcul. Cet événement ne sera pas déclenché lorsque vous cliquerez dans les cas suivants :
 
 
-    - L'utilisateur fait glisser la souris pour une sélection multiple.
+    - L'utilisateur fait glisser la souris pour la sélection multiple.
 
 
     - L'utilisateur sélectionne une cellule dans le mode lorsque des arguments de cellule sont sélectionnés pour les références de formule.
@@ -1265,9 +1266,9 @@ events:
       description: "\n\n#### <a name=\"examples\"></a>範例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/30-events/event-worksheet-single-click.yaml\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getActiveWorksheet();\n    sheet.onSingleClicked.add((event) => {\n        return Excel.run((context) => {\n            console.log(`Click detected at ${event.address} (pixel offset from upper-left cell corner: ${event.offsetX}, ${event.offsetY})`);\n            return context.sync();\n        });\n    });\n\n    console.log(\"The worksheet click handler is registered.\");\n\n    await context.sync();\n});\n```"
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: bbc041b91f38f713252bf156ceedd9f74813521b
-  ms.sourcegitcommit: 3b6cd632df196ae7bf2a1d192e2b60edc82b9e9c
+  ms.openlocfilehash: 5d97e20ff1bff2aad1e79498d42a23e42d92ea0a
+  ms.sourcegitcommit: f7c5207ef96c4f6034fcb1b48e1b0036abf4fccc
   ms.translationtype: MT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 04/14/2021
-  ms.locfileid: "51754080"
+  ms.lasthandoff: 04/16/2021
+  ms.locfileid: "51877199"
