@@ -60,7 +60,7 @@ functions:
     Crée et ouvre une nouvelle présentation. Éventuellement, la présentation peut être prérepxée avec un fichier .pptx codé en base 64.
 
 
-    \[[Ensemble d’API : PowerPointApi 1.1](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets)\]
+    \[[Ensemble d'API : PowerPointApi 1.1](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -76,61 +76,61 @@ functions:
 - name: PowerPoint.run(batch)
   uid: powerpoint!PowerPoint.run:function(1)
   package: powerpoint!
-  summary: Exécute un script de lot qui effectue des actions sur le modèle objet PowerPoint, à l’aide d’un nouveau RequestContext. Lorsque la promesse est résolue, tous les objets suivis qui ont été automatiquement alloués lors de l’exécution sont libérés.
+  summary: Exécute un script de lot qui effectue des actions sur le modèle objet PowerPoint, à l'aide d'un nouveau RequestContext. Lorsque la promesse est résolue, tous les objets suivis qui ont été automatiquement alloués lors de l'exécution sont libérés.
   remarks: ''
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'export function run<T>(batch: (context: PowerPoint.RequestContext) => OfficeExtension.IPromise<T>): OfficeExtension.IPromise<T>;'
+    content: 'export function run<T>(batch: (context: PowerPoint.RequestContext) => Promise<T>): Promise<T>;'
     parameters:
     - id: batch
-      description: Fonction qui prend un RequestContext et renvoie une promesse (généralement, le résultat de « context.sync() »). Le paramètre de contexte facilite les demandes à l’application PowerPoint. Étant donné que le add-in Office et l’application PowerPoint s’exécutent dans deux processus différents, RequestContext est nécessaire pour accéder au modèle objet PowerPoint à partir du add-in.
-      type: '(context: <xref uid="powerpoint!PowerPoint.RequestContext:class" />) =&gt; <xref uid="office!OfficeExtension.IPromise:type" />&lt;T&gt;'
+      description: Fonction qui prend un RequestContext et renvoie une promesse (généralement, le résultat de « context.sync() »). Le paramètre de contexte facilite les demandes à l'application PowerPoint. Étant donné que le add-in Office et l'application PowerPoint s'exécutent dans deux processus différents, RequestContext est nécessaire pour accéder au modèle objet PowerPoint à partir du add-in.
+      type: '(context: <xref uid="powerpoint!PowerPoint.RequestContext:class" />) =&gt; Promise&lt;T&gt;'
     return:
-      type: <xref uid="office!OfficeExtension.IPromise:type" />&lt;T&gt;
+      type: Promise&lt;T&gt;
       description: ''
 - name: PowerPoint.run(object, batch)
   uid: powerpoint!PowerPoint.run:function(2)
   package: powerpoint!
-  summary: Exécute un script de lot qui effectue des actions sur le modèle objet PowerPoint, à l’aide de RequestContext d’un objet API précédemment créé. Lorsque la promesse est résolue, tous les objets suivis qui ont été automatiquement alloués lors de l’exécution sont libérés.
+  summary: Exécute un script de lot qui effectue des actions sur le modèle objet PowerPoint, à l'aide de RequestContext d'un objet API précédemment créé. Lorsque la promesse est résolue, tous les objets suivis qui ont été automatiquement alloués lors de l'exécution sont libérés.
   remarks: ''
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'export function run<T>(object: OfficeExtension.ClientObject, batch: (context: PowerPoint.RequestContext) => OfficeExtension.IPromise<T>): OfficeExtension.IPromise<T>;'
+    content: 'export function run<T>(object: OfficeExtension.ClientObject, batch: (context: PowerPoint.RequestContext) => Promise<T>): Promise<T>;'
     parameters:
     - id: object
-      description: Objet API créé précédemment. Le lot utilise le même RequestContext que l’objet transmis, ce qui signifie que toutes les modifications appliquées à l’objet seront reprises par « context.sync() ».
+      description: Objet API précédemment créé. Le lot utilise le même RequestContext que l'objet transmis, ce qui signifie que toutes les modifications appliquées à l'objet seront reprises par « context.sync() ».
       type: <xref uid="office!OfficeExtension.ClientObject:class" />
     - id: batch
-      description: Fonction qui prend un RequestContext et renvoie une promesse (généralement, le résultat de « context.sync() »). Le paramètre de contexte facilite les demandes à l’application PowerPoint. Étant donné que le add-in Office et l’application PowerPoint s’exécutent dans deux processus différents, RequestContext est nécessaire pour accéder au modèle objet PowerPoint à partir du add-in.
-      type: '(context: <xref uid="powerpoint!PowerPoint.RequestContext:class" />) =&gt; <xref uid="office!OfficeExtension.IPromise:type" />&lt;T&gt;'
+      description: Fonction qui prend un RequestContext et renvoie une promesse (généralement, le résultat de « context.sync() »). Le paramètre de contexte facilite les demandes à l'application PowerPoint. Étant donné que le add-in Office et l'application PowerPoint s'exécutent dans deux processus différents, RequestContext est nécessaire pour accéder au modèle objet PowerPoint à partir du add-in.
+      type: '(context: <xref uid="powerpoint!PowerPoint.RequestContext:class" />) =&gt; Promise&lt;T&gt;'
     return:
-      type: <xref uid="office!OfficeExtension.IPromise:type" />&lt;T&gt;
+      type: Promise&lt;T&gt;
       description: ''
 - name: PowerPoint.run(objects, batch)
   uid: powerpoint!PowerPoint.run:function(3)
   package: powerpoint!
-  summary: Exécute un script de lot qui effectue des actions sur le modèle objet PowerPoint, à l’aide de RequestContext des objets API précédemment créés.
+  summary: Exécute un script de lot qui effectue des actions sur le modèle objet PowerPoint, à l'aide du RequestContext des objets API précédemment créés.
   remarks: ''
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'export function run<T>(objects: OfficeExtension.ClientObject[], batch: (context: PowerPoint.RequestContext) => OfficeExtension.IPromise<T>): OfficeExtension.IPromise<T>;'
+    content: 'export function run<T>(objects: OfficeExtension.ClientObject[], batch: (context: PowerPoint.RequestContext) => Promise<T>): Promise<T>;'
     parameters:
     - id: objects
-      description: Tableau d’objets API précédemment créés. Le tableau est validé pour s’assurer que tous les objets partagent le même contexte. Le lot utilisera ce requestcontext partagé, ce qui signifie que les modifications appliquées à ces objets seront reprises par « context.sync() ».
+      description: Tableau d'objets API précédemment créés. Le tableau est validé pour s'assurer que tous les objets partagent le même contexte. Le lot utilise ce requestcontext partagé, ce qui signifie que toutes les modifications appliquées à ces objets seront reprises par « context.sync() ».
       type: <xref uid="office!OfficeExtension.ClientObject:class" />[]
     - id: batch
       description: Fonction qui prend un RequestContext et renvoie une promesse (généralement, le résultat de « context.sync() »). Le paramètre de contexte facilite les demandes à l’application PowerPoint. Étant donné que le add-in Office et l’application PowerPoint s’exécutent dans deux processus différents, RequestContext est nécessaire pour accéder au modèle objet PowerPoint à partir du add-in.
-      type: '(context: <xref uid="powerpoint!PowerPoint.RequestContext:class" />) =&gt; <xref uid="office!OfficeExtension.IPromise:type" />&lt;T&gt;'
+      type: '(context: <xref uid="powerpoint!PowerPoint.RequestContext:class" />) =&gt; Promise&lt;T&gt;'
     return:
-      type: <xref uid="office!OfficeExtension.IPromise:type" />&lt;T&gt;
+      type: Promise&lt;T&gt;
       description: ''
 metadata:
-  ms.openlocfilehash: cf6addd9d6a30ac10746ef3da8213532905cc74a
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: 18bc703babfa8f1610f5ea6f2d85f717b5337d07
+  ms.sourcegitcommit: f7c5207ef96c4f6034fcb1b48e1b0036abf4fccc
   ms.translationtype: MT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51291231"
+  ms.lasthandoff: 04/16/2021
+  ms.locfileid: "51877317"
