@@ -4,10 +4,10 @@ uid: excel!Excel.IdentityCollection:class
 package: excel!
 fullName: Excel.IdentityCollection
 summary: >-
-  Représente une collection d’identités utilisateur.
+  Représente une collection d'identités d'utilisateurs.
 
 
-  \[[Ensemble d’API : ExcelApi BÊTA (PRÉVISUALISATION UNIQUEMENT)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  \[[Ensemble d'API : ExcelApi BÊTA (PRÉVISUALISATION UNIQUEMENT)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
 remarks: ''
 isPreview: true
 isDeprecated: false
@@ -17,7 +17,7 @@ properties:
   uid: excel!Excel.IdentityCollection#context:member
   package: excel!
   fullName: context
-  summary: Contexte de demande associé à l’objet. Cela connecte le processus du add-in au processus de l’application hôte Office.
+  summary: Contexte de demande associé à l'objet. Cela connecte le processus du add-in au processus de l'application hôte Office.
   remarks: ''
   isPreview: true
   isDeprecated: false
@@ -25,16 +25,28 @@ properties:
     content: 'context: RequestContext;'
     return:
       type: <xref uid="excel!Excel.RequestContext:class" />
+- name: items
+  uid: excel!Excel.IdentityCollection#items:member
+  package: excel!
+  fullName: items
+  summary: Obtient l’élément enfant chargé dans cette collection de sites.
+  remarks: ''
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'readonly items: Excel.IdentityEntity[];'
+    return:
+      type: <xref uid="excel!Excel.IdentityEntity:class" />[]
 methods:
 - name: add(assignee)
   uid: excel!Excel.IdentityCollection#add:member(1)
   package: excel!
   fullName: add(assignee)
   summary: >-
-    Ajoute une identité d’utilisateur à la collection.
+    Ajoute une identité d'utilisateur à la collection.
 
 
-    \[[Ensemble d’API : ExcelApi BÊTA (PRÉVISUALISATION UNIQUEMENT)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d'API : ExcelApi BÊTA (PRÉVISUALISATION UNIQUEMENT)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: true
   isDeprecated: false
@@ -55,7 +67,7 @@ methods:
     Supprime toutes les identités utilisateur de la collection.
 
 
-    \[[Ensemble d’API : ExcelApi BÊTA (PRÉVISUALISATION UNIQUEMENT)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d'API : ExcelApi BÊTA (PRÉVISUALISATION UNIQUEMENT)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: true
   isDeprecated: false
@@ -72,7 +84,7 @@ methods:
     Obtient le nombre d'éléments dans la collection.
 
 
-    \[[Ensemble d’API : ExcelApi BÊTA (PRÉVISUALISATION UNIQUEMENT)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d'API : ExcelApi BÊTA (PRÉVISUALISATION UNIQUEMENT)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: true
   isDeprecated: false
@@ -86,10 +98,10 @@ methods:
   package: excel!
   fullName: getItemAt(index)
   summary: >-
-    Obtient une identité d’utilisateur de document à l’aide de son index dans la collection.
+    Obtient une identité d'utilisateur de document à l'aide de son index dans la collection.
 
 
-    \[[Ensemble d’API : ExcelApi BÊTA (PRÉVISUALISATION UNIQUEMENT)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d'API : ExcelApi BÊTA (PRÉVISUALISATION UNIQUEMENT)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: true
   isDeprecated: false
@@ -97,20 +109,71 @@ methods:
     content: 'getItemAt(index: number): OfficeExtension.ClientResult<Excel.Identity>;'
     parameters:
     - id: index
-      description: Les éléments de la collection d’identités d’utilisateur de document n’ont pas un ordre particulier.
+      description: Les éléments de la collection d'identités d'utilisateur de document n'ont pas un ordre particulier.
       type: number
     return:
       type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;<xref uid="excel!Excel.Identity:interface" />&gt;
-      description: Identité de l’utilisateur du document à l’index donné.
+      description: Identité de l'utilisateur du document à l'index donné.
+- name: load(options)
+  uid: excel!Excel.IdentityCollection#load:member(1)
+  package: excel!
+  fullName: load(options)
+  summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez contacter `context.sync()` avant de lire les propriétés.
+  remarks: ''
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'load(options?: Excel.Interfaces.IdentityCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.IdentityCollection;'
+    parameters:
+    - id: options
+      description: Fournit des options pour lesquelles les propriétés de l'objet à charger.
+      type: <xref uid="excel!Excel.Interfaces.IdentityCollectionLoadOptions:interface" /> & <xref uid="excel!Excel.Interfaces.CollectionLoadOptions:interface" />
+    return:
+      type: <xref uid="excel!Excel.IdentityCollection:class" />
+      description: ''
+- name: load(propertyNames)
+  uid: excel!Excel.IdentityCollection#load:member(2)
+  package: excel!
+  fullName: load(propertyNames)
+  summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez contacter `context.sync()` avant de lire les propriétés.
+  remarks: ''
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.IdentityCollection;'
+    parameters:
+    - id: propertyNames
+      description: Chaîne délimitée par des virgules ou tableau de chaînes spécifiant les propriétés à charger.
+      type: string | string[]
+    return:
+      type: <xref uid="excel!Excel.IdentityCollection:class" />
+      description: ''
+- name: load(propertyNamesAndPaths)
+  uid: excel!Excel.IdentityCollection#load:member(3)
+  package: excel!
+  fullName: load(propertyNamesAndPaths)
+  summary: Files d’attente de la commande pour charger les propriétés de l’objet spécifié. Vous devez contacter `context.sync()` avant de lire les propriétés.
+  remarks: ''
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNamesAndPaths?: OfficeExtension.LoadOption): Excel.IdentityCollection;'
+    parameters:
+    - id: propertyNamesAndPaths
+      description: '`propertyNamesAndPaths.select` est une chaîne délimitée par des virgules qui spécifie les propriétés à charger, et est une chaîne délimitée par des virgules qui spécifie les propriétés de `propertyNamesAndPaths.expand` navigation à charger.'
+      type: <xref uid="office!OfficeExtension.LoadOption:interface" />
+    return:
+      type: <xref uid="excel!Excel.IdentityCollection:class" />
+      description: ''
 - name: remove(assignee)
   uid: excel!Excel.IdentityCollection#remove:member(1)
   package: excel!
   fullName: remove(assignee)
   summary: >-
-    Supprime une identité d’utilisateur de la collection.
+    Supprime une identité d'utilisateur de la collection.
 
 
-    \[[Ensemble d’API : ExcelApi BÊTA (PRÉVISUALISATION UNIQUEMENT)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Ensemble d'API : ExcelApi BÊTA (PRÉVISUALISATION UNIQUEMENT)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: true
   isDeprecated: false
@@ -127,26 +190,20 @@ methods:
   uid: excel!Excel.IdentityCollection#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Remplace la méthode JavaScript afin de fournir une sortie plus utile lorsqu’un objet `toJSON()` API est transmis à `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle `toJSON` la méthode de l’objet qui lui est transmis.) Alors que l’objet Excel.IdentityCollection d’origine est un objet API, la méthode renvoie un objet `toJSON` JavaScript simple (tapé sous la forme `Excel.Interfaces.IdentityCollectionData`<!-- -->) qui contient des copies superficiels de toutes les propriétés enfants chargées à partir de l’objet d’origine.
+  summary: Remplace la méthode JavaScript afin de fournir une sortie plus utile lorsqu'un objet `toJSON()` API est transmis à `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle `toJSON` la méthode de l'objet qui lui est transmis.) Alors que `Excel.IdentityCollection` l'objet d'origine est un objet API, la méthode renvoie un objet `toJSON` JavaScript simple (tapé sous la forme `Excel.Interfaces.IdentityCollectionData`<!-- -->) qui contient un tableau « éléments » avec des copies peu profondes de toutes les propriétés chargées à partir des éléments de la collection.
   remarks: ''
   isPreview: true
   isDeprecated: false
   syntax:
-    content: >-
-      toJSON(): {
-                  [key: string]: string;
-              };
+    content: 'toJSON(): Excel.Interfaces.IdentityCollectionData;'
     return:
-      type: >-
-        {
-                    [key: string]: string;
-                }
+      type: <xref uid="excel!Excel.Interfaces.IdentityCollectionData:interface" />
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: dec4378c4b00296db193dbe6f16ad2eab24c44e2
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: b52c4c26492e584f0c435b373ce3522d50be941c
+  ms.sourcegitcommit: 66ce950cede0c44d43deef165ca96e9f5875d63f
   ms.translationtype: MT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51275397"
+  ms.lasthandoff: 04/21/2021
+  ms.locfileid: "51911149"

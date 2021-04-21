@@ -4,18 +4,18 @@ uid: outlook!Office.Categories:interface
 package: outlook!
 fullName: Office.Categories
 summary: >-
-  Représente les catégories d’un élément.
+  Représente les catégories d'un élément.
 
 
-  Dans Outlook, un utilisateur peut baliser des messages et des rendez-vous à l’aide d’une catégorie pour les coder en couleur. L’utilisateur définit des [catégories dans une liste principale](xref:outlook!Office.MasterCategories:interface) sur sa boîte aux lettres. Ils peuvent ensuite appliquer une ou plusieurs catégories à un élément.
+  Dans Outlook, un utilisateur peut baliser des messages et des rendez-vous à l'aide d'une catégorie pour les coder en couleur. L'utilisateur définit des [catégories dans une liste principale](xref:outlook!Office.MasterCategories:interface) sur sa boîte aux lettres. Ils peuvent ensuite appliquer une ou plusieurs catégories à un élément.
 
 
-  **Important**: dans Outlook sur le web, vous ne pouvez pas utiliser l’API pour gérer les catégories appliquées à un message en mode composition.
+  **Important**: dans Outlook sur le web, vous ne pouvez pas utiliser l'API pour gérer les catégories appliquées à un message en mode composition.
 
 
-  \[[Ensemble d’API : Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  \[[Ensemble d'API : Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
 remarks: >-
-  **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+  **[Niveau d'autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
 
   **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**  : Rédiger ou Lire
@@ -31,9 +31,12 @@ methods:
     Ajoute des catégories à un élément. Chaque catégorie doit se trouver dans la liste principale des catégories de cette boîte aux lettres et doit donc avoir un nom unique, mais plusieurs catégories peuvent utiliser la même couleur.
 
 
-    \[[Ensemble d’API : Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    **Important**: dans Outlook sur le web, vous ne pouvez pas utiliser l'API pour gérer les catégories appliquées à un élément de message ou de rendez-vous en mode Composition.
+
+
+    \[[Ensemble d'API : Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteItem`
+    **[Niveau d'autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteItem`
 
 
     **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**  : Rédiger ou Lire
@@ -85,10 +88,10 @@ methods:
     content: 'addAsync(categories: string[], options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: categories
-      description: Catégories à ajouter à l’élément.
+      description: Catégories à ajouter à l'élément.
       type: string[]
     - id: options
-      description: 'Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
+      description: "Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n'importe quel objet à accéder dans la méthode de rappel."
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
       description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->.
@@ -104,9 +107,12 @@ methods:
     Ajoute des catégories à un élément. Chaque catégorie doit se trouver dans la liste principale des catégories de cette boîte aux lettres et doit donc avoir un nom unique, mais plusieurs catégories peuvent utiliser la même couleur.
 
 
-    \[[Ensemble d’API : Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    **Important**: dans Outlook sur le web, vous ne pouvez pas utiliser l'API pour gérer les catégories appliquées à un élément de message ou de rendez-vous en mode Composition.
+
+
+    \[[Ensemble d'API : Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteItem`
+    **[Niveau d'autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteItem`
 
 
     **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**  : Rédiger ou Lire
@@ -122,7 +128,7 @@ methods:
     content: 'addAsync(categories: string[], callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: categories
-      description: Catégories à ajouter à l’élément.
+      description: Catégories à ajouter à l'élément.
       type: string[]
     - id: callback
       description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->.
@@ -135,15 +141,21 @@ methods:
   package: outlook!
   fullName: getAsync(options, callback)
   summary: >-
-    Obtient les catégories d’un élément.
+    Obtient les catégories d'un élément.
 
 
-    **Important**: s’il n’existe aucune catégorie sur l’élément, ou si un tableau vide est renvoyé en fonction de la version d’Outlook, veillez à gérer `null` les deux cas.
+    **Important**:
 
 
-    \[[Ensemble d’API : Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    - S'il n'existe aucune catégorie sur l'élément, ou si un tableau vide est renvoyé en fonction de la version d'Outlook, veillez à `null` gérer les deux cas.
+
+
+    - Dans Outlook sur le web, vous ne pouvez pas utiliser l'API pour gérer les catégories appliquées à un message en mode composition.
+
+
+    \[[Ensemble d'API : Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+    **[Niveau d'autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
 
     **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**  : Rédiger ou Lire
@@ -153,10 +165,10 @@ methods:
     content: 'getAsync(options: Office.AsyncContextOptions, callback: (asyncResult: Office.AsyncResult<CategoryDetails[]>) => void): void;'
     parameters:
     - id: options
-      description: 'Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
+      description: "Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n'importe quel objet à accéder dans la méthode de rappel."
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->. Si l’obtention des catégories échoue, `asyncResult.error` la propriété contient un code d’erreur.
+      description: Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->. Si l'obtention des catégories échoue, `asyncResult.error` la propriété contient un code d'erreur.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="outlook!Office.CategoryDetails:interface" />[]&gt;) =&gt; void'
     return:
       type: void
@@ -166,15 +178,21 @@ methods:
   package: outlook!
   fullName: getAsync(callback)
   summary: >-
-    Obtient les catégories d’un élément.
+    Obtient les catégories d'un élément.
 
 
-    **Important**: s’il n’existe aucune catégorie sur l’élément, ou si un tableau vide est renvoyé en fonction de la version d’Outlook, veillez à gérer `null` les deux cas.
+    **Important**:
 
 
-    \[[Ensemble d’API : Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    - S'il n'existe aucune catégorie sur l'élément, ou si un tableau vide est renvoyé en fonction de la version d'Outlook, veillez à `null` gérer les deux cas.
+
+
+    - Dans Outlook sur le web, vous ne pouvez pas utiliser l'API pour gérer les catégories appliquées à un message en mode composition.
+
+
+    \[[Ensemble d'API : Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+    **[Niveau d'autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
 
     **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**  : Rédiger ou Lire
@@ -208,7 +226,7 @@ methods:
     content: 'getAsync(callback: (asyncResult: Office.AsyncResult<CategoryDetails[]>) => void): void;'
     parameters:
     - id: callback
-      description: Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->. Si l’obtention des catégories échoue, `asyncResult.error` la propriété contient un code d’erreur.
+      description: Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->. Si l'obtention des catégories échoue, `asyncResult.error` la propriété contient un code d'erreur.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="outlook!Office.CategoryDetails:interface" />[]&gt;) =&gt; void'
     return:
       type: void
@@ -218,12 +236,15 @@ methods:
   package: outlook!
   fullName: removeAsync(categories, options, callback)
   summary: >-
-    Supprime les catégories d’un élément.
+    Supprime les catégories d'un élément.
 
 
-    \[[Ensemble d’API : Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    **Important**: dans Outlook sur le web, vous ne pouvez pas utiliser l'API pour gérer les catégories appliquées à un message en mode composition.
+
+
+    \[[Ensemble d'API : Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteItem`
+    **[Niveau d'autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteItem`
 
 
     **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**  : Rédiger ou Lire
@@ -264,13 +285,13 @@ methods:
     content: 'removeAsync(categories: string[], options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: categories
-      description: Catégories à supprimer de l’élément.
+      description: Catégories à supprimer de l'élément.
       type: string[]
     - id: options
-      description: 'Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
+      description: "Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n'importe quel objet à accéder dans la méthode de rappel."
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->. Si la suppression des catégories échoue, `asyncResult.error` la propriété contient un code d’erreur.
+      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->. Si la suppression des catégories échoue, `asyncResult.error` la propriété contient un code d'erreur.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -280,12 +301,15 @@ methods:
   package: outlook!
   fullName: removeAsync(categories, callback)
   summary: >-
-    Supprime les catégories d’un élément.
+    Supprime les catégories d'un élément.
 
 
-    \[[Ensemble d’API : Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    **Important**: dans Outlook sur le web, vous ne pouvez pas utiliser l'API pour gérer les catégories appliquées à un message en mode composition.
+
+
+    \[[Ensemble d'API : Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteItem`
+    **[Niveau d'autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteItem`
 
 
     **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**  : Rédiger ou Lire
@@ -295,18 +319,18 @@ methods:
     content: 'removeAsync(categories: string[], callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: categories
-      description: Catégories à supprimer de l’élément.
+      description: Catégories à supprimer de l'élément.
       type: string[]
     - id: callback
-      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->. Si la suppression des catégories échoue, `asyncResult.error` la propriété contient un code d’erreur.
+      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->. Si la suppression des catégories échoue, `asyncResult.error` la propriété contient un code d'erreur.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
       description: ''
 metadata:
-  ms.openlocfilehash: d78556f0b04e39c9393b908eee4ecc40c65e735f
-  ms.sourcegitcommit: d0f7e3d564e90cdff464157440c36ad19fa526f0
+  ms.openlocfilehash: 946b17d71ce7bd1b0660c438b43417b22eb9dad5
+  ms.sourcegitcommit: 66ce950cede0c44d43deef165ca96e9f5875d63f
   ms.translationtype: MT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 04/09/2021
-  ms.locfileid: "51660399"
+  ms.lasthandoff: 04/21/2021
+  ms.locfileid: "51911415"

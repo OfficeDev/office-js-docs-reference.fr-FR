@@ -7,7 +7,7 @@ summary: >-
   Représente la collection de formes.
 
 
-  \[[Ensemble d’API : PowerPointApi BETA (PRÉVISUALISATION UNIQUEMENT)](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets)\]
+  \[[Ensemble d'API : PowerPointApi BETA (PRÉVISUALISATION UNIQUEMENT)](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets)\]
 remarks: ''
 isPreview: true
 isDeprecated: false
@@ -17,7 +17,7 @@ properties:
   uid: powerpoint!PowerPoint.ShapeCollection#context:member
   package: powerpoint!
   fullName: context
-  summary: Contexte de demande associé à l’objet. Cela connecte le processus du add-in au processus de l’application hôte Office.
+  summary: Contexte de demande associé à l'objet. Cela connecte le processus du add-in au processus de l'application hôte Office.
   remarks: ''
   isPreview: true
   isDeprecated: false
@@ -46,7 +46,7 @@ methods:
     Obtient le nombre de formes dans la collection.
 
 
-    \[[Ensemble d’API : PowerPointApi BETA (PRÉVISUALISATION UNIQUEMENT)](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets)\]
+    \[[Ensemble d'API : PowerPointApi BETA (PRÉVISUALISATION UNIQUEMENT)](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets)\]
   remarks: ''
   isPreview: true
   isDeprecated: false
@@ -60,10 +60,10 @@ methods:
   package: powerpoint!
   fullName: getItem(key)
   summary: >-
-    Obtient une forme à l’aide de son ID unique. Une erreur est lancée si la forme n’existe pas.
+    Obtient une forme à l'aide de son ID unique. Une erreur est lancée si la forme n'existe pas.
 
 
-    \[[Ensemble d’API : PowerPointApi BETA (PRÉVISUALISATION UNIQUEMENT)](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets)\]
+    \[[Ensemble d'API : PowerPointApi BETA (PRÉVISUALISATION UNIQUEMENT)](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets)\]
   remarks: ''
   isPreview: true
   isDeprecated: false
@@ -75,16 +75,16 @@ methods:
       type: string
     return:
       type: <xref uid="powerpoint!PowerPoint.Shape:class" />
-      description: Forme avec l’ID unique. Si une telle forme n’existe pas, une erreur est lancée.
+      description: Forme avec l'ID unique. Si une telle forme n'existe pas, une erreur est lancée.
 - name: getItemAt(index)
   uid: powerpoint!PowerPoint.ShapeCollection#getItemAt:member(1)
   package: powerpoint!
   fullName: getItemAt(index)
   summary: >-
-    Obtient une forme à l’aide de son index de base zéro dans la collection. Une erreur est lancée si l’index est hors de portée.
+    Obtient une forme à l'aide de son index de base zéro dans la collection. Une erreur est lancée si l'index est hors de portée.
 
 
-    \[[Ensemble d’API : PowerPointApi BETA (PRÉVISUALISATION UNIQUEMENT)](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets)\]
+    \[[Ensemble d'API : PowerPointApi BETA (PRÉVISUALISATION UNIQUEMENT)](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets)\]
   remarks: ''
   isPreview: true
   isDeprecated: false
@@ -96,16 +96,42 @@ methods:
       type: number
     return:
       type: <xref uid="powerpoint!PowerPoint.Shape:class" />
-      description: Forme à l’index donné. Une erreur est lancée si l’index est hors de portée.
+      description: >-
+        Forme à l'index donné. Une erreur est lancée si l'index est hors de portée.
+
+
+        #### <a name="examples"></a>Exemples
+
+
+        ```typescript
+
+        // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/powerpoint/preview-apis/tags.yaml
+
+        await PowerPoint.run(async function(context) {
+          const slide = context.presentation.slides.getItemAt(0);
+          const shape = slide.shapes.getItemAt(0);
+          shape.tags.add("MOUNTAIN", "Denali");
+
+          await context.sync();
+
+          const myShapeTag = shape.tags.getItem("MOUNTAIN");
+          myShapeTag.load("key, value");
+
+          await context.sync();
+
+          console.log("Added key " + JSON.stringify(myShapeTag.key) + " with value " + JSON.stringify(myShapeTag.value));
+        });
+
+        ```
 - name: getItemOrNullObject(id)
   uid: powerpoint!PowerPoint.ShapeCollection#getItemOrNullObject:member(1)
   package: powerpoint!
   fullName: getItemOrNullObject(id)
   summary: >-
-    Obtient une forme à l’aide de son ID unique. Si une telle forme n’existe pas, un objet dont la propriété est définie `isNullObject` sur true est renvoyé.
+    Obtient une forme à l'aide de son ID unique. Si une telle forme n'existe pas, un objet dont la propriété est définie `isNullObject` sur true est renvoyé.
 
 
-    \[[Ensemble d’API : PowerPointApi BETA (PRÉVISUALISATION UNIQUEMENT)](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets)\]
+    \[[Ensemble d'API : PowerPointApi BETA (PRÉVISUALISATION UNIQUEMENT)](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets)\]
   remarks: ''
   isPreview: true
   isDeprecated: false
@@ -117,7 +143,7 @@ methods:
       type: string
     return:
       type: <xref uid="powerpoint!PowerPoint.Shape:class" />
-      description: Forme avec l’ID unique. Si une telle forme n’existe pas, un objet dont la propriété est définie `isNullObject` sur true est renvoyé.
+      description: Forme avec l'ID unique. Si une telle forme n'existe pas, un objet dont la propriété est définie `isNullObject` sur true est renvoyé.
 - name: load(options)
   uid: powerpoint!PowerPoint.ShapeCollection#load:member(1)
   package: powerpoint!
@@ -130,7 +156,7 @@ methods:
     content: 'load(options?: PowerPoint.Interfaces.ShapeCollectionLoadOptions & PowerPoint.Interfaces.CollectionLoadOptions): PowerPoint.ShapeCollection;'
     parameters:
     - id: options
-      description: Fournit des options pour lesquelles les propriétés de l’objet à charger.
+      description: Fournit des options pour lesquelles les propriétés de l'objet à charger.
       type: <xref uid="powerpoint!PowerPoint.Interfaces.ShapeCollectionLoadOptions:interface" /> & <xref uid="powerpoint!PowerPoint.Interfaces.CollectionLoadOptions:interface" />
     return:
       type: <xref uid="powerpoint!PowerPoint.ShapeCollection:class" />
@@ -173,7 +199,7 @@ methods:
   uid: powerpoint!PowerPoint.ShapeCollection#toJSON:member(1)
   package: powerpoint!
   fullName: toJSON()
-  summary: Remplace la méthode JavaScript afin de fournir une sortie plus utile lorsqu’un objet `toJSON()` API est transmis à `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle `toJSON` la méthode de l’objet qui lui est transmis.) Alors que `PowerPoint.ShapeCollection` l’objet d’origine est un objet API, la méthode renvoie un objet `toJSON` JavaScript simple (tapé sous la forme `PowerPoint.Interfaces.ShapeCollectionData`<!-- -->) qui contient un tableau « éléments » avec des copies peu profondes de toutes les propriétés chargées à partir des éléments de la collection.
+  summary: Remplace la méthode JavaScript afin de fournir une sortie plus utile lorsqu'un objet `toJSON()` API est transmis à `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle `toJSON` la méthode de l'objet qui lui est transmis.) Alors que `PowerPoint.ShapeCollection` l'objet d'origine est un objet API, la méthode renvoie un objet `toJSON` JavaScript simple (tapé sous la forme `PowerPoint.Interfaces.ShapeCollectionData`<!-- -->) qui contient un tableau « éléments » avec des copies peu profondes de toutes les propriétés chargées à partir des éléments de la collection.
   remarks: ''
   isPreview: true
   isDeprecated: false
@@ -184,9 +210,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 4a9530be1076a85e9a949c13675be8815d6f0e48
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: f8bd55d72882491e0a9dfd641e04f4c85db2c521
+  ms.sourcegitcommit: 66ce950cede0c44d43deef165ca96e9f5875d63f
   ms.translationtype: MT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51328433"
+  ms.lasthandoff: 04/21/2021
+  ms.locfileid: "51911373"
