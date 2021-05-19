@@ -3,9 +3,10 @@
 |[AddSlideOptions](/javascript/api/powerpoint/powerpoint.addslideoptions)|[layoutId](/javascript/api/powerpoint/powerpoint.addslideoptions#layoutid)|Spécifie l’ID d’une mise en page des diapositives à utiliser pour la nouvelle diapositive.|
 ||[slideMasterId](/javascript/api/powerpoint/powerpoint.addslideoptions#slidemasterid)|Spécifie l’ID d’un curseur de diapositive à utiliser pour la nouvelle diapositive.|
 |[Presentation](/javascript/api/powerpoint/powerpoint.presentation)|[slideMasters](/javascript/api/powerpoint/powerpoint.presentation#slidemasters)|Renvoie la collection `SlideMaster` d’objets qui se retrouvent dans la présentation.|
-||[tags](/javascript/api/powerpoint/powerpoint.presentation#tags)|Renvoie une collection de balises attachées à la présentation.|
-|[Forme](/javascript/api/powerpoint/powerpoint.shape)|[id](/javascript/api/powerpoint/powerpoint.shape#id)|Obtient l’ID unique de la forme.|
-||[tags](/javascript/api/powerpoint/powerpoint.shape#tags)|Renvoie une collection de balises dans la forme.|
+||[étiquettes](/javascript/api/powerpoint/powerpoint.presentation#tags)|Renvoie une collection de balises attachées à la présentation.|
+|[Forme](/javascript/api/powerpoint/powerpoint.shape)|[delete()](/javascript/api/powerpoint/powerpoint.shape#delete--)|Supprime la forme de la collection de formes.|
+||[id](/javascript/api/powerpoint/powerpoint.shape#id)|Obtient l’ID unique de la forme.|
+||[étiquettes](/javascript/api/powerpoint/powerpoint.shape#tags)|Renvoie une collection de balises dans la forme.|
 |[ShapeCollection](/javascript/api/powerpoint/powerpoint.shapecollection)|[getCount()](/javascript/api/powerpoint/powerpoint.shapecollection#getcount--)|Obtient le nombre de formes dans la collection.|
 ||[getItem(key: string)](/javascript/api/powerpoint/powerpoint.shapecollection#getitem-key-)|Obtient une forme à l’aide de son ID unique.|
 ||[getItemAt(index: number)](/javascript/api/powerpoint/powerpoint.shapecollection#getitemat-index-)|Obtient une forme à l’aide de son index de base zéro dans la collection.|
@@ -14,8 +15,8 @@
 |[Slide](/javascript/api/powerpoint/powerpoint.slide)|[disposition](/javascript/api/powerpoint/powerpoint.slide#layout)|Obtient la mise en page de la diapositive.|
 ||[Formes](/javascript/api/powerpoint/powerpoint.slide#shapes)|Renvoie une collection de formes dans la diapositive.|
 ||[slideMaster](/javascript/api/powerpoint/powerpoint.slide#slidemaster)|Obtient `SlideMaster` l’objet qui représente le contenu par défaut de la diapositive.|
-||[tags](/javascript/api/powerpoint/powerpoint.slide#tags)|Renvoie une collection de balises dans la diapositive.|
-|[SlideCollection](/javascript/api/powerpoint/powerpoint.slidecollection)|[add(options?: PowerPoint.AddSlideOptions)](/javascript/api/powerpoint/powerpoint.slidecollection#add-options-)|Ajoute une nouvelle diapositive à la fin de la collection.|
+||[étiquettes](/javascript/api/powerpoint/powerpoint.slide#tags)|Renvoie une collection de balises dans la diapositive.|
+|[SlideCollection](/javascript/api/powerpoint/powerpoint.slidecollection)|[add(options?: PowerPoint. AddSlideOptions)](/javascript/api/powerpoint/powerpoint.slidecollection#add-options-)|Ajoute une nouvelle diapositive à la fin de la collection.|
 |[SlideLayout](/javascript/api/powerpoint/powerpoint.slidelayout)|[id](/javascript/api/powerpoint/powerpoint.slidelayout#id)|Obtient l’ID unique de la mise en page des diapositives.|
 ||[name](/javascript/api/powerpoint/powerpoint.slidelayout#name)|Obtient le nom de la mise en page des diapositives.|
 |[SlideLayoutCollection](/javascript/api/powerpoint/powerpoint.slidelayoutcollection)|[getCount()](/javascript/api/powerpoint/powerpoint.slidelayoutcollection#getcount--)|Obtient le nombre de dispositions dans la collection.|
