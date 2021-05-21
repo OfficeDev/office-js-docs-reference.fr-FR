@@ -1,0 +1,304 @@
+### YamlMime:TSType
+name: Office.MasterCategories
+uid: outlook!Office.MasterCategories:interface
+package: outlook!
+fullName: Office.MasterCategories
+summary: >-
+  Représente la liste principale des catégories sur la boîte aux lettres.
+
+
+  Dans Outlook, un utilisateur peut baliser des messages et des rendez-vous à l’aide d’une catégorie pour les coder en couleur. L’utilisateur définit les catégories dans une liste sur sa boîte aux lettres principale. Ils peuvent ensuite appliquer une ou plusieurs catégories à un élément.
+
+
+  **Important**: dans les scénarios délégués ou partagés, le délégué peut obtenir les catégories dans la liste principale, mais ne peut pas ajouter ou supprimer des catégories.
+
+
+  \[[Ensemble d’API : Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+remarks: >-
+  **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteMailbox`
+
+
+  **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**  : Rédiger ou Lire
+isPreview: false
+isDeprecated: false
+type: interface
+methods:
+- name: addAsync(categories, options, callback)
+  uid: outlook!Office.MasterCategories#addAsync:member(1)
+  package: outlook!
+  fullName: addAsync(categories, options, callback)
+  summary: >-
+    Ajoute des catégories à la liste principale sur une boîte aux lettres. Chaque catégorie doit avoir un nom unique, mais plusieurs catégories peuvent utiliser la même couleur.
+
+
+    \[[Ensemble d’API : Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteMailbox`
+
+
+    **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**  : Rédiger ou Lire
+
+
+    **Erreurs**:
+
+
+    - `DuplicateCategory`<!-- -->: l’une des catégories fournies figure déjà dans la liste principale des catégories.
+
+
+    - `PermissionDenied`<!-- -->: l’utilisateur n’est pas autorisé à effectuer cette action.
+
+
+    #### <a name="examples"></a>Exemples
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/45-categories/work-with-master-categories.yaml
+
+    var masterCategoriesToAdd = [
+      {
+        displayName: "TestCategory",
+        color: Office.MailboxEnums.CategoryColor.Preset0
+      }
+    ];
+
+
+    Office.context.mailbox.masterCategories.addAsync(masterCategoriesToAdd, function(asyncResult) {
+      if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+        console.log("Successfully added categories to master list");
+      } else {
+        console.log("masterCategories.addAsync call failed with error: " + asyncResult.error.message);
+      }
+    });
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'addAsync(categories: CategoryDetails[], options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: categories
+      description: Catégories à ajouter à la liste principale de la boîte aux lettres.
+      type: <xref uid="outlook!Office.CategoryDetails:interface" />[]
+    - id: options
+      description: 'Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: addAsync(categories, callback)
+  uid: outlook!Office.MasterCategories#addAsync:member(2)
+  package: outlook!
+  fullName: addAsync(categories, callback)
+  summary: >-
+    Ajoute des catégories à la liste principale sur une boîte aux lettres. Chaque catégorie doit avoir un nom unique, mais plusieurs catégories peuvent utiliser la même couleur.
+
+
+    \[[Ensemble d’API : Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteMailbox`
+
+
+    **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**  : Rédiger ou Lire
+
+
+    **Erreurs**:
+
+
+    - `DuplicateCategory`<!-- -->: l’une des catégories fournies figure déjà dans la liste principale des catégories.
+
+
+    - `PermissionDenied`<!-- -->: l’utilisateur n’est pas autorisé à effectuer cette action.
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'addAsync(categories: CategoryDetails[], callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: categories
+      description: Catégories à ajouter à la liste principale de la boîte aux lettres.
+      type: <xref uid="outlook!Office.CategoryDetails:interface" />[]
+    - id: callback
+      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: getAsync(options, callback)
+  uid: outlook!Office.MasterCategories#getAsync:member(1)
+  package: outlook!
+  fullName: getAsync(options, callback)
+  summary: >-
+    Obtient la liste principale des catégories d’une boîte aux lettres.
+
+
+    \[[Ensemble d’API : Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteMailbox`
+
+
+    **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**  : Rédiger ou Lire
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getAsync(options: Office.AsyncContextOptions, callback: (asyncResult: Office.AsyncResult<CategoryDetails[]>) => void): void;'
+    parameters:
+    - id: options
+      description: 'Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->. Si l’ajout de catégories échoue, `asyncResult.error` la propriété contient un code d’erreur.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="outlook!Office.CategoryDetails:interface" />[]&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: getAsync(callback)
+  uid: outlook!Office.MasterCategories#getAsync:member(2)
+  package: outlook!
+  fullName: getAsync(callback)
+  summary: >-
+    Obtient la liste principale des catégories d’une boîte aux lettres.
+
+
+    \[[Ensemble d’API : Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteMailbox`
+
+
+    **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**  : Rédiger ou Lire
+
+
+    #### <a name="examples"></a>Exemples
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/45-categories/work-with-master-categories.yaml
+
+    Office.context.mailbox.masterCategories.getAsync(function(asyncResult) {
+      if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+        var categories = asyncResult.value;
+        if (categories && categories.length > 0) {
+          console.log("Master categories:");
+          console.log(JSON.stringify(categories));
+        } else {
+          console.log("There are no categories in the master list.");
+        }
+      } else {
+        console.error(asyncResult.error);
+      }
+    });
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getAsync(callback: (asyncResult: Office.AsyncResult<CategoryDetails[]>) => void): void;'
+    parameters:
+    - id: callback
+      description: Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="outlook!Office.CategoryDetails:interface" />[]&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: removeAsync(categories, options, callback)
+  uid: outlook!Office.MasterCategories#removeAsync:member(1)
+  package: outlook!
+  fullName: removeAsync(categories, options, callback)
+  summary: >-
+    Supprime des catégories de la liste principale d’une boîte aux lettres.
+
+
+    \[[Ensemble d’API : Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteMailbox`
+
+
+    **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**  : Rédiger ou Lire
+
+
+    **Erreurs**:
+
+
+    - `PermissionDenied`<!-- -->: l’utilisateur n’est pas autorisé à effectuer cette action.
+
+
+    #### <a name="examples"></a>Exemples
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/45-categories/work-with-master-categories.yaml
+
+    var masterCategoriesToRemove = ["TestCategory"];
+
+
+    Office.context.mailbox.masterCategories.removeAsync(masterCategoriesToRemove, function(asyncResult) {
+      if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+        console.log("Successfully removed categories from master list");
+      } else {
+        console.log("masterCategories.removeAsync call failed with error: " + asyncResult.error.message);
+      }
+    });
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'removeAsync(categories: string[], options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: categories
+      description: Catégories à supprimer de la liste principale de la boîte aux lettres.
+      type: string[]
+    - id: options
+      description: 'Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->. Si la suppression des catégories échoue, `asyncResult.error` la propriété contient un code d’erreur.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: removeAsync(categories, callback)
+  uid: outlook!Office.MasterCategories#removeAsync:member(2)
+  package: outlook!
+  fullName: removeAsync(categories, callback)
+  summary: >-
+    Supprime des catégories de la liste principale d’une boîte aux lettres.
+
+
+    \[[Ensemble d’API : Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteMailbox`
+
+
+    **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**  : Rédiger ou Lire
+
+
+    **Erreurs**:
+
+
+    - `PermissionDenied`<!-- -->: l’utilisateur n’est pas autorisé à effectuer cette action.
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'removeAsync(categories: string[], callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: categories
+      description: Catégories à supprimer de la liste principale de la boîte aux lettres.
+      type: string[]
+    - id: callback
+      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->. Si la suppression des catégories échoue, `asyncResult.error` la propriété contient un code d’erreur.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+metadata:
+  ms.openlocfilehash: ef45e52d63886ca6cc0ae170262969832fae7d72
+  ms.sourcegitcommit: fc08f53e68f6acec0b6de81691ac5920f3974ed4
+  ms.translationtype: MT
+  ms.contentlocale: fr-FR
+  ms.lasthandoff: 05/21/2021
+  ms.locfileid: "52591544"
