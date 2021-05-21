@@ -1,0 +1,300 @@
+### YamlMime:TSType
+name: Office.CustomProperties
+uid: outlook!Office.CustomProperties:interface
+package: outlook!
+fullName: Office.CustomProperties
+summary: >-
+  L’objet `CustomProperties` représente les propriétés personnalisées qui sont propres à un élément particulier et à un complément de messagerie pour Outlook. Par exemple, il peut s’avérer nécessaire pour un complément de messagerie d’enregistrer certaines données propres au message électronique actif ayant activé le complément. Quand l’utilisateur consulte à nouveau le même message et réactive le complément de messagerie, ce dernier peut récupérer les données enregistrées en tant que propriétés personnalisées. **Important**: la longueur maximale d’un `CustomProperties` objet JSON est de 2 500 caractères.
+
+
+  Étant donné Outlook mac ne met pas en cache les propriétés personnalisées, si le réseau de l’utilisateur est en panne, les macros de messagerie ne peuvent pas accéder à leurs propriétés personnalisées.
+remarks: >-
+  **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+  **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**  : Rédiger ou Lire
+isPreview: false
+isDeprecated: false
+type: interface
+methods:
+- name: get(name)
+  uid: outlook!Office.CustomProperties#get:member(1)
+  package: outlook!
+  fullName: get(name)
+  summary: Retourne la valeur de la propriété personnalisée spécifiée.
+  remarks: >-
+    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+    **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**  : Rédiger ou Lire
+
+
+    #### <a name="examples"></a>Exemples
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/15-item-custom-properties/load-set-get-save.yaml
+
+    var propertyName = $("#propertyName").val();
+
+    var propertyValue = customProps.get(propertyName);
+
+    $("#propertyValue").val(propertyValue);
+
+    console.log(`The value of custom property "${propertyName}" is "${propertyValue}".`);
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'get(name: string): any;'
+    parameters:
+    - id: name
+      description: Nom de la propriété personnalisée à retourner.
+      type: string
+    return:
+      type: any
+      description: Valeur de la propriété personnalisée spécifiée.
+- name: getAll()
+  uid: outlook!Office.CustomProperties#getAll:member(1)
+  package: outlook!
+  fullName: getAll()
+  summary: >-
+    Renvoie un objet avec toutes les propriétés personnalisées d’une collection de paires nom/valeur. Les valeurs suivantes sont équivalentes.
+
+
+    `customProps.get("name")`
+
+
+    `var dictionary = customProps.getAll(); dictionary["name"]`
+
+
+    Vous pouvez itérer dans l’objet dictionnaire pour découvrir tout `names` et `values`<!-- -->.
+
+
+    \[[Ensemble d’API : Mailbox 1.9](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+    **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**  : Rédiger ou Lire
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getAll(): any;'
+    return:
+      type: any
+      description: Objet avec toutes les propriétés personnalisées d’une collection de paires nom/valeur.
+- name: remove(name)
+  uid: outlook!Office.CustomProperties#remove:member(1)
+  package: outlook!
+  fullName: remove(name)
+  summary: >-
+    Supprime la propriété spécifiée de la collection de propriétés personnalisées.
+
+
+    Pour rendre la suppression de la propriété permanente, vous devez appeler la méthode `saveAsync` de l’objet `CustomProperties`.
+  remarks: >-
+    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+    **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**  : Rédiger ou Lire
+
+
+    #### <a name="examples"></a>Exemples
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/15-item-custom-properties/load-set-get-save.yaml
+
+    var propertyName = $("#propertyName").val();
+
+    customProps.remove(propertyName);
+
+    console.log(`Custom property "${propertyName}" removed.`);
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'remove(name: string): void;'
+    parameters:
+    - id: name
+      description: Propriété `name` à supprimer.
+      type: string
+    return:
+      type: void
+      description: ''
+- name: saveAsync(callback, asyncContext)
+  uid: outlook!Office.CustomProperties#saveAsync:member(1)
+  package: outlook!
+  fullName: saveAsync(callback, asyncContext)
+  summary: >-
+    Enregistre les propriétés personnalisées propres aux éléments sur le serveur.
+
+
+    Vous devez appeler la méthode `saveAsync` pour conserver les modifications effectuées avec la méthode `set` ou la méthode `remove` de l’objet `CustomProperties`. L’enregistrement est une action asynchrone.
+
+
+    Il est pratique de vérifier et de gérer les erreurs à partir de votre fonction de rappel `saveAsync`<!-- -->. Plus particulièrement, un complément de lecture peut être activé lorsque l’utilisateur est connecté dans un formulaire de lecture, puis l’utilisateur peut se déconnecter. Si le complément appelle `saveAsync` lorsqu’il est déconnecté, `saveAsync` renvoie une erreur. La méthode de rappel doit pouvoir gérer cette erreur.
+  remarks: >-
+    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+    **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**  : Rédiger ou Lire
+
+
+    #### <a name="examples"></a>Exemples
+
+
+    ```javascript
+
+    // The following JavaScript code sample shows how to asynchronously use
+
+    // the loadCustomPropertiesAsync method to load custom properties that
+
+    // are specific to the current item, and the saveAsync method to save
+
+    // these properties back to the server. After loading the custom properties,
+
+    // the code sample uses the get method to read the custom property myProp,
+
+    // the set method to write the custom property myProp, and then finally
+
+    // calls the saveAsync method to save the custom properties.
+
+
+    // The initialize function is required for all add-ins.
+
+    Office.initialize = function () {
+        // Checks for the DOM to load using the jQuery ready function.
+        $(document).ready(function () {
+            // After the DOM is loaded, add-in-specific code can run.
+            var item = Office.context.mailbox.item;
+            item.loadCustomPropertiesAsync(customPropsCallback);
+        });
+    };
+
+
+    function customPropsCallback(asyncResult) {
+        var customProps = asyncResult.value;
+        var myProp = customProps.get("myProp");
+        console.log("myProp: " + myProp); // First run on current item will return `undefined`.
+
+        // Set myProp custom property.
+        customProps.set("myProp", "value");
+        customProps.saveAsync(saveCallback);
+    }
+
+
+    function saveCallback(asyncResult) {
+        if (asyncResult.status === Office.AsyncResultStatus.Failed) {
+            console.error(asyncResult.error.message);
+        }
+        else {
+            // Async call to save custom properties completed.
+            // Proceed to do the appropriate for your add-in.
+        }
+    }
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'saveAsync(callback: (asyncResult: Office.AsyncResult<void>) => void, asyncContext?: any): void;'
+    parameters:
+    - id: callback
+      description: Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    - id: asyncContext
+      description: Facultatif. Toutes les données d’état transmises à la méthode de rappel.
+      type: any
+    return:
+      type: void
+      description: ''
+- name: saveAsync(asyncContext)
+  uid: outlook!Office.CustomProperties#saveAsync:member(2)
+  package: outlook!
+  fullName: saveAsync(asyncContext)
+  summary: >-
+    Enregistre les propriétés personnalisées propres aux éléments sur le serveur.
+
+
+    Vous devez appeler la méthode `saveAsync` pour conserver les modifications effectuées avec la méthode `set` ou la méthode `remove` de l’objet `CustomProperties`. L’enregistrement est une action asynchrone.
+
+
+    Il est pratique de vérifier et de gérer les erreurs à partir de votre fonction de rappel `saveAsync`<!-- -->. Plus particulièrement, un complément de lecture peut être activé lorsque l’utilisateur est connecté dans un formulaire de lecture, puis l’utilisateur peut se déconnecter. Si le complément appelle `saveAsync` lorsqu’il est déconnecté, `saveAsync` renvoie une erreur. La méthode de rappel doit pouvoir gérer cette erreur.
+  remarks: >-
+    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+    **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**  : Rédiger ou Lire
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'saveAsync(asyncContext?: any): void;'
+    parameters:
+    - id: asyncContext
+      description: Facultatif. Toutes les données d’état transmises à la méthode de rappel.
+      type: any
+    return:
+      type: void
+      description: ''
+- name: set(name, value)
+  uid: outlook!Office.CustomProperties#set:member(1)
+  package: outlook!
+  fullName: set(name, value)
+  summary: >-
+    Affecte la valeur spécifiée à la propriété spécifiée.
+
+
+    La méthode `set` affecte la valeur spécifiée à la propriété spécifiée. Vous devez utiliser la méthode `saveAsync` pour enregistrer la propriété sur le serveur.
+
+
+    La méthode `set` crée une propriété si la propriété spécifiée n’existe pas déjà ; sinon, la valeur existante est remplacée par la nouvelle valeur. Le paramètre `value` peut être de n’importe quel type ; toutefois, il est toujours transmis au serveur sous forme de chaîne.
+  remarks: >-
+    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+    **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**  : Rédiger ou Lire
+
+
+    #### <a name="examples"></a>Exemples
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/15-item-custom-properties/load-set-get-save.yaml
+
+    var propertyName = $("#propertyName").val();
+
+    var propertyValue = $("#propertyValue").val();
+
+    customProps.set(propertyName, propertyValue);
+
+    console.log(`Custom property "${propertyName}" set to value "${propertyValue}".`);
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'set(name: string, value: string): void;'
+    parameters:
+    - id: name
+      description: Nom de la propriété à définir.
+      type: string
+    - id: value
+      description: Valeur de la propriété à définir.
+      type: string
+    return:
+      type: void
+      description: ''
+metadata:
+  ms.openlocfilehash: 4708afb408377a30c0bc3058aea046efd626e989
+  ms.sourcegitcommit: fc08f53e68f6acec0b6de81691ac5920f3974ed4
+  ms.translationtype: MT
+  ms.contentlocale: fr-FR
+  ms.lasthandoff: 05/21/2021
+  ms.locfileid: "52591579"

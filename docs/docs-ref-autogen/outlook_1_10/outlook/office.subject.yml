@@ -1,0 +1,191 @@
+### YamlMime:TSType
+name: Office.Subject
+uid: outlook!Office.Subject:interface
+package: outlook!
+fullName: Office.Subject
+summary: >-
+  Fournit des méthodes pour obtenir et définir l’objet d’un rendez-vous ou d’un message dans un complément Outlook.
+
+
+  \[[Ensemble d’API : Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+remarks: >-
+  **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+  **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: Composer
+isPreview: false
+isDeprecated: false
+type: interface
+methods:
+- name: getAsync(options, callback)
+  uid: outlook!Office.Subject#getAsync:member(1)
+  package: outlook!
+  fullName: getAsync(options, callback)
+  summary: >-
+    Obtient l’objet d’un rendez-vous ou d’un message.
+
+
+    La méthode `getAsync` lance un appel asynchrone vers le serveur Exchange pour obtenir l’objet d’un rendez-vous ou d’un message.
+
+
+    \[[Ensemble d’API : Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+    **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: Composer
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getAsync(options: Office.AsyncContextOptions, callback: (asyncResult: Office.AsyncResult<string>) => void): void;'
+    parameters:
+    - id: options
+      description: 'Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->. La `value` propriété du résultat est l’objet de l’élément.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: getAsync(callback)
+  uid: outlook!Office.Subject#getAsync:member(2)
+  package: outlook!
+  fullName: getAsync(callback)
+  summary: >-
+    Obtient l’objet d’un rendez-vous ou d’un message.
+
+
+    La méthode getAsync démarre un appel asynchrone vers le serveur Exchange pour obtenir l’objet d’un rendez-vous ou message.
+
+
+    \[[Ensemble d’API : Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+    **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: Composer
+
+
+    #### <a name="examples"></a>Exemples
+
+
+    ```javascript
+
+    Office.context.mailbox.item.subject.getAsync(callback);
+
+
+    function callback(asyncResult) {
+        var subject = asyncResult.value;
+    }
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getAsync(callback: (asyncResult: Office.AsyncResult<string>) => void): void;'
+    parameters:
+    - id: callback
+      description: Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->. La `value` propriété du résultat est l’objet de l’élément.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: setAsync(subject, options, callback)
+  uid: outlook!Office.Subject#setAsync:member(1)
+  package: outlook!
+  fullName: setAsync(subject, options, callback)
+  summary: >-
+    Définit l’objet d’un rendez-vous ou d’un message.
+
+
+    La méthode `setAsync` lance un appel asynchrone vers le serveur Exchange pour définir l’objet d’un rendez-vous ou d’un message. La définition de l’objet remplace l’objet actuel, mais laisse tous les préfixes, tels que « Tr: » ou « Re: ».
+
+
+    \[[Ensemble d’API : Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+    **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: Composer
+
+
+    **Erreurs**:
+
+
+    - `DataExceedsMaximumSize`<!-- -->: le paramètre subject est plus de 255 caractères.
+
+
+    #### <a name="examples"></a>Exemples
+
+
+    ```javascript
+
+    Office.context.mailbox.item.subject.setAsync("New subject!", function (asyncResult) {
+        if (asyncResult.status === "failed") {
+            console.log("Action failed with error: " + asyncResult.error.message);
+        }
+    });
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'setAsync(subject: string, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: subject
+      description: Objet du rendez-vous ou du message. La chaîne est limitée à 255 caractères.
+      type: string
+    - id: options
+      description: 'Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->. Si la définition de l’objet échoue, la propriété `asyncResult.error` contient un code d’erreur.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: setAsync(subject, callback)
+  uid: outlook!Office.Subject#setAsync:member(2)
+  package: outlook!
+  fullName: setAsync(subject, callback)
+  summary: >-
+    Définit l’objet d’un rendez-vous ou d’un message.
+
+
+    La méthode `setAsync` lance un appel asynchrone vers le serveur Exchange pour définir l’objet d’un rendez-vous ou d’un message. La définition de l’objet remplace l’objet actuel, mais laisse tous les préfixes, tels que « Tr: » ou « Re: ».
+
+
+    \[[Ensemble d’API : Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+    **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: Composer
+
+
+    **Erreurs**:
+
+
+    - `DataExceedsMaximumSize`<!-- -->: le paramètre subject est plus de 255 caractères.
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'setAsync(subject: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: subject
+      description: Objet du rendez-vous ou du message. La chaîne est limitée à 255 caractères.
+      type: string
+    - id: callback
+      description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->. Si la définition de l’objet échoue, la propriété `asyncResult.error` contient un code d’erreur.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+metadata:
+  ms.openlocfilehash: 9c3561cc7ebb5c3e6eec323207fe9a367e3e72c8
+  ms.sourcegitcommit: fc08f53e68f6acec0b6de81691ac5920f3974ed4
+  ms.translationtype: MT
+  ms.contentlocale: fr-FR
+  ms.lasthandoff: 05/21/2021
+  ms.locfileid: "52591340"

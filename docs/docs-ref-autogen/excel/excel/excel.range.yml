@@ -4,7 +4,7 @@ uid: excel!Excel.Range:class
 package: excel!
 fullName: Excel.Range
 summary: >-
-  La plage représente un ensemble d’une ou plusieurs cellules contiguës telles qu’une cellule, une ligne, une colonne, un bloc de cellules, etc. Pour en savoir plus sur la façon dont les plages sont utilisées dans l’ensemble de l’API, commencez par les plages dans [Excel API JavaScript](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-core-concepts#ranges)<!-- -->.
+  La plage représente un ensemble d’une ou plusieurs cellules contiguës telles qu’une cellule, une ligne, une colonne, un bloc de cellules, etc. Pour en savoir plus sur la façon dont les plages sont utilisées dans l’ensemble de l’API, commencez par les plages dans [l Excel API JavaScript](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-core-concepts#ranges)<!-- -->.
 
 
   \[[Ensemble d’API : ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -18,7 +18,7 @@ properties:
   package: excel!
   fullName: address
   summary: >-
-    Spécifie la référence de plage en style A1. La valeur d’adresse contient la référence de feuille (par exemple, « Feuille1 ! A1:B4 »).
+    Spécifie la référence de plage dans le style A1. La valeur d’adresse contient la référence de feuille (par exemple, « Feuille1 ! A1:B4 »).
 
 
     \[[Ensemble d’API : ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -82,7 +82,7 @@ properties:
   package: excel!
   fullName: columnHidden
   summary: >-
-    Indique si toutes les colonnes de la plage active sont masquées.
+    Représente si toutes les colonnes de la plage actuelle sont masquées. La valeur est `true` lorsque toutes les colonnes d’une plage sont masquées. La valeur `false` est lorsqu’aucune colonne de la plage n’est masquée. La valeur `null` est lorsque certaines colonnes d’une plage sont masquées et que d’autres colonnes de la même plage ne le sont pas.
 
 
     \[[Ensemble d’API : ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -254,7 +254,7 @@ properties:
   package: excel!
   fullName: hidden
   summary: >-
-    Indique si toutes les cellules de la plage active sont masquées.
+    Représente si toutes les cellules de la plage actuelle sont masquées. La valeur est `true` lorsque toutes les cellules d’une plage sont masquées. La valeur `false` est lorsque aucune cellule de la plage n’est masquée. La valeur `null` est lorsque certaines cellules d’une plage sont masquées et que d’autres cellules de la même plage ne le sont pas.
 
 
     \[[Ensemble d’API : ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -416,7 +416,7 @@ properties:
   package: excel!
   fullName: rowHidden
   summary: >-
-    Indique si toutes les lignes de la plage active sont masquées.
+    Représente si toutes les lignes de la plage actuelle sont masquées. La valeur `true` est lorsque toutes les lignes d’une plage sont masquées. La valeur `false` est lorsque aucune ligne de la plage n’est masquée. La valeur est lorsque certaines lignes d’une plage sont masquées et que d’autres lignes de la même `null` plage ne le sont pas.
 
 
     \[[Ensemble d’API : ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1363,23 +1363,6 @@ methods:
     return:
       type: <xref uid="excel!Excel.Range:class" />
       description: "\n\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nExcel.run(function (ctx) { \n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"A1:F8\";\n    var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeAddress).getLastRow();\n    range.load('address');\n    return ctx.sync().then(function() {\n        console.log(range.address); // prints Sheet1!A8:F8\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-- name: getMergedAreas()
-  uid: excel!Excel.Range#getMergedAreas:member(1)
-  package: excel!
-  fullName: getMergedAreas()
-  summary: >-
-    Renvoie un `RangeAreas` objet qui représente les zones fusionnées dans cette plage. Notez que si le nombre de zones fusionnées dans cette plage est supérieur à 512, une erreur `InvalidOperation` sera lancée.
-
-
-    \[[Ensemble d’API : ExcelApiOnline 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'getMergedAreas(): Excel.RangeAreas;'
-    return:
-      type: <xref uid="excel!Excel.RangeAreas:class" />
-      description: ''
 - name: getMergedAreasOrNullObject()
   uid: excel!Excel.Range#getMergedAreasOrNullObject:member(1)
   package: excel!
@@ -2447,9 +2430,9 @@ methods:
       description: "\n\n#### <a name=\"examples\"></a>範例\n\n```typescript\nExcel.run(async (context) => {\n    const largeRange = context.workbook.getSelectedRange();\n    largeRange.load([\"rowCount\", \"columnCount\"]);\n    await context.sync();\n\n    for (let i = 0; i < largeRange.rowCount; i++) {\n        for (let j = 0; j < largeRange.columnCount; j++) {\n            let cell = largeRange.getCell(i, j);\n            cell.values = [[i *j]];\n\n            // call untrack() to release the range from memory\n            cell.untrack();\n        }\n    }\n\n    await context.sync();\n});\n```"
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 0f2f6c7b1615b1993ba6d768478c290259a43f90
-  ms.sourcegitcommit: 56a0dffed6427e832d8f047f6815dd511e55e1f4
+  ms.openlocfilehash: eb40bca93055e264087aa3dd46cef1a9b6720074
+  ms.sourcegitcommit: fc08f53e68f6acec0b6de81691ac5920f3974ed4
   ms.translationtype: MT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 05/19/2021
-  ms.locfileid: "52529412"
+  ms.lasthandoff: 05/21/2021
+  ms.locfileid: "52589738"

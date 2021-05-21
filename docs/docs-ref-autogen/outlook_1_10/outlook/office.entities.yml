@@ -1,0 +1,132 @@
+### YamlMime:TSType
+name: Office.Entities
+uid: outlook!Office.Entities:interface
+package: outlook!
+fullName: Office.Entities
+summary: >-
+  Représente une collection d’entités trouvées dans un message électronique ou un rendez-vous. Mode lecture uniquement.
+
+
+  L’objet `Entities` est un conteneur pour les tableaux d’entités renvoyés par les méthodes `getEntities` et `getEntitiesByType` quand l’élément (message électronique ou rendez-vous) contient une ou plusieurs entités qui ont été trouvées par le serveur. Vous pouvez utiliser ces entités dans votre code pour fournir des informations de contexte supplémentaires, par exemple une carte montrant une adresse trouvée dans l’élément, ou pour ouvrir un numéroteur quand un numéro de téléphone est trouvé dans l’élément.
+
+
+  Si aucune entité du type spécifié dans la propriété n’est présente dans l’élément, la propriété associée à cette entité a la valeur null. Par exemple, si un message contient une adresse et un numéro de téléphone, les propriétés addresses et phoneNumbers contiennent des informations, alors que les autres propriétés ont la valeur null.
+
+
+  Pour être reconnue en tant qu’adresse, la chaîne doit contenir une adresse postale incluant au moins un sous-ensemble d’éléments tels que le numéro de rue, le nom de rue, la ville, le département/la région/l’État et le code postal.
+
+
+  Pour être reconnue comme numéro de téléphone, la chaîne doit contenir un numéro de téléphone de type nord-américain.
+
+
+  La reconnaissance d’entité repose sur la reconnaissance du langage naturel qui est basée sur l’apprentissage par l’ordinateur de grandes quantités de données. La reconnaissance d’une entité n’est pas déterministe et sa réussite s’appuie parfois sur le contexte particulier de l’élément.
+
+
+  Lorsque les tableaux de propriétés sont renvoyés par la méthode, seule la propriété de l’entité spécifiée contient des données ; toutes les autres propriétés `getEntitiesByType` sont null.
+remarks: >-
+  **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+  **[Mode Outlook applicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: Lecture
+isPreview: false
+isDeprecated: false
+type: interface
+properties:
+- name: addresses
+  uid: outlook!Office.Entities#addresses:member
+  package: outlook!
+  fullName: addresses
+  summary: Obtient les adresses physiques (rue ou adresse postale) trouvées dans un e-mail ou un rendez-vous.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'addresses: string[];'
+    return:
+      type: string[]
+      description: "\n\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nvar item = Office.context.mailbox.item;\nvar addresses = item.getEntitiesByType(Office.MailboxEnums.EntityType.Address);\n```"
+- name: contacts
+  uid: outlook!Office.Entities#contacts:member
+  package: outlook!
+  fullName: contacts
+  summary: Obtient les contacts trouvés dans une adresse de messagerie ou un rendez-vous.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'contacts: Contact[];'
+    return:
+      type: <xref uid="outlook!Office.Contact:interface" />[]
+      description: "\n\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nvar item = Office.context.mailbox.item;\nvar contacts = item.getEntitiesByType(Office.MailboxEnums.EntityType.Contact);\n```"
+- name: emailAddresses
+  uid: outlook!Office.Entities#emailAddresses:member
+  package: outlook!
+  fullName: emailAddresses
+  summary: Obtient les adresses de messagerie trouvées dans un e-mail ou un rendez-vous.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'emailAddresses: string[];'
+    return:
+      type: string[]
+      description: "\n\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nvar item = Office.context.mailbox.item;\nvar emailAddresses = item.getEntitiesByType(Office.MailboxEnums.EntityType.EmailAddress);\n```"
+- name: meetingSuggestions
+  uid: outlook!Office.Entities#meetingSuggestions:member
+  package: outlook!
+  fullName: meetingSuggestions
+  summary: Obtient les suggestions de réunion trouvées dans un e-mail.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'meetingSuggestions: MeetingSuggestion[];'
+    return:
+      type: <xref uid="outlook!Office.MeetingSuggestion:interface" />[]
+      description: "\n\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nvar item = Office.context.mailbox.item;\nvar meetingSuggestions = item.getEntitiesByType(Office.MailboxEnums.EntityType.MeetingSuggestion);\n```"
+- name: phoneNumbers
+  uid: outlook!Office.Entities#phoneNumbers:member
+  package: outlook!
+  fullName: phoneNumbers
+  summary: Obtient les numéros de téléphone trouvés dans un e-mail ou un rendez-vous.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'phoneNumbers: PhoneNumber[];'
+    return:
+      type: <xref uid="outlook!Office.PhoneNumber:interface" />[]
+      description: "\n\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nvar item = Office.context.mailbox.item;\nvar phoneNumbers = item.getEntitiesByType(Office.MailboxEnums.EntityType.PhoneNumber);\n```"
+- name: taskSuggestions
+  uid: outlook!Office.Entities#taskSuggestions:member
+  package: outlook!
+  fullName: taskSuggestions
+  summary: Obtient les suggestions de tâche trouvées dans un e-mail ou un rendez-vous.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'taskSuggestions: string[];'
+    return:
+      type: string[]
+      description: "\n\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nvar item = Office.context.mailbox.item;\nvar taskSuggestions = item.getEntitiesByType(Office.MailboxEnums.EntityType.TaskSuggestion);\n```"
+- name: urls
+  uid: outlook!Office.Entities#urls:member
+  package: outlook!
+  fullName: urls
+  summary: Obtient les URL Internet présentes dans un e-mail ou un rendez-vous.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'urls: string[];'
+    return:
+      type: string[]
+      description: "\n\n#### <a name=\"examples\"></a>範例\n\n```javascript\nvar item = Office.context.mailbox.item;\nvar urls = item.getEntitiesByType(Office.MailboxEnums.EntityType.Url);\n```"
+metadata:
+  ms.openlocfilehash: 8e33cd1fe1c7a130e817a4d18eb17671acaf62cd
+  ms.sourcegitcommit: fc08f53e68f6acec0b6de81691ac5920f3974ed4
+  ms.translationtype: MT
+  ms.contentlocale: fr-FR
+  ms.lasthandoff: 05/21/2021
+  ms.locfileid: "52591453"
