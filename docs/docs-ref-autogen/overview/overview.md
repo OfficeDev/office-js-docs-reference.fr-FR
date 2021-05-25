@@ -7,13 +7,13 @@ author: o365devx
 ms.author: o365devx
 ms.prod: non-product-specific
 localization_priority: Priority
-ms.date: 03/17/2021
-ms.openlocfilehash: 63d2efa4d4b9406208f3227ec96df467ea0d8877
-ms.sourcegitcommit: a5c179dc927ce89d1ada071d388d582191d3fa1e
+ms.date: 05/10/2021
+ms.openlocfilehash: 809b6378e33eca682005396ff07e79cb37f9ff2c
+ms.sourcegitcommit: fc08f53e68f6acec0b6de81691ac5920f3974ed4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "51183539"
+ms.lasthandoff: 05/21/2021
+ms.locfileid: "52589682"
 ---
 # <a name="office-add-ins-javascript-api-reference"></a>Référence de l’API JavaScript pour les compléments Office
 
@@ -42,12 +42,12 @@ La liste suivante répertorie les API pour les [applications hôtes Office prise
                 <li><a style="font-size: 1rem;" href="/javascript/api/excel?view=excel-js-online">ExcelApiOnline 1.1</a></li>
                 <li><a style="font-size: 1rem;" href="/javascript/api/excel?view=excel-js-1.12">ExcelApi 1.12</a></li>
                 <li><a style="font-size: 1rem;" href="/javascript/api/excel?view=excel-js-1.11">ExcelApi 1.11</a></li>
-                <li><a style="font-size: 1rem;" href="/javascript/api/excel?view=excel-js-1.10">ExcelApi 1.10</a></li>
+                <li><a style="font-size: 1rem;" href="/javascript/api/excel?view=excel-js-1.10">ExcelApi 1.10</a></li>
                 <li><a style="font-size: 1rem;" href="/javascript/api/excel?view=excel-js-1.9">ExcelApi 1.9</a></li>
-                <li><a style="font-size: 1rem;" href="/javascript/api/excel?view=excel-js-1.8">ExcelApi 1.8</a></li>
-                <li><a style="font-size: 1rem;" href="/javascript/api/excel?view=excel-js-1.7">ExcelApi 1.7</a></li>
-                <li><a style="font-size: 1rem;" href="/javascript/api/excel?view=excel-js-1.6">ExcelApi 1.6</a></li>
-                <li><a style="font-size: 1rem;" href="/javascript/api/excel?view=excel-js-1.5">ExcelApi 1.5</a></li>
+                <li><a style="font-size: 1rem;" href="/javascript/api/excel?view=excel-js-1.8">ExcelApi 1.8</a></li>
+                <li><a style="font-size: 1rem;" href="/javascript/api/excel?view=excel-js-1.7">ExcelApi 1.7</a></li>
+                <li><a style="font-size: 1rem;" href="/javascript/api/excel?view=excel-js-1.6">ExcelApi 1.6</a></li>
+                <li><a style="font-size: 1rem;" href="/javascript/api/excel?view=excel-js-1.5">ExcelApi 1.5</a></li>
                 <li><a style="font-size: 1rem;" href="/javascript/api/excel?view=excel-js-1.4">ExcelApi 1.4</a></li>
                 <li><a style="font-size: 1rem;" href="/javascript/api/excel?view=excel-js-1.3">ExcelApi 1.3</a></li>
                 <li><a style="font-size: 1rem;" href="/javascript/api/excel?view=excel-js-1.2">ExcelApi 1.2</a></li>
@@ -66,9 +66,10 @@ La liste suivante répertorie les API pour les [applications hôtes Office prise
             <h3>APIs Outlook</h3>
             <ul>
                 <li><a style="font-size: 1rem;" href="/javascript/api/outlook?view=outlook-js-preview">Aperçu de la boîte aux lettres</a></li>
+                <li><a style="font-size: 1rem;" href="/javascript/api/outlook?view=outlook-js-1.10">Mailbox 1.10</a></li>
                 <li><a style="font-size: 1rem;" href="/javascript/api/outlook?view=outlook-js-1.9">Mailbox 1.9</a></li>
-                <li><a style="font-size: 1rem;" href="/javascript/api/outlook?view=outlook-js-1.8">Mailbox 1.8</a></li>
-                <li><a style="font-size: 1rem;" href="/javascript/api/outlook?view=outlook-js-1.7">Mailbox 1.7</a></li>
+                <li><a style="font-size: 1rem;" href="/javascript/api/outlook?view=outlook-js-1.8">Mailbox 1.8</a></li>
+                <li><a style="font-size: 1rem;" href="/javascript/api/outlook?view=outlook-js-1.7">Mailbox 1.7</a></li>
                 <li><a style="font-size: 1rem;" href="/javascript/api/outlook?view=outlook-js-1.6">Mailbox 1.6</a></li>
                 <li><a style="font-size: 1rem;" href="/javascript/api/outlook?view=outlook-js-1.5">Mailbox 1.5</a></li>
                 <li><a style="font-size: 1rem;" href="/javascript/api/outlook?view=outlook-js-1.4">Mailbox 1.4</a></li>
@@ -155,7 +156,7 @@ La liste suivante répertorie les API pour les [applications hôtes Office prise
 </ul>
 
 > [!NOTE]
-> Si vous recherchez les API JavaScript pour le développement de scripts Office, visitez la page [Référence de l'API Office Scripts](/javascript/api/office-scripts/overview).
+> Si vous recherchez les API JavaScript pour le développement de scripts Office, visitez la page [Référence de l'API Office Scripts](/javascript/api/office-scripts/overview).
 
 ## <a name="see-also"></a>Voir aussi
 
