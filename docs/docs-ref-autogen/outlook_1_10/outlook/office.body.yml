@@ -9,6 +9,12 @@ summary: >-
 
   \[[Ensemble d’API : Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
 remarks: >-
+  **Problème connu avec les couleurs de bordure de tableau HTML**
+
+
+  Outlook sur Windows : si vous devez définir différentes bordures de cellule sur différentes couleurs dans un tableau HTML en mode Composition, les bordures d’une cellule risquent de ne pas refléter la couleur attendue. Pour connaître le comportement connu, [consultez le problème OfficeDev/office-js \# 1818](https://github.com/OfficeDev/office-js/issues/1818)<!-- -->.
+
+
   **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
 
@@ -79,7 +85,7 @@ methods:
       description: Chaîne à ajouter à la fin du corps. La chaîne est limitée à 5 000 caractères.
       type: string
     - id: options
-      description: 'Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel. `coercionType`<!-- -->: format souhaité pour les données à y être appendées. La chaîne du paramètre `data` est convertie dans ce format.'
+      description: 'Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel. `coercionType`<!-- -->: format souhaité pour les données à appender. La chaîne du paramètre `data` est convertie dans ce format.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" /> & <xref uid="outlook!Office.CoercionTypeOptions:interface" />
     - id: callback
       description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->. Les erreurs rencontrées seront indiquées dans la propriété `asyncResult.error`.
@@ -147,7 +153,7 @@ methods:
     Cette méthode renvoie l’intégralité du corps actuel au format spécifié par `coercionType`<!-- -->.
 
 
-    Lorsque vous travaillez avec des corps au format HTML, il est important de noter que les méthodes et les méthodes ne sont `Body.getAsync` `Body.setAsync` pas idempotentes. La valeur renvoyée par la méthode ne sera pas nécessairement identique à celle qui a été passée précédemment `getAsync` dans `setAsync` la méthode. Le client peut modifier la valeur transmise afin de le rendre `setAsync` efficacement avec son moteur de rendu.
+    Lorsque vous travaillez avec des corps au format HTML, il est important de noter que les méthodes et les méthodes ne sont `Body.getAsync` `Body.setAsync` pas idempotentes. La valeur renvoyée par la méthode ne sera pas nécessairement exactement identique à la valeur qui a été passée `getAsync` précédemment dans `setAsync` la méthode. Le client peut modifier la valeur transmise afin de le rendre efficacement `setAsync` avec son moteur de rendu.
 
 
     \[[Ensemble d’API : Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -209,7 +215,7 @@ methods:
     Cette méthode renvoie l’intégralité du corps actuel au format spécifié par `coercionType`<!-- -->.
 
 
-    Lorsque vous travaillez avec des corps au format HTML, il est important de noter que les méthodes et les méthodes ne sont `Body.getAsync` `Body.setAsync` pas idempotentes. La valeur renvoyée par la méthode ne sera pas nécessairement identique à celle qui a été passée précédemment `getAsync` dans `setAsync` la méthode. Le client peut modifier la valeur transmise afin de le rendre `setAsync` efficacement avec son moteur de rendu.
+    Lorsque vous travaillez avec des corps au format HTML, il est important de noter que les méthodes et les méthodes ne sont `Body.getAsync` `Body.setAsync` pas idempotentes. La valeur renvoyée par la méthode ne sera pas nécessairement exactement identique à la valeur qui a été passée `getAsync` précédemment dans `setAsync` la méthode. Le client peut modifier la valeur transmise afin de le rendre efficacement `setAsync` avec son moteur de rendu.
 
 
     \[[Ensemble d’API : Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -315,7 +321,7 @@ methods:
     Lorsque vous travaillez avec des corps au format HTML, il est important de noter que le client peut modifier la valeur transmise afin de la rendre plus efficace avec son moteur `prependAsync` de rendu. Cela signifie que la valeur renvoyée par un appel ultérieur à la méthode ne contiendra pas nécessairement exactement la valeur qui a été passée précédemment `Body.getAsync` dans `prependAsync` la méthode.
 
 
-    Lorsque vous insérez des liens dans le code HTML, vous pouvez désactiver l’aperçu de lien en ligne en attribuant l’attribut `id` au point d’ancrage (<!-- -->&lt;<!-- -->a<!-- -->&gt;<!-- -->) à « LPNoLP » (voir la section **Exemples** pour un exemple).
+    Lorsque vous insérez des liens dans le code HTML, vous pouvez désactiver l’aperçu des liens en ligne en attribuant l’attribut `id` au point d’ancrage (<!-- -->&lt;<!-- -->a<!-- -->&gt;<!-- -->) à « LPNoLP » (voir la section **Exemples** pour un exemple).
 
 
     \[[Ensemble d’API : Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -414,7 +420,7 @@ methods:
     Remplace l’ensemble du corps avec le texte spécifié.
 
 
-    Lorsque vous travaillez avec des corps au format HTML, il est important de noter que les méthodes et les méthodes ne sont `Body.getAsync` `Body.setAsync` pas idempotentes. La valeur renvoyée par la méthode ne sera pas nécessairement identique à celle qui a été passée précédemment `getAsync` dans `setAsync` la méthode. Le client peut modifier la valeur transmise afin de le rendre `setAsync` efficacement avec son moteur de rendu.
+    Lorsque vous travaillez avec des corps au format HTML, il est important de noter que les méthodes et les méthodes ne sont `Body.getAsync` `Body.setAsync` pas idempotentes. La valeur renvoyée par la méthode ne sera pas nécessairement exactement identique à la valeur qui a été passée `getAsync` précédemment dans `setAsync` la méthode. Le client peut modifier la valeur transmise afin de le rendre efficacement `setAsync` avec son moteur de rendu.
 
 
     Lorsque vous insérez des liens dans le code HTML, vous pouvez désactiver l’aperçu des liens en ligne en attribuant l’attribut `id` au point d’ancrage (<!-- -->&lt;<!-- -->a<!-- -->&gt;<!-- -->) à « LPNoLP » (voir la section **Exemples** pour un exemple).
@@ -492,7 +498,7 @@ methods:
     Remplace l’ensemble du corps avec le texte spécifié.
 
 
-    Lorsque vous travaillez avec des corps au format HTML, il est important de noter que les méthodes et les méthodes ne sont `Body.getAsync` `Body.setAsync` pas idempotentes. La valeur renvoyée par la méthode ne sera pas nécessairement identique à celle qui a été passée précédemment `getAsync` dans `setAsync` la méthode. Le client peut modifier la valeur transmise afin de le rendre `setAsync` efficacement avec son moteur de rendu.
+    Lorsque vous travaillez avec des corps au format HTML, il est important de noter que les méthodes et les méthodes ne sont `Body.getAsync` `Body.setAsync` pas idempotentes. La valeur renvoyée par la méthode ne sera pas nécessairement exactement identique à la valeur qui a été passée `getAsync` précédemment dans `setAsync` la méthode. Le client peut modifier la valeur transmise afin de le rendre efficacement `setAsync` avec son moteur de rendu.
 
 
     Lorsque vous insérez des liens dans le code HTML, vous pouvez désactiver l’aperçu des liens en ligne en attribuant l’attribut `id` au point d’ancrage (<!-- -->&lt;<!-- -->a<!-- -->&gt;<!-- -->) à « LPNoLP » (voir la section **Exemples** pour un exemple).
@@ -538,7 +544,7 @@ methods:
     La méthode `setSelectedDataAsync` insère la chaîne spécifiée à l’emplacement du curseur dans le corps de l’élément ou, si du texte est sélectionné dans l’éditeur, elle remplace ce texte. Si le curseur ne s’est jamais trouvé dans le corps de l’élément, ou si le corps de l’élément n’est plus la partie active de l’interface utilisateur, la chaîne est insérée au début du corps de l’élément. Après l’insertion, le curseur est placé à la fin du contenu inséré.
 
 
-    Lorsque vous insérez des liens dans le code HTML, vous pouvez désactiver l’aperçu de lien en ligne en setting the id attribute on the anchor (<!-- -->&lt;<!-- -->a<!-- -->&gt;<!-- -->) à « LPNoLP » (voir la section **Exemples** pour un exemple).
+    Lorsque vous insérez des liens dans le code HTML, vous pouvez désactiver l’aperçu de lien en ligne en setting l’attribut id sur l’ancrage (<!-- -->&lt;<!-- -->a<!-- -->&gt;<!-- -->) à « LPNoLP » (voir la section **Exemples** pour un exemple).
 
 
     \[[Ensemble d’API : Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -600,7 +606,7 @@ methods:
     La méthode `setSelectedDataAsync` insère la chaîne spécifiée à l’emplacement du curseur dans le corps de l’élément ou, si du texte est sélectionné dans l’éditeur, elle remplace ce texte. Si le curseur ne s’est jamais trouvé dans le corps de l’élément, ou si le corps de l’élément n’est plus la partie active de l’interface utilisateur, la chaîne est insérée au début du corps de l’élément. Après l’insertion, le curseur est placé à la fin du contenu inséré.
 
 
-    Lorsque vous insérez des liens dans le code HTML, vous pouvez désactiver l’aperçu de lien en ligne en setting the id attribute on the anchor (<!-- -->&lt;<!-- -->a<!-- -->&gt;<!-- -->) à « LPNoLP » (voir la section **Exemples** pour un exemple).
+    Lorsque vous insérez des liens dans le code HTML, vous pouvez désactiver l’aperçu de lien en ligne en setting l’attribut id sur l’ancrage (<!-- -->&lt;<!-- -->a<!-- -->&gt;<!-- -->) à « LPNoLP » (voir la section **Exemples** pour un exemple).
 
 
     \[[Ensemble d’API : Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -633,9 +639,9 @@ methods:
       type: void
       description: ''
 metadata:
-  ms.openlocfilehash: 7cfa342c9bd045b38e35e1b0527019f3f0fc834d
-  ms.sourcegitcommit: fc08f53e68f6acec0b6de81691ac5920f3974ed4
+  ms.openlocfilehash: 27d693e4adb7f298eab078bba90b1044af32f3e2
+  ms.sourcegitcommit: 1e0143ae4add09dbe22b0080d22fb25101757fba
   ms.translationtype: MT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 05/21/2021
-  ms.locfileid: "52591508"
+  ms.lasthandoff: 06/11/2021
+  ms.locfileid: "52895307"
