@@ -508,7 +508,7 @@ properties:
     Obtient l’ID de la série à qui appartient une instance.
 
 
-    Dans Outlook sur le web et les clients de bureau, la propriété renvoie `seriesId` l’ID Exchange Web Services (EWS) de l’élément parent (série) à qui cet élément appartient. Toutefois, sur iOS et Android, la seriesId renvoie l’ID REST de l’élément parent.
+    Dans Outlook sur le web clients de bureau et de bureau, la propriété renvoie `seriesId` l’ID Exchange Web Services (EWS) de l’élément parent (série) à qui cet élément appartient. Toutefois, sur iOS et Android, la seriesId renvoie l’ID REST de l’élément parent.
 
 
     **Remarque**: l’identificateur renvoyé par la propriété est identique à `seriesId` l’identificateur Exchange’élément des services Web. La propriété n’est pas identique aux ID Outlook utilisés par l Outlook `seriesId` API REST. Avant d’effectuer des appels d’API REST à l’aide de cette valeur, elle doit être convertie à l’aide de `Office.context.mailbox.convertToRestId`<!-- -->. Pour plus d’informations, voir [Utiliser les API REST Outlook à](https://docs.microsoft.com/office/dev/add-ins/outlook/use-rest-api) partir d’un Outlook de recherche<!-- -->.
@@ -1995,22 +1995,10 @@ methods:
   package: outlook!
   fullName: getSharedPropertiesAsync(options, callback)
   summary: >-
-    Obtient les propriétés d’un rendez-vous ou d’un message dans un dossier partagé.
+    Obtient les propriétés d’un rendez-vous ou d’un message dans un dossier partagé ou une boîte aux lettres partagée (désormais en prévisualisation).
 
 
-    **Important**: en mode composition de message, cette API n’est pas prise en charge dans Outlook sur le web ou Windows à moins que les conditions suivantes ne soient remplies.
-
-
-    1. Le propriétaire partage au moins un dossier de boîte aux lettres avec le délégué.
-
-
-    2. Le délégué rédige un message dans le dossier partagé.
-
-
-    Une fois le message envoyé, il se trouve généralement dans le dossier Éléments envoyés **du** délégué.
-
-
-    Pour plus d’informations sur l’utilisation de cette API, consultez [l’article d’accès délégué.](https://docs.microsoft.com/office/dev/add-ins/outlook/delegate-access)
+    Pour plus d’informations sur l’utilisation de cette API, consultez l’article sur les [dossiers partagés](https://docs.microsoft.com/office/dev/add-ins/outlook/delegate-access) et la boîte aux lettres partagée.
 
 
     **Remarque**: cette méthode n’est pas prise en charge Outlook sur iOS ou Android.
@@ -2018,6 +2006,36 @@ methods:
 
     \[[Ensemble d’API : Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
+    **Important**: en mode composition de message, cette API n’est pas prise en charge dans Outlook sur le web ou sur Windows à moins que les conditions suivantes ne soient remplies.
+
+
+    a. **Accès délégué/Dossiers partagés**
+
+
+    1. Le propriétaire de la boîte aux lettres démarre un message. Il peut s’agit d’un nouveau message, d’une réponse ou d’un forward.
+
+
+    2. Ils enregistrent le message, puis le déplacent de leur propre dossier **Brouillons** vers un dossier partagé avec le délégué.
+
+
+    3. Le délégué ouvre le brouillon à partir du dossier partagé, puis continue la composition.
+
+
+    b. **Boîte aux lettres partagée**
+
+
+    1. L’utilisateur de la boîte aux lettres partagée démarre un message. Il peut s’agit d’un nouveau message, d’une réponse ou d’un forward.
+
+
+    2. Ils enregistrent le message, puis le déplacent de leur propre dossier **Brouillons** vers un dossier de la boîte aux lettres partagée.
+
+
+    3. Un autre utilisateur de boîte aux lettres partagée ouvre le brouillon à partir de la boîte aux lettres partagée, puis continue la composition.
+
+
+    Le message se trouve maintenant dans un contexte partagé et les modules qui la prisent en charge de ces scénarios partagés peuvent obtenir les propriétés partagées de l’élément. Une fois le message envoyé, il se trouve généralement  dans le dossier Éléments envoyés de l’expéditeur.
+
+
     **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
 
@@ -2092,22 +2110,10 @@ methods:
   package: outlook!
   fullName: getSharedPropertiesAsync(callback)
   summary: >-
-    Obtient les propriétés d’un rendez-vous ou d’un message dans un dossier partagé.
+    Obtient les propriétés d’un rendez-vous ou d’un message dans un dossier partagé ou une boîte aux lettres partagée (désormais en prévisualisation).
 
 
-    **Important**: en mode composition de message, cette API n’est pas prise en charge dans Outlook sur le web ou Windows à moins que les conditions suivantes ne soient remplies.
-
-
-    1. Le propriétaire partage au moins un dossier de boîte aux lettres avec le délégué.
-
-
-    2. Le délégué rédige un message dans le dossier partagé.
-
-
-    Une fois le message envoyé, il se trouve généralement dans le dossier Éléments envoyés **du** délégué.
-
-
-    Pour plus d’informations sur l’utilisation de cette API, consultez [l’article d’accès délégué.](https://docs.microsoft.com/office/dev/add-ins/outlook/delegate-access)
+    Pour plus d’informations sur l’utilisation de cette API, consultez l’article sur les [dossiers partagés](https://docs.microsoft.com/office/dev/add-ins/outlook/delegate-access) et la boîte aux lettres partagée.
 
 
     **Remarque**: cette méthode n’est pas prise en charge Outlook sur iOS ou Android.
@@ -2115,6 +2121,36 @@ methods:
 
     \[[Ensemble d’API : Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
+    **Important**: en mode composition de message, cette API n’est pas prise en charge dans Outlook sur le web ou sur Windows à moins que les conditions suivantes ne soient remplies.
+
+
+    a. **Accès délégué/Dossiers partagés**
+
+
+    1. Le propriétaire de la boîte aux lettres démarre un message. Il peut s’agit d’un nouveau message, d’une réponse ou d’un forward.
+
+
+    2. Ils enregistrent le message, puis le déplacent de leur propre dossier **Brouillons** vers un dossier partagé avec le délégué.
+
+
+    3. Le délégué ouvre le brouillon à partir du dossier partagé, puis continue la composition.
+
+
+    b. **Boîte aux lettres partagée**
+
+
+    1. L’utilisateur de la boîte aux lettres partagée démarre un message. Il peut s’agit d’un nouveau message, d’une réponse ou d’un forward.
+
+
+    2. Ils enregistrent le message, puis le déplacent de leur propre dossier **Brouillons** vers un dossier de la boîte aux lettres partagée.
+
+
+    3. Un autre utilisateur de boîte aux lettres partagée ouvre le brouillon à partir de la boîte aux lettres partagée, puis continue la composition.
+
+
+    Le message se trouve maintenant dans un contexte partagé et les modules qui la prisent en charge de ces scénarios partagés peuvent obtenir les propriétés partagées de l’élément. Une fois le message envoyé, il se trouve généralement  dans le dossier Éléments envoyés de l’expéditeur.
+
+
     **[Niveau d’autorisation minimal](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
 
@@ -2323,7 +2359,7 @@ methods:
     content: 'removeAttachmentAsync(attachmentId: string, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: attachmentId
-      description: Identificateur de la pièce jointe à supprimer. La longueur maximale de la chaîne est de 200 caractères Outlook sur le web et `attachmentId` sur Windows.
+      description: Identificateur de la pièce jointe à supprimer. La longueur maximale de la chaîne est de 200 caractères en Outlook sur le web `attachmentId` et Windows.
       type: string
     - id: options
       description: 'Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel.'
@@ -2363,7 +2399,7 @@ methods:
     content: 'removeAttachmentAsync(attachmentId: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: attachmentId
-      description: Identificateur de la pièce jointe à supprimer. La longueur maximale de la chaîne est de 200 caractères Outlook sur le web et `attachmentId` sur Windows.
+      description: Identificateur de la pièce jointe à supprimer. La longueur maximale de la chaîne est de 200 caractères en Outlook sur le web `attachmentId` et Windows.
       type: string
     - id: callback
       description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->. En cas d’échec de la suppression de la pièce jointe, la propriété `asyncResult.error` contient un code d’erreur et la raison de l’échec.
@@ -2609,7 +2645,7 @@ methods:
       description: Données à insérer. Les données ne doivent pas dépasser 1 000 000 caractères. Si elles contiennent plus de 1 000 000 caractères, une exception `ArgumentOutOfRange` est générée.
       type: string
     - id: options
-      description: 'Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel. `coercionType`<!-- -->: s’il s’agit de texte, le style actuel est appliqué Outlook sur le web et les clients de bureau. Si le champ est un éditeur HTML, seules les données de texte sont insérées, même si les données sont au format HTML. Si html et le champ prend en charge le code HTML (l’objet ne le prend pas en charge), le style actuel est appliqué dans Outlook sur le web et le style par défaut est appliqué dans Outlook sur les clients de bureau. Si le champ est au format texte, une erreur `InvalidDataFormat` est renvoyée. Si la propriété `coercionType` n’est pas définie, le résultat dépend du champ : si le champ est au format HTML, le langage HTML est utilisé ; si le champ est au format texte, le texte brut est utilisé.'
+      description: 'Littéral d’objet contenant une ou plusieurs des propriétés suivantes. `asyncContext`<!-- -->: les développeurs peuvent fournir n’importe quel objet à accéder dans la méthode de rappel. `coercionType`<!-- -->: s’il s’agit de texte, le style actuel est appliqué dans Outlook sur le web clients de bureau et de bureau. Si le champ est un éditeur HTML, seules les données de texte sont insérées, même si les données sont au format HTML. Si le code HTML et le champ prend en charge le code HTML (ce n’est pas le cas de l’objet), le style actuel est appliqué en Outlook sur le web et le style par défaut est appliqué dans Outlook clients de bureau. Si le champ est au format texte, une erreur `InvalidDataFormat` est renvoyée. Si la propriété `coercionType` n’est pas définie, le résultat dépend du champ : si le champ est au format HTML, le langage HTML est utilisé ; si le champ est au format texte, le texte brut est utilisé.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" /> & <xref uid="outlook!Office.CoercionTypeOptions:interface" />
     - id: callback
       description: Facultatif. Une fois la méthode terminée, la fonction passée dans le paramètre est appelée avec `callback` un seul paramètre de type `Office.AsyncResult`<!-- -->.
@@ -2656,9 +2692,9 @@ methods:
       description: ''
 extends: <xref uid="outlook!Office.Message:interface" />
 metadata:
-  ms.openlocfilehash: 295469f6e272c6af5d975b7920c84ef258ea8bfb
-  ms.sourcegitcommit: 1e0143ae4add09dbe22b0080d22fb25101757fba
+  ms.openlocfilehash: 21e9d03222ce1be79dbbd155dc29690410cdc1f0
+  ms.sourcegitcommit: 319b8cca7d91e51669407633dacc02ea6e4f4338
   ms.translationtype: MT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 06/11/2021
-  ms.locfileid: "52895573"
+  ms.lasthandoff: 06/18/2021
+  ms.locfileid: "53009819"
