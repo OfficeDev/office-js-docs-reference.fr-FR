@@ -4,10 +4,10 @@ uid: office!Office.UI:interface
 package: office!
 fullName: Office.UI
 summary: >-
-  Fournit des objets et des méthodes que vous pouvez utiliser pour créer et manipuler des composants d’interface utilisateur, tels que des boîtes de dialogue, dans vos applications Office.
+  Fournit des objets et des méthodes que vous pouvez utiliser pour créer et manipuler des composants d’interface utilisateur, tels que des boîtes de dialogue, dans vos Office de données.
 
 
-  Visiter «[Utiliser l’API de boîte de dialogue dans vos add-ins Office](https://docs.microsoft.com/office/dev/add-ins/develop/dialog-api-in-office-add-ins)<!-- -->» pour plus d’informations.
+  Visiter «[Utiliser l’API de boîte](https://docs.microsoft.com/office/dev/add-ins/develop/dialog-api-in-office-add-ins) de dialogue dans vos Office de boîte de dialogue<!-- -->» pour plus d’informations.
 remarks: ''
 isPreview: false
 isDeprecated: false
@@ -32,13 +32,13 @@ methods:
       description: Spécifie le type d’événement à ajouter. Il doit s’y trouver `Office.EventType.DialogParentMessageReceived`<!-- -->.
       type: <xref uid="office!Office.EventType:enum" />
     - id: handler
-      description: Fonction de gestion d’événements à ajouter, dont le seul paramètre est de type [Office.DialogParentMessageReceivedEventArgs](xref:office!Office.DialogParentMessageReceivedEventArgs:interface)<!-- -->.
+      description: Fonction de handler d’événements à ajouter, dont le seul paramètre est de type [Office. DialogParentMessageReceivedEventArgs](xref:office!Office.DialogParentMessageReceivedEventArgs:interface)<!-- -->.
       type: '(result: <xref uid="office!Office.DialogParentMessageReceivedEventArgs:interface" />) =&gt; void'
     - id: options
       description: Facultatif. Fournit une option de conservation des données de contexte de n’importe quel type, sans modification, à utiliser dans un rappel.
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Facultatif. Fonction qui est invoquée lors du retour de l’inscription du handler, dont le seul paramètre est de type [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
+      description: Facultatif. Fonction qui est invoquée lors du retour de l’inscription du handler, dont le seul paramètre est de type [Office. AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -96,7 +96,7 @@ methods:
     - [Mailbox 1.4](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)
 
 
-    Cette méthode est disponible dans l’ensemble de conditions requises DialogApi pour les applications Excel, PowerPoint ou Word, et dans l’ensemble de conditions requises Mailbox 1.4 pour Outlook. Pour plus d’informations sur la spécification d’un ensemble de conditions requises dans votre manifeste, voir Spécifier les hôtes [Office et les conditions requises de l’API](https://docs.microsoft.com/office/dev/add-ins/develop/specify-office-hosts-and-api-requirements)<!-- -->.
+    Cette méthode est disponible dans l’ensemble de conditions requises DialogApi pour les Excel, PowerPoint ou word, et dans l’ensemble de conditions requises Mailbox 1.4 pour Outlook. Pour plus d’informations sur la spécification d’un ensemble de conditions requises dans votre manifeste, voir Spécifier les Office et les conditions requises de [l’API](https://docs.microsoft.com/office/dev/add-ins/develop/specify-office-hosts-and-api-requirements)<!-- -->.
 
 
     La page initiale doit se trouver sur le même domaine que la page parent (paramètre startAddress). Après le chargement de la page initiale, vous pouvez également accéder à d’autres domaines.
@@ -111,7 +111,7 @@ methods:
     Les considérations relatives à la conception ci-dessous s’appliquent aux boîtes de dialogue :
 
 
-    - Une boîte de dialogue ne peut être ouverte qu’une seule fois dans un volet Office Add-in. Plusieurs boîtes de dialogue peuvent être ouvertes en même temps à partir des commandes de module (boutons de ruban personnalisés ou éléments de menu).
+    - Un Office du volet Des tâches du module de Office ne peut avoir qu’une seule boîte de dialogue ouverte à tout moment. Plusieurs boîtes de dialogue peuvent être ouvertes en même temps à partir des commandes de module (boutons de ruban personnalisés ou éléments de menu).
 
 
     - Toutes les boîtes de dialogue peuvent être déplacées et redimensionnées par l’utilisateur.
@@ -144,10 +144,10 @@ methods:
     <table> <tr> <th>Numéro de code</th> <th>Signification</th> </tr> <tr> <td>12004</td> <td>Le domaine de l’URL transmise à displayDialogAsync n’est pas approuvé. Le domaine doit soit être identique à la page hôte (y compris le protocole et le numéro de port), soit être inscrit dans la section `AppDomains` du manifeste du complément.</td> </tr> <tr> <td>12005</td> <td>L’URL transmise à displayDialogAsync utilise le protocole HTTP. C’est le protocole HTTPS qui est requis. (Dans certaines versions d’Office, le message d’erreur renvoyé avec le code 12005 est identique à celui renvoyé avec le code 12004.)</td> </tr> <tr> <td>12007</td> <td>Une boîte de dialogue est déjà ouverte à partir du volet Office. Une seule boîte de dialogue à la fois peut être ouverte dans un complément de volet Office.</td> </tr> <tr> <td>12009</td> <td>L’utilisateur a choisi d’ignorer la boîte de dialogue. Cette erreur peut se produire dans les versions en ligne d’Office, quand les utilisateurs peuvent choisir d’autoriser ou non un complément à afficher une boîte de dialogue.</td> </tr> </table>
 
 
-    Dans la fonction de rappel passée à la méthode displayDialogAsync, vous pouvez utiliser les propriétés de l’objet AsyncResult pour renvoyer les informations suivantes.
+    Dans la fonction de rappel transmise à la méthode displayDialogAsync, vous pouvez utiliser les propriétés de l’objet AsyncResult pour renvoyer les informations suivantes.
 
 
-    <table> <tr> <th>Propriété</th> <th>À utiliser pour</th> </tr> <tr> <td>AsyncResult.value</td> <td>Accéder à l’objet Dialog.</td> </tr> <tr> <td>AsyncResult.status</td> <td>Déterminer si l’opération a réussi ou échoué.</td> </tr> <tr> <td>AsyncResult.error</td> <td>Accéder à un objet Error fournissant des informations sur l’erreur en cas d’échec de l’opération.</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>Accéder à votre valeur ou object défini par l’utilisateur, si vous en avez passé un en tant que paramètre asyncContext.</td> </tr> </table>
+    <table> <tr> <th>Propriété</th> <th>À utiliser</th> </tr> <tr> <td>AsyncResult.value</td> <td>Accéder à l’objet Dialog.</td> </tr> <tr> <td>AsyncResult.status</td> <td>Déterminer si l’opération a réussi ou échoué.</td> </tr> <tr> <td>AsyncResult.error</td> <td>Accéder à un objet Error fournissant des informations sur l’erreur en cas d’échec de l’opération.</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>Accéder à votre valeur ou object défini par l’utilisateur, si vous en avez passé un en tant que paramètre asyncContext.</td> </tr> </table>
   isPreview: false
   isDeprecated: false
   syntax:
@@ -157,7 +157,7 @@ methods:
       description: Accepte l’URL HTTPS complète initiale qui s’ouvre dans la boîte de dialogue. Les URL relatives ne doivent pas être utilisées.
       type: string
     - id: options
-      description: Facultatif. Accepte un [objet Office.DialogOptions pour](xref:office!Office.DialogOptions:interface) définir l’affichage de la boîte de dialogue.
+      description: Facultatif. Accepte une [Office. Objet DialogOptions](xref:office!Office.DialogOptions:interface) pour définir l’affichage de la boîte de dialogue.
       type: <xref uid="office!Office.DialogOptions:interface" />
     - id: callback
       description: Facultatif. Accepte une méthode de rappel pour gérer la tentative de création de boîte de dialogue. Si elle réussit, asyncResult.value est un objet Dialog.
@@ -183,7 +183,7 @@ methods:
     - [Mailbox 1.4](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)
 
 
-    Cette méthode est disponible dans l’ensemble de conditions requises DialogApi pour les applications Excel, PowerPoint ou Word, et dans l’ensemble de conditions requises Mailbox 1.4 pour Outlook. Pour plus d’informations sur la spécification d’un ensemble de conditions requises dans votre manifeste, voir Spécifier les hôtes [Office et les conditions requises de l’API](https://docs.microsoft.com/office/dev/add-ins/develop/specify-office-hosts-and-api-requirements)<!-- -->.
+    Cette méthode est disponible dans l’ensemble de conditions requises DialogApi pour les Excel, PowerPoint ou word, et dans l’ensemble de conditions requises Mailbox 1.4 pour Outlook. Pour plus d’informations sur la spécification d’un ensemble de conditions requises dans votre manifeste, voir Spécifier les Office et les conditions requises de [l’API](https://docs.microsoft.com/office/dev/add-ins/develop/specify-office-hosts-and-api-requirements)<!-- -->.
 
 
     La page initiale doit se trouver sur le même domaine que la page parent (paramètre startAddress). Après le chargement de la page initiale, vous pouvez également accéder à d’autres domaines.
@@ -198,7 +198,7 @@ methods:
     Les considérations relatives à la conception ci-dessous s’appliquent aux boîtes de dialogue :
 
 
-    - Une boîte de dialogue ne peut être ouverte qu’une seule fois dans un volet Office Add-in. Plusieurs boîtes de dialogue peuvent être ouvertes en même temps à partir des commandes de module (boutons de ruban personnalisés ou éléments de menu).
+    - Un Office du volet Des tâches du module de Office ne peut avoir qu’une seule boîte de dialogue ouverte à tout moment. Plusieurs boîtes de dialogue peuvent être ouvertes en même temps à partir des commandes de module (boutons de ruban personnalisés ou éléments de menu).
 
 
     - Toutes les boîtes de dialogue peuvent être déplacées et redimensionnées par l’utilisateur.
@@ -216,7 +216,7 @@ methods:
     - Afficher les pages d’authentification permettant de collecter les informations d’identification de l’utilisateur.
 
 
-    - Afficher un écran d’erreur/de progression/d’entrée à partir d’une commande ShowTaskpane ou ExecuteAction.
+    - Affichez un écran d’erreur/de progression/d’entrée à partir d’une commande ShowTaskpane ou ExecuteAction.
 
 
     - Augmenter provisoirement la surface dont un utilisateur dispose pour effectuer une tâche.
@@ -258,11 +258,11 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'messageParent(message: boolean | string): void;'
+    content: 'messageParent(message: string): void;'
     parameters:
     - id: message
-      description: Accepte un message provenant de la boîte de dialogue et destiné au complément. Outre un booléen, tout ce qui peut être sérialisé en une chaîne, y compris JSON et XML, peut être envoyé.
-      type: boolean | string
+      description: Accepte un message provenant de la boîte de dialogue et destiné au complément. Tout ce qui peut être casté en chaîne ou sérialisé en chaîne, y compris JSON et XML, peut être envoyé.
+      type: string
     return:
       type: void
       description: ''
@@ -284,9 +284,9 @@ methods:
       type: void
       description: ''
 metadata:
-  ms.openlocfilehash: 553a8191d829519444018d0defd70317881f2ca1
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: 020d5790fcdf5ae987f1ec483b1318262951e8e3
+  ms.sourcegitcommit: a0029cf9da418726672be2ce2474b6e2aedea2be
   ms.translationtype: MT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51225229"
+  ms.lasthandoff: 06/30/2021
+  ms.locfileid: "53204160"
