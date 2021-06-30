@@ -18,7 +18,7 @@ properties:
   package: excel!
   fullName: address
   summary: >-
-    Spécifie la référence de plage en style A1. La valeur d’adresse contient la référence de feuille (par exemple, « Feuille1 ! A1:B4 »).
+    Spécifie la référence de plage dans le style A1. La valeur d’adresse contient la référence de feuille (par exemple, « Feuille1 ! A1:B4 »).
 
 
     \[[Ensemble d’API : ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -547,7 +547,7 @@ methods:
   package: excel!
   fullName: autoFill(destinationRange, autoFillType)
   summary: >-
-    Remplit la plage actuelle à la plage de destination à l’aide de la logique de remplissage automatique spécifiée. La plage de destination peut être `null`<!-- -->ou peut étendre la source horizontalement ou verticalement. Les plages nonigues ne sont pas pris en charge.
+    Remplit les plages de la plage actuelle à la plage de destination à l’aide de la logique de remplissage automatique spécifiée. La plage de destination peut être `null`<!-- -->ou peut étendre la source horizontalement ou verticalement. Les plages nonigues ne sont pas pris en charge.
 
 
     Pour plus d’informations, voir [Utiliser le remplissage automatique et le remplissage flash](https://support.office.com/article/video-use-autofill-and-flash-fill-2e79a709-c814-4b27-8bc2-c4dc84d49464)<!-- -->.
@@ -691,7 +691,7 @@ methods:
       description: ID de service qui sera utilisé pour interroger les données.
       type: number
     - id: languageCulture
-      description: Culture de langue pour l’interrogation du service.
+      description: Culture de langue pour interroger le service.
       type: string
     return:
       type: void
@@ -712,7 +712,7 @@ methods:
     content: 'copyFrom(sourceRange: Range | RangeAreas | string, copyType?: Excel.RangeCopyType, skipBlanks?: boolean, transpose?: boolean): void;'
     parameters:
     - id: sourceRange
-      description: Plage source ou `RangeAreas` à partir de la copie. Lorsque la source possède plusieurs plages, son formulaire doit pouvoir être créé en supprimant des lignes ou des `RangeAreas` colonnes complètes d’une plage rectangulaire.
+      description: Plage source ou `RangeAreas` à partir de la copie. Lorsque la source possède plusieurs plages, leur formulaire doit pouvoir être créé en supprimant des lignes ou des `RangeAreas` colonnes complètes d’une plage rectangulaire.
       type: <xref uid="excel!Excel.Range:class" /> | <xref uid="excel!Excel.RangeAreas:class" /> | string
     - id: copyType
       description: Type de données de cellule ou de mise en forme à copier. La valeur par défaut est « All ».
@@ -742,7 +742,7 @@ methods:
     content: 'copyFrom(sourceRange: Range | RangeAreas | string, copyTypeString?: "All" | "Formulas" | "Values" | "Formats", skipBlanks?: boolean, transpose?: boolean): void;'
     parameters:
     - id: sourceRange
-      description: Plage source ou `RangeAreas` à partir de la copie. Lorsque la source possède plusieurs plages, son formulaire doit pouvoir être créé en supprimant des lignes ou des `RangeAreas` colonnes complètes d’une plage rectangulaire.
+      description: Plage source ou `RangeAreas` à partir de la copie. Lorsque la source possède plusieurs plages, leur formulaire doit pouvoir être créé en supprimant des lignes ou des `RangeAreas` colonnes complètes d’une plage rectangulaire.
       type: <xref uid="excel!Excel.Range:class" /> | <xref uid="excel!Excel.RangeAreas:class" /> | string
     - id: copyTypeString
       description: Type de données de cellule ou de mise en forme à copier. La valeur par défaut est « All ».
@@ -931,7 +931,7 @@ methods:
       type: number
     return:
       type: <xref uid="excel!Excel.Range:class" />
-      description: "\n\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nExcel.run(function (ctx) { \n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"A1:F8\";\n    var worksheet = ctx.workbook.worksheets.getItem(sheetName);\n    var range = worksheet.getRange(rangeAddress);\n    var cell = range.cell(0,0);\n    cell.load('address');\n    return ctx.sync().then(function() {\n        console.log(cell.address);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+      description: "\n\n#### <a name=\"examples\"></a>Exemples\n\n```javascript\nExcel.run(function (ctx) { \n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"A1:F8\";\n    var worksheet = ctx.workbook.worksheets.getItem(sheetName);\n    var range = worksheet.getRange(rangeAddress);\n    var cell = range.getCell(0,0);\n    cell.load('address');\n    return ctx.sync().then(function() {\n        console.log(cell.address);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
 - name: getCellProperties(cellPropertiesLoadOptions)
   uid: excel!Excel.Range#getCellProperties:member(1)
   package: excel!
@@ -1149,7 +1149,7 @@ methods:
   package: excel!
   fullName: getIntersectionOrNullObject(anotherRange)
   summary: >-
-    Obtient l’objet de plage qui représente l’intersection rectangulaire des plages données. Si aucune intersection n’est trouvée, cette fonction retourne un objet dont la `isNullObject` propriété est définie sur `true`<!-- -->. Pour plus d’informations, [voir *OrNullObject methods and properties](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
+    Obtient l’objet de plage qui représente l’intersection rectangulaire des plages données. Si aucune intersection n’est trouvée, cette fonction retourne un objet dont `isNullObject` la propriété est définie sur `true`<!-- -->. Pour plus d’informations, [voir *OrNullObject methods and properties](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Ensemble d’API : ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1353,7 +1353,7 @@ methods:
   package: excel!
   fullName: getSpecialCells(cellType, cellValueType)
   summary: >-
-    Obtient l’objet, comprenant une ou plusieurs plages rectangulaires, qui représente toutes les cellules qui correspondent au type et à la valeur `RangeAreas` spécifiés. Si aucune cellule spéciale n’est trouvée, une `ItemNotFound` erreur est envoyée.
+    Obtient l’objet, comprenant une ou plusieurs plages rectangulaires, qui représente toutes les cellules qui correspondent au type et à la valeur `RangeAreas` spécifiés. Si aucune cellule spéciale n’est trouvée, `ItemNotFound` une erreur est envoyée.
 
 
     \[[Ensemble d’API : ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1377,7 +1377,7 @@ methods:
   package: excel!
   fullName: getSpecialCells(cellTypeString, cellValueType)
   summary: >-
-    Obtient l’objet, comprenant une ou plusieurs plages rectangulaires, qui représente toutes les cellules qui correspondent au type et à la valeur `RangeAreas` spécifiés. Si aucune cellule spéciale n’est trouvée, une `ItemNotFound` erreur est envoyée.
+    Obtient l’objet, comprenant une ou plusieurs plages rectangulaires, qui représente toutes les cellules qui correspondent au type et à la valeur `RangeAreas` spécifiés. Si aucune cellule spéciale n’est trouvée, `ItemNotFound` une erreur est envoyée.
 
 
     \[[Ensemble d’API : ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1899,7 +1899,7 @@ methods:
   package: excel!
   fullName: setColumnProperties(columnPropertiesData)
   summary: >-
-    Met à jour la plage basée sur un tableau à une dimension de propriétés de colonne, en encapsulant des éléments tels que la police, le remplissage, les bordures et l’alignement.
+    Met à jour la plage basée sur un tableau à une dimension des propriétés de colonne, en encapsulant des éléments tels que la police, le remplissage, les bordures et l’alignement.
 
 
     \[[Ensemble d’API : ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -2016,7 +2016,7 @@ methods:
   uid: excel!Excel.Range#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Remplace la méthode JavaScript afin de fournir une sortie plus utile lorsqu’un objet `toJSON()` API est transmis à `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle `toJSON` la méthode de l’objet qui lui est transmis.) Tandis que la Excel. Objet Range est un objet API, la `toJSON` méthode renvoie un objet JavaScript simple (tapé sous la forme`Excel.Interfaces.RangeData`<!-- -->) qui contient des copies superficiels de toutes les propriétés enfants chargées à partir de l’objet d’origine.
+  summary: Remplace la méthode JavaScript afin de fournir une sortie plus utile lorsqu’un objet `toJSON()` API est transmis à `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, à son tour, appelle `toJSON` la méthode de l’objet qui lui est transmis.) Tandis que l’Excel. Range object is an API object, the `toJSON` method returns a plain JavaScript object (typed as`Excel.Interfaces.RangeData`<!-- -->) qui contient des copies superficiels de toutes les propriétés enfants chargées à partir de l’objet d’origine.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -2112,9 +2112,9 @@ methods:
       description: "\n\n#### <a name=\"examples\"></a>範例\n\n```typescript\nExcel.run(async (context) => {\n    const largeRange = context.workbook.getSelectedRange();\n    largeRange.load([\"rowCount\", \"columnCount\"]);\n    await context.sync();\n\n    for (let i = 0; i < largeRange.rowCount; i++) {\n        for (let j = 0; j < largeRange.columnCount; j++) {\n            let cell = largeRange.getCell(i, j);\n            cell.values = [[i *j]];\n\n            // call untrack() to release the range from memory\n            cell.untrack();\n        }\n    }\n\n    await context.sync();\n});\n```"
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 85003c03d0b8736667f866f24bcd948db65794b4
-  ms.sourcegitcommit: 16b421acd04a82b5ea86019798317c4bb1a99435
+  ms.openlocfilehash: 15f010d2ad11d359fcdec3224be1405e99d687bb
+  ms.sourcegitcommit: a0029cf9da418726672be2ce2474b6e2aedea2be
   ms.translationtype: MT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 05/25/2021
-  ms.locfileid: "52640193"
+  ms.lasthandoff: 06/30/2021
+  ms.locfileid: "53204069"
