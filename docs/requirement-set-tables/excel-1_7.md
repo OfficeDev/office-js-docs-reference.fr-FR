@@ -1,10 +1,10 @@
 | Classe | Champs | Description |
 |:---|:---|:---|
-|[Graphique](/javascript/api/excel/excel.chart)|[chartType](/javascript/api/excel/excel.chart#charttype)|Spécifie le type du graphique.|
+|[Chart](/javascript/api/excel/excel.chart)|[chartType](/javascript/api/excel/excel.chart#charttype)|Spécifie le type du graphique.|
 ||[id](/javascript/api/excel/excel.chart#id)|L’ID unique du graphique.|
-||[showAllFieldButtons](/javascript/api/excel/excel.chart#showallfieldbuttons)|Spécifie si tous les boutons de champ d’un tableau croisé dynamique sont affichés.|
+||[showAllFieldButtons](/javascript/api/excel/excel.chart#showallfieldbuttons)|Spécifie s’il faut afficher tous les boutons de champ sur une PivotChart.|
 |[ChartAreaFormat](/javascript/api/excel/excel.chartareaformat)|[border](/javascript/api/excel/excel.chartareaformat#border)|Représente le format de bordure de la zone de graphique, qui inclut la couleur, le style de trait et l’pondération.|
-|[ChartAxes](/javascript/api/excel/excel.chartaxes)|[getItem(type: Excel.ChartAxisType, group?: Excel.ChartAxisGroup)](/javascript/api/excel/excel.chartaxes#getitem-type--group-)|Renvoie l’axe spécifique identifié par type et par groupe.|
+|[ChartAxes](/javascript/api/excel/excel.chartaxes)|[getItem(type : Excel. ChartAxisType, group? : Excel. ChartAxisGroup)](/javascript/api/excel/excel.chartaxes#getitem-type--group-)|Renvoie l’axe spécifique identifié par type et par groupe.|
 |[ChartAxis](/javascript/api/excel/excel.chartaxis)|[baseTimeUnit](/javascript/api/excel/excel.chartaxis#basetimeunit)|Spécifie l’unité de base de l’axe des catégories spécifié.|
 ||[categoryType](/javascript/api/excel/excel.chartaxis#categorytype)|Spécifie le type d’axe des catégories.|
 ||[displayUnit](/javascript/api/excel/excel.chartaxis#displayunit)|Représente l’unité d’affichage de l’axe.|
@@ -20,7 +20,7 @@
 ||[top](/javascript/api/excel/excel.chartaxis#top)|Spécifie la distance, en points, entre le bord supérieur de l’axe et le haut de la zone de graphique.|
 ||[type](/javascript/api/excel/excel.chartaxis#type)|Spécifie le type d’axe.|
 ||[width](/javascript/api/excel/excel.chartaxis#width)|Spécifie la largeur, en points, de l’axe du graphique.|
-||[reversePlotOrder](/javascript/api/excel/excel.chartaxis#reverseplotorder)|Spécifie si Excel trace les points de données du dernier au premier.|
+||[reversePlotOrder](/javascript/api/excel/excel.chartaxis#reverseplotorder)|Spécifie si Excel points de données du dernier au premier.|
 ||[scaleType](/javascript/api/excel/excel.chartaxis#scaletype)|Spécifie le type d’échelle de l’axe des valeurs.|
 ||[setCategoryNames(sourceData: Range)](/javascript/api/excel/excel.chartaxis#setcategorynames-sourcedata-)|Définit tous les noms de catégorie pour l’axe spécifié.|
 ||[setCustomDisplayUnit(value: number)](/javascript/api/excel/excel.chartaxis#setcustomdisplayunit-value-)|Définit l’unité d’affichage axe sur une valeur personnalisée.|
@@ -97,7 +97,7 @@
 ||[polynomialOrder](/javascript/api/excel/excel.charttrendline#polynomialorder)|Représente l’ordre d’une courbe de tendance de graphique.|
 ||[format](/javascript/api/excel/excel.charttrendline#format)|Représente la mise en forme de courbe de tendance de graphique.|
 ||[type](/javascript/api/excel/excel.charttrendline#type)|Représente le type de courbe de tendance de graphique.|
-|[ChartTrendlineCollection](/javascript/api/excel/excel.charttrendlinecollection)|[add(type?: Excel.ChartTrendlineType)](/javascript/api/excel/excel.charttrendlinecollection#add-type-)|Ajoute une nouvelle courbe de tendance à la collection de courbes de tendance.|
+|[ChartTrendlineCollection](/javascript/api/excel/excel.charttrendlinecollection)|[add(type?: Excel. ChartTrendlineType)](/javascript/api/excel/excel.charttrendlinecollection#add-type-)|Ajoute une nouvelle courbe de tendance à la collection de courbes de tendance.|
 ||[getCount()](/javascript/api/excel/excel.charttrendlinecollection#getcount--)|Renvoie le nombre de courbes de tendance de la collection.|
 ||[getItem(index : numérique)](/javascript/api/excel/excel.charttrendlinecollection#getitem-index-)|Obtient un objet de courbe de tendance par index, qui est l’ordre d’insertion dans le tableau d’éléments.|
 ||[items](/javascript/api/excel/excel.charttrendlinecollection#items)|Obtient l’élément enfant chargé dans cette collection de sites.|
@@ -133,7 +133,7 @@
 ||[getImage()](/javascript/api/excel/excel.range#getimage--)|Restituer la plage en tant qu’image png codée en base 64.|
 ||[getSurroundingRegion()](/javascript/api/excel/excel.range#getsurroundingregion--)|Renvoie un objet qui représente la région environnante pour la cellule `Range` supérieure gauche de cette plage.|
 ||[lien hypertexte](/javascript/api/excel/excel.range#hyperlink)|Représente le lien hypertexte de la plage actuelle.|
-||[numberFormatLocal](/javascript/api/excel/excel.range#numberformatlocal)|Représente le code de format numérique d’Excel pour la plage donnée, en fonction des paramètres de langue de l’utilisateur.|
+||[numberFormatLocal](/javascript/api/excel/excel.range#numberformatlocal)|Représente le code Excel format numérique de la plage donnée, en fonction des paramètres de langue de l’utilisateur.|
 ||[isEntireColumn](/javascript/api/excel/excel.range#isentirecolumn)|Représente si la plage active est une colonne entière.|
 ||[isEntireRow](/javascript/api/excel/excel.range#isentirerow)|Représente si la plage active est une ligne entière.|
 ||[showCard()](/javascript/api/excel/excel.range#showcard--)|Affiche la carte pour une cellule active si son contenu est riche en valeur.|
@@ -166,11 +166,11 @@
 ||[name](/javascript/api/excel/excel.style#name)|Nom du style.|
 ||[shrinkToFit](/javascript/api/excel/excel.style#shrinktofit)|Spécifie si le texte est automatiquement réduit pour tenir dans la largeur de colonne disponible.|
 ||[verticalAlignment](/javascript/api/excel/excel.style#verticalalignment)|Spécifie l’alignement vertical du style.|
-||[wrapText](/javascript/api/excel/excel.style#wraptext)|Spécifie si Excel encapsule le texte dans l’objet.|
+||[wrapText](/javascript/api/excel/excel.style#wraptext)|Spécifie si Excel le texte dans l’objet.|
 |[StyleCollection](/javascript/api/excel/excel.stylecollection)|[add(name: string)](/javascript/api/excel/excel.stylecollection#add-name-)|Ajoute un nouveau style à la collection.|
 ||[getItem(name: string)](/javascript/api/excel/excel.stylecollection#getitem-name-)|Obtient `Style` une par nom.|
 ||[items](/javascript/api/excel/excel.stylecollection#items)|Obtient l’élément enfant chargé dans cette collection de sites.|
-|[Tableau](/javascript/api/excel/excel.table)|[onChanged](/javascript/api/excel/excel.table#onchanged)|Se produit lorsque les données des cellules changent dans un tableau spécifique.|
+|[Table](/javascript/api/excel/excel.table)|[onChanged](/javascript/api/excel/excel.table#onchanged)|Se produit lorsque les données des cellules changent dans un tableau spécifique.|
 ||[onSelectionChanged](/javascript/api/excel/excel.table#onselectionchanged)|Se produit lorsque la sélection change dans un tableau spécifique.|
 |[TableChangedEventArgs](/javascript/api/excel/excel.tablechangedeventargs)|[adresse](/javascript/api/excel/excel.tablechangedeventargs#address)|Obtient l’adresse qui représente la zone modifiée d’un tableau figurant dans une feuille de calcul spécifique.|
 ||[changeType](/javascript/api/excel/excel.tablechangedeventargs#changetype)|Obtient le type de modification qui représente la façon dont l’événement modifié est déclenché.|
@@ -184,7 +184,7 @@
 ||[tableId](/javascript/api/excel/excel.tableselectionchangedeventargs#tableid)|Obtient l’ID du tableau dans lequel la sélection a été modifiée.|
 ||[type](/javascript/api/excel/excel.tableselectionchangedeventargs#type)|Obtient le type de l’événement.|
 ||[worksheetId](/javascript/api/excel/excel.tableselectionchangedeventargs#worksheetid)|Obtient l’ID de la feuille de calcul dans laquelle la sélection a été modifiée.|
-|[Classeur](/javascript/api/excel/excel.workbook)|[getActiveCell()](/javascript/api/excel/excel.workbook#getactivecell--)|Obtient la cellule active du classeur.|
+|[Workbook](/javascript/api/excel/excel.workbook)|[getActiveCell()](/javascript/api/excel/excel.workbook#getactivecell--)|Obtient la cellule active du classeur.|
 ||[dataConnections](/javascript/api/excel/excel.workbook#dataconnections)|Représente toutes les connexions de données dans le workbook.|
 ||[name](/javascript/api/excel/excel.workbook#name)|Obtient le nom du classeur.|
 ||[properties](/javascript/api/excel/excel.workbook#properties)|Obtient les propriétés du classeur.|
@@ -193,7 +193,7 @@
 |[WorkbookProtection](/javascript/api/excel/excel.workbookprotection)|[protect(password?: string)](/javascript/api/excel/excel.workbookprotection#protect-password-)|Protège un classeur.|
 ||[protected](/javascript/api/excel/excel.workbookprotection#protected)|Spécifie si le workbook est protégé.|
 ||[unprotect(password?: string)](/javascript/api/excel/excel.workbookprotection#unprotect-password-)|Annule la protection un classeur.|
-|[Feuille de calcul](/javascript/api/excel/excel.worksheet)|[copy(positionType?: Excel.WorksheetPositionType, relativeTo?: Excel.Worksheet)](/javascript/api/excel/excel.worksheet#copy-positiontype--relativeto-)|Copie une feuille de calcul et la place à la position spécifiée.|
+|[Worksheet](/javascript/api/excel/excel.worksheet)|[copy(positionType?: Excel. WorksheetPositionType, relativeTo?: Excel. Feuille de calcul)](/javascript/api/excel/excel.worksheet#copy-positiontype--relativeto-)|Copie une feuille de calcul et la place à la position spécifiée.|
 ||[getRangeByIndexes(startRow: number, startColumn: number, rowCount: number, columnCount: number)](/javascript/api/excel/excel.worksheet#getrangebyindexes-startrow--startcolumn--rowcount--columncount-)|Obtient l’objet qui commence à un index de ligne et un index de colonne particuliers et s’étend sur un certain nombre de lignes `Range` et de colonnes.|
 ||[freezePanes](/javascript/api/excel/excel.worksheet#freezepanes)|Obtient un objet qui peut être utilisé pour manipuler des volets figés sur la feuille de calcul.|
 ||[onActivated](/javascript/api/excel/excel.worksheet#onactivated)|Se produit lorsque la feuille de calcul est activée.|

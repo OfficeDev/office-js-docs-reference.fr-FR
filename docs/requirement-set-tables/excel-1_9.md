@@ -91,10 +91,10 @@
 |[ChartMapOptions](/javascript/api/excel/excel.chartmapoptions)|[labelStrategy](/javascript/api/excel/excel.chartmapoptions#labelstrategy)|Spécifie la stratégie d’étiquettes de carte de série d’un graphique de carte région.|
 ||[level](/javascript/api/excel/excel.chartmapoptions#level)|Spécifie le niveau de mappage des séries d’un graphique de carte région.|
 ||[projectionType](/javascript/api/excel/excel.chartmapoptions#projectiontype)|Spécifie le type de projection de série d’un graphique région carte.|
-|[ChartPivotOptions](/javascript/api/excel/excel.chartpivotoptions)|[showAxisFieldButtons](/javascript/api/excel/excel.chartpivotoptions#showaxisfieldbuttons)|Spécifie s’il faut afficher les boutons de champ d’axe dans un tableau croisé dynamique.|
-||[showLegendFieldButtons](/javascript/api/excel/excel.chartpivotoptions#showlegendfieldbuttons)|Spécifie s’il faut afficher les boutons de champ de légende dans un tableau croisé dynamique.|
-||[showReportFilterFieldButtons](/javascript/api/excel/excel.chartpivotoptions#showreportfilterfieldbuttons)|Spécifie s’il faut afficher les boutons de champ de filtre de rapport dans un tableau croisé dynamique.|
-||[showValueFieldButtons](/javascript/api/excel/excel.chartpivotoptions#showvaluefieldbuttons)|Spécifie s’il faut afficher les boutons de champ afficher la valeur dans un tableau croisé dynamique.|
+|[ChartPivotOptions](/javascript/api/excel/excel.chartpivotoptions)|[showAxisFieldButtons](/javascript/api/excel/excel.chartpivotoptions#showaxisfieldbuttons)|Spécifie s’il faut afficher les boutons de champ d’axe sur une PivotChart.|
+||[showLegendFieldButtons](/javascript/api/excel/excel.chartpivotoptions#showlegendfieldbuttons)|Spécifie s’il faut afficher les boutons de champ de légende sur un PivotChart.|
+||[showReportFilterFieldButtons](/javascript/api/excel/excel.chartpivotoptions#showreportfilterfieldbuttons)|Spécifie s’il faut afficher les boutons de champ de filtre de rapport sur une PivotChart.|
+||[showValueFieldButtons](/javascript/api/excel/excel.chartpivotoptions#showvaluefieldbuttons)|Spécifie s’il faut afficher les boutons de champ afficher la valeur sur une PivotChart.|
 |[ChartSeries](/javascript/api/excel/excel.chartseries)|[bubbleScale](/javascript/api/excel/excel.chartseries#bubblescale)|Peut être une valeur d’entier entre 0 (zéro) et 300 correspondant à un pourcentage de la taille par défaut.|
 ||[gradientMaximumColor](/javascript/api/excel/excel.chartseries#gradientmaximumcolor)|Spécifie la couleur de la valeur maximale d’une série de graphique région carte.|
 ||[gradientMaximumType](/javascript/api/excel/excel.chartseries#gradientmaximumtype)|Spécifie le type de valeur maximale d’une série de graphique région carte.|
@@ -147,8 +147,8 @@
 ||[id](/javascript/api/excel/excel.image#id)|Spécifie l’identificateur de forme de l’objet image.|
 ||[shape](/javascript/api/excel/excel.image#shape)|Renvoie `Shape` l’objet associé à l’image.|
 |[IterativeCalculation](/javascript/api/excel/excel.iterativecalculation)|[enabled](/javascript/api/excel/excel.iterativecalculation#enabled)|Cette propriété a la valeur True si Microsoft Excel utilise l'itération pour résoudre des références circulaires.|
-||[maxChange](/javascript/api/excel/excel.iterativecalculation#maxchange)|Spécifie la quantité maximale de modification entre chaque itération à mesure qu’Excel résout des références circulaires.|
-||[maxIteration](/javascript/api/excel/excel.iterativecalculation#maxiteration)|Spécifie le nombre maximal d’itérations qu’Excel peut utiliser pour résoudre une référence circulaire.|
+||[maxChange](/javascript/api/excel/excel.iterativecalculation#maxchange)|Spécifie la quantité maximale de modification entre chaque itération à mesure Excel des références circulaires.|
+||[maxIteration](/javascript/api/excel/excel.iterativecalculation#maxiteration)|Spécifie le nombre maximal d’itérations que Excel pouvez utiliser pour résoudre une référence circulaire.|
 |[Line](/javascript/api/excel/excel.line)|[beginArrowheadLength](/javascript/api/excel/excel.line#beginarrowheadlength)|Renvoie ou définit la longueur de la pointe de la flèche au début de la ligne spécifiée.|
 ||[beginArrowheadStyle](/javascript/api/excel/excel.line#beginarrowheadstyle)|Représente le style de la pointe de la flèche au début de la ligne spécifiée.|
 ||[beginArrowheadWidth](/javascript/api/excel/excel.line#beginarrowheadwidth)|Représente la largeur de la pointe de la flèche au début de la ligne spécifiée.|
@@ -224,7 +224,7 @@
 ||[setAutosortOnCell(cell: Range \| string, sortby: Excel.SortBy)](/javascript/api/excel/excel.pivotlayout#setautosortoncell-cell--sortby-)|Définit le tableau croisé dynamique pour trier automatiquement à l’aide de la cellule spécifiée pour sélectionner automatiquement tous les critères et contexte nécessaires.|
 |[PivotTable](/javascript/api/excel/excel.pivottable)|[enableDataValueEditing](/javascript/api/excel/excel.pivottable#enabledatavalueediting)|Spécifie si le tableau croisé dynamique permet à l’utilisateur de modifier des valeurs dans le corps des données.|
 ||[useCustomSortLists](/javascript/api/excel/excel.pivottable#usecustomsortlists)|Spécifie si le tableau croisé dynamique utilise des listes personnalisées lors du tri.|
-|[Range](/javascript/api/excel/excel.range)|[autoFill(destinationRange?: Range \| string, autoFillType?: Excel.AutoFillType)](/javascript/api/excel/excel.range#autofill-destinationrange--autofilltype-)|Remplit les plages de la plage actuelle à la plage de destination à l’aide de la logique de remplissage automatique spécifiée.|
+|[Range](/javascript/api/excel/excel.range)|[autoFill(destinationRange?: Range \| string, autoFillType?: Excel. AutoFillType)](/javascript/api/excel/excel.range#autofill-destinationrange--autofilltype-)|Remplit la plage actuelle à la plage de destination à l’aide de la logique de remplissage automatique spécifiée.|
 ||[convertDataTypeToText()](/javascript/api/excel/excel.range#convertdatatypetotext--)|Convertit en texte les cellules de plage avec des types de données.|
 ||[convertToLinkedDataType(serviceID: number, languageCulture: string)](/javascript/api/excel/excel.range#converttolinkeddatatype-serviceid--languageculture-)|Convertit les cellules de la plage en types de données liés dans la feuille de calcul.|
 ||[copyFrom(sourceRange: Range \| RangeAreas \| string, copyType?: Excel.RangeCopyType, skipBlanks?: boolean, transpose?: boolean)](/javascript/api/excel/excel.range#copyfrom-sourcerange--copytype--skipblanks--transpose-)|Copie les données de cellule ou la mise en forme de la plage source ou `RangeAreas` de la plage actuelle.|
@@ -240,8 +240,8 @@
 ||[linkedDataTypeState](/javascript/api/excel/excel.range#linkeddatatypestate)|Représente l’état du type de données de chaque cellule.|
 ||[removeDuplicates(columns: number[], includesHeader: boolean)](/javascript/api/excel/excel.range#removeduplicates-columns--includesheader-)|Supprime les valeurs dupliquées de la plage spécifiée par les colonnes.|
 ||[replaceAll (texte : chaîne remplacement : chaîne critères : Excel.ReplaceCriteria)](/javascript/api/excel/excel.range#replaceall-text--replacement--criteria-)|Détecte et remplace la chaîne donnée basée sur les critères spécifiés dans la plage active.|
-||[setCellProperties(cellPropertiesData: SettableCellProperties[][])](/javascript/api/excel/excel.range#setcellproperties-cellpropertiesdata-)|Met à jour la plage basée sur un tableau 2D de propriétés de cellule, en encapsulant des éléments tels que la police, le remplissage, les bordures et l’alignement.|
-||[setColumnProperties(columnPropertiesData: SettableColumnProperties[])](/javascript/api/excel/excel.range#setcolumnproperties-columnpropertiesdata-)|Met à jour la plage basée sur un tableau à une dimension des propriétés de colonne, en encapsulant des éléments tels que la police, le remplissage, les bordures et l’alignement.|
+||[setCellProperties(cellPropertiesData: SettableCellProperties[][])](/javascript/api/excel/excel.range#setcellproperties-cellpropertiesdata-)|Met à jour la plage en fonction d’un tableau 2D de propriétés de cellule, en encapsulant des éléments tels que la police, le remplissage, les bordures et l’alignement.|
+||[setColumnProperties(columnPropertiesData: SettableColumnProperties[])](/javascript/api/excel/excel.range#setcolumnproperties-columnpropertiesdata-)|Met à jour la plage basée sur un tableau à une dimension de propriétés de colonne, en encapsulant des éléments tels que la police, le remplissage, les bordures et l’alignement.|
 ||[setDirty()](/javascript/api/excel/excel.range#setdirty--)|Cette méthode désigne une plage qui doit être recalculée lorsque le recalcul suivant se produit.|
 ||[setRowProperties(rowPropertiesData: SettableRowProperties[])](/javascript/api/excel/excel.range#setrowproperties-rowpropertiesdata-)|Met à jour la plage basée sur un tableau à une dimension de propriétés de ligne, en encapsulant des éléments tels que la police, le remplissage, les bordures et l’alignement.|
 |[RangeAreas](/javascript/api/excel/excel.rangeareas)|[calculate()](/javascript/api/excel/excel.rangeareas#calculate--)|Calcule toutes les cellules dans `RangeAreas` le .|
@@ -304,8 +304,8 @@
 ||[style](/javascript/api/excel/excel.settablecellproperties#style)|Représente la `style` propriété.|
 |[SettableColumnProperties](/javascript/api/excel/excel.settablecolumnproperties)|[columnHidden](/javascript/api/excel/excel.settablecolumnproperties#columnhidden)|Représente la `columnHidden` propriété.|
 ||[columnWidth](/javascript/api/excel/excel.settablecolumnproperties#columnwidth)||
-||[format : Excel.CellPropertiesFormat & { columnWidth?](/javascript/api/excel/excel.settablecolumnproperties#format)|Représente la `format` propriété.|
-|[SettableRowProperties](/javascript/api/excel/excel.settablerowproperties)|[format : Excel.CellPropertiesFormat & { rowHeight?](/javascript/api/excel/excel.settablerowproperties#format)|Représente la `format` propriété.|
+||[format : Excel. CellPropertiesFormat & { columnWidth?](/javascript/api/excel/excel.settablecolumnproperties#format)|Représente la `format` propriété.|
+|[SettableRowProperties](/javascript/api/excel/excel.settablerowproperties)|[format : Excel. CellPropertiesFormat & { rowHeight?](/javascript/api/excel/excel.settablerowproperties#format)|Représente la `format` propriété.|
 ||[rowHeight](/javascript/api/excel/excel.settablerowproperties#rowheight)||
 ||[rowHidden](/javascript/api/excel/excel.settablerowproperties#rowhidden)|Représente la `rowHidden` propriété.|
 |[Shape](/javascript/api/excel/excel.shape)|[altTextDescription](/javascript/api/excel/excel.shape#alttextdescription)|Spécifie l’autre texte de description d’un `Shape` objet.|
@@ -427,7 +427,7 @@
 ||[previouslySaved](/javascript/api/excel/excel.workbook#previouslysaved)|Spécifie si le manuel a déjà été enregistré localement ou en ligne.|
 ||[usePrecisionAsDisplayed](/javascript/api/excel/excel.workbook#useprecisionasdisplayed)|True si les calculs réalisés dans ce classeur utiliseront uniquement la précision des nombres tels qu’ils sont affichés. |
 |[WorkbookAutoSaveSettingChangedEventArgs](/javascript/api/excel/excel.workbookautosavesettingchangedeventargs)|[type](/javascript/api/excel/excel.workbookautosavesettingchangedeventargs#type)|Obtient le type de l’événement.|
-|[Worksheet](/javascript/api/excel/excel.worksheet)|[enableCalculation](/javascript/api/excel/excel.worksheet#enablecalculation)|Détermine si Excel doit recalculer la feuille de calcul si nécessaire.|
+|[Worksheet](/javascript/api/excel/excel.worksheet)|[enableCalculation](/javascript/api/excel/excel.worksheet#enablecalculation)|Détermine si Excel recalculer la feuille de calcul si nécessaire.|
 ||[findAll(text: string, criteria: Excel.WorksheetSearchCriteria)](/javascript/api/excel/excel.worksheet#findall-text--criteria-)|Recherche toutes les occurrences de la chaîne donnée en fonction des critères spécifiés et les renvoie en tant qu’objet, comprenant une ou `RangeAreas` plusieurs plages rectangulaires.|
 ||[findAllOrNullObject(text: string, criteria: Excel.WorksheetSearchCriteria)](/javascript/api/excel/excel.worksheet#findallornullobject-text--criteria-)|Recherche toutes les occurrences de la chaîne donnée en fonction des critères spécifiés et les renvoie en tant qu’objet, comprenant une ou `RangeAreas` plusieurs plages rectangulaires.|
 ||[getRanges(address?: string)](/javascript/api/excel/excel.worksheet#getranges-address-)|Obtient `RangeAreas` l’objet, qui représente un ou plusieurs blocs de plages rectangulaires, spécifiés par l’adresse ou le nom.|
