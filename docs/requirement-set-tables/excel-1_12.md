@@ -1,8 +1,8 @@
 | Classe | Champs | Description |
 |:---|:---|:---|
 |[ChartAxisTitle](/javascript/api/excel/excel.chartaxistitle)|[textOrientation](/javascript/api/excel/excel.chartaxistitle#textorientation)|Spécifie l’angle vers lequel le texte est orienté pour le titre de l’axe du graphique.|
-|[ChartSeries](/javascript/api/excel/excel.chartseries)|[getDimensionValues(dimension: Excel.ChartSeriesDimension)](/javascript/api/excel/excel.chartseries#getdimensionvalues-dimension-)|Obtient les valeurs d’une dimension unique de la série de graphiques.|
-|[Commentaire](/javascript/api/excel/excel.comment)|[contentType](/javascript/api/excel/excel.comment#contenttype)|Obtient le type de contenu du commentaire.|
+|[ChartSeries](/javascript/api/excel/excel.chartseries)|[getDimensionValues(dimension: Excel. ChartSeriesDimension)](/javascript/api/excel/excel.chartseries#getdimensionvalues-dimension-)|Obtient les valeurs d’une dimension unique de la série de graphiques.|
+|[Comment](/javascript/api/excel/excel.comment)|[contentType](/javascript/api/excel/excel.comment#contenttype)|Obtient le type de contenu du commentaire.|
 |[CommentAddedEventArgs](/javascript/api/excel/excel.commentaddedeventargs)|[commentDetails](/javascript/api/excel/excel.commentaddedeventargs#commentdetails)|Obtient `CommentDetail` le tableau qui contient l’ID de commentaire et les ID de ses réponses connexes.|
 ||[source](/javascript/api/excel/excel.commentaddedeventargs#source)|Spécifie la source de l’événement.|
 ||[type](/javascript/api/excel/excel.commentaddedeventargs#type)|Obtient le type de l’événement.|
@@ -34,13 +34,13 @@
 ||[lowerBound](/javascript/api/excel/excel.pivotdatefilter#lowerbound)|Limite inférieure de la plage pour la `between` condition de filtre.|
 ||[upperBound](/javascript/api/excel/excel.pivotdatefilter#upperbound)|Limite supérieure de la plage pour la `between` condition de filtre.|
 ||[wholeDays](/javascript/api/excel/excel.pivotdatefilter#wholedays)|Pour `equals` , et les conditions de `before` `after` `between` filtre, indique si les comparaisons doivent être réalisées en tant que jours entiers.|
-|[PivotField](/javascript/api/excel/excel.pivotfield)|[applyFilter(filter: Excel.PivotFilters)](/javascript/api/excel/excel.pivotfield#applyfilter-filter-)|Définit un ou plusieurs des filtres de tableau croisé dynamique actuels du champ et les applique au champ.|
+|[PivotField](/javascript/api/excel/excel.pivotfield)|[applyFilter(filter: Excel. PivotFilters)](/javascript/api/excel/excel.pivotfield#applyfilter-filter-)|Définit un ou plusieurs des filtres de tableau croisé dynamique actuels du champ et les applique au champ.|
 ||[clearAllFilters()](/javascript/api/excel/excel.pivotfield#clearallfilters--)|Permet d’effacer tous les critères de tous les filtres du champ.|
-||[clearFilter(filterType: Excel.PivotFilterType)](/javascript/api/excel/excel.pivotfield#clearfilter-filtertype-)|Permet d’effacer tous les critères existants du filtre du champ du type donné (s’il en existe un actuellement appliqué).|
+||[clearFilter(filterType: Excel. PivotFilterType)](/javascript/api/excel/excel.pivotfield#clearfilter-filtertype-)|Permet d’effacer tous les critères existants du filtre du champ du type donné (s’il en existe un actuellement appliqué).|
 ||[getFilters()](/javascript/api/excel/excel.pivotfield#getfilters--)|Obtient tous les filtres actuellement appliqués sur le champ.|
-||[isFiltered(filterType?: Excel.PivotFilterType)](/javascript/api/excel/excel.pivotfield#isfiltered-filtertype-)|Vérifie s’il existe des filtres appliqués sur le champ.|
+||[isFiltered(filterType?: Excel. PivotFilterType)](/javascript/api/excel/excel.pivotfield#isfiltered-filtertype-)|Vérifie s’il existe des filtres appliqués sur le champ.|
 |[PivotFilters](/javascript/api/excel/excel.pivotfilters)|[dateFilter](/javascript/api/excel/excel.pivotfilters#datefilter)|Filtre de date actuellement appliqué au champ de tableau croisé dynamique.|
-||[labelFilter](/javascript/api/excel/excel.pivotfilters#labelfilter)|Filtre d’étiquette actuellement appliqué au champ de tableau croisé dynamique.|
+||[labelFilter](/javascript/api/excel/excel.pivotfilters#labelfilter)|Filtre d’étiquettes actuellement appliqué au champ de tableau croisé dynamique.|
 ||[manualFilter](/javascript/api/excel/excel.pivotfilters#manualfilter)|Filtre manuel actuellement appliqué au champ de tableau croisé dynamique.|
 ||[valueFilter](/javascript/api/excel/excel.pivotfilters#valuefilter)|Filtre de valeurs actuellement appliqué au champ de tableau croisé dynamique.|
 |[PivotLabelFilter](/javascript/api/excel/excel.pivotlabelfilter)|[comparator](/javascript/api/excel/excel.pivotlabelfilter#comparator)|Le comparateur est la valeur statique à laquelle les autres valeurs sont comparées.|
@@ -77,11 +77,11 @@
 ||[getItemAt(index: number)](/javascript/api/excel/excel.rangeareascollection#getitemat-index-)|Renvoie `RangeAreas` l’objet en fonction de la position dans la collection.|
 ||[items](/javascript/api/excel/excel.rangeareascollection#items)|Obtient l’élément enfant chargé dans cette collection de sites.|
 |[WorkbookRangeAreas](/javascript/api/excel/excel.workbookrangeareas)|[getRangeAreasBySheet(key: string)](/javascript/api/excel/excel.workbookrangeareas#getrangeareasbysheet-key-)|Renvoie `RangeAreas` l’objet en fonction de l’ID de feuille de calcul ou du nom de la collection.|
-||[getRangeAreasOrNullObjectBySheet(key: string)](/javascript/api/excel/excel.workbookrangeareas#getrangeareasornullobjectbysheet-key-)|Renvoie `RangeAreas` l’objet en fonction du nom de la feuille de calcul ou de l’ID de la collection.|
+||[getRangeAreasOrNullObjectBySheet(key: string)](/javascript/api/excel/excel.workbookrangeareas#getrangeareasornullobjectbysheet-key-)|Renvoie `RangeAreas` l’objet en fonction du nom ou de l’ID de la feuille de calcul dans la collection.|
 ||[addresses](/javascript/api/excel/excel.workbookrangeareas#addresses)|Renvoie un tableau d’adresses de style A1.|
 ||[Zones](/javascript/api/excel/excel.workbookrangeareas#areas)|Renvoie `RangeAreasCollection` l’objet.|
-||[plages](/javascript/api/excel/excel.workbookrangeareas#ranges)|Renvoie les plages qui composent cet objet dans un  `RangeCollection`   objet.|
-|[Feuille de calcul](/javascript/api/excel/excel.worksheet)|[customProperties](/javascript/api/excel/excel.worksheet#customproperties)|Obtient une collection de propriétés personnalisées au niveau de la feuille de calcul.|
+||[plages](/javascript/api/excel/excel.workbookrangeareas#ranges)|Renvoie les plages qui composent cet objet dans un `RangeCollection` objet.|
+|[Worksheet](/javascript/api/excel/excel.worksheet)|[customProperties](/javascript/api/excel/excel.worksheet#customproperties)|Obtient une collection de propriétés personnalisées au niveau de la feuille de calcul.|
 |[WorksheetCustomProperty](/javascript/api/excel/excel.worksheetcustomproperty)|[delete()](/javascript/api/excel/excel.worksheetcustomproperty#delete--)|Supprime la propriété personnalisée.|
 ||[key](/javascript/api/excel/excel.worksheetcustomproperty#key)|Obtient la clé de la propriété personnalisée.|
 ||[value](/javascript/api/excel/excel.worksheetcustomproperty#value)|Obtient ou définit la valeur de la propriété personnalisée.|
